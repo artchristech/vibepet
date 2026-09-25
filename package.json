@@ -1,6 +1,6 @@
 {
   "name": "vibepet",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "desktop AI pet for vibe coders",
   "main": "main.js",
   "scripts": {
