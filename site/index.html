@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vibepet — a desktop pet for people who code with agents</title>
+<meta name="description" content="vibepet lives on your desktop, watches your Claude Code sessions, taps the glass when your agent is waiting on you, and eats your commits.">
+<meta property="og:title" content="vibepet">
+<meta property="og:description" content="A desktop pet for vibe coders. It watches your agents and eats your commits.">
+<meta property="og:image" content="https://vibepet.net/icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="pet.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #11131d; --panel: #181b29; --line: #2a2f47; --ink: #1b1f2e; --mint: #7ef0c1; --amber: #ffcf3f; --pink: #ff7ab0; --text: #e8ebf5; --dim: #8a92a8; }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body { margin: 0; color: var(--text); font: 15px/1.6 "JetBrains Mono", ui-monospace, monospace; background:
+    radial-gradient(900px 500px at 75% 20%, rgba(126,240,193,.08), transparent 60%),
+    linear-gradient(var(--bg), var(--bg)); overflow-x: hidden; }
+  body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .5;
+    background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 16px 16px; }
+  a { color: var(--mint); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; position: relative; }
+  nav { display: flex; align-items: center; gap: 10px; padding: 18px 0; }
+  nav img { width: 28px; image-rendering: pixelated; }
+  nav b { font: 700 18px Silkscreen, monospace; letter-spacing: .5px; }
+  nav .sp { flex: 1; }
+  nav a { color: var(--dim); text-decoration: none; font-size: 13px; }
+  nav a:hover { color: var(--text); }
+
+  .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 20px; align-items: center; min-height: 600px; }
+  h1 { font: 700 clamp(30px, 5vw, 52px)/1.05 Silkscreen, monospace; margin: 0 0 18px; letter-spacing: -.5px; }
+  h1 em { font-style: normal; color: var(--mint); }
+  .lede { color: #c3c9da; font-size: 16px; max-width: 520px; margin: 0 0 26px; }
+  .lede b { color: var(--amber); font-weight: 600; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; font: 700 14px Silkscreen, monospace; text-decoration: none; color: var(--ink);
+    background: var(--mint); border: 2px solid var(--ink); border-radius: 6px; box-shadow: 4px 4px 0 #000; transition: transform .08s, box-shadow .08s; }
+  .btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 #000; }
+  .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #000; }
+  .btn.ghost { background: var(--panel); color: var(--text); border-color: var(--line); box-shadow: 4px 4px 0 rgba(0,0,0,.5); }
+  .small { color: var(--dim); font-size: 12px; margin-top: 12px; }
+  .curl { margin-top: 18px; display: flex; align-items: center; gap: 10px; background: #0b0d14; border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; max-width: 520px; }
+  .curl code { flex: 1; color: var(--mint); font-size: 13px; overflow-x: auto; white-space: nowrap; }
+  .curl code::before { content: "$ "; color: var(--dim); }
+  .curl button { background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 4px; font: inherit; font-size: 11px; padding: 4px 8px; cursor: pointer; }
+
+  .demo { position: relative; height: 560px; }
+  .demo iframe { position: absolute; right: 0; bottom: 0; width: 360px; height: 520px; border: 0; background: transparent; }
+  .desk { position: absolute; inset: 40px 0 0 0; border: 2px solid var(--line); border-radius: 12px; background: linear-gradient(160deg, #1d2135, #151826); overflow: hidden; }
+  .desk .bar { height: 26px; background: rgba(255,255,255,.04); border-bottom: 1px solid var(--line); display: flex; gap: 6px; align-items: center; padding: 0 10px; }
+  .desk .bar i { width: 10px; height: 10px; border-radius: 50%; background: #3a3f55; }
+  .desk pre { margin: 0; padding: 14px 16px; font-size: 12px; color: #6f7894; line-height: 1.7; }
+  .desk pre .g { color: var(--mint); } .desk pre .a { color: var(--amber); }
+  .hint { position: absolute; left: 12px; top: 6px; color: var(--dim); font-size: 12px; }
+
+  section { padding: 70px 0 20px; }
+  h2 { font: 700 26px Silkscreen, monospace; margin: 0 0 28px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .card { background: var(--panel); border: 2px solid var(--line); border-radius: 8px; padding: 18px; }
+  .card h3 { font: 700 15px Silkscreen, monospace; margin: 0 0 8px; color: var(--mint); }
+  .card p { margin: 0; color: #b6bdd0; font-size: 13.5px; }
+  .led { display: inline-block; width: 9px; height: 9px; margin-right: 4px; border: 1px solid var(--ink); }
+  .levels { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .levels span { font-size: 11px; padding: 2px 8px; border: 1px solid var(--line); border-radius: 10px; color: var(--dim); }
+  details { background: var(--panel); border: 2px solid var(--line); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { color: #b6bdd0; margin: 10px 0 0; font-size: 13.5px; }
+  footer { padding: 60px 0 40px; color: var(--dim); font-size: 12px; display: flex; gap: 14px; flex-wrap: wrap; }
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; min-height: 0; padding-top: 20px; }
+    .demo { height: 540px; }
+    .demo iframe { left: 50%; right: auto; transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <img src="pet.png" alt=""><b>vibepet</b><span class="sp"></span>
+    <a href="#what">what it does</a><a href="#faq">faq</a>
+  </nav>
+
+  <div class="hero">
+    <div>
+      <h1>a pet for people who code <em>with agents</em></h1>
+      <p class="lede">vibepet lives on your desktop and watches your Claude Code sessions. When your agent finishes, it <b>taps the glass</b> so you're not the bottleneck. It eats commits. Don't let it starve.</p>
+      <div class="cta">
+        <a class="btn" id="dlMain" href="/download/arm64.dmg">⬇ Download for Mac</a>
+        <a class="btn ghost" id="dlAlt" href="/download/x64.dmg">Intel</a>
+      </div>
+      <div class="curl"><code id="cmd">curl -fsSL vibepet.net/install | sh</code><button id="copy">copy</button></div>
+      <div class="small">v0.1 · macOS 12+ · free · the curl installer skips the "unidentified developer" dance</div>
+    </div>
+    <div class="demo" id="demo">
+      <div class="desk">
+        <div class="bar"><i></i><i></i><i></i></div>
+<pre><span class="g">✻</span> claude › add usage-based billing
+  ⎿ Read src/billing/stripe.ts
+  ⎿ Edit src/billing/meter.ts  <span class="g">+84</span>
+  ⎿ Edit src/api/webhooks.ts   <span class="g">+41</span> <span class="a">-12</span>
+  ⎿ Bash npm test
+    <span class="g">✓ 38 passed</span>
+<span class="g">●</span> Done. Backfill old invoices too?
+<span class="a">›</span> ▌</pre>
+      </div>
+      <div class="hint">↓ he's live — hover, click, double-click</div>
+      <iframe id="pet" src="demo/index.html" title="vibepet live demo" allowtransparency="true"></iframe>
+    </div>
+  </div>
+
+  <section id="what">
+    <h2>what it does</h2>
+    <div class="grid">
+      <div class="card"><h3>"your move" alerts</h3><p>The antenna is a status light. <span class="led" style="background:#7ef0c1"></span>working, <span class="led" style="background:#ffcf3f"></span>waiting on you, <span class="led" style="background:#ff5c6c"></span>stuck on a tool, probably needing approval. You also get a notification the moment your agent finishes.</p></div>
+      <div class="card"><h3>eats commits</h3><p>Commits are food. Over 400 uncommitted lines he starts sweating; over 1200 he panics. One bad agent turn can wreck a big diff, so commit often.</p></div>
+      <div class="card"><h3>quick-draw xp</h3><p>Reply to your agent within 60 seconds for bonus XP. Keep a daily commit streak. Levels unlock blush, sparkles, headphones, shades and a crown.</p>
+        <div class="levels"><span>L2 blush</span><span>L3 sparkles</span><span>L4 headphones</span><span>L5 shades</span><span>L7 crown</span></div></div>
+      <div class="card"><h3>he talks</h3><p>Double-click to chat. He sees your diff and your agent's last messages: <i>write my commit message</i>, <i>vibe check</i>, <i>what's my agent doing?</i>, <i>what's next?</i> Uses your own Anthropic key.</p></div>
+      <div class="card"><h3>stays out of the way</h3><p>Floats on top of your windows but clicks pass through everywhere except the pet. Drag him anywhere. He follows whichever repo your agent is working in.</p></div>
+      <div class="card"><h3>local-first</h3><p>He reads <code>~/.claude</code> session logs and runs <code>git</code> on your machine. No account, no telemetry. Chat is the only thing that leaves your laptop, and it goes straight to Anthropic.</p></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>faq</h2>
+    <details><summary>macOS says it "can't verify the developer"</summary><p>v0.1 isn't notarized yet. Either use the one-liner (<code>curl -fsSL vibepet.net/install | sh</code>), which installs to /Applications with no warning, or open the .dmg, drag vibepet to Applications, try to open it once, then go to System Settings → Privacy &amp; Security → <b>Open Anyway</b>.</p></details>
+    <details><summary>Do I need Claude Code?</summary><p>For the agent alerts, yes. vibepet reads Claude Code's local session logs. Without it he still eats commits, sweats over big diffs, and chats.</p></details>
+    <details><summary>How do I enable chat?</summary><p>Right-click the pet → Set Anthropic API key. The key is encrypted in your macOS keychain. You can also launch with <code>ANTHROPIC_API_KEY</code> set.</p></details>
+    <details><summary>Windows / Linux?</summary><p>Not yet. It's an Electron app, so they're coming.</p></details>
+    <details><summary>How do I get rid of him?</summary><p>Right-click → Quit. To uninstall, delete /Applications/vibepet.app. We'll miss you.</p></details>
+  </section>
+
+  <footer><span>vibepet.net</span><span>v0.1.0</span><span>made with vibes by <a href="https://artchristech.com">artchristech</a></span></footer>
+</div>
+<script>
+  // pick the right build
+  const arm = (() => { try { const c = document.createElement('canvas').getContext('webgl'); const r = c && c.getParameter(c.getExtension('WEBGL_debug_renderer_info')?.UNMASKED_RENDERER_WEBGL ?? 0); return !/intel/i.test(r || ''); } catch { return true; } })();
+  if (!arm) { dlMain.href = '/download/x64.dmg'; dlMain.textContent = '⬇ Download for Mac (Intel)'; dlAlt.href = '/download/arm64.dmg'; dlAlt.textContent = 'Apple Silicon'; }
+  copy.onclick = () => { navigator.clipboard.writeText(cmd.textContent); copy.textContent = 'copied!'; setTimeout(() => copy.textContent = 'copy', 1500); };
+  // eyes follow your cursor across the whole page
+  addEventListener('mousemove', e => {
+    const r = pet.getBoundingClientRect();
+    pet.contentWindow?.postMessage({ cursor: { x: e.clientX - r.left, y: e.clientY - r.top } }, '*');
+  });
+</script>
+</body>
+</html>

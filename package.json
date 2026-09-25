@@ -1,0 +1,46 @@
+{
+  "name": "vibepet",
+  "version": "0.1.0",
+  "description": "desktop AI pet for vibe coders",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --mac dmg zip --arm64 --x64"
+  },
+  "keywords": [],
+  "author": "artchristech",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^44.4.5",
+    "electron-builder": "^26.15.3"
+  },
+  "productName": "vibepet",
+  "homepage": "https://vibepet.net",
+  "build": {
+    "appId": "net.vibepet.app",
+    "productName": "vibepet",
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "build/icon.png",
+      "identity": "-",
+      "extendInfo": {
+        "LSUIElement": true
+      },
+      "hardenedRuntime": false
+    },
+    "dmg": {
+      "title": "vibepet"
+    },
+    "artifactName": "vibepet-${version}-${arch}.${ext}"
+  }
+}

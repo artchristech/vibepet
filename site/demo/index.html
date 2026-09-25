@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>vibepet</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <div id="chat" class="hit hidden">
+    <div class="chat-head">
+      <span id="chatTitle">Net</span>
+      <span class="spacer"></span>
+      <button id="chatClose" title="close (esc)">×</button>
+    </div>
+    <form id="keyForm" class="inline-form hidden">
+      <p>Give me an Anthropic API key and I can talk. It's encrypted in your keychain. (Or launch with <code>ANTHROPIC_API_KEY</code> set.)</p>
+      <div class="row"><input id="keyInput" type="password" placeholder="sk-ant-…" autocomplete="off"><button>save</button></div>
+    </form>
+    <form id="renameForm" class="inline-form hidden">
+      <p>What should I be called?</p>
+      <div class="row"><input id="renameInput" maxlength="16" autocomplete="off"><button>ok</button></div>
+    </form>
+    <div id="msgs"></div>
+    <div id="chips">
+      <button data-mode="commit">✍️ commit msg</button>
+      <button data-mode="vibe">🔍 vibe check</button>
+      <button data-mode="agent">🤖 agent?</button>
+      <button data-mode="next">🎯 next</button>
+    </div>
+    <form id="chatForm"><input id="chatInput" placeholder="say something…" autocomplete="off"><button>↵</button></form>
+  </div>
+
+  <div id="bubble" class="hit hidden"></div>
+  <canvas id="pet" class="hit" width="224" height="208"></canvas>
+
+  <div id="hud" class="hit">
+    <div class="hud-top">
+      <span id="hudName"></span><span id="hudLvl"></span>
+      <span class="spacer"></span>
+      <span id="hudStreak" title="commit streak"></span>
+      <button id="btnChat" title="chat">💬</button>
+      <button id="btnMenu" title="menu">⋯</button>
+    </div>
+    <div class="bar xp" title="xp"><i id="barXp"></i></div>
+    <div class="meters">
+      <label title="fuel — commits feed me">⚡<span class="bar"><i id="barFuel"></i></span></label>
+      <label title="mood">♥<span class="bar"><i id="barMood"></i></span></label>
+    </div>
+    <div id="hudRepo"></div>
+    <div id="hudAgents"></div>
+  </div>
+</div>
+<script src="mock.js"></script><script src="app.js"></script>
+</body>
+</html>
