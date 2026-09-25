@@ -447,9 +447,10 @@ async function send(text, mode = 'chat') {
   let dots = 0; const dt = setInterval(() => { pending.textContent = '.'.repeat(1 + (dots++ % 3)); }, 300);
   let msgs = history.slice(-16);
   while (msgs.length && msgs[0].role !== 'user') msgs = msgs.slice(1);
-  const r = await api.chat({ messages: msgs, mode });
-  clearInterval(dt);
-  sending = false;
+  let r;
+  try { r = await api.chat({ messages: msgs, mode }); }
+  catch (e) { r = { error: e.message || String(e) }; }
+  finally { clearInterval(dt); sending = false; }
   if (r.error === 'nokey') {
     pending.remove(); history.pop();
     $('keyForm').classList.remove('hidden'); $('keyInput').focus();

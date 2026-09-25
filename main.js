@@ -18,7 +18,7 @@ const DEFAULTS = {
   repo: null, pos: null, model: 'claude-sonnet-5', keyEnc: null, keyPlain: null,
   muted: false, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
 };
-let state, saveTimer, win;
+let state, saveTimer, win, sessionKey = null;
 const statePath = () => path.join(app.getPath('userData'), 'state.json');
 function load() {
   try { state = { ...DEFAULTS, ...JSON.parse(fs.readFileSync(statePath(), 'utf8')) }; }
@@ -27,8 +27,10 @@ function load() {
 function save() {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => {
-    fs.mkdirSync(path.dirname(statePath()), { recursive: true });
-    fs.writeFileSync(statePath(), JSON.stringify(state, null, 2));
+    try {
+      fs.mkdirSync(path.dirname(statePath()), { recursive: true });
+      fs.writeFileSync(statePath(), JSON.stringify(state, null, 2));
+    } catch (e) { console.error('save failed:', e.message); }
   }, 300);
 }
 
@@ -76,16 +78,20 @@ function emit(kind, text, { notify = false, ...extra } = {}) {
 // ---------- claude code sessions ----------
 const sessions = new Map(); // id -> { phase, since, … }
 
-function readTail(file, bytes = 131072) {
+function readTail(file, bytes = 131072, maxBytes = 16 * 1048576) {
   const fd = fs.openSync(file, 'r');
   try {
     const size = fs.fstatSync(fd).size;
-    const start = Math.max(0, size - bytes);
-    const buf = Buffer.alloc(size - start);
-    fs.readSync(fd, buf, 0, buf.length, start);
-    const lines = buf.toString('utf8').split('\n');
-    if (start > 0) lines.shift();
-    return lines;
+    for (;;) {
+      const start = Math.max(0, size - bytes);
+      const buf = Buffer.alloc(size - start);
+      fs.readSync(fd, buf, 0, buf.length, start);
+      const lines = buf.toString('utf8').split('\n');
+      if (start > 0) lines.shift();
+      // a single huge record can swallow the whole window; widen until we get a full line
+      if (start === 0 || bytes >= maxBytes || lines.some(l => l.trim())) return lines;
+      bytes *= 4;
+    }
   } finally { fs.closeSync(fd); }
 }
 
@@ -171,8 +177,10 @@ let gitInfo = null;
 
 async function rootOf(dir) {
   if (!dir) return null;
-  if (!rootCache.has(dir)) rootCache.set(dir, await git(dir, ['rev-parse', '--show-toplevel']));
-  return rootCache.get(dir);
+  if (rootCache.has(dir)) return rootCache.get(dir);
+  const root = await git(dir, ['rev-parse', '--show-toplevel']);
+  if (root) rootCache.set(dir, root); // don't cache misses: the dir may be `git init`ed later
+  return root;
 }
 
 async function scanGit(agents) {
@@ -184,12 +192,14 @@ async function scanGit(agents) {
 
   // commit detection across every repo an agent is touching
   for (const root of roots) {
-    const last = await git(root, ['log', '-1', '--format=%H%x09%ct%x09%s']);
+    const last = await git(root, ['log', '-1', '--format=%H%x09%P%x09%ct%x09%s']);
     if (!last) continue;
-    const [sha, ct, ...subj] = last.split('\t');
+    const [sha, parents, ct, ...subj] = last.split('\t');
     const prev = heads.get(root);
     heads.set(root, sha);
-    if (prev && prev !== sha && +ct * 1000 > Date.now() - 10 * 60e3) {
+    // only a new commit on top of the previous HEAD counts (not checkout/reset/fast-forward)
+    const isNewCommit = prev && prev !== sha && parents.split(' ').includes(prev);
+    if (isNewCommit && +ct * 1000 > Date.now() - 10 * 60e3) {
       onCommit(path.basename(root), subj.join('\t'), gitInfo?.root === root ? gitInfo.lines : 0);
     }
   }
@@ -272,7 +282,7 @@ function getKey() {
   if (state.keyEnc && safeStorage.isEncryptionAvailable()) {
     try { return safeStorage.decryptString(Buffer.from(state.keyEnc, 'base64')); } catch { return null; }
   }
-  return state.keyPlain;
+  return sessionKey;
 }
 
 function agentTranscript(s, n = 4) {
@@ -326,8 +336,8 @@ Things you care about: committing often (save points protect against a bad agent
 ipcMain.handle('chat', async (_, { messages, mode }) => {
   const key = getKey();
   if (!key) return { error: 'nokey' };
-  const ctx = await buildContext(mode);
   try {
+    const ctx = await buildContext(mode);
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
@@ -346,8 +356,9 @@ ipcMain.handle('chat', async (_, { messages, mode }) => {
 
 ipcMain.handle('set-key', (_, key) => {
   key = (key || '').trim();
-  if (safeStorage.isEncryptionAvailable()) { state.keyEnc = key ? safeStorage.encryptString(key).toString('base64') : null; state.keyPlain = null; }
-  else state.keyPlain = key || null;
+  state.keyPlain = null;
+  if (safeStorage.isEncryptionAvailable()) { state.keyEnc = key ? safeStorage.encryptString(key).toString('base64') : null; sessionKey = null; }
+  else sessionKey = key || null; // no keychain: keep it in memory only, never write plaintext to disk
   save();
   return !!getKey();
 });

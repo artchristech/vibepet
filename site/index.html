@@ -137,8 +137,10 @@
 </div>
 <script>
   // pick the right build
-  const arm = (() => { try { const c = document.createElement('canvas').getContext('webgl'); const r = c && c.getParameter(c.getExtension('WEBGL_debug_renderer_info')?.UNMASKED_RENDERER_WEBGL ?? 0); return !/intel/i.test(r || ''); } catch { return true; } })();
-  if (!arm) { dlMain.href = '/download/x64.dmg'; dlMain.textContent = '⬇ Download for Mac (Intel)'; dlAlt.href = '/download/arm64.dmg'; dlAlt.textContent = 'Apple Silicon'; }
+  // true = Apple Silicon, false = Intel, null = can't tell (e.g. Safari hides the GPU string)
+  const arm = (() => { try { const c = document.createElement('canvas').getContext('webgl'); const ext = c && c.getExtension('WEBGL_debug_renderer_info'); const r = ext && c.getParameter(ext.UNMASKED_RENDERER_WEBGL); return r ? !/intel/i.test(r) : null; } catch { return null; } })();
+  if (arm === null) dlMain.textContent = '⬇ Download for Mac (Apple Silicon)';
+  if (arm === false) { dlMain.href = '/download/x64.dmg'; dlMain.textContent = '⬇ Download for Mac (Intel)'; dlAlt.href = '/download/arm64.dmg'; dlAlt.textContent = 'Apple Silicon'; }
   copy.onclick = () => { navigator.clipboard.writeText(cmd.textContent); copy.textContent = 'copied!'; setTimeout(() => copy.textContent = 'copy', 1500); };
   // eyes follow your cursor across the whole page
   addEventListener('mousemove', e => {
