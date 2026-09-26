@@ -271,16 +271,20 @@ function snapshot() {
     name: state.name, level, xp: state.xp, xpLo: xpForLevel(level), xpHi: xpForLevel(level + 1),
     fuel: state.fuel, mood: state.mood, commits: state.commits, quickDraws: state.quickDraws, streak: streak(),
     agents: agents.map(a => ({ name: a.name, phase: a.phase, since: a.since })),
-    git: gitInfo, muted: state.muted, hasKey: !!getKey(), hour: new Date().getHours(),
+    git: gitInfo, muted: state.muted, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto',
   };
 }
 
 // ---------- chat ----------
+// Only getKey() touches the keychain, and only when chat actually needs the key, so people who
+// never chat never see a macOS keychain prompt. The decrypted key is cached for the session.
+const hasKey = () => !!(process.env.ANTHROPIC_API_KEY || state.keyEnc || sessionKey);
 function getKey() {
   if (process.env.ANTHROPIC_API_KEY) return process.env.ANTHROPIC_API_KEY;
+  if (sessionKey) return sessionKey;
   if (state.keyEnc && safeStorage.isEncryptionAvailable()) {
-    try { return safeStorage.decryptString(Buffer.from(state.keyEnc, 'base64')); } catch { return null; }
+    try { sessionKey = safeStorage.decryptString(Buffer.from(state.keyEnc, 'base64')); } catch { return null; }
   }
   return sessionKey;
 }
@@ -357,10 +361,10 @@ ipcMain.handle('chat', async (_, { messages, mode }) => {
 ipcMain.handle('set-key', (_, key) => {
   key = (key || '').trim();
   state.keyPlain = null;
-  if (safeStorage.isEncryptionAvailable()) { state.keyEnc = key ? safeStorage.encryptString(key).toString('base64') : null; sessionKey = null; }
+  if (safeStorage.isEncryptionAvailable()) { state.keyEnc = key ? safeStorage.encryptString(key).toString('base64') : null; sessionKey = key || null; }
   else sessionKey = key || null; // no keychain: keep it in memory only, never write plaintext to disk
   save();
-  return !!getKey();
+  return hasKey();
 });
 
 // ---------- window + interaction ----------
@@ -433,7 +437,7 @@ ipcMain.on('menu', () => {
     { label: 'Mute notifications', type: 'checkbox', checked: state.muted, click: m => { state.muted = m.checked; save(); tick(); } },
     { label: 'Model', submenu: ['claude-sonnet-5', 'claude-opus-5-5', 'claude-haiku-4-5-20251001'].map(m => ({
       label: m, type: 'radio', checked: state.model === m, click: () => { state.model = m; save(); } })) },
-    { label: getKey() ? 'Change API key…' : 'Set Anthropic API key…', click: () => emit('openKey') },
+    { label: hasKey() ? 'Change API key…' : 'Set Anthropic API key…', click: () => emit('openKey') },
     { label: 'Rename…', click: () => emit('openRename') },
     { type: 'separator' },
     { label: `Quit ${state.name}`, click: () => app.quit() },
