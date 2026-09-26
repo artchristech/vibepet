@@ -412,6 +412,7 @@ ipcMain.on('drag-end', () => {
 ipcMain.on('focus', () => { app.focus({ steal: true }); win.focus(); });
 ipcMain.on('copy', (_, text) => clipboard.writeText(text));
 ipcMain.on('rename', (_, name) => { name = (name || '').trim().slice(0, 16); if (name) { state.name = name; save(); tick(); } });
+ipcMain.on('exit-done', () => app.quit());
 ipcMain.on('pet', () => {
   if (Date.now() - state.lastPet > 10000) { state.lastPet = Date.now(); state.mood = clamp(state.mood + 2); save(); }
 });
@@ -440,7 +441,7 @@ ipcMain.on('menu', () => {
     { label: hasKey() ? 'Change API key…' : 'Set Anthropic API key…', click: () => emit('openKey') },
     { label: 'Rename…', click: () => emit('openRename') },
     { type: 'separator' },
-    { label: `Quit ${state.name}`, click: () => app.quit() },
+    { label: `Quit ${state.name}`, click: () => { emit('exit'); setTimeout(() => app.quit(), 2500); } },
   ]).popup({ window: win });
 });
 

@@ -79,6 +79,15 @@ function baseState(now) {
   if ((late || now - lastInteract > 15 * 60e3) && !hovering && !chatOpen) return 'sleeping';
   return 'idle';
 }
+// exit: a hole opens under the pet and it drops in (ms offsets from the start)
+let exiting = null;
+const EX = { open: 300, antic: 380, hop: 600, fall: 950, close: 1300, done: 1380 };
+function startExit() {
+  if (exiting) return;
+  exiting = { start: performance.now(), poofed: false };
+  closeChat(); $('hud').classList.remove('show');
+  say('bye! 👋', { prio: true, ms: 900 });
+}
 function transient(kind, ms) { anim = { kind, until: performance.now() + ms, start: performance.now() }; }
 
 // ================= drawing =================
@@ -87,7 +96,9 @@ function every(key, ms, now) { if ((emitT[key] || 0) < now) { emitT[key] = now +
 
 function draw(now) {
   const t = now / 1000;
-  const st = anim.kind && now < anim.until ? anim.kind : baseState(now);
+  let st = anim.kind && now < anim.until ? anim.kind : baseState(now);
+  const ex = exiting ? now - exiting.start : -1;
+  if (ex >= 0) st = ex < EX.antic ? 'idle' : ex < EX.hop ? 'love' : 'exitfall';
   const lvl = snap?.level || 1;
   ctx.setTransform(S, 0, 0, S, 0, 0);
   ctx.clearRect(0, 0, GW, GH);
@@ -109,11 +120,35 @@ function draw(now) {
     case 'hungry': bob = 1; ry -= 1; rx += 1; break;
     default: bob = Math.round(Math.sin(t * 2.2) * 0.7);
   }
+  if (ex >= 0) {
+    const e01 = (a, b) => Math.max(0, Math.min(1, (ex - a) / (b - a)));
+    if (ex > 150 && ex < EX.antic) { const q = Math.sin(e01(150, EX.antic) * Math.PI); ry -= Math.round(q * 2); rx += Math.round(q); }
+    else if (ex < EX.hop) { const q = e01(EX.antic, EX.hop); bob = -Math.round(Math.sin(q * Math.PI) * 5); if (q < .5) { rx -= 1; ry += 1; } }
+    else { const q = e01(EX.hop, EX.fall); bob = Math.round(q * q * 44); rx -= 2; ry += 2; }
+  }
   cy += bob;
 
-  // ground shadow
-  const sw = Math.max(6, 12 + Math.round(bob / 2));
-  ell(28, 47, sw, 1.6, () => 'rgba(0,0,0,.18)');
+  // the hole (exit only), then clip the pet to above its rim so it drops in
+  if (ex >= 0) {
+    const e01 = (a, b) => Math.max(0, Math.min(1, (ex - a) / (b - a)));
+    const open = ex < EX.fall ? 1 - (1 - e01(0, EX.open)) ** 3 : 1 - e01(EX.fall + 50, EX.close) ** 2;
+    const hr = 15 * open, hry = Math.max(.6, hr * .24);
+    if (hr > .5) {
+      ell(28, 47, hr + 1, hry + 1, () => '#2a2f47');
+      ell(28, 47, hr, hry, (dx, dy) => dy < -.25 ? '#0f1119' : '#05060a');
+    }
+    if (ex > EX.fall && !exiting.poofed) {
+      exiting.poofed = true;
+      spawn('spark', 14, { x: 28, y: 45, spread: 2.2, up: 1.3, g: .05, colors: ['#7ef0c1', '#c7fff0', '#ffffff', '#8fd3ff'] });
+      tune([523, 392, 262], 70);
+    }
+    if (ex > EX.done) { exiting = 'done'; api.exitDone(); }
+    ctx.save(); ctx.beginPath(); ctx.rect(0, 0, GW, 47); ctx.clip();
+  } else {
+    // ground shadow
+    const sw = Math.max(6, 12 + Math.round(bob / 2));
+    ell(28, 47, sw, 1.6, () => 'rgba(0,0,0,.18)');
+  }
 
   // colors — hungry pets go pale
   const fuel = snap?.fuel ?? 80;
@@ -122,6 +157,7 @@ function draw(now) {
 
   // feet (wiggle when happy)
   const happy = ['celebrate', 'levelup', 'love'].includes(st);
+  if (ex >= 0 && ex > EX.fall) { ctx.restore(); drawParts(); return; }
   const fw = happy ? Math.round(Math.sin(t * 20)) : 0;
   for (const s of [-1, 1]) {
     ell(cx + s * 6, cy + ry - 0.5 + (s === 1 ? fw : -fw) * 0.5, 3.4, 2.2, (dx, dy, r) => r > 0.62 ? OUT : C.shade);
@@ -157,7 +193,7 @@ function draw(now) {
   const pxX = rc.left + cx * S, pxY = rc.top + cy * S;
   let lx = Math.max(-1, Math.min(1, Math.round((cursor.x - pxX) / 90)));
   let ly = Math.max(-1, Math.min(1, Math.round((cursor.y - pxY) / 110)));
-  if (st === 'working') { lx = 0; ly = 1; }
+  if (st === 'working' || (ex >= 0 && ex < EX.antic)) { lx = 0; ly = 1; }
   const ey = cy - 3 + ly, exL = cx - 6 + lx, exR = cx + 4 + lx;
 
   if (now > nextBlink) { blinkUntil = now + 110; nextBlink = now + rand(2500, 5500); }
@@ -169,7 +205,7 @@ function draw(now) {
     if (st === 'sleeping') rect(ex, ey + 2, 3, 1, OUT);
     else if (happy) dots(ex, ey, [[0,2],[1,1],[2,2]], OUT);
     else if (st === 'panic' || st === 'stalled') { rect(ex - 1, ey, 4, 4, OUT); rect(ex, ey + 1, 2, 2, '#fff'); if (st === 'panic') rect(ex + (Math.floor(t * 8) % 2), ey + 1, 1, 1, OUT); }
-    else if (st === 'alert') { rect(ex - 1, ey - 1, 3, 4, OUT); rect(ex - 1, ey - 1, 1, 1, '#fff'); }
+    else if (st === 'alert' || st === 'exitfall') { rect(ex - 1, ey - 1, 3, 4, OUT); rect(ex - 1, ey - 1, 1, 1, '#fff'); }
     else if (blink) rect(ex, ey + 2, 2, 1, OUT);
     else if (st === 'hungry') { rect(ex, ey + 1, 2, 2, OUT); rect(ex - 1, ey, 4, 1, C.shade); }
     else { rect(ex, ey, 2, 3, OUT); rect(ex, ey, 1, 1, '#fff'); }
@@ -183,7 +219,7 @@ function draw(now) {
   const mx = cx - 1 + lx, my = cy + 2 + ly;
   if (st === 'working') { /* hidden behind laptop */ }
   else if (st === 'eat') { if (Math.floor(t * 7) % 2) rect(mx - 1, my, 4, 3, OUT); else rect(mx - 1, my + 1, 4, 1, OUT); }
-  else if (st === 'alert' || st === 'levelup') { rect(mx, my, 3, 3, OUT); rect(mx + 1, my + 1, 1, 1, '#ff7ab0'); }
+  else if (st === 'alert' || st === 'levelup' || st === 'exitfall') { rect(mx, my, 3, 3, OUT); rect(mx + 1, my + 1, 1, 1, '#ff7ab0'); }
   else if (st === 'panic' || st === 'stalled') dots(mx - 1, my + 1, [[0,1],[1,0],[2,1],[3,0],[4,1]], OUT);
   else if (st === 'sleeping') rect(mx + 1, my + 1, 1, 1, OUT);
   else if (st === 'hungry') dots(mx - 1, my + 1, [[0,1],[1,0],[2,0],[3,1]], OUT);
@@ -210,6 +246,7 @@ function draw(now) {
   if (happy && every('spark', 120, now)) spawn('spark', 3, { x: cx + rand(-12, 12), y: cy - 10, colors: CONFETTI, up: 1.4, g: 0.04 });
   if (lvl >= 3 && st === 'idle' && every('trail', 2500, now)) spawn('spark', 2, { x: cx + rand(-14, 14), y: cy + rand(-6, 8), up: 0.2, colors: ['#fff', '#c7fff0'], fast: 1.5 });
 
+  if (ex >= 0) ctx.restore();
   drawParts();
 }
 
@@ -311,6 +348,7 @@ api.on('event', e => {
     case 'snackNo': case 'night': say(e.text); break;
     case 'openChat': openChat(); break;
     case 'openKey': openChat(); $('keyForm').classList.remove('hidden'); $('keyInput').focus(); break;
+    case 'exit': startExit(); break;
     case 'openRename': openChat(); $('renameForm').classList.remove('hidden'); $('renameInput').value = snap?.name || ''; $('renameInput').select(); break;
   }
 });
