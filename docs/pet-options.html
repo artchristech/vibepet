@@ -1,0 +1,1114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Net — sprite options</title>
+<style>
+  :root { --bg: #14161f; --card: #1c1f2c; --line: #2c3150; --text: #e8ebf5; --dim: #8a92a8; --mint: #7ef0c1; --desk: #2a2d3a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
+  header { position: sticky; top: 0; z-index: 5; background: rgba(20,22,31,.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); padding: 14px 20px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  h1 { font-size: 15px; margin: 0 14px 0 0; }
+  .group { display: flex; gap: 4px; align-items: center; }
+  .group span { color: var(--dim); margin-right: 4px; }
+  button { font: inherit; background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 5px; padding: 4px 10px; cursor: pointer; }
+  button.on { border-color: var(--mint); color: var(--mint); }
+  main { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; padding: 20px; }
+  .card { background: var(--card); border: 2px solid var(--line); border-radius: 10px; overflow: hidden; cursor: pointer; transition: border-color .15s; }
+  .card:hover { border-color: #4a5280; }
+  .card.picked { border-color: var(--mint); box-shadow: 0 0 0 3px rgba(126,240,193,.2); }
+  .stage { height: 250px; display: grid; place-items: center; background: var(--desk); position: relative; }
+  .stage.light { background: #e9e6df; }
+  .stage.wall { background: radial-gradient(circle at 30% 20%, #4b3c7a, #1b2440 60%, #0f1522); }
+  canvas { image-rendering: pixelated; display: block; }
+  .res { position: absolute; top: 8px; right: 8px; font-size: 11px; color: var(--dim); background: rgba(0,0,0,.35); padding: 1px 6px; border-radius: 4px; }
+  .num { position: absolute; top: 8px; left: 8px; font-weight: 700; color: var(--mint); background: rgba(0,0,0,.35); padding: 1px 7px; border-radius: 4px; }
+  .meta { padding: 10px 14px 14px; }
+  .meta b { font-size: 14px; }
+  .meta p { margin: 4px 0 0; color: var(--dim); font-size: 12px; }
+  #pick { color: var(--mint); margin-left: auto; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Net · sprite options</h1>
+  <div class="group" id="states"><span>state</span></div>
+  <div class="group" id="bgs"><span>desk</span></div>
+  <div class="group" id="zooms"><span>zoom</span></div>
+  <div id="pick">click a card to pick</div>
+</header>
+<main id="grid"></main>
+
+<script>
+// ===================== tiny pixel engine (Uint32 buffers, scaled with CSS) =====================
+const OUT = '#1b1f2e', DARK = '#141726', WHITE = '#ffffff';
+const cache = new Map();
+function K(h) {
+  let c = cache.get(h);
+  if (!c) { const n = parseInt(h.slice(1), 16); c = { r: n >> 16 & 255, g: n >> 8 & 255, b: n & 255 }; c.u = ((255 << 24) | (c.b << 16) | (c.g << 8) | c.r) >>> 0; cache.set(h, c); }
+  return c;
+}
+const hex = (r, g, b) => '#' + [r, g, b].map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')).join('');
+function mix(a, b, t) { const A = K(a), B = K(b); return hex(A.r + (B.r - A.r) * t, A.g + (B.g - A.g) * t, A.b + (B.b - A.b) * t); }
+function hsl(h, s, l) { s /= 100; l /= 100; const f = n => { const k = (n + h / 30) % 12; return l - s * Math.min(l, 1 - l) * Math.max(-1, Math.min(k - 3, 9 - k, 1)); }; return hex(f(0) * 255, f(8) * 255, f(4) * 255); }
+const rampOf = h => [mix(h, '#000000', .55), mix(h, '#000000', .3), h, mix(h, '#ffffff', .35), mix(h, '#ffffff', .75)];
+
+function put(S, x, y, h) { x = Math.floor(x); y = Math.floor(y); if (x < 0 || y < 0 || x >= S.w || y >= S.h) return; S.buf[y * S.w + x] = K(h).u; }
+function putA(S, x, y, h, a) {
+  x = Math.floor(x); y = Math.floor(y); if (x < 0 || y < 0 || x >= S.w || y >= S.h || a <= 0) return;
+  const i = y * S.w + x, c = K(h), e = S.buf[i], ea = (e >>> 24) / 255;
+  if (ea === 0) { S.buf[i] = ((Math.round(a * 255) << 24) | (c.b << 16) | (c.g << 8) | c.r) >>> 0; return; }
+  const er = e & 255, eg = e >> 8 & 255, eb = e >> 16 & 255, na = Math.min(1, ea + a * (1 - ea));
+  S.buf[i] = ((Math.round(na * 255) << 24) | (Math.round(eb + (c.b - eb) * a) << 16) | (Math.round(eg + (c.g - eg) * a) << 8) | Math.round(er + (c.r - er) * a)) >>> 0;
+}
+function rectF(S, x, y, w, h, c) { x = Math.round(x); y = Math.round(y); for (let j = 0; j < Math.max(1, Math.round(h)); j++) for (let i = 0; i < Math.max(1, Math.round(w)); i++) put(S, x + i, y + j, c); }
+function ellF(S, cx, cy, rx, ry, c) {
+  for (let y = Math.floor(cy - ry - 1); y <= cy + ry + 1; y++) for (let x = Math.floor(cx - rx - 1); x <= cx + rx + 1; x++) {
+    const dx = (x + .5 - cx) / rx, dy = (y + .5 - cy) / ry; if (dx * dx + dy * dy <= 1) put(S, x, y, c);
+  }
+}
+function halo(S, cx, cy, R, h, a) {
+  for (let y = Math.floor(cy - R); y <= cy + R; y++) for (let x = Math.floor(cx - R); x <= cx + R; x++) {
+    const d = Math.hypot(x + .5 - cx, y + .5 - cy) / R; if (d < 1) putA(S, x, y, h, a * (1 - d) * (1 - d));
+  }
+}
+function shadow(S, cx, cy, rx, ry) { for (let y = Math.floor(cy - ry); y <= cy + ry; y++) for (let x = Math.floor(cx - rx); x <= cx + rx; x++) { const dx = (x + .5 - cx) / rx, dy = (y + .5 - cy) / ry; if (dx * dx + dy * dy <= 1) putA(S, x, y, '#000000', .22); } }
+
+const BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]].map(r => r.map(v => (v + .5) / 16));
+// clean bands; ordered dither only in a narrow seam between tones
+const dith = (t, x, y, n) => { const f = Math.max(0, Math.min(.999, t)) * (n - 1); let i = Math.floor(f); const fr = f - i; if (fr > .62 || (fr > .38 && (fr - .38) / .24 > BAYER[y & 3][x & 3])) i++; return Math.min(i, n - 1); };
+
+// generic filled shape with a 1px outline wherever an outside pixel touches the inside
+function fillShape(S, x0, y0, W, H, test, color, outline) {
+  x0 = Math.floor(x0); y0 = Math.floor(y0); W = Math.ceil(W); H = Math.ceil(H);
+  const m = new Uint8Array(W * H);
+  for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) m[j * W + i] = test(x0 + i, y0 + j) ? 1 : 0;
+  const ins = (i, j) => i >= 0 && j >= 0 && i < W && j < H && m[j * W + i];
+  for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
+    const x = x0 + i, y = y0 + j;
+    if (m[j * W + i]) put(S, x, y, color(x, y));
+    else if (outline && (ins(i - 1, j) || ins(i + 1, j) || ins(i, j - 1) || ins(i, j + 1))) put(S, x, y, typeof outline === 'function' ? outline(x, y) : outline);
+  }
+}
+// lit sphere-ish blob. shape(dx,dy,x,y) -> r (inside when <= 1)
+function orb(S, cx, cy, rx, ry, ramp, o = {}) {
+  const shape = o.shape || ((dx, dy) => dx * dx + dy * dy);
+  const R = (x, y) => shape((x + .5 - cx) / rx, (y + .5 - cy) / ry, x, y);
+  const ext = o.ext || 1;
+  fillShape(S, cx - rx - 3, cy - ry - 3, rx * 2 + 7, ry * (1 + ext) + 7, (x, y) => R(x, y) <= 1, (x, y) => {
+    const dx = (x + .5 - cx) / rx, dy = (y + .5 - cy) / ry, r = Math.min(1, Math.max(0, o.rOf ? o.rOf(dx, dy) : R(x, y)));
+    if (o.flat) { if (dy > .5 || (dx > .65 && dy > .05)) return ramp[1]; if ((dx + .45) ** 2 + (dy + .5) ** 2 < .05) return ramp[4]; return ramp[2]; }
+    if (o.spec !== false && (dx + .4) ** 2 + (dy + .5) ** 2 < (o.specR ?? .012)) return WHITE;
+    if (o.rim && r > .72 && dx > .15 && dy > .1) return o.rim;
+    if (o.spec2 && (dx + .4) ** 2 + (dy + .5) ** 2 < (o.specR ?? .012) * 3.5) return ramp[ramp.length - 1];
+    const nz = Math.sqrt(1 - r), d = -.45 * dx - .6 * dy + .66 * nz - (o.ao ? Math.max(0, dy - .45) * o.ao : 0) + (o.tex ? o.tex(x, y) : 0);
+    return ramp[dith((d + .3) / 1.2, x, y, ramp.length)];
+  }, o.outline === undefined ? OUT : o.outline);
+}
+function rrect(S, x, y, w, h, rad, colorFn, outline) {
+  const inside = (px, py) => {
+    const lx = px + .5 - x, ly = py + .5 - y; if (lx < 0 || ly < 0 || lx > w || ly > h) return false;
+    const cx = Math.min(Math.max(lx, rad), w - rad), cy = Math.min(Math.max(ly, rad), h - rad);
+    return (lx - cx) ** 2 + (ly - cy) ** 2 <= rad * rad;
+  };
+  fillShape(S, x - 2, y - 2, w + 5, h + 5, inside, colorFn, outline);
+}
+function tri(S, a, b, c, colorFn, outline) {
+  const sgn = (p, q, r) => (p[0] - r[0]) * (q[1] - r[1]) - (q[0] - r[0]) * (p[1] - r[1]);
+  const xs = [a[0], b[0], c[0]], ys = [a[1], b[1], c[1]];
+  fillShape(S, Math.min(...xs) - 2, Math.min(...ys) - 2, Math.max(...xs) - Math.min(...xs) + 5, Math.max(...ys) - Math.min(...ys) + 5, (x, y) => {
+    const p = [x + .5, y + .5], d1 = sgn(p, a, b), d2 = sgn(p, b, c), d3 = sgn(p, c, a);
+    return !((d1 < 0 || d2 < 0 || d3 < 0) && (d1 > 0 || d2 > 0 || d3 > 0));
+  }, colorFn, outline);
+}
+function line(S, x0, y0, x1, y1, c, th = 1) {
+  const n = Math.max(Math.abs(x1 - x0), Math.abs(y1 - y0), 1);
+  for (let i = 0; i <= n; i++) rectF(S, x0 + (x1 - x0) * i / n - (th - 1) / 2, y0 + (y1 - y0) * i / n - (th - 1) / 2, th, th, c);
+}
+
+const GL = {
+  bang: ['##', '##', '##', '##', '  ', '##'],
+  q: [' ## ', '#  #', '   #', '  # ', ' #  ', '    ', ' #  '],
+  z: ['####', '  # ', ' #  ', '####'],
+  heart: [' # # ', '#####', '#####', ' ### ', '  #  '],
+  note: ['  ##', ' # #', ' #  ', '##  ', '##  '],
+  drop: [' # ', '###', '###', ' # '],
+};
+function glyph(S, x, y, name, c, g = 1, outline = OUT) {
+  const pts = []; GL[name].forEach((r, j) => [...r].forEach((ch, i) => ch === '#' && pts.push([i, j])));
+  const set = new Set(pts.map(p => p + ''));
+  if (outline) for (const [i, j] of pts) for (const [di, dj] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) if (!set.has([i + di, j + dj] + '')) rectF(S, x + (i + di) * g, y + (j + dj) * g, g, g, outline);
+  for (const [i, j] of pts) rectF(S, x + i * g, y + j * g, g, g, c);
+}
+
+// ===================== shared behaviour =====================
+function motion(st, t, k) {
+  const m = { dy: 0, sq: 0, jx: 0 };
+  const hop = (speed, height) => {
+    const p = (t * speed) % 1, s = Math.sin(p * Math.PI);
+    m.dy = -Math.round(Math.max(0, s) * height * k);
+    if (p < .1 || p > .93) m.sq = Math.round(k); else if (s > .5) m.sq = -Math.round(k);
+  };
+  if (st === 'alert') hop(1.3, 6);
+  else if (st === 'celebrate') hop(2.2, 9);
+  else if (st === 'sleep') m.sq = Math.sin(t * 1.3) > 0 ? 0 : Math.round(k);
+  else if (st === 'working') m.dy = Math.round(Math.sin(t * 7) * .5 * k);
+  else if (st === 'nervous') { m.jx = Math.sin(t * 31) > .7 ? Math.max(1, Math.round(k * .7)) : 0; m.dy = Math.round(Math.sin(t * 2.2) * .7 * k); }
+  else m.dy = Math.round(Math.sin(t * 2.2) * .8 * k);
+  return m;
+}
+function status(st, t) {
+  if (st === 'working') return { h: mix('#2fcf7f', '#c4ffe0', (Math.sin(t * 5) + 1) / 2), glow: true };
+  if (st === 'alert') return Math.floor(t * 3) % 2 ? { h: '#ffcf3f', glow: true } : { h: '#8a6a12', glow: false };
+  if (st === 'nervous') return { h: '#ff8a5c', glow: true };
+  if (st === 'celebrate') return { h: hsl((t * 360) % 360, 90, 65), glow: true };
+  if (st === 'sleep') return { h: '#3d4360', glow: false };
+  return { h: '#6b7394', glow: false };
+}
+function eye(S, x, y, k, st, look, o = {}) {
+  const th = Math.max(1, Math.round(k * .6));
+  const arc = (hw, h, dir) => { for (let i = -hw; i <= hw; i += 1) rectF(S, x + i, y + dir * (1 - (i / hw) ** 2) * h, th, th, DARK); };
+  if (st === 'sleep') { arc(1.6 * k, .7 * k, 1); return; }
+  if (st === 'celebrate') { arc(1.6 * k, 1.1 * k, -1); return; }
+  if (look.blink) { rectF(S, x - 1.4 * k, y + .3 * k, 2.8 * k, th, DARK); return; }
+  const big = st === 'alert', rx = (big ? 1.7 : 1.3) * k * (o.eyeScale || 1), ry = (big ? 2.1 : 1.8) * k * (o.eyeScale || 1);
+  ellF(S, x, y, rx, ry, DARK);
+  if (k >= 1.8 && !o.flat) ellF(S, x, y + ry * .45, rx * .7, ry * .45, o.iris || '#2d4a7a');
+  if (o.slit && k >= 1.8) { ellF(S, x, y, rx * .75, ry * .9, o.iris); rectF(S, x - .5, y - ry * .8, 1, ry * 1.6, DARK); }
+  const hs = Math.max(1, Math.round(k * .75));
+  rectF(S, x - rx * .55, y - ry * .6, hs, hs, WHITE);
+  if (k >= 1.8) rectF(S, x + rx * .3, y + ry * .35, Math.max(1, hs - 1), Math.max(1, hs - 1), WHITE);
+  if (st === 'nervous') { const s = o.side || 1; line(S, x - 1.6 * k, y - 2.7 * k + s * .5 * k, x + 1.6 * k, y - 2.7 * k - s * .5 * k, DARK, th); }
+}
+function mouth(S, x, y, k, st, t) {
+  const th = Math.max(1, Math.round(k * .5));
+  if (st === 'alert' || st === 'celebrate') {
+    const r = (st === 'celebrate' ? 1.6 : 1.1) * k;
+    ellF(S, x, y + .7 * k, r, r * .9, DARK);
+    if (k >= 1.3) ellF(S, x, y + .7 * k + r * .45, r * .6, r * .38, '#ff7ab0');
+    return;
+  }
+  if (st === 'nervous') { const step = Math.max(1, Math.round(k)); for (let i = -2 * k; i <= 2 * k; i++) rectF(S, x + i, y + .6 * k + (Math.floor((i + 20 * k) / step) % 2) * step * .7, 1, th, DARK); return; }
+  if (st === 'sleep') { ellF(S, x, y + .9 * k, Math.max(.6, .45 * k), Math.max(.8, .6 * k), DARK); return; }
+  for (let i = -1.6 * k; i <= 1.6 * k; i += 1) rectF(S, x + i, y + (1 - (i / (1.6 * k)) ** 2) * .9 * k, 1, th, DARK);
+}
+function blush(S, x, y, k, o = {}) {
+  const rx = 2.2 * k, ry = Math.max(1, .9 * k);
+  for (let yy = Math.floor(y - ry); yy <= y + ry; yy++) for (let xx = Math.floor(x - rx); xx <= x + rx; xx++) {
+    const dx = (xx + .5 - x) / rx, dy = (yy + .5 - y) / ry;
+    if (dx * dx + dy * dy <= 1 && (k < 1.8 || (xx + yy) % 2 === 0 || dx * dx + dy * dy < .35)) put(S, xx, yy, o.c || '#ff9ec4');
+  }
+}
+function antenna(S, x, top, k, st, t, outline, flat) {
+  const len = 4.5 * k, w = Math.max(1, Math.round(k * .5));
+  for (let j = 0; j < len; j++) rectF(S, x + (flat ? 0 : Math.round(Math.sin(j * .9 + t * 3) * .45 * k * (j / len))), top - j - 1, w, 1, outline);
+  const s = status(st, t), bx = x + .3 * k, by = top - len - 1.2 * k;
+  if (s.glow) halo(S, bx, by, 4 * k, s.h, .4);
+  orb(S, bx, by, 1.5 * k, 1.5 * k, rampOf(s.h), { outline, flat, specR: .06 });
+}
+function laptop(S, cx, cy, k, t, body, outline) {
+  const x = cx - 8 * k, y = cy + 1 * k, w = 16 * k, h = 9 * k;
+  const lid = ['#7d869f', '#a3abc2', '#c9cfdc', '#e6eaf2'];
+  rrect(S, x, y, w, h, Math.max(1, k * .8), (px, py) => lid[dith(1 - (py - y) / h, px, py, lid.length)], outline);
+  const g = mix('#2fcf7f', '#c4ffe0', (Math.sin(t * 3) + 1) / 2);
+  if (k >= 1.8) halo(S, cx, y + h * .45, 3 * k, g, .5);
+  ellF(S, cx, y + h * .45, Math.max(1, .9 * k), Math.max(1, .9 * k), g);
+  rrect(S, cx - 10 * k, y + h, 20 * k, 2.2 * k, Math.max(1, k * .5), () => '#8a92a8', outline);
+  const tk = Math.floor(t * 10) % 2;
+  orb(S, cx - 8.5 * k, y + h - k * .4 + tk * k * .6, 1.7 * k, 1.3 * k, body, { outline, spec: false });
+  orb(S, cx + 8.5 * k, y + h - k * .4 + (1 - tk) * k * .6, 1.7 * k, 1.3 * k, body, { outline, spec: false });
+}
+function sweat(S, x, y, k) {
+  if (k < 1.5) { glyph(S, x, y, 'drop', '#8fd3ff', 1); return; }
+  orb(S, x, y + k, 1.3 * k, 1.8 * k, rampOf('#8fd3ff'), { shape: (dx, dy) => dx * dx / (dy < 0 ? (1 + dy) * (1 + dy) + .001 : 1) + dy * dy, specR: .08 });
+}
+
+// ===================== designs =====================
+const MINT = ['#2a8a7a', '#43b596', '#6dd8b2', '#9ef0cc', '#d9fff1'];
+const MINT_SOFT = ['#2f9180', '#48b99a', '#6fd9b4', '#9ef0cc', '#dcfff3'];
+const feetOf = r => [r[0], r[0], r[1], r[1], r[2]];
+
+function drawNet(S, st, t, look, k, o = {}) {
+  const m = motion(st, t, k), body = o.ramp || MINT, outl = o.outline || OUT, happy = st === 'celebrate';
+  const cx = S.w / 2 + m.jx, cy = 34 * k + m.dy, rx = 13 * k + m.sq, ry = 11 * k - m.sq;
+  shadow(S, S.w / 2, 47 * k, Math.max(6 * k, 12 * k + m.dy / 2), 1.6 * k);
+  const fw = happy ? Math.round(Math.sin(t * 20) * k * .6) : 0;
+  for (const s of [-1, 1]) orb(S, cx + s * 6 * k, cy + ry - .5 * k + (s > 0 ? fw : -fw), 3.4 * k, 2.2 * k, feetOf(body), { outline: outl, spec: false, flat: o.flat });
+  if (o.arms && st !== 'working') {
+    const ay = happy ? cy - 5 * k + Math.round(Math.sin(t * 14) * k) : st === 'alert' ? cy - 2 * k : cy + 3 * k;
+    for (const s of [-1, 1]) orb(S, cx + s * (rx + .2 * k), ay, 2.3 * k, 1.9 * k, body, { outline: outl, spec: false });
+  }
+  orb(S, cx, cy, rx, ry, body, { outline: outl, flat: o.flat, rim: o.rim, specR: .01 });
+  const lx = look.x * k * .9, ly = st === 'working' ? k : look.y * k * .7;
+  if (st !== 'sleep' || true) { blush(S, cx - 8.5 * k + lx, cy + .6 * k + ly * .5, k); blush(S, cx + 8.5 * k + lx, cy + .6 * k + ly * .5, k); }
+  antenna(S, cx, cy - ry, k, st, t, outl, o.flat);
+  eye(S, cx - 5.2 * k + lx, cy - 3 * k + ly, k, st, look, { ...o, side: -1 });
+  eye(S, cx + 5.2 * k + lx, cy - 3 * k + ly, k, st, look, { ...o, side: 1 });
+  if (st === 'working') laptop(S, cx, cy, k, t, body, outl); else mouth(S, cx + lx, cy + 2.2 * k + ly, k, st, t);
+  if (st === 'nervous') sweat(S, cx + rx - 4 * k, cy - ry + 2 * k, k);
+  return { cx, top: cy - ry - 7 * k, cy, rx, k };
+}
+
+function drawSlime(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, cy = 66 + m.dy * .8, rx = 29 + m.sq * 1.5, ry = 24 - m.sq;
+  const ramp = ['#1d6f73', '#2a9c9a', '#45c7b8', '#86ecd6', '#d6fff5'];
+  shadow(S, S.w / 2, 92, 30 + m.dy / 3, 3);
+  const shape = (dx, dy) => dy > 0 ? dx * dx * (1 - .28 * dy) + dy * dy * 1.9 : dx * dx + dy * dy;
+  orb(S, cx, cy, rx, ry, ramp, { shape, specR: 0, rOf: (dx, dy) => dx * dx + dy * dy });
+  // translucent core + bubbles
+  const s = status(st, t);
+  halo(S, cx + 2, cy + 6, 14, s.glow ? s.h : '#bfffee', s.glow ? .55 : .25);
+  for (let i = 0; i < 4; i++) {
+    const p = ((t * .25 + i * .27) % 1), bx = cx - 14 + i * 9 + Math.sin(t * 2 + i) * 2, by = cy + 14 - p * 30, br = 1.5 + (i % 2);
+    for (let a = 0; a < 12; a++) put(S, bx + Math.cos(a / 12 * 6.283) * br, by + Math.sin(a / 12 * 6.283) * br, '#c8fff2');
+  }
+  // gloss streak
+  for (let i = 0; i < 9; i++) rectF(S, cx - 20 + i * 1.2, cy - 16 + i * -.2 + i * i * .06, 2, 2, i < 7 ? '#ffffff' : '#d6fff5');
+  rectF(S, cx - 22, cy - 10, 2, 2, '#ffffff');
+  // drips
+  for (const [dx, ph] of [[-17, 0], [15, 2]]) { const dl = 2 + Math.round((Math.sin(t * 1.5 + ph) + 1) * 1.5); orb(S, cx + dx, cy + ry * .5 + dl * .5, 2.4, dl * .5 + 2.5, ramp, { spec: false }); }
+  const lx = look.x * 2, ly = st === 'working' ? 2 : look.y * 1.5;
+  eye(S, cx - 9 + lx, cy - 2 + ly, 2, st, look, { eyeScale: .9, iris: '#1f3f5c', side: -1 });
+  eye(S, cx + 9 + lx, cy - 2 + ly, 2, st, look, { eyeScale: .9, iris: '#1f3f5c', side: 1 });
+  blush(S, cx - 16 + lx, cy + 3, 2); blush(S, cx + 16 + lx, cy + 3, 2);
+  mouth(S, cx + lx, cy + 4 + ly, 2, st === 'working' ? 'idle' : st, t);
+  if (st === 'nervous') sweat(S, cx + 20, cy - 16, 2);
+  return { cx, top: cy - ry - 4, cy, rx, k };
+}
+
+function drawBot(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy;
+  const cream = ['#6f6450', '#9c8f72', '#c6b995', '#e6dcbd', '#fbf6e6'];
+  shadow(S, S.w / 2, 96, 24 + m.dy / 3, 3);
+  for (const s of [-1, 1]) orb(S, cx + s * 11, 89 + b * .4, 6, 3.5, ['#3b3f52', '#3b3f52', '#555b75', '#6f7694', '#9aa1bd'], { spec: false });
+  rrect(S, cx - 21, 74 + b * .6, 42, 13, 4, (x, y) => cream[dith(.75 - (y - 74 - b * .6) / 26, x, y, 5)], OUT);
+  for (let j = 0; j < 2; j++) for (let i = 0; i < 6; i++) rectF(S, cx - 16 + i * 5.6, 78 + j * 4 + b * .6, 4, 2, j === 0 && i === (Math.floor(t * 8) % 6) && st === 'working' ? '#7ef0c1' : '#9c8f72');
+  rectF(S, cx - 4, 69 + b, 8, 6, '#6f6450');
+  const hx = cx - 27, hy = 24 + b + m.sq, W = 54, H = 46 - m.sq;
+  rrect(S, hx, hy, W, H, 8, (x, y) => cream[dith(1 - ((y - hy) / H) * .7 - ((x - hx) / W) * .35 + .1, x, y, 5)], OUT);
+  // screen
+  const sx = hx + 6, sy = hy + 6, sw = 38, sh = 30, s = status(st, t);
+  const ph = st === 'sleep' ? '#2f6b56' : st === 'alert' ? '#ffcf3f' : st === 'nervous' ? '#ff9a6a' : st === 'celebrate' ? s.h : '#7ef0c1';
+  rrect(S, sx, sy, sw, sh, 5, (x, y) => (y % 2 ? '#0c1812' : '#0f1f17'), '#4a4436');
+  halo(S, sx + sw / 2, sy + sh / 2, 20, ph, .12);
+  const P = (x, y) => { put(S, x, y, ph); putA(S, x + 1, y, ph, .25); putA(S, x - 1, y, ph, .25); putA(S, x, y + 1, ph, .2); putA(S, x, y - 1, ph, .2); };
+  const PR = (x, y, w, h) => { for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) P(Math.round(x + i), Math.round(y + j)); };
+  const fx = sx + sw / 2 + look.x * 3, fy = sy + 12 + (st === 'working' ? 2 : look.y * 2);
+  for (const d of [-8, 8]) {
+    const ex = fx + d;
+    if (st === 'sleep') PR(ex - 3, fy + 2, 6, 1);
+    else if (st === 'celebrate') { P(ex - 3, fy + 2); P(ex - 2, fy + 1); P(ex - 1, fy); P(ex, fy); P(ex + 1, fy + 1); P(ex + 2, fy + 2); }
+    else if (look.blink) PR(ex - 2, fy + 2, 5, 1);
+    else if (st === 'alert') PR(ex - 3, fy - 2, 6, 8);
+    else PR(ex - 2, fy - 1, 4, 6);
+    if (st === 'nervous') { P(ex - 3, fy - 4 + (d < 0 ? 1 : -1)); P(ex - 1, fy - 4); P(ex + 1, fy - 4 + (d < 0 ? -1 : 1)); }
+  }
+  const my = fy + 8;
+  if (st === 'working') { for (let l = 0; l < 3; l++) { const w = 6 + ((l * 7 + Math.floor(t * 3)) % 5) * 4; PR(sx + 5, my + l * 3 - 2, w, 1); } }
+  else if (st === 'alert' || st === 'celebrate') { PR(fx - 3, my, 6, 1); PR(fx - 3, my + 1, 1, 3); PR(fx + 2, my + 1, 1, 3); PR(fx - 2, my + 4, 4, 1); }
+  else if (st === 'nervous') { for (let i = -5; i <= 5; i++) P(fx + i, my + 1 + (Math.floor((i + 10) / 2) % 2)); }
+  else if (st === 'sleep') { PR(fx - 1, my + 1, 2, 2); glyph(S, sx + sw - 9, sy + 3, 'z', ph, 1, null); }
+  else { P(fx - 5, my); P(fx + 5, my); PR(fx - 4, my + 1, 9, 1); }
+  // bezel details
+  for (let i = 0; i < 4; i++) rectF(S, hx + W - 6, hy + 10 + i * 4, 3, 1, '#9c8f72');
+  const led = s.glow ? s.h : '#6b7394'; if (s.glow) halo(S, hx + W - 5, hy + H - 7, 5, led, .5); ellF(S, hx + W - 5, hy + H - 7, 1.6, 1.6, led);
+  antenna(S, hx + 14, hy, 2, st, t, OUT, false);
+  return { cx, top: hy - 12, cy: hy + H / 2, rx: W / 2, k };
+}
+
+function drawAxolotl(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, cy = 58 + m.dy, rx = 26 + m.sq, ry = 18 - m.sq;
+  const pink = ['#a8456f', '#d46b95', '#f497b7', '#ffc4d6', '#fff0f5'];
+  shadow(S, S.w / 2, 94, 24 + m.dy / 3, 3);
+  // tail + body
+  const tw = Math.sin(t * 3) * 3;
+  orb(S, cx + 20, cy + 22 + tw * .3, 10, 5, pink, { spec: false, shape: (dx, dy) => dx * dx + (dy - dx * tw * .08) ** 2 });
+  orb(S, cx, cy + 20, 16, 11, pink, { spec: false });
+  for (const s of [-1, 1]) orb(S, cx + s * 11, cy + 30, 4, 3, feetOf(pink), { spec: false });
+  // gills (status lights)
+  const s = status(st, t), gc = s.glow ? s.h : '#ff5c8a';
+  for (const side of [-1, 1]) for (let g = 0; g < 3; g++) {
+    const ang = (-.55 + g * .45) + Math.sin(t * 2.5 + g) * .08, bx = cx + side * (rx - 4), by = cy - 6 + g * 6;
+    for (let i = 0; i < 13; i++) {
+      const x = bx + side * Math.cos(ang) * i, y = by - Math.sin(ang) * i * .9 - i * i * .02;
+      rectF(S, x, y, 2, 2, OUT);
+    }
+    for (let i = 0; i < 12; i++) {
+      const x = bx + side * Math.cos(ang) * i, y = by - Math.sin(ang) * i * .9 - i * i * .02;
+      put(S, x, y, i > 8 ? mix(gc, '#ffffff', .4) : gc);
+      if (i % 3 === 1) { put(S, x, y - 2, gc); put(S, x + side, y + 2, mix(gc, '#000000', .2)); }
+    }
+    if (s.glow) halo(S, bx + side * 10 * Math.cos(ang), by - 8 * Math.sin(ang), 5, gc, .3);
+  }
+  orb(S, cx, cy, rx, ry, pink, { specR: .008 });
+  const lx = look.x * 2, ly = st === 'working' ? 2 : look.y * 1.4;
+  for (const side of [-1, 1]) {
+    const ex = cx + side * 14 + lx, ey = cy - 3 + ly;
+    if (st === 'sleep' || st === 'celebrate' || look.blink) eye(S, ex, ey, 1.6, st, look, {});
+    else { ellF(S, ex, ey, st === 'alert' ? 3 : 2.4, st === 'alert' ? 3 : 2.4, DARK); rectF(S, ex - 1.5, ey - 1.5, 1, 1, WHITE); }
+    if (st === 'nervous') line(S, ex - 3, ey - 5 - side, ex + 3, ey - 5 + side, DARK, 1);
+  }
+  blush(S, cx - 19 + lx, cy + 3, 2, { c: '#ff6f9e' }); blush(S, cx + 19 + lx, cy + 3, 2, { c: '#ff6f9e' });
+  if (st === 'alert' || st === 'celebrate' || st === 'nervous' || st === 'sleep') mouth(S, cx + lx, cy + 3 + ly, 1.7, st, t);
+  else for (let i = -8; i <= 8; i++) put(S, cx + lx + i, cy + 4 + ly + Math.round((1 - (i / 8) ** 2) * 2), DARK);
+  if (st === 'working') laptop(S, cx, cy + 14, 1.5, t, pink, OUT);
+  if (st === 'nervous') sweat(S, cx + 22, cy - 14, 2);
+  return { cx, top: cy - ry - 10, cy, rx, k };
+}
+
+function drawCat(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, cy = 64 + m.dy, rx = 25 + m.sq, ry = 21 - m.sq;
+  const fur = ['#2f2944', '#4a4068', '#6c6195', '#968bc3', '#d5cdf2'];
+  shadow(S, S.w / 2, 94, 24 + m.dy / 3, 3);
+  // tail
+  const wag = Math.sin(t * (st === 'celebrate' ? 12 : st === 'alert' ? 7 : 2.5)) * 6;
+  for (let i = 0; i < 20; i++) { const x = cx + 20 + i * .9, y = cy + 14 - i * 1.3 + Math.sin(i * .25) * 2 + wag * (i / 20) ** 2 * (i > 10 ? 1 : .5); ellF(S, x, y, 3.2, 3.2, OUT); }
+  for (let i = 0; i < 20; i++) { const x = cx + 20 + i * .9, y = cy + 14 - i * 1.3 + Math.sin(i * .25) * 2 + wag * (i / 20) ** 2 * (i > 10 ? 1 : .5); ellF(S, x, y, 2.2, 2.2, i > 16 ? fur[4] : fur[2]); }
+  for (const s of [-1, 1]) orb(S, cx + s * 11, cy + ry - 1, 6, 3.6, feetOf(fur), { spec: false });
+  // ears
+  const ey0 = cy - ry + 6;
+  for (const s of [-1, 1]) {
+    const flick = st === 'alert' ? -2 : st === 'sleep' ? 3 : 0;
+    const a = [cx + s * 22, ey0 + 4], b = [cx + s * 8, ey0 - 2], c = [cx + s * 19, ey0 - 17 + flick];
+    tri(S, a, b, c, (x, y) => fur[dith(.6 + (s < 0 ? .2 : -.1) - (y - c[1]) / 40, x, y, 5)], OUT);
+    tri(S, [cx + s * 19, ey0 + 1], [cx + s * 12, ey0 - 1], [cx + s * 18, ey0 - 10 + flick], () => '#ff9ec4', null);
+  }
+  orb(S, cx, cy, rx, ry, fur, { specR: .008 });
+  // collar + bell = status light
+  const s = status(st, t);
+  for (let x = cx - 15; x <= cx + 15; x++) { const y = cy + 10 + Math.round(((x - cx) / 15) ** 2 * 2.5); rectF(S, x, y, 1, 3, '#e04a5f'); put(S, x, y, '#ff7a8a'); }
+  if (s.glow) halo(S, cx, cy + 16, 8, s.h, .5);
+  orb(S, cx, cy + 16, 3.2, 3.2, rampOf(s.glow ? s.h : '#ffcf3f'), { specR: .08 });
+  const lx = look.x * 2, ly = st === 'working' ? 2 : look.y * 1.4;
+  eye(S, cx - 9 + lx, cy - 4 + ly, 2, st, look, { iris: '#b8e05a', slit: true, side: -1 });
+  eye(S, cx + 9 + lx, cy - 4 + ly, 2, st, look, { iris: '#b8e05a', slit: true, side: 1 });
+  tri(S, [cx - 2 + lx, cy + 1 + ly], [cx + 2 + lx, cy + 1 + ly], [cx + lx, cy + 3 + ly], () => '#ff9ec4', null);
+  if (st === 'alert' || st === 'celebrate' || st === 'nervous' || st === 'sleep') mouth(S, cx + lx, cy + 3 + ly, 1.5, st, t);
+  else { for (const s2 of [-1, 1]) { put(S, cx + lx + s2, cy + 4 + ly, DARK); put(S, cx + lx + s2 * 2, cy + 5 + ly, DARK); put(S, cx + lx + s2 * 3, cy + 4 + ly, DARK); } put(S, cx + lx, cy + 4 + ly, DARK); }
+  for (const s2 of [-1, 1]) for (let w = 0; w < 3; w++) line(S, cx + s2 * 13 + lx, cy + 1 + w * 2 + ly, cx + s2 * 24 + lx, cy - 1 + w * 3 + ly, '#c9c3e6', 1);
+  if (st === 'working') laptop(S, cx, cy + 6, 1.6, t, fur, OUT);
+  if (st === 'nervous') sweat(S, cx + 18, cy - 16, 2);
+  return { cx, top: cy - ry - 16, cy, rx, k };
+}
+
+function drawGhost(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), float = Math.sin(t * 1.6) * 3, cx = S.w / 2 + m.jx, cy = 52 + m.dy + float, rx = 24 + m.sq, ry = 22 - m.sq;
+  const ramp = ['#5f66a0', '#8d95cf', '#bcc4f5', '#e1e6ff', '#ffffff'];
+  const s = status(st, t);
+  shadow(S, S.w / 2, 96, 14 - float, 2);
+  halo(S, cx, cy + 8, 40, s.glow ? s.h : '#aab3ff', s.glow ? .3 : .14);
+  const wave = x => cy + ry * .95 + Math.sin(x * .38 + t * 5) * 2.4;
+  orb(S, cx, cy, rx, ry, ramp, {
+    ext: 1.3, specR: .01,
+    shape: (dx, dy, x, y) => dy <= 0 ? dx * dx + dy * dy : (Math.abs(dx) <= 1 && y + .5 < wave(x) ? dx * dx * .98 : 2),
+    rOf: (dx, dy) => dy <= 0 ? dx * dx + dy * dy : dx * dx,
+  });
+  const lx = look.x * 2, ly = st === 'working' ? 2 : look.y * 1.5;
+  for (const side of [-1, 1]) {
+    const ex = cx + side * 8 + lx, ey = cy - 4 + ly;
+    if (['sleep', 'celebrate'].includes(st) || look.blink) eye(S, ex, ey, 2, st, look, {});
+    else { ellF(S, ex, ey, st === 'alert' ? 3.4 : 2.8, st === 'alert' ? 4.6 : 3.8, DARK); rectF(S, ex - 1.5, ey - 2.5, 2, 2, WHITE); }
+    if (st === 'nervous') line(S, ex - 3, ey - 6 - side, ex + 3, ey - 6 + side, DARK, 1);
+  }
+  blush(S, cx - 15 + lx, cy + 2, 2, { c: '#ffb3d1' }); blush(S, cx + 15 + lx, cy + 2, 2, { c: '#ffb3d1' });
+  mouth(S, cx + lx, cy + 3 + ly, 1.8, st === 'working' ? 'idle' : st, t);
+  if (st === 'working') laptop(S, cx, cy + 10, 1.5, t, ramp, OUT);
+  if (st === 'nervous') sweat(S, cx + 18, cy - 14, 2);
+  return { cx, top: cy - ry - 4, cy, rx, k };
+}
+
+// ===================== designs 10–19 =====================
+function leaf(S, x, y, len, ang, w, ramp, outline = OUT) {
+  const ca = Math.cos(ang), sa = Math.sin(ang), ex = x + ca * len, ey = y + sa * len;
+  const loc = (px, py) => { const dx = px + .5 - x, dy = py + .5 - y; return [dx * ca + dy * sa, -dx * sa + dy * ca]; };
+  fillShape(S, Math.min(x, ex) - w - 3, Math.min(y, ey) - w - 3, Math.abs(ex - x) + 2 * w + 7, Math.abs(ey - y) + 2 * w + 7,
+    (px, py) => { const [u, v] = loc(px, py); return u >= 0 && u <= len && Math.abs(v) <= Math.sin(Math.PI * u / len) * w; },
+    (px, py) => { const [u, v] = loc(px, py); if (Math.abs(v) < .6 && u > 1.5 && u < len - 2) return ramp[1]; return ramp[dith(.35 + (v < 0 ? .3 : 0) + u / len * .25, px, py, ramp.length)]; }, outline);
+}
+function chain(S, pts, r0, r1, ramp) {
+  const n = pts.length - 1, r = i => r0 * (1 - i / n) + r1 * (i / n);
+  pts.forEach((p, i) => ellF(S, p[0], p[1], r(i) + 1, r(i) + 1, OUT));
+  pts.forEach((p, i) => ellF(S, p[0], p[1], r(i), r(i), ramp[i < n * .3 ? 2 : i < n * .7 ? 3 : 2]));
+  pts.forEach((p, i) => { if (i % 2 === 0) put(S, p[0] + r(i) * .5, p[1] + r(i) * .5, ramp[1]); });
+}
+const tear = (dx, dy) => dx * dx / (dy < 0 ? (1 + dy) * (1 + dy) + .001 : 1) + dy * dy;
+function face(S, cx, ey, sep, k, st, t, look, o = {}) {
+  const lx = look.x * k * .9, ly = st === 'working' ? k * .8 : look.y * k * .7;
+  eye(S, cx - sep + lx, ey + ly, k, st, look, { ...o, side: -1 });
+  eye(S, cx + sep + lx, ey + ly, k, st, look, { ...o, side: 1 });
+  if (o.blush !== false) { blush(S, cx - sep - 3 * k + lx, ey + 2.6 * k, k * .8, { c: o.blushC }); blush(S, cx + sep + 3 * k + lx, ey + 2.6 * k, k * .8, { c: o.blushC }); }
+  if (!o.noMouth && st !== 'working') mouth(S, cx + lx, ey + (o.mouthDy ?? 3.4) * k + ly, k * (o.mouthK || .9), st, t);
+}
+
+function drawFrog(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, cy = 68 + m.dy, rx = 28 + m.sq, ry = 18 - m.sq;
+  const G = ['#28602a', '#3b8f38', '#5dbd52', '#98e284', '#e0ffd2'], cream = ['#9a9a58', '#c4c47c', '#e6e4a8', '#f6f4cc', '#fffff0'];
+  shadow(S, S.w / 2, 95, 28 + m.dy / 3, 3);
+  for (const s of [-1, 1]) orb(S, cx + s * 24, cy + 9, 9, 7, feetOf(G), { spec: false });
+  for (const s of [-1, 1]) orb(S, cx + s * 13, cy + ry, 6, 3, feetOf(G), { spec: false });
+  orb(S, cx, cy, rx, ry, G, { specR: .006 });
+  const sg = status(st, t); if (sg.glow) halo(S, cx, cy + 8, 15, sg.h, .5);
+  orb(S, cx, cy + 7, 15, 8, cream, { outline: null, spec: false });
+  const lx = look.x * 1.5, ly = st === 'working' ? 1.5 : look.y * 1.2;
+  for (const s of [-1, 1]) {
+    const ex = cx + s * 13, ey = cy - ry + 1;
+    orb(S, ex, ey, 8, 7, G, { specR: .02 });
+    if (st === 'sleep' || st === 'celebrate' || look.blink) { eye(S, ex, ey, 2, st, look, {}); continue; }
+    ellF(S, ex, ey, 4.6, 4.6, '#fffbe6');
+    const pr = st === 'alert' ? 3 : 2.2;
+    ellF(S, ex + lx, ey + ly, pr + .8, pr * (st === 'alert' ? 1 : .7), DARK);
+    rectF(S, ex - 2, ey - 3, 2, 2, WHITE);
+    if (st === 'nervous') line(S, ex - 5, ey - 8 - s, ex + 5, ey - 8 + s, DARK, 1);
+  }
+  if (['alert', 'celebrate', 'nervous', 'sleep'].includes(st)) mouth(S, cx, cy - 3, 1.8, st, t);
+  else for (let i = -15; i <= 15; i++) put(S, cx + i, cy - 3 + Math.round((1 - (i / 15) ** 2) * 2.5), DARK);
+  blush(S, cx - 20, cy, 2); blush(S, cx + 20, cy, 2);
+  if (st === 'idle') { const p = Math.max(0, Math.sin(t * 2)); if (p > .25) orb(S, cx, cy + 3, 6 * p + 2, 4 * p + 1.5, ['#c9a0a8', '#e8b8c0', '#ffd4dc', '#ffe8ee', '#ffffff'], { spec: false }); }
+  if (st === 'working') laptop(S, cx, cy + 1, 1.6, t, G, OUT);
+  if (st === 'nervous') sweat(S, cx + 24, cy - 16, 2);
+  return { cx, top: cy - ry - 12, cy, rx, k };
+}
+
+function drawSprout(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy;
+  const pot = ['#6e3219', '#9c4a28', '#c86a3c', '#e59a66', '#ffd2ae'], LF = ['#1f5a26', '#2f8a36', '#4fb24a', '#86da6e', '#d2ffb8'];
+  shadow(S, S.w / 2, 95, 22 + m.dy / 3, 3);
+  const pw = 38, ph = 30 - m.sq, py = 62 + b + m.sq, px = cx - pw / 2;
+  fillShape(S, px - 4, py - 2, pw + 9, ph + 5, (x, y) => { const u = (y + .5 - py) / ph; if (u < 0 || u > 1) return false; return Math.abs(x + .5 - cx) <= pw / 2 - u * 5; },
+    (x, y) => pot[dith(.78 - (x - px) / pw * .5 - (y - py) / ph * .25, x, y, 5)], OUT);
+  rrect(S, px - 3, py - 5, pw + 6, 7, 2, (x, y) => pot[dith(.9 - (x - px) / pw * .45, x, y, 5)], OUT);
+  ellF(S, cx, py - 5, 17, 1.4, '#3b2618');
+  const droop = st === 'nervous' ? .7 : st === 'sleep' ? .5 : 0, sway = Math.sin(t * 1.8) * (st === 'celebrate' ? .25 : .08);
+  const tx = cx + Math.sin(t * 1.8) * 2, top = py - 26;
+  line(S, cx, py - 6, tx, top, OUT, 3); line(S, cx, py - 6, tx, top, '#4fb24a', 1);
+  leaf(S, cx + (tx - cx) * .4, py - 12, 17, -2.55 - droop * 1.1 + sway, 5.5, LF);
+  leaf(S, cx + (tx - cx) * .6, py - 17, 17, -.6 + droop * 1.1 + sway, 5.5, LF);
+  const s = status(st, t), bud = s.glow ? s.h : '#ff9ec4';
+  if (st === 'celebrate') for (let i = 0; i < 6; i++) { const a = i / 6 * 6.283 + t * 2; orb(S, tx + Math.cos(a) * 5, top - 2 + Math.sin(a) * 5, 3, 3, rampOf(hsl((i * 60 + t * 200) % 360, 85, 70)), { specR: .05 }); }
+  if (s.glow) halo(S, tx, top - 2, 7, bud, .45);
+  orb(S, tx, top - 2, 3.4, 3.8, rampOf(bud), { specR: .06, shape: tear });
+  face(S, cx, py + 10, 7, 1.6, st, t, look, { mouthDy: 3.2 });
+  if (st === 'working') laptop(S, cx, py + 13, 1.3, t, pot, OUT);
+  if (st === 'nervous') sweat(S, cx + 20, py - 4, 2);
+  return { cx, top: top - 8, cy: py + 10, rx: 20, k };
+}
+
+function drawOcto(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, cy = 46 + m.dy, rx = 22 + m.sq, ry = 20 - m.sq;
+  const P = ['#5a2468', '#8a3a98', '#b862c4', '#e298e6', '#fde0ff'], s = status(st, t), tip = s.glow ? s.h : '#ffb3f0';
+  shadow(S, S.w / 2, 95, 26 + m.dy / 3, 3);
+  for (let i = 0; i < 6; i++) {
+    const spread = (i - 2.5) / 2.5, x0 = cx - 14 + i * 5.6, y0 = cy + ry * .55, n = 16, pts = [];
+    for (let j = 0; j <= n; j++) { const u = j / n; pts.push([x0 + spread * u * 16 + Math.sin(t * 3 + i * 1.1 + u * 5) * u * 3, y0 + j * 1.9 - (u > .75 ? (u - .75) * 16 : 0)]); }
+    chain(S, pts, 3.6, 1.3, P);
+    const e = pts[n]; if (s.glow) halo(S, e[0], e[1], 5, tip, .55); ellF(S, e[0], e[1], 1.6, 1.6, tip);
+  }
+  orb(S, cx, cy, rx, ry, P, { specR: .012 });
+  for (const [dx, dy] of [[-12, -10], [10, -13], [15, -4]]) ellF(S, cx + dx, cy + dy, 1.5, 1.2, P[3]);
+  face(S, cx, cy + 1, 7.5, 2, st, t, look, { eyeScale: 1.2, iris: '#4a2a6e', blushC: '#ff8fd0' });
+  if (st === 'working') laptop(S, cx, cy + 9, 1.7, t, P, OUT);
+  if (st === 'nervous') sweat(S, cx + 18, cy - 14, 2);
+  return { cx, top: cy - ry - 4, cy, rx, k };
+}
+
+function drawPenguin(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), wad = st === 'idle' ? Math.round(Math.sin(t * 3)) : 0, cx = S.w / 2 + m.jx + wad, cy = 60 + m.dy, rx = 21 + m.sq, ry = 26 - m.sq;
+  const N = ['#0f1226', '#1b2142', '#2b345f', '#46528a', '#8290c8'], W = ['#9aa3bd', '#c4cadb', '#e3e7f1', '#f5f7fb', '#ffffff'], O = ['#8a3d06', '#c45f0e', '#f28a1e', '#ffb24d', '#ffe0a8'];
+  shadow(S, S.w / 2, 95, 22 + m.dy / 3, 3);
+  for (const s of [-1, 1]) orb(S, cx + s * 8, cy + ry - 1, 6, 2.8, O, { spec: false });
+  const flap = st === 'celebrate' ? Math.sin(t * 16) * 5 + 6 : st === 'alert' ? 4 : 0;
+  for (const s of [-1, 1]) orb(S, cx + s * (rx - 1), cy + 4 - flap, 5, 12, N, { spec: false });
+  orb(S, cx, cy, rx, ry, N, { specR: .01 });
+  orb(S, cx, cy + 7, 14, 17, W, { outline: null, spec: false });
+  orb(S, cx - 6, cy - 10, 7, 7, W, { outline: null, spec: false }); orb(S, cx + 6, cy - 10, 7, 7, W, { outline: null, spec: false });
+  const lx = look.x * 1.5, ly = st === 'working' ? 1.5 : look.y;
+  eye(S, cx - 6 + lx, cy - 11 + ly, 1.7, st, look, { side: -1 }); eye(S, cx + 6 + lx, cy - 11 + ly, 1.7, st, look, { side: 1 });
+  blush(S, cx - 11 + lx, cy - 6, 1.6); blush(S, cx + 11 + lx, cy - 6, 1.6);
+  const open = st === 'alert' || st === 'celebrate' ? 2 : 0;
+  tri(S, [cx - 4 + lx, cy - 6 + ly], [cx + 4 + lx, cy - 6 + ly], [cx + lx, cy - 2 + ly - open * .5], (x, y) => O[dith(.8 - (y - cy + 6) / 6, x, y, 5)], OUT);
+  if (open) tri(S, [cx - 3 + lx, cy - 3 + ly + open], [cx + 3 + lx, cy - 3 + ly + open], [cx + lx, cy + ly + open], () => O[1], OUT);
+  const s = status(st, t), bow = s.glow ? s.h : '#e04a5f';
+  if (s.glow) halo(S, cx, cy + 3, 9, bow, .4);
+  tri(S, [cx - 7, cy], [cx - 7, cy + 6], [cx - 1, cy + 3], (x, y) => rampOf(bow)[dith(.7 - (x - cx + 7) / 12, x, y, 5)], OUT);
+  tri(S, [cx + 7, cy], [cx + 7, cy + 6], [cx + 1, cy + 3], (x, y) => rampOf(bow)[dith(.55, x, y, 5)], OUT);
+  ellF(S, cx, cy + 3, 1.6, 1.6, rampOf(bow)[3]);
+  if (st === 'working') laptop(S, cx, cy + 5, 1.7, t, N, OUT);
+  if (st === 'nervous') sweat(S, cx + 16, cy - 20, 2);
+  return { cx, top: cy - ry - 4, cy, rx, k };
+}
+
+function drawShroom(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy;
+  const R = ['#5e1019', '#94202c', '#cf3a3a', '#f07464', '#ffd2c6'], C = ['#8a7a62', '#b8a888', '#e0d4b6', '#f3ebd6', '#fffaf0'];
+  shadow(S, S.w / 2, 95, 20 + m.dy / 3, 3);
+  for (const s of [-1, 1]) orb(S, cx + s * 7, 89 + b * .5, 5, 2.6, feetOf(C), { spec: false });
+  orb(S, cx, 72 + b, 15 + m.sq, 17 - m.sq, C, { specR: 0 });
+  const capY = 48 + b, cr = 20 - m.sq, under = capY + Math.round(.4 * cr);
+  orb(S, cx, capY, 31 + m.sq, cr, R, { shape: (dx, dy) => dy > .4 ? 2 : dx * dx + dy * dy, specR: .012 });
+  for (let x = -24; x <= 24; x++) { put(S, cx + x, under + 1, OUT); put(S, cx + x, under + 2, x % 3 === 0 ? '#8a7a62' : '#d8c8a8'); }
+  const s = status(st, t), sr = s.glow ? rampOf(s.h) : ['#c9b8b0', '#e6d8d0', '#fff6ee', '#fffaf5', '#ffffff'];
+  for (const [dx, dy, r] of [[-15, -7, 4.2], [1, -14, 3.6], [15, -6, 4.6], [-4, -2, 2.6], [23, 1, 2.4], [-24, 1, 2.4]]) {
+    if (s.glow) halo(S, cx + dx, capY + dy, r + 5, s.h, .3);
+    orb(S, cx + dx, capY + dy, r, r * .85, sr, { outline: null, specR: .08 });
+  }
+  face(S, cx, 70 + b, 5.5, 1.6, st, t, look, { mouthDy: 3.4 });
+  if (st === 'working') laptop(S, cx, 70 + b, 1.4, t, C, OUT);
+  if (st === 'nervous') sweat(S, cx + 24, capY - 8, 2);
+  return { cx, top: capY - cr - 4, cy: 70 + b, rx: 26, k };
+}
+
+function drawOwl(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, cy = 60 + m.dy, rx = 24 + m.sq, ry = 26 - m.sq;
+  const B = ['#35210f', '#5a3a1e', '#86592f', '#b88a57', '#ecd3a8'], Cr = ['#b39a78', '#d6bf98', '#efdcb8', '#faf0da', '#ffffff'];
+  shadow(S, S.w / 2, 95, 22 + m.dy / 3, 3);
+  for (const s of [-1, 1]) for (let c = -1; c <= 1; c++) ellF(S, cx + s * 7 + c * 2, cy + ry, 1.2, 2, '#f2b33d');
+  for (const s of [-1, 1]) tri(S, [cx + s * 19, cy - ry + 12], [cx + s * 7, cy - ry + 4], [cx + s * 21, cy - ry - 6 - (st === 'alert' ? 3 : 0)], (x, y) => B[dith(.55 - (y - cy + ry) / 50, x, y, 5)], OUT);
+  const up = st === 'celebrate' ? 10 + Math.sin(t * 14) * 3 : 0;
+  for (const s of [-1, 1]) orb(S, cx + s * (rx - 2), cy + 6 - up, 7, 15, B.map(c => mix(c, '#000000', .15)), { spec: false });
+  orb(S, cx, cy, rx, ry, B, { specR: .008 });
+  orb(S, cx, cy + 11, 14, 12, Cr, { outline: null, spec: false });
+  for (let r = 0; r < 3; r++) for (let c = -2; c <= 2; c++) { const x = cx + c * 5 + (r % 2) * 2.5, y = cy + 6 + r * 5; put(S, x - 1, y, B[2]); put(S, x, y + 1, B[2]); put(S, x + 1, y, B[2]); }
+  orb(S, cx - 8, cy - 7, 10, 10, Cr, { outline: null, spec: false }); orb(S, cx + 8, cy - 7, 10, 10, Cr, { outline: null, spec: false });
+  const s = status(st, t), iris = s.glow ? s.h : '#f2a93b', lx = look.x * 1.6, ly = st === 'working' ? 2 : look.y * 1.2;
+  for (const side of [-1, 1]) {
+    const ex = cx + side * 8, ey = cy - 7;
+    if (st === 'sleep' || st === 'celebrate' || look.blink) { eye(S, ex, ey, 2, st, look, {}); continue; }
+    if (s.glow) halo(S, ex, ey, 9, iris, .35);
+    ellF(S, ex, ey, 6.4, 6.4, OUT); ellF(S, ex, ey, 5.6, 5.6, iris);
+    ellF(S, ex + lx, ey + ly, st === 'alert' ? 2.6 : 3.4, st === 'alert' ? 2.6 : 3.4, DARK);
+    rectF(S, ex - 3 + lx, ey - 3 + ly, 2, 2, WHITE);
+    if (st === 'nervous') line(S, ex - 5, ey - 8 + side * -1, ex + 5, ey - 8 + side, DARK, 1);
+  }
+  tri(S, [cx - 2.5, cy - 2], [cx + 2.5, cy - 2], [cx, cy + 3], (x, y) => ['#8a5a10', '#c78a1c', '#f2b33d', '#ffd27a', '#fff0c8'][dith(.8 - (y - cy + 2) / 6, x, y, 5)], OUT);
+  if (st === 'working') laptop(S, cx, cy + 7, 1.6, t, B, OUT);
+  if (st === 'nervous') sweat(S, cx + 18, cy - 18, 2);
+  return { cx, top: cy - ry - 8, cy, rx, k };
+}
+
+function drawDragon(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy;
+  const D = ['#6e1f10', '#a8391a', '#d9602a', '#f59650', '#ffd9a8'], E = ['#9c9480', '#c8c0aa', '#e8e2d0', '#f6f2e6', '#ffffff'];
+  shadow(S, S.w / 2, 95, 24 + m.dy / 3, 3);
+  const s = status(st, t), fl = s.glow ? s.h : '#ff9a3c';
+  const tp = []; for (let i = 0; i <= 12; i++) { const u = i / 12; tp.push([cx + 18 + u * 18, 76 + b - u * 18 - Math.sin(u * 3 + t * 2) * 2]); }
+  chain(S, tp, 3.4, 1.6, D);
+  const e = tp[12]; halo(S, e[0], e[1] - 3, 7, fl, s.glow ? .6 : .35);
+  orb(S, e[0], e[1] - 3, 2.6 + Math.sin(t * 12) * .4, 4, rampOf(fl), { shape: tear, specR: .05 });
+  for (const s2 of [-1, 1]) leaf(S, cx + s2 * 8, 44 + b, 18, s2 < 0 ? -2.5 : -.64, 6.5 + (st === 'celebrate' ? Math.sin(t * 14) * 1.5 : 0), ['#3a1a48', '#5a2a6e', '#7d3f98', '#a866c4', '#dcb0f0']);
+  orb(S, cx, 48 + b + m.sq, 20 + m.sq, 17 - m.sq, D, { specR: .012 });
+  for (const s2 of [-1, 1]) tri(S, [cx + s2 * 7, 35 + b], [cx + s2 * 13, 37 + b], [cx + s2 * 13, 26 + b], (x, y) => E[dith(.8 - (37 + b - y) / 16, x, y, 5)], OUT);
+  orb(S, cx, 58 + b, 9, 5, ['#b8781a', '#e0a02a', '#ffc84a', '#ffe08a', '#fff4c8'], { outline: null, spec: false });
+  face(S, cx, 45 + b, 7, 1.9, st, t, look, { eyeScale: 1.15, iris: '#2f7a2c', mouthDy: 3.3 });
+  if (st === 'celebrate') { const p = (t * 2) % 1; orb(S, cx, 22 + b - p * 6, 4 + p * 2, 6 + p * 2, rampOf(hsl(30 + p * 20, 100, 60)), { shape: tear, outline: null }); }
+  const ey = 72 + b, zig = x => { const q = ((Math.round(x - cx) % 8) + 8) % 8; return (q < 4 ? q : 8 - q) * 1.4; };
+  orb(S, cx, ey, 24, 20, E, { ext: 1, specR: .01, shape: (dx, dy, x, y) => (y + .5 < ey - 5 + zig(x)) ? 2 : dx * dx + dy * dy });
+  for (const [dx, dy, r] of [[-12, 4, 3], [9, 9, 2.5], [14, -1, 2]]) ellF(S, cx + dx, ey + dy, r, r * .8, '#c8c0aa');
+  if (st === 'nervous') { line(S, cx - 4, ey + 2, cx, ey + 7, OUT, 1); line(S, cx, ey + 7, cx - 2, ey + 12, OUT, 1); sweat(S, cx + 18, 32 + b, 2); }
+  if (st === 'working') laptop(S, cx, ey - 12, 1.5, t, D, OUT);
+  return { cx, top: 22 + b, cy: 48 + b, rx: 22, k };
+}
+
+function drawJelly(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), fl = Math.sin(t * 1.8) * 3, cx = S.w / 2 + m.jx, cy = 40 + m.dy + fl, rx = 26 + m.sq, ry = 22 - m.sq;
+  const J = ['#5b3a8e', '#8a5fc2', '#b690ee', '#dcc6ff', '#f8f2ff'], s = status(st, t), gc = s.glow ? s.h : '#c9a8ff';
+  halo(S, cx, cy + 12, 46, gc, s.glow ? .28 : .14);
+  shadow(S, S.w / 2, 96, 12 - fl, 2);
+  const base = cy + ry * .5;
+  for (let i = 0; i < 7; i++) {
+    const x0 = cx - 16 + i * 5.3;
+    for (let j = 0; j < 36; j++) {
+      const x = x0 + Math.sin(t * 2.5 + i + j * .22) * 2.5 * (j / 36 + .3), y = base + 2 + j;
+      putA(S, x, y, i % 2 ? J[3] : J[2], 1 - j / 42);
+      if (j % 8 === 6) { halo(S, x, y, 3, gc, .5); put(S, x, y, gc); }
+    }
+  }
+  orb(S, cx, cy, rx, ry, J, { ext: .6, specR: .015, shape: (dx, dy, x, y) => (y + .5 > base + Math.abs(Math.sin((x - cx) * .4 + t)) * 2.5) ? 2 : dx * dx + dy * dy });
+  halo(S, cx, cy + 2, 13, gc, .3);
+  face(S, cx, cy + 1, 8, 1.8, st, t, look, { iris: '#5b3a8e', blushC: '#ffb3e6' });
+  if (st === 'working') laptop(S, cx, cy + 8, 1.5, t, J, OUT);
+  if (st === 'nervous') sweat(S, cx + 18, cy - 14, 2);
+  return { cx, top: cy - ry - 4, cy, rx, k };
+}
+
+function drawDuck(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, cy = 72 + m.dy;
+  const Y = ['#8a650a', '#c79612', '#f2c42a', '#ffe168', '#fff6c4'], O = ['#8a3d06', '#c45f0e', '#f28a1e', '#ffb24d', '#ffe0a8'];
+  for (const [r, ph] of [[24, 0], [32, 1.5]]) for (let a = 0; a < 90; a++) { const an = a / 90 * 6.283; if (Math.sin(an * 3 + t * 2 + ph) > .2) putA(S, S.w / 2 + Math.cos(an) * r, 92 + Math.sin(an) * r * .16, '#8fd3ff', .55); }
+  tri(S, [cx + 17, cy - 6], [cx + 29, cy - 14], [cx + 22, cy + 2], (x, y) => Y[dith(.55, x, y, 5)], OUT);
+  orb(S, cx, cy, 26 + m.sq, 15 - m.sq, Y, { specR: .008 });
+  const flap = st === 'celebrate' ? Math.sin(t * 16) * 4 + 5 : 0;
+  for (const s of [-1, 1]) orb(S, cx + s * 17, cy + 1 - flap, 7, 8, Y.map(c => mix(c, '#8a5a00', .2)), { spec: false });
+  const hy = cy - 21;
+  orb(S, cx, hy, 16, 14, Y, { specR: .014 });
+  const s = status(st, t), mic = s.glow ? s.h : '#ff5c6c';
+  for (let a = 0; a <= 40; a++) { const an = Math.PI + a / 40 * Math.PI; rectF(S, cx + Math.cos(an) * 17.5 - 1, hy - 2 + Math.sin(an) * 15.5 - 1, 3, 3, OUT); }
+  for (let a = 0; a <= 40; a++) { const an = Math.PI + a / 40 * Math.PI; put(S, cx + Math.cos(an) * 17.5, hy - 2 + Math.sin(an) * 15.5, '#59607a'); }
+  for (const s2 of [-1, 1]) rrect(S, cx + s2 * 17 - 3, hy - 5, 6, 9, 2, () => '#3a3f55', OUT);
+  line(S, cx - 17, hy + 3, cx - 9, hy + 8, OUT, 2);
+  if (s.glow) halo(S, cx - 8, hy + 8, 5, mic, .6);
+  ellF(S, cx - 8, hy + 8, 1.8, 1.8, mic);
+  face(S, cx, hy - 4, 6, 1.6, st, t, look, { noMouth: true });
+  const open = st === 'alert' || st === 'celebrate' ? 2 : 0;
+  orb(S, cx, hy + 4 - open * .5, 8, 3.2, O, { spec: false });
+  if (open) orb(S, cx, hy + 7 + open * .5, 6, 2.4, O, { spec: false }); else line(S, cx - 5, hy + 5, cx + 5, hy + 5, O[0], 1);
+  if (st === 'working') laptop(S, cx, cy - 3, 1.6, t, Y, OUT);
+  if (st === 'nervous') sweat(S, cx + 16, hy - 12, 2);
+  return { cx, top: hy - 18, cy: hy, rx: 18, k };
+}
+
+function drawCapy(S, st, t, look) {
+  const k = 2, m = motion(st, t, k), cx = S.w / 2 + m.jx, cy = 72 + m.dy;
+  const Br = ['#4a2f1c', '#6e4a2c', '#97683f', '#c29265', '#ecd0ac'];
+  shadow(S, S.w / 2, 95, 28 + m.dy / 3, 3);
+  for (const s of [-1, 1]) orb(S, cx + s * 13, cy + 15, 6, 3, feetOf(Br), { spec: false });
+  orb(S, cx + 4, cy + 2, 32 + m.sq, 14 - m.sq, Br.map(c => mix(c, '#000000', .12)), { specR: 0 });
+  const hy = cy - 30 + m.sq;
+  for (const s of [-1, 1]) orb(S, cx + s * 14, hy + 2, 4, 3.2, feetOf(Br), { spec: false });
+  rrect(S, cx - 17, hy, 34, 32 - m.sq, 11, (x, y) => Br[dith(.95 - (y - hy) / 34 * .55 - (x - cx + 17) / 34 * .3, x, y, 5)], OUT);
+  rrect(S, cx - 10, hy + 17, 20, 12, 5, (x, y) => Br[dith(.45 - (y - hy - 17) / 30, x, y, 5)], OUT);
+  rectF(S, cx - 5, hy + 20, 2, 1, DARK); rectF(S, cx + 3, hy + 20, 2, 1, DARK);
+  if (!['alert', 'celebrate', 'nervous'].includes(st)) line(S, cx - 2, hy + 25, cx + 2, hy + 25, Br[0], 1); else mouth(S, cx, hy + 22, 1.4, st, t);
+  const lx = look.x * 1.2, ly = st === 'working' ? 1.2 : look.y;
+  for (const side of [-1, 1]) {
+    const ex = cx + side * 8 + lx, ey = hy + 10 + ly;
+    if (['sleep', 'celebrate', 'alert'].includes(st) || look.blink) eye(S, ex, ey, 1.5, st, look, {});
+    else { rectF(S, ex - 1.5, ey, 3, 2, DARK); rectF(S, ex - 2, ey - 1, 4, 1, Br[1]); put(S, ex - 1, ey, WHITE); if (st === 'nervous') line(S, ex - 3, ey - 4 - side, ex + 3, ey - 4 + side, DARK, 1); }
+  }
+  blush(S, cx - 12, hy + 16, 1.6, { c: '#e88a9a' }); blush(S, cx + 12, hy + 16, 1.6, { c: '#e88a9a' });
+  const s = status(st, t), bounce = st === 'celebrate' ? Math.abs(Math.sin(t * 8)) * 6 : 0, yx = cx + 2, yy = hy - 5 - bounce;
+  if (s.glow) halo(S, yx, yy, 10, s.h, .55);
+  orb(S, yx, yy, 5.5, 5, ['#a86a00', '#d99400', '#ffbf1f', '#ffdc6a', '#fff4c4'], { specR: .05 });
+  leaf(S, yx, yy - 5, 7, -.6, 2.4, ['#1f5a26', '#2f8a36', '#4fb24a', '#86da6e', '#d2ffb8']);
+  if (st === 'working') laptop(S, cx, cy - 2, 1.7, t, Br, OUT);
+  if (st === 'nervous') sweat(S, cx + 20, hy + 2, 2);
+  return { cx, top: yy - 10, cy: hy + 14, rx: 17, k };
+}
+
+// ===================== tier 3: 224×208 @1× =====================
+const hash = (x, y) => { let h = (Math.floor(x) * 374761393 + Math.floor(y) * 668265263) | 0; h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
+const furTex = (amt = .14) => (x, y) => (hash(x >> 1, y >> 2) - .5) * amt;
+function hsRamp(h, s, l, n = 7) {
+  const lo = l * .38, hi = Math.min(95, l + (100 - l) * .78);
+  return Array.from({ length: n }, (_, i) => { const u = i / (n - 1); return hsl(((h + (1 - u) * -16 + u * 8) % 360 + 360) % 360, Math.min(100, s * (.8 + .3 * Math.sin(u * Math.PI))), lo + (hi - lo) * Math.pow(u, .9)); });
+}
+const selout = r => mix(r[0], '#0a0b16', .45);
+function shadow2(S, cx, cy, rx, ry) { for (let y = Math.floor(cy - ry); y <= cy + ry; y++) for (let x = Math.floor(cx - rx); x <= cx + rx; x++) { const dx = (x + .5 - cx) / rx, dy = (y + .5 - cy) / ry, r = dx * dx + dy * dy; if (r <= 1) putA(S, x, y, '#000000', .34 * (1 - r)); } }
+function blobs(S, cs, o = {}) {
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  for (const c of cs) { x0 = Math.min(x0, c.x - c.r); y0 = Math.min(y0, c.y - c.r); x1 = Math.max(x1, c.x + c.r); y1 = Math.max(y1, c.y + c.r); }
+  const best = (x, y) => { let bi = 0, bv = -1e9; for (let i = 0; i < cs.length; i++) { const c = cs[i], v = 1 - Math.hypot(x + .5 - c.x, y + .5 - c.y) / c.r; if (v > bv) { bv = v; bi = i; } } return [bi, bv]; };
+  fillShape(S, x0 - 3, y0 - 3, x1 - x0 + 7, y1 - y0 + 7, (x, y) => best(x, y)[1] >= 0, (x, y) => {
+    const c = cs[best(x, y)[0]], dx = (x + .5 - c.x) / c.r, dy = (y + .5 - c.y) / c.r, r = Math.min(1, dx * dx + dy * dy);
+    const d = -.45 * dx - .6 * dy + .66 * Math.sqrt(1 - r) + (o.tex ? o.tex(x, y) : 0);
+    return c.ramp[dith((d + .3) / 1.2, x, y, c.ramp.length)];
+  }, o.outline === undefined ? OUT : o.outline);
+}
+function eye2(S, x, y, R, st, look, iris, o = {}) {
+  const D = '#171225', sd = o.side || 1;
+  const arc = (h, dy0) => { for (let i = -R; i <= R; i++) rectF(S, x + i, y + dy0 + (1 - (i / R) ** 2) * h, 2, 2, D); };
+  if (st === 'sleep') { arc(R * .35, 0); line(S, x + sd * R, y, x + sd * (R + 3), y - 2, D, 2); return; }
+  if (st === 'celebrate') { arc(-R * .55, 0); return; }
+  if (look.blink) { arc(R * .15, R * .2); return; }
+  const big = st === 'alert', rx = R * (big ? 1.12 : 1), ry = R * 1.2 * (big ? 1.1 : 1), ir = rampOf(iris);
+  ellF(S, x, y, rx + 1.6, ry + 1.6, D);
+  for (let py = Math.floor(y - ry); py <= y + ry; py++) for (let px = Math.floor(x - rx); px <= x + rx; px++) {
+    const dx = (px + .5 - x) / rx, dy = (py + .5 - y) / ry; if (dx * dx + dy * dy > 1) continue;
+    const u = (dy + 1) / 2; put(S, px, py, u < .26 ? D : ir[dith(.12 + u * .85, px, py, 5)]);
+  }
+  const pxo = look.x * rx * .22, pyo = look.y * ry * .15;
+  ellF(S, x + pxo, y + pyo + ry * .08, rx * (st === 'nervous' ? .26 : .42), ry * (st === 'nervous' ? .28 : .45), D);
+  ellF(S, x - rx * .36 + pxo * .5, y - ry * .38, Math.max(1.5, R * .32), Math.max(1.5, R * .34), '#ffffff');
+  ellF(S, x + rx * .38 + pxo * .5, y + ry * .4, Math.max(1, R * .14), Math.max(1, R * .14), '#ffffff');
+  line(S, x + sd * rx * .85, y - ry * .55, x + sd * (rx + 3.5), y - ry * .95, D, 2);
+  if (st === 'nervous') line(S, x - rx, y - ry - 5 - sd * 2.5, x + rx, y - ry - 5 + sd * 2.5, D, 2);
+}
+function mouth2(S, x, y, st, t, w = 7) {
+  if (['alert', 'celebrate', 'nervous', 'sleep'].includes(st)) { mouth(S, x, y, 3.2, st, t); return; }
+  for (let i = -w; i <= w; i++) rectF(S, x + i, y + Math.abs(Math.sin(i / w * Math.PI)) * w * .32, 2, 2, '#171225');
+}
+const cheek = (S, x, y, c = '#ff7fa8') => halo(S, x, y, 10, c, .6);
+function sparkle(S, x, y, r, c) { line(S, x - r, y, x + r, y, c, 1); line(S, x, y - r, x, y + r, c, 1); rectF(S, x - 1, y - 1, 3, 3, c); put(S, x, y, '#ffffff'); }
+
+function drawFox(S, st, t, look) {
+  const k = 4, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy;
+  const O = hsRamp(22, 88, 56), Cr = hsRamp(38, 50, 88), Dk = hsRamp(260, 22, 24), s = status(st, t);
+  shadow2(S, S.w / 2, 190, 60 + b / 4, 8);
+  const wag = Math.sin(t * (st === 'celebrate' ? 10 : st === 'alert' ? 6 : 2)) * 8, tipR = s.glow ? hsRamp(0, 0, 0).map((_, i) => rampOf(s.h)[Math.min(4, Math.floor(i * 5 / 7))]) : Cr;
+  const tc = []; for (let i = 0; i < 10; i++) { const u = i / 9; tc.push({ x: cx + 36 + u * 40 + wag * u * u, y: b + 162 - u * 70 + Math.sin(u * 3) * 5, r: 10 + Math.sin(u * Math.PI) * 15 - u * 3, ramp: u > .74 ? tipR : O }); }
+  if (s.glow) halo(S, tc[9].x, tc[9].y, 28, s.h, .45);
+  blobs(S, tc, { tex: furTex(.16), outline: selout(O) });
+  for (const s2 of [-1, 1]) orb(S, cx + s2 * 18, b + 180, 12, 7, Dk, { outline: selout(Dk), spec: false });
+  orb(S, cx, b + 148, 36 + m.sq, 30 - m.sq, O, { tex: furTex(.14), ao: .5, outline: selout(O), specR: 0, rim: O[5] });
+  orb(S, cx, b + 154, 20, 20, Cr, { outline: null, spec: false, tex: furTex(.1) });
+  const ey = b + 70 + m.sq;
+  for (const s2 of [-1, 1]) {
+    const tipY = ey - 46 - (st === 'alert' ? 8 : 0) + (st === 'sleep' ? 12 : 0);
+    tri(S, [cx + s2 * 12, ey], [cx + s2 * 48, ey + 10], [cx + s2 * 40, tipY], (x, y) => { const u = (y - tipY) / 56; return u < .28 ? Dk[dith(.55, x, y, 7)] : O[dith(.8 - u * .45 + (s2 < 0 ? .08 : -.08), x, y, 7)]; }, selout(O));
+    tri(S, [cx + s2 * 22, ey + 2], [cx + s2 * 40, ey + 6], [cx + s2 * 37, tipY + 16], (x, y) => ['#e8a0a8', '#f5c0c6', '#ffdde0'][dith(.6 - (y - tipY) / 80, x, y, 3)], null);
+  }
+  orb(S, cx, b + 98 + m.sq, 50 + m.sq, 40 - m.sq, O, { tex: furTex(.14), ao: .3, outline: selout(O), specR: 0, rim: O[5] });
+  for (const s2 of [-1, 1]) tri(S, [cx + s2 * 42, b + 96], [cx + s2 * 60, b + 116], [cx + s2 * 36, b + 122], (x, y) => Cr[dith(.6, x, y, 7)], selout(O));
+  orb(S, cx, b + 118, 30, 17, Cr, { outline: null, spec: false, tex: furTex(.06) });
+  const lx = look.x * 3, ly = st === 'working' ? 4 : look.y * 2.5;
+  eye2(S, cx - 21 + lx, b + 96 + ly, 9, st, look, '#d9851c', { side: -1 }); eye2(S, cx + 21 + lx, b + 96 + ly, 9, st, look, '#d9851c', { side: 1 });
+  cheek(S, cx - 34, b + 114); cheek(S, cx + 34, b + 114);
+  ellF(S, cx + lx * .6, b + 110 + ly * .4, 5.5, 3.6, '#1b1420'); rectF(S, cx - 3 + lx * .6, b + 108 + ly * .4, 3, 1, '#7a6a80');
+  if (st !== 'working') mouth2(S, cx + lx * .6, b + 117, st, t, 6);
+  if (st === 'working') laptop(S, cx, b + 128, 3.3, t, O, selout(O));
+  if (st === 'nervous') sweat(S, cx + 48, b + 66, 4);
+  return { cx, top: b + 34, cy: b + 100, rx: 50, k };
+}
+
+function drawPanda(S, st, t, look) {
+  const k = 4, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy;
+  const R = hsRamp(14, 74, 46), R2 = hsRamp(10, 70, 30), W = hsRamp(35, 25, 92), Dk = hsRamp(350, 35, 18), s = status(st, t);
+  shadow2(S, S.w / 2, 190, 60 + b / 4, 8);
+  const sw = Math.sin(t * 2) * 6, tc = [];
+  for (let i = 0; i < 12; i++) { const u = i / 11; tc.push({ x: cx + 30 + u * 46 + sw * u, y: b + 170 - u * 64 + Math.sin(u * 3.5) * 6, r: 12 + Math.sin(u * Math.PI) * 9, ramp: i % 3 === 2 ? R2 : R }); }
+  blobs(S, tc, { tex: furTex(.12), outline: selout(R) });
+  for (const s2 of [-1, 1]) orb(S, cx + s2 * 20, b + 180, 12, 8, Dk, { outline: selout(Dk), spec: false });
+  orb(S, cx, b + 150, 38 + m.sq, 30 - m.sq, R, { tex: furTex(.12), ao: .5, outline: selout(R), specR: 0 });
+  orb(S, cx, b + 162, 24, 16, Dk, { outline: null, spec: false });
+  for (const s2 of [-1, 1]) {
+    orb(S, cx + s2 * 40, b + 66, 17, 16, W, { outline: selout(R), spec: false, tex: furTex(.08) });
+    orb(S, cx + s2 * 40, b + 69, 10, 9, Dk, { outline: null, spec: false });
+  }
+  orb(S, cx, b + 100 + m.sq, 54 + m.sq, 40 - m.sq, R, { tex: furTex(.14), ao: .25, outline: selout(R), specR: 0, rim: R[5] });
+  for (const s2 of [-1, 1]) { orb(S, cx + s2 * 22, b + 82, 9, 6, W, { outline: null, spec: false }); orb(S, cx + s2 * 38, b + 110, 14, 12, W, { outline: null, spec: false, tex: furTex(.06) }); }
+  orb(S, cx, b + 116, 22, 15, W, { outline: null, spec: false });
+  const tear = s.glow ? s.h : R2[1];
+  for (const s2 of [-1, 1]) { if (s.glow) halo(S, cx + s2 * 20, b + 112, 12, s.h, .5); line(S, cx + s2 * 21, b + 104, cx + s2 * 18, b + 122, tear, 4); }
+  const lx = look.x * 3, ly = st === 'working' ? 4 : look.y * 2.5;
+  eye2(S, cx - 22 + lx, b + 96 + ly, 8.5, st, look, '#5a3420', { side: -1 }); eye2(S, cx + 22 + lx, b + 96 + ly, 8.5, st, look, '#5a3420', { side: 1 });
+  ellF(S, cx + lx * .5, b + 110, 6, 4, '#1b1420'); rectF(S, cx - 3 + lx * .5, b + 108, 3, 1, '#7a6a80');
+  if (st !== 'working') mouth2(S, cx + lx * .5, b + 117, st, t, 6);
+  if (st === 'working') laptop(S, cx, b + 128, 3.3, t, R, selout(R));
+  if (st === 'nervous') sweat(S, cx + 50, b + 70, 4);
+  return { cx, top: b + 44, cy: b + 100, rx: 54, k };
+}
+
+function drawBunny(S, st, t, look) {
+  const k = 4, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy;
+  const W = hsRamp(262, 22, 88), P = ['#d9788f', '#ec9aac', '#f8bfcb', '#ffdde4', '#fff2f5'], s = status(st, t);
+  shadow2(S, S.w / 2, 190, 56 + b / 4, 8);
+  const perk = st === 'alert' ? -.15 : st === 'sleep' || st === 'nervous' ? .35 : 0, sway = Math.sin(t * 1.7) * .05;
+  leaf(S, cx - 20, b + 70, 70, -1.85 - perk * .6 + sway, 15, W, selout(W)); leaf(S, cx - 20, b + 68, 58, -1.85 - perk * .6 + sway, 8, P, null);
+  leaf(S, cx + 18, b + 70, 64, -.95 + perk + sway, 14, W, selout(W)); leaf(S, cx + 18, b + 68, 52, -.95 + perk + sway, 7, P, null);
+  blobs(S, [{ x: cx + 40, y: b + 168, r: 12, ramp: W }, { x: cx + 48, y: b + 160, r: 10, ramp: W }], { tex: furTex(.1), outline: selout(W) });
+  for (const s2 of [-1, 1]) orb(S, cx + s2 * 22, b + 182, 16, 7, W, { outline: selout(W), spec: false });
+  orb(S, cx, b + 152, 40 + m.sq, 32 - m.sq, W, { tex: furTex(.1), ao: .5, outline: selout(W), specR: 0, rim: W[5] });
+  orb(S, cx, b + 106 + m.sq, 48 + m.sq, 40 - m.sq, W, { tex: furTex(.12), ao: .25, outline: selout(W), specR: .006, spec2: true });
+  const lx = look.x * 3, ly = st === 'working' ? 4 : look.y * 2.5;
+  eye2(S, cx - 21 + lx, b + 102 + ly, 9.5, st, look, '#7b4fd0', { side: -1 }); eye2(S, cx + 21 + lx, b + 102 + ly, 9.5, st, look, '#7b4fd0', { side: 1 });
+  cheek(S, cx - 34, b + 120, '#ff8fb0'); cheek(S, cx + 34, b + 120, '#ff8fb0');
+  const nose = s.glow ? s.h : '#ff7fa0';
+  if (s.glow) halo(S, cx + lx * .5, b + 116, 9, nose, .6);
+  tri(S, [cx - 5 + lx * .5, b + 113], [cx + 5 + lx * .5, b + 113], [cx + lx * .5, b + 119], () => nose, '#171225');
+  if (st !== 'working') mouth2(S, cx + lx * .5, b + 122, st, t, 6);
+  if (st === 'working') laptop(S, cx, b + 132, 3.3, t, W, selout(W));
+  if (st === 'nervous') sweat(S, cx + 46, b + 76, 4);
+  return { cx, top: b + 20, cy: b + 106, rx: 48, k };
+}
+
+function drawHamster(S, st, t, look) {
+  const k = 4, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy;
+  const G = hsRamp(32, 78, 62), Cr = hsRamp(40, 45, 90), P = ['#d9788f', '#ec9aac', '#f8bfcb', '#ffdde4', '#fff2f5'], s = status(st, t);
+  shadow2(S, S.w / 2, 190, 62 + b / 4, 8);
+  for (const s2 of [-1, 1]) orb(S, cx + s2 * 24, b + 182, 10, 6, P, { outline: selout(P), spec: false });
+  for (const s2 of [-1, 1]) { orb(S, cx + s2 * 36, b + 64, 13, 12, G, { outline: selout(G), spec: false }); orb(S, cx + s2 * 36, b + 66, 7, 7, P, { outline: null, spec: false }); }
+  orb(S, cx, b + 124 + m.sq, 62 + m.sq, 58 - m.sq, G, { tex: furTex(.12), ao: .45, outline: selout(G), specR: .005, spec2: true, rim: G[5] });
+  orb(S, cx, b + 146, 38, 34, Cr, { outline: null, spec: false, tex: furTex(.08) });
+  const puff = st === 'working' ? 3 : Math.max(0, Math.sin(t * 3)) * 2;
+  for (const s2 of [-1, 1]) orb(S, cx + s2 * 40, b + 124, 18 + puff, 15 + puff, Cr, { outline: null, spec: false, tex: furTex(.06) });
+  const lx = look.x * 3, ly = st === 'working' ? 4 : look.y * 2.5;
+  eye2(S, cx - 22 + lx, b + 104 + ly, 7.5, st, look, '#3a2418', { side: -1 }); eye2(S, cx + 22 + lx, b + 104 + ly, 7.5, st, look, '#3a2418', { side: 1 });
+  cheek(S, cx - 38, b + 124, '#ff8fa8'); cheek(S, cx + 38, b + 124, '#ff8fa8');
+  ellF(S, cx + lx * .5, b + 116, 4, 3, '#e56f8a');
+  if (st !== 'working') mouth2(S, cx + lx * .5, b + 122, st, t, 5);
+  if (st === 'working') laptop(S, cx, b + 134, 3.3, t, G, selout(G));
+  else {
+    const seed = s.glow ? rampOf(s.h) : ['#2a2530', '#3d3645', '#5a5265', '#8c849a', '#d8d2e2'];
+    if (s.glow) halo(S, cx, b + 152, 16, s.h, .5);
+    orb(S, cx, b + 152, 8, 12, seed, { shape: tear, specR: .05 });
+    for (let i = -1; i <= 1; i++) line(S, cx + i * 3, b + 144, cx + i * 3, b + 160, mix(seed[2], '#ffffff', .3), 1);
+    for (const s2 of [-1, 1]) orb(S, cx + s2 * 10, b + 156, 6, 5, P, { outline: selout(P), spec: false });
+  }
+  if (st === 'nervous') sweat(S, cx + 48, b + 76, 4);
+  return { cx, top: b + 50, cy: b + 110, rx: 60, k };
+}
+
+function drawPhoenix(S, st, t, look) {
+  const k = 4, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy, s = status(st, t);
+  const F = hsRamp(10, 92, 54), Y = hsRamp(42, 95, 68), crest = s.glow ? rampOf(s.h) : ['#a8300a', '#e0561a', '#ff8a2a', '#ffc04a', '#fff0a0'];
+  halo(S, cx, b + 120, 90, s.glow ? s.h : '#ff8a2a', .22);
+  shadow2(S, S.w / 2, 190, 50 + b / 4, 7);
+  const fl = i => Math.sin(t * 9 + i * 1.7) * 3;
+  for (let i = 0; i < 3; i++) leaf(S, cx + 30, b + 158, 58 + fl(i) * 2, .35 + i * .32, 12 + fl(i) * .5, ['#8a1f08', '#c43a10', '#f06a1e', '#ffa53a', '#ffe08a'], selout(F));
+  const flap = st === 'celebrate' ? Math.sin(t * 16) * .5 : st === 'alert' ? -.3 : 0;
+  for (const s2 of [-1, 1]) leaf(S, cx + s2 * 34, b + 132, 40, (s2 < 0 ? Math.PI - .5 : .5) - s2 * flap, 14, F, selout(F));
+  for (const s2 of [-1, 1]) for (let c = -1; c <= 1; c++) line(S, cx + s2 * 14 + c * 4, b + 172, cx + s2 * 14 + c * 6, b + 182, '#e0a02a', 2);
+  orb(S, cx, b + 126 + m.sq, 46 + m.sq, 44 - m.sq, F, { ao: .35, outline: selout(F), specR: .008, spec2: true, rim: '#ffd27a' });
+  orb(S, cx, b + 146, 26, 22, Y, { outline: null, spec: false });
+  for (let i = 0; i < 3; i++) leaf(S, cx - 6 + i * 6, b + 88, 34 + fl(i + 4) * 2, -1.9 + i * .35, 8 + fl(i) * .3, crest, selout(F));
+  if (s.glow) halo(S, cx, b + 62, 22, s.h, .4);
+  for (let i = 0; i < 7; i++) { const p = (t * .6 + i / 7) % 1, x = cx - 30 + i * 10 + Math.sin(t * 3 + i) * 4, y = b + 70 - p * 60; putA(S, x, y, '#ffd27a', 1 - p); putA(S, x + 1, y, '#ff8a2a', (1 - p) * .7); }
+  const lx = look.x * 3, ly = st === 'working' ? 4 : look.y * 2.5;
+  eye2(S, cx - 18 + lx, b + 116 + ly, 8.5, st, look, '#6a2a8a', { side: -1 }); eye2(S, cx + 18 + lx, b + 116 + ly, 8.5, st, look, '#6a2a8a', { side: 1 });
+  cheek(S, cx - 30, b + 132, '#ff5a7a'); cheek(S, cx + 30, b + 132, '#ff5a7a');
+  const op = st === 'alert' || st === 'celebrate' ? 3 : 0;
+  tri(S, [cx - 7, b + 126], [cx + 7, b + 126], [cx, b + 136 - op], (x, y) => Y[dith(.8 - (y - b - 126) / 14, x, y, 7)], selout(F));
+  if (op) tri(S, [cx - 5, b + 130 + op], [cx + 5, b + 130 + op], [cx, b + 136 + op], () => Y[2], selout(F));
+  if (st === 'working') laptop(S, cx, b + 140, 3.2, t, F, selout(F));
+  if (st === 'nervous') sweat(S, cx + 44, b + 92, 4);
+  return { cx, top: b + 50, cy: b + 126, rx: 46, k };
+}
+
+function drawMoth(S, st, t, look) {
+  const k = 4, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy, s = status(st, t);
+  const Fz = hsRamp(40, 38, 84), Wg = hsRamp(26, 48, 72), spot = s.glow ? s.h : '#8b7bff';
+  shadow2(S, S.w / 2, 190, 50 + b / 4, 7);
+  const fast = ['working', 'alert', 'celebrate'].includes(st), fw = 1 + Math.sin(t * (fast ? 14 : 3)) * (fast ? .18 : .06);
+  for (const s2 of [-1, 1]) {
+    const aU = s2 < 0 ? Math.PI + .55 : -.55, aL = s2 < 0 ? Math.PI - .55 : .55;
+    leaf(S, cx + s2 * 10, b + 144, 56, aL, 22 * fw, Wg, selout(Wg));
+    leaf(S, cx + s2 * 12, b + 118, 82, aU, 34 * fw, Wg, selout(Wg));
+    const ux = cx + s2 * 12 + Math.cos(aU) * 46, uy = b + 118 + Math.sin(aU) * 46;
+    if (s.glow) halo(S, ux, uy, 18, spot, .5);
+    ellF(S, ux, uy, 11 * fw, 9, '#3b2a4a'); ellF(S, ux, uy, 8 * fw, 6.5, spot); ellF(S, ux - 2, uy - 2, 3, 2.5, '#ffffff');
+    const lxx = cx + s2 * 10 + Math.cos(aL) * 34, lyy = b + 144 + Math.sin(aL) * 34; ellF(S, lxx, lyy, 5, 4, mix(spot, '#3b2a4a', .4));
+  }
+  orb(S, cx, b + 150, 20, 34, Fz, { tex: furTex(.16), ao: .5, outline: selout(Fz), specR: 0 });
+  for (let i = 0; i < 5; i++) line(S, cx - 14, b + 140 + i * 8, cx + 14, b + 140 + i * 8, Fz[2], 1);
+  blobs(S, Array.from({ length: 9 }, (_, i) => ({ x: cx + Math.cos(i / 8 * Math.PI) * 30, y: b + 120 + Math.sin(i / 8 * Math.PI) * 8, r: 13, ramp: Fz })), { tex: furTex(.18), outline: selout(Fz) });
+  const hy = b + 96 + m.sq;
+  for (const s2 of [-1, 1]) {
+    const pts = []; for (let i = 0; i <= 20; i++) { const u = i / 20; pts.push([cx + s2 * (8 + u * 30), hy - 26 - u * 36 + u * u * 20 + Math.sin(t * 2 + u * 3) * 2 * u]); }
+    for (let i = 0; i < pts.length - 1; i++) line(S, pts[i][0], pts[i][1], pts[i + 1][0], pts[i + 1][1], '#5a4a3a', 2);
+    for (let i = 3; i < pts.length; i += 2) { line(S, pts[i][0], pts[i][1], pts[i][0] + s2 * 4, pts[i][1] - 5, '#8a7a60', 1); line(S, pts[i][0], pts[i][1], pts[i][0] - s2 * 1, pts[i][1] - 6, '#8a7a60', 1); }
+  }
+  orb(S, cx, hy, 38, 32, Fz, { tex: furTex(.16), ao: .2, outline: selout(Fz), specR: 0, rim: Fz[5] });
+  const lx = look.x * 3, ly = st === 'working' ? 4 : look.y * 2.5;
+  eye2(S, cx - 17 + lx, hy - 2 + ly, 10, st, look, '#4a3f78', { side: -1 }); eye2(S, cx + 17 + lx, hy - 2 + ly, 10, st, look, '#4a3f78', { side: 1 });
+  cheek(S, cx - 26, hy + 14, '#ff9ec0'); cheek(S, cx + 26, hy + 14, '#ff9ec0');
+  if (st !== 'working') mouth2(S, cx + lx * .5, hy + 16, st, t, 5);
+  if (st === 'working') laptop(S, cx, hy + 26, 3.2, t, Fz, selout(Fz));
+  if (st === 'nervous') sweat(S, cx + 34, hy - 30, 4);
+  return { cx, top: hy - 60, cy: hy, rx: 38, k };
+}
+
+function drawKoi(S, st, t, look) {
+  const k = 4, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy * .6 + Math.sin(t * 1.4) * 3, s = status(st, t);
+  const wc = s.glow ? s.h : '#4aa8ff', by = b + 100, R = 70;
+  shadow2(S, S.w / 2, 190, 50, 7);
+  for (let y = Math.floor(by - R); y <= by + R; y++) for (let x = Math.floor(cx - R); x <= cx + R; x++) {
+    const d = Math.hypot(x + .5 - cx, y + .5 - by) / R; if (d > 1) continue;
+    putA(S, x, y, mix(wc, '#0a2a5a', Math.max(0, (y - by) / R) * .6), .2 + d * d * .25);
+  }
+  const sp = st === 'working' || st === 'alert' ? 1.8 : st === 'sleep' ? .3 : .9, a = t * sp, dir = -Math.sin(a) >= 0 ? 1 : -1;
+  const fx = cx + Math.cos(a) * 20, fy = by + Math.sin(a * 2) * 8 + 4;
+  const Wt = hsRamp(210, 10, 94), Or = hsRamp(18, 95, 58);
+  leaf(S, fx - dir * 24, fy, 26, dir > 0 ? Math.PI + Math.sin(t * 10) * .35 : Math.sin(t * 10) * .35, 13, Or, selout(Or));
+  orb(S, fx, fy, 32, 19, Wt, { outline: selout(Wt), specR: .01, spec2: true });
+  orb(S, fx - dir * 10, fy - 7, 11, 7, Or, { outline: null, spec: false }); orb(S, fx + dir * 12, fy + 5, 8, 6, Or, { outline: null, spec: false });
+  leaf(S, fx, fy + 12, 14, dir > 0 ? 2.2 : .9, 5, Or, selout(Or));
+  const ex = fx + dir * 12;
+  eye2(S, ex - 8 + look.x * 2, fy - 4, 4.8, st, look, '#2a2a4a', { side: -1 }); eye2(S, ex + 8 + look.x * 2, fy - 4, 4.8, st, look, '#2a2a4a', { side: 1 });
+  cheek(S, ex + dir * 4, fy + 6, '#ff8fa8');
+  mouth(S, ex + dir * 1, fy + 4, 2.4, st === 'working' ? 'alert' : st, t);
+  for (let i = 0; i < 6; i++) { const p = (t * .35 + i / 6) % 1, bx = cx - 40 + i * 16 + Math.sin(t * 2 + i) * 4, bb = by + R * .7 - p * R * 1.4, br = 2 + (i % 3); if (Math.hypot(bx - cx, bb - by) < R - 6) for (let q = 0; q < 14; q++) putA(S, bx + Math.cos(q / 14 * 6.283) * br, bb + Math.sin(q / 14 * 6.283) * br, '#e6f6ff', .8); }
+  for (let q = 0; q < 360; q++) { const an = q / 360 * 6.283; putA(S, cx + Math.cos(an) * R, by + Math.sin(an) * R, '#d6efff', .7); putA(S, cx + Math.cos(an) * (R - 1), by + Math.sin(an) * (R - 1), '#9fd4ff', .4); }
+  for (let q = 0; q < 60; q++) { const an = Math.PI * 1.1 + q / 60 * 1.1; for (let w = 0; w < 4; w++) putA(S, cx + Math.cos(an) * (R - 8 - w), by + Math.sin(an) * (R - 8 - w), '#ffffff', .55 - w * .12); }
+  ellF(S, cx + R * .45, by + R * .5, 4, 3, '#ffffff');
+  if (s.glow) halo(S, cx, by, R + 10, s.h, .18);
+  if (st === 'nervous') sweat(S, fx + dir * 20, fy - 22, 4);
+  return { cx, top: by - R - 6, cy: by, rx: R, k };
+}
+
+function crystal(S, x, y, w, h, lean, ramp, outline) {
+  const tip = [x + lean, y - h - w * .7], tl = [x - w / 2 + lean * .8, y - h], tr = [x + w / 2 + lean * .8, y - h], bl = [x - w / 2, y], br = [x + w / 2, y], mid = [x + lean * .9, y - h - w * .1], mb = [x, y];
+  tri(S, bl, tl, mb, (px, py) => ramp[dith(.8, px, py, ramp.length)], outline); tri(S, tl, mid, mb, (px, py) => ramp[dith(.72, px, py, ramp.length)], outline);
+  tri(S, mb, mid, tr, (px, py) => ramp[dith(.45, px, py, ramp.length)], outline); tri(S, mb, tr, br, (px, py) => ramp[dith(.3, px, py, ramp.length)], outline);
+  tri(S, tl, tip, mid, (px, py) => ramp[dith(.95, px, py, ramp.length)], outline); tri(S, mid, tip, tr, (px, py) => ramp[dith(.6, px, py, ramp.length)], outline);
+  line(S, mid[0], mid[1], mb[0], mb[1], ramp[ramp.length - 1], 1);
+}
+function drawSnail(S, st, t, look) {
+  const k = 4, m = motion(st, t, k), cx = S.w / 2 + m.jx, b = m.dy * .5, s = status(st, t);
+  const Bd = hsRamp(165, 28, 70), CR = s.glow ? rampOf(s.h) : hsRamp(275, 58, 64);
+  shadow2(S, S.w / 2, 190, 76, 8);
+  orb(S, cx + 4, b + 170, 78, 16, Bd, { outline: selout(Bd), specR: .004, spec2: true, ao: .3 });
+  for (const [dx, dy] of [[-40, -6], [10, -4], [50, -5]]) ellF(S, cx + dx, b + 166 + dy, 3, 1.5, '#ffffff');
+  halo(S, cx + 14, b + 130, 56, CR[3], s.glow ? .45 : .22);
+  crystal(S, cx + 40, b + 164, 24, 44, 8, CR, selout(CR)); crystal(S, cx - 2, b + 164, 34, 70, 4, CR, selout(CR)); crystal(S, cx + 24, b + 166, 22, 34, -6, CR, selout(CR));
+  sparkle(S, cx + 2 + Math.sin(t * 2) * 6, b + 92, 4 + Math.round(Math.sin(t * 5) + 1), '#ffffff'); sparkle(S, cx + 48, b + 118, 3, '#ffffff');
+  const hx = cx - 58, hy = b + 138 + m.sq;
+  orb(S, hx, hy, 26, 32, Bd, { outline: selout(Bd), specR: .008, spec2: true, ao: .2 });
+  for (const s2 of [-1, 1]) {
+    const tx = hx + s2 * 12 + Math.sin(t * 2 + s2) * 3, ty = hy - 58 - (st === 'alert' ? 8 : 0) + (st === 'sleep' ? 18 : 0);
+    line(S, hx + s2 * 8, hy - 24, tx, ty, selout(Bd), 6); line(S, hx + s2 * 8, hy - 24, tx, ty, Bd[3], 3);
+    orb(S, tx, ty, 9, 9, ['#c8c8d8', '#e0e0ec', '#f4f4fa', '#ffffff', '#ffffff'], { outline: selout(Bd), spec: false });
+    if (st === 'sleep' || look.blink) line(S, tx - 6, ty, tx + 6, ty, '#171225', 2);
+    else if (st === 'celebrate') for (let i = -5; i <= 5; i++) rectF(S, tx + i, ty + 1 - (1 - (i / 5) ** 2) * 4, 2, 2, '#171225');
+    else { ellF(S, tx + look.x * 3, ty + look.y * 3 + 1, st === 'alert' ? 5 : 4.5, st === 'alert' ? 5 : 4.5, '#171225'); ellF(S, tx - 2 + look.x * 3, ty - 2 + look.y * 3, 1.6, 1.6, '#ffffff'); }
+  }
+  cheek(S, hx - 14, hy + 4, '#ff8fb0'); cheek(S, hx + 14, hy + 4, '#ff8fb0');
+  mouth2(S, hx, hy + 8, st === 'working' ? 'idle' : st, t, 6);
+  if (st === 'working') laptop(S, hx + 30, b + 150, 2.6, t, Bd, selout(Bd));
+  if (st === 'nervous') sweat(S, hx + 22, hy - 30, 4);
+  return { cx: cx - 10, top: b + 64, cy: b + 140, rx: 70, k };
+}
+
+function drawStar(S, st, t, look) {
+  const k = 4, m = motion(st, t, k), fl = Math.sin(t * 1.6) * 5, cx = S.w / 2 + m.jx, cy = 102 + m.dy + fl, s = status(st, t);
+  const G = hsRamp(44, 95, 64), spin = st === 'celebrate' ? t * 3 : Math.sin(t * .8) * .06, R = 62 + m.sq;
+  halo(S, cx, cy, 96, s.glow ? s.h : '#ffe08a', s.glow ? .3 : .16);
+  shadow2(S, S.w / 2, 190, 34 - fl, 5);
+  const shape = (dx, dy) => { const th = Math.atan2(dy, dx) + Math.PI / 2 - spin, rr = .7 + .3 * Math.cos(5 * th); return (dx * dx + dy * dy) / (rr * rr); };
+  orb(S, cx, cy, R, R, G, { shape, outline: selout(G), specR: .006, spec2: true, rim: '#fff4c0', ao: .2 });
+  for (let i = 0; i < 6; i++) { const an = t * (st === 'working' ? 2 : .8) + i / 6 * 6.283, x = cx + Math.cos(an) * 84, y = cy + Math.sin(an) * 30; sparkle(S, x, y, 3 + (i % 2), s.glow ? s.h : i % 2 ? '#ffffff' : '#ffe08a'); }
+  const lx = look.x * 3, ly = st === 'working' ? 4 : look.y * 2.5;
+  eye2(S, cx - 16 + lx, cy - 4 + ly, 8, st, look, '#3a6ad0', { side: -1 }); eye2(S, cx + 16 + lx, cy - 4 + ly, 8, st, look, '#3a6ad0', { side: 1 });
+  cheek(S, cx - 28, cy + 12, '#ff8f7a'); cheek(S, cx + 28, cy + 12, '#ff8f7a');
+  if (st !== 'working') mouth2(S, cx + lx * .5, cy + 12, st, t, 6);
+  if (st === 'working') laptop(S, cx, cy + 18, 3, t, G, selout(G));
+  if (st === 'nervous') sweat(S, cx + 34, cy - 36, 4);
+  return { cx, top: cy - 70, cy, rx: 50, k };
+}
+
+function drawDrone(S, st, t, look) {
+  const k = 4, m = motion(st, t, k), hv = Math.sin(t * 2) * 6, cx = S.w / 2 + m.jx, cy = 96 + m.dy + hv, s = status(st, t);
+  const Wt = hsRamp(222, 14, 90), led = st === 'sleep' ? '#2a5a6a' : s.glow ? s.h : '#63e6ff';
+  shadow2(S, S.w / 2, 190, 40 - hv, 6);
+  for (const s2 of [-1, 1]) {
+    const px = cx + s2 * 62, py = cy + 16;
+    const jet = 12 + Math.sin(t * 30 + s2) * 3;
+    halo(S, px, py + 22, 20, led, .45);
+    orb(S, px, py + 14 + jet / 2, 5, jet / 2 + 2, rampOf(led), { shape: (dx, dy) => tear(dx, -dy), outline: null, spec: false });
+    orb(S, px, py, 13, 15, Wt, { outline: selout(Wt), specR: .02, spec2: true });
+    rectF(S, px - 7, py + 10, 14, 3, '#2a2f47');
+  }
+  tri(S, [cx - 8, cy - 50], [cx + 8, cy - 50], [cx + 2, cy - 72], (x, y) => Wt[dith(.8 - (cy - 50 - y) / 60, x, y, 7)], selout(Wt));
+  orb(S, cx, cy, 58 + m.sq, 50 - m.sq, Wt, { outline: selout(Wt), specR: .03, spec2: true, rim: '#bfe6ff', tex: (x, y) => (y > cy + 16 && y < cy + 22) ? -.25 : 0 });
+  const vx = cx - 42, vy = cy - 24, vw = 84, vh = 38;
+  rrect(S, vx, vy, vw, vh, 17, (x, y) => mix('#0b0e1c', '#262c52', Math.max(0, 1 - (y - vy) / vh) * .7), '#0a0b16');
+  for (let i = 0; i < 18; i++) put(S, vx + 12 + i, vy + 5 + i * .25, '#5a6494');
+  halo(S, cx, cy - 5, 36, led, .18);
+  const P = (x, y, w, h) => { for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) { put(S, x + i, y + j, led); } };
+  const fx = cx + look.x * 5, fy = cy - 8 + (st === 'working' ? 3 : look.y * 3);
+  for (const d of [-16, 16]) {
+    const ex = fx + d;
+    if (st === 'sleep') P(ex - 6, fy + 3, 12, 2);
+    else if (st === 'celebrate') for (let i = -6; i <= 6; i++) P(ex + i, fy + 2 - (6 - Math.abs(i)) * .7, 2, 2);
+    else if (look.blink) P(ex - 6, fy + 3, 12, 2);
+    else { rrect(S, ex - 5, fy - 7 - (st === 'alert' ? 2 : 0), 10, 14 + (st === 'alert' ? 4 : 0), 4, () => led, null); rectF(S, ex - 3, fy - 5, 2, 3, '#ffffff'); }
+    if (st === 'nervous') line(S, ex - 7, fy - 12 - d / 16 * 2, ex + 7, fy - 12 + d / 16 * 2, led, 2);
+  }
+  if (st === 'working') for (let l = 0; l < 2; l++) P(vx + 22 + ((Math.floor(t * 6) + l * 3) % 4) * 3, fy + 10 + l * 3, 18 + l * 8, 1);
+  else if (st === 'alert' || st === 'celebrate') { P(fx - 4, fy + 10, 8, 2); P(fx - 5, fy + 12, 2, 3); P(fx + 3, fy + 12, 2, 3); P(fx - 4, fy + 15, 8, 2); }
+  else if (st === 'nervous') for (let i = -8; i <= 8; i++) P(fx + i, fy + 12 + (Math.floor((i + 16) / 3) % 2) * 2, 1, 2);
+  else for (let i = -7; i <= 7; i++) P(fx + i, fy + 11 + (1 - (i / 7) ** 2) * 2.5, 1, 2);
+  for (const s2 of [-1, 1]) halo(S, cx + s2 * 36, cy + 12, 8, '#ff8fb0', .4);
+  if (st === 'nervous') sweat(S, cx + 44, cy - 44, 4);
+  return { cx, top: cy - 72, cy, rx: 58, k };
+}
+
+// ===================== catalogue =====================
+const DESIGNS = [
+  { name: 'Current', res: '56×52 @4×', w: 56, h: 52, scale: 4, k: 1, draw: (S, st, t, l) => drawNet(S, st, t, l, 1, { flat: true }), note: 'Roughly what ships today: flat three-tone, one-pixel eyes.' },
+  { name: 'Net 3×', res: '75×70 @3×', w: 75, h: 70, scale: 3, k: 75 / 56, draw: (S, st, t, l) => drawNet(S, st, t, l, 75 / 56, { arms: false, eyeScale: 1.15 }), note: 'A modest step: 34% more pixels, dithered lighting, bigger highlights.' },
+  { name: 'Net HD', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: (S, st, t, l) => drawNet(S, st, t, l, 2, { arms: true, eyeScale: 1.3 }), note: 'Same Net at twice the resolution: lit sphere, irises with two highlights, little arms, glowing antenna.' },
+  { name: 'Net HD · soft', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: (S, st, t, l) => drawNet(S, st, t, l, 2, { arms: true, eyeScale: 1.3, outline: '#1d5a52', rim: '#5fe0d0', ramp: MINT_SOFT }), note: 'Net HD with a tinted outline and a rim light on the shadow side. Softer, more "sticker".' },
+  { name: 'Slime', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawSlime, note: 'Translucent goo. The glowing core is the status light; bubbles rise, drips wobble.' },
+  { name: 'Byte', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawBot, note: 'Retro beige computer buddy. Phosphor face; the screen shows scrolling code while your agent works.' },
+  { name: 'Axolotl', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawAxolotl, note: 'Gills are the status light: pink idle, green working, amber when your agent is waiting.' },
+  { name: 'Cat', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawCat, note: 'Round cat with a collar bell as the status light. Tail wags faster when something happens.' },
+  { name: 'Ghost', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawGhost, note: 'Floats and wobbles. The aura changes colour with agent status.' },
+  { name: 'Frog', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawFrog, note: "Belly glows with agent status. Throat puffs while idle." },
+  { name: 'Sprout', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawSprout, note: "A potted seedling. The flower bud is the status light; leaves droop when you're nervous or asleep, and it blooms when you commit." },
+  { name: 'Octopus', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawOcto, note: "Six tentacles with glowing tips for status. Perfect for typing on a laptop." },
+  { name: 'Penguin', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawPenguin, note: "Waddles while idle. The bowtie is the status light; flippers flap when you commit." },
+  { name: 'Shroom', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawShroom, note: "Toadstool with cap spots that glow in the status colour." },
+  { name: 'Owl', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawOwl, note: "Night-shift coder. Irises glow in the status colour; ear tufts perk up when your agent is waiting." },
+  { name: 'Dragon', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawDragon, note: "A hatchling still half in its egg. The tail flame shows status; it breathes fire when you commit. The shell cracks when you're nervous." },
+  { name: 'Jelly', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawJelly, note: "Floats. Glowing dots on its tentacles and inside its bell show status." },
+  { name: 'Duck', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawDuck, note: "A rubber debugging duck in a headset. The mic light shows status; it floats on ripples." },
+  { name: 'Capybara', res: '112×104 @2×', w: 112, h: 104, scale: 2, k: 2, draw: drawCapy, note: "Unbothered. The yuzu on its head glows in the status colour and bounces when you commit." },
+  { name: 'Fox kit', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawFox, note: "Fluffy fur texture and a big tail whose tip glows in the status colour." },
+  { name: 'Red panda', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawPanda, note: "Striped tail and white face markings. The tear marks glow in the status colour." },
+  { name: 'Bunny', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawBunny, note: "One ear flops; both droop when you're nervous and perk up when your agent is waiting. The nose is the status light." },
+  { name: 'Hamster', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawHamster, note: "Cheeks puff while your agent works. It holds a seed that glows in the status colour." },
+  { name: 'Phoenix', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawPhoenix, note: "A fire chick with a flickering flame tail and rising embers. The crest shows status." },
+  { name: 'Moth', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawMoth, note: "A fuzzy moth with feathered antennae. The eye-spots on its wings glow; it flutters faster when something's happening." },
+  { name: 'Koi bowl', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawKoi, note: "A koi swimming in a floating water bubble. The water glows in the status colour; the koi swims faster while your agent works." },
+  { name: 'Crystal snail', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawSnail, note: "Amethyst crystals on its back glow in the status colour; its eye stalks follow your cursor." },
+  { name: 'Star', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawStar, note: "A plump star with orbiting sparkles. It spins when you commit." },
+  { name: 'Drone', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawDrone, note: "A glossy hover-bot with an LED face on its visor. The thrusters glow in the status colour." },
+];
+const STATES = ['idle', 'working', 'alert', 'celebrate', 'nervous', 'sleep', 'cycle'];
+let state = 'cycle', zoom = 1, bg = 'desk', mouse = { x: -1e4, y: -1e4 };
+
+const grid = document.getElementById('grid');
+const cards = DESIGNS.map((d, i) => {
+  const el = document.createElement('div');
+  el.className = 'card';
+  el.innerHTML = `<div class="stage"><span class="num">${i + 1}</span><span class="res">${d.res}</span></div><div class="meta"><b>${d.name}</b><p>${d.note}</p></div>`;
+  const cv = document.createElement('canvas'); cv.width = d.w; cv.height = d.h;
+  el.querySelector('.stage').appendChild(cv);
+  grid.appendChild(el);
+  const ctx = cv.getContext('2d'), img = ctx.createImageData(d.w, d.h);
+  const card = { d, el, cv, ctx, img, S: { w: d.w, h: d.h, buf: new Uint32Array(img.data.buffer) }, parts: [], nextBlink: 0, blinkUntil: 0, emit: {}, last: null };
+  el.onclick = () => {
+    cards.forEach(c => c.el.classList.toggle('picked', c === card));
+    document.getElementById('pick').textContent = `picked #${i + 1} ${d.name} — tell Claude: "go with ${d.name}"`;
+  };
+  return card;
+});
+function sizeAll() { for (const c of cards) { c.cv.style.width = c.d.w * c.d.scale * zoom + 'px'; c.cv.style.height = c.d.h * c.d.scale * zoom + 'px'; c.el.querySelector('.stage').style.height = (250 * zoom) + 'px'; } }
+function buttons(id, list, get, set) {
+  const g = document.getElementById(id);
+  for (const v of list) { const b = document.createElement('button'); b.textContent = v; b.onclick = () => { set(v); [...g.querySelectorAll('button')].forEach(x => x.classList.toggle('on', x === b)); }; if (v === get()) b.classList.add('on'); g.appendChild(b); }
+}
+buttons('states', STATES, () => state, v => state = v);
+buttons('bgs', ['desk', 'light', 'wall'], () => bg, v => { bg = v; for (const c of cards) c.el.querySelector('.stage').className = 'stage ' + (v === 'desk' ? '' : v); });
+buttons('zooms', ['1×', '2×'], () => zoom === 1 ? '1×' : '2×', v => { zoom = v === '1×' ? 1 : 2; sizeAll(); });
+sizeAll();
+addEventListener('mousemove', e => { mouse = { x: e.clientX, y: e.clientY }; });
+
+function spawn(c, kind, n, o) {
+  for (let i = 0; i < n; i++) c.parts.push({ kind, x: o.x + (Math.random() - .5) * (o.sx || 0), y: o.y, vx: (Math.random() - .5) * (o.vx ?? .6), vy: -(Math.random() * .6 + .3) * (o.up ?? 1), g: o.g ?? 0, life: 1, decay: .012 + Math.random() * .01, c: o.c || '#fff', gs: o.gs || 1 });
+}
+const CONF = ['#7ef0c1', '#ffcf3f', '#ff7ab0', '#8b7bff', '#8fd3ff', '#ffffff'];
+let t0 = performance.now(), lastFrame = 0;
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (now - lastFrame < 33) return; lastFrame = now;
+  const t = (now - t0) / 1000;
+  const st = state === 'cycle' ? ['idle', 'working', 'alert', 'celebrate', 'nervous', 'sleep'][Math.floor(t / 3.5) % 6] : state;
+  for (const c of cards) {
+    const r = c.cv.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) continue;
+    if (now > c.nextBlink) { c.blinkUntil = now + 120; c.nextBlink = now + 2500 + Math.random() * 3000; }
+    const look = { x: Math.max(-1, Math.min(1, (mouse.x - (r.left + r.width / 2)) / 160)), y: Math.max(-1, Math.min(1, (mouse.y - (r.top + r.height / 2)) / 160)), blink: now < c.blinkUntil };
+    c.S.buf.fill(0);
+    const a = c.d.draw(c.S, st, t, look), k = c.d.k, g = Math.max(1, Math.round(k));
+    const every = (key, ms) => { if ((c.emit[key] || 0) < now) { c.emit[key] = now + ms; return true; } return false; };
+    if (st !== c.last && st === 'celebrate') spawn(c, 'spark', 40, { x: a.cx, y: a.top + 6 * k, sx: 20 * k, vx: 2 * k, up: 1.8 * k, g: .05 * k, c: CONF });
+    c.last = st;
+    if (st === 'celebrate' && every('conf', 110)) spawn(c, 'spark', 3, { x: a.cx, y: a.top + 4 * k, sx: 24 * k, vx: 1 * k, up: 1.4 * k, g: .04 * k, c: CONF });
+    if (st === 'sleep' && every('z', 1400)) spawn(c, 'z', 1, { x: a.cx + a.rx * .7, y: a.top + 6 * k, vx: .2, up: .35 * k, c: '#c7d0ff', gs: g });
+    if (st === 'working' && every('note', 2600)) spawn(c, 'note', 1, { x: a.cx - a.rx - 2 * k, y: a.top + 8 * k, vx: .2, up: .4 * k, c: '#7ef0c1', gs: g });
+    if (st === 'nervous' && every('drop', 800)) spawn(c, 'drop', 1, { x: a.cx + (Math.random() < .5 ? -1 : 1) * (a.rx + 2 * k), y: a.cy - 4 * k, vx: .2, up: -.2, g: .03 * k, c: '#8fd3ff', gs: g });
+    if (st === 'alert' && Math.floor(t * 3) % 3) glyph(c.S, a.cx + a.rx * .55, Math.max(2, a.top - 2 * k), 'bang', '#ffcf3f', g);
+    for (let i = c.parts.length - 1; i >= 0; i--) {
+      const p = c.parts[i]; p.x += p.vx; p.y += p.vy; p.vy += p.g; p.life -= p.decay;
+      if (p.life <= 0 || p.y > c.S.h + 4) { c.parts.splice(i, 1); continue; }
+      const col = Array.isArray(p.c) ? (p.c = p.c[Math.floor(Math.random() * p.c.length)]) : p.c;
+      if (p.kind === 'spark') rectF(c.S, p.x, p.y, Math.max(1, Math.round(k * .8)), Math.max(1, Math.round(k * .8)), col);
+      else glyph(c.S, p.x, p.y, p.kind, col, p.gs);
+    }
+    c.ctx.putImageData(c.img, 0, 0);
+  }
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

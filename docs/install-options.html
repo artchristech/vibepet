@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install section — options</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0d0f16; --panel: #11141d; --panel2: #151926; --line: rgba(255,255,255,.09); --line2: rgba(255,255,255,.16);
+    --text: #eceef5; --dim: #8b92a8; --faint: #5b6178; --mint: #7ef0c1; --mintbg: rgba(126,240,193,.07);
+    --sans: Inter, system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+  .label { max-width: 1040px; margin: 0 auto; padding: 64px 24px 0; font: 600 13px var(--mono); color: #ffcf3f; letter-spacing: .08em; }
+  .label span { color: var(--dim); font-weight: 400; letter-spacing: 0; margin-left: 10px; }
+  .opt { max-width: 1040px; margin: 0 auto; padding: 24px 24px 72px; border-bottom: 1px dashed var(--line2); }
+  svg.i { width: 18px; height: 18px; flex: none; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; }
+  .eyebrow { font: 600 15px var(--mono); color: var(--mint); letter-spacing: .16em; }
+  .more { font: 400 14px var(--mono); color: var(--dim); text-decoration: none; } .more:hover { color: var(--text); }
+  code.inl { font: 500 13px var(--mono); background: rgba(255,255,255,.04); border: 1px solid var(--line); padding: 2px 7px; border-radius: 4px; color: var(--text); }
+  .note { text-align: center; color: var(--dim); font-size: 15px; margin: 22px auto 0; max-width: 760px; line-height: 2; }
+
+  /* shared: tabs */
+  .tabs { display: flex; align-items: stretch; gap: 30px; padding: 0 30px; border-bottom: 1px solid var(--line); }
+  .tabs .t0 { font: 600 14px var(--mono); letter-spacing: .12em; color: var(--dim); padding: 20px 0; margin-right: 8px; }
+  .tabs button { background: none; border: 0; color: var(--dim); font: 400 15px var(--mono); padding: 20px 2px; cursor: pointer; position: relative; }
+  .tabs button:hover { color: var(--text); }
+  .tabs button.on { color: var(--mint); }
+  .tabs button.on::after { content: ""; position: absolute; left: -4px; right: -4px; bottom: -1px; height: 2px; background: var(--mint); }
+  .pane { display: none; } .pane.on { display: block; }
+
+  /* shared: buttons */
+  .b { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 15px 18px; border-radius: 10px; font: 600 15px var(--mono); text-decoration: none; cursor: pointer; transition: filter .15s, background .15s, border-color .15s; border: 1px solid transparent; }
+  .b.p { background: var(--mint); color: #0b1a14; } .b.p:hover { filter: brightness(1.07); }
+  .b.s { background: #0c0e14; color: var(--text); border-color: var(--line2); } .b.s:hover { background: #151925; border-color: rgba(255,255,255,.26); }
+  .b.x { background: transparent; color: var(--faint); border: 1px dashed var(--line2); cursor: default; }
+  .tag { font: 600 12px var(--mono); color: var(--mint); border: 1px solid rgba(126,240,193,.5); padding: 2px 8px; border-radius: 3px; letter-spacing: .06em; }
+  .tag.soon { color: var(--faint); border-color: var(--line2); }
+
+  /* cmd box */
+  .cmd { display: flex; align-items: center; gap: 14px; padding: 16px 16px 16px 22px; background: #0a0c12; border: 1px solid var(--line2); border-radius: 12px; }
+  .cmd code { flex: 1; min-width: 0; font: 500 16px var(--mono); white-space: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .cmd code::before { content: "$ "; color: var(--faint); }
+  .cmd code b { color: var(--mint); font-weight: 500; }
+  .copy { flex: none; font: 600 13px var(--mono); background: var(--mint); color: #0b1a14; border: 0; border-radius: 8px; padding: 9px 14px; cursor: pointer; }
+  .copy.ghost { background: transparent; color: var(--text); border: 1px solid var(--line2); }
+
+  /* ===== A: faithful — tabbed panel + 3 platform cards ===== */
+  .A .frame { border: 1px solid var(--line); background: var(--panel); }
+  .A .body { padding: 56px 72px 60px; }
+  .A h3 { font: 700 26px var(--sans); margin: 0 0 12px; letter-spacing: -.01em; }
+  .A .lede { color: #c2c7d6; margin: 0 0 36px; font-size: 17px; }
+  .A .cards { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); }
+  .A .card { padding: 30px 32px 32px; display: flex; flex-direction: column; background: #0c0e14; }
+  .A .card + .card { border-left: 1px solid var(--line); }
+  .A .card.hi { background: var(--mintbg); outline: 1px solid rgba(126,240,193,.45); outline-offset: -1px; }
+  .A .card h4 { font: 700 21px var(--sans); margin: 0 0 12px; display: flex; justify-content: space-between; align-items: center; }
+  .A .card .spec { font: 400 14px/1.9 var(--mono); color: var(--dim); margin: 0 0 22px; flex: 1; }
+  .A .card .b + .b { margin-top: 12px; }
+
+  /* ===== B: one-liner first — terminal hero, platform row below ===== */
+  .B .frame { border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--panel); }
+  .B .tabs { padding: 0 28px; }
+  .B .body { padding: 44px 48px 48px; }
+  .B .term { border: 1px solid var(--line2); border-radius: 14px; overflow: hidden; background: #08090e; box-shadow: 0 40px 90px -40px rgba(126,240,193,.35); }
+  .B .bar { display: flex; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); align-items: center; }
+  .B .bar i { width: 11px; height: 11px; border-radius: 50%; background: #2a2f47; }
+  .B .bar span { margin-left: auto; font: 400 12px var(--mono); color: var(--faint); }
+  .B .term .cmd { border: 0; border-radius: 0; background: transparent; padding: 22px 22px 8px 26px; }
+  .B .term .cmd code { font-size: 20px; }
+  .B .out { font: 400 13.5px/1.9 var(--mono); color: var(--faint); padding: 0 26px 22px; }
+  .B .out .g { color: var(--mint); }
+  .B .row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 14px; margin-top: 22px; }
+  .B .mini { border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; background: #0c0e14; display: flex; flex-direction: column; gap: 12px; }
+  .B .mini .top { display: flex; justify-content: space-between; align-items: center; font: 600 16px var(--sans); }
+  .B .mini .spec { font: 400 13px var(--mono); color: var(--dim); }
+  .B .mini .bb { display: flex; gap: 8px; }
+  .B .mini .b { padding: 11px 12px; font-size: 13px; }
+
+  /* ===== C: split — two big choices side by side, no tabs ===== */
+  .C .grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+  .C .side { padding: 44px 44px 40px; background: var(--panel); display: flex; flex-direction: column; }
+  .C .side + .side { border-left: 1px solid var(--line); background: #0c0e14; }
+  .C .side.hi { background: linear-gradient(160deg, rgba(126,240,193,.09), rgba(126,240,193,.02) 60%), var(--panel); }
+  .C .kicker { font: 600 12px var(--mono); letter-spacing: .14em; color: var(--mint); margin-bottom: 14px; display: flex; gap: 10px; align-items: center; }
+  .C h3 { font: 700 28px/1.15 var(--sans); margin: 0 0 12px; letter-spacing: -.015em; }
+  .C p { margin: 0 0 26px; color: var(--dim); font-size: 15.5px; }
+  .C .steps { margin: 20px 0 0; padding: 0; list-style: none; font: 400 13.5px/2 var(--mono); color: var(--faint); counter-reset: s; }
+  .C .steps li::before { counter-increment: s; content: counter(s) "  "; color: var(--mint); }
+  .C .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .C .foot { margin-top: auto; padding-top: 26px; display: flex; gap: 18px; font: 400 13px var(--mono); color: var(--faint); }
+  .C .foot a { color: var(--dim); text-decoration: none; } .C .foot a:hover { color: var(--text); }
+
+  @media (max-width: 860px) {
+    .A .body { padding: 32px 22px; } .A .cards { grid-template-columns: 1fr; } .A .card + .card { border-left: 0; border-top: 1px solid var(--line); }
+    .B .body { padding: 26px 18px; } .B .row { grid-template-columns: 1fr; } .B .term .cmd code { font-size: 15px; }
+    .C .grid { grid-template-columns: 1fr; } .C .side + .side { border-left: 0; border-top: 1px solid var(--line); } .C .side { padding: 30px 24px; }
+    .tabs { gap: 18px; padding: 0 18px; overflow-x: auto; } .tabs .t0 { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><symbol id="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 17v2.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5V17"/></symbol></svg>
+
+<!-- ================= A ================= -->
+<div class="label">OPTION A <span>closest to your reference: tabbed panel with three platform cards</span></div>
+<div class="opt A">
+  <div class="head"><span class="eyebrow">QUICK START</span><a class="more" href="#">All releases →</a></div>
+  <div class="frame" data-tabs>
+    <div class="tabs"><span class="t0">INSTALL</span><button class="on" data-t="apps">Apps</button><button data-t="one">One-liner</button><button data-t="src">From source</button></div>
+    <div class="body">
+      <div class="pane on" data-p="apps">
+        <h3>Desktop app</h3>
+        <p class="lede">A tiny always-on-top pet that watches your Claude Code sessions and your git repo. Native on Apple Silicon and Intel Macs.</p>
+        <div class="cards">
+          <div class="card hi"><h4>Apple Silicon <span class="tag">RECOMMENDED</span></h4><p class="spec">M1 – M4 · macOS 12+ · v0.1.2</p>
+            <a class="b p" href="/download/arm64.dmg"><svg class="i"><use href="#dl"/></svg>Download .dmg</a>
+            <a class="b s" href="/download/arm64.zip"><svg class="i"><use href="#dl"/></svg>Download .zip</a></div>
+          <div class="card"><h4>Intel Mac</h4><p class="spec">x64 · macOS 12+ · v0.1.2</p>
+            <a class="b p" href="/download/x64.dmg"><svg class="i"><use href="#dl"/></svg>Download .dmg</a>
+            <a class="b s" href="/download/x64.zip"><svg class="i"><use href="#dl"/></svg>Download .zip</a></div>
+          <div class="card"><h4>Windows & Linux <span class="tag soon">SOON</span></h4><p class="spec">Same pet, same app, on the way. Star the repo to hear when it lands.</p>
+            <span class="b x">Coming soon</span>
+            <a class="b s" href="https://github.com/artchristech/vibepet">★ Watch on GitHub</a></div>
+        </div>
+      </div>
+      <div class="pane" data-p="one">
+        <h3>One-liner</h3>
+        <p class="lede">Downloads the right build for your Mac, installs it to /Applications, and skips the "unidentified developer" prompt.</p>
+        <div class="cmd"><code>curl -fsSL <b>vibepet.net/install</b> | sh</code><button class="copy">Copy</button></div>
+      </div>
+      <div class="pane" data-p="src">
+        <h3>From source</h3>
+        <p class="lede">It's about 1,000 lines of Electron. Fork it, give your pet a new trick.</p>
+        <div class="cmd"><code>git clone <b>github.com/artchristech/vibepet</b> && cd vibepet && npm i && npm start</code><button class="copy">Copy</button></div>
+      </div>
+    </div>
+  </div>
+  <p class="note">Re-run the one-liner any time to update. To enable chat, right-click your pet → <code class="inl">Set Anthropic API key</code>, or launch with <code class="inl">ANTHROPIC_API_KEY</code> set.</p>
+</div>
+
+<!-- ================= B ================= -->
+<div class="label">OPTION B <span>one-liner first: a big terminal as the hero, downloads as a slim row below</span></div>
+<div class="opt B">
+  <div class="head"><span class="eyebrow">QUICK START</span><a class="more" href="#">All releases →</a></div>
+  <div class="frame" data-tabs>
+    <div class="tabs"><span class="t0">INSTALL</span><button class="on" data-t="one">One-liner</button><button data-t="apps">Apps</button><button data-t="src">From source</button></div>
+    <div class="body">
+      <div class="pane on" data-p="one">
+        <div class="term">
+          <div class="bar"><i></i><i></i><i></i><span>zsh — 80×24</span></div>
+          <div class="cmd"><code>curl -fsSL <b>vibepet.net/install</b> | sh</code><button class="copy">Copy</button></div>
+          <div class="out">↓ downloading vibepet (arm64)… <br><span class="g">✓</span> installed to /Applications/vibepet.app — say hi to Net 👋</div>
+        </div>
+        <div class="row">
+          <div class="mini"><div class="top">Apple Silicon <span class="tag">DMG</span></div><span class="spec">macOS 12+ · v0.1.2</span><div class="bb"><a class="b p" href="/download/arm64.dmg"><svg class="i"><use href="#dl"/></svg>.dmg</a><a class="b s" href="/download/arm64.zip">.zip</a></div></div>
+          <div class="mini"><div class="top">Intel Mac</div><span class="spec">x64 · v0.1.2</span><div class="bb"><a class="b s" href="/download/x64.dmg"><svg class="i"><use href="#dl"/></svg>.dmg</a><a class="b s" href="/download/x64.zip">.zip</a></div></div>
+          <div class="mini"><div class="top">Win · Linux <span class="tag soon">SOON</span></div><span class="spec">on the way</span><div class="bb"><span class="b x">Coming soon</span></div></div>
+        </div>
+      </div>
+      <div class="pane" data-p="apps"><p style="color:var(--dim);margin:0">(same three cards as option A)</p></div>
+      <div class="pane" data-p="src"><div class="cmd"><code>git clone <b>github.com/artchristech/vibepet</b> && cd vibepet && npm i && npm start</code><button class="copy">Copy</button></div></div>
+    </div>
+  </div>
+  <p class="note">Free and open source (MIT). Everything runs locally; chat uses your own Anthropic key.</p>
+</div>
+
+<!-- ================= C ================= -->
+<div class="label">OPTION C <span>split, no tabs: two big choices side by side</span></div>
+<div class="opt C">
+  <div class="head"><span class="eyebrow">QUICK START</span><a class="more" href="#">All releases →</a></div>
+  <div class="grid">
+    <div class="side hi">
+      <div class="kicker">TERMINAL <span class="tag">FASTEST</span></div>
+      <h3>One line, ten seconds.</h3>
+      <p>Picks the right build for your Mac, installs it, and launches your pet. No security prompt.</p>
+      <div class="cmd"><code>curl -fsSL <b>vibepet.net/install</b> | sh</code><button class="copy">Copy</button></div>
+      <ul class="steps"><li>paste into Terminal</li><li>your pet pops up in the corner</li><li>start a Claude Code session and it's already watching</li></ul>
+      <div class="foot"><span>re-run to update</span><a href="#">view script</a></div>
+    </div>
+    <div class="side">
+      <div class="kicker">DESKTOP APP</div>
+      <h3>Download for Mac.</h3>
+      <p>Drag it to Applications. The first time, open it via System Settings → Privacy &amp; Security → Open Anyway.</p>
+      <div class="pair"><a class="b p" href="/download/arm64.dmg"><svg class="i"><use href="#dl"/></svg>Apple Silicon</a><a class="b s" href="/download/x64.dmg"><svg class="i"><use href="#dl"/></svg>Intel</a></div>
+      <div class="foot"><span>macOS 12+ · v0.1.2</span><a href="#">.zip</a><a href="#">source</a><span>Windows/Linux soon</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('[data-tabs]').forEach(f => f.querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
+  f.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('on', x === b));
+  f.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', p.dataset.p === b.dataset.t));
+}));
+document.querySelectorAll('.copy').forEach(b => b.onclick = () => {
+  navigator.clipboard?.writeText(b.previousElementSibling.textContent).catch(() => {});
+  b.textContent = 'Copied ✓'; setTimeout(() => b.textContent = 'Copy', 1500);
+});
+</script>
+</body>
+</html>
