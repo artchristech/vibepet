@@ -42,23 +42,39 @@ function toolAsk(c) {
   return `${c.name}: ${plain(String(i.command || i.file_path || i.pattern || i.url || i.description || ''))}`.replace(/: $/, '');
 }
 
-function classify(file, mtimeMs) {
+// a real human prompt: typed text (or a /command), not a tool result, hook echo or background-task notice
+function humanAt(d) {
+  if (d.type !== 'user' || d.isMeta || d.isSidechain) return 0;
+  const c = d.message?.content;
+  if (Array.isArray(c) && c.some(b => b.type === 'tool_result')) return 0;
+  const t = textOf(c).trimStart();
+  if (!t || t.startsWith('[Request interrupted') || (t.startsWith('<') && !t.startsWith('<command-'))) return 0;
+  return Date.parse(d.timestamp) || 0;
+}
+
+// side: a subagent's own file, whose records are all sidechain
+function classify(file, mtimeMs, side = false) {
   const idle = Date.now() - mtimeMs;
   const lines = readTail(file);
-  let cwd = null, title;
+  let cwd = null, title, turnAt = 0;
   for (let i = lines.length - 1; i >= 0 && title === undefined; i--) {
     if (!lines[i].includes('"ai-title"')) continue;
     try { const d = JSON.parse(lines[i]); if (d.type === 'ai-title' && d.aiTitle) title = String(d.aiTitle).slice(0, 80); } catch {}
   }
-  const out = (phase, ask) => ({ phase, cwd, title, ...(ask ? { ask: cap(ask) } : {}) });
+  for (let i = lines.length - 1; i >= 0 && !side && !turnAt; i--) {
+    if (!lines[i].includes('"type":"user"')) continue;
+    try { turnAt = humanAt(JSON.parse(lines[i])); } catch {}
+  }
+  turnAt ||= Date.now() - 45 * 60e3;
+  const out = (phase, ask, extra) => ({ phase, cwd, title, turnAt, ...(ask ? { ask: cap(ask) } : {}), ...extra });
   for (let i = lines.length - 1; i >= 0; i--) {
     let d; try { d = JSON.parse(lines[i]); } catch { continue; }
     if (!cwd && d.cwd) cwd = d.cwd;
-    if (d.isSidechain || d.isMeta || (d.type !== 'assistant' && d.type !== 'user')) continue;
+    if ((d.isSidechain && !side) || d.isMeta || (d.type !== 'assistant' && d.type !== 'user')) continue;
     cwd = d.cwd || cwd;
     if (d.type === 'assistant') {
       const m = d.message || {}, tools = (m.content || []).filter(c => c.type === 'tool_use');
-      if (tools.length) return idle > 90000 ? out('stalled', toolAsk(tools[tools.length - 1])) : out('working');
+      if (tools.length) return idle > 90000 ? out('stalled', toolAsk(tools[tools.length - 1]), { agentWait: tools.some(c => c.name === 'Agent' || c.name === 'Task') }) : out('working');
       if (['end_turn', 'stop_sequence', 'max_tokens'].includes(m.stop_reason)) {
         if (idle > 5 * 60e3) return out('parked');
         const t = textOf(m.content).trim();
@@ -68,9 +84,96 @@ function classify(file, mtimeMs) {
     }
     const txt = textOf(d.message?.content);
     if (txt.startsWith('[Request interrupted')) return out('parked');
-    return out(idle > 120000 ? 'parked' : 'working');
+    return out(idle > 120000 && !side ? 'parked' : 'working');   // a subagent thinking past 2 min after a tool result is still running (fanout ages it out at 10)
   }
   return null;
+}
+
+// ---------- fan-out: the subagents a session is waiting on ----------
+// The parent jsonl goes silent while its children run; their files live in <session>/subagents/.
+const kidCache = new Map(), metaCache = new Map();   // child path -> { size, mtimeMs, k: { phase, stuck, ask } } | meta
+function meta(fp) {
+  if (metaCache.has(fp)) return metaCache.get(fp);
+  let m = {}; try { m = JSON.parse(fs.readFileSync(fp.slice(0, -6) + '.meta.json', 'utf8')) || {}; } catch {}
+  if (metaCache.size > 4000) metaCache.clear();
+  metaCache.set(fp, m); return m;
+}
+function kidPhase(fp, st) {
+  const hit = kidCache.get(fp);
+  if (hit && hit.size === st.size && hit.mtimeMs === st.mtimeMs) return hit.k;
+  let c = null; try { c = classify(fp, st.mtimeMs, true); } catch {}
+  // stuck: silent > 90 s on a tool that isn't itself an Agent call. Subagent approvals block in the parent's terminal.
+  const k = { phase: c?.phase || null, stuck: c?.phase === 'stalled' && !c.agentWait, ask: c?.ask };
+  if (kidCache.size > 4000) kidCache.clear();
+  kidCache.set(fp, { size: st.size, mtimeMs: st.mtimeMs, k });
+  return k;
+}
+function fanout(file, turnAt = Date.now() - 45 * 60e3) {
+  const dir = path.join(file.slice(0, -6), 'subagents');
+  let names; try { names = fs.readdirSync(dir); } catch { return null; }
+  // workflow runs keep their agents one level down: subagents/workflows/<run>/agent-*.jsonl
+  let wf = []; try { wf = fs.readdirSync(path.join(dir, 'workflows')).map(w => path.join('workflows', w)); } catch {}
+  for (const w of wf) try { names.push(...fs.readdirSync(path.join(dir, w)).map(n => path.join(w, n))); } catch {}
+  const now = Date.now(), kids = [];
+  let newestAt = 0;
+  for (const n of names) {
+    if (!n.endsWith('.jsonl') || !path.basename(n).startsWith('agent-')) continue;
+    const fp = path.join(dir, n);
+    let st; try { st = fs.statSync(fp); } catch { continue; }
+    if (st.mtimeMs < turnAt) continue;                    // finished before this turn began
+    newestAt = Math.max(newestAt, st.mtimeMs);
+    kids.push({ fp, st, m: meta(fp) });
+  }
+  const top = kids.filter(k => !k.m.parentAgentId), depth = k => k.m.spawnDepth ?? 1;
+  const min = Math.min(...kids.map(depth));
+  const direct = (top.length ? top : kids.filter(k => depth(k) === min)).sort((a, b) => b.st.mtimeMs - a.st.mtimeMs).slice(0, 32);
+  let open = 0, oldestOpenAt = null, stuck = 0, stuckAsk;
+  const items = direct.map(k => {
+    const p = kidPhase(k.fp, k.st), o = (p.phase === 'working' || p.phase === 'stalled') && now - k.st.mtimeMs < 10 * 60e3;
+    if (o) { open++; const b = k.st.birthtimeMs || k.st.mtimeMs; oldestOpenAt = Math.min(oldestOpenAt ?? b, b); }
+    if (o && p.stuck) { stuck++; stuckAsk ??= p.ask; }
+    return { desc: cap(plain(String(k.m.description || '')), 60), open: o };
+  });
+  return { total: direct.length, done: direct.length - open, open, stuck, stuckAsk, oldestOpenAt, newestAt: newestAt || null, items };
+}
+// open children keep a parent working: not done, and not stuck on the Agent call it's waiting on. A question still needs you,
+// and so does a child stuck on its own tool (its approval prompt is in the parent's terminal): then the parent is stuck, on the child's ask.
+function settle(c, fo) {
+  if (!c || !(fo?.open > 0)) return c?.phase;
+  if (c.phase === 'ready' || c.phase === 'parked' || (c.phase === 'stalled' && c.agentWait)) return fo.stuck > 0 ? 'stalled' : 'working';
+  return c.phase;
+}
+
+// every live session under root (~/.claude/projects); onChange(s, prev) on a phase change
+function scan(root, sessions, onChange) {
+  let dirs; try { dirs = fs.readdirSync(root); } catch { return []; }
+  const now = Date.now(), seen = new Set(), out = [];
+  for (const dname of dirs) {
+    if (dname.includes('private-tmp') || dname.includes('scratchpad')) continue; // throwaway worker sessions
+    const dir = path.join(root, dname);
+    let files; try { files = fs.readdirSync(dir); } catch { continue; }
+    for (const f of files) {
+      if (!f.endsWith('.jsonl')) continue;
+      const fp = path.join(dir, f);
+      let st; try { st = fs.statSync(fp); } catch { continue; }
+      const age = now - st.mtimeMs;
+      if (age > 45 * 60e3 && (age > 12 * 3600e3 || !(now - (fanout(fp)?.newestAt || 0) <= 45 * 60e3))) continue;   // silent parent, but children may still run
+      let c; try { c = classify(fp, st.mtimeMs); } catch { continue; }
+      if (!c) continue;
+      const fo = fanout(fp, c.turnAt), phase = settle(c, fo);
+      const id = f.slice(0, -6);
+      seen.add(id);
+      const prev = sessions.get(id);
+      const name = c.cwd ? path.basename(c.cwd) : dname.split('-').pop();
+      const s = { id, file: fp, name, cwd: c.cwd, phase, since: prev && prev.phase === phase ? prev.since : now, mtime: Math.max(st.mtimeMs, fo?.newestAt || 0),
+        ask: phase === 'stalled' && fo?.stuck && (c.phase !== 'stalled' || c.agentWait) ? fo.stuckAsk : c.ask, title: c.title || prev?.title, fanout: fo?.total ? fo : undefined };
+      if (prev && prev.phase !== phase) onChange?.(s, prev);
+      sessions.set(id, s);
+      if (phase !== 'parked') out.push(s);
+    }
+  }
+  for (const id of [...sessions.keys()]) if (!seen.has(id)) sessions.delete(id);
+  return out.sort((a, b) => b.mtime - a.mtime);
 }
 
 // ---------- where does a session live? (on click only) ----------
@@ -161,4 +264,4 @@ async function focusTty(bid, tty) {
   return (await run('/usr/bin/osascript', ['-e', FOCUS[bid], tty], 5000))?.trim() === 'ok';
 }
 
-module.exports = { readTail, textOf, classify, psAll, locateSession, hostApp, bundleId, focusTty, run };
+module.exports = { readTail, textOf, classify, fanout, settle, scan, psAll, locateSession, hostApp, bundleId, focusTty, run };

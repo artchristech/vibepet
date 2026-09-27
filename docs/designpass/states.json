@@ -93,6 +93,16 @@
       "id": "17-roster-none",
       "renderer": "snap.agents = [{ id: 's-claude', name: 'claude', title: 'Designpass p4', phase: 'working', since: Date.now() - 240*1000 }]; renderHud(); (() => { const c = document.getElementById('pet').getBoundingClientRect(); cursor = { x: c.left + c.width/2, y: c.top + c.height*0.62 }; lastCur = { ...cursor }; vel = { x: 0, y: 0 }; })();",
       "wait": 900
+    },
+    {
+      "id": "18-roster-fanout",
+      "renderer": "const it = (d, o) => ({ desc: d, open: o }); snap.agents = [{ id: 's-api', name: 'api', title: 'Rate limiter for the public API', phase: 'waiting', since: Date.now() - 90*1000, ask: 'Should I also cap bursts per API key, or only per IP?', fanout: { total: 2, done: 1, open: 1, oldestOpenAt: Date.now() - 4*60e3, newestAt: Date.now(), items: [it('load test', true), it('read limiter docs', false)] } }, { id: 's-claude', name: 'claude', title: 'Designpass p5 fan-out', phase: 'working', since: Date.now() - 300*1000, fanout: { total: 5, done: 3, open: 2, oldestOpenAt: Date.now() - 7*60e3, newestAt: Date.now(), items: [it('build:L2', true), it('verify pips', true), it('scan repo', false), it('write tests', false), it('read docs', false)] } }, { id: 's-wide', name: 'wide', title: 'Audit every screen', phase: 'working', since: Date.now() - 600*1000, fanout: { total: 12, done: 9, open: 3, oldestOpenAt: Date.now() - 11*60e3, newestAt: Date.now(), items: [it('screen 10', true), it('screen 11', true), it('screen 12', true)] } }]; renderHud(); (() => { const c = document.getElementById('pet').getBoundingClientRect(); cursor = { x: c.left + c.width/2, y: c.top + c.height*0.62 }; lastCur = { ...cursor }; vel = { x: 0, y: 0 }; })();",
+      "wait": 900
+    },
+    {
+      "id": "19-summon",
+      "main": "({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.send('summon')",
+      "wait": 700
     }
   ]
 }

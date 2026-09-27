@@ -1,10 +1,10 @@
 // vibepet — a desktop pet that watches your coding agents and your repo.
-const { app, BrowserWindow, ipcMain, screen, Menu, dialog, safeStorage, Notification, clipboard, powerMonitor } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, Menu, dialog, safeStorage, Notification, clipboard, powerMonitor, globalShortcut } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { execFile } = require('child_process');
-const { readTail, textOf, classify, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
+const { readTail, textOf, scan, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
 
 const W = 360, H = 520;
 const CLAUDE_DIR = path.join(os.homedir(), '.claude', 'projects');
@@ -12,13 +12,14 @@ const TICK_MS = 3000;
 
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 app.disableHardwareAcceleration();   // a 224×208 pixel canvas + one CSS capsule: the GPU process costs memory, buys nothing
-if (!app.requestSingleInstanceLock()) app.quit();
+const primary = app.requestSingleInstanceLock();
+if (!primary) app.quit();   // the running pet gets 'second-instance' instead
 
 // ---------- state ----------
 const DEFAULTS = {
   name: 'Net', xp: 0, fuel: 80, mood: 70, commits: 0, quickDraws: 0,
   repo: null, pos: null, model: 'claude-sonnet-5', keyEnc: null, keyPlain: null,
-  muted: false, onTop: true, animations: false, game: false, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
+  muted: false, onTop: true, hotkey: 'Control+Alt+Command+J', animations: false, game: false, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
 };
 let state, saveTimer, win, sessionKey = null;
 const statePath = () => path.join(app.getPath('userData'), 'state.json');
@@ -61,28 +62,39 @@ function gainXP(n) {
   }
 }
 
+const send = (ch, data) => win && !win.isDestroyed() && win.webContents.send(ch, data);
 function emit(kind, text, { notify = false, ...extra } = {}) {
-  if (win && !win.isDestroyed()) win.webContents.send('event', { kind, text, ...extra });
-  if (notify && !state.muted && Notification.isSupported()) {
-    new Notification({ title: state.name, body: text, silent: false }).show();
-  }
+  send('event', { kind, text, ...extra });
+  if (notify && !state.muted && Notification.isSupported()) banner(text, extra.id);
+}
+// a banner is a door: click → that agent's terminal (the renderer's queue decides). Electron drops the click
+// handler once a Notification is GC'd, so each one is held until it closes or is clicked.
+const banners = new Set();
+function banner(body, id, silent = false) {
+  const n = new Notification({ title: state.name, body, silent }), drop = () => banners.delete(n);
+  banners.add(n);
+  if (banners.size > 16) banners.delete(banners.values().next().value);   // macOS never fires 'close' for one left in Notification Center
+  n.on('click', () => { drop(); if (id) send('jumpTo', { id }); });
+  n.on('close', drop);
+  n.show();
+  return n;
 }
 
 // batch "finished" OS notifications: at most one per 20s
 const DONE_GAP = 20000;
 let doneQueue = [], doneTimer = null, lastDoneNote = 0;
-function queueDone(name) {
-  if (!doneQueue.includes(name)) doneQueue.push(name);
+function queueDone(a) {   // { name, id }
+  if (!doneQueue.some(d => d.id === a.id)) doneQueue.push(a);
   if (doneTimer) return;
   doneTimer = setTimeout(flushDone, Math.max(0, lastDoneNote + DONE_GAP - Date.now()));
 }
 function flushDone() {
   doneTimer = null;
-  const names = doneQueue; doneQueue = [];
-  if (!names.length || state.muted || !Notification.isSupported()) return;
+  const done = doneQueue; doneQueue = [];
+  if (!done.length || state.muted || !Notification.isSupported()) return;
   lastDoneNote = Date.now();
-  const who = names.length > 2 ? `${names.length} agents` : names.join(', ');
-  new Notification({ title: state.name, body: `${who} done`, silent: true }).show();
+  const who = done.length > 2 ? `${done.length} agents` : done.map(d => d.name).join(', ');
+  banner(`${who} done`, done[0].id, true);
 }
 // the pet can't be seen (hidden, or the user stepped away): only then does an OS banner earn its interruption
 const away = () => !win || win.isDestroyed() || !win.isVisible() || powerMonitor.getSystemIdleTime() > 60;
@@ -90,44 +102,18 @@ const away = () => !win || win.isDestroyed() || !win.isVisible() || powerMonitor
 // ---------- claude code sessions ----------
 const sessions = new Map(); // id -> { phase, since, … }
 
-function scanAgents() {
-  let dirs; try { dirs = fs.readdirSync(CLAUDE_DIR); } catch { return []; }
-  const now = Date.now(), seen = new Set(), out = [];
-  for (const dname of dirs) {
-    if (dname.includes('private-tmp') || dname.includes('scratchpad')) continue; // throwaway worker sessions
-    const dir = path.join(CLAUDE_DIR, dname);
-    let files; try { files = fs.readdirSync(dir); } catch { continue; }
-    for (const f of files) {
-      if (!f.endsWith('.jsonl')) continue;
-      const fp = path.join(dir, f);
-      let st; try { st = fs.statSync(fp); } catch { continue; }
-      if (now - st.mtimeMs > 45 * 60e3) continue;
-      let c; try { c = classify(fp, st.mtimeMs); } catch { continue; }
-      if (!c) continue;
-      const id = f.slice(0, -6);
-      seen.add(id);
-      const prev = sessions.get(id);
-      const name = c.cwd ? path.basename(c.cwd) : dname.split('-').pop();
-      if (prev && prev.phase !== c.phase) transition(name, prev, c.phase, now);
-      const s = { id, file: fp, name, cwd: c.cwd, phase: c.phase, since: prev && prev.phase === c.phase ? prev.since : now, mtime: st.mtimeMs,
-        ask: c.ask, title: c.title || prev?.title };
-      sessions.set(id, s);
-      if (c.phase !== 'parked') out.push(s);
-    }
-  }
-  for (const id of [...sessions.keys()]) if (!seen.has(id)) sessions.delete(id);
-  return out.sort((a, b) => b.mtime - a.mtime);
-}
+// phases are settled against each session's subagents (agents.js fanout/settle), so a fan-out never reads as stuck or done
+const scanAgents = () => scan(CLAUDE_DIR, sessions, transition);
 
-function transition(name, prev, phase, now) {
-  const was = prev.phase === 'working' || prev.phase === 'stalled';
+function transition(s, prev) {
+  const { name, id, phase } = s, was = prev.phase === 'working' || prev.phase === 'stalled';
   if (phase === 'ready' && was) {
-    emit('agentDone', `${name} is done`, { agent: name });
-    if (away()) queueDone(name);
+    emit('agentDone', `${name} is done`, { agent: name, id });
+    if (away()) queueDone({ name, id });
   } else if (phase === 'waiting' && was) {
-    emit('agentNeeds', `${name} has a question`, { agent: name, notify: away() });
+    emit('agentNeeds', `${name} has a question`, { agent: name, id, notify: away() });
   } else if (phase === 'stalled' && prev.phase === 'working') {
-    emit('agentStalled', `${name} needs approval`, { agent: name, notify: away() });
+    emit('agentStalled', `${name} needs approval`, { agent: name, id, notify: away() });
   }
 }
 
@@ -222,7 +208,7 @@ function snapshot() {
   return {
     name: state.name, level, xp: state.xp, xpLo: xpForLevel(level), xpHi: xpForLevel(level + 1),
     fuel: state.fuel, mood: state.mood, commits: state.commits,
-    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, phase: a.phase, since: a.since, ask: a.ask })),
+    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout })),
     git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto',
   };
@@ -320,13 +306,17 @@ ipcMain.handle('set-key', (_, key) => {
 });
 
 // ---------- window + interaction ----------
-function createWindow() {
-  const { workArea } = screen.getPrimaryDisplay();
-  let pos = state.pos;
+// pos if it's on some display, else the primary's bottom-right corner
+function homePos(pos) {
   const onScreen = pos && screen.getAllDisplays().some(d => {
     const b = d.workArea; return pos.x > b.x - W / 2 && pos.x < b.x + b.width - W / 2 && pos.y > b.y - H / 2 && pos.y < b.y + b.height - 100;
   });
-  if (!onScreen) pos = { x: workArea.x + workArea.width - W - 24, y: workArea.y + workArea.height - H };
+  if (onScreen) return pos;
+  const { workArea } = screen.getPrimaryDisplay();
+  return { x: workArea.x + workArea.width - W - 24, y: workArea.y + workArea.height - H };
+}
+function createWindow() {
+  const pos = homePos(state.pos);
   win = new BrowserWindow({
     width: W, height: H, x: pos.x, y: pos.y, frame: false, transparent: true, resizable: false,
     hasShadow: false, alwaysOnTop: state.onTop, skipTaskbar: true, fullscreenable: false, backgroundColor: '#00000000',
@@ -412,6 +402,8 @@ ipcMain.on('menu', () => {
     { label: 'Mute notifications', type: 'checkbox', checked: state.muted, click: m => { state.muted = m.checked; save(); tick(); } },
     { label: 'Game mode (XP, hunger, levels)', type: 'checkbox', checked: state.game, click: m => { state.game = m.checked; state.lastDecay = Date.now(); save(); tick(); } },
     { label: 'Animations', type: 'checkbox', checked: state.animations, click: m => { state.animations = m.checked; save(); tick(); } },
+    { label: `Jump key${keyTaken ? ' (taken)' : ''}`, submenu: KEYS.map(([label, k]) => ({
+      label, type: 'radio', checked: state.hotkey === k, click: () => { state.hotkey = k; save(); bindKey(); } })) },
     { label: 'Keep on top', type: 'checkbox', checked: state.onTop, click: m => { state.onTop = m.checked; win.setAlwaysOnTop(m.checked, 'floating'); save(); } },
     { label: 'Model', submenu: ['claude-sonnet-5', 'claude-opus-5-5', 'claude-haiku-4-5-20251001'].map(m => ({
       label: m, type: 'radio', checked: state.model === m, click: () => { state.model = m; save(); } })) },
@@ -422,10 +414,33 @@ ipcMain.on('menu', () => {
   ]).popup({ window: win });
 });
 
+// ---------- the jump door: a global key walks the renderer's queue (it owns pending()) ----------
+const KEYS = [['⌃⌥⌘J', 'Control+Alt+Command+J'], ['⌥⌘J', 'Alt+Command+J'], ['Off', null]];   // not ⌥Space (Raycast/ChatGPT) or ⌃⌥Space (input source)
+let keyTaken = false;
+function bindKey() {
+  globalShortcut.unregisterAll();
+  let ok = true;
+  if (state.hotkey) try { ok = globalShortcut.register(state.hotkey, () => send('hotkey')); } catch { ok = false; }
+  keyTaken = !ok;   // someone else has it: stay quiet, the menu says so
+}
+app.on('will-quit', () => globalShortcut.unregisterAll());
+
+// "Lost him? Open vibepet again." — a second launch re-homes the running pet and opens its pill once
+app.on('second-instance', () => {
+  if (!win || win.isDestroyed()) return;
+  const [x, y] = win.getPosition(), p = homePos({ x, y });
+  if (p.x !== x || p.y !== y) { win.setPosition(p.x, p.y); state.pos = p; save(); }
+  win.showInactive();
+  send('summon');
+});
+
 app.whenReady().then(() => {
+  if (!primary) return;
   load();
   if (process.platform === 'darwin') app.dock?.hide();
   createWindow();
+  bindKey();
   setInterval(tick, TICK_MS);
+  if (process.env.VIBEPET_TEST) globalThis.__vibepet = { banners, banner, bindKey, keyTaken: () => keyTaken };
 });
 app.on('window-all-closed', () => app.quit());

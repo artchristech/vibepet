@@ -362,6 +362,23 @@ api.on('tick', s => {
     if (w.length) say(`${w.map(a => a.name).join(', ')} ${w.length > 1 ? 'are' : 'is'} waiting on you`, { alert: true });
   }
 });
+// the jump door. hotkey: a press < 4 s after the last walks on, else it snapshots the queue (markSeen reshuffles pending()).
+// nothing waiting = nothing happens: no bubble, no sound
+let cyc = { ids: [], i: 0, at: 0 };
+api.on('hotkey', () => {
+  const now = Date.now();
+  cyc = now - cyc.at < 4000 && cyc.ids.length ? { ...cyc, i: cyc.i + 1, at: now } : { ids: pending().map(a => a.id), i: 0, at: now };
+  const live = snap?.agents || [];
+  for (let k = 0; k < cyc.ids.length; k++) {
+    const j = (cyc.i + k) % cyc.ids.length, a = live.find(x => x.id === cyc.ids[j]);
+    if (a && api.jump) { cyc.i = j; jumpTo(a); return; }
+  }
+});
+api.on('jumpTo', ({ id } = {}) => {   // a clicked banner: its agent, else whoever is first in line
+  const a = (snap?.agents || []).find(x => x.id === id) || pending()[0];
+  if (a && api.jump) jumpTo(a);
+});
+api.on('summon', () => { wantUntil = performance.now() + 1500; wake(); });   // relaunched: open the pill once, silently
 api.on('event', e => {
   lastInteract = performance.now(); wake();
   switch (e.kind) {
@@ -400,12 +417,24 @@ function renderHud() {
     `<span class="chip ${a.phase}" title="${a.phase} since ${ago(Date.now() - a.since)}">${esc(a.name)}${a.phase === 'waiting' ? ' · your move' : a.phase === 'stalled' ? ' · stuck?' : a.phase === 'ready' ? ' · done' : ''}</span>`).join('');
   renderRoster();
 }
-// the question in the pill: what each waiting/stuck/finished agent wants, shown only while the pill is open
+// the question in the pill: what each waiting/stuck/finished agent wants, shown only while the pill is open.
+// agents fanned out to subagents follow, with a static gauge: filled pip = child done, hollow = still running
 function renderRoster() {
-  $('roster').innerHTML = pending(true).slice(0, 4).map(a => { const sig = SIG[a.phase]; return `<button data-id="${esc(a.id)}">` +
+  const rows = pending(true), has = new Set(rows.map(a => a.id));
+  rows.push(...(snap?.agents || []).filter(a => a.phase === 'working' && a.fanout?.open > 0 && !has.has(a.id)));
+  $('roster').innerHTML = rows.slice(0, 4).map(a => { const sig = SIG[a.phase], fo = a.fanout; return `<button data-id="${esc(a.id)}"${fo ? ` title="${esc(foTitle(fo))}"` : ''}>` +
     `<i style="background:${LED[sig]}"></i><b>${esc(a.title || a.name)}</b><time>${ago(Date.now() - a.since)}</time>` +
-    `<span>${esc(noteFor(a.id) || a.ask || (sig === 'needs' ? 'has a question' : sig === 'stuck' ? 'needs approval' : 'done'))}</span></button>`; }).join('');
+    `<span>${fo ? foPips(fo, LED[sig]) : ''}${esc(noteFor(a.id) || (sig === 'running' ? [`${fo.open} running`, fo.items.filter(k => k.open).map(k => k.desc).filter(Boolean).join(', ')].filter(Boolean).join(': ') : a.ask) ||
+      (sig === 'needs' ? 'has a question' : sig === 'stuck' ? 'needs approval' : 'done'))}</span></button>`; }).join('');
   rosterShow();
+}
+function foPips(fo, c) {
+  const o = Math.min(fo.open, 8), d = Math.min(fo.done, 8 - o), more = fo.total - d - o;   // running pips first: they're the news
+  return `<em style="color:${c}">${'<u class="f"></u>'.repeat(d)}${'<u></u>'.repeat(o)}${more > 0 ? `<small>+${more}</small>` : ''}</em>`;
+}
+function foTitle(fo) {
+  const descs = fo.items.map(k => k.desc).filter(Boolean).join(', ');
+  return [`${fo.done} of ${fo.total} subagents done`, fo.open && fo.oldestOpenAt && `oldest running ${Math.max(1, Math.round((Date.now() - fo.oldestOpenAt) / 60000))}m`, descs].filter(Boolean).join(' · ');
 }
 // a failed jump's note shows in the row itself: the roster hides the bubble while the pill is open
 const notes = new Map();
