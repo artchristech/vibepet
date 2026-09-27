@@ -44,6 +44,7 @@ const SPR = {
 
 // ================= particles =================
 function spawn(kind, n, o = {}) {
+  if (!snap?.animations && !exiting) return;
   for (let i = 0; i < n; i++) parts.push({
     kind, x: o.x ?? rand(16, 40), y: o.y ?? rand(14, 24),
     vx: rand(-0.35, 0.35) * (o.spread ?? 1), vy: -rand(0.25, 0.7) * (o.up ?? 1),
@@ -69,12 +70,10 @@ const CONFETTI = ['#7ef0c1', '#ffcf3f', '#ff7ab0', '#8b7bff', '#8fd3ff', '#fff']
 function agentsIn(phase) { return (snap?.agents || []).filter(a => a.phase === phase); }
 function baseState(now) {
   if (!snap) return 'idle';
-  if (agentsIn('waiting').length) return 'alert';
+  if (agentsIn('waiting').some(a => Date.now() - a.since < 8000)) return 'alert';
   if (agentsIn('stalled').length) return 'stalled';
-  const lines = snap.git?.lines || 0;
-  if (lines > 1200) return 'panic';
   if (agentsIn('working').length) return 'working';
-  if (snap.fuel < 20) return 'hungry';
+  if (snap.game && snap.fuel < 20) return 'hungry';
   const late = snap.hour >= 1 && snap.hour < 6;
   if ((late || now - lastInteract > 15 * 60e3) && !hovering && !chatOpen) return 'sleeping';
   return 'idle';
@@ -85,10 +84,10 @@ const EX = { open: 300, antic: 380, hop: 600, fall: 950, close: 1300, done: 1380
 function startExit() {
   if (exiting) return;
   exiting = { start: performance.now(), poofed: false };
-  closeChat(); $('hud').classList.remove('show');
+  closeChat(); $('hud').classList.remove('show'); $('hud').classList.add('gone');
   say('bye! 👋', { prio: true, ms: 900 });
 }
-function transient(kind, ms) { anim = { kind, until: performance.now() + ms, start: performance.now() }; }
+function transient(kind, ms) { if (!snap?.animations) return; anim = { kind, until: performance.now() + ms, start: performance.now() }; }
 
 // ================= drawing =================
 let nextBlink = 0, blinkUntil = 0, emitT = {};
@@ -98,8 +97,9 @@ function draw(now) {
   const t = now / 1000;
   let st = anim.kind && now < anim.until ? anim.kind : baseState(now);
   const ex = exiting ? now - exiting.start : -1;
+  if (!snap?.animations && st !== 'sleeping') st = 'still';
   if (ex >= 0) st = ex < EX.antic ? 'idle' : ex < EX.hop ? 'love' : 'exitfall';
-  const lvl = snap?.level || 1;
+  const lvl = snap?.game ? snap.level : 1;
   ctx.setTransform(S, 0, 0, S, 0, 0);
   ctx.clearRect(0, 0, GW, GH);
 
@@ -114,10 +114,10 @@ function draw(now) {
     case 'celebrate': case 'levelup': hop(2.2, 9); break;
     case 'love': hop(1.6, 3); break;
     case 'poke': ry -= Math.round(Math.max(0, 1 - (now - anim.start) / 200) * 2); rx += ry < 11 ? 1 : 0; break;
-    case 'panic': cx += Math.round(Math.sin(t * 45) * 0.8); break;
     case 'sleeping': ry += Math.sin(t * 1.3) > 0 ? 0 : -1; rx += Math.sin(t * 1.3) > 0 ? 0 : 1; break;
     case 'working': bob = Math.round(Math.sin(t * 7) * 0.5); break;
     case 'hungry': bob = 1; ry -= 1; rx += 1; break;
+    case 'still': break;
     default: bob = Math.round(Math.sin(t * 2.2) * 0.7);
   }
   if (ex >= 0) {
@@ -145,14 +145,12 @@ function draw(now) {
     if (ex > EX.done) { exiting = 'done'; api.exitDone(); }
     ctx.save(); ctx.beginPath(); ctx.rect(0, 0, GW, 47); ctx.clip();
   } else {
-    // ground shadow
-    const sw = Math.max(6, 12 + Math.round(bob / 2));
-    ell(28, 47, sw, 1.6, () => 'rgba(0,0,0,.18)');
+    // ground shadow is the #hud pill (see style.css)
   }
 
   // colors — hungry pets go pale
-  const fuel = snap?.fuel ?? 80;
-  const hue = st === 'panic' ? 150 : 158, sat = Math.round(35 + fuel * 0.45);
+  const fuel = snap?.game ? snap.fuel : 80;
+  const hue = 158, sat = Math.round(35 + fuel * 0.45);
   const C = { base: `hsl(${hue} ${sat}% 66%)`, shade: `hsl(${hue + 12} ${sat}% 50%)`, light: `hsl(${hue - 8} ${sat}% 86%)` };
 
   // feet (wiggle when happy)
@@ -179,7 +177,7 @@ function draw(now) {
   const top = cy - ry;
   dots(cx, top, [[0,-1],[0,-2],[1,-3]], OUT);
   let led = '#59607a';
-  if (agentsIn('waiting').length) led = Math.floor(t * 3) % 2 ? '#ffcf3f' : '#7a5f10';
+  if (agentsIn('waiting').length) led = '#ffcf3f';
   else if (agentsIn('stalled').length) led = Math.floor(t * 2) % 2 ? '#ff5c6c' : '#6b1f27';
   else if (agentsIn('working').length) led = `hsl(152 90% ${55 + Math.sin(t * 5) * 15}%)`;
   rect(cx, top - 6, 3, 3, OUT); rect(cx + 1, top - 5, 1, 1, led);
@@ -198,13 +196,13 @@ function draw(now) {
 
   if (now > nextBlink) { blinkUntil = now + 110; nextBlink = now + rand(2500, 5500); }
   const blink = now < blinkUntil;
-  const shades = lvl >= 5 && hovering && !['sleeping', 'panic', 'alert'].includes(st);
+  const shades = lvl >= 5 && hovering && !['sleeping', 'alert'].includes(st);
 
   for (const ex of [exL, exR]) {
     if (shades) continue;
     if (st === 'sleeping') rect(ex, ey + 2, 3, 1, OUT);
     else if (happy) dots(ex, ey, [[0,2],[1,1],[2,2]], OUT);
-    else if (st === 'panic' || st === 'stalled') { rect(ex - 1, ey, 4, 4, OUT); rect(ex, ey + 1, 2, 2, '#fff'); if (st === 'panic') rect(ex + (Math.floor(t * 8) % 2), ey + 1, 1, 1, OUT); }
+    else if (st === 'stalled') { rect(ex - 1, ey, 4, 4, OUT); rect(ex, ey + 1, 2, 2, '#fff'); }
     else if (st === 'alert' || st === 'exitfall') { rect(ex - 1, ey - 1, 3, 4, OUT); rect(ex - 1, ey - 1, 1, 1, '#fff'); }
     else if (blink) rect(ex, ey + 2, 2, 1, OUT);
     else if (st === 'hungry') { rect(ex, ey + 1, 2, 2, OUT); rect(ex - 1, ey, 4, 1, C.shade); }
@@ -220,7 +218,7 @@ function draw(now) {
   if (st === 'working') { /* hidden behind laptop */ }
   else if (st === 'eat') { if (Math.floor(t * 7) % 2) rect(mx - 1, my, 4, 3, OUT); else rect(mx - 1, my + 1, 4, 1, OUT); }
   else if (st === 'alert' || st === 'levelup' || st === 'exitfall') { rect(mx, my, 3, 3, OUT); rect(mx + 1, my + 1, 1, 1, '#ff7ab0'); }
-  else if (st === 'panic' || st === 'stalled') dots(mx - 1, my + 1, [[0,1],[1,0],[2,1],[3,0],[4,1]], OUT);
+  else if (st === 'stalled') dots(mx - 1, my + 1, [[0,1],[1,0],[2,1],[3,0],[4,1]], OUT);
   else if (st === 'sleeping') rect(mx + 1, my + 1, 1, 1, OUT);
   else if (st === 'hungry') dots(mx - 1, my + 1, [[0,1],[1,0],[2,0],[3,1]], OUT);
   else dots(mx - 1, my, [[0,0],[1,1],[2,1],[3,0]], OUT);
@@ -241,7 +239,6 @@ function draw(now) {
 
   // ambient emitters
   if (st === 'sleeping' && every('z', 1600, now)) spawn('z', 1, { x: cx + 9, y: top, up: 0.4, spread: 0.3, colors: ['#c7d0ff'], fast: 0.6 });
-  if ((st === 'panic' || (snap?.git?.lines || 0) > 400) && st !== 'sleeping' && every('drop', 900, now)) spawn('drop', 1, { x: cx + pick([-11, 10]), y: cy - 6, up: -0.3, g: 0.03 });
   if (st === 'working' && every('note', 3000, now)) spawn('note', 1, { x: cx - 12, y: top + 2, up: 0.4, colors: ['#7ef0c1', '#8fd3ff'], fast: 0.7 });
   if (happy && every('spark', 120, now)) spawn('spark', 3, { x: cx + rand(-12, 12), y: cy - 10, colors: CONFETTI, up: 1.4, g: 0.04 });
   if (lvl >= 3 && st === 'idle' && every('trail', 2500, now)) spawn('spark', 2, { x: cx + rand(-14, 14), y: cy + rand(-6, 8), up: 0.2, colors: ['#fff', '#c7fff0'], fast: 1.5 });
@@ -300,23 +297,19 @@ const LINES = {
   idle: ['vibes: immaculate', 'ship it?', 'I believe in you. and your agent.', 'read the diff. or don\'t. I\'m a pet, not a cop.', 'what are we building next?', 'the best prompt is a specific prompt', '*stares at your cursor*'],
   working: a => [`${a} is cooking 🔥`, `watching ${a} type is my favorite show`, `${a}'s on it. stretch your legs?`, `shh… ${a} is thinking`],
   hungry: ['feed me a commit 🥺', '*stomach growls in merge conflict*', 'running on fumes. git commit pls'],
-  lines: (n, r) => [`${n} lines uncommitted in ${r}. one commit and I'd feel safer`, `that diff is getting chonky (${n} lines)`],
-  stale: m => [`last commit was ${m} min ago. save point?`],
   night: h => [`it's ${h}am. the bugs are more confident at night.`, 'sleep is a performance optimization'],
 };
 let nextChatter = performance.now() + 25000;
 setInterval(() => {
   const now = performance.now();
-  if (!snap || now < nextChatter || bubbleBusy || chatOpen) return;
+  if (!snap?.game || now < nextChatter || bubbleBusy || chatOpen) return;
   nextChatter = now + rand(3, 7) * 60e3;
   const st = baseState(now);
   if (st === 'sleeping' || st === 'alert') return;
-  const g = snap.git, working = agentsIn('working')[0];
+  const working = agentsIn('working')[0];
   let pool = LINES.idle;
   if (working) pool = LINES.working(working.name);
   if (snap.fuel < 25) pool = LINES.hungry;
-  else if (g?.lines > 250) pool = LINES.lines(g.lines, g.name);
-  else if (g?.lines > 0 && g.lastCommitAt && Date.now() - g.lastCommitAt > 90 * 60e3) pool = LINES.stale(Math.round((Date.now() - g.lastCommitAt) / 60e3));
   else if (snap.hour >= 1 && snap.hour < 5) pool = LINES.night(snap.hour);
   say(pick(pool));
 }, 15000);
@@ -342,8 +335,6 @@ api.on('event', e => {
       spawn('spark', 30, { x: 28, y: 22, spread: 3, up: 2, g: 0.05, colors: CONFETTI }); say(e.text, { prio: true }); tune([523, 659, 784, 1047], 80); break;
     case 'levelup': transient('levelup', 3500); spawn('spark', 60, { x: 28, y: 20, spread: 4, up: 2.5, g: 0.05, colors: CONFETTI });
       say(e.text, { prio: true, ms: 7000 }); tune([523, 659, 784, 1047, 784, 1047, 1319], 110); break;
-    case 'quick': transient('love', 1500); spawn('heart', 3, { colors: ['#ff5c8a'] }); say(e.text); blip(1200, 0.12); break;
-    case 'nervous': case 'panic': say(e.text, { prio: e.kind === 'panic', alert: e.kind === 'panic', ms: 7000 }); break;
     case 'snack': transient('eat', 1200); say(e.text); break;
     case 'snackNo': case 'night': say(e.text); break;
     case 'openChat': openChat(); break;
@@ -358,23 +349,22 @@ const ago = ms => { const m = Math.round(ms / 60000); return m < 1 ? 'just now' 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 function renderHud() {
   if (!snap) return;
+  $('hud').classList.toggle('nogame', !snap.game);
   $('hudName').textContent = snap.name;
   $('hudLvl').textContent = `Lv${snap.level}`;
-  $('hudStreak').textContent = snap.streak ? `🔥${snap.streak}` : '';
   $('barXp').style.width = `${Math.round(100 * (snap.xp - snap.xpLo) / (snap.xpHi - snap.xpLo))}%`;
   $('barFuel').style.width = `${snap.fuel}%`;
   $('barMood').style.width = `${snap.mood}%`;
   const g = snap.git;
   if (g?.root) {
-    const cls = g.lines > 1200 ? 'bad' : g.lines > 400 ? 'warn' : '';
-    $('hudRepo').innerHTML = `⎇ <b>${esc(g.name)}</b>${g.branch ? '/' + esc(g.branch) : ''} · <span class="${cls}">±${g.lines}</span> in ${g.files}f${g.untracked ? ` +${g.untracked}new` : ''} · ${g.lastCommitAt ? ago(Date.now() - g.lastCommitAt) : 'no commits'}`;
+    $('hudRepo').innerHTML = `⎇ <b>${esc(g.name)}</b>${g.branch ? '/' + esc(g.branch) : ''} · ±${g.lines} in ${g.files}f${g.untracked ? ` +${g.untracked}new` : ''} · ${g.lastCommitAt ? ago(Date.now() - g.lastCommitAt) : 'no commits'}`;
   } else $('hudRepo').textContent = g?.dir ? `${g.dir.split('/').pop()} isn't a git repo` : 'no repo — start an agent or right-click → watch';
   $('hudAgents').innerHTML = (snap.agents || []).slice(0, 6).map(a =>
     `<span class="chip ${a.phase}" title="${a.phase} since ${ago(Date.now() - a.since)}">${esc(a.name)}${a.phase === 'waiting' ? ' · your move' : a.phase === 'stalled' ? ' · stuck?' : ''}</span>`).join('');
 }
 
 // ================= mouse: click-through, drag, click =================
-let ignoring = true, hudTimer;
+let ignoring = true;
 const setIgnore = v => { if (v !== ignoring) { ignoring = v; api.setIgnore(v); } };
 function petPixelHit(e) {
   const r = cv.getBoundingClientRect();
@@ -384,11 +374,56 @@ function petPixelHit(e) {
   }
   return false;
 }
-function showHud(on) {
-  clearTimeout(hudTimer);
-  if (on) { $('hud').classList.add('show'); hovering = true; lastInteract = performance.now(); }
-  else hudTimer = setTimeout(() => { $('hud').classList.remove('show'); hovering = false; }, 900);
+// ---- hud reveal: a critically-damped spring toward an intent target (distance + approach prediction)
+let hoverHit = false;
+function showHud(on) { hoverHit = on; }
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const W = reduceMotion ? 40 : 22;            // spring angular freq; ζ = 1 (no overshoot)
+const NEAR = 24, FAR = 120, GRACE = 200, TTA = 0.25;
+let rp = 0, rv = 0, vel = { x: 0, y: 0 }, lastCur = null, wantUntil = 0, lastFrame = performance.now();
+const clamp01 = v => Math.max(0, Math.min(1, v));
+const smooth = v => (v = clamp01(v), v * v * (3 - 2 * v));
+function zoneRect() {           // pet body + full-size pill, in window coords (pill measured untransformed)
+  const c = cv.getBoundingClientRect(), h = $('hud');
+  return { l: Math.min(c.left + 44, h.offsetLeft), r: Math.max(c.right - 44, h.offsetLeft + h.offsetWidth),
+           t: c.top + 56, b: h.offsetTop + h.offsetHeight };
 }
+function hudTarget(now, dt) {
+  if (dragging || chatOpen || exiting) return 0;
+  // smoothed cursor velocity (px/s)
+  if (lastCur && dt > 0) {
+    const k = 1 - Math.exp(-dt / 0.06);
+    vel.x += ((cursor.x - lastCur.x) / dt - vel.x) * k; vel.y += ((cursor.y - lastCur.y) / dt - vel.y) * k;
+  }
+  lastCur = { ...cursor };
+  const z = zoneRect(), nx = Math.max(z.l, Math.min(z.r, cursor.x)), ny = Math.max(z.t, Math.min(z.b, cursor.y));
+  const dx = cursor.x - nx, dy = cursor.y - ny, d = Math.hypot(dx, dy);
+  let want = 1 - smooth((d - NEAR) / (FAR - NEAR));
+  if (d > NEAR) {
+    const vr = -(vel.x * dx + vel.y * dy) / d;                 // closing speed toward the zone
+    const vt = Math.sqrt(Math.max(0, vel.x ** 2 + vel.y ** 2 - vr * vr));
+    if (vr > 60 && (d - NEAR) / vr < TTA) want = Math.max(want, 1);           // arriving soon: pre-expand
+    else if (vt > 700 && vr < vt * 0.5) want *= 0.3;                           // just passing by
+    else if (vr < -150) want *= 0.5;                                           // heading away
+  }
+  if (hoverHit || (rp > 0.5 && d < NEAR * 2.5)) want = 1;                     // hysteresis: stay open in zone
+  if (want > 0.9) wantUntil = now + GRACE;
+  else if (now < wantUntil) want = 1;                                          // grace before collapsing
+  return want;
+}
+function hudFrame(now) {
+  const dt = Math.min(0.05, (now - lastFrame) / 1000); lastFrame = now;
+  const target = hudTarget(now, dt);
+  for (let i = 0, h = dt / 4; i < 4; i++) { rv += (W * W * (target - rp) - 2 * W * rv) * h; rp += rv * h; }
+  if (Math.abs(target - rp) < 0.001 && Math.abs(rv) < 0.01) { rp = target; rv = 0; }
+  const p = clamp01(rp), a = smooth((p - 0.55) / 0.45), hud = $('hud');
+  hud.style.setProperty('--p', p.toFixed(4)); hud.style.setProperty('--a', a.toFixed(4));
+  hud.classList.toggle('live', p > 0.6);
+  const was = hovering; hovering = p > 0.5;
+  if (hovering && !was) lastInteract = now;
+  requestAnimationFrame(hudFrame);
+}
+requestAnimationFrame(hudFrame);
 document.addEventListener('mousemove', e => {
   if (dragging) return;
   const el = document.elementFromPoint(e.clientX, e.clientY);
@@ -432,6 +467,7 @@ function poke() {
 }
 
 $('btnChat').onclick = () => openChat();
+$('hud').addEventListener('mouseover', () => { $('hud').title = [$('hudName').textContent, $('hudRepo').textContent, $('hudAgents').textContent && 'agents: ' + [...$('hudAgents').children].map(c => c.textContent).join(', ')].filter(Boolean).join('\n'); });
 $('btnMenu').onclick = () => api.menu();
 
 // ================= chat =================

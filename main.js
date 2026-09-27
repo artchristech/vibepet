@@ -14,9 +14,9 @@ if (!app.requestSingleInstanceLock()) app.quit();
 
 // ---------- state ----------
 const DEFAULTS = {
-  name: 'Net', xp: 0, fuel: 80, mood: 70, commits: 0, quickDraws: 0, commitDays: [],
+  name: 'Net', xp: 0, fuel: 80, mood: 70, commits: 0, quickDraws: 0,
   repo: null, pos: null, model: 'claude-sonnet-5', keyEnc: null, keyPlain: null,
-  muted: false, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
+  muted: false, onTop: true, animations: false, game: false, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
 };
 let state, saveTimer, win, sessionKey = null;
 const statePath = () => path.join(app.getPath('userData'), 'state.json');
@@ -38,22 +38,13 @@ const clamp = v => Math.max(0, Math.min(100, v));
 const levelFor = xp => Math.floor(Math.sqrt(xp / 40)) + 1; // L2=40, L3=160, L4=360, L5=640…
 const xpForLevel = l => 40 * (l - 1) ** 2;
 const UNLOCKS = { 2: 'blush', 3: 'sparkle trail', 4: 'headphones', 5: 'shades (hover me)', 7: 'crown' };
-const dayKey = (d = new Date()) => d.toLocaleDateString('en-CA');
-
-function streak() {
-  const days = new Set(state.commitDays);
-  const d = new Date();
-  if (!days.has(dayKey(d))) d.setDate(d.getDate() - 1);
-  let n = 0;
-  while (days.has(dayKey(d))) { n++; d.setDate(d.getDate() - 1); }
-  return n;
-}
 
 function decay() {
   const now = Date.now();
   const min = Math.min(240, (now - state.lastDecay) / 60000);
   if (min < 0.25) return;
   state.lastDecay = now;
+  if (!state.game) return;
   state.fuel = clamp(state.fuel - min / 3);               // empty in ~5h without commits
   state.mood = clamp(state.mood + (state.fuel < 25 ? -min / 2 : (55 - state.mood) * 0.01 * min));
 }
@@ -73,6 +64,23 @@ function emit(kind, text, { notify = false, ...extra } = {}) {
   if (notify && !state.muted && Notification.isSupported()) {
     new Notification({ title: state.name, body: text, silent: false }).show();
   }
+}
+
+// batch "finished" OS notifications: at most one per 20s
+const DONE_GAP = 20000;
+let doneQueue = [], doneTimer = null, lastDoneNote = 0;
+function queueDone(name) {
+  if (!doneQueue.includes(name)) doneQueue.push(name);
+  if (doneTimer) return;
+  doneTimer = setTimeout(flushDone, Math.max(0, lastDoneNote + DONE_GAP - Date.now()));
+}
+function flushDone() {
+  doneTimer = null;
+  const names = doneQueue; doneQueue = [];
+  if (!names.length || state.muted || !Notification.isSupported()) return;
+  lastDoneNote = Date.now();
+  const who = names.length > 2 ? `${names.length} agents` : names.join(', ');
+  new Notification({ title: state.name, body: `${who} finished — your move!`, silent: false }).show();
 }
 
 // ---------- claude code sessions ----------
@@ -111,9 +119,9 @@ function classify(file, mtimeMs) {
     cwd = d.cwd || cwd;
     if (d.type === 'assistant') {
       const m = d.message || {};
-      if ((m.content || []).some(c => c.type === 'tool_use')) return { phase: idle > 25000 ? 'stalled' : 'working', cwd };
+      if ((m.content || []).some(c => c.type === 'tool_use')) return { phase: idle > 90000 ? 'stalled' : 'working', cwd };
       if (['end_turn', 'stop_sequence', 'max_tokens'].includes(m.stop_reason)) {
-        return { phase: idle > 15 * 60e3 ? 'parked' : 'waiting', cwd };
+        return { phase: idle > 5 * 60e3 ? 'parked' : 'waiting', cwd };
       }
       return { phase: 'working', cwd };
     }
@@ -154,15 +162,10 @@ function scanAgents() {
 
 function transition(name, prev, phase, now) {
   if (phase === 'waiting' && (prev.phase === 'working' || prev.phase === 'stalled')) {
-    emit('agentDone', `${name} finished — your move!`, { notify: true, agent: name });
+    emit('agentDone', `${name} finished — your move!`, { agent: name });
+    queueDone(name);
   } else if (phase === 'stalled' && prev.phase === 'working') {
-    emit('agentStalled', `${name} has gone quiet on a tool call. Needs your approval?`, { notify: true, agent: name });
-  } else if (phase === 'working' && prev.phase === 'waiting') {
-    const secs = (now - prev.since) / 1000;
-    if (secs < 60) {
-      state.quickDraws++; state.mood = clamp(state.mood + 3); gainXP(4);
-      emit('quick', `Quick draw! Replied to ${name} in ${Math.round(secs)}s. +4xp`);
-    }
+    emit('agentStalled', `${name} has gone quiet on a tool call. Needs your approval?`, { agent: name });
   }
 }
 
@@ -171,7 +174,6 @@ const git = (cwd, args) => new Promise(res =>
   execFile('git', args, { cwd, timeout: 5000, maxBuffer: 8e6 }, (e, out) => res(e ? null : out.trimEnd())));
 
 const heads = new Map();      // root -> sha
-const diffLevel = new Map();  // root -> 0/1/2 (calm / nervous / panic)
 const rootCache = new Map();  // dir -> root|null
 let gitInfo = null;
 
@@ -186,7 +188,10 @@ async function rootOf(dir) {
 async function scanGit(agents) {
   const roots = new Set();
   for (const a of agents) { const r = await rootOf(a.cwd); if (r) roots.add(r); }
-  const focusDir = state.repo || agents[0]?.cwd || gitInfo?.root;
+  // auto-focus is sticky: only move off the current repo once no live agent is working in it
+  const live = agents.filter(a => a.phase !== 'parked'), cur = gitInfo?.root;
+  const stick = cur && (!live.length || live.some(a => a.cwd === cur || a.cwd?.startsWith(cur + path.sep)));
+  const focusDir = state.repo || (stick ? cur : live[0]?.cwd || agents[0]?.cwd) || cur;
   const focus = await rootOf(focusDir);
   if (focus) roots.add(focus);
 
@@ -223,24 +228,14 @@ async function scanGit(agents) {
     untracked: untracked ? untracked.split('\n').filter(Boolean).length : 0,
     lastCommitAt: ct ? +ct * 1000 : null, lastSubject: subj.join('\t'),
   };
-
-  const lvl = lines > 1200 ? 2 : lines > 400 ? 1 : 0;
-  const was = diffLevel.get(focus);
-  diffLevel.set(focus, lvl);
-  if (was !== undefined && lvl > was) {
-    emit(lvl === 2 ? 'panic' : 'nervous', lvl === 2
-      ? `${lines} uncommitted lines in ${gitInfo.name}. One bad agent turn and it's gone. COMMIT.`
-      : `${lines} lines uncommitted in ${gitInfo.name}… save point?`, { notify: lvl === 2 });
-  }
 }
 
 function onCommit(repo, subject, lines) {
   const xp = 10 + Math.min(40, Math.round(lines / 25));
   state.commits++;
+  if (!state.game) return;
   state.fuel = clamp(state.fuel + 30);
   state.mood = clamp(state.mood + 8);
-  const today = dayKey();
-  if (!state.commitDays.includes(today)) state.commitDays = [...state.commitDays, today].slice(-400);
   emit('commit', `nom! "${subject.slice(0, 60)}" +${xp}xp`, { repo });
   gainXP(xp);
 }
@@ -269,9 +264,9 @@ function snapshot() {
   const level = levelFor(state.xp);
   return {
     name: state.name, level, xp: state.xp, xpLo: xpForLevel(level), xpHi: xpForLevel(level + 1),
-    fuel: state.fuel, mood: state.mood, commits: state.commits, quickDraws: state.quickDraws, streak: streak(),
+    fuel: state.fuel, mood: state.mood, commits: state.commits,
     agents: agents.map(a => ({ name: a.name, phase: a.phase, since: a.since })),
-    git: gitInfo, muted: state.muted, hasKey: hasKey(), hour: new Date().getHours(),
+    git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto',
   };
 }
@@ -312,7 +307,7 @@ function agentTranscript(s, n = 4) {
 async function buildContext(mode) {
   const g = gitInfo;
   const parts = [
-    `Pet stats: level ${levelFor(state.xp)}, fuel ${Math.round(state.fuel)}/100, mood ${Math.round(state.mood)}/100, commit streak ${streak()} days, total commits witnessed ${state.commits}.`,
+    state.game && `Pet stats: level ${levelFor(state.xp)}, fuel ${Math.round(state.fuel)}/100, mood ${Math.round(state.mood)}/100, total commits witnessed ${state.commits}.`,
     `Local time: ${new Date().toLocaleString()}.`,
     `Agents: ${agents.length ? agents.map(a => `${a.name}=${a.phase} for ${Math.round((Date.now() - a.since) / 1000)}s`).join(', ') : 'none active'}.`,
   ];
@@ -328,7 +323,7 @@ async function buildContext(mode) {
     }
   } else parts.push('Repo: none detected.');
   if (mode === 'agent' || mode === 'next') parts.push('Latest agent transcript:\n' + agentTranscript(agents[0]));
-  return parts.join('\n\n');
+  return parts.filter(Boolean).join('\n\n');
 }
 
 const SYSTEM = name => `You are ${name}, a tiny pixel creature who lives on the desktop of a "vibe coder" — someone who builds software mostly by directing AI coding agents like Claude Code. You watch their agents and their git repo. You eat commits (that's literally how you're fed).
@@ -377,10 +372,10 @@ function createWindow() {
   if (!onScreen) pos = { x: workArea.x + workArea.width - W - 24, y: workArea.y + workArea.height - H };
   win = new BrowserWindow({
     width: W, height: H, x: pos.x, y: pos.y, frame: false, transparent: true, resizable: false,
-    hasShadow: false, alwaysOnTop: true, skipTaskbar: true, fullscreenable: false, backgroundColor: '#00000000',
+    hasShadow: false, alwaysOnTop: state.onTop, skipTaskbar: true, fullscreenable: false, backgroundColor: '#00000000',
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false },
   });
-  win.setAlwaysOnTop(true, 'floating');
+  win.setAlwaysOnTop(state.onTop, 'floating');
   win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   win.setIgnoreMouseEvents(true, { forward: true });
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
@@ -391,15 +386,16 @@ function createWindow() {
     if (win.isDestroyed()) return;
     const p = screen.getCursorScreenPoint(), [x, y] = win.getPosition();
     win.webContents.send('cursor', { x: p.x - x, y: p.y - y });
-  }, 60);
+  }, 16);
 }
 
 let drag = null;
-ipcMain.on('set-ignore', (_, v) => win.setIgnoreMouseEvents(v, { forward: true }));
+ipcMain.on('set-ignore', (_, v) => !win.isDestroyed() && win.setIgnoreMouseEvents(v, { forward: true }));
 ipcMain.on('drag-start', () => {
   const c = screen.getCursorScreenPoint(), [x, y] = win.getPosition();
   clearInterval(drag?.timer);
   drag = { cx: c.x, cy: c.y, x, y, timer: setInterval(() => {
+    if (!win || win.isDestroyed()) return clearInterval(drag?.timer);
     const p = screen.getCursorScreenPoint();
     win.setPosition(drag.x + p.x - drag.cx, drag.y + p.y - drag.cy);
   }, 16) };
@@ -420,7 +416,7 @@ ipcMain.on('pet', () => {
 ipcMain.on('menu', () => {
   const g = gitInfo;
   Menu.buildFromTemplate([
-    { label: `${state.name} · Lv ${levelFor(state.xp)} · ${state.xp}xp`, enabled: false },
+    { label: state.game ? `${state.name} · Lv ${levelFor(state.xp)} · ${state.xp}xp` : state.name, enabled: false },
     { label: g?.root ? `Watching ${g.name}${state.repo ? '' : ' (following your agent)'}` : 'No repo yet — start an agent or pick one', enabled: false },
     { type: 'separator' },
     { label: 'Chat…', click: () => emit('openChat') },
@@ -430,12 +426,15 @@ ipcMain.on('menu', () => {
     } },
     { label: 'Follow my active agent (auto)', type: 'checkbox', checked: !state.repo, click: () => { state.repo = null; save(); tick(); } },
     { type: 'separator' },
-    { label: 'Toss a snack', click: () => {
+    { label: 'Toss a snack', visible: state.game, click: () => {
       if (Date.now() - state.lastSnack < 30 * 60e3) return emit('snackNo', 'snacks are nice but I run on commits. (one snack per 30 min)');
       state.lastSnack = Date.now(); state.fuel = clamp(state.fuel + 10); save(); emit('snack', 'crunch. thanks! (commits are the real meal though)');
     } },
     { label: 'Open at login', type: 'checkbox', checked: app.getLoginItemSettings().openAtLogin, click: m => app.setLoginItemSettings({ openAtLogin: m.checked }) },
     { label: 'Mute notifications', type: 'checkbox', checked: state.muted, click: m => { state.muted = m.checked; save(); tick(); } },
+    { label: 'Game mode (XP, hunger, levels)', type: 'checkbox', checked: state.game, click: m => { state.game = m.checked; state.lastDecay = Date.now(); save(); tick(); } },
+    { label: 'Animations', type: 'checkbox', checked: state.animations, click: m => { state.animations = m.checked; save(); tick(); } },
+    { label: 'Keep on top', type: 'checkbox', checked: state.onTop, click: m => { state.onTop = m.checked; win.setAlwaysOnTop(m.checked, 'floating'); save(); } },
     { label: 'Model', submenu: ['claude-sonnet-5', 'claude-opus-5-5', 'claude-haiku-4-5-20251001'].map(m => ({
       label: m, type: 'radio', checked: state.model === m, click: () => { state.model = m; save(); } })) },
     { label: hasKey() ? 'Change API key…' : 'Set Anthropic API key…', click: () => emit('openKey') },
