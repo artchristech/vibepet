@@ -21,6 +21,7 @@
     "productName": "vibepet",
     "files": [
       "main.js",
+      "agents.js",
       "preload.js",
       "renderer/**",
       "package.json"

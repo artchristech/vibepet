@@ -1,0 +1,62 @@
+{
+  "states": {
+    "01-idle": {
+      "ok": true
+    },
+    "02-hud-half": {
+      "ok": true
+    },
+    "03-hud-full": {
+      "ok": true
+    },
+    "04-hud-aim": {
+      "ok": true
+    },
+    "05-working": {
+      "ok": true
+    },
+    "06-waiting": {
+      "ok": true
+    },
+    "07-stalled": {
+      "ok": true
+    },
+    "08-agents-mixed": {
+      "ok": true
+    },
+    "09-sleeping": {
+      "ok": true
+    },
+    "10-bubble-done": {
+      "ok": true
+    },
+    "11-bubble-stalled": {
+      "ok": true
+    },
+    "12-chat": {
+      "ok": true
+    },
+    "13-chat-convo": {
+      "ok": true
+    },
+    "14-chat-nokey": {
+      "ok": true
+    },
+    "15-game-anim-on": {
+      "ok": true
+    },
+    "16-roster-needs": {
+      "ok": true
+    },
+    "17-roster-none": {
+      "ok": true
+    }
+  },
+  "userData": "/var/folders/gx/48qp82w15gsgjnh5g7qgvs9h0000gn/T/designpass-ud-6tNar1",
+  "userDataSeenByApp": "/private/var/folders/gx/48qp82w15gsgjnh5g7qgvs9h0000gn/T/designpass-ud-6tNar1",
+  "idle": {
+    "cpuPercent": 0.6,
+    "memMB": 274,
+    "processes": 4
+  }
+}

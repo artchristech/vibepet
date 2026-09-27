@@ -73,7 +73,8 @@ const CONFETTI = ['#7ef0c1', '#ffcf3f', '#ff7ab0', '#8b7bff', '#8fd3ff', '#fff']
 const seenReady = new Set(), rkey = a => a.name + '@' + a.since;
 const unseen = a => !(a.phase === 'ready' && seenReady.has(rkey(a)));
 function agentsIn(phase) { return (snap?.agents || []).filter(a => a.phase === phase && unseen(a)); }
-function markSeen() { const r = agentsIn('ready'); for (const a of r) seenReady.add(rkey(a)); if (r.length) { renderHud(); wake(); } }
+const heldReady = new Set();   // ready rows seen by this hover stay in the roster until the pill closes
+function markSeen() { const r = agentsIn('ready'); for (const a of r) { seenReady.add(rkey(a)); heldReady.add(rkey(a)); } if (r.length) { renderHud(); wake(); } }
 function baseState(now) {
   if (!snap) return 'idle';
   if (agentsIn('waiting').some(a => Date.now() - a.since < 8000)) return 'alert';
@@ -90,6 +91,11 @@ function baseState(now) {
 const SIG = { waiting: 'needs', stalled: 'stuck', ready: 'ready', working: 'running' }, RANK = ['needs', 'stuck', 'ready', 'running'];
 function agentSignals() { return (snap?.agents || []).filter(a => SIG[a.phase] && unseen(a)).map(a => SIG[a.phase]).sort((a, b) => RANK.indexOf(a) - RANK.indexOf(b)); }
 const LED = { needs: '#ffcf3f', stuck: '#ff5c6c', ready: '#9ff5d6', running: '#3fe08f', none: '#8a93b8' };
+// agents that want you, most urgent first (needs > stuck > ready), oldest first within a rank
+function pending(held) {
+  return (snap?.agents || []).filter(a => SIG[a.phase] && SIG[a.phase] !== 'running' && (unseen(a) || (held && heldReady.has(rkey(a)))))
+    .sort((a, b) => RANK.indexOf(SIG[a.phase]) - RANK.indexOf(SIG[b.phase]) || a.since - b.since);
+}
 // exit: a hole opens under the pet and it drops in (ms offsets from the start)
 let exiting = null;
 const EX = { open: 300, antic: 380, hop: 600, fall: 950, close: 1300, done: 1380 };
@@ -283,11 +289,11 @@ requestAnimationFrame(drawL.fn);
 // ================= speech bubble =================
 const bubble = $('bubble');
 let bubbleQ = [], bubbleBusy = false, bubbleTimer, typeTimer;
-function say(text, { ms = 5500, prio = false, alert = false } = {}) {
-  if (prio || !bubbleBusy) { bubbleQ = prio ? [] : bubbleQ; show({ text, ms, alert }); }
-  else if (bubbleQ.length < 3) bubbleQ.push({ text, ms, alert });
+function say(text, { ms = 5500, prio = false, alert = false, quiet = false } = {}) {
+  if (prio || !bubbleBusy) { bubbleQ = prio ? [] : bubbleQ; show({ text, ms, alert, quiet }); }
+  else if (bubbleQ.length < 3) bubbleQ.push({ text, ms, alert, quiet });
 }
-function show({ text, ms, alert }) {
+function show({ text, ms, alert, quiet }) {
   clearTimeout(bubbleTimer); clearInterval(typeTimer);
   bubbleBusy = true;
   bubble.className = 'hit' + (alert === 'stuck' ? ' alert stuck' : alert ? ' alert' : '');
@@ -295,7 +301,7 @@ function show({ text, ms, alert }) {
   let i = 0;
   typeTimer = setInterval(() => {
     bubble.textContent = text.slice(0, ++i);
-    if (i % 3 === 0) blip(880 + Math.random() * 200, 0.015, 0.01);
+    if (i % 3 === 0 && !quiet) blip(880 + Math.random() * 200, 0.015, 0.01);
     if (i >= text.length) clearInterval(typeTimer);
   }, 18);
   bubbleTimer = setTimeout(hideBubble, ms + text.length * 18);
@@ -392,7 +398,27 @@ function renderHud() {
   } else $('hudRepo').textContent = g?.dir ? `${g.dir.split('/').pop()} isn't a git repo` : 'no repo — start an agent or right-click → watch';
   $('hudAgents').innerHTML = (snap.agents || []).slice(0, 6).map(a =>
     `<span class="chip ${a.phase}" title="${a.phase} since ${ago(Date.now() - a.since)}">${esc(a.name)}${a.phase === 'waiting' ? ' · your move' : a.phase === 'stalled' ? ' · stuck?' : a.phase === 'ready' ? ' · done' : ''}</span>`).join('');
+  renderRoster();
 }
+// the question in the pill: what each waiting/stuck/finished agent wants, shown only while the pill is open
+function renderRoster() {
+  $('roster').innerHTML = pending(true).slice(0, 4).map(a => { const sig = SIG[a.phase]; return `<button data-id="${esc(a.id)}">` +
+    `<i style="background:${LED[sig]}"></i><b>${esc(a.title || a.name)}</b><time>${ago(Date.now() - a.since)}</time>` +
+    `<span>${esc(noteFor(a.id) || a.ask || (sig === 'needs' ? 'has a question' : sig === 'stuck' ? 'needs approval' : 'done'))}</span></button>`; }).join('');
+  rosterShow();
+}
+// a failed jump's note shows in the row itself: the roster hides the bubble while the pill is open
+const notes = new Map();
+function noteFor(id) { const n = notes.get(id); return n && n.until > Date.now() ? n.text : null; }
+function rosterShow() {
+  const r = $('roster'), on = $('hud').classList.contains('live') && r.children.length > 0;
+  if (on === r.classList.contains('hidden')) r.classList.toggle('hidden', !on);
+}
+$('roster').onclick = e => {
+  const id = e.target.closest('button[data-id]')?.dataset.id, a = (snap?.agents || []).find(x => x.id === id);
+  if (!a) return;
+  if (api.jump) jumpTo(a); else if (a.ask) api.copy(a.ask);
+};
 
 // ================= mouse: click-through, drag, click =================
 let ignoring = true;
@@ -416,9 +442,9 @@ let aimHits = 0, still = null, nearSince = 0;
 const clamp01 = v => Math.max(0, Math.min(1, v));
 const smooth = v => (v = clamp01(v), v * v * (3 - 2 * v));
 function zoneRect() {           // pet body + full-size pill, in window coords (pill measured untransformed)
-  const c = cv.getBoundingClientRect(), h = $('hud');
-  return { l: Math.min(c.left + 44, h.offsetLeft), r: Math.max(c.right - 44, h.offsetLeft + h.offsetWidth),
-           t: c.top + 56, b: h.offsetTop + h.offsetHeight };
+  const c = cv.getBoundingClientRect(), h = $('hud'), ro = $('roster'), rs = !ro.classList.contains('hidden');
+  return { l: Math.min(c.left + 44, h.offsetLeft, rs ? ro.offsetLeft : 1e9), r: Math.max(c.right - 44, h.offsetLeft + h.offsetWidth, rs ? ro.offsetLeft + ro.offsetWidth : 0),
+           t: rs ? Math.min(c.top + 56, ro.offsetTop) : c.top + 56, b: h.offsetTop + h.offsetHeight };
 }
 function hudTarget(now, dt) {
   if (dragging || chatOpen || exiting) return 0;
@@ -455,10 +481,12 @@ function hudFrame(now) {
   for (let i = 0, h = dt / 4; i < 4; i++) { rv += (W * W * (target - rp) - 2 * W * rv) * h; rp += rv * h; }
   if (Math.abs(target - rp) < 0.001 && Math.abs(rv) < 0.01) { rp = target; rv = 0; }
   const p = clamp01(rp), a = smooth((p - 0.55) / 0.45), hud = $('hud'), ps = p.toFixed(4);
-  if (ps !== hudP) { hudP = ps; hud.style.setProperty('--p', ps); hud.style.setProperty('--a', a.toFixed(4)); }
+  if (ps !== hudP) { hudP = ps; hud.style.setProperty('--p', ps); hud.style.setProperty('--a', a.toFixed(4)); if (!reduceMotion) $('roster').style.opacity = a.toFixed(4); }
   hud.classList.toggle('live', p > 0.6);
+  rosterShow();
   const was = hovering; hovering = p > 0.5;
   if (hovering && !was) { lastInteract = now; markSeen(); }
+  if (!hovering && was && heldReady.size) { heldReady.clear(); renderRoster(); }
   const cur = cursor.x + ',' + cursor.y, settled = rv === 0 && rp === target && cur === hudCur;
   hudCur = cur;
   park(hudL, !settled);                      // settled spring + still cursor: drop to the 10 Hz check
@@ -473,7 +501,7 @@ document.addEventListener('mousemove', e => {
   let hit = el && el.closest('.hit');
   if (hit === cv && !petPixelHit(e)) hit = null;
   setIgnore(!hit);
-  showHud(hit === cv || (hit && hit.id === 'hud') || (hit && $('hud').contains(hit)));
+  showHud(hit === cv || (hit && ($('hud').contains(hit) || $('roster').contains(hit))));
 });
 document.addEventListener('mouseleave', () => { if (!dragging) { setIgnore(true); showHud(false); } });
 
@@ -489,28 +517,35 @@ document.addEventListener('mouseup', e => {
   const moved = Math.hypot(e.screenX - down.x, e.screenY - down.y);
   const d = down; down = null;
   if (moved > 4) { say(pick(['wheee', 'new desk, who dis', 'ooh nice view']), { ms: 1800 }); return; }
-  if (d.detail >= 2) { openChat(); return; }
+  if (d.detail >= 2) { clearTimeout(jumpT); openChat(); return; }
   poke();
 });
 cv.addEventListener('contextmenu', e => { e.preventDefault(); api.menu(); });
 
 function poke() {
-  lastInteract = performance.now(); markSeen();
+  lastInteract = performance.now();
   api.pet();
-  const w = agentsIn('waiting'), s = agentsIn('stalled');
-  if (w.length || s.length) {
-    transient('poke', 250);
-    say([...w.map(a => `${a.name} is waiting on you`), ...s.map(a => `${a.name} might need an approval`)].join('\n'), { prio: true, alert: true });
-    return;
-  }
+  const top = pending()[0];
+  if (top && api.jump) { clearTimeout(jumpT); jumpT = setTimeout(() => jumpTo(top), 300); return; }   // the terminal coming forward is the feedback; waits out a double-click
+  markSeen();
   transient(Math.random() < 0.5 ? 'love' : 'poke', 900);
   spawn('heart', 2, { x: 28 + rand(-8, 8), y: 18, colors: ['#ff5c8a', '#ff9ec4'] });
   blip(pick([740, 880, 988]), 0.07);
   if (Math.random() < 0.4) say(pick(['hehe', '*happy wiggle*', 'boop', 'again!', ...(snap?.game ? [`⚡${Math.round(snap.fuel)} ♥${Math.round(snap.mood)}`] : [])]), { ms: 1600 });
 }
 
+// go to the agent's terminal; if it can't be found, the resume command is on the clipboard: one quiet line, no sound
+let jumpT;
+async function jumpTo(a) {
+  markSeen();
+  let r; try { r = await api.jump(a.id); } catch { r = null; }
+  if (r?.ok) return;
+  const text = r?.cmd ? "couldn't find its terminal — resume command copied" : "couldn't find its terminal";
+  notes.set(a.id, { text, until: Date.now() + 4000 }); renderRoster(); setTimeout(renderRoster, 4100);
+  say(`${a.name}: ${text}`, { prio: true, quiet: true, ms: 4000 });
+}
+
 $('btnChat').onclick = () => openChat();
-$('hud').addEventListener('mouseover', () => { $('hud').title = [$('hudName').textContent, $('hudRepo').textContent, $('hudAgents').textContent && 'agents: ' + [...$('hudAgents').children].map(c => c.textContent).join(', ')].filter(Boolean).join('\n'); });
 $('btnMenu').onclick = () => api.menu();
 
 // ================= chat =================

@@ -1,0 +1,217 @@
+{
+  "overall": 80.85,
+  "axis_means": {
+    "reveal-and-hover-feel": 80.71,
+    "status-signalling": 80.12,
+    "sprite-and-idle": 82.59,
+    "interruptions-and-bubbles": 81.88,
+    "restraint-and-footprint": 79.82,
+    "idle-cost": 80.0
+  },
+  "states": {
+    "01-idle": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 86,
+        "idle-cost": 80
+      },
+      "score": 82.33,
+      "note": "soft pet-width shadow under feet, grey antenna tip calm-neutral, no chrome"
+    },
+    "02-hud-half": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 80,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 85,
+        "idle-cost": 80
+      },
+      "score": 81.83,
+      "note": "half-reveal is a slightly larger same-capsule shadow, no icons shown; growth subtle, hard to read as progress"
+    },
+    "03-hud-full": {
+      "axes": {
+        "reveal-and-hover-feel": 84,
+        "status-signalling": 80,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 84,
+        "idle-cost": 80
+      },
+      "score": 82.33,
+      "note": "pill tucked under feet, compose icon primary + divider + \u22ef; only two targets, compose not markedly larger"
+    },
+    "04-hud-aim": {
+      "axes": {
+        "reveal-and-hover-feel": 86,
+        "status-signalling": 80,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 84,
+        "idle-cost": 80
+      },
+      "score": 82.67,
+      "note": "pill already fully open while cursor still out \u2014 prediction visible"
+    },
+    "05-working": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 82,
+        "sprite-and-idle": 82,
+        "interruptions-and-bubbles": 84,
+        "restraint-and-footprint": 86,
+        "idle-cost": 80
+      },
+      "score": 82.33,
+      "note": "green 2x2 antenna tip + flat focused mouth; colour-led signal, no glyph shape"
+    },
+    "06-waiting": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 72,
+        "sprite-and-idle": 82,
+        "interruptions-and-bubbles": 68,
+        "restraint-and-footprint": 70,
+        "idle-cost": 80
+      },
+      "score": 75.33,
+      "note": "amber ! glyph reads well but bubble 'projects is done' pairs a routine finish with amber urgency \u2014 ready merged into needs-input"
+    },
+    "07-stalled": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 86,
+        "sprite-and-idle": 86,
+        "interruptions-and-bubbles": 84,
+        "restraint-and-footprint": 84,
+        "idle-cost": 80
+      },
+      "score": 83.33,
+      "note": "red tip + red ? + square-eyed wavy-mouth concern: shape+colour, unmistakable"
+    },
+    "08-agents-mixed": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 76,
+        "sprite-and-idle": 82,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 82,
+        "idle-cost": 80
+      },
+      "score": 80.33,
+      "note": "three agent dots with amber ! winning; readable which wins but dots are tiny (\u22481 art px) and no red outranks"
+    },
+    "09-sleeping": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 80,
+        "sprite-and-idle": 80,
+        "interruptions-and-bubbles": 84,
+        "restraint-and-footprint": 88,
+        "idle-cost": 80
+      },
+      "score": 82.0,
+      "note": "closed eyes + dimmed dark antenna, static; sleep reads mostly via eye line"
+    },
+    "10-bubble-done": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 84,
+        "restraint-and-footprint": 82,
+        "idle-cost": 80
+      },
+      "score": 82.0,
+      "note": "green check + one-line 'claude is done', tail on head, quiet colour for routine finish"
+    },
+    "11-bubble-stalled": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 86,
+        "sprite-and-idle": 86,
+        "interruptions-and-bubbles": 88,
+        "restraint-and-footprint": 82,
+        "idle-cost": 80
+      },
+      "score": 83.67,
+      "note": "'codex needs approval' red-outlined pill-shaped bubble centred on pet, names agent+action; red reserved for blocker"
+    },
+    "12-chat": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 80,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 72,
+        "idle-cost": 80
+      },
+      "score": 79.67,
+      "note": "chat shares pill fill/radius, local ~/.claude trust copy visible, chips one row; panel wide relative to need"
+    },
+    "13-chat-convo": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 80,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 80,
+        "restraint-and-footprint": 70,
+        "idle-cost": 80
+      },
+      "score": 79.0,
+      "note": "first message visible, copy button above code (no overlap); panel large and near window edge"
+    },
+    "14-chat-nokey": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 80,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 78,
+        "idle-cost": 80
+      },
+      "score": 81.33,
+      "note": "one short paragraph: key stays on Mac in keychain; clear green save primary"
+    },
+    "15-game-anim-on": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 74,
+        "sprite-and-idle": 68,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 72,
+        "idle-cost": 80
+      },
+      "score": 75.67,
+      "note": "crown + headphones + laptop crowd the head; laptop hides mouth, music note floats outside silhouette"
+    },
+    "16-roster-needs": {
+      "axes": {
+        "reveal-and-hover-feel": 82,
+        "status-signalling": 80,
+        "sprite-and-idle": 82,
+        "interruptions-and-bubbles": 78,
+        "restraint-and-footprint": 70,
+        "idle-cost": 80
+      },
+      "score": 78.67,
+      "note": "roster card with dots/time over pet + open pill; text truncated with ellipses, adds sizable chrome"
+    },
+    "17-roster-none": {
+      "axes": {
+        "reveal-and-hover-feel": 82,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 82,
+        "idle-cost": 80
+      },
+      "score": 82.0,
+      "note": "green tip idle, pill under feet, no roster clutter when nothing needs you"
+    }
+  }
+}

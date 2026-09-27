@@ -5,7 +5,7 @@
     "cursor"
   ],
   "settle": 1500,
-  "prelude": "(() => {\n  clearInterval(window.__dpT);\n  const now = Date.now();\n  snap = { name: 'Net', level: 1, xp: 0, xpLo: 0, xpHi: 40, fuel: 80, mood: 70, commits: 0, agents: [],\n    git: { root: '/x/vibepet', name: 'vibepet', branch: 'main', lines: 84, files: 3, untracked: 1, lastCommitAt: now - 25*60e3, lastSubject: 'wip' },\n    muted: true, animations: false, game: false, hasKey: true, hour: 14, watching: 'auto' };\n  renderHud(); closeChat(); bubbleQ = []; hideBubble(); bubble.classList.add('hidden');\n  document.getElementById('msgs').innerHTML = ''; history = [];\n  anim = { kind: null, until: 0 }; parts.length = 0; exiting = null; emitT = {};\n  nextBlink = performance.now() + 1e9; blinkUntil = 0; nextChatter = performance.now() + 1e9;\n  cursor = { x: -999, y: -999 }; lastCur = null; vel = { x: 0, y: 0 };\n  hoverHit = false; hovering = false; rp = 0; rv = 0; wantUntil = 0; aimHits = 0; still = null; nearSince = 0;\n  lastInteract = performance.now();\n  document.getElementById('hud').classList.remove('gone');\n})()",
+  "prelude": "(() => {\n  clearInterval(window.__dpT);\n  const now = Date.now();\n  snap = { name: 'Net', level: 1, xp: 0, xpLo: 0, xpHi: 40, fuel: 80, mood: 70, commits: 0, agents: [],\n    git: { root: '/x/vibepet', name: 'vibepet', branch: 'main', lines: 84, files: 3, untracked: 1, lastCommitAt: now - 25*60e3, lastSubject: 'wip' },\n    muted: true, animations: false, game: false, hasKey: true, hour: 14, watching: 'auto' };\n  seenReady.clear(); heldReady.clear();\n  renderHud(); closeChat(); bubbleQ = []; hideBubble(); bubble.classList.add('hidden');\n  document.getElementById('msgs').innerHTML = ''; history = [];\n  anim = { kind: null, until: 0 }; parts.length = 0; exiting = null; emitT = {};\n  nextBlink = performance.now() + 1e9; blinkUntil = 0; nextChatter = performance.now() + 1e9;\n  cursor = { x: -999, y: -999 }; lastCur = null; vel = { x: 0, y: 0 };\n  hoverHit = false; hovering = false; rp = 0; rv = 0; wantUntil = 0; aimHits = 0; still = null; nearSince = 0;\n  lastInteract = performance.now();\n  document.getElementById('hud').classList.remove('gone');\n})()",
   "states": [
     {
       "id": "01-idle",
@@ -82,6 +82,16 @@
     {
       "id": "15-game-anim-on",
       "renderer": "Object.assign(snap, { game: true, animations: true, level: 7, xp: 1500, xpLo: 1440, xpHi: 1960, fuel: 72, mood: 80 }); snap.agents = [{ name: 'claude', phase: 'working', since: Date.now() - 240*1000 }]; renderHud();",
+      "wait": 900
+    },
+    {
+      "id": "16-roster-needs",
+      "renderer": "snap.agents = [{ id: 's-api', name: 'api', title: 'Rate limiter for the public API', phase: 'waiting', since: Date.now() - 90*1000, ask: 'Should I also cap bursts per API key, or only per IP?' }, { id: 's-codex', name: 'codex', title: 'Fix flaky checkout test', phase: 'stalled', since: Date.now() - 600*1000, ask: 'Bash: npm test -- --runInBand checkout.spec.ts' }, { id: 's-claude', name: 'claude', phase: 'working', since: Date.now() - 240*1000 }]; renderHud(); (() => { const c = document.getElementById('pet').getBoundingClientRect(); cursor = { x: c.left + c.width/2, y: c.top + c.height*0.62 }; lastCur = { ...cursor }; vel = { x: 0, y: 0 }; })();",
+      "wait": 900
+    },
+    {
+      "id": "17-roster-none",
+      "renderer": "snap.agents = [{ id: 's-claude', name: 'claude', title: 'Designpass p4', phase: 'working', since: Date.now() - 240*1000 }]; renderHud(); (() => { const c = document.getElementById('pet').getBoundingClientRect(); cursor = { x: c.left + c.width/2, y: c.top + c.height*0.62 }; lastCur = { ...cursor }; vel = { x: 0, y: 0 }; })();",
       "wait": 900
     }
   ]

@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { execFile } = require('child_process');
+const { readTail, textOf, classify, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
 
 const W = 360, H = 520;
 const CLAUDE_DIR = path.join(os.homedir(), '.claude', 'projects');
@@ -89,53 +90,6 @@ const away = () => !win || win.isDestroyed() || !win.isVisible() || powerMonitor
 // ---------- claude code sessions ----------
 const sessions = new Map(); // id -> { phase, since, … }
 
-function readTail(file, bytes = 131072, maxBytes = 16 * 1048576) {
-  const fd = fs.openSync(file, 'r');
-  try {
-    const size = fs.fstatSync(fd).size;
-    for (;;) {
-      const start = Math.max(0, size - bytes);
-      const buf = Buffer.alloc(size - start);
-      fs.readSync(fd, buf, 0, buf.length, start);
-      const lines = buf.toString('utf8').split('\n');
-      if (start > 0) lines.shift();
-      // a single huge record can swallow the whole window; widen until we get a full line
-      if (start === 0 || bytes >= maxBytes || lines.some(l => l.trim())) return lines;
-      bytes *= 4;
-    }
-  } finally { fs.closeSync(fd); }
-}
-
-function textOf(content) {
-  if (typeof content === 'string') return content;
-  return (content || []).filter(c => c.type === 'text').map(c => c.text).join('\n');
-}
-
-function classify(file, mtimeMs) {
-  const idle = Date.now() - mtimeMs;
-  const lines = readTail(file);
-  let cwd = null;
-  for (let i = lines.length - 1; i >= 0; i--) {
-    let d; try { d = JSON.parse(lines[i]); } catch { continue; }
-    if (!cwd && d.cwd) cwd = d.cwd;
-    if (d.isSidechain || d.isMeta || (d.type !== 'assistant' && d.type !== 'user')) continue;
-    cwd = d.cwd || cwd;
-    if (d.type === 'assistant') {
-      const m = d.message || {};
-      if ((m.content || []).some(c => c.type === 'tool_use')) return { phase: idle > 90000 ? 'stalled' : 'working', cwd };
-      if (['end_turn', 'stop_sequence', 'max_tokens'].includes(m.stop_reason)) {
-        if (idle > 5 * 60e3) return { phase: 'parked', cwd };
-        return { phase: textOf(m.content).trim().endsWith('?') ? 'waiting' : 'ready', cwd };   // a question needs you; anything else is just done
-      }
-      return { phase: 'working', cwd };
-    }
-    const txt = textOf(d.message?.content);
-    if (txt.startsWith('[Request interrupted')) return { phase: 'parked', cwd };
-    return { phase: idle > 120000 ? 'parked' : 'working', cwd };
-  }
-  return null;
-}
-
 function scanAgents() {
   let dirs; try { dirs = fs.readdirSync(CLAUDE_DIR); } catch { return []; }
   const now = Date.now(), seen = new Set(), out = [];
@@ -155,7 +109,8 @@ function scanAgents() {
       const prev = sessions.get(id);
       const name = c.cwd ? path.basename(c.cwd) : dname.split('-').pop();
       if (prev && prev.phase !== c.phase) transition(name, prev, c.phase, now);
-      const s = { id, file: fp, name, cwd: c.cwd, phase: c.phase, since: prev && prev.phase === c.phase ? prev.since : now, mtime: st.mtimeMs };
+      const s = { id, file: fp, name, cwd: c.cwd, phase: c.phase, since: prev && prev.phase === c.phase ? prev.since : now, mtime: st.mtimeMs,
+        ask: c.ask, title: c.title || prev?.title };
       sessions.set(id, s);
       if (c.phase !== 'parked') out.push(s);
     }
@@ -267,7 +222,7 @@ function snapshot() {
   return {
     name: state.name, level, xp: state.xp, xpLo: xpForLevel(level), xpHi: xpForLevel(level + 1),
     fuel: state.fuel, mood: state.mood, commits: state.commits,
-    agents: agents.map(a => ({ name: a.name, phase: a.phase, since: a.since })),
+    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, phase: a.phase, since: a.since, ask: a.ask })),
     git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto',
   };
@@ -412,6 +367,24 @@ ipcMain.on('drag-end', () => {
 });
 ipcMain.on('focus', () => { app.focus({ steal: true }); win.focus(); });
 ipcMain.on('copy', (_, text) => clipboard.writeText(text));
+// click → the terminal tab that session runs in (iTerm2/Terminal), else its app, else copy a resume command.
+// The only place ps/lsof/osascript ever run; nothing is typed into any terminal.
+const shq = s => /^[\w@%+=:,./-]+$/.test(s) ? s : `'${s.replace(/'/g, `'\\''`)}'`;
+ipcMain.handle('jump', async (_, id) => {
+  const s = sessions.get(id);
+  if (!s) return { ok: false };
+  try {
+    const procs = await psAll(), loc = await locateSession(s, procs), host = loc && hostApp(loc.pid, procs);
+    if (host) {
+      const bid = await bundleId(host);
+      if (await focusTty(bid, loc.tty)) return { ok: true, level: 'tab' };
+      if (await run('/usr/bin/open', bid ? ['-b', bid] : ['-a', host]) !== null) return { ok: true, level: 'app' };
+    }
+  } catch (e) { console.error('jump:', e.message); }
+  const cmd = `${s.cwd ? `cd ${shq(s.cwd)} && ` : ''}claude --resume ${shq(id)}`;
+  clipboard.writeText(cmd);
+  return { ok: false, cmd };
+});
 ipcMain.on('rename', (_, name) => { name = (name || '').trim().slice(0, 16); if (name) { state.name = name; save(); tick(); } });
 ipcMain.on('exit-done', () => app.quit());
 ipcMain.on('pet', () => {
