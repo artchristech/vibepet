@@ -1,0 +1,185 @@
+{
+  "overall": 81.31,
+  "states": {
+    "01-idle": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 82,
+        "sprite-and-idle": 85,
+        "interruptions-and-bubbles": 88,
+        "restraint-and-footprint": 88,
+        "idle-cost": 80
+      },
+      "score": 83.5,
+      "note": "Soft grey capsule shadow under feet (~57% pet width) reads as a shadow; grey LED is calm-neutral; no chrome."
+    },
+    "02-hud-half": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 80,
+        "sprite-and-idle": 85,
+        "interruptions-and-bubbles": 88,
+        "restraint-and-footprint": 86,
+        "idle-cost": 80
+      },
+      "score": 82.83,
+      "note": "Half-reveal is the same capsule enlarged with no icons, but its mid-grey fill differs from the near-black full pill."
+    },
+    "03-hud-full": {
+      "axes": {
+        "reveal-and-hover-feel": 76,
+        "status-signalling": 80,
+        "sprite-and-idle": 85,
+        "interruptions-and-bubbles": 88,
+        "restraint-and-footprint": 82,
+        "idle-cost": 80
+      },
+      "score": 81.83,
+      "note": "Pill top edge touches/overlaps the foot pixels; icons natural size with even padding; grey\u2192black fill jump between steps."
+    },
+    "04-hud-aim": {
+      "axes": {
+        "reveal-and-hover-feel": 84,
+        "status-signalling": 80,
+        "sprite-and-idle": 85,
+        "interruptions-and-bubbles": 88,
+        "restraint-and-footprint": 82,
+        "idle-cost": 80
+      },
+      "score": 83.17,
+      "note": "Pill is fully open while the cursor is still out, so the aim prediction is visible; same foot-overlap as 03."
+    },
+    "05-working": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 80,
+        "sprite-and-idle": 82,
+        "interruptions-and-bubbles": 88,
+        "restraint-and-footprint": 88,
+        "idle-cost": 80
+      },
+      "score": 82.67,
+      "note": "Green LED (2x2 art px) plus flat focused mouth; distinct, but it's the weakest-shaped of the states (no glyph)."
+    },
+    "06-waiting": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 86,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 84,
+        "idle-cost": 80
+      },
+      "score": 83.0,
+      "note": "Amber LED, amber '!' glyph and open mouth give shape plus colour; the '!' adds a held element."
+    },
+    "07-stalled": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 86,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 84,
+        "idle-cost": 80
+      },
+      "score": 83.0,
+      "note": "Red LED, pink '?', square wide eyes and wavy mouth: unmistakable and distinct from waiting."
+    },
+    "08-agents-mixed": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 78,
+        "sprite-and-idle": 82,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 82,
+        "idle-cost": 80
+      },
+      "score": 81.0,
+      "note": "Amber '!' wins, but the per-agent dots by the antenna are ~1 art px and the red stuck dot is hard to read, so the priority winner is ambiguous."
+    },
+    "09-sleeping": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 88,
+        "restraint-and-footprint": 90,
+        "idle-cost": 80
+      },
+      "score": 83.67,
+      "note": "Closed-line eyes and dark LED; the LED nearly vanishes on dark desktop and the mouth is a single dot."
+    },
+    "10-bubble-done": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 84,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 84,
+        "idle-cost": 80
+      },
+      "score": 82.67,
+      "note": "One-line neutral 'claude is done' bubble centred on the head with tail at the antenna; mint check separates ready from needs-input."
+    },
+    "11-bubble-stalled": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 82,
+        "idle-cost": 80
+      },
+      "score": 81.33,
+      "note": "'codex needs approval' names the agent and action, but the amber dot/border bubble clashes with the red LED state colour."
+    },
+    "12-chat": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 80,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 80,
+        "restraint-and-footprint": 72,
+        "idle-cost": 80
+      },
+      "score": 79.0,
+      "note": "Rounded panel matches the pill fill; empty state states that ~/.claude is read locally; the ~340pt panel is large for the need."
+    },
+    "13-chat-convo": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 80,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 66,
+        "restraint-and-footprint": 70,
+        "idle-cost": 80
+      },
+      "score": 76.33,
+      "note": "Top message is clipped mid-glyph ('Anthropic.') and the chip row is cut by the divider; the copy button clears the code."
+    },
+    "14-chat-nokey": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 80,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 70,
+        "idle-cost": 80
+      },
+      "score": 79.0,
+      "note": "Short keychain-local explainer with a clear 'save' primary, but two stacked input rows and a tall panel."
+    },
+    "15-game-anim-on": {
+      "axes": {
+        "reveal-and-hover-feel": 76,
+        "status-signalling": 78,
+        "sprite-and-idle": 62,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 78,
+        "idle-cost": 80
+      },
+      "score": 76.67,
+      "note": "Crown collides with the headphone band and outline at top-left, and the laptop hides the mouth; stays within the silhouette."
+    }
+  }
+}

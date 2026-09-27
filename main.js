@@ -10,6 +10,7 @@ const CLAUDE_DIR = path.join(os.homedir(), '.claude', 'projects');
 const TICK_MS = 3000;
 
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+app.disableHardwareAcceleration();   // a 224×208 pixel canvas + one CSS capsule: the GPU process costs memory, buys nothing
 if (!app.requestSingleInstanceLock()) app.quit();
 
 // ---------- state ----------
@@ -123,7 +124,8 @@ function classify(file, mtimeMs) {
       const m = d.message || {};
       if ((m.content || []).some(c => c.type === 'tool_use')) return { phase: idle > 90000 ? 'stalled' : 'working', cwd };
       if (['end_turn', 'stop_sequence', 'max_tokens'].includes(m.stop_reason)) {
-        return { phase: idle > 5 * 60e3 ? 'parked' : 'waiting', cwd };
+        if (idle > 5 * 60e3) return { phase: 'parked', cwd };
+        return { phase: textOf(m.content).trim().endsWith('?') ? 'waiting' : 'ready', cwd };   // a question needs you; anything else is just done
       }
       return { phase: 'working', cwd };
     }
@@ -163,9 +165,12 @@ function scanAgents() {
 }
 
 function transition(name, prev, phase, now) {
-  if (phase === 'waiting' && (prev.phase === 'working' || prev.phase === 'stalled')) {
+  const was = prev.phase === 'working' || prev.phase === 'stalled';
+  if (phase === 'ready' && was) {
     emit('agentDone', `${name} is done`, { agent: name });
     if (away()) queueDone(name);
+  } else if (phase === 'waiting' && was) {
+    emit('agentNeeds', `${name} has a question`, { agent: name, notify: away() });
   } else if (phase === 'stalled' && prev.phase === 'working') {
     emit('agentStalled', `${name} needs approval`, { agent: name, notify: away() });
   }

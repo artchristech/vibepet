@@ -39,6 +39,7 @@ const SPR = {
   drop: [[0,0],[0,1],[1,1]],
   bang: [[0,0],[1,0],[0,1],[1,1],[0,2],[1,2],[0,3],[1,3],[0,5],[1,5]],
   what: [[1,0],[2,0],[0,1],[3,1],[3,2],[2,3],[1,4],[1,6]],
+  tick: [[4,0],[3,1],[4,1],[0,2],[2,2],[3,2],[0,3],[1,3],[2,3],[1,4]],
   crown: [[0,0],[3,0],[6,0],[0,1],[1,1],[3,1],[5,1],[6,1],[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[0,3],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3]],
 };
 
@@ -68,21 +69,27 @@ function drawParts() {
 const CONFETTI = ['#7ef0c1', '#ffcf3f', '#ff7ab0', '#8b7bff', '#8fd3ff', '#fff'];
 
 // ================= state machine =================
-function agentsIn(phase) { return (snap?.agents || []).filter(a => a.phase === phase); }
+// 'ready' (finished, unread) holds until the pet is hovered or clicked after it landed
+const seenReady = new Set(), rkey = a => a.name + '@' + a.since;
+const unseen = a => !(a.phase === 'ready' && seenReady.has(rkey(a)));
+function agentsIn(phase) { return (snap?.agents || []).filter(a => a.phase === phase && unseen(a)); }
+function markSeen() { const r = agentsIn('ready'); for (const a of r) seenReady.add(rkey(a)); if (r.length) { renderHud(); wake(); } }
 function baseState(now) {
   if (!snap) return 'idle';
   if (agentsIn('waiting').some(a => Date.now() - a.since < 8000)) return 'alert';
   if (agentsIn('waiting').length) return 'waiting';
   if (agentsIn('stalled').length) return 'stalled';
+  if (agentsIn('ready').length) return 'ready';
   if (agentsIn('working').length) return 'working';
   if (snap.game && snap.fuel < 20) return 'hungry';
   const late = snap.hour >= 1 && snap.hour < 6;
   if ((late || now - lastInteract > 15 * 60e3) && !hovering && !chatOpen) return 'sleeping';
   return 'idle';
 }
-// one resolver for LED + face: needs input > stuck > running > none
-function agentSignal() { return agentsIn('waiting').length ? 'needs' : agentsIn('stalled').length ? 'stuck' : agentsIn('working').length ? 'running' : 'none'; }
-const LED = { needs: '#ffcf3f', stuck: '#ff5c6c', running: '#3fe08f', none: '#59607a' };
+// one resolver for LED + face: needs input > stuck > ready > running > none; [0] wins, the rest become pips
+const SIG = { waiting: 'needs', stalled: 'stuck', ready: 'ready', working: 'running' }, RANK = ['needs', 'stuck', 'ready', 'running'];
+function agentSignals() { return (snap?.agents || []).filter(a => SIG[a.phase] && unseen(a)).map(a => SIG[a.phase]).sort((a, b) => RANK.indexOf(a) - RANK.indexOf(b)); }
+const LED = { needs: '#ffcf3f', stuck: '#ff5c6c', ready: '#9ff5d6', running: '#3fe08f', none: '#8a93b8' };
 // exit: a hole opens under the pet and it drops in (ms offsets from the start)
 let exiting = null;
 const EX = { open: 300, antic: 380, hop: 600, fall: 950, close: 1300, done: 1380 };
@@ -105,7 +112,7 @@ function draw(now) {
   const moving = !!snap?.animations || ex >= 0;   // steady states hold still; only opt-in Animations or the exit move
   if (ex >= 0) st = ex < EX.antic ? 'idle' : ex < EX.hop ? 'love' : 'exitfall';
   const lvl = snap?.game ? snap.level : 1;
-  const sig = agentSignal();
+  const sigs = agentSignals(), sig = sigs[0] || 'none', pips = sigs.slice(1, 4);
   if (sig !== lastSig) { if (lastSig !== undefined && !reduceMotion) haloUntil = now + 500; lastSig = sig; }
 
   let cx = 28, cy = 34, rx = 13, ry = 11, bob = 0;
@@ -143,7 +150,7 @@ function draw(now) {
   const blink = moving && now < blinkUntil;
   const shades = lvl >= 5 && hovering && !['sleeping', 'alert', 'waiting'].includes(st);
   const active = moving || parts.length > 0 || now < haloUntil;
-  const key = [st, sig, lx, ly, cy, lvl, shades, snap?.game && snap.fuel, snap?.game && snap.mood].join();
+  const key = [st, sig, pips.join('.'), lx, ly, cy, lvl, shades, snap?.game && snap.fuel, snap?.game && snap.mood].join();
   if (!active && key === lastKey) return false;
   lastKey = key;
   ctx.setTransform(S, 0, 0, S, 0, 0);
@@ -198,7 +205,8 @@ function draw(now) {
   const top = cy - ry;
   dots(cx, top, [[0,-1],[0,-2],[1,-3]], OUT);
   const led = LED[sig];                                   // held steady; a change plays one fading halo, once
-  rect(cx, top - 7, 4, 4, OUT); rect(cx + 1, top - 6, 2, 2, led);
+  rect(cx, top - 7, 4, 4, OUT); if (!(st === 'sleeping' && sig === 'none')) rect(cx + 1, top - 6, 2, 2, led);   // asleep = unlit
+  pips.forEach((p, i) => { const x = cx - 4 * (i + 1); rect(x, top - 6, 3, 3, OUT); rect(x + 1, top - 5, 1, 1, LED[p]); });   // other agents: small, static
   if (now < haloUntil) {
     ctx.globalAlpha = 0.5 * ((haloUntil - now) / 500) ** 2;
     rect(cx - 1, top - 8, 6, 1, led); rect(cx - 1, top - 3, 6, 1, led); rect(cx - 1, top - 7, 1, 4, led); rect(cx + 4, top - 7, 1, 4, led);
@@ -251,6 +259,7 @@ function draw(now) {
   // over-head indicators
   if (needs) outlined(cx + 8, top - 10 + bob * 0, SPR.bang, '#ffcf3f');
   if (st === 'stalled') outlined(cx + 8, top - 10, SPR.what, '#ff8a95');
+  if (st === 'ready') outlined(cx + 8, top - 9, SPR.tick, LED.ready);
 
   // ambient emitters
   if (st === 'sleeping' && every('z', 1600, now)) spawn('z', 1, { x: cx + 9, y: top, up: 0.4, spread: 0.3, colors: ['#c7d0ff'], fast: 0.6 });
@@ -351,6 +360,7 @@ api.on('event', e => {
   lastInteract = performance.now(); wake();
   switch (e.kind) {
     case 'agentDone': say(e.text, { prio: true, ms: 4000 }); break;   // routine finish: one quiet line, no amber, no sound
+    case 'agentNeeds':
     case 'agentStalled': say(e.text, { prio: true, alert: true, ms: 8000 }); tune([440, 330]); break;
     case 'commit': transient('eat', 1300); setTimeout(() => transient('celebrate', 2200), 1300);
       spawn('spark', 30, { x: 28, y: 22, spread: 3, up: 2, g: 0.05, colors: CONFETTI }); say(e.text, { prio: true }); tune([523, 659, 784, 1047], 80); break;
@@ -381,7 +391,7 @@ function renderHud() {
     $('hudRepo').innerHTML = `⎇ <b>${esc(g.name)}</b>${g.branch ? '/' + esc(g.branch) : ''} · ±${g.lines} in ${g.files}f${g.untracked ? ` +${g.untracked}new` : ''} · ${g.lastCommitAt ? ago(Date.now() - g.lastCommitAt) : 'no commits'}`;
   } else $('hudRepo').textContent = g?.dir ? `${g.dir.split('/').pop()} isn't a git repo` : 'no repo — start an agent or right-click → watch';
   $('hudAgents').innerHTML = (snap.agents || []).slice(0, 6).map(a =>
-    `<span class="chip ${a.phase}" title="${a.phase} since ${ago(Date.now() - a.since)}">${esc(a.name)}${a.phase === 'waiting' ? ' · your move' : a.phase === 'stalled' ? ' · stuck?' : ''}</span>`).join('');
+    `<span class="chip ${a.phase}" title="${a.phase} since ${ago(Date.now() - a.since)}">${esc(a.name)}${a.phase === 'waiting' ? ' · your move' : a.phase === 'stalled' ? ' · stuck?' : a.phase === 'ready' ? ' · done' : ''}</span>`).join('');
 }
 
 // ================= mouse: click-through, drag, click =================
@@ -400,8 +410,9 @@ let hoverHit = false;
 function showHud(on) { hoverHit = on; }
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const W = reduceMotion ? 40 : 22;            // spring angular freq; ζ = 1 (no overshoot)
-const NEAR = 24, FAR = 120, GRACE = 200, TTA = 0.25;
+const NEAR = 24, FAR = 120, GRACE = 500, TTA = 0.25, ACK = 0.25;   // distance alone only acknowledges; intent opens
 let rp = 0, rv = 0, vel = { x: 0, y: 0 }, lastCur = null, wantUntil = 0, lastFrame = performance.now();
+let aimHits = 0, still = null, nearSince = 0;
 const clamp01 = v => Math.max(0, Math.min(1, v));
 const smooth = v => (v = clamp01(v), v * v * (3 - 2 * v));
 function zoneRect() {           // pet body + full-size pill, in window coords (pill measured untransformed)
@@ -416,18 +427,23 @@ function hudTarget(now, dt) {
     const k = 1 - Math.exp(-dt / 0.06);
     vel.x += ((cursor.x - lastCur.x) / dt - vel.x) * k; vel.y += ((cursor.y - lastCur.y) / dt - vel.y) * k;
   }
+  const moved = !lastCur || cursor.x !== lastCur.x || cursor.y !== lastCur.y;
   lastCur = { ...cursor };
   const z = zoneRect(), nx = Math.max(z.l, Math.min(z.r, cursor.x)), ny = Math.max(z.t, Math.min(z.b, cursor.y));
   const dx = cursor.x - nx, dy = cursor.y - ny, d = Math.hypot(dx, dy);
-  let want = 1 - smooth((d - NEAR) / (FAR - NEAR));
+  let want = ACK * (1 - smooth((d - NEAR) / (FAR - NEAR))), aim = false;   // micro-ack: shadow widens, no icons (a = 0 below p .55)
   if (d > NEAR) {
     const vr = -(vel.x * dx + vel.y * dy) / d;                 // closing speed toward the zone
     const vt = Math.sqrt(Math.max(0, vel.x ** 2 + vel.y ** 2 - vr * vr));
-    if (vr > 60 && (d - NEAR) / vr < TTA) want = Math.max(want, 1);           // arriving soon: pre-expand
+    if (vr > 60 && (d - NEAR) / vr < TTA) aim = true;                          // arriving soon
     else if (vt > 700 && vr < vt * 0.5) want *= 0.3;                           // just passing by
     else if (vr < -150) want *= 0.5;                                           // heading away
   }
-  if (hoverHit || (rp > 0.5 && d < NEAR * 2.5)) want = 1;                     // hysteresis: stay open in zone
+  if (moved) aimHits = aim ? aimHits + 1 : 0;                                  // aim must hold 2+ cursor samples: one jitter can't open it
+  if (!still || Math.hypot(cursor.x - still.x, cursor.y - still.y) > 6) still = { x: cursor.x, y: cursor.y, t: now };
+  nearSince = d < NEAR * 2 ? nearSince || now : 0;
+  const intent = d < NEAR * 2 && (now - still.t >= 100 || now - nearSince >= 300);   // hoverIntent: slowed (<6px/100ms) or dwelled 300ms
+  if (hoverHit || d === 0 || aimHits >= 2 || intent || (rp > 0.5 && d < NEAR * 2.5)) want = 1;   // in zone, aimed, intent, or hysteresis
   if (want > 0.9) wantUntil = now + GRACE;
   else if (now < wantUntil) want = 1;                                          // grace before collapsing
   return want;
@@ -442,7 +458,7 @@ function hudFrame(now) {
   if (ps !== hudP) { hudP = ps; hud.style.setProperty('--p', ps); hud.style.setProperty('--a', a.toFixed(4)); }
   hud.classList.toggle('live', p > 0.6);
   const was = hovering; hovering = p > 0.5;
-  if (hovering && !was) lastInteract = now;
+  if (hovering && !was) { lastInteract = now; markSeen(); }
   const cur = cursor.x + ',' + cursor.y, settled = rv === 0 && rp === target && cur === hudCur;
   hudCur = cur;
   park(hudL, !settled);                      // settled spring + still cursor: drop to the 10 Hz check
@@ -479,7 +495,7 @@ document.addEventListener('mouseup', e => {
 cv.addEventListener('contextmenu', e => { e.preventDefault(); api.menu(); });
 
 function poke() {
-  lastInteract = performance.now();
+  lastInteract = performance.now(); markSeen();
   api.pet();
   const w = agentsIn('waiting'), s = agentsIn('stalled');
   if (w.length || s.length) {
@@ -505,7 +521,7 @@ function openChat() {
   api.focus();
   if (snap && !snap.hasKey) $('keyForm').classList.remove('hidden');
   setTimeout(() => ($('keyForm').classList.contains('hidden') ? $('chatInput') : $('keyInput')).focus(), 50);
-  if (!$('msgs').children.length) addMsg('pet', pick(['what\'s up?', 'hey :) try a chip below, or just talk', 'I see your repo. ask me anything.']));
+  if (!$('msgs').children.length) addMsg('pet', 'ask about this repo, or pick a chip.\nreads ~/.claude locally. chat sends your message + repo context to Anthropic.');
 }
 function closeChat() { chatOpen = false; $('chat').classList.add('hidden'); ['keyForm', 'renameForm'].forEach(id => $(id).classList.add('hidden')); }
 $('chatClose').onclick = closeChat;
@@ -530,10 +546,10 @@ function addMsg(who, text, cls = '') {
 }
 
 const MODES = {
-  commit: ['✍️ commit msg', 'Write a commit message for my current uncommitted changes. Conventional-commit subject ≤72 chars, blank line, 2–5 terse bullets. Output ONLY the message in a single ```text code block.'],
-  vibe: ['🔍 vibe check', 'Vibe check: look at my diff size, time since last commit, and what my agents are doing. Anything risky in the diff? Give one blunt, specific recommendation.'],
-  agent: ['🤖 what\'s my agent doing?', 'What is my coding agent doing right now / what did it last say? Summarize in 2–3 lines and tell me whether it needs me.'],
-  next: ['🎯 next step?', 'Given my recent commits, current diff, and my agent\'s latest messages: what is the single best next step? One line, then a one-line why. If it helps, give me the exact prompt to paste to my agent.'],
+  commit: ['commit msg', 'Write a commit message for my current uncommitted changes. Conventional-commit subject ≤72 chars, blank line, 2–5 terse bullets. Output ONLY the message in a single ```text code block.'],
+  vibe: ['vibe check', 'Vibe check: look at my diff size, time since last commit, and what my agents are doing. Anything risky in the diff? Give one blunt, specific recommendation.'],
+  agent: ['what\'s my agent doing?', 'What is my coding agent doing right now / what did it last say? Summarize in 2–3 lines and tell me whether it needs me.'],
+  next: ['next step?', 'Given my recent commits, current diff, and my agent\'s latest messages: what is the single best next step? One line, then a one-line why. If it helps, give me the exact prompt to paste to my agent.'],
 };
 let sending = false;
 async function send(text, mode = 'chat') {

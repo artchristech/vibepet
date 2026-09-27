@@ -5,7 +5,7 @@
     "cursor"
   ],
   "settle": 1500,
-  "prelude": "(() => {\n  clearInterval(window.__dpT);\n  const now = Date.now();\n  snap = { name: 'Net', level: 1, xp: 0, xpLo: 0, xpHi: 40, fuel: 80, mood: 70, commits: 0, agents: [],\n    git: { root: '/x/vibepet', name: 'vibepet', branch: 'main', lines: 84, files: 3, untracked: 1, lastCommitAt: now - 25*60e3, lastSubject: 'wip' },\n    muted: true, animations: false, game: false, hasKey: true, hour: 14, watching: 'auto' };\n  renderHud(); closeChat(); bubbleQ = []; hideBubble(); bubble.classList.add('hidden');\n  document.getElementById('msgs').innerHTML = ''; history = [];\n  anim = { kind: null, until: 0 }; parts.length = 0; exiting = null; emitT = {};\n  nextBlink = performance.now() + 1e9; blinkUntil = 0; nextChatter = performance.now() + 1e9;\n  cursor = { x: -999, y: -999 }; lastCur = null; vel = { x: 0, y: 0 };\n  hoverHit = false; hovering = false; rp = 0; rv = 0; wantUntil = 0;\n  lastInteract = performance.now();\n  document.getElementById('hud').classList.remove('gone');\n})()",
+  "prelude": "(() => {\n  clearInterval(window.__dpT);\n  const now = Date.now();\n  snap = { name: 'Net', level: 1, xp: 0, xpLo: 0, xpHi: 40, fuel: 80, mood: 70, commits: 0, agents: [],\n    git: { root: '/x/vibepet', name: 'vibepet', branch: 'main', lines: 84, files: 3, untracked: 1, lastCommitAt: now - 25*60e3, lastSubject: 'wip' },\n    muted: true, animations: false, game: false, hasKey: true, hour: 14, watching: 'auto' };\n  renderHud(); closeChat(); bubbleQ = []; hideBubble(); bubble.classList.add('hidden');\n  document.getElementById('msgs').innerHTML = ''; history = [];\n  anim = { kind: null, until: 0 }; parts.length = 0; exiting = null; emitT = {};\n  nextBlink = performance.now() + 1e9; blinkUntil = 0; nextChatter = performance.now() + 1e9;\n  cursor = { x: -999, y: -999 }; lastCur = null; vel = { x: 0, y: 0 };\n  hoverHit = false; hovering = false; rp = 0; rv = 0; wantUntil = 0; aimHits = 0; still = null; nearSince = 0;\n  lastInteract = performance.now();\n  document.getElementById('hud').classList.remove('gone');\n})()",
   "states": [
     {
       "id": "01-idle",
@@ -54,7 +54,7 @@
     },
     {
       "id": "10-bubble-done",
-      "renderer": "snap.agents = [{ name: 'claude', phase: 'waiting', since: Date.now() - 2*1000 }]; renderHud();",
+      "renderer": "snap.agents = [{ name: 'claude', phase: 'ready', since: Date.now() - 2*1000 }]; renderHud();",
       "main": "({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.send('event', { kind: 'agentDone', text: 'claude is done', agent: 'claude' })",
       "wait": 1400
     },
@@ -66,17 +66,17 @@
     },
     {
       "id": "12-chat",
-      "renderer": "addMsg('pet', \"what's up?\"); openChat();",
+      "renderer": "openChat();",
       "wait": 600
     },
     {
       "id": "13-chat-convo",
-      "renderer": "addMsg('pet', \"what's up?\"); openChat(); addMsg('user', '✍️ commit msg'); addMsg('pet', 'here you go:\\n```text\\nfeat(hud): spring-driven shadow pill\\n\\n- morph ground shadow into toolbar\\n- predict reveal from cursor aim\\n```');",
+      "renderer": "openChat(); addMsg('user', 'commit msg'); addMsg('pet', 'here you go:\\n```text\\nfeat(hud): spring-driven shadow pill\\n\\n- morph ground shadow into toolbar\\n- predict reveal from cursor aim\\n```');",
       "wait": 600
     },
     {
       "id": "14-chat-nokey",
-      "renderer": "snap.hasKey = false; addMsg('pet', \"what's up?\"); openChat();",
+      "renderer": "snap.hasKey = false; openChat();",
       "wait": 600
     },
     {

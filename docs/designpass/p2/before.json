@@ -1,0 +1,185 @@
+{
+  "states": {
+    "01-idle": {
+      "axes": {
+        "reveal-and-hover-feel": 72,
+        "status-signalling": 78,
+        "sprite-and-idle": 80,
+        "interruptions-and-bubbles": 85,
+        "restraint-and-footprint": 88,
+        "idle-cost": 68
+      },
+      "score": 78.5,
+      "note": "Thin soft ground shadow reads as shadow; dim grey LED calm-neutral; memory 323MB caps idle-cost."
+    },
+    "02-hud-half": {
+      "axes": {
+        "reveal-and-hover-feel": 74,
+        "status-signalling": 75,
+        "sprite-and-idle": 80,
+        "interruptions-and-bubbles": 85,
+        "restraint-and-footprint": 84,
+        "idle-cost": 68
+      },
+      "score": 77.67,
+      "note": "Half reveal is one larger dark capsule under feet, no icons shown early; slab is fairly opaque."
+    },
+    "03-hud-full": {
+      "axes": {
+        "reveal-and-hover-feel": 76,
+        "status-signalling": 75,
+        "sprite-and-idle": 80,
+        "interruptions-and-bubbles": 85,
+        "restraint-and-footprint": 82,
+        "idle-cost": 68
+      },
+      "score": 77.67,
+      "note": "Pill with edit + more icons tucked under feet; only two controls, primary sits left of centre line."
+    },
+    "04-hud-aim": {
+      "axes": {
+        "reveal-and-hover-feel": 82,
+        "status-signalling": 75,
+        "sprite-and-idle": 80,
+        "interruptions-and-bubbles": 85,
+        "restraint-and-footprint": 82,
+        "idle-cost": 68
+      },
+      "score": 78.67,
+      "note": "Pill already fully open at aim state, prediction visible; same geometry as 03."
+    },
+    "05-working": {
+      "axes": {
+        "reveal-and-hover-feel": 72,
+        "status-signalling": 76,
+        "sprite-and-idle": 78,
+        "interruptions-and-bubbles": 85,
+        "restraint-and-footprint": 88,
+        "idle-cost": 68
+      },
+      "score": 77.83,
+      "note": "Green 2x2 LED + flat focused mouth; no extra shape cue beyond colour/face."
+    },
+    "06-waiting": {
+      "axes": {
+        "reveal-and-hover-feel": 72,
+        "status-signalling": 82,
+        "sprite-and-idle": 80,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 80,
+        "idle-cost": 68
+      },
+      "score": 77.33,
+      "note": "Amber LED plus '!' glyph and open mouth: shape+colour, glanceable; glyph adds an element."
+    },
+    "07-stalled": {
+      "axes": {
+        "reveal-and-hover-feel": 72,
+        "status-signalling": 84,
+        "sprite-and-idle": 80,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 80,
+        "idle-cost": 68
+      },
+      "score": 77.67,
+      "note": "Red LED + '?' glyph + square wide eyes read as concerned, distinct from waiting."
+    },
+    "08-agents-mixed": {
+      "axes": {
+        "reveal-and-hover-feel": 72,
+        "status-signalling": 72,
+        "sprite-and-idle": 78,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 80,
+        "idle-cost": 68
+      },
+      "score": 75.33,
+      "note": "Shows amber '!' winner; unclear which agent won, and stuck vs your-move priority not evident."
+    },
+    "09-sleeping": {
+      "axes": {
+        "reveal-and-hover-feel": 72,
+        "status-signalling": 80,
+        "sprite-and-idle": 80,
+        "interruptions-and-bubbles": 85,
+        "restraint-and-footprint": 88,
+        "idle-cost": 68
+      },
+      "score": 78.83,
+      "note": "Eyes shut, grey dim LED, static; LED dim looks same as idle LED."
+    },
+    "10-bubble-done": {
+      "axes": {
+        "reveal-and-hover-feel": 72,
+        "status-signalling": 66,
+        "sprite-and-idle": 76,
+        "interruptions-and-bubbles": 74,
+        "restraint-and-footprint": 76,
+        "idle-cost": 68
+      },
+      "score": 72.0,
+      "note": "'claude is done' one-line bubble anchored on head, but routine finish uses same amber '!' as needs-input."
+    },
+    "11-bubble-stalled": {
+      "axes": {
+        "reveal-and-hover-feel": 72,
+        "status-signalling": 82,
+        "sprite-and-idle": 80,
+        "interruptions-and-bubbles": 84,
+        "restraint-and-footprint": 80,
+        "idle-cost": 68
+      },
+      "score": 77.67,
+      "note": "Amber 'codex needs approval' bubble centred on Net, names agent+action, no '!' in copy."
+    },
+    "12-chat": {
+      "axes": {
+        "reveal-and-hover-feel": 70,
+        "status-signalling": 75,
+        "sprite-and-idle": 78,
+        "interruptions-and-bubbles": 66,
+        "restraint-and-footprint": 60,
+        "idle-cost": 68
+      },
+      "score": 69.5,
+      "note": "Large mostly-empty panel for 'what's up?'; chips wrap to 2 rows; hard-edged panel vs soft pill."
+    },
+    "13-chat-convo": {
+      "axes": {
+        "reveal-and-hover-feel": 70,
+        "status-signalling": 75,
+        "sprite-and-idle": 78,
+        "interruptions-and-bubbles": 56,
+        "restraint-and-footprint": 62,
+        "idle-cost": 68
+      },
+      "score": 68.17,
+      "note": "Copy button overlaps 'shadow' code text; top message clipped at panel top; chips wrap."
+    },
+    "14-chat-nokey": {
+      "axes": {
+        "reveal-and-hover-feel": 70,
+        "status-signalling": 75,
+        "sprite-and-idle": 78,
+        "interruptions-and-bubbles": 70,
+        "restraint-and-footprint": 62,
+        "idle-cost": 68
+      },
+      "score": 70.5,
+      "note": "Key copy mentions keychain and local env in short paragraph with clear save; chips still wrap."
+    },
+    "15-game-anim-on": {
+      "axes": {
+        "reveal-and-hover-feel": 70,
+        "status-signalling": 72,
+        "sprite-and-idle": 58,
+        "interruptions-and-bubbles": 82,
+        "restraint-and-footprint": 72,
+        "idle-cost": 68
+      },
+      "score": 70.33,
+      "note": "Laptop covers mouth/lower face, crown crowds antenna, pink headphones widen silhouette."
+    }
+  },
+  "overall": 75.18
+}

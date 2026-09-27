@@ -15,8 +15,8 @@
       <button id="chatClose" title="close (esc)">×</button>
     </div>
     <form id="keyForm" class="inline-form hidden">
-      <p>Give me an Anthropic API key and I can talk. It's encrypted in your keychain. (Or launch with <code>ANTHROPIC_API_KEY</code> set.)</p>
-      <div class="row"><input id="keyInput" type="password" placeholder="sk-ant-…" autocomplete="off"><button>save</button></div>
+      <p>Chat needs an Anthropic API key. It stays on this Mac, encrypted in your keychain.</p>
+      <div class="row"><input id="keyInput" type="password" placeholder="sk-ant-…" autocomplete="off" title="or launch with ANTHROPIC_API_KEY set"><button>save</button></div>
     </form>
     <form id="renameForm" class="inline-form hidden">
       <p>What should I be called?</p>
@@ -24,10 +24,10 @@
     </form>
     <div id="msgs"></div>
     <div id="chips">
-      <button data-mode="commit">✍️ commit msg</button>
-      <button data-mode="vibe">🔍 vibe check</button>
-      <button data-mode="agent">🤖 agent?</button>
-      <button data-mode="next">🎯 next</button>
+      <button data-mode="commit">commit msg</button>
+      <button data-mode="vibe">vibe check</button>
+      <button data-mode="agent">agent?</button>
+      <button data-mode="next">next</button>
     </div>
     <form id="chatForm"><input id="chatInput" placeholder="say something…" autocomplete="off"><button>↵</button></form>
   </div>
