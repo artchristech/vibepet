@@ -214,7 +214,7 @@ function draw(now) {
   }
 
   // crown (L7+)
-  if (lvl >= 7) outlined(cx - 10, top - 1, SPR.crown, '#ffcf3f');
+  if (lvl >= 7) outlined(cx - 12, top - 6, SPR.crown, '#ffcf3f');   // perched on the headphone band, clear of the antenna
 
   // --- face ---
   const ey = cy - 3 + ly, exL = cx - 6 + lx, exR = cx + 4 + lx;
@@ -237,7 +237,7 @@ function draw(now) {
 
   // mouth
   const mx = cx - 1 + lx, my = cy + 2 + ly;
-  if (st === 'working') { if (!moving) rect(mx - 1, my + 1, 4, 1, OUT); /* else hidden behind laptop */ }
+  if (st === 'working') rect(mx - 1, my + 1, 4, 1, OUT);   // focused; stays visible above the laptop lid
   else if (needs && !moving) { rect(mx - 1, my, 4, 3, OUT); rect(mx, my + 1, 2, 1, C.base); }
   else if (st === 'eat') { if (Math.floor(t * 7) % 2) rect(mx - 1, my, 4, 3, OUT); else rect(mx - 1, my + 1, 4, 1, OUT); }
   else if (st === 'alert' || st === 'levelup' || st === 'exitfall') { rect(mx, my, 3, 3, OUT); rect(mx + 1, my + 1, 1, 1, '#ff7ab0'); }
@@ -248,17 +248,17 @@ function draw(now) {
 
   // laptop while the agent works — little hands typing
   if (st === 'working' && moving) {
-    const ly0 = cy + 1;
-    rect(cx - 8, ly0, 16, 9, OUT); rect(cx - 7, ly0 + 1, 14, 7, '#c9cfdc'); rect(cx - 7, ly0 + 1, 14, 1, '#e6eaf2');
-    rect(cx - 1, ly0 + 4, 2, 2, `hsl(152 80% ${60 + Math.sin(t * 3) * 10}%)`);
-    rect(cx - 10, ly0 + 9, 20, 3, OUT); rect(cx - 9, ly0 + 10, 18, 1, '#8a92a8');
+    const ly0 = cy + 5;                                   // low lid: the mouth stays in view
+    rect(cx - 8, ly0, 16, 6, OUT); rect(cx - 7, ly0 + 1, 14, 4, '#c9cfdc'); rect(cx - 7, ly0 + 1, 14, 1, '#e6eaf2');
+    rect(cx - 1, ly0 + 2, 2, 2, `hsl(152 80% ${60 + Math.sin(t * 3) * 10}%)`);
+    rect(cx - 10, ly0 + 6, 20, 3, OUT); rect(cx - 9, ly0 + 7, 18, 1, '#8a92a8');
     const k = Math.floor(t * 10) % 2;
-    rect(cx - 10, ly0 + 7 + k, 3, 2, C.base); rect(cx + 7, ly0 + 8 - k, 3, 2, C.base);
+    rect(cx - 10, ly0 + 4 + k, 3, 2, C.base); rect(cx + 7, ly0 + 5 - k, 3, 2, C.base);
   }
 
   // over-head indicators
   if (needs) outlined(cx + 8, top - 10 + bob * 0, SPR.bang, '#ffcf3f');
-  if (st === 'stalled') outlined(cx + 8, top - 10, SPR.what, '#ff8a95');
+  if (st === 'stalled') outlined(cx + 8, top - 10, SPR.what, LED.stuck);
   if (st === 'ready') outlined(cx + 8, top - 9, SPR.tick, LED.ready);
 
   // ambient emitters
@@ -290,7 +290,7 @@ function say(text, { ms = 5500, prio = false, alert = false } = {}) {
 function show({ text, ms, alert }) {
   clearTimeout(bubbleTimer); clearInterval(typeTimer);
   bubbleBusy = true;
-  bubble.className = 'hit' + (alert ? ' alert' : '');
+  bubble.className = 'hit' + (alert === 'stuck' ? ' alert stuck' : alert ? ' alert' : '');
   bubble.textContent = '';
   let i = 0;
   typeTimer = setInterval(() => {
@@ -360,8 +360,8 @@ api.on('event', e => {
   lastInteract = performance.now(); wake();
   switch (e.kind) {
     case 'agentDone': say(e.text, { prio: true, ms: 4000 }); break;   // routine finish: one quiet line, no amber, no sound
-    case 'agentNeeds':
-    case 'agentStalled': say(e.text, { prio: true, alert: true, ms: 8000 }); tune([440, 330]); break;
+    case 'agentNeeds': say(e.text, { prio: true, alert: true, ms: 8000 }); tune([440, 330]); break;
+    case 'agentStalled': say(e.text, { prio: true, alert: 'stuck', ms: 8000 }); break;   // stuck = red, same as LED + glyph
     case 'commit': transient('eat', 1300); setTimeout(() => transient('celebrate', 2200), 1300);
       spawn('spark', 30, { x: 28, y: 22, spread: 3, up: 2, g: 0.05, colors: CONFETTI }); say(e.text, { prio: true }); tune([523, 659, 784, 1047], 80); break;
     case 'levelup': transient('levelup', 3500); spawn('spark', 60, { x: 28, y: 20, spread: 4, up: 2.5, g: 0.05, colors: CONFETTI });
@@ -525,6 +525,7 @@ function openChat() {
 }
 function closeChat() { chatOpen = false; $('chat').classList.add('hidden'); ['keyForm', 'renameForm'].forEach(id => $(id).classList.add('hidden')); }
 $('chatClose').onclick = closeChat;
+$('msgs').addEventListener('scroll', e => e.target.classList.toggle('fade', e.target.scrollTop > 0));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeChat(); });
 
 function renderMd(text) {
@@ -540,8 +541,9 @@ function addMsg(who, text, cls = '') {
   el.querySelectorAll('.copy').forEach(b => b.onclick = () => {
     api.copy(b.nextElementSibling.textContent); b.textContent = 'copied!';
   });
-  $('msgs').appendChild(el);
-  $('msgs').scrollTop = 1e9;
+  const m = $('msgs'); m.appendChild(el);
+  m.scrollTop = who === 'pet' ? el.offsetTop - m.offsetTop - 6 : 1e9;   // a reply opens at its first line
+  m.classList.toggle('fade', m.scrollTop > 0);
   return el;
 }
 

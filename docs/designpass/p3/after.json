@@ -1,0 +1,185 @@
+{
+  "states": {
+    "01-idle": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 86,
+        "idle-cost": 68
+      },
+      "score": 81.0,
+      "note": "Shadow is pet-width capsule under feet, slightly dark but reads as ground; grey LED + soft smile = calm neutral; no chrome."
+    },
+    "02-hud-half": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 85,
+        "idle-cost": 68
+      },
+      "score": 80.83,
+      "note": "Half-reveal is same capsule scaled a bit wider, no icons shown, no ghost; shadow still fairly dark slab."
+    },
+    "03-hud-full": {
+      "axes": {
+        "reveal-and-hover-feel": 85,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 83,
+        "idle-cost": 68
+      },
+      "score": 81.33,
+      "note": "Pill tucks under feet with edit (primary) + divider + \u22ef; even margins, concentric radius; slight tight gap to feet."
+    },
+    "04-hud-aim": {
+      "axes": {
+        "reveal-and-hover-feel": 87,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 83,
+        "idle-cost": 68
+      },
+      "score": 81.67,
+      "note": "Pill fully open while cursor is still out: aim prediction visible."
+    },
+    "05-working": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 84,
+        "sprite-and-idle": 85,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 87,
+        "idle-cost": 68
+      },
+      "score": 81.67,
+      "note": "Green LED + flat focused mouth, no glyph; distinct from idle but mostly via LED colour + mouth."
+    },
+    "06-waiting": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 87,
+        "sprite-and-idle": 86,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 85,
+        "idle-cost": 68
+      },
+      "score": 82.0,
+      "note": "Amber LED + amber '!' glyph + open-mouth attentive face: shape+colour, glanceable."
+    },
+    "07-stalled": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 88,
+        "sprite-and-idle": 86,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 84,
+        "idle-cost": 68
+      },
+      "score": 82.0,
+      "note": "Red LED + red '?' + wide square eyes, wavy mouth = concerned; unmistakable, distinct shape."
+    },
+    "08-agents-mixed": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 84,
+        "sprite-and-idle": 85,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 84,
+        "idle-cost": 68
+      },
+      "score": 81.17,
+      "note": "Three tiny per-agent LEDs + amber '!' wins; needs-input over blocked is Codex order, but tiny dots are hard to parse."
+    },
+    "09-sleeping": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 86,
+        "sprite-and-idle": 86,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 88,
+        "idle-cost": 68
+      },
+      "score": 82.33,
+      "note": "Eyes shut, LED dark/dimmed, no Zzz; calm static sleep frame."
+    },
+    "10-bubble-done": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 85,
+        "sprite-and-idle": 85,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 84,
+        "idle-cost": 68
+      },
+      "score": 81.33,
+      "note": "'claude is done' neutral dark bubble, tail to head, centred, one line; green check glyph = ready distinct from needs-input."
+    },
+    "11-bubble-stalled": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 87,
+        "sprite-and-idle": 86,
+        "interruptions-and-bubbles": 88,
+        "restraint-and-footprint": 83,
+        "idle-cost": 68
+      },
+      "score": 82.0,
+      "note": "'codex needs approval' with red dot + red border reserved for blocker; names agent+action, centred on head."
+    },
+    "12-chat": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 76,
+        "idle-cost": 68
+      },
+      "score": 79.33,
+      "note": "Rounded dark panel matches pill; empty state states ~/.claude local read; chips one row; panel is sizeable for need."
+    },
+    "13-chat-convo": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 84,
+        "restraint-and-footprint": 75,
+        "idle-cost": 68
+      },
+      "score": 78.83,
+      "note": "Copy label sits above code, no overlap; first user msg visible; panel large; faint scrollbar on right edge."
+    },
+    "14-chat-nokey": {
+      "axes": {
+        "reveal-and-hover-feel": 80,
+        "status-signalling": 82,
+        "sprite-and-idle": 84,
+        "interruptions-and-bubbles": 88,
+        "restraint-and-footprint": 82,
+        "idle-cost": 68
+      },
+      "score": 80.67,
+      "note": "Short two-line key explanation (stays on Mac, keychain) + clear 'save' primary; compact panel."
+    },
+    "15-game-anim-on": {
+      "axes": {
+        "reveal-and-hover-feel": 78,
+        "status-signalling": 78,
+        "sprite-and-idle": 68,
+        "interruptions-and-bubbles": 86,
+        "restraint-and-footprint": 78,
+        "idle-cost": 68
+      },
+      "score": 76.0,
+      "note": "Crown crowds antenna LED, headphone band breaks top outline, laptop hides mouth; stays within silhouette, no particles."
+    }
+  },
+  "overall": 80.81
+}
