@@ -67,17 +67,20 @@
     {
       "id": "12-chat",
       "renderer": "openChat();",
-      "wait": 600
+      "wait": 600,
+      "main": "({ ipcMain }) => { ipcMain.removeHandler('chat-via'); ipcMain.handle('chat-via', () => 'key'); }"
     },
     {
       "id": "13-chat-convo",
       "renderer": "openChat(); addMsg('user', 'commit msg'); addMsg('pet', 'here you go:\\n```text\\nfeat(hud): spring-driven shadow pill\\n\\n- morph ground shadow into toolbar\\n- predict reveal from cursor aim\\n```');",
-      "wait": 600
+      "wait": 600,
+      "main": "({ ipcMain }) => { ipcMain.removeHandler('chat-via'); ipcMain.handle('chat-via', () => 'key'); }"
     },
     {
       "id": "14-chat-nokey",
       "renderer": "snap.hasKey = false; openChat();",
-      "wait": 600
+      "wait": 600,
+      "main": "({ ipcMain }) => { ipcMain.removeHandler('chat-via'); ipcMain.handle('chat-via', () => null); }"
     },
     {
       "id": "15-game-anim-on",
@@ -100,9 +103,20 @@
       "wait": 900
     },
     {
+      "id": "19-roster-receipt",
+      "renderer": "const now = Date.now(); snap.agents = [{ id: 's-api', name: 'api', title: 'Rate limiter for the public API', phase: 'ready', since: now - 120*1000, ask: 'Added a token bucket per key.', receipt: { files: ['/x/api/src/limiter.ts', '/x/api/src/routes.ts', '/x/api/test/limiter.test.ts'], add: 84, del: 12, check: { cmd: 'npm test', full: 'npm test -- --runInBand', at: now - 3*60e3, ok: true }, stale: false, truncated: false } }, { id: 's-ui', name: 'ui', title: 'Tighten the settings sheet', phase: 'waiting', since: now - 60*1000, ask: 'Keep the old toggle labels?', receipt: { files: ['/x/ui/Settings.swift', '/x/ui/Theme.swift'], add: 20, del: 9, check: { cmd: 'xcodebuild -scheme UI', full: 'xcodebuild -scheme UI build', at: now - 9*60e3, ok: true }, stale: true, truncated: false } }]; renderHud(); (() => { const c = document.getElementById('pet').getBoundingClientRect(); cursor = { x: c.left + c.width/2, y: c.top + c.height*0.62 }; lastCur = { ...cursor }; vel = { x: 0, y: 0 }; })();",
+      "wait": 900
+    },
+    {
       "id": "19-summon",
       "main": "({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.send('summon')",
       "wait": 700
+    },
+    {
+      "id": "20-chat-via-claude",
+      "renderer": "snap.hasKey = false; openChat();",
+      "main": "({ ipcMain }) => { ipcMain.removeHandler('chat-via'); ipcMain.handle('chat-via', () => 'claude'); }",
+      "wait": 600
     }
   ]
 }

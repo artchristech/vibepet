@@ -201,3 +201,119 @@ Merges agency#1, excellence#2 and seamless#1's summon. Loop 1 deferred it until 
 - **Idle diet v2**: engineering hygiene with no user-visible payoff this loop. P3's per-child `{size,mtime}` cache is the pattern to extend to `scanAgents` later.
 - **One material (bubble grows from the pill, no typewriter blips)**: the blip in `show()` is a known no-sound bug. It's a designpass fix, not a product pick.
 - **Live roster ages + ⌘-click dismiss**: snoozing needs/stuck can hide a real blocker, and 1 Hz age updates add a timer for little gain.
+
+---
+
+## Loop 3 (2026-09-27, branch design/0927)
+
+Pool: 22 ideas from five lenses. After merging duplicates: Receipt line = Proof of green (usefulness#1 = excellence#3), keyless compose (seamless#1 ~ agency#2), focus hand-back (seamless#4 ⊂ excellence#5), honest first run (seamless#5 ~ excellence#4), and a file-overlap family (crossed wires ~ stale-read).
+
+Checked before speccing (read-only):
+- `pmset -g assertions`: a live `claude` process holds its own `caffeinate -i -t 300` (PreventUserIdleSystemSleep), child of pid `claude`. Claude Code already keeps the Mac awake while it works, so novelty#1 is redundant.
+- `claude --help` (at `~/.local/bin/claude`): `-p`, `--no-session-persistence` ("sessions will not be saved to disk"), `--tools ""` ("Use \"\" to disable all tools"), `--system-prompt`, `--output-format json`, `--setting-sources`, and `--strict-mcp-config` all exist. `--bare` would skip hooks, but it refuses OAuth ("strictly ANTHROPIC_API_KEY"), so it's unusable for the keyless path.
+- `agents.js` `classify()` already computes `turnAt` (P3) and the backward walk. The Loop 2 check (`is_error:true`, `"Exit code N"`) still stands.
+- `scan()` already skips project dirs containing `private-tmp`.
+
+### Picked
+
+#### P5. Receipt line: what the turn touched, and whether it's green (V4 × N4 × F4 = 64)
+
+Merges usefulness#1 and excellence#3. This is the first carried candidate from Loop 2 ("proof of green"), with "what it touched" folded inline so it no longer needs a second hover layer. It answers the question a user has at handoff ("did it run the tests after its last edit, and how much did it change?") from data the pet already reads. Keyless, local, and pull-only.
+
+**Spec**
+- `agents.js`
+  - Export `CHECK_RE`, a runner-specific regex that matches anywhere in a Bash `command`: `(npm|pnpm|yarn|bun) (run )?(test|build|lint|typecheck|check)`, `npx (tsc|jest|vitest|eslint|playwright)`, `(^|[;&|] *)tsc\b`, `pytest`, `cargo (test|build|check|clippy)`, `go (test|build|vet)`, `xcodebuild`, `swift (test|build)`, `make( (test|check|build))?\b`, `node (--test|--check)`. A bare `build` or `test` word does **not** match, so `rm -rf build` isn't a check.
+  - Add `receipt(lines, turnAt, side)`, a forward pass from the first record with `timestamp >= turnAt`. It fully parses only lines containing `"tool_use"` or `"tool_result"`, and skips sidechain records unless `side`.
+    - Edits: `Edit`, `MultiEdit`, `Write` and `NotebookEdit` tool_use give `files` (a Set of `path.resolve(cwd, file_path)`), `add`/`del` (newline counts of `new_string`/`content` vs `old_string`, summed over MultiEdit `edits[]`), and `lastEditAt`.
+    - Check: the last Bash tool_use whose `command` matches `CHECK_RE` gives `{cmd: first line capped to 24 chars, full, id, at}`. It joins to the tool_result with the same `tool_use_id`. `is_error:true` or text matching `/^Exit code (\d+)/` gives `ok:false, exit:N`; any other result gives `ok:true`. No result in the tail means the check is still running or was truncated, so the verdict is `undefined`, not a guess.
+    - `truncated`: true when `turnAt` precedes the tail's first record timestamp, or when `turnAt` is the 45-min fallback.
+    - Returns `{files:[…], add, del, check?, stale: check && lastEditAt > check.at, truncated}`, or `undefined` when there are no edits and no check.
+  - `classify()` attaches `receipt` to every `out()`. It costs one extra pass over the already-read `lines`, with no extra file read.
+  - `kidPhase()` stores the child's `receipt` in `kidCache` (the child is classified with `side=true`).
+  - `fanout()` folds it into the parent. `files` is the union across counted children. The check is the latest by `at` across parent and children. `stale` is true if any edit in parent or child comes after that check. Subagents do most of the editing in this user's sessions (Agent appears in 114 of 120).
+- `main.js` `snapshot().agents[]` passes `receipt` through. No other main-process code reads it.
+- `renderer/app.js` `renderRoster()`, for `ready` and `waiting` rows only (`stuck` and running rows keep today's content):
+  - After the ask, append `<small class="rc" title="<file list, ≤12, then +N> · +add −del · <full cmd> · exit N">`.
+  - Content: `[≥]N file(s)` (≥ when `truncated`), then the verdict chip. `✓ <cmd> <ago(at)>` is ok. `✗ <cmd> exit N` is a fail. `– edited after <cmd>` is stale. No check means no chip, never "untested", because a regex miss must read as unknown.
+  - If both the files and the check are absent, render nothing.
+  - `$('roster').onclick`: `if (e.target.closest('.rc [data-cmd]'))`, call `api.copy(full)` and return. That neither jumps nor calls `markSeen()`.
+- `renderer/style.css`: `.rc` is 10px, `font-variant-numeric: tabular-nums`, 55% opacity. `✓` uses the LED green, `✗` the LED red, and stale 45% grey. No `animation` or `transition` of its own. The row stays one line with ellipsis, so row height is unchanged.
+- It never feeds the LED, antenna, `say()`, `emit()`, `banner()` or sounds.
+
+**Acceptance**
+1. `node --check agents.js main.js renderer/app.js` passes. The app launches with a temp `--user-data-dir` and no console errors, and the real `~/Library/Application Support/vibepet` mtime is unchanged.
+2. `test/receipt.test.js` (tmp fixtures, never `~/.claude`):
+   - (a) An Edit of 2 files, then `npm test` with a success result gives `files.length === 2`, `check.ok === true`, `stale === false`.
+   - (b) `npm test` with a result `"Exit code 1\n…"` gives `ok:false, exit:1`.
+   - (c) A passing check, then an Edit gives `stale === true`.
+   - (d) Edits and no check give `check === undefined`.
+   - (e) A check tool_use with no tool_result in the tail gives `check.ok === undefined` and renders no chip.
+   - (f) `rm -rf build && mkdir build` doesn't match `CHECK_RE`. `cd x && pnpm run test` does.
+   - (g) Records before `turnAt` are ignored.
+   - (h) A tail whose first record is newer than `turnAt` gives `truncated === true`.
+   - (i) A parent with one child that edits 3 files and runs `cargo test` gives a parent receipt with 3 files and a `✓ cargo test` verdict.
+3. A cache check: a second `scanAgents()` with unchanged stats makes 0 extra `readTail` calls (the existing counter or spy).
+4. `grep -n "receipt" main.js renderer/app.js` hits only `snapshot()`, `renderRoster()` and the roster click handler.
+5. Add designpass state `19-roster-receipt` to `docs/designpass/states.json`: one ready row showing `3 files · ✓ npm test 4m` and one waiting row showing `– edited after tsc`. The capture shows both, and the pet canvas `getBoundingClientRect()` is identical to the `17-roster-none` state.
+6. `git diff` adds no `setInterval`, `requestAnimationFrame` or CSS `animation`.
+7. A read-only script over the real `~/.claude/projects` prints `{title, phase, files, check.cmd, ok, stale}` for live ready/waiting sessions and writes nothing. A human spot-checks 3 of them against the terminal.
+
+#### P6. Chat without a key: run it on the user's own `claude` login (V4 × N3 × F4 = 48)
+
+From seamless#1. Today a keyless user who double-clicks the pet hits the key form, and most vibe coders sign in to Claude Code with OAuth and have no `sk-ant` key. This turns the dead end into a working chat with zero setup. The API key becomes an optional speed-up.
+
+**Spec**
+- `main.js`
+  - Add `findClaude()`, which is lazy (first chat open only, never at launch or per tick) and caches `claudeBin` (a path or `null`) for the process lifetime.
+    - The order is `process.env.VIBEPET_CLAUDE_BIN` (a test hook), `~/.local/bin/claude`, `/opt/homebrew/bin/claude`, `/usr/local/bin/claude`, `~/.claude/local/claude`. Each is checked with `fs.accessSync(p, X_OK)`.
+    - As a last resort it runs one `execFile('/bin/zsh', ['-lc', 'command -v claude'], {timeout: 3000})`.
+  - Add `ipcMain.handle('chat-via')`, which returns `'key'` when `hasKey()`, else `'claude'` if `findClaude()` finds a binary, else `null`.
+  - `ipcMain.handle('chat')`: when there's no key and `claudeBin` is set, call `chatViaClaude(system, messages)`.
+    - `spawn(claudeBin, ['-p', '--no-session-persistence', '--tools', '', '--setting-sources', '', '--strict-mcp-config', '--output-format', 'json', '--model', state.model, '--system-prompt', system], {cwd: <os.tmpdir()>/vibepet-chat (mkdir -p), timeout: 90000})`.
+    - The transcript goes on stdin, flattened as `User: …` / `${state.name}: …` blocks. It's never passed as an argv value, so text starting with `-` can't be read as a flag.
+    - Parse the stdout JSON. If `!is_error`, return `{text: result, via: 'claude'}`. If the result matches `/log ?in|not logged|api key|auth/i`, return `{error: 'nokey'}` so the existing key form appears. Any other error returns its first line.
+    - On a non-zero exit with unparsable stdout, retry once without `--model`: the CLI may not know the API model id.
+    - One request in flight at a time. A second send waits (the renderer already blocks input while dots show).
+  - `--setting-sources ''` keeps the user's hooks (UserPromptSubmit, SessionStart, …) from firing on pet chat. **Verify by hand first.** If the CLI rejects the empty value, use `--settings '{"disableAllHooks":true}'` instead and note which in the commit.
+  - `system` is the existing `SYSTEM(state.name)` plus the `buildContext(mode)` block, unchanged. `state.mood` +1 on success, as the API path does.
+  - `{error: 'nokey'}` is returned only when there's neither a key nor a binary.
+- `preload.js`: expose `chatVia: () => ipcRenderer.invoke('chat-via')`.
+- `renderer/app.js` `openChat()`: show `#keyForm` only when `await api.chatVia() === null`. When it's `'claude'`, the first pet message is `using your Claude Code login · ⋯ → Set API key for faster replies`, followed by the existing privacy line. The existing waiting indicator runs during the 5–10 s wait; no new timer.
+- `renderer/index.html` `#keyForm <p>`: add one clause: `…or sign in to Claude Code (\`claude\`) and chat works without a key.`
+- The spawned `claude` is never visible to the pet as an agent. `--no-session-persistence` writes no jsonl, and the `private-tmp` cwd skip covers it if one ever does.
+
+**Acceptance**
+1. `node --check main.js preload.js renderer/app.js` passes, and the app launches with a temp `--user-data-dir`.
+2. Before wiring it in, run the exact argv by hand from `$TMPDIR/vibepet-chat` with `echo 'User: say hi' | claude -p …`. It exits 0 and prints JSON with `is_error:false` and a non-empty `result`. Record whether `--setting-sources ''` was accepted.
+3. With `ANTHROPIC_API_KEY` unset and `keyEnc` null (temp userData), the `vibe check` chip returns text and the key form never appears.
+4. Before and after that chat, `ls ~/.claude/projects | wc -l` is unchanged, `find ~/.claude/projects -newer <marker> -name '*.jsonl' -path '*vibepet-chat*'` finds nothing, and no roster row appears for it.
+5. With `VIBEPET_CLAUDE_BIN=/nonexistent`, `PATH=/usr/bin:/bin` and no candidates, the key form appears exactly as today, and no `claude` process is spawned (`pgrep -f 'claude -p'` stays empty).
+6. With `VIBEPET_CLAUDE_BIN` pointing at a stub script that prints `{"is_error":true,"result":"Invalid API key · Please run /login"}`, the key form appears and there's no crash or stack in the chat.
+7. A probe counter shows `findClaude()` runs 0 times from launch to 60 s idle and exactly once across two chat opens.
+8. With a key set, the API path is byte-identical to today. `git diff` shows the `fetch` branch untouched apart from the new keyless `else` branch.
+9. `git diff` adds no `setInterval`.
+
+**Why these two together:** P5 finishes the handoff story: the roster says who needs you (P2), what the turn did, and whether it's green, and one click jumps there (P1/P4). P6 fixes the one surface that dead-ends for most users. They touch disjoint code. P5 covers `agents.js` classify/fanout, `snapshot` and the roster row. P6 covers the `chat` IPC, preload, `openChat()` and the key form. Neither pushes anything unprompted, and both work without an API key.
+
+### Rejected (one line each)
+
+- **Keep the Mac awake while agents work (novelty#1)**: redundant. Live `claude` already runs `caffeinate -i -t 300` itself (verified in `pmset -g assertions`).
+- **Hold: SIGSTOP an agent (agency#1)**: its core premise is unverified (does Claude Code's API stream survive a multi-minute stop?), and a crash between STOP and CONT freezes the user's agent. Spike it on a scratch branch before it can be a pick.
+- **Dispatch: compose starts a real agent (agency#2)**: high agency, but it competes with P6 for the keyless compose field. It's also the first time the pet would launch processes, it needs Automation, and non-iTerm/Terminal hosts only get copy. Loop 4 candidate once P6 shows how keyless compose gets used.
+- **Resume in place (agency#3)**: depends on Dispatch's `openInTerminal`, and can start a second process on a session hidden in tmux/ssh/VS Code. Ship it with Dispatch, not before.
+- **Wake me for this one: one-shot bell (agency#4)**: bypassing the user's own Mute adds a hidden mode and a long-press gesture. It's too close to the rejected focus pin for too niche a moment.
+- **'You asked' line (usefulness#2)**: cheap and right, but it adds a second line to ready rows, just as P5 adds a receipt. Fold `you` into the row `title` tooltip in a designpass pass, not a pick.
+- **Crossed wires, pull-only (usefulness#3)**: now honest (pull-only), and it needs P5's `receipt.files`. First in line for Loop 4, on P5's data.
+- **Spin counter: same error ×N (usefulness#4)**: strong (V4 × N4 × F4), but it shares P5's turn walk and roster row, the same conflict rule that deferred proof-of-green in Loop 2. Co-first for Loop 4. Reuse P5's forward pass.
+- **You said: past answers recalled (novelty#2)**: novel, but a Jaccard match on short questions will surface confident wrong answers in the one moment the user is deciding. Needs a precision measurement on real transcripts first.
+- **Turn snapshots via `git stash create` (novelty#3)**: writes refs into the user's repo unprompted on every turn. The pet mirrors state and doesn't mutate the user's repo.
+- **Stale-read marker (novelty#4)**: same family as crossed wires, with worse precision (Reads fall out of the 128KB tail first). Merge into the crossed-wires build if at all.
+- **Waking the Mac doesn't set off false alarms (seamless#2)**: a real correctness bug, but the fix is a `powerMonitor` resume quiet window (2 ticks) that fits in a designpass pass. The full slept-interval bookkeeping in `classify` is overbuilt.
+- **Out of sight counts as away (seamless#3)**: the net effect is more banners for multi-monitor users, and the 30 s threshold is a guess. Revisit only with ledger evidence of missed questions.
+- **Borrowed focus: hand the keyboard back (seamless#4)**: a real bug with a permission-free route (`lsappinfo front`). It's small enough to be a designpass fix, and it rides along with P6 only if `closeChat()` is already being touched.
+- **The first hover teaches the pet (seamless#5)**: third lap for first-run honesty. It's a new-install aid, not the daily loop, so it's a designpass fix, and it stops being carried as a product pick.
+- **Idle diet v3 (excellence#1)**: rejected a third time for the same reason: no user-visible payoff. Drop it from future pools unless someone reports Activity Monitor numbers. Opportunistic: gate `scanGit()` on `.git/index` mtime.
+- **Jump that never fails silently (excellence#2)**: good polish (`-1743` detection, `open -b <bid> <root>` for editors), but low novelty. Polish-loop candidate.
+- **Proof of green (excellence#3)**: merged into P5.
+- **Honest first run / not-watching (excellence#4)**: see seamless#5. The `CLAUDE_CONFIG_DIR` resolution is a one-line correctness fix for the next designpass pass.
+- **Chat at glance speed: streaming + caching (excellence#5)**: key-gated polish on a secondary surface. P6 makes the keyless majority's chat work first. Streaming can follow for both paths (`--output-format stream-json`).

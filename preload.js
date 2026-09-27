@@ -12,6 +12,7 @@ contextBridge.exposeInMainWorld('pet', {
   pet: () => ipcRenderer.send('pet'),
   exitDone: () => ipcRenderer.send('exit-done'),
   chat: payload => ipcRenderer.invoke('chat', payload),
+  chatVia: () => ipcRenderer.invoke('chat-via'),
   setKey: k => ipcRenderer.invoke('set-key', k),
   jump: id => ipcRenderer.invoke('jump', id),
 });

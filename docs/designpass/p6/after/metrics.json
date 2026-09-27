@@ -1,0 +1,74 @@
+{
+  "states": {
+    "01-idle": {
+      "ok": true
+    },
+    "02-hud-half": {
+      "ok": true
+    },
+    "03-hud-full": {
+      "ok": true
+    },
+    "04-hud-aim": {
+      "ok": true
+    },
+    "05-working": {
+      "ok": true
+    },
+    "06-waiting": {
+      "ok": true
+    },
+    "07-stalled": {
+      "ok": true
+    },
+    "08-agents-mixed": {
+      "ok": true
+    },
+    "09-sleeping": {
+      "ok": true
+    },
+    "10-bubble-done": {
+      "ok": true
+    },
+    "11-bubble-stalled": {
+      "ok": true
+    },
+    "12-chat": {
+      "ok": true
+    },
+    "13-chat-convo": {
+      "ok": true
+    },
+    "14-chat-nokey": {
+      "ok": true
+    },
+    "15-game-anim-on": {
+      "ok": true
+    },
+    "16-roster-needs": {
+      "ok": true
+    },
+    "17-roster-none": {
+      "ok": true
+    },
+    "18-roster-fanout": {
+      "ok": true
+    },
+    "19-roster-receipt": {
+      "ok": true
+    },
+    "19-summon": {
+      "ok": true
+    },
+    "20-chat-via-claude": {
+      "ok": true
+    }
+  },
+  "userData": "/var/folders/gx/48qp82w15gsgjnh5g7qgvs9h0000gn/T/designpass-ud-24zN4B",
+  "userDataSeenByApp": "/private/var/folders/gx/48qp82w15gsgjnh5g7qgvs9h0000gn/T/designpass-ud-24zN4B",
+  "idle": {
+    "cpuPercent": 0.3,
+    "memMB": 323,
+    "processes": 4
+  }
+}

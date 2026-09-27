@@ -3,7 +3,7 @@ const { app, BrowserWindow, ipcMain, screen, Menu, dialog, safeStorage, Notifica
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
-const { execFile } = require('child_process');
+const { execFile, spawn } = require('child_process');
 const { readTail, textOf, scan, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
 
 const W = 360, H = 520;
@@ -208,7 +208,8 @@ function snapshot() {
   return {
     name: state.name, level, xp: state.xp, xpLo: xpForLevel(level), xpHi: xpForLevel(level + 1),
     fuel: state.fuel, mood: state.mood, commits: state.commits,
-    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout })),
+    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout,
+      receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
     git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto',
   };
@@ -275,9 +276,64 @@ Voice: warm, playful, a little cheeky, never cutesy-to-the-point-of-useless. Be 
 
 Things you care about: committing often (save points protect against a bad agent turn), reading diffs before shipping, answering the agent when it's waiting, not coding at 4am, and shipping.`;
 
+// no key: the user's own `claude` login. Looked up on the first chat open only, then cached for the process.
+let claudeBin;   // undefined = not looked yet, null = none
+function findClaude() {
+  if (claudeBin !== undefined) return Promise.resolve(claudeBin);
+  const h = os.homedir();
+  for (const p of [process.env.VIBEPET_CLAUDE_BIN, path.join(h, '.local/bin/claude'), '/opt/homebrew/bin/claude', '/usr/local/bin/claude', path.join(h, '.claude/local/claude')]) {
+    if (!p) continue;
+    try { fs.accessSync(p, fs.constants.X_OK); return Promise.resolve(claudeBin = p); } catch {}
+  }
+  return new Promise(res => execFile('/bin/zsh', ['-lc', 'command -v claude'], { timeout: 3000 }, (e, out) => {
+    const p = !e && out.trim().split('\n').pop();
+    res(claudeBin = p && p.startsWith('/') ? p : null);
+  }));
+}
+ipcMain.handle('chat-via', async () => hasKey() ? 'key' : (await findClaude()) ? 'claude' : null);
+
+const AUTH_RE = /log ?in|auth|api key|credential|unauthori[sz]ed|\b401\b/i;
+function runClaude(bin, args, input) {
+  return new Promise(res => {
+    const dir = path.join(os.tmpdir(), 'vibepet-chat');
+    try { fs.mkdirSync(dir, { recursive: true }); } catch {}
+    let out = '', done = false;
+    const fin = code => { if (done) return; done = true; clearTimeout(t); app.removeListener('will-quit', quit); res({ code, out }); };
+    let c; try { c = spawn(bin, args, { cwd: dir, stdio: ['pipe', 'pipe', 'ignore'] }); } catch { return res({ code: -2, out: '' }); }
+    const quit = () => c.kill('SIGKILL'); app.once('will-quit', quit);   // no orphan claude after the pet exits
+    const t = setTimeout(() => { c.kill('SIGKILL'); fin(-1); }, 90000);
+    c.stdout.on('data', b => { out += b; });
+    c.on('error', () => fin(-2));
+    c.on('close', fin);
+    c.stdin.on('error', () => {});
+    c.stdin.end(input);
+  });
+}
+let claudeBusy = false;
+async function chatViaClaude(bin, messages, mode) {
+  if (claudeBusy) return { error: 'still thinking about the last one' };
+  claudeBusy = true;
+  try {
+    // the repo context (diff included) rides stdin, never argv: argv is readable by `ps` and logged by endpoint agents
+    const sys = SYSTEM(state.name) + '\n\nThe user\'s message starts with a <live_context> block the app attached: their live repo and agent state.';
+    const input = '<live_context>\n' + await buildContext(mode) + '\n</live_context>\n\n' +
+      messages.map(m => `${m.role === 'user' ? 'User' : state.name}: ${m.content}`).join('\n\n');
+    const base = ['-p', '--no-session-persistence', '--tools', '', '--setting-sources', '', '--strict-mcp-config', '--output-format', 'json'];
+    const parse = s => { try { return JSON.parse(s); } catch { return null; } };
+    let r = await runClaude(bin, [...base, '--model', state.model, '--system-prompt', sys], input), j = parse(r.out);
+    // a model this login can't use comes back as parsable JSON with is_error (exit 1): retry once on the CLI's own default
+    if (!j && r.code > 0 || j?.is_error && (j.api_error_status === 404 || /selected model/i.test(j.result || ''))) { r = await runClaude(bin, [...base, '--system-prompt', sys], input); j = parse(r.out); }
+    if (!j) return AUTH_RE.test(r.out) ? { error: 'nokey' } : { error: r.code === -1 ? 'claude timed out' : r.code === -2 ? (claudeBin = undefined, 'couldn\'t start claude') : `claude exited ${r.code}` };
+    const text = String(j.result || '').trim();
+    if (j.is_error || !text) return AUTH_RE.test(text) ? { error: 'nokey' } : { error: text || 'claude returned nothing' };
+    state.mood = clamp(state.mood + 1);
+    return { text, via: 'claude' };
+  } finally { claudeBusy = false; }
+}
+
 ipcMain.handle('chat', async (_, { messages, mode }) => {
   const key = getKey();
-  if (!key) return { error: 'nokey' };
+  if (!key) { const bin = await findClaude(); return bin ? chatViaClaude(bin, messages, mode) : { error: 'nokey' }; }
   try {
     const ctx = await buildContext(mode);
     const r = await fetch('https://api.anthropic.com/v1/messages', {

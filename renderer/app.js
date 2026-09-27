@@ -422,11 +422,25 @@ function renderHud() {
 function renderRoster() {
   const rows = pending(true), has = new Set(rows.map(a => a.id));
   rows.push(...(snap?.agents || []).filter(a => a.phase === 'working' && a.fanout?.open > 0 && !has.has(a.id)));
-  $('roster').innerHTML = rows.slice(0, 4).map(a => { const sig = SIG[a.phase], fo = a.fanout; return `<button data-id="${esc(a.id)}"${fo ? ` title="${esc(foTitle(fo))}"` : ''}>` +
+  $('roster').innerHTML = rows.slice(0, 4).map(a => { const sig = SIG[a.phase], fo = a.fanout, rc = (sig === 'ready' || sig === 'needs') && rcLine(a.receipt);
+    const line = `${fo ? foPips(fo, LED[sig]) : ''}${esc(noteFor(a.id) || (sig === 'running' ? [`${fo.open} running`, fo.items.filter(k => k.open).map(k => k.desc).filter(Boolean).join(', ')].filter(Boolean).join(': ') : a.ask) ||
+      (sig === 'needs' ? 'has a question' : sig === 'stuck' ? 'needs approval' : 'done'))}`;
+    return `<button data-id="${esc(a.id)}"${fo ? ` title="${esc(foTitle(fo))}"` : ''}>` +
     `<i style="background:${LED[sig]}"></i><b>${esc(a.title || a.name)}</b><time>${ago(Date.now() - a.since)}</time>` +
-    `<span>${fo ? foPips(fo, LED[sig]) : ''}${esc(noteFor(a.id) || (sig === 'running' ? [`${fo.open} running`, fo.items.filter(k => k.open).map(k => k.desc).filter(Boolean).join(', ')].filter(Boolean).join(': ') : a.ask) ||
-      (sig === 'needs' ? 'has a question' : sig === 'stuck' ? 'needs approval' : 'done'))}</span></button>`; }).join('');
+    (rc ? `<span class="w"><span>${line}</span>${rc}</span></button>` : `<span>${line}</span></button>`); }).join('');
   rosterShow();
+}
+// the receipt: what the turn touched, and whether a check ran green after it. Pull-only: never feeds the LED, bubble or sound
+const short = f => f.split('/').slice(-2).join('/');
+function rcLine(rc) {
+  const files = [...(rc?.files || [])], c = rc?.check;
+  if (!files.length && !c) return '';
+  const tip = [...files.slice(0, 12).map(short), files.length > 12 && `+${files.length - 12} more`, files.length && `+${rc.add} −${rc.del}`,
+    c && c.full, c && c.ok === false && (c.exit != null ? `exit ${c.exit}` : 'failed')].filter(Boolean).join('\n');
+  const v = !c ? '' : rc.stale ? `<var class="stale">– edited after ${esc(c.cmd)}</var>` : c.ok ? `<var class="ok">✓ ${esc(c.cmd)} ${ago(Date.now() - c.at)}</var>`
+    : c.ok === false ? `<var class="bad">✗ ${esc(c.cmd)} ${c.exit != null ? 'exit ' + c.exit : 'failed'}</var>` : '';
+  if (!files.length && !v) return '';
+  return `<small class="rc" title="${esc(tip)}">${files.length ? `${rc.truncated ? '≥' : ''}${files.length} file${files.length === 1 ? '' : 's'}` : ''}${v}</small>`;
 }
 function foPips(fo, c) {
   const o = Math.min(fo.open, 8), d = Math.min(fo.done, 8 - o), more = fo.total - d - o;   // running pips first: they're the news
@@ -446,6 +460,8 @@ function rosterShow() {
 $('roster').onclick = e => {
   const id = e.target.closest('button[data-id]')?.dataset.id, a = (snap?.agents || []).find(x => x.id === id);
   if (!a) return;
+  const v = e.target.closest('.rc var');   // the verdict chip copies its command; no jump, and the row stays unread
+  if (v && a.receipt?.check) { api.copy(a.receipt.check.full); v.textContent = 'copied'; return; }
   if (api.jump) jumpTo(a); else if (a.ask) api.copy(a.ask);
 };
 
@@ -579,13 +595,16 @@ $('btnMenu').onclick = () => api.menu();
 
 // ================= chat =================
 let history = [];
-function openChat() {
+async function openChat() {
   chatOpen = true; lastInteract = performance.now();
   $('chat').classList.remove('hidden');
   api.focus();
-  if (snap && !snap.hasKey) $('keyForm').classList.remove('hidden');
-  setTimeout(() => ($('keyForm').classList.contains('hidden') ? $('chatInput') : $('keyInput')).focus(), 50);
-  if (!$('msgs').children.length) addMsg('pet', 'ask about this repo, or pick a chip.\nreads ~/.claude locally. chat sends your message + repo context to Anthropic.');
+  let via = 'key'; try { via = await api.chatVia(); } catch {}
+  if (!chatOpen) return;
+  if (via === null) $('keyForm').classList.remove('hidden');
+  if ($('renameForm').classList.contains('hidden')) ($('keyForm').classList.contains('hidden') ? $('chatInput') : $('keyInput')).focus();   // rename keeps its own focus
+  if (!$('msgs').children.length) addMsg('pet', (via === 'claude' ? 'using your Claude Code login · ⋯ → Set API key for faster replies\n' : 'ask about this repo, or pick a chip.\n') +
+    'reads ~/.claude locally. chat sends your message + repo context to Anthropic.');
 }
 function closeChat() { chatOpen = false; $('chat').classList.add('hidden'); ['keyForm', 'renameForm'].forEach(id => $(id).classList.add('hidden')); }
 $('chatClose').onclick = closeChat;

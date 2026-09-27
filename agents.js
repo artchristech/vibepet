@@ -52,6 +52,71 @@ function humanAt(d) {
   return Date.parse(d.timestamp) || 0;
 }
 
+// ---------- receipt: what this turn touched, and whether a check ran green after it ----------
+// a runner at the start of a command segment (after &&, ||, ;, |, a newline or env assignments); a bare 'build'/'test' word never matches
+const CHECK_RE = /(?:^|&&|\|\||[;|\n(])\s*(?:\w+=\S*\s+)*((?:npm|pnpm|yarn|bun)\s+(?:run\s+)?(?:test|build|lint|typecheck|check)\b|npx\s+(?:tsc|jest|vitest|eslint|playwright)\b|tsc\b|pytest\b|cargo\s+(?:test|build|check|clippy)\b|go\s+(?:test|build|vet)\b|xcodebuild\b|swift\s+(?:test|build)\b|make\s+(?:test|check|build)\b|node\s+--(?:test|check)\b)/;
+const FAIL_RE = /\b[1-9]\d* (?:failed|failing|failures?|errors?)\b|\bFAIL(?:ED)?\b|npm ERR!|^error(?:\[E\d+\])?:|\berror TS\d+|^# fail [1-9]/m;
+const PASS_RE = /\b[1-9]\d* (?:passed|passing)\b|\bBUILD SUCCEEDED\b|\btest result: ok\b|^ok\s|^# pass [1-9]/m;
+const EDITS = new Set(['Edit', 'MultiEdit', 'Write', 'NotebookEdit']);
+const nl = s => typeof s === 'string' && s ? s.split('\n').length : 0;
+const tsOf = l => Date.parse((l.match(/"timestamp":"([^"]+)"/) || [])[1]) || 0;
+function receipt(lines, turnAt, side = false, fallback = false) {
+  let first = 0, on = false, check, lastEditAt = 0, add = 0, del = 0;
+  const checks = [];
+  const edits = new Map(), results = new Map();   // tool_use_id -> edit | tool_result
+  for (const l of lines) {
+    if (!on) { const t = tsOf(l); if (!t) continue; first ||= t; if (t < turnAt) continue; on = true; }
+    if (!l.includes('"tool_use"') && !l.includes('"tool_result"')) continue;
+    let d; try { d = JSON.parse(l); } catch { continue; }
+    if (d.isSidechain && !side) continue;
+    const at = Date.parse(d.timestamp) || 0;
+    for (const c of Array.isArray(d.message?.content) ? d.message.content : []) {
+      if (c.type === 'tool_result') results.set(c.tool_use_id, c);
+      if (c.type !== 'tool_use') continue;
+      const i = c.input || {};
+      if (EDITS.has(c.name) && (i.file_path || i.notebook_path)) {
+        const pairs = c.name === 'MultiEdit' ? (i.edits || []).map(e => [e.new_string, e.old_string]) : [[i.new_string ?? i.content ?? i.new_source, i.old_string]];
+        edits.set(c.id, { file: path.resolve(d.cwd || '/', i.file_path || i.notebook_path), at,
+          add: pairs.reduce((s, p) => s + nl(p[0]), 0), del: pairs.reduce((s, p) => s + nl(p[1]), 0) });
+      } else if (c.name === 'Bash' && typeof i.command === 'string') {
+        const m = i.command.match(CHECK_RE);
+        if (m) { const s = m.index + m[0].indexOf(m[1]);
+          // a pipe, ';' or '||' after the runner hides its exit code ('npm test | tail' exits 0 on red): read the output instead
+          checks.push({ id: c.id, cmd: i.command.slice(s).split('\n')[0].slice(0, 24), full: i.command, at,
+            masked: /[|;\n]/.test(i.command.slice(s + m[1].length)) && !/pipefail/.test(i.command) }); }
+      }
+    }
+  }
+  const files = new Set();
+  for (const [id, e] of edits) {
+    if (results.get(id)?.is_error) continue;   // a rejected or failed edit touched nothing
+    files.add(e.file); add += e.add; del += e.del; lastEditAt = Math.max(lastEditAt, e.at);
+  }
+  for (const ch of checks) {
+    const r = results.get(ch.id), t = r ? textOf(r.content) || '' : '', x = t.match(/^Exit code (\d+)/);
+    if (r && !/^(?:The user doesn't want|\[Request interrupted|Command running in background)/.test(t)) {
+      if (r.is_error || x) Object.assign(ch, { ok: false, exit: x ? +x[1] : undefined });
+      else if (!ch.masked || PASS_RE.test(t) && !FAIL_RE.test(t)) ch.ok = true;
+      else if (FAIL_RE.test(t)) ch.ok = false;
+    }
+    delete ch.id; delete ch.masked;
+  }
+  // the last run of each command after the last edit; a red one outranks a later green of another command (lint ✓ can't hide test ✗)
+  const last = new Map(); for (const ch of checks) last.set(ch.cmd, ch);
+  check = [...last.values()].filter(ch => ch.at >= lastEditAt && ch.ok === false).sort((a, b) => b.at - a.at)[0] || checks[checks.length - 1];
+  if (!files.size && !check) return undefined;
+  return { files, add, del, check, lastEditAt, stale: !!check && lastEditAt > check.at, truncated: fallback || (!side && !!first && turnAt < first) };
+}
+// the parent's receipt, widened by its counted children: union of files, the latest check wins, stale if any edit follows it
+function foldReceipt(rc, kids) {
+  const all = [rc, ...kids].filter(Boolean);
+  if (all.length < 2) return rc;
+  const files = new Set(all.flatMap(r => [...r.files])), check = all.map(r => r.check).filter(Boolean).sort((a, b) => b.at - a.at)[0];
+  const lastEditAt = Math.max(0, ...all.map(r => r.lastEditAt));
+  return { files, add: all.reduce((s, r) => s + r.add, 0), del: all.reduce((s, r) => s + r.del, 0), check, lastEditAt,
+    stale: !!check && lastEditAt > check.at, truncated: all.some(r => r.truncated) };
+}
+
 // side: a subagent's own file, whose records are all sidechain
 function classify(file, mtimeMs, side = false) {
   const idle = Date.now() - mtimeMs;
@@ -65,8 +130,10 @@ function classify(file, mtimeMs, side = false) {
     if (!lines[i].includes('"type":"user"')) continue;
     try { turnAt = humanAt(JSON.parse(lines[i])); } catch {}
   }
+  const fallback = !turnAt && !side;
   turnAt ||= Date.now() - 45 * 60e3;
-  const out = (phase, ask, extra) => ({ phase, cwd, title, turnAt, ...(ask ? { ask: cap(ask) } : {}), ...extra });
+  const rc = receipt(lines, side ? 0 : turnAt, side, fallback);   // same lines, no extra read
+  const out = (phase, ask, extra) => ({ phase, cwd, title, turnAt, receipt: rc, ...(ask ? { ask: cap(ask) } : {}), ...extra });
   for (let i = lines.length - 1; i >= 0; i--) {
     let d; try { d = JSON.parse(lines[i]); } catch { continue; }
     if (!cwd && d.cwd) cwd = d.cwd;
@@ -103,12 +170,12 @@ function kidPhase(fp, st) {
   if (hit && hit.size === st.size && hit.mtimeMs === st.mtimeMs) return hit.k;
   let c = null; try { c = classify(fp, st.mtimeMs, true); } catch {}
   // stuck: silent > 90 s on a tool that isn't itself an Agent call. Subagent approvals block in the parent's terminal.
-  const k = { phase: c?.phase || null, stuck: c?.phase === 'stalled' && !c.agentWait, ask: c?.ask };
+  const k = { phase: c?.phase || null, stuck: c?.phase === 'stalled' && !c.agentWait, ask: c?.ask, rc: c?.receipt };
   if (kidCache.size > 4000) kidCache.clear();
   kidCache.set(fp, { size: st.size, mtimeMs: st.mtimeMs, k });
   return k;
 }
-function fanout(file, turnAt = Date.now() - 45 * 60e3) {
+function fanout(file, turnAt = Date.now() - 45 * 60e3, rc) {
   const dir = path.join(file.slice(0, -6), 'subagents');
   let names; try { names = fs.readdirSync(dir); } catch { return null; }
   // workflow runs keep their agents one level down: subagents/workflows/<run>/agent-*.jsonl
@@ -128,13 +195,15 @@ function fanout(file, turnAt = Date.now() - 45 * 60e3) {
   const min = Math.min(...kids.map(depth));
   const direct = (top.length ? top : kids.filter(k => depth(k) === min)).sort((a, b) => b.st.mtimeMs - a.st.mtimeMs).slice(0, 32);
   let open = 0, oldestOpenAt = null, stuck = 0, stuckAsk;
+  const rcs = [];
   const items = direct.map(k => {
     const p = kidPhase(k.fp, k.st), o = (p.phase === 'working' || p.phase === 'stalled') && now - k.st.mtimeMs < 10 * 60e3;
     if (o) { open++; const b = k.st.birthtimeMs || k.st.mtimeMs; oldestOpenAt = Math.min(oldestOpenAt ?? b, b); }
     if (o && p.stuck) { stuck++; stuckAsk ??= p.ask; }
+    if (p.rc) rcs.push(p.rc);
     return { desc: cap(plain(String(k.m.description || '')), 60), open: o };
   });
-  return { total: direct.length, done: direct.length - open, open, stuck, stuckAsk, oldestOpenAt, newestAt: newestAt || null, items };
+  return { total: direct.length, done: direct.length - open, open, stuck, stuckAsk, oldestOpenAt, newestAt: newestAt || null, items, receipt: foldReceipt(rc, rcs) };
 }
 // open children keep a parent working: not done, and not stuck on the Agent call it's waiting on. A question still needs you,
 // and so does a child stuck on its own tool (its approval prompt is in the parent's terminal): then the parent is stuck, on the child's ask.
@@ -160,13 +229,14 @@ function scan(root, sessions, onChange) {
       if (age > 45 * 60e3 && (age > 12 * 3600e3 || !(now - (fanout(fp)?.newestAt || 0) <= 45 * 60e3))) continue;   // silent parent, but children may still run
       let c; try { c = classify(fp, st.mtimeMs); } catch { continue; }
       if (!c) continue;
-      const fo = fanout(fp, c.turnAt), phase = settle(c, fo);
+      const fo = fanout(fp, c.turnAt, c.receipt), phase = settle(c, fo), receipt = fo ? fo.receipt : c.receipt;
+      if (fo) delete fo.receipt;
       const id = f.slice(0, -6);
       seen.add(id);
       const prev = sessions.get(id);
       const name = c.cwd ? path.basename(c.cwd) : dname.split('-').pop();
       const s = { id, file: fp, name, cwd: c.cwd, phase, since: prev && prev.phase === phase ? prev.since : now, mtime: Math.max(st.mtimeMs, fo?.newestAt || 0),
-        ask: phase === 'stalled' && fo?.stuck && (c.phase !== 'stalled' || c.agentWait) ? fo.stuckAsk : c.ask, title: c.title || prev?.title, fanout: fo?.total ? fo : undefined };
+        ask: phase === 'stalled' && fo?.stuck && (c.phase !== 'stalled' || c.agentWait) ? fo.stuckAsk : c.ask, title: c.title || prev?.title, fanout: fo?.total ? fo : undefined, receipt };
       if (prev && prev.phase !== phase) onChange?.(s, prev);
       sessions.set(id, s);
       if (phase !== 'parked') out.push(s);
@@ -264,4 +334,4 @@ async function focusTty(bid, tty) {
   return (await run('/usr/bin/osascript', ['-e', FOCUS[bid], tty], 5000))?.trim() === 'ok';
 }
 
-module.exports = { readTail, textOf, classify, fanout, settle, scan, psAll, locateSession, hostApp, bundleId, focusTty, run };
+module.exports = { CHECK_RE, receipt, readTail, textOf, classify, fanout, settle, scan, psAll, locateSession, hostApp, bundleId, focusTty, run };
