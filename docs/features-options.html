@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Features section — pet in action</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0d0f16; --tile: #14171f; --line: rgba(255,255,255,.07); --text: #f5f5f7; --dim: #86868b; --mint: #7ef0c1; --amber: #ffcf3f; --pink: #ff7ab0; --blue: #8fd3ff; --red: #ff5c6c;
+    --sans: Inter, -apple-system, system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.47 var(--sans); -webkit-font-smoothing: antialiased; letter-spacing: -.01em; }
+  canvas { image-rendering: pixelated; display: block; }
+  .memo { max-width: 980px; margin: 0 auto; padding: 72px 24px 0; color: var(--dim); font-size: 15px; }
+  .memo b { color: var(--text); font-weight: 600; }
+  .label { max-width: 1120px; margin: 0 auto; padding: 80px 24px 0; font: 600 12px var(--mono); color: var(--amber); letter-spacing: .08em; }
+  .label span { color: var(--dim); font-weight: 400; letter-spacing: 0; margin-left: 8px; }
+  .opt { max-width: 1120px; margin: 0 auto; padding: 40px 24px 96px; border-bottom: 1px dashed rgba(255,255,255,.1); }
+  h2 { font: 700 clamp(40px, 6vw, 64px)/1.05 var(--sans); letter-spacing: -.035em; text-align: center; margin: 0 0 56px; }
+  h2 .g { background: linear-gradient(90deg, #7ef0c1, #8fd3ff 50%, #c79bff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* ---------- scene kit (sized in em; JS sets font-size from width) ---------- */
+  .scene { position: absolute; overflow: hidden; }
+  .win { position: absolute; background: rgba(9,11,17,.94); border: 1px solid rgba(255,255,255,.08); border-radius: .8em; overflow: hidden; box-shadow: 0 1.2em 2.6em rgba(0,0,0,.4); }
+  .tb { height: 1.9em; display: flex; align-items: center; gap: .38em; padding: 0 .75em; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .tb i { width: .55em; height: .55em; border-radius: 50%; background: #2c3148; }
+  .tb span { margin-left: .5em; font: 500 .68em var(--mono); color: #5b6178; }
+  .tx { margin: 0; padding: .75em .95em; font: 400 .74em/1.7 var(--mono); color: #9aa0b4; white-space: pre-wrap; }
+  .g { color: var(--mint); } .am { color: var(--amber); } .dm { color: #5b6178; }
+  .petbox { position: absolute; } .petbox canvas { width: 100%; height: auto; }
+  .notif { position: absolute; top: 6%; right: 4%; width: 17em; display: flex; gap: .7em; align-items: center; padding: .7em .8em; border-radius: 1em; z-index: 6;
+    background: rgba(44,48,64,.78); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,.1); box-shadow: 0 1em 2em rgba(0,0,0,.4);
+    transform: translateX(130%); opacity: 0; transition: transform .45s cubic-bezier(.2,.9,.3,1.2), opacity .3s; }
+  .notif.show { transform: none; opacity: 1; }
+  .notif img { width: 2.2em; height: 2.2em; border-radius: .5em; image-rendering: pixelated; }
+  .notif b { display: block; font-size: .82em; } .notif span { font-size: .76em; color: #c7c7cc; } .notif small { margin-left: auto; align-self: flex-start; color: var(--dim); font-size: .7em; }
+  .pop { position: absolute; font: 700 1.05em var(--sans); color: var(--mint); opacity: 0; transform: translate(-50%, .4em); transition: opacity .3s, transform .6s ease-out; z-index: 6; white-space: nowrap; }
+  .pop.show { opacity: 1; transform: translate(-50%, -.6em); }
+  .hud { position: absolute; font: 500 .8em var(--mono); color: #9aa0b4; background: rgba(9,11,17,.8); border: 1px solid var(--line); border-radius: .8em; padding: .6em .9em; }
+  .hud .n { color: var(--text); transition: color .3s; } .hud .n.warn { color: var(--amber); } .hud .n.ok { color: var(--mint); }
+  .xpbar { height: .35em; margin-top: .5em; border-radius: 1em; background: #262b40; overflow: hidden; } .xpbar i { display: block; height: 100%; width: 42%; background: linear-gradient(90deg, #8b7bff, #c79bff); transition: width .8s cubic-bezier(.2,.9,.3,1); }
+  .bubble { position: absolute; background: rgba(28,31,43,.96); border: 1px solid rgba(255,255,255,.09); border-radius: 1em; padding: .8em .9em; opacity: 0; transform: scale(.94); transform-origin: 0 100%; transition: opacity .25s, transform .3s cubic-bezier(.2,.9,.3,1.3); z-index: 3; }
+  .bubble.show { opacity: 1; transform: none; }
+  .bubble .who { font: 700 .72em var(--sans); color: var(--mint); margin-bottom: .4em; }
+  .bubble pre { margin: 0; font: 400 .72em/1.65 var(--mono); color: #dfe2ec; white-space: pre-wrap; min-height: 6.6em; }
+  .bubble .cp { position: absolute; right: .7em; bottom: .7em; font: 600 .66em var(--sans); padding: .35em .75em; border-radius: .6em; background: #262b40; color: var(--text); transition: background .2s, color .2s; }
+  .bubble .cp.done { background: var(--mint); color: #0b1a14; }
+  .pr .row { height: .55em; border-radius: .3em; background: rgba(255,255,255,.07); margin: .65em .95em 0; }
+  .btn { position: absolute; font: 600 .78em var(--sans); padding: .55em 1.1em; border-radius: .7em; background: #238636; color: #fff; transition: background .25s; white-space: nowrap; }
+  .btn.done { background: #8957e5; }
+  .cursor { position: absolute; width: 1.15em; height: 1.55em; z-index: 7; pointer-events: none; filter: drop-shadow(0 .15em .25em rgba(0,0,0,.5)); }
+  .ripple { position: absolute; width: 2.6em; height: 2.6em; margin: -1.3em 0 0 -1.3em; border-radius: 50%; border: 2px solid rgba(255,255,255,.85); opacity: 0; z-index: 6; pointer-events: none; }
+  .tag { position: absolute; font: 600 .74em var(--mono); color: #0b1a24; background: var(--blue); border: 0; padding: .25em .6em; border-radius: .5em; opacity: 0; transition: opacity .3s; z-index: 6; white-space: nowrap; }
+  .tag.show { opacity: 1; }
+
+  /* ---------- A: bento, every tile playing ---------- */
+  .bento { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 330px; gap: 16px; }
+  .t { position: relative; border-radius: 28px; overflow: hidden; background: var(--tile); }
+  .t header { position: relative; z-index: 8; padding: 28px 30px 0; pointer-events: none; }
+  .t h3 { font: 700 26px/1.12 var(--sans); letter-spacing: -.025em; margin: 0 0 6px; }
+  .t p { margin: 0; color: var(--dim); font-size: 15.5px; max-width: 330px; }
+  .t .scene { inset: 96px 0 0 0; }
+  .a1 { grid-column: span 4; grid-row: span 2; background: radial-gradient(90% 70% at 75% 95%, rgba(255,207,63,.14), transparent 60%), var(--tile); }
+  .a1 h3 { font-size: 40px; } .a1 p { font-size: 18px; max-width: 420px; } .a1 .scene { inset: 120px 0 0 0; }
+  .a2 { grid-column: span 2; grid-row: span 2; background: radial-gradient(100% 70% at 50% 80%, rgba(126,240,193,.14), transparent 60%), var(--tile); }
+  .a3 { grid-column: span 3; background: radial-gradient(80% 90% at 20% 100%, rgba(255,122,176,.13), transparent 60%), var(--tile); }
+  .a4 { grid-column: span 3; background: radial-gradient(80% 90% at 90% 100%, rgba(143,211,255,.13), transparent 60%), var(--tile); }
+
+  /* ---------- B: chapters, one big stage ---------- */
+  .chap { display: grid; grid-template-columns: 330px 1fr; gap: 40px; align-items: center; }
+  .chap ul { list-style: none; margin: 0; padding: 0; }
+  .chap li { padding: 20px 0; border-top: 1px solid var(--line); cursor: pointer; opacity: .34; transition: opacity .3s; }
+  .chap li:last-child { border-bottom: 1px solid var(--line); }
+  .chap li.on { opacity: 1; }
+  .chap li h3 { font: 700 30px/1.1 var(--sans); letter-spacing: -.03em; margin: 0; }
+  .chap li p { margin: 6px 0 0; color: var(--dim); font-size: 16px; max-height: 0; overflow: hidden; transition: max-height .4s; }
+  .chap li.on p { max-height: 60px; }
+  .chap .bar { height: 2px; margin-top: 12px; background: var(--line); border-radius: 2px; overflow: hidden; visibility: hidden; }
+  .chap li.on .bar { visibility: visible; } .chap .bar i { display: block; height: 100%; width: 0; background: var(--text); }
+  .stage { position: relative; aspect-ratio: 16 / 11; border-radius: 32px; overflow: hidden; background: radial-gradient(80% 70% at 70% 90%, var(--glow, rgba(126,240,193,.14)), transparent 65%), var(--tile); transition: background .6s; }
+  .stage .scene { inset: 0; opacity: 0; transition: opacity .35s; } .stage .scene.on { opacity: 1; }
+
+  @media (max-width: 900px) {
+    .bento { grid-template-columns: 1fr; grid-auto-rows: 380px; } .a1, .a2, .a3, .a4 { grid-column: auto; grid-row: auto; } .a1 h3 { font-size: 30px; } .a1 .scene { inset: 110px 0 0 0; }
+    .chap { grid-template-columns: 1fr; } .chap li h3 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><symbol id="cur" viewBox="0 0 16 22"><path d="M1 1v17l4.5-4.2 3 6.7 3-1.3-3-6.6H15z" fill="#fff" stroke="#000" stroke-width="1.2"/></symbol></svg>
+
+<div class="memo">
+  <b>Design review, round 2: the pet in action.</b> Feedback was to stop decorating and start demonstrating. Each feature is now a short loop where the pet reacts to real-looking events: an agent finishing, a diff growing, a double-click, a click passing through it. There's no copy to read; you watch it happen. Its eyes follow the on-screen cursor.
+</div>
+
+<div class="label">A <span>bento: all four scenes play at once</span></div>
+<div class="opt">
+  <h2>Your agent works.<br><span class="g">Your pet keeps watch.</span></h2>
+  <div class="bento">
+    <div class="t a1"><header><h3>Taps the glass.</h3><p>Claude Code finishes. Your pet knows before you do.</p></header><div class="scene" data-scene="glass"></div></div>
+    <div class="t a2"><header><h3>Eats commits.</h3><p>Big diffs make it sweat. Commits feed it.</p></header><div class="scene" data-scene="commits"></div></div>
+    <div class="t a3"><header><h3>Writes the message.</h3><p>Double-click. It reads your diff.</p></header><div class="scene" data-scene="message"></div></div>
+    <div class="t a4"><header><h3>Never in the way.</h3><p>Clicks pass right through it.</p></header><div class="scene" data-scene="way"></div></div>
+  </div>
+</div>
+
+<div class="label">B <span>chapters: one big stage plays each scene in turn; click a line to jump</span></div>
+<div class="opt">
+  <h2>Your agent works.<br>Your pet keeps watch.</h2>
+  <div class="chap">
+    <ul id="chapters">
+      <li data-i="0" data-glow="rgba(255,207,63,.16)"><h3>Taps the glass.</h3><p>Your agent finishes. Your pet knows first.</p><div class="bar"><i></i></div></li>
+      <li data-i="1" data-glow="rgba(126,240,193,.16)"><h3>Eats commits.</h3><p>Big diffs make it sweat. Commits feed it.</p><div class="bar"><i></i></div></li>
+      <li data-i="2" data-glow="rgba(255,122,176,.15)"><h3>Writes the message.</h3><p>Double-click it for a commit message.</p><div class="bar"><i></i></div></li>
+      <li data-i="3" data-glow="rgba(143,211,255,.15)"><h3>Never in the way.</h3><p>Clicks pass right through it.</p><div class="bar"><i></i></div></li>
+      <li data-i="4" data-glow="rgba(199,155,255,.16)"><h3>Leaves in style.</h3><p>Quit, and it drops into a hole of its own.</p><div class="bar"><i></i></div></li>
+    </ul>
+    <div class="stage" id="stage">
+      <div class="scene" data-scene="glass"></div><div class="scene" data-scene="commits"></div><div class="scene" data-scene="message"></div><div class="scene" data-scene="way"></div><div class="scene" data-scene="exit"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../site/sprites.js"></script>
+<script>
+const clamp01 = v => Math.max(0, Math.min(1, v));
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+const ease = x => x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+const typed = (s, p) => s.slice(0, Math.round(s.length * clamp01(p)));
+const G = s => `<span class="g">${s}</span>`, AM = s => `<span class="am">${s}</span>`, DM = s => `<span class="dm">${s}</span>`;
+
+// ---------- live pets ----------
+const pets = [];
+function makePet(cv) {
+  const w = 112, h = 104; cv.width = w; cv.height = h;
+  const ctx = cv.getContext('2d'), img = ctx.createImageData(w, h);
+  const p = { cv, ctx, img, S: { w, h, buf: new Uint32Array(img.data.buffer) }, state: 'idle', lookEl: null, parts: [], emit: 0, nextBlink: 0, blinkUntil: 0, live: true };
+  pets.push(p); return p;
+}
+// ---------- fake cursor ----------
+function cursorKit(root) {
+  root.insertAdjacentHTML('beforeend', '<svg class="cursor"><use href="#cur"/></svg><span class="ripple"></span>');
+  const c = root.querySelector('.cursor'), r = root.querySelector('.ripple');
+  return {
+    el: c,
+    at(path, t) { // path: [[t, x%, y%], ...]
+      let i = 0; while (i < path.length - 1 && t > path[i + 1][0]) i++;
+      const a = path[i], b = path[Math.min(i + 1, path.length - 1)], k = b[0] === a[0] ? 1 : ease(seg(t, a[0], b[0]));
+      const x = a[1] + (b[1] - a[1]) * k, y = a[2] + (b[2] - a[2]) * k;
+      c.style.left = x + '%'; c.style.top = y + '%'; return [x, y];
+    },
+    click(t, times, pos) {
+      let o = 0, s = 1;
+      for (const tc of times) if (t >= tc && t < tc + .45) { const q = (t - tc) / .45; o = 1 - q; s = .4 + q * .9; }
+      r.style.opacity = o; r.style.left = pos[0] + '%'; r.style.top = pos[1] + '%'; r.style.transform = `scale(${s})`;
+    },
+  };
+}
+
+// ---------- the four scenes ----------
+const SCENES = {
+  exit(root) {
+    root.innerHTML = `<div class="petbox" style="left:50%;bottom:6%;width:52%;transform:translateX(-50%)"><canvas></canvas></div>
+      <div class="pop" style="left:50%;top:14%;color:#f5f5f7">bye! 👋</div><div class="pop hi" style="left:50%;top:14%;color:#f5f5f7">hi again ✨</div>`;
+    const pet = makePet(root.querySelector('canvas')), [bye, hi] = root.querySelectorAll('.pop');
+    return { L: 6.5, update(t) {
+      const s01 = (a, b) => Math.max(0, Math.min(1, (t - a) / (b - a)));
+      let hole = 0, dy = 0, st = 'idle', poof = false;
+      if (t >= 1 && t < 2.5) {                         // exit
+        hole = 30 * (t < 1.95 ? 1 - (1 - s01(1, 1.3)) ** 3 : 1 - s01(2.05, 2.45) ** 2);
+        if (t < 1.3) st = 'idle';
+        else if (t < 1.55) { st = 'celebrate'; dy = -Math.sin(s01(1.3, 1.55) * Math.PI) * 8; }
+        else { st = 'alert'; dy = s01(1.55, 1.95) ** 2 * 110; }
+        poof = t > 1.95;
+      } else if (t >= 2.5 && t < 3.6) dy = 200;       // gone
+      else if (t >= 3.6 && t < 4.9) {                 // pop back up
+        hole = 30 * (t < 4.4 ? 1 - (1 - s01(3.6, 3.85)) ** 3 : 1 - s01(4.45, 4.85) ** 2);
+        const q = s01(3.85, 4.3); dy = t < 3.85 ? 200 : 110 * (1 - q) - Math.sin(q * Math.PI) * 14;
+        st = t < 4.3 ? 'alert' : 'celebrate';
+      }
+      pet.state = st; pet.fx = { hole, dy, poof };
+      bye.classList.toggle('show', t > 1.05 && t < 1.9); hi.classList.toggle('show', t > 4.2 && t < 5.2);
+    } };
+  },
+  glass(root) {
+    root.innerHTML = `
+      <div class="win" style="left:4%;top:6%;width:52%;height:80%"><div class="tb"><i></i><i></i><i></i><span>claude — my-saas</span></div><pre class="tx"></pre></div>
+      <div class="notif"><img src="../site/pet.png" alt=""><div><b>Net</b><span>my-saas finished. Your move!</span></div><small>now</small></div>
+      <div class="petbox" style="right:2%;bottom:2%;width:42%"><canvas></canvas></div>
+      <div class="pop" style="left:80%;bottom:58%">+4 xp · quick draw</div>`;
+    const pet = makePet(root.querySelector('canvas')), tx = root.querySelector('.tx'), notif = root.querySelector('.notif'), pop = root.querySelector('.pop');
+    const LINES = [[.3, `${G('✻')} claude › add usage-based billing`], [1.1, `  ⎿ Read src/billing/stripe.ts`], [1.9, `  ⎿ Edit src/billing/meter.ts ${G('+84')}`], [2.7, `  ⎿ Edit src/api/webhooks.ts ${G('+41')} ${AM('-12')}`], [3.4, `  ⎿ Bash npm test`], [3.9, `    ${G('✓ 38 passed')}`], [4.4, `${AM('●')} Done. Backfill old invoices too?`]];
+    let last = '';
+    return { L: 10, update(t) {
+      let h = LINES.filter(l => t >= l[0]).map(l => l[1]).join('\n');
+      if (t >= 4.4) h += `\n${DM('›')} ` + typed('yes', seg(t, 5.7, 6.1)) + (t < 6.3 && Math.floor(t * 2.5) % 2 ? '▌' : '');
+      if (t >= 6.3) h += `\n${G('✻')} on it…`;
+      if (h !== last) { tx.innerHTML = h; last = h; }
+      pet.state = t < 4.4 ? 'working' : t < 6.3 ? 'alert' : 'working';
+      notif.classList.toggle('show', t > 4.5 && t < 6.2);
+      pop.classList.toggle('show', t > 6.4 && t < 7.9);
+    } };
+  },
+  commits(root) {
+    root.innerHTML = `
+      <div class="hud" style="left:8%;right:8%;top:2%">⎇ my-saas/main · <span class="n">±84</span> lines<div class="xpbar"><i></i></div></div>
+      <div class="petbox" style="left:50%;top:14%;width:44%;transform:translateX(-50%)"><canvas></canvas></div>
+      <div class="pop" style="left:50%;top:22%">+29 xp</div>
+      <div class="win" style="left:8%;right:8%;bottom:5%;height:18%"><pre class="tx"></pre></div>`;
+    const pet = makePet(root.querySelector('canvas')), n = root.querySelector('.n'), xp = root.querySelector('.xpbar i'), pop = root.querySelector('.pop'), tx = root.querySelector('.tx');
+    let last = '';
+    return { L: 9, update(t) {
+      const lines = t < 5.4 ? Math.round(84 + ease(seg(t, .3, 3.8)) * 400) : 0;
+      n.textContent = '±' + lines; n.className = 'n' + (lines > 400 ? ' warn' : t >= 5.4 ? ' ok' : '');
+      pet.state = t < 5.4 ? (lines > 400 ? 'nervous' : 'idle') : t < 7.4 ? 'celebrate' : 'idle';
+      let h = t > 4.2 ? `${G('$')} git commit -m "` + typed('billing"', seg(t, 4.3, 5.1)) : DM('$ ▌');
+      if (t > 5.3) h += `\n${G('✓')} 1 commit · 484 lines`;
+      if (h !== last) { tx.innerHTML = h; last = h; }
+      xp.style.width = t >= 5.4 ? '78%' : '42%';
+      pop.classList.toggle('show', t > 5.4 && t < 6.9);
+    } };
+  },
+  message(root) {
+    root.innerHTML = `
+      <div class="petbox" style="left:2%;bottom:0;width:44%"><canvas></canvas></div>
+      <div class="bubble" style="left:44%;right:4%;top:6%"><div class="who">Net</div><pre></pre><span class="cp">Copy</span></div>`;
+    const pet = makePet(root.querySelector('canvas')), cur = cursorKit(root), bub = root.querySelector('.bubble'), pre = bub.querySelector('pre'), cp = bub.querySelector('.cp');
+    pet.lookEl = cur.el;
+    const MSG = 'feat(billing): usage-based pricing\n\n- meter events on every API call\n- webhook updates plan preview';
+    const PATH = [[0, 88, 92], [1.1, 22, 58], [5.9, 22, 58], [6.6, 90, 80], [8.2, 90, 80], [9, 88, 92]];
+    return { L: 9, update(t) {
+      const pos = cur.at(PATH, t);
+      cur.click(t, [1.3, 1.55, 6.75], pos);
+      pet.state = t > 1.5 && t < 2.1 ? 'alert' : 'idle';
+      bub.classList.toggle('show', t > 1.9 && t < 8.5);
+      pre.textContent = typed(MSG, seg(t, 2.1, 5.4)) + (t > 2.1 && t < 5.4 ? '▌' : '');
+      const done = t > 6.8; cp.textContent = done ? 'Copied ✓' : 'Copy'; cp.classList.toggle('done', done);
+    } };
+  },
+  way(root) {
+    root.innerHTML = `
+      <div class="win pr" style="left:4%;top:4%;width:64%;height:84%"><div class="tb"><i></i><i></i><i></i><span>Pull request #42</span></div><div class="row" style="width:60%"></div><div class="row" style="width:80%"></div><div class="row" style="width:45%"></div><div class="btn" style="right:4%;bottom:9%">Merge</div></div>
+      <div class="petbox" style="right:0;bottom:0;width:44%"><canvas></canvas></div>
+      <div class="tag" style="left:34%;top:40%">↳ clicked straight through</div>`;
+    const pet = makePet(root.querySelector('canvas')), cur = cursorKit(root), btn = root.querySelector('.btn'), tag = root.querySelector('.tag');
+    pet.lookEl = cur.el;
+    const PATH = [[0, 16, 88], [2, 60, 77], [5.6, 60, 77], [6.6, 16, 88], [8, 16, 88]];
+    return { L: 8, update(t) {
+      const pos = cur.at(PATH, t);
+      cur.click(t, [2.2], pos);
+      const done = t > 2.35 && t < 7.4; btn.textContent = done ? 'Merged ✓' : 'Merge'; btn.classList.toggle('done', done);
+      tag.classList.toggle('show', t > 2.5 && t < 5.2);
+      pet.state = 'idle';
+    } };
+  },
+};
+
+// ---------- mount ----------
+function mount(el) {
+  const s = SCENES[el.dataset.scene](el);
+  const fit = () => el.style.fontSize = Math.max(12.5, Math.min(20, el.clientWidth / 30)) + 'px';
+  new ResizeObserver(fit).observe(el); fit();
+  s.el = el; s.pets = pets.slice(-(el.querySelectorAll('canvas').length));
+  return s;
+}
+const bento = [...document.querySelectorAll('.bento .scene')].map(mount);
+const chapters = [...document.querySelectorAll('#stage .scene')].map(mount);
+const items = [...document.querySelectorAll('#chapters li')], stage = document.getElementById('stage');
+let active = 0, chapStart = performance.now();
+function choose(i) {
+  active = i; chapStart = performance.now();
+  chapters.forEach((s, j) => { s.el.classList.toggle('on', j === i); s.pets.forEach(p => { p.live = j === i; p.parts.length = 0; }); });
+  items.forEach((li, j) => li.classList.toggle('on', j === i));
+  stage.style.setProperty('--glow', items[i].dataset.glow);
+}
+items.forEach((li, i) => li.onclick = () => choose(i));
+choose(0);
+
+// ---------- loop ----------
+let mouse = { x: -1e4, y: -1e4 };
+addEventListener('mousemove', e => mouse = { x: e.clientX, y: e.clientY });
+const CONF = ['#7ef0c1', '#ffcf3f', '#ff7ab0', '#8b7bff', '#8fd3ff', '#ffffff'];
+const t0 = performance.now(); let lastF = 0;
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (now - lastF < 33) return; lastF = now;
+  const T = (now - t0) / 1000;
+  for (const s of bento) s.update(T % s.L);
+  const ct = (now - chapStart) / 1000, cs = chapters[active];
+  if (ct >= cs.L) choose((active + 1) % chapters.length); else { cs.update(ct); items[active].querySelector('.bar i').style.width = (ct / cs.L * 100) + '%'; }
+  for (const p of pets) {
+    if (!p.live) continue;
+    const r = p.cv.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight || !r.width) continue;
+    if (now > p.nextBlink) { p.blinkUntil = now + 120; p.nextBlink = now + 2400 + Math.random() * 3000; }
+    let tx = mouse.x, ty = mouse.y;
+    if (p.lookEl) { const c = p.lookEl.getBoundingClientRect(); tx = c.left; ty = c.top; }
+    const look = { x: Math.max(-1, Math.min(1, (tx - r.left - r.width / 2) / (r.width * .9))), y: Math.max(-1, Math.min(1, (ty - r.top - r.height / 2) / (r.height * .9))), blink: now < p.blinkUntil };
+    p.S.buf.fill(0);
+    const SOFT = { arms: true, eyeScale: 1.3, outline: '#1d5a52', rim: '#5fe0d0', ramp: MINT_SOFT };
+    const fx = p.fx ? p.fx : null;
+    let a;
+    if (fx && (fx.dy || fx.hole)) {
+      // draw the pet off to the side, then blit it above the hole's rim so it drops in / pops out
+      p.tmp ||= { w: p.S.w, h: p.S.h, buf: new Uint32Array(p.S.w * p.S.h) };
+      p.tmp.buf.fill(0); a = drawNet(p.tmp, p.state, T, look, 2, SOFT);
+      const HY = 95, dy = Math.round(fx.dy || 0);
+      if (fx.hole > .5) { ellF(p.S, 56, HY, fx.hole + 1.5, fx.hole * .24 + 1.5, '#2a2f47'); ellF(p.S, 56, HY, fx.hole, fx.hole * .24, '#05060a'); }
+      for (let y = 0; y < p.S.h; y++) { const ty = y + dy; if (ty < 0 || ty >= p.S.h || ty >= HY) continue; for (let x = 0; x < p.S.w; x++) { const v = p.tmp.buf[y * p.S.w + x]; if (v) p.S.buf[ty * p.S.w + x] = v; } }
+      a = { ...a, top: a.top + dy };
+    } else a = drawNet(p.S, p.state, T, look, 2, SOFT);
+    if (fx && fx.poof && !p.poofed) { p.poofed = true; for (let i = 0; i < 16; i++) p.parts.push({ x: 56 + (Math.random() - .5) * 30, y: 92, vx: (Math.random() - .5) * 2.2, vy: -Math.random() * 2.4 - .6, life: 1, c: ['#7ef0c1', '#c7fff0', '#ffffff', '#8fd3ff'][i % 4] }); }
+    if (fx && !fx.poof) p.poofed = false;
+    if (p.state === 'alert' && !fx?.dy && Math.floor(T * 3) % 3) glyph(p.S, a.cx + a.rx * .55, Math.max(2, a.top - 4), 'bang', '#ffcf3f', 2);
+    if (p.state === 'celebrate' && now > p.emit) { p.emit = now + 80; for (let i = 0; i < 3; i++) p.parts.push({ x: a.cx + (Math.random() - .5) * 40, y: a.top + 10, vx: (Math.random() - .5) * 1.5, vy: -Math.random() * 2 - 1, life: 1, c: CONF[(i * 2 + Math.floor(now)) % 6] }); }
+    if (p.state === 'working' && now > p.emit) { p.emit = now + 1800; p.parts.push({ note: 1, x: a.cx - a.rx - 6, y: a.top + 14, vx: -.1, vy: -.35, life: 1, c: '#7ef0c1' }); }
+    for (let i = p.parts.length - 1; i >= 0; i--) {
+      const q = p.parts[i]; q.x += q.vx; q.y += q.vy; if (!q.note) q.vy += .06; q.life -= q.note ? .01 : .02;
+      if (q.life <= 0) { p.parts.splice(i, 1); continue; }
+      if (q.note) glyph(p.S, q.x, q.y, 'note', q.c, 2); else rectF(p.S, q.x, q.y, 2, 2, q.c);
+    }
+    p.ctx.putImageData(p.img, 0, 0);
+  }
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

@@ -1012,6 +1012,355 @@ function drawDrone(S, st, t, look) {
   return { cx, top: cy - 72, cy, rx: 58, k };
 }
 
+// ===================== tier 3b: ten more 224×208 designs =====================
+const T4 = (S, st, t, look) => { const k = 4, m = motion(st, t, k); return { k, m, cx: S.w / 2 + m.jx, b: m.dy, s: status(st, t), lx: look.x * 3, ly: st === 'working' ? 4 : look.y * 2.5 }; };
+const eyes2 = (S, x, y, sep, R, st, look, iris) => { eye2(S, x - sep, y, R, st, look, iris, { side: -1 }); eye2(S, x + sep, y, R, st, look, iris, { side: 1 }); };
+const PK4 = ['#d9788f', '#ec9aac', '#f8bfcb', '#ffdde4', '#fff2f5'];
+const glow7 = h => { const r = rampOf(h); return [0, 1, 2, 2, 3, 4, 4].map(i => r[i]); };
+const band = (lo, hi) => (dx, dy) => dy >= lo && dy <= hi ? dx * dx + dy * dy : 9;
+
+function drawOtter(S, st, t, look) {
+  const { m, cx, b, s, lx, ly } = T4(S, st, t, look);
+  const Br = hsRamp(24, 42, 44), Cr = hsRamp(34, 38, 84), Dk = hsRamp(18, 30, 22), Sh = hsRamp(350, 42, 78);
+  shadow2(S, S.w / 2, 190, 64 + b / 4, 8);
+  leaf(S, cx + 28, b + 176, 60, -.22 + Math.sin(t * (st === 'celebrate' ? 9 : 2)) * .1, 12, Br, selout(Br));
+  for (const s2 of [-1, 1]) orb(S, cx + s2 * 22, b + 182, 13, 7, Dk, { outline: selout(Dk), spec: false });
+  orb(S, cx, b + 146, 44 + m.sq, 38 - m.sq, Br, { tex: furTex(.12), ao: .5, outline: selout(Br), specR: 0, rim: Br[5] });
+  orb(S, cx, b + 156, 28, 24, Cr, { outline: null, spec: false, tex: furTex(.08) });
+  const hy = b + 98 + m.sq;
+  for (const s2 of [-1, 1]) { orb(S, cx + s2 * 42, hy - 26, 10, 9, Br, { outline: selout(Br), spec: false }); orb(S, cx + s2 * 42, hy - 25, 5, 4, Dk, { outline: null, spec: false }); }
+  orb(S, cx, hy, 50 + m.sq, 38 - m.sq, Br, { tex: furTex(.12), ao: .2, outline: selout(Br), specR: 0, rim: Br[5] });
+  orb(S, cx, hy + 10, 38, 26, Cr, { outline: null, spec: false, tex: furTex(.06) });
+  eyes2(S, cx + lx, hy - 4 + ly, 20, 8, st, look, '#4a2c1a');
+  cheek(S, cx - 32, hy + 14, '#ff9a8a'); cheek(S, cx + 32, hy + 14, '#ff9a8a');
+  ellF(S, cx + lx * .5, hy + 9, 7, 4.5, '#1b1420'); rectF(S, cx - 3 + lx * .5, hy + 6, 3, 1, '#7a6a80');
+  for (const s2 of [-1, 1]) for (let i = 0; i < 3; i++) line(S, cx + s2 * 16, hy + 13 + i * 3, cx + s2 * 32, hy + 9 + i * 5, '#8a7060', 1);
+  if (st !== 'working') mouth2(S, cx + lx * .5, hy + 16, st, t, 5);
+  const clam = (sx, sy) => {
+    const P = s.glow ? rampOf(s.h) : ['#9a8aae', '#c8bcd6', '#e8e0f0', '#ffffff', '#ffffff'];
+    orb(S, sx, sy - 3, 20, 15, Sh, { shape: (dx, dy) => dy > .05 ? 9 : dx * dx + dy * dy, outline: selout(Sh), spec: false });
+    for (let i = -3; i <= 3; i++) { const a = i * .36; line(S, sx + Math.sin(a) * 4, sy - 5, sx + Math.sin(a) * 17, sy - 3 - Math.cos(a) * 13, Sh[3], 1); }
+    if (s.glow) halo(S, sx, sy - 2, 26, s.h, .65);
+    orb(S, sx, sy - 2, 7, 7, P, { specR: .06, outline: selout(Sh) });
+    orb(S, sx, sy, 22, 15, Sh, { shape: (dx, dy) => dy < -.05 ? 9 : dx * dx + dy * dy, outline: selout(Sh), spec: false });
+    for (let i = -3; i <= 3; i++) { const a = i * .36; line(S, sx + Math.sin(a) * 4, sy + 2, sx + Math.sin(a) * 19, sy + Math.cos(a) * 13, Sh[2], 1); }
+  };
+  if (st === 'working') { clam(cx, hy - 42); laptop(S, cx, b + 128, 3.3, t, Br, selout(Br)); }
+  else {
+    const lift = st === 'celebrate' ? Math.round(Math.abs(Math.sin(t * 8)) * 6) : 0;
+    clam(cx, b + 146 - lift);
+    for (const s2 of [-1, 1]) orb(S, cx + s2 * 21, b + 150 - lift, 9, 8, Br, { outline: selout(Br), spec: false, tex: furTex(.08) });
+  }
+  if (st === 'nervous') sweat(S, cx + 50, hy - 30, 4);
+  return { cx, top: st === 'working' ? hy - 60 : hy - 38, cy: hy, rx: 50, k: 4 };
+}
+
+function drawTardi(S, st, t, look) {
+  const { m, cx, b, s, lx, ly } = T4(S, st, t, look);
+  const T = hsRamp(20, 38, 80), tun = st === 'sleep', cy = b + (tun ? 138 : 124) + m.sq, rx = tun ? 58 : 52, ry = tun ? 40 : 50;
+  shadow2(S, S.w / 2, 190, 62 + b / 4, 8);
+  const sp = st === 'working' || st === 'alert' ? 12 : st === 'celebrate' ? 16 : 3, wig = i => tun ? 0 : Math.sin(t * sp + i * 1.3) * 3;
+  if (!tun) for (let i = 0; i < 3; i++) for (const s2 of [-1, 1]) {
+    const x0 = cx + s2 * (rx + 2 - i * 3), y0 = cy - 18 + i * 22 + wig(i * 2 + s2);
+    for (let c = -1; c <= 1; c++) line(S, x0 + s2 * 10, y0 + c * 3, x0 + s2 * 16, y0 + c * 4 + 2, '#3a2630', 2);
+    orb(S, x0 + s2 * 3, y0, 11, 8, T, { outline: selout(T), spec: false });
+  }
+  for (const s2 of [-1, 1]) { orb(S, cx + s2 * 26, b + 180, 12, 8, T, { outline: selout(T), spec: false }); for (let c = -1; c <= 1; c++) line(S, cx + s2 * 26 + c * 4, b + 186, cx + s2 * 26 + c * 5, b + 190, '#3a2630', 2); }
+  orb(S, cx, cy, rx + m.sq, ry - m.sq, T, { outline: selout(T), specR: .006, spec2: true, rim: T[5], ao: .3, tex: (x, y) => (((y - cy + 8) % 16) + 16) % 16 < 1.6 ? -.2 : (hash(x >> 1, y >> 1) - .5) * .06 });
+  // moss tuft + dewdrop = status light
+  const ty = cy - ry + m.sq + 2;
+  blobs(S, [{ x: cx - 8, y: ty, r: 7, ramp: hsRamp(110, 50, 46) }, { x: cx + 4, y: ty - 3, r: 8, ramp: hsRamp(110, 50, 46) }, { x: cx + 13, y: ty + 1, r: 6, ramp: hsRamp(110, 50, 46) }], { outline: selout(hsRamp(110, 50, 46)), tex: furTex(.2) });
+  const dy0 = ty - 16 + (st === 'celebrate' ? -Math.abs(Math.sin(t * 8)) * 8 : 0), D = s.glow ? rampOf(s.h) : ['#5a8ab8', '#8fc0e8', '#bfe4ff', '#e6f6ff', '#ffffff'];
+  if (s.glow) halo(S, cx + 2, dy0, 24, s.h, .6);
+  orb(S, cx + 2, dy0, 8, 10, D, { shape: tear, specR: .06, outline: selout(T) });
+  const fy = tun ? cy - 8 : cy - 20;
+  eyes2(S, cx + lx, fy + ly, 19, tun ? 6 : 6.5, st, look, '#3a2030');
+  cheek(S, cx - 32, fy + 16, '#ff8fa0'); cheek(S, cx + 32, fy + 16, '#ff8fa0');
+  if (st !== 'working') {
+    const sx = cx + lx * .5, sy = fy + 20 + ly * .4, big = st === 'alert' || st === 'celebrate';
+    orb(S, sx, sy, 15, 11, T, { outline: selout(T), spec: false });
+    ellF(S, sx, sy + 1, big ? 7 : 5.5, big ? 6 : 4.5, '#2a1620'); ellF(S, sx, sy + 2, big ? 4.5 : 3, big ? 3.5 : 2.2, '#b04a60');
+    if (st === 'nervous') for (let i = -5; i <= 5; i++) put(S, sx + i, sy + 9 + (i & 1), '#2a1620');
+  } else laptop(S, cx, cy + 4, 3.3, t, T, selout(T));
+  if (st === 'nervous') sweat(S, cx + 48, cy - 44, 4);
+  return { cx, top: dy0 - 12, cy, rx, k: 4 };
+}
+
+function drawTurtle(S, st, t, look) {
+  const { m, cx, b, s, lx, ly } = T4(S, st, t, look);
+  const Sk = hsRamp(92, 36, 60), Sh = hsRamp(28, 46, 44), Ms = hsRamp(112, 52, 44), St = hsRamp(230, 8, 68);
+  shadow2(S, S.w / 2, 190, 80 + b / 4, 9);
+  const hide = st === 'sleep', scy = b + 142 + m.sq;
+  for (const s2 of [-1, 1]) orb(S, cx + s2 * 62, b + 172, 13, 9, Sk, { outline: selout(Sk), spec: false });
+  const scute = (x, y) => { const v = (y - scy) / 18, u = (x - cx) / 28 + (Math.floor(v) & 1) * .5, gu = Math.abs((u % 1 + 1) % 1 - .5), gv = Math.abs((v % 1 + 1) % 1 - .5); return gu > .45 || gv > .45 ? -.3 : 0; };
+  orb(S, cx, scy, 78, 58, Sh, { shape: band(-2, .42), outline: selout(Sh), specR: 0, ao: .2, tex: scute });
+  // moss garden on top
+  const mc = []; for (let i = 0; i < 9; i++) { const a = -2.35 + i * .2; mc.push({ x: cx + Math.cos(a) * 70, y: scy + Math.sin(a) * 52, r: 11 + (i % 3) * 2.5, ramp: Ms }); }
+  blobs(S, mc, { outline: selout(Ms), tex: furTex(.22) });
+  orb(S, cx - 8, b + 84, 7, 5, St, { outline: selout(St), spec: false });
+  const fx = cx - 34 + Math.sin(t * 1.8) * 2, fy = b + 72;
+  line(S, cx - 34, b + 92, fx, fy, Ms[1], 2); leaf(S, cx - 34, b + 86, 10, -2.4, 4, Ms, selout(Ms));
+  const bloom = st === 'celebrate' ? 1.4 : 1;
+  for (let i = 0; i < 5; i++) { const a = i / 5 * 6.283 + t * (st === 'celebrate' ? 3 : 0); ellF(S, fx + Math.cos(a) * 4 * bloom, fy + Math.sin(a) * 4 * bloom, 3 * bloom, 3 * bloom, '#ff9ec4'); }
+  ellF(S, fx, fy, 2, 2, '#ffd84a');
+  // stone lantern: its window is the status light
+  const lx0 = cx + 28, gy = b + 84;
+  rrect(S, lx0 - 10, gy - 5, 20, 6, 2, (x, y) => St[dith(.5, x, y, 7)], selout(St));
+  rrect(S, lx0 - 3, gy - 15, 6, 11, 1, (x, y) => St[dith(.6, x, y, 7)], selout(St));
+  rrect(S, lx0 - 9, gy - 29, 18, 15, 2, (x, y) => St[dith(.7, x, y, 7)], selout(St));
+  const win = s.glow ? s.h : st === 'sleep' ? '#2a2f47' : '#e8b860';
+  if (s.glow) halo(S, lx0, gy - 22, 30, s.h, .6);
+  rectF(S, lx0 - 5, gy - 26, 10, 9, win); rectF(S, lx0 - 4, gy - 25, 3, 2, mix(win, '#ffffff', .6));
+  tri(S, [lx0 - 17, gy - 28], [lx0 + 17, gy - 28], [lx0, gy - 41], (x, y) => St[dith(.45 + (x < lx0 ? .25 : 0), x, y, 7)], selout(St));
+  orb(S, lx0, gy - 43, 3, 3, St, { outline: selout(St), spec: false });
+  // head
+  const hy = hide ? b + 152 : st === 'working' ? b + 136 : st === 'alert' ? b + 140 : b + 146;
+  const head = () => {
+    if (!hide) orb(S, cx, hy + 20, 18, 14, Sk, { outline: selout(Sk), spec: false });
+    orb(S, cx, hy, hide ? 24 : 32, hide ? 18 : 26, Sk, { outline: selout(Sk), specR: .006, spec2: true, ao: .3 });
+    eyes2(S, cx + lx * .7, hy - 3 + (hide ? 0 : ly), hide ? 11 : 14, hide ? 5.5 : 7, st, look, '#3a4a1a');
+    if (!hide) { cheek(S, cx - 22, hy + 9, '#ff9a8a'); cheek(S, cx + 22, hy + 9, '#ff9a8a'); if (st !== 'working') mouth2(S, cx + lx * .4, hy + 9, st, t, 5); }
+  };
+  if (hide) head();
+  rrect(S, cx - 76, scy + 18, 152, 11, 5, (x, y) => Sh[dith(.78, x, y, 7)], selout(Sh));
+  if (!hide) head();
+  for (const s2 of [-1, 1]) orb(S, cx + s2 * 44, b + 178, 16, 10, Sk, { outline: selout(Sk), spec: false });
+  if (st === 'working') laptop(S, cx, b + 148, 2.9, t, Sk, selout(Sk));
+  if (st === 'nervous') sweat(S, cx + 40, b + 120, 4);
+  return { cx, top: gy - 44, cy: hy, rx: 70, k: 4 };
+}
+
+// see-through wing: tinted glass body, bright rim, faint veins
+function glassWing(S, x, y, len, ang, w) {
+  const ca = Math.cos(ang), sa = Math.sin(ang), ex = x + ca * len, ey = y + sa * len;
+  for (let py = Math.floor(Math.min(y, ey) - w - 2); py <= Math.max(y, ey) + w + 2; py++)
+    for (let px = Math.floor(Math.min(x, ex) - w - 2); px <= Math.max(x, ex) + w + 2; px++) {
+      const dx = px + .5 - x, dy = py + .5 - y, u = dx * ca + dy * sa, v = -dx * sa + dy * ca;
+      if (u < 0 || u > len) continue;
+      const half = Math.sin(Math.PI * u / len) * w, av = Math.abs(v);
+      if (av > half) continue;
+      if (half - av < 1.3) putA(S, px, py, '#f4f9ff', .85);                              // rim
+      else if (Math.abs(v - half * .35) < .6 || Math.abs(v + half * .3) < .6 || av < .5) putA(S, px, py, '#ffffff', .6); // veins
+      else putA(S, px, py, mix('#d6e9ff', '#ffffff', u / len), .4 + (v < 0 ? .12 : 0));   // glass
+    }
+}
+function drawBee(S, st, t, look) {
+  const { m, cx, b, s, lx, ly } = T4(S, st, t, look), hv = Math.sin(t * 2.4) * 5, cy = 106 + m.dy + hv;
+  const Y = hsRamp(44, 92, 60), Bk = hsRamp(262, 24, 24), Wg = ['#9ab8d8', '#c0d8f0', '#dcebfa', '#f0f7ff', '#ffffff'];
+  shadow2(S, S.w / 2, 190, 46 - hv, 6);
+  const fl = Math.sin(t * (st === 'sleep' ? 2 : st === 'working' || st === 'celebrate' ? 40 : 26)) * (st === 'sleep' ? .04 : .2);
+  for (const s2 of [-1, 1]) {
+    glassWing(S, cx + s2 * 18, cy - 34, 54, (s2 < 0 ? Math.PI + .8 : -.8) - s2 * fl, 19);
+    glassWing(S, cx + s2 * 26, cy - 22, 36, (s2 < 0 ? Math.PI + .3 : -.3) - s2 * fl, 12);
+  }
+  const perk = st === 'alert' ? -6 : st === 'sleep' || st === 'nervous' ? 8 : 0;
+  for (const s2 of [-1, 1]) { const ax = cx + s2 * 26, ay = cy - 76 + perk + Math.sin(t * 3 + s2) * 2; line(S, cx + s2 * 12, cy - 46, cx + s2 * 20, cy - 64 + perk / 2, Bk[1], 2); line(S, cx + s2 * 20, cy - 64 + perk / 2, ax, ay, Bk[1], 2); orb(S, ax, ay, 4, 4, Bk, { outline: selout(Bk), specR: .1 }); }
+  for (const s2 of [-1, 1]) { const fx = cx + s2 * 24 + Math.sin(t * 4 + s2) * 2; line(S, cx + s2 * 20, cy + 44, fx, cy + 60, Bk[2], 3); orb(S, fx, cy + 61, 5, 4, Bk, { outline: selout(Bk), spec: false }); }
+  // stinger tail-light
+  const sc = s.glow ? s.h : Bk[3];
+  if (s.glow) halo(S, cx, cy + 62, 22, s.h, .7);
+  tri(S, [cx - 8, cy + 48], [cx + 8, cy + 48], [cx, cy + 70], (x, y) => mix(sc, '#ffffff', Math.max(0, .45 - (y - cy - 48) / 40)), selout(Bk));
+  orb(S, cx, cy, 58 + m.sq, 56 - m.sq, Y, { tex: furTex(.12), ao: .3, outline: selout(Y), specR: .006, spec2: true, rim: Y[5] });
+  for (const [lo, hi] of [[.3, .46], [.6, .76]]) orb(S, cx, cy, 58 + m.sq, 56 - m.sq, Bk, { shape: band(lo, hi), outline: null, spec: false, tex: furTex(.12) });
+  eyes2(S, cx + lx, cy - 14 + ly, 20, 9, st, look, '#4a2e0a');
+  cheek(S, cx - 34, cy + 4, '#ff8a6a'); cheek(S, cx + 34, cy + 4, '#ff8a6a');
+  if (st !== 'working') mouth2(S, cx + lx * .5, cy + 6, st, t, 6);
+  else laptop(S, cx, cy + 12, 3.3, t, Y, selout(Y));
+  if (st === 'nervous') sweat(S, cx + 50, cy - 40, 4);
+  return { cx, top: cy - 64, cy, rx: 58, k: 4 };
+}
+
+function drawCactus(S, st, t, look) {
+  const { m, cx, b, s, lx, ly } = T4(S, st, t, look);
+  const G = hsRamp(142, 40, 46), Pt = hsRamp(16, 56, 54), Pk = hsRamp(335, 78, 72);
+  shadow2(S, S.w / 2, 191, 56 + b / 4, 7);
+  const arm = st === 'alert' ? -12 : st === 'celebrate' ? Math.sin(t * 12) * 8 - 6 : st === 'sleep' || st === 'nervous' ? 12 : Math.sin(t * 1.5) * 2;
+  for (const s2 of [-1, 1]) {
+    const ay = b + 122 + (s2 > 0 ? 10 : 0), ex = cx + s2 * 54, top = ay - 32 + arm;
+    blobs(S, [{ x: cx + s2 * 30, y: ay, r: 12, ramp: G }, { x: cx + s2 * 44, y: ay, r: 12, ramp: G }, { x: ex, y: ay - 8, r: 12, ramp: G }, { x: ex, y: (ay + top) / 2 - 6, r: 11.5, ramp: G }, { x: ex, y: top, r: 11, ramp: G }], { outline: selout(G), tex: furTex(.05) });
+    for (let i = 0; i < 4; i++) { const px = ex + (i % 2 ? 7 : -7), py = top + i * 8; put(S, px, py, '#fff4d0'); put(S, px + (i % 2 ? 1 : -1), py - 1, '#fff4d0'); }
+  }
+  const ribs = (x, y) => { const u = Math.asin(Math.max(-1, Math.min(1, (x + .5 - cx) / 40))) / (Math.PI / 2) * 3, f = u - Math.round(u); return Math.abs(f) < .07 ? -.22 : 0; };
+  orb(S, cx, b + 110 + m.sq, 40 + m.sq, 66 - m.sq, G, { tex: ribs, ao: .2, outline: selout(G), specR: .005, spec2: true, rim: G[5] });
+  const long = st === 'nervous' || st === 'alert';
+  for (let i = 0; i < 26; i++) {
+    const x = cx + (hash(i, 1) - .5) * 68, y = b + 56 + hash(i, 2) * 96;
+    if (((x - cx) / 38) ** 2 + ((y - b - 110) / 64) ** 2 > .9 || (Math.abs(x - cx) < 32 && y > b + 82 && y < b + 124)) continue;
+    const sx = x > cx ? 1 : -1;
+    put(S, x, y, '#fff4d0'); put(S, x + sx, y - 1, '#fff4d0'); if (long) { put(S, x + sx * 2, y - 2, '#fff4d0'); put(S, x - sx, y - 1, '#fff4d0'); }
+  }
+  // flower = status light
+  const fx = cx + 3, fy = b + 44 + m.sq;
+  if (st === 'sleep') orb(S, fx, fy - 4, 7, 11, Pk, { shape: tear, outline: selout(Pk), spec: false });
+  else {
+    const open = st === 'celebrate' ? 1.25 : st === 'nervous' ? .8 : 1, rot = st === 'celebrate' ? t * 2 : Math.sin(t) * .1;
+    for (let i = 0; i < 5; i++) leaf(S, fx, fy, 17 * open, rot + i / 5 * 6.283 - 1.57, 8 * open, Pk, selout(Pk));
+    if (s.glow) halo(S, fx, fy, 26, s.h, .65);
+    orb(S, fx, fy, 6.5, 6.5, s.glow ? rampOf(s.h) : hsRamp(46, 90, 62), { outline: selout(Pk), specR: .08 });
+  }
+  eyes2(S, cx + lx * .8, b + 100 + ly, 16, 7.5, st, look, '#2a4a2a');
+  cheek(S, cx - 26, b + 114, '#ff8fa0'); cheek(S, cx + 26, b + 114, '#ff8fa0');
+  if (st !== 'working') mouth2(S, cx + lx * .5, b + 114, st, t, 5);
+  const pot = y0 => fillShape(S, cx - 44, y0, 88, 42, (x, y) => y >= y0 + 2 && y <= y0 + 38 && Math.abs(x + .5 - cx) <= 40 - (y - y0) * .22, (x, y) => Pt[dith(.62 - (x - cx) / 90 - (y - y0) / 140, x, y, 7)], selout(Pt));
+  pot(b + 148);
+  rrect(S, cx - 48, b + 142, 96, 13, 4, (x, y) => Pt[dith(.8 - (x - cx) / 120, x, y, 7)], selout(Pt));
+  if (st === 'working') laptop(S, cx, b + 116, 3.2, t, G, selout(G));
+  if (st === 'nervous') sweat(S, cx + 44, b + 70, 4);
+  return { cx, top: b + 34, cy: b + 106, rx: 40, k: 4 };
+}
+
+function drawCloud(S, st, t, look) {
+  const { m, cx, b: b0, s, lx, ly } = T4(S, st, t, look), b = b0 * .6, fl = Math.sin(t * 1.3) * 4, cy = b + 114 + fl;
+  const dull = st === 'sleep' || st === 'nervous', C = dull ? hsRamp(236, 16, 70) : hsRamp(222, 34, 90);
+  shadow2(S, S.w / 2, 192, 52 - fl, 6);
+  if (st === 'celebrate') {
+    const RB = ['#ff5a6a', '#ffa04a', '#ffe04a', '#6ae07a', '#5ab4ff', '#9a7aff'];
+    for (let y = Math.floor(cy - 70); y <= cy + 20; y++) for (let x = Math.floor(cx - 94); x <= cx + 94; x++) { const d = Math.hypot(x + .5 - cx, y + .5 - cy - 20), i = Math.floor((92 - d) / 5); if (i >= 0 && i < 6) putA(S, x, y, RB[i], .85); }
+  }
+  // the sun behind the cloud = status light (a moon when asleep)
+  const sx = cx + 50, sy = cy - 38;
+  if (st === 'sleep') {
+    orb(S, sx, sy, 19, 19, rampOf('#d8dcf0'), { spec: false, outline: '#5a6080' });
+    for (let y = sy - 24; y <= sy + 24; y++) for (let x = sx - 24; x <= sx + 30; x++) if (Math.hypot(x + .5 - sx - 10, y + .5 - sy + 7) < 16) { const X = Math.floor(x), Y2 = Math.floor(y); if (X >= 0 && Y2 >= 0 && X < S.w && Y2 < S.h) S.buf[Y2 * S.w + X] = 0; }
+  } else {
+    const sc = s.glow ? s.h : '#e6c35a';
+    if (s.glow) halo(S, sx, sy, 56, s.h, .5);
+    for (let i = 0; i < 8; i++) { const a = i / 8 * 6.283 + t * .6; line(S, sx + Math.cos(a) * 26, sy + Math.sin(a) * 26, sx + Math.cos(a) * 33, sy + Math.sin(a) * 33, mix(sc, '#ffffff', .25), 3); }
+    orb(S, sx, sy, 20, 20, glow7(sc), { outline: selout(glow7(sc)), specR: .03 });
+  }
+  const q = m.sq;
+  blobs(S, [{ x: cx - 54, y: cy + 12, r: 30 + q, ramp: C }, { x: cx - 22, y: cy - 14, r: 38 + q, ramp: C }, { x: cx + 22, y: cy - 8, r: 36 + q, ramp: C }, { x: cx + 56, y: cy + 14, r: 28 + q, ramp: C }, { x: cx, y: cy + 16, r: 40 - q, ramp: C }], { outline: selout(C), tex: furTex(.05) });
+  eyes2(S, cx + lx, cy + 4 + ly, 22, 8.5, st, look, '#4a6ad0');
+  cheek(S, cx - 36, cy + 20, '#ff9ec4'); cheek(S, cx + 36, cy + 20, '#ff9ec4');
+  if (st !== 'working') mouth2(S, cx + lx * .5, cy + 20, st, t, 6);
+  else laptop(S, cx, cy + 18, 3.2, t, C, selout(C));
+  if (st === 'nervous') for (let i = 0; i < 10; i++) { const p = (t * 1.6 + hash(i, 3)) % 1, x = cx - 54 + i * 12, y = cy + 44 + p * 40; for (let j = 0; j < 5; j++) putA(S, x, y + j, '#7fc4ff', (1 - p) * (.5 + j * .1)); }
+  if (st === 'alert' && Math.floor(t * 6) % 2) { const zx = cx - 58, zy = cy + 44; line(S, zx, zy, zx - 6, zy + 12, '#ffe04a', 3); line(S, zx - 6, zy + 12, zx + 2, zy + 12, '#ffe04a', 3); line(S, zx + 2, zy + 12, zx - 5, zy + 26, '#ffe04a', 3); }
+  if (st === 'nervous') sweat(S, cx + 30, cy - 50, 4);
+  return { cx, top: cy - 54, cy, rx: 60, k: 4 };
+}
+
+function drawCorgi(S, st, t, look) {
+  const { m, cx, b, s, lx, ly } = T4(S, st, t, look);
+  const O = hsRamp(28, 80, 58), W = hsRamp(36, 30, 94), Dk = hsRamp(10, 30, 26);
+  shadow2(S, S.w / 2 - 6, 190, 62 + b / 4, 8);
+  // tennis ball = status light
+  const up = st === 'celebrate' ? Math.abs(Math.sin(t * 6)) * 44 : st === 'alert' ? Math.abs(Math.sin(t * 4)) * 14 : 0, bx = S.w / 2 + 80, by = 180 - up;
+  shadow2(S, bx, 190, 12 - up / 8, 3);
+  if (s.glow) halo(S, bx, by, 26, s.h, .6);
+  const BR = s.glow ? glow7(s.h) : hsRamp(72, 78, 56);
+  orb(S, bx, by, 11, 11, BR, { outline: selout(BR), specR: .05 });
+  for (const sg of [-1, 1]) for (let q = 0; q < 48; q++) { const a = q / 48 * 6.283, x = bx + sg * 15 + Math.cos(a) * 11, y = by + Math.sin(a) * 11; if (Math.hypot(x - bx, y - by) < 10) put(S, x, y, '#ffffff'); }
+  const wag = Math.sin(t * (st === 'celebrate' || st === 'alert' ? 16 : 5)) * 4;
+  orb(S, cx - 46 + wag, b + 160, 11, 9, O, { outline: selout(O), spec: false, tex: furTex(.14) });
+  for (const s2 of [-1, 1]) orb(S, cx + s2 * 20, b + 182, 12, 7, W, { outline: selout(W), spec: false });
+  orb(S, cx, b + 152, 46 + m.sq, 34 - m.sq, O, { tex: furTex(.12), ao: .5, outline: selout(O), specR: 0, rim: O[5] });
+  orb(S, cx, b + 156, 24, 26, W, { outline: null, spec: false, tex: furTex(.08) });
+  const ey = b + 100 + m.sq;
+  for (const s2 of [-1, 1]) {
+    const tipY = ey - 66 - (st === 'alert' ? 8 : 0) + (st === 'sleep' || st === 'nervous' ? 16 : 0), tipX = cx + s2 * (st === 'sleep' || st === 'nervous' ? 52 : 42);
+    tri(S, [cx + s2 * 10, ey - 24], [cx + s2 * 52, ey - 4], [tipX, tipY], (x, y) => O[dith(.8 - (y - tipY) / 110 + (s2 < 0 ? .08 : -.08), x, y, 7)], selout(O));
+    tri(S, [cx + s2 * 22, ey - 18], [cx + s2 * 44, ey - 8], [tipX + s2 * -2, tipY + 16], (x, y) => ['#e8a0a8', '#f5c0c6', '#ffdde0'][dith(.6 - (y - tipY) / 90, x, y, 3)], null);
+  }
+  orb(S, cx, ey, 54 + m.sq, 40 - m.sq, O, { tex: furTex(.12), ao: .25, outline: selout(O), specR: 0, rim: O[5] });
+  tri(S, [cx - 8, ey + 6], [cx + 8, ey + 6], [cx, ey - 34], (x, y) => W[dith(.78, x, y, 7)], null);
+  for (const s2 of [-1, 1]) orb(S, cx + s2 * 18, ey + 22, 20, 15, W, { outline: null, spec: false, tex: furTex(.06) });
+  orb(S, cx, ey + 18, 16, 16, W, { outline: null, spec: false });
+  rrect(S, cx - 30, ey + 38, 60, 6, 3, (x, y) => (x & 3) ? '#d8344a' : '#b82a3e', '#5a1020');
+  eyes2(S, cx + lx, ey - 2 + ly, 24, 8.5, st, look, '#4a2a14');
+  cheek(S, cx - 38, ey + 18, '#ff8f9a'); cheek(S, cx + 38, ey + 18, '#ff8f9a');
+  ellF(S, cx + lx * .5, ey + 12, 7, 4.5, '#1b1420'); rectF(S, cx - 3 + lx * .5, ey + 9, 3, 1, '#7a6a80');
+  if (st !== 'working') {
+    mouth2(S, cx + lx * .5, ey + 19, st, t, 6);
+    if (st === 'idle') { ellF(S, cx + lx * .5 + 3, ey + 27, 4.5, 5, '#c24a60'); ellF(S, cx + lx * .5 + 3, ey + 26, 3.5, 4, '#ff7f9a'); }
+  } else laptop(S, cx, b + 132, 3.3, t, O, selout(O));
+  if (st === 'nervous') sweat(S, cx + 52, ey - 30, 4);
+  return { cx, top: ey - 64, cy: ey, rx: 54, k: 4 };
+}
+
+function drawLantern(S, st, t, look) {
+  const { m, cx, b, s, lx, ly } = T4(S, st, t, look), fl = Math.sin(t * 1.6) * 4, cy = b * .8 + 106 + fl;
+  const glow = s.glow ? s.h : st === 'sleep' ? '#3d4360' : '#ffb04a', flick = st === 'nervous' ? .55 + .45 * hash(Math.floor(t * 18), 7) : 1;
+  const Pp = hsRamp(24, 66, 70).map(c => mix(c, glow, st === 'sleep' ? .45 : s.glow ? .38 : .18)), Dk = hsRamp(350, 30, 26);
+  if (st !== 'sleep') halo(S, cx, cy, 104, glow, (s.glow ? .34 : .2) * flick);
+  shadow2(S, S.w / 2, 192, 40 - fl, 6);
+  const sw = Math.sin(t * 1.2) * 3;
+  for (let q = 0; q <= 40; q++) { const a = Math.PI + q / 40 * Math.PI; rectF(S, cx + sw * .5 + Math.cos(a) * 18, cy - 66 + Math.sin(a) * 14, 3, 3, '#3a2a2a'); }
+  orb(S, cx, cy, 62 + m.sq, 56 - m.sq, Pp, { outline: selout(Pp), specR: .006, spec2: true, rim: mix(glow, '#ffffff', .5), tex: (x, y) => (((y - cy + 6) % 13) + 13) % 13 < 1.3 ? -.24 : 0 });
+  if (st !== 'sleep') halo(S, cx, cy + 6, 46, mix(glow, '#ffffff', .45), .32 * flick);
+  rrect(S, cx - 30, cy - 64, 60, 12, 4, (x, y) => Dk[dith(.75 - (y - cy + 64) / 30, x, y, 7)], selout(Dk));
+  rrect(S, cx - 30, cy + 50, 60, 12, 4, (x, y) => Dk[dith(.6 - (y - cy - 50) / 30, x, y, 7)], selout(Dk));
+  const tx = cx + sw;
+  for (let i = -2; i <= 2; i++) line(S, cx + i * 2, cy + 64, tx + i * 3, cy + 80, i & 1 ? '#c8343c' : '#e8505a', 2);
+  orb(S, cx, cy + 66, 5, 4, hsRamp(355, 70, 50), { outline: '#5a1020', spec: false });
+  eyes2(S, cx + lx, cy - 6 + ly, 22, 9, st, look, '#7a2a14');
+  cheek(S, cx - 36, cy + 12, '#ff6a6a'); cheek(S, cx + 36, cy + 12, '#ff6a6a');
+  if (st !== 'working') mouth2(S, cx + lx * .5, cy + 12, st, t, 6);
+  else laptop(S, cx, cy + 12, 3.2, t, Pp, selout(Pp));
+  if (st === 'nervous') sweat(S, cx + 50, cy - 40, 4);
+  return { cx, top: cy - 70, cy, rx: 62, k: 4 };
+}
+
+function drawHedgehog(S, st, t, look) {
+  const { m, cx, b, s, lx, ly } = T4(S, st, t, look);
+  const Sp = hsRamp(24, 34, 31), Cr = hsRamp(34, 45, 86), Dk = hsRamp(260, 22, 20);
+  shadow2(S, S.w / 2, 190, 66 + b / 4, 8);
+  const br = st === 'alert' || st === 'nervous' ? .3 : st === 'sleep' ? .2 : .22, scy = b + 118 + m.sq;
+  const spikes = (dx, dy) => { const th = Math.atan2(dy, dx), w = Math.abs(((th * 11 / Math.PI + (st === 'nervous' ? Math.sin(t * 30) * .15 : 0)) % 2 + 2) % 2 - 1), sp = 1 - br * w; return (dx * dx + dy * dy) / (sp * sp); };
+  orb(S, cx, scy, 80, 66, Sp, { shape: spikes, rOf: (dx, dy) => Math.min(1, dx * dx + dy * dy), outline: selout(Sp), specR: 0, ao: .2, tex: (x, y) => { const a = Math.atan2((y - scy) / 66, (x - cx) / 80); return (Math.sin(a * 44) > .55 ? .22 : Math.sin(a * 44) < -.6 ? -.2 : 0) + (hash(x >> 1, y) - .5) * .12; } });
+  for (let i = 0; i < 30; i++) { const a = -Math.PI + .1 + i / 29 * (Math.PI - .2), r0 = .5 + hash(i, 5) * .2, r1 = r0 + .28; line(S, cx + Math.cos(a) * 80 * r0, scy + Math.sin(a) * 66 * r0, cx + Math.cos(a) * 80 * r1, scy + Math.sin(a) * 66 * r1, i & 1 ? Sp[5] : Sp[0], 1); put(S, cx + Math.cos(a) * 80 * r1, scy + Math.sin(a) * 66 * r1, Sp[6]); }
+  for (const s2 of [-1, 1]) { orb(S, cx + s2 * 36, b + 90, 10, 9, Cr, { outline: selout(Cr), spec: false }); orb(S, cx + s2 * 36, b + 91, 5, 4, PK4, { outline: null, spec: false }); }
+  // berry stuck on the spines = status light
+  const bx = cx - 54, by = scy - 46, BR = s.glow ? glow7(s.h) : hsRamp(350, 72, 50);
+  if (s.glow) halo(S, bx, by, 26, s.h, .6);
+  orb(S, bx, by, 10, 10, BR, { outline: selout(BR), specR: .05 });
+  leaf(S, bx + 2, by - 8, 11, -1.1, 4, hsRamp(112, 52, 44), selout(hsRamp(112, 52, 44)));
+  for (const s2 of [-1, 1]) orb(S, cx + s2 * 24, b + 182, 12, 7, PK4, { outline: selout(PK4), spec: false });
+  const fshape = (dx, dy) => dx * dx / Math.max(.2, 1 - .4 * Math.max(0, dy)) ** 2 + dy * dy;
+  orb(S, cx, b + 130 + m.sq, 50, 44, Cr, { shape: fshape, tex: furTex(.08), outline: selout(Cr), specR: 0, rim: Cr[5], ao: .2 });
+  eyes2(S, cx + lx, b + 120 + ly, 20, 7.5, st, look, '#2a1a14');
+  cheek(S, cx - 30, b + 140, '#ff8fa0'); cheek(S, cx + 30, b + 140, '#ff8fa0');
+  orb(S, cx + lx * .5, b + 146, 13, 10, Cr, { outline: selout(Cr), spec: false });
+  orb(S, cx + lx * .6, b + 148, 6, 4.5, Dk, { outline: null, specR: .08 });
+  if (st !== 'working') mouth2(S, cx + lx * .5, b + 158, st, t, 4);
+  else laptop(S, cx, b + 136, 3.2, t, Cr, selout(Cr));
+  if (st === 'nervous') sweat(S, cx + 56, b + 76, 4);
+  return { cx, top: scy - 62, cy: b + 120, rx: 70, k: 4 };
+}
+
+function drawWhale(S, st, t, look) {
+  const { m, cx, b: b0, s, lx, ly } = T4(S, st, t, look), b = b0 * .7, cy = b + 132 + Math.sin(t * 1.6) * 3, x0 = cx - 12;
+  const Bl = hsRamp(208, 62, 50), Be = hsRamp(200, 30, 88);
+  shadow2(S, S.w / 2, 190, 70, 7);
+  for (let q = 0; q < 200; q++) { const a = q / 200 * 6.283, w = 90 + Math.sin(t * 2) * 3; putA(S, S.w / 2 + Math.cos(a) * w, 186 + Math.sin(a) * 6, '#9fd8ff', .45); putA(S, S.w / 2 + Math.cos(a) * w * .8, 187 + Math.sin(a) * 4, '#cdeeff', .3); }
+  const tw = Math.sin(t * (st === 'celebrate' ? 8 : st === 'alert' ? 5 : 2)) * .18;
+  blobs(S, [{ x: x0 + 56, y: cy + 14, r: 20, ramp: Bl }, { x: x0 + 72, y: cy - 4, r: 14, ramp: Bl }, { x: x0 + 82, y: cy - 20, r: 10, ramp: Bl }], { outline: selout(Bl) });
+  leaf(S, x0 + 82, cy - 24, 24, -2.25 + tw, 10, Bl, selout(Bl)); leaf(S, x0 + 82, cy - 24, 24, -.85 + tw, 10, Bl, selout(Bl));
+  const fin = st === 'celebrate' ? Math.sin(t * 14) * .4 : 0;
+  leaf(S, x0 - 50, cy + 18, 26, 2.5 + fin, 9, Bl, selout(Bl));
+  const inBody = (x, y) => ((x + .5 - x0) / (70 + m.sq)) ** 2 + ((y + .5 - cy) / (50 - m.sq)) ** 2 <= 1;
+  orb(S, x0, cy, 70 + m.sq, 50 - m.sq, Bl, { outline: selout(Bl), specR: .008, spec2: true, rim: Bl[5], ao: .2 });
+  orb(S, x0, cy + 28, 54, 24, Be, { shape: (dx, dy, x, y) => inBody(x, y) && inBody(x, y + 2) ? dx * dx + dy * dy : 9, outline: null, spec: false });
+  for (let i = 0; i < 4; i++) for (let x = x0 - 40; x <= x0 + 40; x++) { const y = cy + 30 + i * 5; if (inBody(x, y + 3) && ((x - x0) / 54) ** 2 + ((y - cy - 28) / 24) ** 2 < .9) put(S, x, y, Be[2]); }
+  leaf(S, x0 + 46, cy + 22, 22, .6 - fin, 8, Bl, selout(Bl));
+  // blowhole spout = status light
+  const H0 = { idle: 26, working: 34 + Math.sin(t * 6) * 6, alert: 44, celebrate: 58, nervous: 12 + Math.abs(Math.sin(t * 9)) * 10, sleep: 0 }[st], H = Math.min(H0, cy - 72);
+  const sc = s.glow ? s.h : '#9fd8ff', SR = glow7(sc), top = cy - 48 - H;
+  if (st === 'sleep') { for (let i = 0; i < 3; i++) { const p = (t * .5 + i / 3) % 1; const r = 3 + i; for (let q = 0; q < 14; q++) putA(S, x0 + Math.sin(t + i) * 4 + Math.cos(q / 14 * 6.283) * r, cy - 56 - p * 40 + Math.sin(q / 14 * 6.283) * r, '#cdeeff', .8 * (1 - p)); } }
+  else {
+    if (s.glow) halo(S, x0, top + 10, 34, s.h, .55);
+    line(S, x0, cy - 46, x0, top + 6, selout(SR), 7); line(S, x0, cy - 46, x0, top + 6, SR[4], 4); line(S, x0 - 1, cy - 46, x0 - 1, top + 6, SR[6], 1);
+    for (const s2 of [-1, 1]) for (let i = 0; i < 3; i++) { const p = ((t * 1.5 + i / 3) % 1), dx = s2 * (6 + p * 22), dy = top + 4 + p * p * 28 - p * 6; orb(S, x0 + dx, dy, 4 - i * .6, 5 - i * .6, SR, { shape: tear, outline: selout(SR), specR: .1 }); }
+    orb(S, x0, top + 4, 9, 7, SR, { outline: selout(SR), specR: .05 });
+  }
+  eyes2(S, x0 + lx, cy - 4 + ly, 24, 8.5, st, look, '#1a3a6a');
+  cheek(S, x0 - 38, cy + 12, '#ff9ec4'); cheek(S, x0 + 38, cy + 12, '#ff9ec4');
+  if (st !== 'working') mouth2(S, x0 + lx * .5, cy + 12, st, t, 8);
+  else laptop(S, x0, cy + 8, 3.3, t, Bl, selout(Bl));
+  if (st === 'nervous') sweat(S, x0 + 56, cy - 50, 4);
+  return { cx: x0, top: st === 'sleep' ? cy - 56 : top - 4, cy, rx: 70, k: 4 };
+}
+
 // ===================== catalogue =====================
 const DESIGNS = [
   { name: 'Current', res: '56×52 @4×', w: 56, h: 52, scale: 4, k: 1, draw: (S, st, t, l) => drawNet(S, st, t, l, 1, { flat: true }), note: 'Roughly what ships today: flat three-tone, one-pixel eyes.' },
@@ -1043,6 +1392,16 @@ const DESIGNS = [
   { name: 'Crystal snail', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawSnail, note: "Amethyst crystals on its back glow in the status colour; its eye stalks follow your cursor." },
   { name: 'Star', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawStar, note: "A plump star with orbiting sparkles. It spins when you commit." },
   { name: 'Drone', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawDrone, note: "A glossy hover-bot with an LED face on its visor. The thrusters glow in the status colour." },
+  { name: 'Sea otter', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawOtter, note: "Holds a clam shell; the pearl inside is the status light. The shell goes on its head while it types." },
+  { name: 'Water bear', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawTardi, note: "A chubby tardigrade with eight stubby legs. The dewdrop on its moss tuft is the status light; it curls into a ball to sleep." },
+  { name: 'Moss turtle', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawTurtle, note: "A tiny moss garden grows on its shell. The window of the stone lantern in the garden is the status light; it pulls its head in to sleep." },
+  { name: 'Bee', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawBee, note: "A round fuzzy bee. Its stinger is a little tail light that glows in the status colour." },
+  { name: 'Cactus', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawCactus, note: "A potted cactus. The centre of the flower on its head is the status light; the flower closes to sleep and its arms go up on alerts." },
+  { name: 'Cloud', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawCloud, note: "The sun peeking out behind it is the status light (a moon when asleep). It rains when nervous and makes a rainbow when you commit." },
+  { name: 'Corgi', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawCorgi, note: "Big ears, stubby legs. Its tennis ball is the status light, and it bounces when something happens." },
+  { name: 'Lantern', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawLantern, note: "A paper lantern spirit. The whole lantern glows from inside in the status colour and flickers when nervous." },
+  { name: 'Hedgehog', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawHedgehog, note: "A berry stuck on its spines is the status light. Spines bristle on alerts." },
+  { name: 'Whale', res: '224×208 @1×', w: 224, h: 208, scale: 1, k: 4, draw: drawWhale, note: "A little whale bobbing on the water. Its blowhole spout is the status light: bigger when something happens, a fountain when you commit." },
 ];
 const STATES = ['idle', 'working', 'alert', 'celebrate', 'nervous', 'sleep', 'cycle'];
 let state = 'cycle', zoom = 1, bg = 'desk', mouse = { x: -1e4, y: -1e4 };
