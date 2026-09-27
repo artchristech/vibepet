@@ -1,5 +1,5 @@
 // vibepet — a desktop pet that watches your coding agents and your repo.
-const { app, BrowserWindow, ipcMain, screen, Menu, dialog, safeStorage, Notification, clipboard } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, Menu, dialog, safeStorage, Notification, clipboard, powerMonitor } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -80,8 +80,10 @@ function flushDone() {
   if (!names.length || state.muted || !Notification.isSupported()) return;
   lastDoneNote = Date.now();
   const who = names.length > 2 ? `${names.length} agents` : names.join(', ');
-  new Notification({ title: state.name, body: `${who} finished — your move!`, silent: false }).show();
+  new Notification({ title: state.name, body: `${who} done`, silent: true }).show();
 }
+// the pet can't be seen (hidden, or the user stepped away): only then does an OS banner earn its interruption
+const away = () => !win || win.isDestroyed() || !win.isVisible() || powerMonitor.getSystemIdleTime() > 60;
 
 // ---------- claude code sessions ----------
 const sessions = new Map(); // id -> { phase, since, … }
@@ -162,10 +164,10 @@ function scanAgents() {
 
 function transition(name, prev, phase, now) {
   if (phase === 'waiting' && (prev.phase === 'working' || prev.phase === 'stalled')) {
-    emit('agentDone', `${name} finished — your move!`, { agent: name });
-    queueDone(name);
+    emit('agentDone', `${name} is done`, { agent: name });
+    if (away()) queueDone(name);
   } else if (phase === 'stalled' && prev.phase === 'working') {
-    emit('agentStalled', `${name} has gone quiet on a tool call. Needs your approval?`, { agent: name });
+    emit('agentStalled', `${name} needs approval`, { agent: name, notify: away() });
   }
 }
 
@@ -241,7 +243,7 @@ function onCommit(repo, subject, lines) {
 }
 
 // ---------- tick ----------
-let busy = false, agents = [], lastNight = 0;
+let busy = false, agents = [];
 async function tick() {
   if (busy) return;
   busy = true;
@@ -249,11 +251,6 @@ async function tick() {
     decay();
     agents = scanAgents();
     await scanGit(agents);
-    const h = new Date().getHours();
-    if (h >= 1 && h < 5 && agents.length && Date.now() - lastNight > 60 * 60e3) {
-      lastNight = Date.now();
-      emit('night', `it's ${h}am. the bugs get braver at night. one more commit, then sleep?`);
-    }
     if (win && !win.isDestroyed()) win.webContents.send('tick', snapshot());
     save();
   } catch (e) { console.error(e); }
@@ -381,12 +378,15 @@ function createWindow() {
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
   win.webContents.on('did-finish-load', () => tick());
 
-  // eyes follow the cursor anywhere on screen
-  setInterval(() => {
+  // eyes follow the cursor anywhere on screen: sent only on change; 60 Hz near the pet while moving, 10 Hz otherwise
+  let last = '', movedAt = 0;
+  (function feed() {
     if (win.isDestroyed()) return;
-    const p = screen.getCursorScreenPoint(), [x, y] = win.getPosition();
-    win.webContents.send('cursor', { x: p.x - x, y: p.y - y });
-  }, 16);
+    const p = screen.getCursorScreenPoint(), [x, y] = win.getPosition(), c = { x: p.x - x, y: p.y - y }, k = c.x + ',' + c.y;
+    if (k !== last) { last = k; movedAt = Date.now(); win.webContents.send('cursor', c); }
+    const near = c.x > -220 && c.x < W + 220 && c.y > -220 && c.y < H + 220;
+    setTimeout(feed, near && Date.now() - movedAt < 500 ? 16 : 100);
+  })();
 }
 
 let drag = null;

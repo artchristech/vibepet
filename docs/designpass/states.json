@@ -1,0 +1,88 @@
+{
+  "entry": ".",
+  "freeze": [
+    "tick",
+    "cursor"
+  ],
+  "settle": 1500,
+  "prelude": "(() => {\n  clearInterval(window.__dpT);\n  const now = Date.now();\n  snap = { name: 'Net', level: 1, xp: 0, xpLo: 0, xpHi: 40, fuel: 80, mood: 70, commits: 0, agents: [],\n    git: { root: '/x/vibepet', name: 'vibepet', branch: 'main', lines: 84, files: 3, untracked: 1, lastCommitAt: now - 25*60e3, lastSubject: 'wip' },\n    muted: true, animations: false, game: false, hasKey: true, hour: 14, watching: 'auto' };\n  renderHud(); closeChat(); bubbleQ = []; hideBubble(); bubble.classList.add('hidden');\n  document.getElementById('msgs').innerHTML = ''; history = [];\n  anim = { kind: null, until: 0 }; parts.length = 0; exiting = null; emitT = {};\n  nextBlink = performance.now() + 1e9; blinkUntil = 0; nextChatter = performance.now() + 1e9;\n  cursor = { x: -999, y: -999 }; lastCur = null; vel = { x: 0, y: 0 };\n  hoverHit = false; hovering = false; rp = 0; rv = 0; wantUntil = 0;\n  lastInteract = performance.now();\n  document.getElementById('hud').classList.remove('gone');\n})()",
+  "states": [
+    {
+      "id": "01-idle",
+      "renderer": "",
+      "wait": 500
+    },
+    {
+      "id": "02-hud-half",
+      "renderer": "(() => { const p = (() => { const z = zoneRect(); return { x: (z.l + z.r)/2, y: z.b + 72 }; })(); cursor = { x: p.x, y: p.y }; lastCur = { ...cursor }; vel = { x: 0, y: 0 }; })();",
+      "wait": 900
+    },
+    {
+      "id": "03-hud-full",
+      "renderer": "(() => { const p = (() => { const c = document.getElementById('pet').getBoundingClientRect(); return { x: c.left + c.width/2, y: c.top + c.height*0.62 }; })(); cursor = { x: p.x, y: p.y }; lastCur = { ...cursor }; vel = { x: 0, y: 0 }; })();",
+      "wait": 900
+    },
+    {
+      "id": "04-hud-aim",
+      "renderer": "(() => { const z = zoneRect(); cursor = { x: z.r + 140, y: z.b + 90 }; lastCur = { ...cursor }; vel = { x: 0, y: 0 };\n  const tx = (z.l + z.r)/2, ty = (z.t + z.b)/2, dx = tx - cursor.x, dy = ty - cursor.y, L = Math.hypot(dx, dy), sp = 10; let n = 0;\n  window.__dpT = setInterval(() => { if (++n > 12) return clearInterval(window.__dpT); cursor = { x: cursor.x + dx/L*sp, y: cursor.y + dy/L*sp }; }, 16); })();",
+      "wait": 260
+    },
+    {
+      "id": "05-working",
+      "renderer": "snap.agents = [{ name: 'claude', phase: 'working', since: Date.now() - 240*1000 }]; renderHud();",
+      "wait": 500
+    },
+    {
+      "id": "06-waiting",
+      "renderer": "snap.agents = [{ name: 'claude', phase: 'waiting', since: Date.now() - 60*1000 }]; renderHud();",
+      "wait": 500
+    },
+    {
+      "id": "07-stalled",
+      "renderer": "snap.agents = [{ name: 'codex', phase: 'stalled', since: Date.now() - 600*1000 }]; renderHud();",
+      "wait": 500
+    },
+    {
+      "id": "08-agents-mixed",
+      "renderer": "snap.agents = [{ name: 'claude', phase: 'working', since: Date.now() - 240*1000 }, { name: 'codex', phase: 'stalled', since: Date.now() - 600*1000 }, { name: 'api', phase: 'waiting', since: Date.now() - 90*1000 }]; renderHud();",
+      "wait": 500
+    },
+    {
+      "id": "09-sleeping",
+      "renderer": "snap.hour = 3;",
+      "wait": 500
+    },
+    {
+      "id": "10-bubble-done",
+      "renderer": "snap.agents = [{ name: 'claude', phase: 'waiting', since: Date.now() - 2*1000 }]; renderHud();",
+      "main": "({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.send('event', { kind: 'agentDone', text: 'claude is done', agent: 'claude' })",
+      "wait": 1400
+    },
+    {
+      "id": "11-bubble-stalled",
+      "renderer": "snap.agents = [{ name: 'codex', phase: 'stalled', since: Date.now() - 95*1000 }]; renderHud();",
+      "main": "({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.send('event', { kind: 'agentStalled', text: 'codex needs approval', agent: 'codex' })",
+      "wait": 1900
+    },
+    {
+      "id": "12-chat",
+      "renderer": "addMsg('pet', \"what's up?\"); openChat();",
+      "wait": 600
+    },
+    {
+      "id": "13-chat-convo",
+      "renderer": "addMsg('pet', \"what's up?\"); openChat(); addMsg('user', '✍️ commit msg'); addMsg('pet', 'here you go:\\n```text\\nfeat(hud): spring-driven shadow pill\\n\\n- morph ground shadow into toolbar\\n- predict reveal from cursor aim\\n```');",
+      "wait": 600
+    },
+    {
+      "id": "14-chat-nokey",
+      "renderer": "snap.hasKey = false; addMsg('pet', \"what's up?\"); openChat();",
+      "wait": 600
+    },
+    {
+      "id": "15-game-anim-on",
+      "renderer": "Object.assign(snap, { game: true, animations: true, level: 7, xp: 1500, xpLo: 1440, xpHi: 1960, fuel: 72, mood: 80 }); snap.agents = [{ name: 'claude', phase: 'working', since: Date.now() - 240*1000 }]; renderHud();",
+      "wait": 900
+    }
+  ]
+}

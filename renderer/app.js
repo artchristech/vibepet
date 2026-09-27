@@ -51,6 +51,7 @@ function spawn(kind, n, o = {}) {
     g: o.g ?? 0, life: 1, decay: rand(0.008, 0.018) * (o.fast ?? 1),
     color: pick(o.colors || ['#fff']),
   });
+  wake();
 }
 function drawParts() {
   for (let i = parts.length - 1; i >= 0; i--) {
@@ -71,6 +72,7 @@ function agentsIn(phase) { return (snap?.agents || []).filter(a => a.phase === p
 function baseState(now) {
   if (!snap) return 'idle';
   if (agentsIn('waiting').some(a => Date.now() - a.since < 8000)) return 'alert';
+  if (agentsIn('waiting').length) return 'waiting';
   if (agentsIn('stalled').length) return 'stalled';
   if (agentsIn('working').length) return 'working';
   if (snap.game && snap.fuel < 20) return 'hungry';
@@ -78,6 +80,9 @@ function baseState(now) {
   if ((late || now - lastInteract > 15 * 60e3) && !hovering && !chatOpen) return 'sleeping';
   return 'idle';
 }
+// one resolver for LED + face: needs input > stuck > running > none
+function agentSignal() { return agentsIn('waiting').length ? 'needs' : agentsIn('stalled').length ? 'stuck' : agentsIn('working').length ? 'running' : 'none'; }
+const LED = { needs: '#ffcf3f', stuck: '#ff5c6c', running: '#3fe08f', none: '#59607a' };
 // exit: a hole opens under the pet and it drops in (ms offsets from the start)
 let exiting = null;
 const EX = { open: 300, antic: 380, hop: 600, fall: 950, close: 1300, done: 1380 };
@@ -87,21 +92,21 @@ function startExit() {
   closeChat(); $('hud').classList.remove('show'); $('hud').classList.add('gone');
   say('bye! 👋', { prio: true, ms: 900 });
 }
-function transient(kind, ms) { if (!snap?.animations) return; anim = { kind, until: performance.now() + ms, start: performance.now() }; }
+function transient(kind, ms) { if (!snap?.animations) return; anim = { kind, until: performance.now() + ms, start: performance.now() }; wake(); }
 
 // ================= drawing =================
-let nextBlink = 0, blinkUntil = 0, emitT = {};
+let nextBlink = 0, blinkUntil = 0, emitT = {}, lastSig, haloUntil = 0, lastKey = '';
 function every(key, ms, now) { if ((emitT[key] || 0) < now) { emitT[key] = now + ms; return true; } return false; }
 
 function draw(now) {
   const t = now / 1000;
   let st = anim.kind && now < anim.until ? anim.kind : baseState(now);
   const ex = exiting ? now - exiting.start : -1;
-  if (!snap?.animations && st !== 'sleeping') st = 'still';
+  const moving = !!snap?.animations || ex >= 0;   // steady states hold still; only opt-in Animations or the exit move
   if (ex >= 0) st = ex < EX.antic ? 'idle' : ex < EX.hop ? 'love' : 'exitfall';
   const lvl = snap?.game ? snap.level : 1;
-  ctx.setTransform(S, 0, 0, S, 0, 0);
-  ctx.clearRect(0, 0, GW, GH);
+  const sig = agentSignal();
+  if (sig !== lastSig) { if (lastSig !== undefined && !reduceMotion) haloUntil = now + 500; lastSig = sig; }
 
   let cx = 28, cy = 34, rx = 13, ry = 11, bob = 0;
   const hop = (speed, height) => {
@@ -109,7 +114,7 @@ function draw(now) {
     bob = -Math.round(Math.max(0, s) * height);
     if (p < 0.1 || p > 0.93) { rx += 1; ry -= 1; } else if (s > 0.5) { rx -= 1; ry += 1; }
   };
-  switch (st) {
+  if (moving) switch (st) {
     case 'alert': hop(1.3, 6); break;
     case 'celebrate': case 'levelup': hop(2.2, 9); break;
     case 'love': hop(1.6, 3); break;
@@ -117,7 +122,6 @@ function draw(now) {
     case 'sleeping': ry += Math.sin(t * 1.3) > 0 ? 0 : -1; rx += Math.sin(t * 1.3) > 0 ? 0 : 1; break;
     case 'working': bob = Math.round(Math.sin(t * 7) * 0.5); break;
     case 'hungry': bob = 1; ry -= 1; rx += 1; break;
-    case 'still': break;
     default: bob = Math.round(Math.sin(t * 2.2) * 0.7);
   }
   if (ex >= 0) {
@@ -127,6 +131,23 @@ function draw(now) {
     else { const q = e01(EX.hop, EX.fall); bob = Math.round(q * q * 44); rx -= 2; ry += 2; }
   }
   cy += bob;
+
+  // gaze (decided up front so an unchanged frame can skip the repaint)
+  const rc = cv.getBoundingClientRect();
+  const pxX = rc.left + cx * S, pxY = rc.top + cy * S;
+  let lx = Math.max(-1, Math.min(1, Math.round((cursor.x - pxX) / 90)));
+  let ly = Math.max(-1, Math.min(1, Math.round((cursor.y - pxY) / 110)));
+  if (st === 'working' || (ex >= 0 && ex < EX.antic)) { lx = 0; ly = 1; }
+  if (st === 'sleeping') lx = ly = 0;
+  if (moving && now > nextBlink) { blinkUntil = now + 110; nextBlink = now + rand(2500, 5500); }
+  const blink = moving && now < blinkUntil;
+  const shades = lvl >= 5 && hovering && !['sleeping', 'alert', 'waiting'].includes(st);
+  const active = moving || parts.length > 0 || now < haloUntil;
+  const key = [st, sig, lx, ly, cy, lvl, shades, snap?.game && snap.fuel, snap?.game && snap.mood].join();
+  if (!active && key === lastKey) return false;
+  lastKey = key;
+  ctx.setTransform(S, 0, 0, S, 0, 0);
+  ctx.clearRect(0, 0, GW, GH);
 
   // the hole (exit only), then clip the pet to above its rim so it drops in
   if (ex >= 0) {
@@ -142,7 +163,7 @@ function draw(now) {
       spawn('spark', 14, { x: 28, y: 45, spread: 2.2, up: 1.3, g: .05, colors: ['#7ef0c1', '#c7fff0', '#ffffff', '#8fd3ff'] });
       tune([523, 392, 262], 70);
     }
-    if (ex > EX.done) { exiting = 'done'; api.exitDone(); }
+    if (ex > EX.done) { exiting = 'done'; api.exitDone(); return false; }
     ctx.save(); ctx.beginPath(); ctx.rect(0, 0, GW, 47); ctx.clip();
   } else {
     // ground shadow is the #hud pill (see style.css)
@@ -155,7 +176,7 @@ function draw(now) {
 
   // feet (wiggle when happy)
   const happy = ['celebrate', 'levelup', 'love'].includes(st);
-  if (ex >= 0 && ex > EX.fall) { ctx.restore(); drawParts(); return; }
+  if (ex >= 0 && ex > EX.fall) { ctx.restore(); drawParts(); return true; }
   const fw = happy ? Math.round(Math.sin(t * 20)) : 0;
   for (const s of [-1, 1]) {
     ell(cx + s * 6, cy + ry - 0.5 + (s === 1 ? fw : -fw) * 0.5, 3.4, 2.2, (dx, dy, r) => r > 0.62 ? OUT : C.shade);
@@ -176,34 +197,27 @@ function draw(now) {
   // antenna = agent status LED
   const top = cy - ry;
   dots(cx, top, [[0,-1],[0,-2],[1,-3]], OUT);
-  let led = '#59607a';
-  if (agentsIn('waiting').length) led = '#ffcf3f';
-  else if (agentsIn('stalled').length) led = Math.floor(t * 2) % 2 ? '#ff5c6c' : '#6b1f27';
-  else if (agentsIn('working').length) led = `hsl(152 90% ${55 + Math.sin(t * 5) * 15}%)`;
-  rect(cx, top - 6, 3, 3, OUT); rect(cx + 1, top - 5, 1, 1, led);
-  if (led !== '#59607a') { ctx.globalAlpha = 0.35; rect(cx, top - 6, 3, 3, led); ctx.globalAlpha = 1; rect(cx + 1, top - 5, 1, 1, '#fff'); }
+  const led = LED[sig];                                   // held steady; a change plays one fading halo, once
+  rect(cx, top - 7, 4, 4, OUT); rect(cx + 1, top - 6, 2, 2, led);
+  if (now < haloUntil) {
+    ctx.globalAlpha = 0.5 * ((haloUntil - now) / 500) ** 2;
+    rect(cx - 1, top - 8, 6, 1, led); rect(cx - 1, top - 3, 6, 1, led); rect(cx - 1, top - 7, 1, 4, led); rect(cx + 4, top - 7, 1, 4, led);
+    ctx.globalAlpha = 1;
+  }
 
   // crown (L7+)
   if (lvl >= 7) outlined(cx - 10, top - 1, SPR.crown, '#ffcf3f');
 
   // --- face ---
-  const rc = cv.getBoundingClientRect();
-  const pxX = rc.left + cx * S, pxY = rc.top + cy * S;
-  let lx = Math.max(-1, Math.min(1, Math.round((cursor.x - pxX) / 90)));
-  let ly = Math.max(-1, Math.min(1, Math.round((cursor.y - pxY) / 110)));
-  if (st === 'working' || (ex >= 0 && ex < EX.antic)) { lx = 0; ly = 1; }
   const ey = cy - 3 + ly, exL = cx - 6 + lx, exR = cx + 4 + lx;
-
-  if (now > nextBlink) { blinkUntil = now + 110; nextBlink = now + rand(2500, 5500); }
-  const blink = now < blinkUntil;
-  const shades = lvl >= 5 && hovering && !['sleeping', 'alert'].includes(st);
+  const needs = st === 'alert' || st === 'waiting';
 
   for (const ex of [exL, exR]) {
     if (shades) continue;
-    if (st === 'sleeping') rect(ex, ey + 2, 3, 1, OUT);
+    if (st === 'sleeping') dots(ex - 1, ey + 1, [[0,0],[1,1],[2,1],[3,0]], OUT);
     else if (happy) dots(ex, ey, [[0,2],[1,1],[2,2]], OUT);
     else if (st === 'stalled') { rect(ex - 1, ey, 4, 4, OUT); rect(ex, ey + 1, 2, 2, '#fff'); }
-    else if (st === 'alert' || st === 'exitfall') { rect(ex - 1, ey - 1, 3, 4, OUT); rect(ex - 1, ey - 1, 1, 1, '#fff'); }
+    else if (needs || st === 'exitfall') { rect(ex, ey - 1, 2, 4, OUT); rect(ex, ey - 1, 1, 1, '#fff'); }
     else if (blink) rect(ex, ey + 2, 2, 1, OUT);
     else if (st === 'hungry') { rect(ex, ey + 1, 2, 2, OUT); rect(ex - 1, ey, 4, 1, C.shade); }
     else { rect(ex, ey, 2, 3, OUT); rect(ex, ey, 1, 1, '#fff'); }
@@ -215,7 +229,8 @@ function draw(now) {
 
   // mouth
   const mx = cx - 1 + lx, my = cy + 2 + ly;
-  if (st === 'working') { /* hidden behind laptop */ }
+  if (st === 'working') { if (!moving) rect(mx - 1, my + 1, 4, 1, OUT); /* else hidden behind laptop */ }
+  else if (needs && !moving) { rect(mx - 1, my, 4, 3, OUT); rect(mx, my + 1, 2, 1, C.base); }
   else if (st === 'eat') { if (Math.floor(t * 7) % 2) rect(mx - 1, my, 4, 3, OUT); else rect(mx - 1, my + 1, 4, 1, OUT); }
   else if (st === 'alert' || st === 'levelup' || st === 'exitfall') { rect(mx, my, 3, 3, OUT); rect(mx + 1, my + 1, 1, 1, '#ff7ab0'); }
   else if (st === 'stalled') dots(mx - 1, my + 1, [[0,1],[1,0],[2,1],[3,0],[4,1]], OUT);
@@ -224,7 +239,7 @@ function draw(now) {
   else dots(mx - 1, my, [[0,0],[1,1],[2,1],[3,0]], OUT);
 
   // laptop while the agent works — little hands typing
-  if (st === 'working') {
+  if (st === 'working' && moving) {
     const ly0 = cy + 1;
     rect(cx - 8, ly0, 16, 9, OUT); rect(cx - 7, ly0 + 1, 14, 7, '#c9cfdc'); rect(cx - 7, ly0 + 1, 14, 1, '#e6eaf2');
     rect(cx - 1, ly0 + 4, 2, 2, `hsl(152 80% ${60 + Math.sin(t * 3) * 10}%)`);
@@ -234,7 +249,7 @@ function draw(now) {
   }
 
   // over-head indicators
-  if (st === 'alert' && Math.floor(t * 3) % 3) outlined(cx + 8, top - 10 + bob * 0, SPR.bang, '#ffcf3f');
+  if (needs) outlined(cx + 8, top - 10 + bob * 0, SPR.bang, '#ffcf3f');
   if (st === 'stalled') outlined(cx + 8, top - 10, SPR.what, '#ff8a95');
 
   // ambient emitters
@@ -245,10 +260,16 @@ function draw(now) {
 
   if (ex >= 0) ctx.restore();
   drawParts();
+  return true;
 }
 
-function loop(now) { draw(now); requestAnimationFrame(loop); }
-requestAnimationFrame(loop);
+// loops run on rAF while something changes and park to a 10 Hz check once settled; wake() resumes at once
+const loops = [];
+function park(L, hot) { L.t = hot ? 0 : setTimeout(() => L.fn(performance.now()), 100); if (hot) requestAnimationFrame(L.fn); }
+function wake() { for (const L of loops) if (L.t) { clearTimeout(L.t); park(L, true); } }
+const drawL = { fn: now => park(drawL, draw(now) !== false && exiting !== 'done') };
+loops.push(drawL);
+requestAnimationFrame(drawL.fn);
 
 // ================= speech bubble =================
 const bubble = $('bubble');
@@ -315,28 +336,28 @@ setInterval(() => {
 }, 15000);
 
 // ================= main-process feeds =================
-api.on('cursor', c => { cursor = c; });
+api.on('cursor', c => { cursor = c; wake(); });
 api.on('tick', s => {
   const first = !snap;
-  snap = s;
+  snap = s; wake();
   renderHud();
   $('chatTitle').textContent = s.name;
-  if (first) {
+  if (first) {                                  // speak at launch only when someone is actually waiting on you
     const w = agentsIn('waiting');
-    say(w.length ? `hi! ${w.map(a => a.name).join(', ')} ${w.length > 1 ? 'are' : 'is'} waiting on you` : pick(['hi! I\'m back', 'boot sequence complete ✨', 'reporting for vibe duty']), { alert: !!w.length });
+    if (w.length) say(`${w.map(a => a.name).join(', ')} ${w.length > 1 ? 'are' : 'is'} waiting on you`, { alert: true });
   }
 });
 api.on('event', e => {
-  lastInteract = performance.now();
+  lastInteract = performance.now(); wake();
   switch (e.kind) {
-    case 'agentDone': say(e.text, { prio: true, alert: true, ms: 8000 }); tune([660, 880, 1320]); break;
+    case 'agentDone': say(e.text, { prio: true, ms: 4000 }); break;   // routine finish: one quiet line, no amber, no sound
     case 'agentStalled': say(e.text, { prio: true, alert: true, ms: 8000 }); tune([440, 330]); break;
     case 'commit': transient('eat', 1300); setTimeout(() => transient('celebrate', 2200), 1300);
       spawn('spark', 30, { x: 28, y: 22, spread: 3, up: 2, g: 0.05, colors: CONFETTI }); say(e.text, { prio: true }); tune([523, 659, 784, 1047], 80); break;
     case 'levelup': transient('levelup', 3500); spawn('spark', 60, { x: 28, y: 20, spread: 4, up: 2.5, g: 0.05, colors: CONFETTI });
       say(e.text, { prio: true, ms: 7000 }); tune([523, 659, 784, 1047, 784, 1047, 1319], 110); break;
     case 'snack': transient('eat', 1200); say(e.text); break;
-    case 'snackNo': case 'night': say(e.text); break;
+    case 'snackNo': say(e.text); break;
     case 'openChat': openChat(); break;
     case 'openKey': openChat(); $('keyForm').classList.remove('hidden'); $('keyInput').focus(); break;
     case 'exit': startExit(); break;
@@ -411,20 +432,26 @@ function hudTarget(now, dt) {
   else if (now < wantUntil) want = 1;                                          // grace before collapsing
   return want;
 }
+let hudCur = '', hudP = '';
 function hudFrame(now) {
   const dt = Math.min(0.05, (now - lastFrame) / 1000); lastFrame = now;
   const target = hudTarget(now, dt);
   for (let i = 0, h = dt / 4; i < 4; i++) { rv += (W * W * (target - rp) - 2 * W * rv) * h; rp += rv * h; }
   if (Math.abs(target - rp) < 0.001 && Math.abs(rv) < 0.01) { rp = target; rv = 0; }
-  const p = clamp01(rp), a = smooth((p - 0.55) / 0.45), hud = $('hud');
-  hud.style.setProperty('--p', p.toFixed(4)); hud.style.setProperty('--a', a.toFixed(4));
+  const p = clamp01(rp), a = smooth((p - 0.55) / 0.45), hud = $('hud'), ps = p.toFixed(4);
+  if (ps !== hudP) { hudP = ps; hud.style.setProperty('--p', ps); hud.style.setProperty('--a', a.toFixed(4)); }
   hud.classList.toggle('live', p > 0.6);
   const was = hovering; hovering = p > 0.5;
   if (hovering && !was) lastInteract = now;
-  requestAnimationFrame(hudFrame);
+  const cur = cursor.x + ',' + cursor.y, settled = rv === 0 && rp === target && cur === hudCur;
+  hudCur = cur;
+  park(hudL, !settled);                      // settled spring + still cursor: drop to the 10 Hz check
 }
+const hudL = { fn: hudFrame };
+loops.push(hudL);
 requestAnimationFrame(hudFrame);
 document.addEventListener('mousemove', e => {
+  wake();
   if (dragging) return;
   const el = document.elementFromPoint(e.clientX, e.clientY);
   let hit = el && el.closest('.hit');
@@ -463,7 +490,7 @@ function poke() {
   transient(Math.random() < 0.5 ? 'love' : 'poke', 900);
   spawn('heart', 2, { x: 28 + rand(-8, 8), y: 18, colors: ['#ff5c8a', '#ff9ec4'] });
   blip(pick([740, 880, 988]), 0.07);
-  if (Math.random() < 0.4) say(pick(['hehe', '*happy wiggle*', 'boop', 'again!', snap ? `⚡${Math.round(snap.fuel)} ♥${Math.round(snap.mood)}` : 'hi']), { ms: 1600 });
+  if (Math.random() < 0.4) say(pick(['hehe', '*happy wiggle*', 'boop', 'again!', ...(snap?.game ? [`⚡${Math.round(snap.fuel)} ♥${Math.round(snap.mood)}`] : [])]), { ms: 1600 });
 }
 
 $('btnChat').onclick = () => openChat();
@@ -496,7 +523,6 @@ function addMsg(who, text, cls = '') {
   if (who === 'pet') el.innerHTML = renderMd(text); else el.textContent = text;
   el.querySelectorAll('.copy').forEach(b => b.onclick = () => {
     api.copy(b.nextElementSibling.textContent); b.textContent = 'copied!';
-    say('copied. now go commit it 👀', { ms: 2500 });
   });
   $('msgs').appendChild(el);
   $('msgs').scrollTop = 1e9;

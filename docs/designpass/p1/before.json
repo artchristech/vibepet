@@ -1,0 +1,185 @@
+{
+  "overall": 60.51,
+  "states": {
+    "01-idle": {
+      "axes": {
+        "reveal-and-hover-feel": 55,
+        "status-signalling": 62,
+        "sprite-and-idle": 66,
+        "interruptions-and-bubbles": 72,
+        "restraint-and-footprint": 70,
+        "idle-cost": 60
+      },
+      "score": 64.17,
+      "note": "Hard black lozenge shadow under feet; grey antenna pixel reads neutral; no chrome."
+    },
+    "02-hud-half": {
+      "axes": {
+        "reveal-and-hover-feel": 55,
+        "status-signalling": 62,
+        "sprite-and-idle": 66,
+        "interruptions-and-bubbles": 72,
+        "restraint-and-footprint": 66,
+        "idle-cost": 60
+      },
+      "score": 63.5,
+      "note": "Half-reveal is a bigger black blob, icons hidden (good) but slab-weight and aspect drift from shadow."
+    },
+    "03-hud-full": {
+      "axes": {
+        "reveal-and-hover-feel": 64,
+        "status-signalling": 62,
+        "sprite-and-idle": 66,
+        "interruptions-and-bubbles": 72,
+        "restraint-and-footprint": 68,
+        "idle-cost": 60
+      },
+      "score": 65.33,
+      "note": "Pill with edit + \u22ef, centred under feet, icons natural size; heavy black fill, divider cramped."
+    },
+    "04-hud-aim": {
+      "axes": {
+        "reveal-and-hover-feel": 72,
+        "status-signalling": 62,
+        "sprite-and-idle": 66,
+        "interruptions-and-bubbles": 72,
+        "restraint-and-footprint": 68,
+        "idle-cost": 60
+      },
+      "score": 66.67,
+      "note": "Pill already fully open with cursor ~70px out: aim prediction visible."
+    },
+    "05-working": {
+      "axes": {
+        "reveal-and-hover-feel": 56,
+        "status-signalling": 48,
+        "sprite-and-idle": 58,
+        "interruptions-and-bubbles": 72,
+        "restraint-and-footprint": 70,
+        "idle-cost": 60
+      },
+      "score": 60.67,
+      "note": "Only a tiny green antenna pixel changes; face identical to idle."
+    },
+    "06-waiting": {
+      "axes": {
+        "reveal-and-hover-feel": 56,
+        "status-signalling": 48,
+        "sprite-and-idle": 58,
+        "interruptions-and-bubbles": 72,
+        "restraint-and-footprint": 70,
+        "idle-cost": 60
+      },
+      "score": 60.67,
+      "note": "Amber antenna pixel ~1 art-px; same smile as working, not attentive."
+    },
+    "07-stalled": {
+      "axes": {
+        "reveal-and-hover-feel": 56,
+        "status-signalling": 45,
+        "sprite-and-idle": 56,
+        "interruptions-and-bubbles": 72,
+        "restraint-and-footprint": 70,
+        "idle-cost": 60
+      },
+      "score": 59.83,
+      "note": "Stuck = tiny pinkish-white pixel, barely distinguishable; no concerned expression."
+    },
+    "08-agents-mixed": {
+      "axes": {
+        "reveal-and-hover-feel": 56,
+        "status-signalling": 45,
+        "sprite-and-idle": 58,
+        "interruptions-and-bubbles": 72,
+        "restraint-and-footprint": 70,
+        "idle-cost": 60
+      },
+      "score": 60.17,
+      "note": "Amber pixel wins but can't tell which agent/state or that it outranks working."
+    },
+    "09-sleeping": {
+      "axes": {
+        "reveal-and-hover-feel": 56,
+        "status-signalling": 58,
+        "sprite-and-idle": 62,
+        "interruptions-and-bubbles": 72,
+        "restraint-and-footprint": 72,
+        "idle-cost": 60
+      },
+      "score": 63.33,
+      "note": "Eyes become dashes (one wink-like), LED dim; sleep differs only by eye line."
+    },
+    "10-bubble-done": {
+      "axes": {
+        "reveal-and-hover-feel": 56,
+        "status-signalling": 52,
+        "sprite-and-idle": 60,
+        "interruptions-and-bubbles": 50,
+        "restraint-and-footprint": 60,
+        "idle-cost": 60
+      },
+      "score": 56.33,
+      "note": "'claude finished \u2014 your move!' in loud amber for a routine finish; tail points at head."
+    },
+    "11-bubble-stalled": {
+      "axes": {
+        "reveal-and-hover-feel": 56,
+        "status-signalling": 55,
+        "sprite-and-idle": 58,
+        "interruptions-and-bubbles": 58,
+        "restraint-and-footprint": 58,
+        "idle-cost": 60
+      },
+      "score": 57.5,
+      "note": "Two-line bubble with '?', shifted right of pet centre; names agent, same amber as done."
+    },
+    "12-chat": {
+      "axes": {
+        "reveal-and-hover-feel": 56,
+        "status-signalling": 58,
+        "sprite-and-idle": 64,
+        "interruptions-and-bubbles": 58,
+        "restraint-and-footprint": 50,
+        "idle-cost": 60
+      },
+      "score": 57.67,
+      "note": "Chat panel spans window with square-ish dark card unlike pill; chips wrap 'next' to row 2; big empty body."
+    },
+    "13-chat-convo": {
+      "axes": {
+        "reveal-and-hover-feel": 56,
+        "status-signalling": 58,
+        "sprite-and-idle": 64,
+        "interruptions-and-bubbles": 48,
+        "restraint-and-footprint": 50,
+        "idle-cost": 60
+      },
+      "score": 56.0,
+      "note": "'copy' button overlaps commit text; top message clipped at panel top; chips wrap."
+    },
+    "14-chat-nokey": {
+      "axes": {
+        "reveal-and-hover-feel": 56,
+        "status-signalling": 58,
+        "sprite-and-idle": 64,
+        "interruptions-and-bubbles": 66,
+        "restraint-and-footprint": 52,
+        "idle-cost": 60
+      },
+      "score": 59.33,
+      "note": "Key copy states keychain + local, clear save button; chips wrap, panel large."
+    },
+    "15-game-anim-on": {
+      "axes": {
+        "reveal-and-hover-feel": 56,
+        "status-signalling": 52,
+        "sprite-and-idle": 50,
+        "interruptions-and-bubbles": 65,
+        "restraint-and-footprint": 56,
+        "idle-cost": 60
+      },
+      "score": 56.5,
+      "note": "Crown collides with antenna, laptop covers mouth, headphones widen silhouette; stays within pet bounds."
+    }
+  }
+}
