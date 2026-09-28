@@ -424,6 +424,9 @@ api.on('jumpTo', ({ id } = {}) => {   // a clicked banner: its agent, else whoev
   const a = (snap?.agents || []).find(x => x.id === id) || pending()[0];
   if (a && api.jump) jumpTo(a);
 });
+// near the top of the screen there's no room above Net: main pins him to the window top and the panels flip below
+api.on('below', v => { $('stage').classList.toggle('below', v); wake(); });
+if (!$('stage').classList.contains('below')) api.petTop?.(cv.offsetTop);
 api.on('summon', () => { document.body.classList.remove('away'); wantUntil = performance.now() + 1500; wake(); });   // relaunched / gesture: open the pill once, silently
 api.on('hide', () => { closeChat(); document.body.classList.add('away'); });
 // summon-gesture training: Net holds up a pad; each click-drag is one sample, main keeps the ones that agree
@@ -503,15 +506,25 @@ function renderHud() {
 // the question in the pill: what each waiting/stuck/finished agent wants, shown only while the pill is open.
 // agents fanned out to subagents follow, with a static gauge: filled pip = child done, hollow = still running
 function renderRoster() {
+  // every live session, most urgent first; unseen needs/stuck/ready from pending(), then everything still running
   const rows = pending(true), has = new Set(rows.map(a => a.id));
-  rows.push(...(snap?.agents || []).filter(a => a.phase === 'working' && a.fanout?.open > 0 && !has.has(a.id)));
-  $('roster').innerHTML = rows.slice(0, 4).map(a => { const sig = SIG[a.phase], fo = a.fanout, rc = (sig === 'ready' || sig === 'needs') && rcLine(a.receipt);
-    const line = `${fo ? foPips(fo, LED[sig]) : ''}${esc(noteFor(a.id) || (sig === 'running' ? [`${fo.open} running`, fo.items.filter(k => k.open).map(k => k.desc).filter(Boolean).join(', ')].filter(Boolean).join(': ') : a.ask) ||
+  rows.push(...(snap?.agents || []).filter(a => a.phase === 'working' && !has.has(a.id)));
+  $('roster').innerHTML = rows.slice(0, 6).map(a => { const sig = SIG[a.phase], fo = a.fanout, rc = (sig === 'ready' || sig === 'needs') && rcLine(a.receipt);
+    const line = `${fo ? foPips(fo, LED[sig]) : ''}${esc(noteFor(a.id) || (sig === 'running' ? (fo?.open ? `${fo.done}/${fo.total} subagents done` : 'working') : a.ask) ||
       (sig === 'needs' ? 'has a question' : sig === 'stuck' ? 'needs approval' : 'done'))}`;
+    const kids = (fo?.items || []).filter(k => k.open).slice(0, 3).map(k =>
+      `<span class="kid${k.stuck ? ' stuck' : ''}"><i></i><b>${esc(k.type)}</b><span>${esc(k.doing || k.desc)}</span><time>${dur(Date.now() - k.startAt)}${k.tok ? ` · ↓ ${kfmt(k.tok)}` : ''}</time></span>`).join('');
     return `<button data-id="${esc(a.id)}"${fo ? ` title="${esc(foTitle(fo))}"` : ''}>` +
-    `<i style="background:${LED[sig]}"></i><b>${esc(a.title || a.name)}</b><time>${ago(Date.now() - a.since)}</time>` +
-    (rc ? `<span class="w"><span>${line}</span>${rc}</span></button>` : `<span>${line}</span></button>`); }).join('');
+    `<i style="background:${LED[sig]}"></i><b>${esc(a.title || a.name)}</b><time class="${sig}">${phaseTime(a, sig)}</time>` +
+    (rc ? `<span class="w"><span>${line}</span>${rc}</span>` : `<span>${line}</span>`) + kids + `</button>`; }).join('');
   rosterShow();
+}
+// "waiting 4m" says whose move it is and for how long; "just now" said neither
+const dur = ms => { const s = Math.max(0, Math.round(ms / 1000)); return s < 60 ? `${s}s` : s < 3600 ? `${Math.floor(s / 60)}m ${s % 60}s` : `${Math.floor(s / 3600)}h ${Math.floor(s % 3600 / 60)}m`; };
+const kfmt = n => n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${(n / 1e3).toFixed(1)}k` : String(n);
+function phaseTime(a, sig) {
+  const t = Date.now() - a.since, m = Math.max(1, Math.round(t / 60000));
+  return sig === 'needs' ? `waiting ${m}m` : sig === 'stuck' ? `stuck ${m}m` : sig === 'ready' ? `done ${ago(t)}` : dur(t);
 }
 // the receipt: what the turn touched, and whether a check ran green after it. Pull-only: never feeds the LED, bubble or sound
 const short = f => f.split('/').slice(-2).join('/');

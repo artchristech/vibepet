@@ -8,6 +8,9 @@ const { readTail, textOf, scan, psAll, locateSession, hostApp, bundleId, focusTt
 const gesture = require('./gesture');
 
 const W = 360, H = 520;
+const { place, areaFor, minY } = require('./place');
+let petTop = 276;   // Net's top inside the window (panels-above layout); the renderer reports the real value
+let virt = null, below = false;   // wanted window pos (panels above; may sit above the screen top) + current flip
 const CLAUDE_DIR = path.join(os.homedir(), '.claude', 'projects');
 const TICK_MS = 3000;
 
@@ -388,11 +391,23 @@ ipcMain.handle('set-key', (_, key) => {
 // pos if it's on some display, else the primary's bottom-right corner
 function homePos(pos) {
   const onScreen = pos && screen.getAllDisplays().some(d => {
-    const b = d.workArea; return pos.x > b.x - W / 2 && pos.x < b.x + b.width - W / 2 && pos.y > b.y - H / 2 && pos.y < b.y + b.height - 100;
+    const b = d.workArea; return pos.x > b.x - W / 2 && pos.x < b.x + b.width - W / 2 && pos.y >= b.y - petTop && pos.y < b.y + b.height - 100;
   });
   if (onScreen) return pos;
   const { workArea } = screen.getPrimaryDisplay();
   return { x: workArea.x + workArea.width - W - 24, y: workArea.y + workArea.height - H };
+}
+const areas = () => screen.getAllDisplays().map(d => d.workArea);
+// every move goes through here: panels flip below Net when there's no room above him (see place.js)
+function moveTo(v) {
+  const a = areaFor({ x: v.x + W / 2, y: v.y + petTop + 104 }, areas());
+  virt = { x: Math.round(v.x), y: Math.round(Math.max(v.y, minY(a, petTop))) };
+  const p = place(virt, areas(), W, petTop);
+  if (!win || win.isDestroyed()) return p;
+  if (p.below !== below) { below = p.below; win.webContents.send('below', below); }
+  const [x, y] = win.getPosition();
+  if (x !== p.x || y !== p.y) win.setPosition(p.x, p.y);
+  return p;
 }
 function createWindow() {
   const pos = homePos(state.pos);
@@ -406,7 +421,8 @@ function createWindow() {
   win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   win.setIgnoreMouseEvents(true, { forward: true });
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
-  win.webContents.on('did-finish-load', () => tick());
+  win.webContents.on('did-finish-load', () => { tick(); below = false; moveTo(pos); });
+  screen.on('display-metrics-changed', () => virt && moveTo(virt));
 
   // eyes follow the cursor anywhere on screen: sent only on change; 60 Hz near the pet while moving, 10 Hz otherwise
   let last = '', movedAt = 0;
@@ -421,19 +437,20 @@ function createWindow() {
 
 let drag = null;
 ipcMain.on('set-ignore', (_, v) => !win.isDestroyed() && win.setIgnoreMouseEvents(v, { forward: true }));
+ipcMain.on('pet-top', (_, t) => { if (t > 0 && t < H && t !== petTop) { petTop = t; if (virt && !below) moveTo(virt); } });
 ipcMain.on('drag-start', () => {
-  const c = screen.getCursorScreenPoint(), [x, y] = win.getPosition();
+  const c = screen.getCursorScreenPoint(), { x, y } = virt || { x: win.getPosition()[0], y: win.getPosition()[1] };
   clearInterval(drag?.timer);
   drag = { cx: c.x, cy: c.y, x, y, timer: setInterval(() => {
     if (!win || win.isDestroyed()) return clearInterval(drag?.timer);
     const p = screen.getCursorScreenPoint();
-    win.setPosition(drag.x + p.x - drag.cx, drag.y + p.y - drag.cy);
+    moveTo({ x: drag.x + p.x - drag.cx, y: drag.y + p.y - drag.cy });
   }, 16) };
 });
 ipcMain.on('drag-end', () => {
   if (!drag) return;
   clearInterval(drag.timer); drag = null;
-  const [x, y] = win.getPosition(); state.pos = { x, y }; save();
+  state.pos = { ...virt }; save();
 });
 ipcMain.on('focus', () => { app.focus({ steal: true }); win.focus(); });
 ipcMain.on('copy', (_, text) => clipboard.writeText(text));
@@ -566,8 +583,8 @@ ipcMain.on('gesture-sample', (_, pts) => {
 ipcMain.on('gesture-undo', () => { if (rec) { rec.samples.pop(); recSend(); } });
 function summonAt(p) {
   const d = screen.getDisplayNearestPoint(p).workArea;
-  const x = Math.round(Math.min(Math.max(p.x - W / 2, d.x), d.x + d.width - W)), y = Math.round(Math.min(Math.max(p.y - H + 120, d.y), d.y + d.height - H));
-  win.setPosition(x, y); state.pos = { x, y }; save();
+  const x = Math.round(Math.min(Math.max(p.x - W / 2, d.x), d.x + d.width - W)), y = Math.round(Math.min(Math.max(p.y - H + 120, minY(d, petTop)), d.y + d.height - H));
+  moveTo({ x, y }); state.pos = { ...virt }; save();
   win.showInactive(); send('summon');
 }
 function toggleNet(p) { toggledAt = Date.now(); win.isVisible() ? hideNet() : summonAt(p); }
@@ -578,8 +595,8 @@ ipcMain.on('gesture-cancel', () => { rec = null; syncWatch(); });
 // "Lost him? Open vibepet again." — a second launch re-homes the running pet and opens its pill once
 app.on('second-instance', () => {
   if (!win || win.isDestroyed()) return;
-  const [x, y] = win.getPosition(), p = homePos({ x, y });
-  if (p.x !== x || p.y !== y) { win.setPosition(p.x, p.y); state.pos = p; save(); }
+  const p = homePos(virt);
+  if (p !== virt) { moveTo(p); state.pos = { ...virt }; save(); }
   win.showInactive();
   send('summon');
 });

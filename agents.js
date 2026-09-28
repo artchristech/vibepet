@@ -117,6 +117,18 @@ function foldReceipt(rc, kids) {
     stale: !!check && lastEditAt > check.at, truncated: all.some(r => r.truncated) };
 }
 
+// what a subagent is doing right now, and how big its context is: newest assistant record's tool call (or text) + usage
+function activity(lines) {
+  for (let i = lines.length - 1; i >= 0; i--) {
+    if (!lines[i].includes('"type":"assistant"')) continue;
+    let d; try { d = JSON.parse(lines[i]); } catch { continue; }
+    const m = d.message || {}, u = m.usage || {}, tools = (m.content || []).filter(c => c.type === 'tool_use');
+    const tok = (u.input_tokens || 0) + (u.cache_creation_input_tokens || 0) + (u.cache_read_input_tokens || 0) + (u.output_tokens || 0);
+    const t = tools[tools.length - 1], doing = t ? (t.input?.description ? plain(String(t.input.description)) : toolAsk(t)) : firstSentence(textOf(m.content));
+    return { doing: doing ? cap(doing, 70) : '', tok };
+  }
+  return { doing: '', tok: 0 };
+}
 // side: a subagent's own file, whose records are all sidechain
 function classify(file, mtimeMs, side = false) {
   const idle = Date.now() - mtimeMs;
@@ -133,7 +145,8 @@ function classify(file, mtimeMs, side = false) {
   const fallback = !turnAt && !side;
   turnAt ||= Date.now() - 45 * 60e3;
   const rc = receipt(lines, side ? 0 : turnAt, side, fallback);   // same lines, no extra read
-  const out = (phase, ask, extra) => ({ phase, cwd, title, turnAt, receipt: rc, ...(ask ? { ask: cap(ask) } : {}), ...extra });
+  const act = side ? activity(lines) : null;
+  const out = (phase, ask, extra) => ({ phase, cwd, title, turnAt, receipt: rc, ...(ask ? { ask: cap(ask) } : {}), ...(act || {}), ...extra });
   for (let i = lines.length - 1; i >= 0; i--) {
     let d; try { d = JSON.parse(lines[i]); } catch { continue; }
     if (!cwd && d.cwd) cwd = d.cwd;
@@ -170,7 +183,7 @@ function kidPhase(fp, st) {
   if (hit && hit.size === st.size && hit.mtimeMs === st.mtimeMs) return hit.k;
   let c = null; try { c = classify(fp, st.mtimeMs, true); } catch {}
   // stuck: silent > 90 s on a tool that isn't itself an Agent call. Subagent approvals block in the parent's terminal.
-  const k = { phase: c?.phase || null, stuck: c?.phase === 'stalled' && !c.agentWait, ask: c?.ask, rc: c?.receipt };
+  const k = { phase: c?.phase || null, stuck: c?.phase === 'stalled' && !c.agentWait, ask: c?.ask, rc: c?.receipt, doing: c?.doing || '', tok: c?.tok || 0 };
   if (kidCache.size > 4000) kidCache.clear();
   kidCache.set(fp, { size: st.size, mtimeMs: st.mtimeMs, k });
   return k;
@@ -201,7 +214,8 @@ function fanout(file, turnAt = Date.now() - 45 * 60e3, rc) {
     if (o) { open++; const b = k.st.birthtimeMs || k.st.mtimeMs; oldestOpenAt = Math.min(oldestOpenAt ?? b, b); }
     if (o && p.stuck) { stuck++; stuckAsk ??= p.ask; }
     if (p.rc) rcs.push(p.rc);
-    return { desc: cap(plain(String(k.m.description || '')), 60), open: o };
+    return { desc: cap(plain(String(k.m.description || '')), 60), open: o, type: String(k.m.agentType || 'agent'), doing: p.doing, tok: p.tok,
+      startAt: k.st.birthtimeMs || k.st.mtimeMs, stuck: o && p.stuck };
   });
   return { total: direct.length, done: direct.length - open, open, stuck, stuckAsk, oldestOpenAt, newestAt: newestAt || null, items, receipt: foldReceipt(rc, rcs) };
 }

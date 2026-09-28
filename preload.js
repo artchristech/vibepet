@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('pet', {
   setIgnore: v => ipcRenderer.send('set-ignore', v),
   dragStart: () => ipcRenderer.send('drag-start'),
   dragEnd: () => ipcRenderer.send('drag-end'),
+  petTop: t => ipcRenderer.send('pet-top', t),
   menu: () => ipcRenderer.send('menu'),
   focus: () => ipcRenderer.send('focus'),
   copy: t => ipcRenderer.send('copy', t),
