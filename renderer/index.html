@@ -9,13 +9,8 @@
 <body>
 <div id="stage">
   <div id="chat" class="hit hidden">
-    <div class="chat-head">
-      <span id="chatTitle">Net</span>
-      <span class="spacer"></span>
-      <button id="chatClose" title="close (esc)">×</button>
-    </div>
     <form id="keyForm" class="inline-form hidden">
-      <p>Chat needs an Anthropic API key, or sign in to Claude Code (<code>claude</code>) and restart me. The key stays on this Mac, encrypted in your keychain.</p>
+      <p>Chat uses your Claude Code login. No <code>claude</code> here? Paste an Anthropic API key instead. It's stored encrypted in your macOS keychain, and macOS may ask you to allow that.</p>
       <div class="row"><input id="keyInput" type="password" placeholder="sk-ant-…" autocomplete="off" title="or launch with ANTHROPIC_API_KEY set"><button>save</button></div>
     </form>
     <form id="renameForm" class="inline-form hidden">
@@ -24,14 +19,27 @@
     </form>
     <div id="msgs"></div>
     <div id="chips">
-      <button data-mode="commit">commit msg</button>
-      <button data-mode="vibe">vibe check</button>
-      <button data-mode="agent">agent?</button>
-      <button data-mode="next">next</button>
+      <button data-mode="agent">What's my agent doing?</button>
+      <button data-mode="commit">Write a commit message</button>
+      <button data-mode="next">What should I do next?</button>
+      <button data-mode="vibe">Vibe check</button>
     </div>
-    <form id="chatForm"><input id="chatInput" placeholder="say something…" autocomplete="off"><button>↵</button></form>
+    <form id="chatForm"><input id="chatInput" placeholder="Ask Net about this repo…" autocomplete="off"><button id="chatSend" aria-label="Send" disabled><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></form>
+    <div id="chatNote"><span id="chatNoteText"></span><button id="chatClose" title="Close (Esc)">esc</button></div>
   </div>
 
+  <div id="gest" class="hit hidden">
+    <p id="gestMsg"></p>
+    <div class="gest-row">
+      <canvas id="gestPad" width="400" height="400" aria-label="Drawing pad"></canvas>
+      <div class="gest-side">
+        <div id="gestShots"><canvas width="96" height="96"></canvas><canvas width="96" height="96"></canvas><canvas width="96" height="96"></canvas></div>
+        <button id="gestUndo" disabled>Redo last</button>
+        <button id="gestCancel">Cancel</button>
+      </div>
+    </div>
+    <p class="dim">Click and drag on the pad. A circle, a zig-zag or a “Z” works well — later, just move the mouse in that shape anywhere, no click.</p>
+  </div>
   <div id="roster" class="hit hidden"></div>
   <div id="bubble" class="hit hidden"></div>
   <canvas id="pet" class="hit" width="224" height="208"></canvas>
@@ -43,6 +51,7 @@
     <div class="hidden"><span id="hudName"></span><span id="hudLvl"></span><i id="barXp"></i><i id="barFuel"></i><i id="barMood"></i><div id="hudRepo"></div><div id="hudAgents"></div></div>
   </div>
 </div>
+<script src="../site/sprites.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

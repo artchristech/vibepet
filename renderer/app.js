@@ -3,7 +3,8 @@ const api = window.pet;
 const $ = id => document.getElementById(id);
 const cv = $('pet'), ctx = cv.getContext('2d');
 const S = 4, GW = 56, GH = 52;
-const OUT = '#1b1f2e';
+// OUT (ink) and the pixel engine for the other pets come from ../site/sprites.js, shared with the website
+SHADOWS = false;   // the #hud pill is the ground shadow
 
 let snap = null;
 let cursor = { x: -999, y: -999 };
@@ -107,8 +108,45 @@ function startExit() {
 }
 function transient(kind, ms) { if (!snap?.animations) return; anim = { kind, until: performance.now() + ms, start: performance.now() }; wake(); }
 
+// ================= other pets: the site's cast, drawn by sprites.js onto the same canvas =================
+// surfaces are integer fractions of the 224x208 canvas, so they scale up crisp; feet land where Net's do
+const CAST = {
+  slime: { w: 112, h: 104, draw: (S, st, t, l) => drawSlime(S, st, t, l) },
+  cat: { w: 112, h: 104, draw: (S, st, t, l) => drawCat(S, st, t, l) },
+  sprout: { w: 112, h: 104, draw: (S, st, t, l) => drawSprout(S, st, t, l) },
+  shroom: { w: 112, h: 104, draw: (S, st, t, l) => drawShroom(S, st, t, l) },
+  star: { w: 224, h: 208, draw: (S, st, t, l) => drawStar(S, st, t, l) },
+  koi: { w: 224, h: 208, draw: (S, st, t, l) => drawKoi(S, st, t, l) },
+};
+const ENGINE = { working: 'working', alert: 'alert', waiting: 'alert', exitfall: 'alert', stalled: 'nervous', sleeping: 'sleep', celebrate: 'celebrate', levelup: 'celebrate', love: 'celebrate' };
+const engineStatus = status;
+let castLed = null;   // while a cast pet draws, its status tint follows the app's LED, held steady
+status = (st, t) => castLed ? { h: castLed, glow: castLed !== LED.none } : engineStatus(st, t);
+const surf = {};
+function surfaceFor(id) {
+  const c = CAST[id];
+  if (!surf[id]) { const cv2 = document.createElement('canvas'); cv2.width = c.w; cv2.height = c.h; const x = cv2.getContext('2d'), img = x.createImageData(c.w, c.h); surf[id] = { cv: cv2, x, img, S: { w: c.w, h: c.h, buf: new Uint32Array(img.data.buffer) } }; }
+  return surf[id];
+}
+function drawCast(id, st, t, look, sig, dy) {
+  const c = CAST[id], s = surfaceFor(id);
+  s.S.buf.fill(0);
+  castLed = LED[sig];
+  const g = c.draw(s.S, ENGINE[st] || 'idle', t, look) || { cx: c.w / 2, top: c.h * .3 };
+  castLed = null;
+  s.x.putImageData(s.img, 0, 0);
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(s.cv, 0, dy, GW, GH);
+  // status LED + over-head mark, same grammar as Net's antenna
+  const k = GW / c.w, x = Math.round(g.cx * k), top = Math.round(g.top * k) + dy;
+  rect(x - 2, top - 5, 4, 4, OUT); if (!(st === 'sleeping' && sig === 'none')) rect(x - 1, top - 4, 2, 2, LED[sig]);
+  if (st === 'alert' || st === 'waiting') outlined(x + 6, top - 9, SPR.bang, '#ffcf3f');
+  else if (st === 'stalled') outlined(x + 6, top - 9, SPR.what, LED.stuck);
+  else if (st === 'ready') outlined(x + 6, top - 8, SPR.tick, LED.ready);
+}
+
 // ================= drawing =================
-let nextBlink = 0, blinkUntil = 0, emitT = {}, lastSig, haloUntil = 0, lastKey = '';
+let nextBlink = 0, blinkUntil = 0, emitT = {}, lastSig, haloUntil = 0, lastKey = '', lastCast = 0;
 function every(key, ms, now) { if ((emitT[key] || 0) < now) { emitT[key] = now + ms; return true; } return false; }
 
 function draw(now) {
@@ -156,8 +194,10 @@ function draw(now) {
   const blink = moving && now < blinkUntil;
   const shades = lvl >= 5 && hovering && !['sleeping', 'alert', 'waiting'].includes(st);
   const active = moving || parts.length > 0 || now < haloUntil;
-  const key = [st, sig, pips.join('.'), lx, ly, cy, lvl, shades, snap?.game && snap.fuel, snap?.game && snap.mood].join();
+  const pet = CAST[snap?.pet] ? snap.pet : null;
+  const key = [pet, st, sig, pips.join('.'), lx, ly, cy, lvl, shades, snap?.game && snap.fuel, snap?.game && snap.mood].join();
   if (!active && key === lastKey) return false;
+  if (pet && active && key === lastKey && now - lastCast < 33) return true;   // cast pets animate at ~30fps like the site
   lastKey = key;
   ctx.setTransform(S, 0, 0, S, 0, 0);
   ctx.clearRect(0, 0, GW, GH);
@@ -190,6 +230,13 @@ function draw(now) {
   // feet (wiggle when happy)
   const happy = ['celebrate', 'levelup', 'love'].includes(st);
   if (ex >= 0 && ex > EX.fall) { ctx.restore(); drawParts(); return true; }
+  if (pet) {
+    lastCast = now;
+    drawCast(pet, st, moving ? t : 0, { x: lx, y: ly, blink }, sig, ex >= 0 ? bob : 0);
+    if (ex >= 0) ctx.restore();
+    drawParts();
+    return true;
+  }
   const fw = happy ? Math.round(Math.sin(t * 20)) : 0;
   for (const s of [-1, 1]) {
     ell(cx + s * 6, cy + ry - 0.5 + (s === 1 ? fw : -fw) * 0.5, 3.4, 2.2, (dx, dy, r) => r > 0.62 ? OUT : C.shade);
@@ -356,7 +403,6 @@ api.on('tick', s => {
   const first = !snap;
   snap = s; wake();
   renderHud();
-  $('chatTitle').textContent = s.name;
   if (first) {                                  // speak at launch only when someone is actually waiting on you
     const w = agentsIn('waiting');
     if (w.length) say(`${w.map(a => a.name).join(', ')} ${w.length > 1 ? 'are' : 'is'} waiting on you`, { alert: true });
@@ -378,7 +424,44 @@ api.on('jumpTo', ({ id } = {}) => {   // a clicked banner: its agent, else whoev
   const a = (snap?.agents || []).find(x => x.id === id) || pending()[0];
   if (a && api.jump) jumpTo(a);
 });
-api.on('summon', () => { wantUntil = performance.now() + 1500; wake(); });   // relaunched: open the pill once, silently
+api.on('summon', () => { document.body.classList.remove('away'); wantUntil = performance.now() + 1500; wake(); });   // relaunched / gesture: open the pill once, silently
+api.on('hide', () => { closeChat(); document.body.classList.add('away'); });
+// summon-gesture training: Net holds up a pad; each click-drag is one sample, main keeps the ones that agree
+function gestDraw(cv, pts) {
+  const c = cv.getContext('2d'), S = cv.width, b = pts.reduce((m, p) => Math.max(m, Math.abs(p.x), Math.abs(p.y)), 1), k = S * 0.36 / b;
+  c.clearRect(0, 0, S, S); c.strokeStyle = '#7ef0c1'; c.lineWidth = S / 24; c.lineJoin = c.lineCap = 'round'; c.beginPath();
+  pts.forEach((p, i) => c[i ? 'lineTo' : 'moveTo'](S / 2 + p.x * k, S / 2 + p.y * k)); c.stroke();
+}
+const pad = $('gestPad'), pc = pad.getContext('2d');
+let ink = null, gestOpen = false;
+function padClear() { pc.clearRect(0, 0, pad.width, pad.height); }
+function padPt(e) { const r = pad.getBoundingClientRect(); return { x: (e.clientX - r.left) * pad.width / r.width, y: (e.clientY - r.top) * pad.height / r.height, t: Math.round(performance.now()) }; }
+pad.addEventListener('pointerdown', e => {
+  if (e.button) return;
+  pad.setPointerCapture(e.pointerId); pad.classList.add('on'); padClear();
+  ink = [padPt(e)]; pc.strokeStyle = '#7ef0c1'; pc.lineWidth = 7; pc.lineJoin = pc.lineCap = 'round';
+});
+pad.addEventListener('pointermove', e => {
+  if (!ink) return;
+  const p = padPt(e), q = ink[ink.length - 1];
+  if (Math.hypot(p.x - q.x, p.y - q.y) < 1) return;
+  ink.push(p); pc.beginPath(); pc.moveTo(q.x, q.y); pc.lineTo(p.x, p.y); pc.stroke();
+});
+function padUp() { if (!ink) return; const pts = ink; ink = null; pad.classList.remove('on'); api.gestureSample(pts); setTimeout(() => { if (!ink) padClear(); }, 350); }
+pad.addEventListener('pointerup', padUp); pad.addEventListener('pointercancel', padUp);
+function gestClose() { gestOpen = false; ink = null; padClear(); $('gest').classList.add('hidden'); }
+api.on('gesture-rec', r => {
+  const box = $('gest'), shots = [...box.querySelectorAll('#gestShots canvas')], prev = r.previews || [];
+  gestOpen = true; box.classList.remove('hidden'); closeChat();
+  shots.forEach((s, i) => { s.getContext('2d').clearRect(0, 0, s.width, s.height); s.classList.toggle('on', !!prev[i]); if (prev[i]) gestDraw(s, prev[i]); });
+  $('gestUndo').disabled = r.done || !prev.length;
+  $('gestMsg').textContent = r.done ? `Saved. Hide ${snap?.name || 'Net'}, then move the mouse in that shape to bring him back.`
+    : r.hint || (prev.length ? `Nice — ${3 - prev.length} more, same shape.` : 'Draw your gesture 3 times on the pad.');
+  if (r.done) setTimeout(gestClose, 2800);
+});
+$('gestUndo').onclick = () => api.gestureUndo();
+$('gestCancel').onclick = () => { api.gestureCancel(); gestClose(); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && gestOpen) { api.gestureCancel(); gestClose(); } });
 api.on('event', e => {
   lastInteract = performance.now(); wake();
   switch (e.kind) {
@@ -594,7 +677,7 @@ $('btnChat').onclick = () => openChat();
 $('btnMenu').onclick = () => api.menu();
 
 // ================= chat =================
-let history = [];
+let history = [], keyExplained = false;
 async function openChat() {
   chatOpen = true; lastInteract = performance.now();
   $('chat').classList.remove('hidden');
@@ -603,13 +686,17 @@ async function openChat() {
   if (!chatOpen) return;
   if (via === null) $('keyForm').classList.remove('hidden');
   if ($('renameForm').classList.contains('hidden')) ($('keyForm').classList.contains('hidden') ? $('chatInput') : $('keyInput')).focus();   // rename keeps its own focus
-  if (!$('msgs').children.length) addMsg('pet', (via === 'claude' ? 'using your Claude Code login · ⋯ → Set API key for faster replies\n' : 'ask about this repo, or pick a chip.\n') +
-    'reads ~/.claude locally. chat sends your message + repo context to Anthropic.');
+  $('chatNoteText').textContent = via === 'claude' ? 'Via Claude Code · sends message + repo context' : 'Sends your message + repo context to Anthropic';
+  $('chat').classList.toggle('fresh', !$('msgs').children.length);
+  // the OS keychain prompt comes on the first send: say so first, so it's expected rather than alarming
+  if (via === 'key-locked' && !keyExplained) { keyExplained = true; addMsg('pet', 'macOS will ask to unlock the API key you saved when you send. It stays encrypted on this Mac.', 'note'); }
 }
 function closeChat() { chatOpen = false; $('chat').classList.add('hidden'); ['keyForm', 'renameForm'].forEach(id => $(id).classList.add('hidden')); }
 $('chatClose').onclick = closeChat;
 $('msgs').addEventListener('scroll', e => e.target.classList.toggle('fade', e.target.scrollTop > 0));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeChat(); });
+// clicking anywhere outside the pet window blurs it: treat that as dismiss (not mid-send — the keychain prompt blurs too)
+window.addEventListener('blur', () => { if (chatOpen && !sending) closeChat(); });
 
 function renderMd(text) {
   const blocks = [];
@@ -618,6 +705,7 @@ function renderMd(text) {
   return h.replace(/\u0000(\d+)\u0000/g, (_, i) => `<pre><button class="copy" data-i="${i}">copy</button><code>${blocks[i]}</code></pre>`);
 }
 function addMsg(who, text, cls = '') {
+  if (cls !== 'note') $('chat').classList.remove('fresh');
   const el = document.createElement('div');
   el.className = `msg ${who} ${cls}`;
   if (who === 'pet') el.innerHTML = renderMd(text); else el.textContent = text;
@@ -657,8 +745,9 @@ async function send(text, mode = 'chat') {
     $('keyForm').classList.remove('hidden'); $('keyInput').focus();
     return;
   }
-  if (r.error) { history.pop(); pending.remove(); addMsg('pet', `hmm, that didn't work: ${r.error}`, 'err'); return; }
+  if (r.error) { history.pop(); pending.remove(); addMsg('pet', `That didn't work: ${r.error}`, 'err'); return; }
   pending.remove();
+  if (r.note) addMsg('pet', r.note, 'note');
   addMsg('pet', r.text);
   history.push({ role: 'assistant', content: r.text });
   if (!chatOpen) say(r.text.slice(0, 140));
@@ -667,16 +756,17 @@ $('chatForm').onsubmit = e => {
   e.preventDefault();
   const v = $('chatInput').value.trim();
   if (!v) return;
-  $('chatInput').value = '';
+  $('chatInput').value = ''; $('chatSend').disabled = true;
   send(v);
 };
+$('chatInput').addEventListener('input', e => { $('chatSend').disabled = !e.target.value.trim(); });
 $('chips').onclick = e => { const m = e.target.closest('button')?.dataset.mode; if (m) send(null, m); };
 $('keyForm').onsubmit = async e => {
   e.preventDefault();
   const ok = await api.setKey($('keyInput').value);
   $('keyInput').value = '';
   $('keyForm').classList.add('hidden');
-  addMsg('pet', ok ? 'key saved 🔑 let\'s talk.' : 'key cleared.');
+  addMsg('pet', ok ? 'Key saved. Chat will use it.' : 'Key cleared.', 'note');
   if (snap) snap.hasKey = ok;
   $('chatInput').focus();
 };

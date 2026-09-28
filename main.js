@@ -1,10 +1,11 @@
 // vibepet — a desktop pet that watches your coding agents and your repo.
-const { app, BrowserWindow, ipcMain, screen, Menu, dialog, safeStorage, Notification, clipboard, powerMonitor, globalShortcut } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, Menu, dialog, safeStorage, Notification, clipboard, powerMonitor, globalShortcut, Tray } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { execFile, spawn } = require('child_process');
 const { readTail, textOf, scan, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
+const gesture = require('./gesture');
 
 const W = 360, H = 520;
 const CLAUDE_DIR = path.join(os.homedir(), '.claude', 'projects');
@@ -16,10 +17,11 @@ const primary = app.requestSingleInstanceLock();
 if (!primary) app.quit();   // the running pet gets 'second-instance' instead
 
 // ---------- state ----------
+const PETS = [['net', 'Net'], ['slime', 'Slime'], ['cat', 'Cat'], ['sprout', 'Sprout'], ['shroom', 'Shroom'], ['star', 'Star'], ['koi', 'Koi']];   // the site hero's cast (site/sprites.js)
 const DEFAULTS = {
   name: 'Net', xp: 0, fuel: 80, mood: 70, commits: 0, quickDraws: 0,
-  repo: null, pos: null, model: 'claude-sonnet-5', keyEnc: null, keyPlain: null,
-  muted: false, onTop: true, hotkey: 'Control+Alt+Command+J', animations: false, game: false, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
+  repo: null, pos: null, model: 'claude-sonnet-5', keyEnc: null, keyPlain: null, engine: null,   // engine: null = auto (Claude Code login first), 'claude' | 'key'
+  muted: false, onTop: true, hotkey: 'Control+Alt+Command+J', animations: false, game: false, pet: 'net', born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
 };
 let state, saveTimer, win, sessionKey = null;
 const statePath = () => path.join(app.getPath('userData'), 'state.json');
@@ -210,22 +212,31 @@ function snapshot() {
     fuel: state.fuel, mood: state.mood, commits: state.commits,
     agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout,
       receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
-    git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, hasKey: hasKey(), hour: new Date().getHours(),
+    git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, pet: state.pet, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto',
   };
 }
 
 // ---------- chat ----------
-// Only getKey() touches the keychain, and only when chat actually needs the key, so people who
-// never chat never see a macOS keychain prompt. The decrypted key is cached for the session.
+// The keychain is touched only by getKey(), only at send time, and only when the saved key is the
+// engine: the user's own `claude` login is the default, so most people never see a keychain prompt.
+// A denied/failed unlock is remembered for the session so macOS doesn't ask again and again.
 const hasKey = () => !!(process.env.ANTHROPIC_API_KEY || state.keyEnc || sessionKey);
+let keyDenied = false;
 function getKey() {
   if (process.env.ANTHROPIC_API_KEY) return process.env.ANTHROPIC_API_KEY;
   if (sessionKey) return sessionKey;
-  if (state.keyEnc && safeStorage.isEncryptionAvailable()) {
-    try { sessionKey = safeStorage.decryptString(Buffer.from(state.keyEnc, 'base64')); } catch { return null; }
-  }
+  if (keyDenied || !state.keyEnc || !safeStorage.isEncryptionAvailable()) return null;
+  try { sessionKey = safeStorage.decryptString(Buffer.from(state.keyEnc, 'base64')) || null; } catch { sessionKey = null; }
+  if (!sessionKey) keyDenied = true;
   return sessionKey;
+}
+// 'key' ready · 'key-locked' saved key, macOS will ask on first send · 'claude' login · null nothing yet
+async function engine() {
+  if (process.env.ANTHROPIC_API_KEY || sessionKey) return state.engine === 'claude' && await findClaude() ? 'claude' : 'key';
+  const bin = state.engine === 'key' && state.keyEnc && !keyDenied ? null : await findClaude();
+  if (bin) return 'claude';
+  return state.keyEnc && !keyDenied ? 'key-locked' : null;
 }
 
 function agentTranscript(s, n = 4) {
@@ -270,11 +281,15 @@ async function buildContext(mode) {
   return parts.filter(Boolean).join('\n\n');
 }
 
-const SYSTEM = name => `You are ${name}, a tiny pixel creature who lives on the desktop of a "vibe coder" — someone who builds software mostly by directing AI coding agents like Claude Code. You watch their agents and their git repo. You eat commits (that's literally how you're fed).
+const SYSTEM = name => `You are ${name}, a small desktop companion for someone who builds software by directing AI coding agents like Claude Code. You can see their live repo state and agent status (attached as context).
 
-Voice: warm, playful, a little cheeky, never cutesy-to-the-point-of-useless. Be genuinely useful: you can actually see their repo state and agent status below. Default to 1-3 short sentences unless asked for more or writing a commit message. No headers. Occasional pet flavor is fine (*wiggles*), but at most one per reply.
-
-Things you care about: committing often (save points protect against a bad agent turn), reading diffs before shipping, answering the agent when it's waiting, not coding at 4am, and shipping.`;
+How to answer:
+- Answer the question first, in 1-3 short sentences. Longer only when asked, or when writing a commit message or a prompt.
+- Calm, friendly, plain. No roleplay or *actions*, no emojis unless the user uses them, no exclamation-mark enthusiasm.
+- Never nag: don't push them to commit, ship, or reply to an agent unless they ask what to do.
+- Use the context to be specific, but don't recite raw stats (line counts, seconds, timestamps) unless asked. Say "a few minutes", "a sizeable diff", or name the file instead.
+- A greeting gets a one-line friendly reply plus one concrete, useful offer based on the context (e.g. "Want a commit message for the renderer changes?").
+- If you don't know, say so briefly.`;
 
 // no key: the user's own `claude` login. Looked up on the first chat open only, then cached for the process.
 let claudeBin;   // undefined = not looked yet, null = none
@@ -290,7 +305,7 @@ function findClaude() {
     res(claudeBin = p && p.startsWith('/') ? p : null);
   }));
 }
-ipcMain.handle('chat-via', async () => hasKey() ? 'key' : (await findClaude()) ? 'claude' : null);
+ipcMain.handle('chat-via', () => engine());
 
 const AUTH_RE = /log ?in|auth|api key|credential|unauthori[sz]ed|\b401\b/i;
 function runClaude(bin, args, input) {
@@ -332,8 +347,14 @@ async function chatViaClaude(bin, messages, mode) {
 }
 
 ipcMain.handle('chat', async (_, { messages, mode }) => {
-  const key = getKey();
-  if (!key) { const bin = await findClaude(); return bin ? chatViaClaude(bin, messages, mode) : { error: 'nokey' }; }
+  const via = await engine();
+  const key = via === 'key' || via === 'key-locked' ? getKey() : null;
+  if (!key) {
+    const bin = await findClaude();
+    if (!bin) return { error: 'nokey' };
+    const r = await chatViaClaude(bin, messages, mode);
+    return via === 'key-locked' && !r.error ? { ...r, note: 'Couldn\'t unlock the saved key, so I used your Claude Code login.' } : r;
+  }
   try {
     const ctx = await buildContext(mode);
     const r = await fetch('https://api.anthropic.com/v1/messages', {
@@ -357,6 +378,8 @@ ipcMain.handle('set-key', (_, key) => {
   state.keyPlain = null;
   if (safeStorage.isEncryptionAvailable()) { state.keyEnc = key ? safeStorage.encryptString(key).toString('base64') : null; sessionKey = key || null; }
   else sessionKey = key || null; // no keychain: keep it in memory only, never write plaintext to disk
+  keyDenied = false;
+  state.engine = key ? 'key' : null;
   save();
   return hasKey();
 });
@@ -376,6 +399,7 @@ function createWindow() {
   win = new BrowserWindow({
     width: W, height: H, x: pos.x, y: pos.y, frame: false, transparent: true, resizable: false,
     hasShadow: false, alwaysOnTop: state.onTop, skipTaskbar: true, fullscreenable: false, backgroundColor: '#00000000',
+    acceptFirstMouse: true,   // Net is never the key window: without this macOS eats the first click to activate him
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false },
   });
   win.setAlwaysOnTop(state.onTop, 'floating');
@@ -437,38 +461,68 @@ ipcMain.on('pet', () => {
   if (Date.now() - state.lastPet > 10000) { state.lastPet = Date.now(); state.mood = clamp(state.mood + 2); save(); }
 });
 
-ipcMain.on('menu', () => {
+function buildMenu() {
   const g = gitInfo;
-  Menu.buildFromTemplate([
-    { label: state.game ? `${state.name} · Lv ${levelFor(state.xp)} · ${state.xp}xp` : state.name, enabled: false },
-    { label: g?.root ? `Watching ${g.name}${state.repo ? '' : ' (following your agent)'}` : 'No repo yet — start an agent or pick one', enabled: false },
-    { type: 'separator' },
+  const pickRepo = async () => {
+    const r = await dialog.showOpenDialog({ properties: ['openDirectory'], defaultPath: g?.root || os.homedir() });
+    if (!r.canceled && r.filePaths[0]) { state.repo = r.filePaths[0]; save(); tick(); }
+  };
+  const toggle = (label, key, after) => ({ label, type: 'checkbox', checked: !!state[key], click: m => { state[key] = m.checked; after?.(m.checked); save(); tick(); } });
+  return Menu.buildFromTemplate([
+    { label: g?.root ? `Watching ${g.name}` : 'No repo yet', submenu: [
+      { label: 'Follow my agent', type: 'radio', checked: !state.repo, click: () => { state.repo = null; save(); tick(); } },
+      { label: 'Choose a repo…', type: 'radio', checked: !!state.repo, click: pickRepo },
+    ] },
     { label: 'Chat…', click: () => emit('openChat') },
-    { label: 'Watch a repo…', click: async () => {
-      const r = await dialog.showOpenDialog({ properties: ['openDirectory'], defaultPath: g?.root || os.homedir() });
-      if (!r.canceled && r.filePaths[0]) { state.repo = r.filePaths[0]; save(); tick(); }
-    } },
-    { label: 'Follow my active agent (auto)', type: 'checkbox', checked: !state.repo, click: () => { state.repo = null; save(); tick(); } },
-    { type: 'separator' },
+    { label: 'Pet', submenu: PETS.map(([id, label]) => ({ label, type: 'radio', checked: state.pet === id, click: () => { state.pet = id; save(); tick(); } })) },
     { label: 'Toss a snack', visible: state.game, click: () => {
       if (Date.now() - state.lastSnack < 30 * 60e3) return emit('snackNo', 'snacks are nice but I run on commits. (one snack per 30 min)');
       state.lastSnack = Date.now(); state.fuel = clamp(state.fuel + 10); save(); emit('snack', 'crunch. thanks! (commits are the real meal though)');
     } },
-    { label: 'Open at login', type: 'checkbox', checked: app.getLoginItemSettings().openAtLogin, click: m => app.setLoginItemSettings({ openAtLogin: m.checked }) },
-    { label: 'Mute notifications', type: 'checkbox', checked: state.muted, click: m => { state.muted = m.checked; save(); tick(); } },
-    { label: 'Game mode (XP, hunger, levels)', type: 'checkbox', checked: state.game, click: m => { state.game = m.checked; state.lastDecay = Date.now(); save(); tick(); } },
-    { label: 'Animations', type: 'checkbox', checked: state.animations, click: m => { state.animations = m.checked; save(); tick(); } },
-    { label: `Jump key${keyTaken ? ' (taken)' : ''}`, submenu: KEYS.map(([label, k]) => ({
-      label, type: 'radio', checked: state.hotkey === k, click: () => { state.hotkey = k; save(); bindKey(); } })) },
-    { label: 'Keep on top', type: 'checkbox', checked: state.onTop, click: m => { state.onTop = m.checked; win.setAlwaysOnTop(m.checked, 'floating'); save(); } },
-    { label: 'Model', submenu: ['claude-sonnet-5', 'claude-opus-5-5', 'claude-haiku-4-5-20251001'].map(m => ({
-      label: m, type: 'radio', checked: state.model === m, click: () => { state.model = m; save(); } })) },
-    { label: hasKey() ? 'Change API key…' : 'Set Anthropic API key…', click: () => emit('openKey') },
-    { label: 'Rename…', click: () => emit('openRename') },
+    { type: 'separator' },
+    { label: 'Settings', submenu: [
+      { label: 'Open at login', type: 'checkbox', checked: app.getLoginItemSettings().openAtLogin, click: m => app.setLoginItemSettings({ openAtLogin: m.checked }) },
+      toggle('Keep on top', 'onTop', v => win.setAlwaysOnTop(v, 'floating')),
+      toggle('Mute notifications', 'muted'),
+      { type: 'separator' },
+      toggle('Animations', 'animations'),
+      toggle('Game mode', 'game', () => { state.lastDecay = Date.now(); }),
+      { type: 'separator' },
+      { label: `Jump key${keyTaken ? ' (taken)' : ''}`, submenu: KEYS.map(([label, k]) => ({
+        label, type: 'radio', checked: state.hotkey === k, click: () => { state.hotkey = k; save(); bindKey(); } })) },
+      { label: 'Gesture', submenu: [
+        { label: 'On', type: 'radio', enabled: !!gest().templates.length, checked: gest().on && !!gest().templates.length, click: () => { gest().on = true; save(); syncWatch(); } },
+        { label: 'Off', type: 'radio', checked: !(gest().on && gest().templates.length), click: () => { gest().on = false; save(); syncWatch(); } },
+        { type: 'separator' },
+        { label: gest().templates.length ? 'Record a new gesture…' : 'Record gesture…', click: recordGesture },
+        { label: 'Sensitivity', submenu: [['Low', 'low'], ['Medium', 'med'], ['High', 'high']].map(([label, v]) => ({
+          label, type: 'radio', checked: gest().sens === v, click: () => { gest().sens = v; save(); } })) },
+      ] },
+      { label: 'Chat engine', submenu: [
+        { label: `Claude Code login (recommended)${claudeBin === null ? ' — not found' : ''}`, type: 'radio', enabled: claudeBin !== null, checked: state.engine !== 'key', click: () => { state.engine = 'claude'; save(); } },
+        { label: hasKey() ? 'Anthropic API key' : 'Anthropic API key…', type: 'radio', checked: state.engine === 'key', click: () => { if (hasKey()) { state.engine = 'key'; keyDenied = false; save(); } else emit('openKey'); } },
+      ] },
+      { label: 'Chat model', submenu: ['claude-sonnet-5', 'claude-opus-5-5', 'claude-haiku-4-5-20251001'].map(m => ({
+        label: m, type: 'radio', checked: state.model === m, click: () => { state.model = m; save(); } })) },
+      { label: hasKey() ? 'Change API key…' : 'Set API key…', click: () => emit('openKey') },
+      { label: `Rename ${state.name}…`, click: () => emit('openRename') },
+    ] },
+    { label: `${win.isVisible() ? 'Hide' : 'Show'} ${state.name}`, click: () => toggleNet(trayPoint()) },
     { type: 'separator' },
     { label: `Quit ${state.name}`, click: () => { emit('exit'); setTimeout(() => app.quit(), 2500); } },
-  ]).popup({ window: win });
-});
+  ]);
+}
+ipcMain.on('menu', () => buildMenu().popup({ window: win }));
+
+// ---------- menu bar icon: click toggles Net (he spawns under the icon), right-click is his menu ----------
+let tray = null;
+const trayPoint = () => { const b = tray?.getBounds(); return b?.width ? { x: b.x + b.width / 2, y: b.y + b.height } : screen.getCursorScreenPoint(); };
+function createTray() {
+  tray = new Tray(path.join(__dirname, 'renderer', 'trayTemplate.png'));
+  tray.setToolTip(state.name);
+  tray.on('click', () => toggleNet(trayPoint()));
+  tray.on('right-click', () => tray.popUpContextMenu(buildMenu()));
+}
 
 // ---------- the jump door: a global key walks the renderer's queue (it owns pending()) ----------
 const KEYS = [['⌃⌥⌘J', 'Control+Alt+Command+J'], ['⌥⌘J', 'Alt+Command+J'], ['Off', null]];   // not ⌥Space (Raycast/ChatGPT) or ⌃⌥Space (input source)
@@ -476,10 +530,50 @@ let keyTaken = false;
 function bindKey() {
   globalShortcut.unregisterAll();
   let ok = true;
-  if (state.hotkey) try { ok = globalShortcut.register(state.hotkey, () => send('hotkey')); } catch { ok = false; }
+  if (state.hotkey) try { ok = globalShortcut.register(state.hotkey, () => { if (!win.isVisible()) win.showInactive(), send('summon'); send('hotkey'); }); } catch { ok = false; }
   keyTaken = !ok;   // someone else has it: stay quiet, the menu says so
 }
 app.on('will-quit', () => globalShortcut.unregisterAll());
+
+// ---------- summon gesture: draw your own trained shape anywhere — Net vanishes, draw it again and he appears at the cursor ----------
+// Cursor-position polling only (gesture.js) — no event hooks, no Accessibility — and only while a gesture is on or being recorded.
+const gest = () => (state.gesture ||= { on: false, sens: 'med', templates: [] });
+let rec = null, toggledAt = 0;   // rec = { samples } while training on the pad
+const gw = gesture.watcher(screen, stroke => {
+  const g = gest();
+  if (!rec && Date.now() - toggledAt > 2500 && gesture.recognize(stroke, g.templates, g.sens).ok) toggleNet(stroke[stroke.length - 1]);
+});
+function syncWatch() { const g = gest(); !rec && g.on && g.templates.length ? gw.start() : gw.stop(); }
+// training happens on a pad Net holds up: each click-drag is one sample. Forgiving: only a dot or a flick is
+// refused, and if two of three agree we keep those two and ask for one more instead of starting over.
+const recSend = (extra = {}) => send('gesture-rec', { previews: rec ? rec.samples.map(gesture.normalize) : [], ...extra });
+ipcMain.on('gesture-sample', (_, pts) => {
+  if (!rec || !Array.isArray(pts)) return;
+  pts = pts.filter(p => Number.isFinite(p?.x) && Number.isFinite(p?.y)).slice(0, 2000).map(p => ({ x: +p.x, y: +p.y, t: +p.t || 0 }));
+  if (gesture.trivial(pts)) return recSend({ hint: 'That was tiny — draw it a little bigger.' });
+  rec.samples.push(pts);
+  if (rec.samples.length < 3) return recSend();
+  const set = gesture.consistentSet(rec.samples);
+  if (set.length >= 3) {
+    const g = gest(); g.templates = set.slice(0, 3).map(gesture.template); g.on = true; save();
+    const previews = set.slice(0, 3).map(gesture.normalize);
+    rec = null; syncWatch();
+    return send('gesture-rec', { previews, done: true });
+  }
+  rec.samples = set.length === 2 ? set : rec.samples.slice(-1);
+  recSend({ hint: set.length === 2 ? 'Two of those match — once more like those.' : 'Those looked different — draw the same shape as the last one.' });
+});
+ipcMain.on('gesture-undo', () => { if (rec) { rec.samples.pop(); recSend(); } });
+function summonAt(p) {
+  const d = screen.getDisplayNearestPoint(p).workArea;
+  const x = Math.round(Math.min(Math.max(p.x - W / 2, d.x), d.x + d.width - W)), y = Math.round(Math.min(Math.max(p.y - H + 120, d.y), d.y + d.height - H));
+  win.setPosition(x, y); state.pos = { x, y }; save();
+  win.showInactive(); send('summon');
+}
+function toggleNet(p) { toggledAt = Date.now(); win.isVisible() ? hideNet() : summonAt(p); }
+function hideNet() { send('hide'); setTimeout(() => { if (!win.isDestroyed()) win.hide(); }, 260); }
+function recordGesture() { rec = { samples: [] }; if (!win.isVisible()) send('summon'); win.show(); app.focus({ steal: true }); win.focus(); syncWatch(); recSend({ start: true }); }
+ipcMain.on('gesture-cancel', () => { rec = null; syncWatch(); });
 
 // "Lost him? Open vibepet again." — a second launch re-homes the running pet and opens its pill once
 app.on('second-instance', () => {
@@ -495,7 +589,10 @@ app.whenReady().then(() => {
   load();
   if (process.platform === 'darwin') app.dock?.hide();
   createWindow();
+  createTray();
   bindKey();
+  syncWatch();
+  setTimeout(findClaude, 3000);   // so the Chat engine menu knows whether the login exists
   setInterval(tick, TICK_MS);
   if (process.env.VIBEPET_TEST) globalThis.__vibepet = { banners, banner, bindKey, keyTaken: () => keyTaken };
 });

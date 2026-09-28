@@ -15,4 +15,7 @@ contextBridge.exposeInMainWorld('pet', {
   chatVia: () => ipcRenderer.invoke('chat-via'),
   setKey: k => ipcRenderer.invoke('set-key', k),
   jump: id => ipcRenderer.invoke('jump', id),
+  gestureCancel: () => ipcRenderer.send('gesture-cancel'),
+  gestureSample: pts => ipcRenderer.send('gesture-sample', pts),
+  gestureUndo: () => ipcRenderer.send('gesture-undo'),
 });

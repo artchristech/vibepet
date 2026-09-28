@@ -22,8 +22,10 @@
     "files": [
       "main.js",
       "agents.js",
+      "gesture.js",
       "preload.js",
       "renderer/**",
+      "site/sprites.js",
       "package.json"
     ],
     "directories": {
