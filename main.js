@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { execFile, spawn } = require('child_process');
-const { readTail, textOf, scan, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
+const { readTail, textOf, firstPrompt, scan, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
 const gesture = require('./gesture');
 
 const W = 360, H = 520;
@@ -24,7 +24,7 @@ const PETS = [['net', 'Net'], ['slime', 'Slime'], ['cat', 'Cat'], ['sprout', 'Sp
 const DEFAULTS = {
   name: 'Net', xp: 0, fuel: 80, mood: 70, commits: 0, quickDraws: 0,
   repo: null, pos: null, model: 'claude-sonnet-5', keyEnc: null, keyPlain: null, engine: null,   // engine: null = auto (Claude Code login first), 'claude' | 'key'
-  muted: false, onTop: true, hotkey: 'Control+Alt+Command+J', animations: false, game: false, pet: 'net', born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
+  muted: false, onTop: true, hotkey: 'Control+Alt+Command+J', animations: false, game: false, pet: 'net', goals: {}, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
 };
 let state, saveTimer, win, sessionKey = null;
 const statePath = () => path.join(app.getPath('userData'), 'state.json');
@@ -122,6 +122,44 @@ function transition(s, prev) {
   }
 }
 
+// ---------- goals + nag ----------
+// a goal per session: typed in the roster, else the session's first prompt (auto). Kept 3 days after its session was last seen.
+const GOAL_TTL = 3 * 864e5, goalMiss = new Map();   // id -> when the head last had no prompt (retry every 30s, not every tick)
+function goalFor(s) {
+  let g = state.goals[s.id];
+  if (!g) {
+    if (Date.now() - (goalMiss.get(s.id) || 0) < 30e3) return null;
+    let t = null; try { t = firstPrompt(s.file); } catch {}
+    if (!t) { goalMiss.set(s.id, Date.now()); return null; }
+    goalMiss.delete(s.id);
+    g = state.goals[s.id] = { text: t, auto: true };
+  }
+  g.seen = Date.now();
+  return g;
+}
+function pruneGoals() {
+  const now = Date.now();
+  for (const [id, g] of Object.entries(state.goals)) if (now - (g.seen || 0) > GOAL_TTL) delete state.goals[id];
+}
+ipcMain.on('set-goal', (_, { id, text }) => {
+  text = String(text || '').replace(/\s+/g, ' ').trim().slice(0, 120);
+  if (text) state.goals[id] = { text, auto: false, at: Date.now(), seen: Date.now() };
+  else delete state.goals[id];   // cleared: falls back to the first prompt next tick
+  save(); tick();
+});
+// blocked on you past NAG_MS: one nudge per episode (a new phase resets `since`, so a fresh block nags again)
+const NAG_MS = 3 * 60e3, nagged = new Map();   // id -> since it nagged for
+function nag(list) {
+  const now = Date.now();
+  for (const a of list) {
+    if ((a.phase !== 'stalled' && a.phase !== 'waiting') || now - a.since < NAG_MS || nagged.get(a.id) === a.since) continue;
+    nagged.set(a.id, a.since);
+    const m = Math.round((now - a.since) / 60000);
+    emit('agentNag', `${a.title || a.name} ${a.phase === 'waiting' ? 'has waited on your answer' : 'has been blocked on approval'} ${m}m`, { agent: a.name, id: a.id, notify: true });
+  }
+  for (const id of nagged.keys()) if (!sessions.has(id)) nagged.delete(id);
+}
+
 // ---------- git ----------
 const git = (cwd, args) => new Promise(res =>
   execFile('git', args, { cwd, timeout: 5000, maxBuffer: 8e6 }, (e, out) => res(e ? null : out.trimEnd())));
@@ -201,6 +239,9 @@ async function tick() {
   try {
     decay();
     agents = scanAgents();
+    for (const a of agents) a.goal = goalFor(a);
+    pruneGoals();
+    nag(agents);
     await scanGit(agents);
     if (win && !win.isDestroyed()) win.webContents.send('tick', snapshot());
     save();
@@ -213,7 +254,7 @@ function snapshot() {
   return {
     name: state.name, level, xp: state.xp, xpLo: xpForLevel(level), xpHi: xpForLevel(level + 1),
     fuel: state.fuel, mood: state.mood, commits: state.commits,
-    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout,
+    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, goal: a.goal && { text: a.goal.text, auto: a.goal.auto }, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout,
       receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
     git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, pet: state.pet, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto',

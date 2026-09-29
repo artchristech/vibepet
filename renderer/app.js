@@ -470,6 +470,7 @@ api.on('event', e => {
   switch (e.kind) {
     case 'agentDone': say(e.text, { prio: true, ms: 4000 }); break;   // routine finish: one quiet line, no amber, no sound
     case 'agentNeeds': say(e.text, { prio: true, alert: true, ms: 8000 }); tune([440, 330]); break;
+    case 'agentNag': say(e.text, { prio: true, alert: 'stuck', ms: 10000 }); tune([330, 262]); break;   // blocked on you past 3m: once per episode
     case 'agentStalled': say(e.text, { prio: true, alert: 'stuck', ms: 8000 }); break;   // stuck = red, same as LED + glyph
     case 'commit': transient('eat', 1300); setTimeout(() => transient('celebrate', 2200), 1300);
       spawn('spark', 30, { x: 28, y: 22, spread: 3, up: 2, g: 0.05, colors: CONFETTI }); say(e.text, { prio: true }); tune([523, 659, 784, 1047], 80); break;
@@ -505,7 +506,30 @@ function renderHud() {
 }
 // the question in the pill: what each waiting/stuck/finished agent wants, shown only while the pill is open.
 // agents fanned out to subagents follow, with a static gauge: filled pip = child done, hollow = still running
+// the goal line: one sentence per session. click it to type your own; empty resets to the session's first prompt
+let editing = null;   // session id whose goal is being typed (the roster freezes so the input survives ticks)
+function goalLine(a) {
+  const g = a.goal;
+  return `<span class="goal${!g ? ' none' : g.auto ? ' auto' : ''}" data-goal title="${g?.auto ? 'guessed from the first prompt · click to set' : 'click to edit the goal'}">◎ ${esc(g?.text || 'set a goal')}</span>`;
+}
+function editGoal(id) {
+  const a = (snap?.agents || []).find(x => x.id === id);
+  if (!a) return;
+  editing = id; api.focus();
+  $('roster').innerHTML = `<form class="goalf"><input maxlength="120" placeholder="what is this session for?" value="${esc(a.goal && !a.goal.auto ? a.goal.text : '')}"></form>`;
+  const f = $('roster').querySelector('form'), inp = f.querySelector('input'), done = save => {
+    if (editing !== id) return;
+    editing = null;
+    if (save) api.setGoal(id, inp.value);
+    renderRoster();
+  };
+  f.onsubmit = e => { e.preventDefault(); done(true); };
+  inp.onkeydown = e => { if (e.key === 'Escape') { e.stopPropagation(); done(false); } };
+  inp.onblur = () => done(false);
+  rosterShow(); inp.focus(); inp.select();
+}
 function renderRoster() {
+  if (editing) return;
   // every live session, most urgent first; unseen needs/stuck/ready from pending(), then everything still running
   const rows = pending(true), has = new Set(rows.map(a => a.id));
   rows.push(...(snap?.agents || []).filter(a => a.phase === 'working' && !has.has(a.id)));
@@ -513,7 +537,7 @@ function renderRoster() {
   $('roster').innerHTML = rows.slice(0, 6).map(a => { const sig = SIG[a.phase];
     const kids = (a.fanout?.items || []).filter(k => k.open).slice(0, 3).map(k =>
       `<span class="kid"><i class="tl" style="color:${k.stuck ? TL.stuck : TL.running};background:currentColor"></i><b>${esc(k.type || k.desc)}</b></span>`).join('');
-    return `<button data-id="${esc(a.id)}" title="${esc(sig)}"><i class="tl" style="color:${TL[sig]};background:currentColor"></i><b>${esc(a.title || a.name)}</b>${kids}</button>`; }).join('');
+    return `<button data-id="${esc(a.id)}" title="${esc(sig)}"><i class="tl" style="color:${TL[sig]};background:currentColor"></i><b>${esc(a.title || a.name)}</b>${goalLine(a)}${kids}</button>`; }).join('');
   rosterShow();
 }
 // "waiting 4m" says whose move it is and for how long; "just now" said neither
@@ -547,12 +571,13 @@ function foTitle(fo) {
 const notes = new Map();
 function noteFor(id) { const n = notes.get(id); return n && n.until > Date.now() ? n.text : null; }
 function rosterShow() {
-  const r = $('roster'), on = $('hud').classList.contains('live') && r.children.length > 0 && !menuOpen;
+  const r = $('roster'), on = !!editing || ($('hud').classList.contains('live') && r.children.length > 0 && !menuOpen);
   if (on === r.classList.contains('hidden')) r.classList.toggle('hidden', !on);
 }
 $('roster').onclick = e => {
   const id = e.target.closest('button[data-id]')?.dataset.id, a = (snap?.agents || []).find(x => x.id === id);
   if (!a) return;
+  if (e.target.closest('[data-goal]')) { editGoal(id); return; }
   const v = e.target.closest('.rc var');   // the verdict chip copies its command; no jump, and the row stays unread
   if (v && a.receipt?.check) { api.copy(a.receipt.check.full); v.textContent = 'copied'; return; }
   if (api.jump) jumpTo(a); else if (a.ask) api.copy(a.ask);

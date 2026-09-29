@@ -169,6 +169,24 @@ function classify(file, mtimeMs, side = false) {
   return null;
 }
 
+// the session's opening ask, as a default goal: the first real prompt in the file's head (a /command or pasted tag doesn't count)
+function firstPrompt(file, bytes = 262144) {
+  const fd = fs.openSync(file, 'r');
+  let head;
+  try { const buf = Buffer.alloc(Math.min(bytes, fs.fstatSync(fd).size)); fs.readSync(fd, buf, 0, buf.length, 0); head = buf.toString('utf8'); }
+  finally { fs.closeSync(fd); }
+  for (const l of head.split('\n')) {
+    if (!l.includes('"type":"user"')) continue;
+    let d; try { d = JSON.parse(l); } catch { continue; }
+    if (!humanAt(d)) continue;
+    const t = textOf(d.message?.content).trim();
+    if (t.startsWith('<')) continue;
+    const g = firstSentence(t);
+    if (g.length >= 4) return cap(g, 80);
+  }
+  return null;
+}
+
 // ---------- fan-out: the subagents a session is waiting on ----------
 // The parent jsonl goes silent while its children run; their files live in <session>/subagents/.
 const kidCache = new Map(), metaCache = new Map();   // child path -> { size, mtimeMs, k: { phase, stuck, ask } } | meta
@@ -348,4 +366,4 @@ async function focusTty(bid, tty) {
   return (await run('/usr/bin/osascript', ['-e', FOCUS[bid], tty], 5000))?.trim() === 'ok';
 }
 
-module.exports = { CHECK_RE, receipt, readTail, textOf, classify, fanout, settle, scan, psAll, locateSession, hostApp, bundleId, focusTty, run };
+module.exports = { CHECK_RE, firstPrompt, receipt, readTail, textOf, classify, fanout, settle, scan, psAll, locateSession, hostApp, bundleId, focusTty, run };
