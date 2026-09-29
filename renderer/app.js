@@ -470,6 +470,9 @@ api.on('event', e => {
   switch (e.kind) {
     case 'agentDone': say(e.text, { prio: true, ms: 4000 }); break;   // routine finish: one quiet line, no amber, no sound
     case 'agentNeeds': say(e.text, { prio: true, alert: true, ms: 8000 }); tune([440, 330]); break;
+    case 'goalDrift': say(e.text, { prio: true, alert: true, ms: 9000 }); tune([392, 349]); break;
+    case 'goalBack': say(e.text, { prio: true, ms: 4000 }); break;
+    case 'goalDone': transient('celebrate', 2200); spawn('spark', 30, { x: 28, y: 22, spread: 3, up: 2, g: 0.05, colors: CONFETTI }); say(e.text, { prio: true, ms: 6000 }); tune([523, 659, 784], 90); break;
     case 'agentNag': say(e.text, { prio: true, alert: 'stuck', ms: 10000 }); tune([330, 262]); break;   // blocked on you past 3m: once per episode
     case 'agentStalled': say(e.text, { prio: true, alert: 'stuck', ms: 8000 }); break;   // stuck = red, same as LED + glyph
     case 'commit': transient('eat', 1300); setTimeout(() => transient('celebrate', 2200), 1300);
@@ -510,7 +513,7 @@ function renderHud() {
 let editing = null;   // session id whose goal is being typed (the roster freezes so the input survives ticks)
 function goalLine(a) {
   const g = a.goal;
-  return `<span class="goal${!g ? ' none' : g.auto ? ' auto' : ''}" data-goal title="${g?.auto ? 'guessed from the first prompt · click to set' : 'click to edit the goal'}">◎ ${esc(g?.text || 'set a goal')}</span>`;
+  return `<span class="goal${!g ? ' none' : g.auto ? ' auto' : ''}${g?.done ? ' done' : g?.verdict === 'on' ? ' on' : g?.verdict === 'drift' ? ' drift' : ''}" data-goal title="${g?.done ? 'goal hit' : g?.verdict === 'drift' ? 'recent actions don\'t mention this goal' : g?.verdict === 'on' ? 'recent actions match this goal' : ''}${g?.auto ? ' · guessed from the first prompt' : ''} · click to edit, ⌥-click to mark done">${g?.done ? '✓' : '◎'} ${esc(g?.text || 'set a goal')}</span>`;
 }
 function editGoal(id) {
   const a = (snap?.agents || []).find(x => x.id === id);
@@ -577,7 +580,7 @@ function rosterShow() {
 $('roster').onclick = e => {
   const id = e.target.closest('button[data-id]')?.dataset.id, a = (snap?.agents || []).find(x => x.id === id);
   if (!a) return;
-  if (e.target.closest('[data-goal]')) { editGoal(id); return; }
+  if (e.target.closest('[data-goal]')) { if (e.altKey) api.goalDone(id); else editGoal(id); return; }
   const v = e.target.closest('.rc var');   // the verdict chip copies its command; no jump, and the row stays unread
   if (v && a.receipt?.check) { api.copy(a.receipt.check.full); v.textContent = 'copied'; return; }
   if (api.jump) jumpTo(a); else if (a.ask) api.copy(a.ask);
@@ -775,6 +778,7 @@ const MODES = {
   commit: ['commit msg', 'Write a commit message for my current uncommitted changes. Conventional-commit subject ≤72 chars, blank line, 2–5 terse bullets. Output ONLY the message in a single ```text code block.'],
   vibe: ['vibe check', 'Vibe check: look at my diff size, time since last commit, and what my agents are doing. Anything risky in the diff? Give one blunt, specific recommendation.'],
   agent: ['what\'s my agent doing?', 'What is my coding agent doing right now / what did it last say? Summarize in 2–3 lines and tell me whether it needs me.'],
+  goal: ['on track?', 'For each session below, compare its GOAL with what the agent has actually been doing. Per session, one line: "on track", "drifting" or "done", then a short why naming the files or actions. If one is drifting, give the one-line prompt I should paste to steer it back.'],
   next: ['next step?', 'Given my recent commits, current diff, and my agent\'s latest messages: what is the single best next step? One line, then a one-line why. If it helps, give me the exact prompt to paste to my agent.'],
 };
 let sending = false;

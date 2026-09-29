@@ -149,6 +149,9 @@ input:focus { border-color: rgba(255,255,255,.22); }
 #roster span.goal { font-size: 10.5px; color: #cfd6ea; cursor: text; }
 #roster span.goal:hover { color: #fff; text-decoration: underline dotted; }
 #roster span.goal.auto { color: var(--dim); font-style: italic; }
+#roster span.goal.on::first-letter { color: #3fe08f; }
+#roster span.goal.drift { color: #ffc46b; }
+#roster span.goal.done { color: #3fe08f; font-style: normal; }
 #roster span.goal.none { color: var(--dim); opacity: .6; }
 #roster .goalf { padding: 4px; }
 #roster .goalf input { width: 300px; padding: 5px 8px; border: 1px solid rgba(255,255,255,.18); border-radius: 8px; background: rgba(255,255,255,.06); color: var(--text); font: 11px var(--font); outline: none; }

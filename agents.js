@@ -5,6 +5,7 @@ const fs = require('fs');
 const os = require('os');
 const { execFile } = require('child_process');
 
+const { intentful, evidence } = require('./goal');
 const SESS_DIR = path.join(os.homedir(), '.claude', 'sessions');   // Claude Code's own <pid>.json registry
 
 function readTail(file, bytes = 131072, maxBytes = 16 * 1048576) {
@@ -146,7 +147,8 @@ function classify(file, mtimeMs, side = false) {
   turnAt ||= Date.now() - 45 * 60e3;
   const rc = receipt(lines, side ? 0 : turnAt, side, fallback);   // same lines, no extra read
   const act = side ? activity(lines) : null;
-  const out = (phase, ask, extra) => ({ phase, cwd, title, turnAt, receipt: rc, ...(ask ? { ask: cap(ask) } : {}), ...(act || {}), ...extra });
+  const ev = side ? undefined : evidence(lines);
+  const out = (phase, ask, extra) => ({ phase, cwd, title, turnAt, receipt: rc, ev, ...(ask ? { ask: cap(ask) } : {}), ...(act || {}), ...extra });
   for (let i = lines.length - 1; i >= 0; i--) {
     let d; try { d = JSON.parse(lines[i]); } catch { continue; }
     if (!cwd && d.cwd) cwd = d.cwd;
@@ -169,22 +171,30 @@ function classify(file, mtimeMs, side = false) {
   return null;
 }
 
-// the session's opening ask, as a default goal: the first real prompt in the file's head (a /command or pasted tag doesn't count)
-function firstPrompt(file, bytes = 262144) {
+// the session's opening ask, as a default goal: the first prompt that states intent in the file's head (a /command or pasted tag doesn't count)
+function firstPrompt(file, chunk = 262144, maxBytes = 4 * 1048576) {
   const fd = fs.openSync(file, 'r');
-  let head;
-  try { const buf = Buffer.alloc(Math.min(bytes, fs.fstatSync(fd).size)); fs.readSync(fd, buf, 0, buf.length, 0); head = buf.toString('utf8'); }
-  finally { fs.closeSync(fd); }
-  for (const l of head.split('\n')) {
-    if (!l.includes('"type":"user"')) continue;
-    let d; try { d = JSON.parse(l); } catch { continue; }
-    if (!humanAt(d)) continue;
-    const t = textOf(d.message?.content).trim();
-    if (t.startsWith('<')) continue;
-    const g = firstSentence(t);
-    if (g.length >= 4) return cap(g, 80);
-  }
-  return null;
+  try {
+    const size = Math.min(fs.fstatSync(fd).size, maxBytes);
+    let pos = 0, rest = '', asks = 0;
+    while (pos < size) {   // the head can hold 300KB+ of hook/skill attachments before the first prompt: read on, chunk by chunk
+      const buf = Buffer.alloc(Math.min(chunk, size - pos));
+      fs.readSync(fd, buf, 0, buf.length, pos); pos += buf.length;
+      const lines = (rest + buf.toString('utf8')).split('\n');
+      rest = pos < size ? lines.pop() : '';
+      for (const l of lines) {
+        if (!l.includes('"type":"user"')) continue;
+        let d; try { d = JSON.parse(l); } catch { continue; }
+        if (!humanAt(d)) continue;
+        const t = textOf(d.message?.content).trim();
+        if (t.startsWith('<')) continue;
+        const g = firstSentence(t);
+        if (intentful(g)) return cap(g, 80);   // 'cd vibepet' or 'commit it' is a reflex, not a goal: keep reading
+        if (++asks >= 8) return null;
+      }
+    }
+    return null;
+  } finally { fs.closeSync(fd); }
 }
 
 // ---------- fan-out: the subagents a session is waiting on ----------
@@ -268,7 +278,7 @@ function scan(root, sessions, onChange) {
       const prev = sessions.get(id);
       const name = c.cwd ? path.basename(c.cwd) : dname.split('-').pop();
       const s = { id, file: fp, name, cwd: c.cwd, phase, since: prev && prev.phase === phase ? prev.since : now, mtime: Math.max(st.mtimeMs, fo?.newestAt || 0),
-        ask: phase === 'stalled' && fo?.stuck && (c.phase !== 'stalled' || c.agentWait) ? fo.stuckAsk : c.ask, title: c.title || prev?.title, fanout: fo?.total ? fo : undefined, receipt };
+        ask: phase === 'stalled' && fo?.stuck && (c.phase !== 'stalled' || c.agentWait) ? fo.stuckAsk : c.ask, title: c.title || prev?.title, fanout: fo?.total ? fo : undefined, receipt, ev: c.ev };
       if (prev && prev.phase !== phase) onChange?.(s, prev);
       sessions.set(id, s);
       if (phase !== 'parked') out.push(s);

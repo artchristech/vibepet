@@ -6,6 +6,7 @@ const os = require('os');
 const { execFile, spawn } = require('child_process');
 const { readTail, textOf, firstPrompt, scan, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
 const gesture = require('./gesture');
+const { judge, commitMatches } = require('./goal');
 
 const W = 360, H = 520;
 const { place, areaFor, minY } = require('./place');
@@ -127,12 +128,13 @@ function transition(s, prev) {
 const GOAL_TTL = 3 * 864e5, goalMiss = new Map();   // id -> when the head last had no prompt (retry every 30s, not every tick)
 function goalFor(s) {
   let g = state.goals[s.id];
+  if (g?.auto && g.v !== 2) g = null;   // guessed by an older rule (it took 'cd vibepet'): guess again
   if (!g) {
     if (Date.now() - (goalMiss.get(s.id) || 0) < 30e3) return null;
     let t = null; try { t = firstPrompt(s.file); } catch {}
     if (!t) { goalMiss.set(s.id, Date.now()); return null; }
     goalMiss.delete(s.id);
-    g = state.goals[s.id] = { text: t, auto: true };
+    g = state.goals[s.id] = { text: t, auto: true, v: 2, at: Date.now() };
   }
   g.seen = Date.now();
   return g;
@@ -143,10 +145,65 @@ function pruneGoals() {
 }
 ipcMain.on('set-goal', (_, { id, text }) => {
   text = String(text || '').replace(/\s+/g, ' ').trim().slice(0, 120);
-  if (text) state.goals[id] = { text, auto: false, at: Date.now(), seen: Date.now() };
+  const s = sessions.get(id);
+  if (text) { state.goals[id] = { text, auto: false, at: Date.now(), seen: Date.now() }; ledger('goal_set', s, text); }
   else delete state.goals[id];   // cleared: falls back to the first prompt next tick
+  drift.delete(id); goalMiss.delete(id);
   save(); tick();
 });
+// ledger: an append-only day book of goals set / hit and drift spells (userData/ledger.jsonl)
+const ledgerPath = () => path.join(app.getPath('userData'), 'ledger.jsonl');
+function ledger(kind, s, goal, extra = {}) {
+  const row = { t: Date.now(), kind, id: s?.id, name: s?.title || s?.name, goal, ...extra };
+  try { fs.appendFileSync(ledgerPath(), JSON.stringify(row) + '\n'); } catch (e) { console.error('ledger:', e.message); }
+}
+function today() {
+  const from = new Date().setHours(0, 0, 0, 0);
+  let rows = [];
+  try { rows = fs.readFileSync(ledgerPath(), 'utf8').split('\n').filter(Boolean).map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(r => r && r.t >= from); } catch {}
+  const set = rows.filter(r => r.kind === 'goal_set'), hit = rows.filter(r => r.kind === 'goal_done');
+  const driftMs = rows.filter(r => r.kind === 'drift_end').reduce((n, r) => n + (r.ms || 0), 0);
+  const open = [...drift.values()].filter(d => d.startedAt).reduce((n, d) => n + Date.now() - d.startedAt, 0);
+  const m = ms => `${Math.round(ms / 60000)}m`;
+  const lines = [
+    `Goals set: ${set.length} · hit: ${hit.length} · time drifting: ${m(driftMs + open)}`, '',
+    ...hit.map(r => `✓ ${r.goal}  (${r.name || r.id?.slice(0, 8)}${r.how ? ', ' + r.how : ''})`),
+    ...agents.filter(a => a.goal && !a.goal.done).map(a => `◎ ${a.goal.text}  (${a.title || a.name}${drift.get(a.id)?.startedAt ? ', drifting' : ''})`),
+  ];
+  return lines.join('\n');
+}
+// drift: judge() each tick; a verdict must hold two ticks before it counts, and speaks once per spell
+const drift = new Map();   // id -> { state, streak, startedAt }
+function watchDrift(a) {
+  const g = a.goal;
+  if (!g || g.done || !a.ev) return a.verdict = 'unknown';
+  const v = judge(g.text, a.ev).state, d = drift.get(a.id) || { state: 'unknown', streak: 0 };
+  d.streak = v === d.pending ? d.streak + 1 : 1; d.pending = v;
+  if (d.streak >= 2 && v !== d.state) {
+    if (v === 'drift' && !d.startedAt) {
+      d.startedAt = Date.now(); ledger('drift_start', a, g.text);
+      emit('goalDrift', `${a.title || a.name} may have wandered off "${cap(g.text, 50)}"`, { agent: a.name, id: a.id, notify: away() });
+    } else if (v === 'on' && d.startedAt) {
+      ledger('drift_end', a, g.text, { ms: Date.now() - d.startedAt }); d.startedAt = 0;
+      emit('goalBack', `${a.title || a.name} is back on track`, { agent: a.name, id: a.id });
+    }
+    d.state = v;
+  }
+  drift.set(a.id, d);
+  return a.verdict = d.startedAt ? 'drift' : d.state;
+}
+const cap = (t, n) => t.length <= n ? t : t.slice(0, n - 1) + '…';
+function goalDone(a, how) {
+  const g = a.goal;
+  if (!g || g.done) return;
+  g.done = Date.now();
+  ledger('goal_done', a, g.text, { how });
+  const d = drift.get(a.id); if (d?.startedAt) { ledger('drift_end', a, g.text, { ms: Date.now() - d.startedAt }); drift.delete(a.id); }
+  emit('goalDone', `goal hit: "${cap(g.text, 60)}" +15xp`, { agent: a.name, id: a.id, notify: away() });
+  gainXP(15);
+}
+ipcMain.on('goal-done', (_, id) => { const a = agents.find(x => x.id === id); if (a) { goalDone(a, 'marked'); save(); tick(); } });
+
 // blocked on you past NAG_MS: one nudge per episode (a new phase resets `since`, so a fresh block nags again)
 const NAG_MS = 3 * 60e3, nagged = new Map();   // id -> since it nagged for
 function nag(list) {
@@ -196,7 +253,7 @@ async function scanGit(agents) {
     // only a new commit on top of the previous HEAD counts (not checkout/reset/fast-forward)
     const isNewCommit = prev && prev !== sha && parents.split(' ').includes(prev);
     if (isNewCommit && +ct * 1000 > Date.now() - 10 * 60e3) {
-      onCommit(path.basename(root), subj.join('\t'), gitInfo?.root === root ? gitInfo.lines : 0);
+      onCommit(path.basename(root), subj.join('\t'), gitInfo?.root === root ? gitInfo.lines : 0, root);
     }
   }
 
@@ -221,7 +278,9 @@ async function scanGit(agents) {
   };
 }
 
-function onCommit(repo, subject, lines) {
+function onCommit(repo, subject, lines, root) {
+  // a commit that names a session's goal, in that session's repo, closes the goal
+  for (const a of agents) if (a.goal && !a.goal.done && a.cwd && root && (a.cwd + '/').startsWith(root + '/') && commitMatches(a.goal.text, subject)) goalDone(a, 'commit');
   const xp = 10 + Math.min(40, Math.round(lines / 25));
   state.commits++;
   if (!state.game) return;
@@ -239,8 +298,9 @@ async function tick() {
   try {
     decay();
     agents = scanAgents();
-    for (const a of agents) a.goal = goalFor(a);
+    for (const a of agents) { a.goal = goalFor(a); watchDrift(a); }
     pruneGoals();
+    for (const id of drift.keys()) if (!sessions.has(id)) drift.delete(id);
     nag(agents);
     await scanGit(agents);
     if (win && !win.isDestroyed()) win.webContents.send('tick', snapshot());
@@ -254,7 +314,7 @@ function snapshot() {
   return {
     name: state.name, level, xp: state.xp, xpLo: xpForLevel(level), xpHi: xpForLevel(level + 1),
     fuel: state.fuel, mood: state.mood, commits: state.commits,
-    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, goal: a.goal && { text: a.goal.text, auto: a.goal.auto }, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout,
+    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, goal: a.goal && { text: a.goal.text, auto: a.goal.auto, done: !!a.goal.done, verdict: a.verdict }, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout,
       receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
     git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, pet: state.pet, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto',
@@ -321,6 +381,10 @@ async function buildContext(mode) {
       if (untracked) parts.push('Untracked files:\n' + untracked.split('\n').slice(0, 30).join('\n'));
     }
   } else parts.push('Repo: none detected.');
+  if (mode === 'goal') {
+    const live = agents.filter(a => a.goal).slice(0, 4);
+    parts.push(live.length ? live.map(a => `GOAL (${a.goal.auto ? 'guessed from first prompt' : 'set by user'}): ${a.goal.text}\nLexical check: ${a.verdict}\n${agentTranscript(a, 8)}`).join('\n\n---\n\n') : 'No session has a goal yet.');
+  }
   if (mode === 'agent' || mode === 'next') parts.push('Latest agent transcript:\n' + agentTranscript(agents[0]));
   return parts.filter(Boolean).join('\n\n');
 }
@@ -532,6 +596,7 @@ function buildMenu() {
       { label: 'Choose a repo…', type: 'radio', checked: !!state.repo, click: pickRepo },
     ] },
     { label: 'Chat…', click: () => emit('openChat') },
+    { label: 'Today…', click: () => dialog.showMessageBox({ message: `${state.name}'s day book`, detail: today(), buttons: ['OK'] }) },
     { label: 'Pet', submenu: PETS.map(([id, label]) => ({ label, type: 'radio', checked: state.pet === id, click: () => { state.pet = id; save(); tick(); } })) },
     { label: 'Toss a snack', visible: state.game, click: () => {
       if (Date.now() - state.lastSnack < 30 * 60e3) return emit('snackNo', 'snacks are nice but I run on commits. (one snack per 30 min)');
