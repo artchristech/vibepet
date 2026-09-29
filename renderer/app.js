@@ -91,6 +91,7 @@ function baseState(now) {
 // one resolver for LED + face: needs input > stuck > ready > running > none; [0] wins, the rest become pips
 const SIG = { waiting: 'needs', stalled: 'stuck', ready: 'ready', working: 'running' }, RANK = ['needs', 'stuck', 'ready', 'running'];
 function agentSignals() { return (snap?.agents || []).filter(a => SIG[a.phase] && unseen(a)).map(a => SIG[a.phase]).sort((a, b) => RANK.indexOf(a) - RANK.indexOf(b)); }
+const TL = { running: '#3fe08f', needs: '#ffcf3f', ready: '#ffcf3f', stuck: '#ff5c6c' };
 const LED = { needs: '#ffcf3f', stuck: '#ff5c6c', ready: '#9ff5d6', running: '#3fe08f', none: '#8a93b8' };
 // agents that want you, most urgent first (needs > stuck > ready), oldest first within a rank
 function pending(held) {
@@ -140,7 +141,6 @@ function drawCast(id, st, t, look, sig, dy) {
   // status LED + over-head mark, same grammar as Net's antenna
   const k = GW / c.w, x = Math.round(g.cx * k), top = Math.round(g.top * k) + dy;
   rect(x - 2, top - 5, 4, 4, OUT); if (!(st === 'sleeping' && sig === 'none')) rect(x - 1, top - 4, 2, 2, LED[sig]);
-  if (st === 'alert' || st === 'waiting') outlined(x + 6, top - 9, SPR.bang, '#ffcf3f');
   else if (st === 'stalled') outlined(x + 6, top - 9, SPR.what, LED.stuck);
   else if (st === 'ready') outlined(x + 6, top - 8, SPR.tick, LED.ready);
 }
@@ -259,7 +259,7 @@ function draw(now) {
   dots(cx, top, [[0,-1],[0,-2],[1,-3]], OUT);
   const led = LED[sig];                                   // held steady; a change plays one fading halo, once
   rect(cx, top - 7, 4, 4, OUT); if (!(st === 'sleeping' && sig === 'none')) rect(cx + 1, top - 6, 2, 2, led);   // asleep = unlit
-  pips.forEach((p, i) => { const x = cx - 4 * (i + 1); rect(x, top - 6, 3, 3, OUT); rect(x + 1, top - 5, 1, 1, LED[p]); });   // other agents: small, static
+  // other agents live in the hover list now; no pips over the head
   if (now < haloUntil) {
     ctx.globalAlpha = 0.5 * ((haloUntil - now) / 500) ** 2;
     rect(cx - 1, top - 8, 6, 1, led); rect(cx - 1, top - 3, 6, 1, led); rect(cx - 1, top - 7, 1, 4, led); rect(cx + 4, top - 7, 1, 4, led);
@@ -310,7 +310,7 @@ function draw(now) {
   }
 
   // over-head indicators
-  if (needs) outlined(cx + 8, top - 10 + bob * 0, SPR.bang, '#ffcf3f');
+  // the yellow antenna says it; no "!" over the head
   if (st === 'stalled') outlined(cx + 8, top - 10, SPR.what, LED.stuck);
   if (st === 'ready') outlined(cx + 8, top - 9, SPR.tick, LED.ready);
 
@@ -509,14 +509,11 @@ function renderRoster() {
   // every live session, most urgent first; unseen needs/stuck/ready from pending(), then everything still running
   const rows = pending(true), has = new Set(rows.map(a => a.id));
   rows.push(...(snap?.agents || []).filter(a => a.phase === 'working' && !has.has(a.id)));
-  $('roster').innerHTML = rows.slice(0, 6).map(a => { const sig = SIG[a.phase], fo = a.fanout, rc = (sig === 'ready' || sig === 'needs') && rcLine(a.receipt);
-    const line = `${fo ? foPips(fo, LED[sig]) : ''}${esc(noteFor(a.id) || (sig === 'running' ? (fo?.open ? `${fo.done}/${fo.total} subagents done` : 'working') : a.ask) ||
-      (sig === 'needs' ? 'has a question' : sig === 'stuck' ? 'needs approval' : 'done'))}`;
-    const kids = (fo?.items || []).filter(k => k.open).slice(0, 3).map(k =>
-      `<span class="kid${k.stuck ? ' stuck' : ''}"><i></i><b>${esc(k.type)}</b><span>${esc(k.doing || k.desc)}</span><time>${dur(Date.now() - k.startAt)}${k.tok ? ` · ↓ ${kfmt(k.tok)}` : ''}</time></span>`).join('');
-    return `<button data-id="${esc(a.id)}"${fo ? ` title="${esc(foTitle(fo))}"` : ''}>` +
-    `<i style="background:${LED[sig]}"></i><b>${esc(a.title || a.name)}</b><time class="${sig}">${phaseTime(a, sig)}</time>` +
-    (rc ? `<span class="w"><span>${line}</span>${rc}</span>` : `<span>${line}</span>`) + kids + `</button>`; }).join('');
+  // traffic light: green = working, yellow = your move (needs input / finished, unread), red = stuck/error
+  $('roster').innerHTML = rows.slice(0, 6).map(a => { const sig = SIG[a.phase];
+    const kids = (a.fanout?.items || []).filter(k => k.open).slice(0, 3).map(k =>
+      `<span class="kid"><i class="tl" style="color:${k.stuck ? TL.stuck : TL.running};background:currentColor"></i><b>${esc(k.type || k.desc)}</b></span>`).join('');
+    return `<button data-id="${esc(a.id)}" title="${esc(sig)}"><i class="tl" style="color:${TL[sig]};background:currentColor"></i><b>${esc(a.title || a.name)}</b>${kids}</button>`; }).join('');
   rosterShow();
 }
 // "waiting 4m" says whose move it is and for how long; "just now" said neither
@@ -550,7 +547,7 @@ function foTitle(fo) {
 const notes = new Map();
 function noteFor(id) { const n = notes.get(id); return n && n.until > Date.now() ? n.text : null; }
 function rosterShow() {
-  const r = $('roster'), on = $('hud').classList.contains('live') && r.children.length > 0;
+  const r = $('roster'), on = $('hud').classList.contains('live') && r.children.length > 0 && !menuOpen;
   if (on === r.classList.contains('hidden')) r.classList.toggle('hidden', !on);
 }
 $('roster').onclick = e => {
@@ -627,6 +624,7 @@ function hudFrame(now) {
   rosterShow();
   const was = hovering; hovering = p > 0.5;
   if (hovering && !was) { lastInteract = now; markSeen(); }
+  if (!hovering && was && menuOpen) closeMenu();
   if (!hovering && was && heldReady.size) { heldReady.clear(); renderRoster(); }
   const cur = cursor.x + ',' + cursor.y, settled = rv === 0 && rp === target && cur === hudCur;
   hudCur = cur;
@@ -642,7 +640,7 @@ document.addEventListener('mousemove', e => {
   let hit = el && el.closest('.hit');
   if (hit === cv && !petPixelHit(e)) hit = null;
   setIgnore(!hit);
-  showHud(hit === cv || (hit && ($('hud').contains(hit) || $('roster').contains(hit))));
+  showHud(hit === cv || (hit && ($('hud').contains(hit) || $('roster').contains(hit) || $('actions').contains(hit))));
 });
 document.addEventListener('mouseleave', () => { if (!dragging) { setIgnore(true); showHud(false); } });
 
@@ -659,15 +657,13 @@ document.addEventListener('mouseup', e => {
   const d = down; down = null;
   if (moved > 4) { say(pick(['wheee', 'new desk, who dis', 'ooh nice view']), { ms: 1800 }); return; }
   if (d.detail >= 2) { clearTimeout(jumpT); openChat(); return; }
-  poke();
+  clearTimeout(jumpT); jumpT = setTimeout(() => menuOpen ? closeMenu() : openMenu(), 250);   // waits out a double-click
 });
 cv.addEventListener('contextmenu', e => { e.preventDefault(); api.menu(); });
 
 function poke() {
   lastInteract = performance.now();
   api.pet();
-  const top = pending()[0];
-  if (top && api.jump) { clearTimeout(jumpT); jumpT = setTimeout(() => jumpTo(top), 300); return; }   // the terminal coming forward is the feedback; waits out a double-click
   markSeen();
   transient(Math.random() < 0.5 ? 'love' : 'poke', 900);
   spawn('heart', 2, { x: 28 + rand(-8, 8), y: 18, colors: ['#ff5c8a', '#ff9ec4'] });
@@ -686,12 +682,31 @@ async function jumpTo(a) {
   say(`${a.name}: ${text}`, { prio: true, quiet: true, ms: 4000 });
 }
 
-$('btnChat').onclick = () => openChat();
-$('btnMenu').onclick = () => api.menu();
+// ================= click menu (replaces the old pill) =================
+var menuOpen = false;
+function openMenu() {
+  const top = pending()[0], j = $('actions').querySelector('[data-act=jump]');
+  j.hidden = !(top && api.jump); if (top) j.textContent = `Go to ${top.title || top.name}`;
+  menuOpen = true; $('actions').classList.remove('hidden'); rosterShow(); lastInteract = performance.now(); wake();
+}
+function closeMenu() { menuOpen = false; $('actions').classList.add('hidden'); rosterShow(); }
+$('actions').onclick = e => {
+  const act = e.target.closest('button[data-act]')?.dataset.act; if (!act) return;
+  closeMenu();
+  if (act === 'chat') openChat();
+  else if (act === 'jump') { const top = pending()[0]; if (top) jumpTo(top); }
+  else if (act === 'pet') poke();
+  else if (act === 'rename') { openChat(); $('renameForm').classList.remove('hidden'); $('renameInput').value = snap?.name || ''; $('renameInput').select(); }
+  else if (act === 'more') api.menu();
+};
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen) closeMenu(); });
+window.addEventListener('blur', () => { if (menuOpen) closeMenu(); });
+document.addEventListener('mousedown', e => { if (menuOpen && !$('actions').contains(e.target) && e.target !== cv) closeMenu(); });
 
 // ================= chat =================
 let history = [], keyExplained = false;
 async function openChat() {
+  if (menuOpen) closeMenu();
   chatOpen = true; lastInteract = performance.now();
   $('chat').classList.remove('hidden');
   api.focus();
