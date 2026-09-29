@@ -7,6 +7,7 @@ const { execFile, spawn } = require('child_process');
 const { readTail, textOf, firstPrompt, scan, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
 const gesture = require('./gesture');
 const { judge, commitMatches } = require('./goal');
+const content = require('./content');
 
 const W = 360, H = 520;
 const { place, areaFor, minY } = require('./place');
@@ -25,7 +26,7 @@ const PETS = [['net', 'Net'], ['slime', 'Slime'], ['cat', 'Cat'], ['sprout', 'Sp
 const DEFAULTS = {
   name: 'Net', xp: 0, fuel: 80, mood: 70, commits: 0, quickDraws: 0,
   repo: null, pos: null, model: 'claude-sonnet-5', keyEnc: null, keyPlain: null, engine: null,   // engine: null = auto (Claude Code login first), 'claude' | 'key'
-  muted: false, onTop: true, hotkey: 'Control+Alt+Command+J', animations: false, game: false, pet: 'net', goals: {}, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
+  contentTarget: 45, deleteRaw: false, muted: false, onTop: true, hotkey: 'Control+Alt+Command+J', animations: false, game: false, pet: 'net', goals: {}, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
 };
 let state, saveTimer, win, sessionKey = null;
 const statePath = () => path.join(app.getPath('userData'), 'state.json');
@@ -317,7 +318,7 @@ function snapshot() {
     agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, goal: a.goal && { text: a.goal.text, auto: a.goal.auto, done: !!a.goal.done, verdict: a.verdict }, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout,
       receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
     git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, pet: state.pet, hasKey: hasKey(), hour: new Date().getHours(),
-    watching: state.repo ? 'manual' : 'auto',
+    watching: state.repo ? 'manual' : 'auto', rec: content.status(),
   };
 }
 
@@ -596,6 +597,9 @@ function buildMenu() {
       { label: 'Choose a repo…', type: 'radio', checked: !!state.repo, click: pickRepo },
     ] },
     { label: 'Chat…', click: () => emit('openChat') },
+    { label: content.status().recording ? 'Stop & make short' : content.status().busy ? 'Making your short…' : 'Start content session', enabled: !content.status().busy && !content.status().starting, accelerator: 'Control+Alt+Command+R', click: () => content.toggle() },
+    { label: 'Finish last session', visible: !content.status().recording && !content.status().busy && !!content.unfinished(), click: () => content.finishLast() },
+    { label: 'Open shorts folder', click: () => content.openFolder() },
     { label: 'Today…', click: () => dialog.showMessageBox({ message: `${state.name}'s day book`, detail: today(), buttons: ['OK'] }) },
     { label: 'Pet', submenu: PETS.map(([id, label]) => ({ label, type: 'radio', checked: state.pet === id, click: () => { state.pet = id; save(); tick(); } })) },
     { label: 'Toss a snack', visible: state.game, click: () => {
@@ -607,6 +611,8 @@ function buildMenu() {
       { label: 'Open at login', type: 'checkbox', checked: app.getLoginItemSettings().openAtLogin, click: m => app.setLoginItemSettings({ openAtLogin: m.checked }) },
       toggle('Keep on top', 'onTop', v => win.setAlwaysOnTop(v, 'floating')),
       toggle('Mute notifications', 'muted'),
+      { label: 'Short length', submenu: [30, 45, 60].map(n => ({ label: `${n}s`, type: 'radio', checked: state.contentTarget === n, click: () => { state.contentTarget = n; save(); } })) },
+      toggle('Delete raw recording after render', 'deleteRaw'),
       { type: 'separator' },
       toggle('Animations', 'animations'),
       toggle('Game mode', 'game', () => { state.lastDecay = Date.now(); }),
@@ -635,6 +641,7 @@ function buildMenu() {
     { label: `Quit ${state.name}`, click: () => { emit('exit'); setTimeout(() => app.quit(), 2500); } },
   ]);
 }
+ipcMain.on('rec-toggle', () => content.toggle());
 ipcMain.on('menu', () => buildMenu().popup({ window: win }));
 
 // ---------- menu bar icon: click toggles Net (he spawns under the icon), right-click is his menu ----------
@@ -655,6 +662,7 @@ function bindKey() {
   let ok = true;
   if (state.hotkey) try { ok = globalShortcut.register(state.hotkey, () => { if (!win.isVisible()) win.showInactive(), send('summon'); send('hotkey'); }); } catch { ok = false; }
   keyTaken = !ok;   // someone else has it: stay quiet, the menu says so
+  try { globalShortcut.register('Control+Alt+Command+R', () => content.toggle()); } catch {}   // not ⌘⇧R: that's hard-reload in every browser
 }
 app.on('will-quit', () => globalShortcut.unregisterAll());
 
@@ -713,6 +721,7 @@ app.whenReady().then(() => {
   if (process.platform === 'darwin') app.dock?.hide();
   createWindow();
   createTray();
+  content.init({ emit, getState: () => state, refresh: () => send('tick', snapshot()), display: () => screen.getDisplayMatching(win.getBounds()), petPng: path.join(__dirname, 'content', 'net.png') });
   bindKey();
   syncWatch();
   setTimeout(findClaude, 3000);   // so the Chat engine menu knows whether the login exists

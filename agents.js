@@ -376,4 +376,4 @@ async function focusTty(bid, tty) {
   return (await run('/usr/bin/osascript', ['-e', FOCUS[bid], tty], 5000))?.trim() === 'ok';
 }
 
-module.exports = { CHECK_RE, firstPrompt, receipt, readTail, textOf, classify, fanout, settle, scan, psAll, locateSession, hostApp, bundleId, focusTty, run };
+module.exports = { CHECK_RE, firstPrompt, humanAt, receipt, readTail, textOf, classify, fanout, settle, scan, psAll, locateSession, hostApp, bundleId, focusTty, run };

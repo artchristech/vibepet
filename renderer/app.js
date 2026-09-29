@@ -195,7 +195,7 @@ function draw(now) {
   const shades = lvl >= 5 && hovering && !['sleeping', 'alert', 'waiting'].includes(st);
   const active = moving || parts.length > 0 || now < haloUntil;
   const pet = CAST[snap?.pet] ? snap.pet : null;
-  const key = [pet, st, sig, pips.join('.'), lx, ly, cy, lvl, shades, snap?.game && snap.fuel, snap?.game && snap.mood].join();
+  const key = [pet, st, sig, pips.join('.'), lx, ly, cy, lvl, shades, snap?.game && snap.fuel, snap?.game && snap.mood, !!snap?.rec?.recording].join();
   if (!active && key === lastKey) return false;
   if (pet && active && key === lastKey && now - lastCast < 33) return true;   // cast pets animate at ~30fps like the site
   lastKey = key;
@@ -319,6 +319,9 @@ function draw(now) {
   if (st === 'working' && every('note', 3000, now)) spawn('note', 1, { x: cx - 12, y: top + 2, up: 0.4, colors: ['#7ef0c1', '#8fd3ff'], fast: 0.7 });
   if (happy && every('spark', 120, now)) spawn('spark', 3, { x: cx + rand(-12, 12), y: cy - 10, colors: CONFETTI, up: 1.4, g: 0.04 });
   if (lvl >= 3 && st === 'idle' && every('trail', 2500, now)) spawn('spark', 2, { x: cx + rand(-14, 14), y: cy + rand(-6, 8), up: 0.2, colors: ['#fff', '#c7fff0'], fast: 1.5 });
+
+  // recording: a red light over the head whenever the screen is being captured. Not an animation: it can't be switched off
+  if (snap?.rec?.recording) { rect(cx - 16, top - 9, 5, 5, OUT); rect(cx - 15, top - 8, 3, 3, '#ff3b30'); }
 
   if (ex >= 0) ctx.restore();
   drawParts();
@@ -473,6 +476,8 @@ api.on('event', e => {
     case 'goalDrift': say(e.text, { prio: true, alert: true, ms: 9000 }); tune([392, 349]); break;
     case 'goalBack': say(e.text, { prio: true, ms: 4000 }); break;
     case 'goalDone': transient('celebrate', 2200); spawn('spark', 30, { x: 28, y: 22, spread: 3, up: 2, g: 0.05, colors: CONFETTI }); say(e.text, { prio: true, ms: 6000 }); tune([523, 659, 784], 90); break;
+    case 'content': say(e.text, { prio: true, alert: !!e.alert, ms: e.alert ? 10000 : 4000 }); if (!e.alert) transient('poke', 400); break;
+    case 'contentDone': transient('celebrate', 2400); spawn('spark', 40, { x: 28, y: 22, spread: 3, up: 2, g: 0.05, colors: CONFETTI }); say(e.text, { prio: true, ms: 8000 }); tune([523, 659, 784, 1047], 80); break;
     case 'agentNag': say(e.text, { prio: true, alert: 'stuck', ms: 10000 }); tune([330, 262]); break;   // blocked on you past 3m: once per episode
     case 'agentStalled': say(e.text, { prio: true, alert: 'stuck', ms: 8000 }); break;   // stuck = red, same as LED + glyph
     case 'commit': transient('eat', 1300); setTimeout(() => transient('celebrate', 2200), 1300);
@@ -715,6 +720,8 @@ var menuOpen = false;
 function openMenu() {
   const top = pending()[0], j = $('actions').querySelector('[data-act=jump]');
   j.hidden = !(top && api.jump); if (top) j.textContent = `Go to ${top.title || top.name}`;
+  const r = $('actions').querySelector('[data-act=rec]'), rs = snap?.rec || {};
+  r.textContent = rs.recording ? '● Stop & make short' : rs.busy ? 'Making your short…' : 'Record a short'; r.disabled = !!(rs.busy || rs.starting);
   menuOpen = true; $('actions').classList.remove('hidden'); rosterShow(); lastInteract = performance.now(); wake();
 }
 function closeMenu() { menuOpen = false; $('actions').classList.add('hidden'); rosterShow(); }
@@ -722,6 +729,7 @@ $('actions').onclick = e => {
   const act = e.target.closest('button[data-act]')?.dataset.act; if (!act) return;
   closeMenu();
   if (act === 'chat') openChat();
+  else if (act === 'rec') api.recToggle();
   else if (act === 'jump') { const top = pending()[0]; if (top) jumpTo(top); }
   else if (act === 'pet') poke();
   else if (act === 'rename') { openChat(); $('renameForm').classList.remove('hidden'); $('renameInput').value = snap?.name || ''; $('renameInput').select(); }
