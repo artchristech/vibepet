@@ -1,5 +1,5 @@
 // vibepet — a desktop pet that watches your coding agents and your repo.
-const { app, BrowserWindow, ipcMain, screen, Menu, dialog, safeStorage, Notification, clipboard, powerMonitor, globalShortcut, Tray } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, Menu, dialog, safeStorage, Notification, clipboard, shell, powerMonitor, globalShortcut, Tray } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -8,6 +8,7 @@ const { readTail, textOf, firstPrompt, scan, psAll, locateSession, hostApp, bund
 const gesture = require('./gesture');
 const { judge, commitMatches } = require('./goal');
 const content = require('./content');
+const ports = require('./ports');
 
 const W = 480, H = 720;
 const { place, areaFor, minY } = require('./place');
@@ -304,6 +305,7 @@ async function tick() {
     for (const id of drift.keys()) if (!sessions.has(id)) drift.delete(id);
     nag(agents);
     await scanGit(agents);
+    watchLocal();
     if (win && !win.isDestroyed()) win.webContents.send('tick', snapshot());
     save();
   } catch (e) { console.error(e); }
@@ -319,7 +321,42 @@ function snapshot() {
       receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
     git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, pet: state.pet, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto', rec: content.status(),
+    local: { servers: local.servers.length, procs: local.procs.length, tasks: local.tasks.filter(t => t.running).length,
+      names: local.servers.slice(0, 4).map(s => `${s.kind} :${s.port}`) },
   };
+}
+
+// ---------- localhost: listening servers + background tasks (ports.js polls every 10s off the tick) ----------
+let local = { servers: [], procs: [], tasks: [], at: 0 };
+function watchLocal() {
+  const c = ports.poll();
+  if (c.at === local.at) return;
+  const lines = local.at ? ports.diff(local.servers, c.servers) : [];   // first poll = baseline, no announcements
+  local = c;
+  if (lines.length) emit('localhost', lines.length > 2 ? `${lines.length} servers changed — ${lines[0]}` : lines.join(' · '));
+}
+const agoS = ms => ms == null ? '' : ms < 3600e3 ? `${Math.round(ms / 60e3)}m` : ms < 864e5 ? `${Math.round(ms / 3600e3)}h` : `${Math.round(ms / 864e5)}d`;
+function localMenu() {
+  const { servers, procs, tasks } = local;
+  const stopIt = async (what, pid) => {
+    const r = await dialog.showMessageBox({ type: 'warning', buttons: ['Stop', 'Cancel'], defaultId: 1, cancelId: 1, message: `Stop ${what}?`, detail: `pid ${pid}` });
+    if (r.response === 0) { emit('localhost', await ports.stop(pid)); setTimeout(() => ports.poll(0), 800); }
+  };
+  const live = tasks.filter(t => t.running), done = tasks.filter(t => !t.running).slice(0, 6);
+  return { label: `Localhost${servers.length ? ` (${servers.length})` : ''}`, submenu: [
+    ...(servers.length ? servers.map(s => ({ label: `:${s.port}  ${s.title || ports.label(s)}  · ${agoS(s.age)}`, toolTip: s.dir || '', submenu: [
+      { label: `Open http://localhost:${s.port}`, enabled: s.http !== false, click: () => shell.openExternal(`http://localhost:${s.port}`) },
+      { label: `${ports.label(s)} — ${s.dir ? s.dir.replace(os.homedir(), '~') : s.cmd}`, enabled: false },
+      { type: 'separator' },
+      { label: `Stop ${s.kind} (pid ${s.pid})…`, click: () => stopIt(`${ports.label(s)} on :${s.port}`, s.pid) },
+    ] })) : [{ label: 'nothing listening', enabled: false }]),
+    ...(procs.length ? [{ type: 'separator' }, { label: 'Dev processes', enabled: false }, ...procs.map(p => ({ label: `${p.kind} · ${p.project || '?'} · ${agoS(p.age)}`, toolTip: p.args, submenu: [
+      { label: p.args.slice(0, 80), enabled: false }, { label: `Stop pid ${p.pid}…`, click: () => stopIt(`${p.kind} (${p.project || p.pid})`, p.pid) }] }))] : []),
+    { type: 'separator' },
+    { label: `Background tasks${live.length ? ` (${live.length} running)` : ''}`, enabled: false },
+    ...(live.length || done.length ? [...live, ...done].map(t => ({ label: `${t.running ? '●' : t.status === 'failed' ? '✗' : '✓'} ${t.name.slice(0, 48)} · ${t.project} · ${agoS(t.running ? t.age : Date.now() - t.ended)}`,
+      toolTip: t.file, click: () => shell.showItemInFolder(t.file) })) : [{ label: 'none', enabled: false }]),
+  ] };
 }
 
 // ---------- chat ----------
@@ -596,6 +633,7 @@ function buildMenu() {
       { label: 'Follow my agent', type: 'radio', checked: !state.repo, click: () => { state.repo = null; save(); tick(); } },
       { label: 'Choose a repo…', type: 'radio', checked: !!state.repo, click: pickRepo },
     ] },
+    localMenu(),
     { label: 'Chat…', click: () => emit('openChat') },
     { label: content.status().recording ? 'Stop & make short' : content.status().busy ? 'Making your short…' : 'Start content session', enabled: !content.status().busy && !content.status().starting, accelerator: 'Control+Alt+Command+R', click: () => content.toggle() },
     { label: 'Finish last session', visible: !content.status().recording && !content.status().busy && !!content.unfinished(), click: () => content.finishLast() },

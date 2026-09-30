@@ -486,6 +486,7 @@ api.on('event', e => {
       say(e.text, { prio: true, ms: 7000 }); tune([523, 659, 784, 1047, 784, 1047, 1319], 110); break;
     case 'snack': transient('eat', 1200); say(e.text); break;
     case 'snackNo': say(e.text); break;
+    case 'localhost': say(e.text, { ms: 5000 }); break;   // a server came up / went down: one line, no sound
     case 'openChat': openChat(); break;
     case 'openKey': openChat(); $('keyForm').classList.remove('hidden'); $('keyInput').focus(); break;
     case 'exit': startExit(); break;
@@ -546,6 +547,9 @@ function renderRoster() {
     const kids = (a.fanout?.items || []).filter(k => k.open).slice(0, 3).map(k =>
       `<span class="kid"><i class="tl" style="color:${k.stuck ? TL.stuck : TL.running};background:currentColor"></i><b>${esc(k.type || k.desc)}</b></span>`).join('');
     return `<button data-id="${esc(a.id)}" title="${esc(sig)}"><i class="tl" style="color:${TL[sig]};background:currentColor"></i><b>${esc(a.title || a.name)}</b>${goalLine(a)}${kids}</button>`; }).join('');
+  // localhost footer: what's listening + running in the background (right-click → Localhost for the list)
+  const L = snap?.local;
+  if (L && (L.servers || L.tasks || L.procs)) $('roster').insertAdjacentHTML('beforeend', `<small class="local" title="${esc((L.names || []).join('\n'))}">⌂ ${L.servers} server${L.servers === 1 ? '' : 's'}${L.tasks ? ` · ${L.tasks} bg task${L.tasks === 1 ? '' : 's'}` : ''}${L.procs ? ` · ${L.procs} dev proc${L.procs === 1 ? '' : 's'}` : ''}</small>`);
   rosterShow();
 }
 // "waiting 4m" says whose move it is and for how long; "just now" said neither
