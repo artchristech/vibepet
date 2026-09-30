@@ -785,6 +785,9 @@ async function openChat() {
   if (via === null) $('keyForm').classList.remove('hidden');
   if ($('renameForm').classList.contains('hidden')) ($('keyForm').classList.contains('hidden') ? $('chatInput') : $('keyInput')).focus();   // rename keeps its own focus
   $('chatNoteText').textContent = via === 'claude' ? 'Via Claude Code · sends message + repo context' : 'Sends your message + repo context to Anthropic';
+  const g = snap?.git;
+  $('chatName').textContent = snap?.name || 'Net';
+  $('chatMeta').textContent = [g?.root ? `${g.name}${g.branch ? '/' + g.branch : ''}` : 'no repo', via === 'claude' ? 'claude code' : 'api key'].join(' · ');
   $('chat').classList.toggle('fresh', !$('msgs').children.length);
   // the OS keychain prompt comes on the first send: say so first, so it's expected rather than alarming
   if (via === 'key-locked' && !keyExplained) { keyExplained = true; addMsg('pet', 'macOS will ask to unlock the API key you saved when you send. It stays encrypted on this Mac.', 'note'); }
@@ -808,7 +811,8 @@ function addMsg(who, text, cls = '') {
   el.className = `msg ${who} ${cls}`;
   if (who === 'pet') el.innerHTML = renderMd(text); else el.textContent = text;
   el.querySelectorAll('.copy').forEach(b => b.onclick = () => {
-    api.copy(b.nextElementSibling.textContent); b.textContent = 'copied!';
+    api.copy(b.nextElementSibling.textContent); b.textContent = 'copied'; b.classList.add('done');
+    setTimeout(() => { b.textContent = 'copy'; b.classList.remove('done'); }, 1400);
   });
   const m = $('msgs'); m.appendChild(el);
   m.scrollTop = who === 'pet' ? el.offsetTop - m.offsetTop - 6 : 1e9;   // a reply opens at its first line
@@ -830,15 +834,18 @@ async function send(text, mode = 'chat') {
   const [label, prompt] = MODES[mode] || [text, text];
   addMsg('user', label);
   history.push({ role: 'user', content: prompt });
-  const pending = addMsg('pet', '…');
+  const pending = addMsg('pet', '', 'typing');
+  const steps = mode === 'commit' ? ['reading the diff', 'drafting'] : ['reading the repo', 'checking your agents', 'thinking'];
+  let k = 0; const tick = () => { pending.innerHTML = `<span class="think">${steps[Math.min(k++, steps.length - 1)]}</span>`; };
+  tick(); $('chat').classList.add('busy');
   transient('poke', 300);
-  let dots = 0; const dt = setInterval(() => { pending.textContent = '.'.repeat(1 + (dots++ % 3)); }, 300);
+  const dt = setInterval(tick, 1800);
   let msgs = history.slice(-16);
   while (msgs.length && msgs[0].role !== 'user') msgs = msgs.slice(1);
   let r;
   try { r = await api.chat({ messages: msgs, mode }); }
   catch (e) { r = { error: e.message || String(e) }; }
-  finally { clearInterval(dt); sending = false; }
+  finally { clearInterval(dt); sending = false; $('chat').classList.remove('busy'); }
   if (r.error === 'nokey') {
     pending.remove(); history.pop();
     $('keyForm').classList.remove('hidden'); $('keyInput').focus();

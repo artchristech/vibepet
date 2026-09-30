@@ -9,6 +9,7 @@
 <body>
 <div id="stage">
   <div id="chat" class="hit hidden">
+    <div id="chatHead"><i id="chatDot"></i><b id="chatName">Net</b><span id="chatMeta"></span><button id="chatClose" type="button" title="Close (Esc)">esc</button></div>
     <form id="keyForm" class="inline-form hidden">
       <p>Chat uses your Claude Code login. No <code>claude</code> here? Paste an Anthropic API key instead. It's stored encrypted in your macOS keychain, and macOS may ask you to allow that.</p>
       <div class="row"><input id="keyInput" type="password" placeholder="sk-ant-…" autocomplete="off" title="or launch with ANTHROPIC_API_KEY set"><button>save</button></div>
@@ -26,7 +27,7 @@
       <button data-mode="vibe">Vibe check</button>
     </div>
     <form id="chatForm"><input id="chatInput" placeholder="Ask Net about this repo…" autocomplete="off"><button id="chatSend" aria-label="Send" disabled><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></form>
-    <div id="chatNote"><span id="chatNoteText"></span><button id="chatClose" title="Close (Esc)">esc</button></div>
+    <div id="chatNote"><span id="chatNoteText"></span></div>
   </div>
 
   <div id="gest" class="hit hidden">
