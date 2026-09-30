@@ -44,9 +44,35 @@ const SPR = {
   crown: [[0,0],[3,0],[6,0],[0,1],[1,1],[3,1],[5,1],[6,1],[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[0,3],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3]],
 };
 
+// ================= motion tuning (Animations ON) =================
+// one place to dial how lively the pet is; Animations OFF and reduceMotion stay fully still
+const MOTION = {
+  bobAmp: 0.5,        // idle bob (px)          was 0.7 @ 2.2 rad/s (0.35 Hz)
+  bobW: 1.6,          // rad/s  -> 0.25 Hz
+  workAmp: 0.5, workW: 2.5,   // working bob: was 0.5 @ 7 rad/s (1.1 Hz) -> 0.4 Hz, rounds to a rare 1px dip
+  sleepW: 0.8,        // sleep squash toggle   was 1.3 rad/s
+  alertAmp: 1, alertW: 2.5,   // needs-you: gentle sway instead of a constant 6px hop @ 1.3 Hz
+  hopScale: 0.45,     // transient hops (celebrate/levelup/love) height ×
+  hopSpeed: 0.65,     // ... and speed ×
+  castFps: 12,        // cast pets redraw cap   was ~30 fps
+  castTime: 0.45,     // cast pets' clock ×  (slows every sine in sprites.js)
+  castAmp: 0.5,       // cast pets' bob/hop amplitude × (sprites.js castMotionScale, app-only)
+  blinkMin: 4000, blinkMax: 8000,   // was 2500–5500 ms
+  typeHz: 3,          // typing hands toggle  was 10/s
+  ledW: 1.2,          // laptop LED shimmer   was 3 rad/s
+  feetW: 8,           // happy feet wiggle    was 20 rad/s
+  chewHz: 4,          // eat mouth toggle     was 7/s
+  emit: 3,            // ambient emitter intervals ×
+  spark: 600,         // happy sparkle interval ms (was 120), 1 per burst (was 3)
+  burst: 0.5,         // celebratory spawn counts ×
+  pokeMs: 0.6,        // transient() durations ×
+};
+const burst = n => Math.max(1, Math.round(n * MOTION.burst));
+if (typeof window !== 'undefined') window.castMotionScale = MOTION.castAmp;   // read by site/sprites.js motion(); website leaves it at 1
+
 // ================= particles =================
 function spawn(kind, n, o = {}) {
-  if (!snap?.animations && !exiting) return;
+  if ((!snap?.animations || reduceMotion) && !exiting) return;
   for (let i = 0; i < n; i++) parts.push({
     kind, x: o.x ?? rand(16, 40), y: o.y ?? rand(14, 24),
     vx: rand(-0.35, 0.35) * (o.spread ?? 1), vy: -rand(0.25, 0.7) * (o.up ?? 1),
@@ -107,7 +133,7 @@ function startExit() {
   closeChat(); $('hud').classList.remove('show'); $('hud').classList.add('gone');
   say('bye! 👋', { prio: true, ms: 900 });
 }
-function transient(kind, ms) { if (!snap?.animations) return; anim = { kind, until: performance.now() + ms, start: performance.now() }; wake(); }
+function transient(kind, ms) { if (!snap?.animations || reduceMotion) return; ms = Math.round(ms * MOTION.pokeMs); anim = { kind, until: performance.now() + ms, start: performance.now() }; wake(); }
 
 // ================= other pets: the site's cast, drawn by sprites.js onto the same canvas =================
 // surfaces are integer fractions of the 224x208 canvas, so they scale up crisp; feet land where Net's do
@@ -153,7 +179,7 @@ function draw(now) {
   const t = now / 1000;
   let st = anim.kind && now < anim.until ? anim.kind : baseState(now);
   const ex = exiting ? now - exiting.start : -1;
-  const moving = !!snap?.animations || ex >= 0;   // steady states hold still; only opt-in Animations or the exit move
+  const moving = (!!snap?.animations && !reduceMotion) || ex >= 0;   // steady states hold still; only opt-in Animations or the exit move
   if (ex >= 0) st = ex < EX.antic ? 'idle' : ex < EX.hop ? 'love' : 'exitfall';
   const lvl = snap?.game ? snap.level : 1;
   const sigs = agentSignals(), sig = sigs[0] || 'none', pips = sigs.slice(1, 4);
@@ -166,14 +192,14 @@ function draw(now) {
     if (p < 0.1 || p > 0.93) { rx += 1; ry -= 1; } else if (s > 0.5) { rx -= 1; ry += 1; }
   };
   if (moving) switch (st) {
-    case 'alert': hop(1.3, 6); break;
-    case 'celebrate': case 'levelup': hop(2.2, 9); break;
-    case 'love': hop(1.6, 3); break;
-    case 'poke': ry -= Math.round(Math.max(0, 1 - (now - anim.start) / 200) * 2); rx += ry < 11 ? 1 : 0; break;
-    case 'sleeping': ry += Math.sin(t * 1.3) > 0 ? 0 : -1; rx += Math.sin(t * 1.3) > 0 ? 0 : 1; break;
-    case 'working': bob = Math.round(Math.sin(t * 7) * 0.5); break;
+    case 'alert': bob = Math.round(Math.sin(t * MOTION.alertW) * MOTION.alertAmp); break;
+    case 'celebrate': case 'levelup': hop(2.2 * MOTION.hopSpeed, 9 * MOTION.hopScale); break;
+    case 'love': hop(1.6 * MOTION.hopSpeed, 3 * MOTION.hopScale); break;
+    case 'poke': ry -= Math.round(Math.max(0, 1 - (now - anim.start) / 150)); break;
+    case 'sleeping': ry += Math.sin(t * MOTION.sleepW) > 0 ? 0 : -1; rx += Math.sin(t * MOTION.sleepW) > 0 ? 0 : 1; break;
+    case 'working': bob = Math.round(Math.sin(t * MOTION.workW) * MOTION.workAmp); break;
     case 'hungry': bob = 1; ry -= 1; rx += 1; break;
-    default: bob = Math.round(Math.sin(t * 2.2) * 0.7);
+    default: bob = Math.round(Math.sin(t * MOTION.bobW) * MOTION.bobAmp);
   }
   if (ex >= 0) {
     const e01 = (a, b) => Math.max(0, Math.min(1, (ex - a) / (b - a)));
@@ -190,14 +216,14 @@ function draw(now) {
   let ly = Math.max(-1, Math.min(1, Math.round((cursor.y - pxY) / 110)));
   if (st === 'working' || (ex >= 0 && ex < EX.antic)) { lx = 0; ly = 1; }
   if (st === 'sleeping') lx = ly = 0;
-  if (moving && now > nextBlink) { blinkUntil = now + 110; nextBlink = now + rand(2500, 5500); }
+  if (moving && now > nextBlink) { blinkUntil = now + 110; nextBlink = now + rand(MOTION.blinkMin, MOTION.blinkMax); }
   const blink = moving && now < blinkUntil;
   const shades = lvl >= 5 && hovering && !['sleeping', 'alert', 'waiting'].includes(st);
   const active = moving || parts.length > 0 || now < haloUntil;
   const pet = CAST[snap?.pet] ? snap.pet : null;
   const key = [pet, st, sig, pips.join('.'), lx, ly, cy, lvl, shades, snap?.game && snap.fuel, snap?.game && snap.mood].join();
   if (!active && key === lastKey) return false;
-  if (pet && active && key === lastKey && now - lastCast < 33) return true;   // cast pets animate at ~30fps like the site
+  if (pet && active && key === lastKey && now - lastCast < 1000 / MOTION.castFps) return true;   // pixel-art cadence, slower than the site's ~30fps
   lastKey = key;
   ctx.setTransform(S, 0, 0, S, 0, 0);
   ctx.clearRect(0, 0, GW, GH);
@@ -232,12 +258,12 @@ function draw(now) {
   if (ex >= 0 && ex > EX.fall) { ctx.restore(); drawParts(); return true; }
   if (pet) {
     lastCast = now;
-    drawCast(pet, st, moving ? t : 0, { x: lx, y: ly, blink }, sig, ex >= 0 ? bob : 0);
+    drawCast(pet, st, moving ? (ex >= 0 ? t : t * MOTION.castTime) : 0, { x: lx, y: ly, blink }, sig, ex >= 0 ? bob : 0);
     if (ex >= 0) ctx.restore();
     drawParts();
     return true;
   }
-  const fw = happy ? Math.round(Math.sin(t * 20)) : 0;
+  const fw = happy ? Math.round(Math.sin(t * MOTION.feetW)) : 0;
   for (const s of [-1, 1]) {
     ell(cx + s * 6, cy + ry - 0.5 + (s === 1 ? fw : -fw) * 0.5, 3.4, 2.2, (dx, dy, r) => r > 0.62 ? OUT : C.shade);
   }
@@ -292,7 +318,7 @@ function draw(now) {
   const mx = cx - 1 + lx, my = cy + 2 + ly;
   if (st === 'working') rect(mx - 1, my + 1, 4, 1, OUT);   // focused; stays visible above the laptop lid
   else if (needs && !moving) { rect(mx - 1, my, 4, 3, OUT); rect(mx, my + 1, 2, 1, C.base); }
-  else if (st === 'eat') { if (Math.floor(t * 7) % 2) rect(mx - 1, my, 4, 3, OUT); else rect(mx - 1, my + 1, 4, 1, OUT); }
+  else if (st === 'eat') { if (Math.floor(t * MOTION.chewHz) % 2) rect(mx - 1, my, 4, 3, OUT); else rect(mx - 1, my + 1, 4, 1, OUT); }
   else if (st === 'alert' || st === 'levelup' || st === 'exitfall') { rect(mx, my, 3, 3, OUT); rect(mx + 1, my + 1, 1, 1, '#ff7ab0'); }
   else if (st === 'stalled') dots(mx - 1, my + 1, [[0,1],[1,0],[2,1],[3,0],[4,1]], OUT);
   else if (st === 'sleeping') rect(mx + 1, my + 1, 1, 1, OUT);
@@ -303,9 +329,9 @@ function draw(now) {
   if (st === 'working' && moving) {
     const ly0 = cy + 5;                                   // low lid: the mouth stays in view
     rect(cx - 8, ly0, 16, 6, OUT); rect(cx - 7, ly0 + 1, 14, 4, '#c9cfdc'); rect(cx - 7, ly0 + 1, 14, 1, '#e6eaf2');
-    rect(cx - 1, ly0 + 2, 2, 2, `hsl(152 80% ${60 + Math.sin(t * 3) * 10}%)`);
+    rect(cx - 1, ly0 + 2, 2, 2, `hsl(152 80% ${60 + Math.sin(t * MOTION.ledW) * 10}%)`);
     rect(cx - 10, ly0 + 6, 20, 3, OUT); rect(cx - 9, ly0 + 7, 18, 1, '#8a92a8');
-    const k = Math.floor(t * 10) % 2;
+    const k = Math.floor(t * MOTION.typeHz) % 2;
     rect(cx - 10, ly0 + 4 + k, 3, 2, C.base); rect(cx + 7, ly0 + 5 - k, 3, 2, C.base);
   }
 
@@ -315,10 +341,10 @@ function draw(now) {
   if (st === 'ready') outlined(cx + 8, top - 9, SPR.tick, LED.ready);
 
   // ambient emitters
-  if (st === 'sleeping' && every('z', 1600, now)) spawn('z', 1, { x: cx + 9, y: top, up: 0.4, spread: 0.3, colors: ['#c7d0ff'], fast: 0.6 });
-  if (st === 'working' && every('note', 3000, now)) spawn('note', 1, { x: cx - 12, y: top + 2, up: 0.4, colors: ['#7ef0c1', '#8fd3ff'], fast: 0.7 });
-  if (happy && every('spark', 120, now)) spawn('spark', 3, { x: cx + rand(-12, 12), y: cy - 10, colors: CONFETTI, up: 1.4, g: 0.04 });
-  if (lvl >= 3 && st === 'idle' && every('trail', 2500, now)) spawn('spark', 2, { x: cx + rand(-14, 14), y: cy + rand(-6, 8), up: 0.2, colors: ['#fff', '#c7fff0'], fast: 1.5 });
+  if (st === 'sleeping' && every('z', 1600 * MOTION.emit, now)) spawn('z', 1, { x: cx + 9, y: top, up: 0.4, spread: 0.3, colors: ['#c7d0ff'], fast: 0.6 });
+  if (st === 'working' && every('note', 3000 * MOTION.emit, now)) spawn('note', 1, { x: cx - 12, y: top + 2, up: 0.4, colors: ['#7ef0c1', '#8fd3ff'], fast: 0.7 });
+  if (happy && every('spark', MOTION.spark, now)) spawn('spark', 1, { x: cx + rand(-12, 12), y: cy - 10, colors: CONFETTI, up: 1.4, g: 0.04 });
+  if (lvl >= 3 && st === 'idle' && every('trail', 2500 * MOTION.emit, now)) spawn('spark', 1, { x: cx + rand(-14, 14), y: cy + rand(-6, 8), up: 0.2, colors: ['#fff', '#c7fff0'], fast: 1.5 });
 
   if (ex >= 0) ctx.restore();
   drawParts();
@@ -472,8 +498,8 @@ api.on('event', e => {
     case 'agentNeeds': say(e.text, { prio: true, alert: true, ms: 8000 }); tune([440, 330]); break;
     case 'agentStalled': say(e.text, { prio: true, alert: 'stuck', ms: 8000 }); break;   // stuck = red, same as LED + glyph
     case 'commit': transient('eat', 1300); setTimeout(() => transient('celebrate', 2200), 1300);
-      spawn('spark', 30, { x: 28, y: 22, spread: 3, up: 2, g: 0.05, colors: CONFETTI }); say(e.text, { prio: true }); tune([523, 659, 784, 1047], 80); break;
-    case 'levelup': transient('levelup', 3500); spawn('spark', 60, { x: 28, y: 20, spread: 4, up: 2.5, g: 0.05, colors: CONFETTI });
+      spawn('spark', burst(30), { x: 28, y: 22, spread: 3, up: 2, g: 0.05, colors: CONFETTI }); say(e.text, { prio: true }); tune([523, 659, 784, 1047], 80); break;
+    case 'levelup': transient('levelup', 3500); spawn('spark', burst(60), { x: 28, y: 20, spread: 4, up: 2.5, g: 0.05, colors: CONFETTI });
       say(e.text, { prio: true, ms: 7000 }); tune([523, 659, 784, 1047, 784, 1047, 1319], 110); break;
     case 'snack': transient('eat', 1200); say(e.text); break;
     case 'snackNo': say(e.text); break;
@@ -666,7 +692,7 @@ function poke() {
   api.pet();
   markSeen();
   transient(Math.random() < 0.5 ? 'love' : 'poke', 900);
-  spawn('heart', 2, { x: 28 + rand(-8, 8), y: 18, colors: ['#ff5c8a', '#ff9ec4'] });
+  spawn('heart', 1, { x: 28 + rand(-8, 8), y: 18, colors: ['#ff5c8a', '#ff9ec4'] });
   blip(pick([740, 880, 988]), 0.07);
   if (Math.random() < 0.4) say(pick(['hehe', '*happy wiggle*', 'boop', 'again!', ...(snap?.game ? [`⚡${Math.round(snap.fuel)} ♥${Math.round(snap.mood)}`] : [])]), { ms: 1600 });
 }

@@ -104,6 +104,7 @@ function glyph(S, x, y, name, c, g = 1, outline = OUT) {
 
 // ===================== shared behaviour =====================
 function motion(st, t, k) {
+  k *= (typeof window !== 'undefined' && window.castMotionScale) || 1;   // desktop app may calm cast motion; site leaves it unset (=1)
   const m = { dy: 0, sq: 0, jx: 0 };
   const hop = (speed, height) => {
     const p = (t * speed) % 1, s = Math.sin(p * Math.PI);
