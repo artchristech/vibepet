@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'">
+<title>Theater</title>
+<link rel="stylesheet" href="player.css">
+</head>
+<body>
+<header id="top">
+  <div class="brand"><i></i>THEATER</div>
+  <div id="title">loading…</div>
+  <div id="stats"></div>
+</header>
+<main id="stage">
+  <div id="vignette"></div>
+  <section id="focus" aria-live="polite"></section>
+  <aside id="pin" class="hidden" aria-label="beat detail"></aside>
+  <div id="card" class="hidden"><small id="cardNo"></small><h1 id="cardText"></h1></div>
+  <div id="flash" class="hidden"></div>
+</main>
+<section id="railWrap" aria-label="timeline">
+  <div id="rail"><svg id="branches"></svg><div id="beats"></div></div>
+  <div id="head"></div>
+</section>
+<footer id="controls">
+  <button id="play" title="play / pause (space)">▶</button>
+  <div id="speed" role="group" aria-label="speed"><button data-s="1">1×</button><button data-s="4">4×</button><button data-s="16">16×</button></div>
+  <div id="scrub"><div id="ticks"></div><div id="fill"></div><div id="knob"></div></div>
+  <time id="clock">0:00</time>
+  <span id="chap"></span>
+</footer>
+<script src="player.js"></script>
+</body>
+</html>

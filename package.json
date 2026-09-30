@@ -25,6 +25,7 @@
       "agents.js",
       "goal.js",
       "content/**",
+      "theater/**",
       "ports.js",
       "gesture.js",
       "preload.js",
