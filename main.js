@@ -27,7 +27,7 @@ const PETS = [['net', 'Net'], ['slime', 'Slime'], ['cat', 'Cat'], ['sprout', 'Sp
 const DEFAULTS = {
   name: 'Net', xp: 0, fuel: 80, mood: 70, commits: 0, quickDraws: 0,
   repo: null, pos: null, model: 'claude-sonnet-5', keyEnc: null, keyPlain: null, engine: null,   // engine: null = auto (Claude Code login first), 'claude' | 'key'
-  contentTarget: 45, deleteRaw: false, muted: false, onTop: true, hotkey: 'Control+Alt+Command+J', animations: false, game: false, pet: 'net', goals: {}, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
+  contentTarget: 45, deleteRaw: false, size: 'm', muted: false, onTop: true, hotkey: 'Control+Alt+Command+J', animations: false, game: false, pet: 'net', goals: {}, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
 };
 let state, saveTimer, win, sessionKey = null;
 const statePath = () => path.join(app.getPath('userData'), 'state.json');
@@ -346,7 +346,7 @@ function snapshot() {
     agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, goal: a.goal && { text: a.goal.text, auto: a.goal.auto, done: !!a.goal.done, verdict: a.verdict }, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout,
       receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
     git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, pet: state.pet, hasKey: hasKey(), hour: new Date().getHours(),
-    watching: state.repo ? 'manual' : 'auto', rec: content.status(),
+    watching: state.repo ? 'manual' : 'auto', rec: content.status(), scale: petScale(),
     local: { servers: local.servers.length, procs: local.procs.length, tasks: local.tasks.filter(t => t.running).length,
       names: local.servers.slice(0, 4).map(s => `${s.kind} :${s.port}`) },
   };
@@ -568,10 +568,11 @@ function homePos(pos) {
 }
 const areas = () => screen.getAllDisplays().map(d => d.workArea);
 // every move goes through here: panels flip below Net when there's no room above him (see place.js)
+const SIZES = { s: 0.75, m: 1, l: 1.35 }, petScale = () => SIZES[state.size] || 1, petH = () => Math.round(208 * petScale());
 function moveTo(v) {
-  const a = areaFor({ x: v.x + W / 2, y: v.y + petTop + 104 }, areas());
+  const a = areaFor({ x: v.x + W / 2, y: v.y + petTop + petH() / 2 }, areas());
   virt = { x: Math.round(v.x), y: Math.round(Math.max(v.y, minY(a, petTop))) };
-  const p = place(virt, areas(), W, petTop, H);
+  const p = place(virt, areas(), W, petTop, H, petH());
   if (!win || win.isDestroyed()) return p;
   if (p.below !== below) { below = p.below; win.webContents.send('below', below); }
   if (p.room !== room) { room = p.room; win.webContents.send('room', room); }
@@ -686,6 +687,8 @@ function buildMenu() {
       { label: 'Short length', submenu: [30, 45, 60].map(n => ({ label: `${n}s`, type: 'radio', checked: state.contentTarget === n, click: () => { state.contentTarget = n; save(); } })) },
       toggle('Delete raw recording after render', 'deleteRaw'),
       { type: 'separator' },
+      { label: 'Size', submenu: [['s', 'Small'], ['m', 'Medium'], ['l', 'Large']].map(([k, label]) => ({ label, type: 'radio', checked: (state.size || 'm') === k,
+        click: () => { const h0 = petH(); state.size = k; petTop += h0 - petH(); save(); send('tick', snapshot()); if (virt) moveTo(virt); } })) },   // Net grows upward from his feet
       toggle('Animations', 'animations'),
       toggle('Game mode', 'game', () => { state.lastDecay = Date.now(); }),
       { type: 'separator' },

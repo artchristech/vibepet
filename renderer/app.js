@@ -211,7 +211,7 @@ function draw(now) {
 
   // gaze (decided up front so an unchanged frame can skip the repaint)
   const rc = cv.getBoundingClientRect();
-  const pxX = rc.left + cx * S, pxY = rc.top + cy * S;
+  const k = rc.width / cv.width || 1, pxX = rc.left + cx * S * k, pxY = rc.top + cy * S * k;   // k: Small/Large CSS scale
   const gaze = moving || hovering;                   // calm default: eyes follow the cursor only when you're at the pet
   let lx = gaze ? Math.max(-1, Math.min(1, Math.round((cursor.x - pxX) / 90))) : 0;
   let ly = gaze ? Math.max(-1, Math.min(1, Math.round((cursor.y - pxY) / 110))) : 0;
@@ -433,6 +433,7 @@ api.on('cursor', c => { cursor = c; wake(); });
 api.on('tick', s => {
   const first = !snap;
   snap = s; wake();
+  if (s.scale && s.scale !== +document.documentElement.style.getPropertyValue('--pet-scale')) { document.documentElement.style.setProperty('--pet-scale', s.scale); api.petTop?.(cv.offsetTop); }   // Small / Medium / Large
   renderHud();
   if (first) {                                  // speak at launch only when someone is actually waiting on you
     const w = agentsIn('waiting');
@@ -629,7 +630,7 @@ let ignoring = true;
 const setIgnore = v => { if (v !== ignoring) { ignoring = v; api.setIgnore(v); } };
 function petPixelHit(e) {
   const r = cv.getBoundingClientRect();
-  const x = Math.floor(e.clientX - r.left), y = Math.floor(e.clientY - r.top);
+  const k = cv.width / r.width || 1, x = Math.floor((e.clientX - r.left) * k), y = Math.floor((e.clientY - r.top) * k);
   for (const [dx, dy] of [[0,0],[6,0],[-6,0],[0,6],[0,-6]]) {
     try { if (ctx.getImageData(x + dx, y + dy, 1, 1).data[3] > 60) return true; } catch {}
   }
