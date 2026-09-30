@@ -135,6 +135,7 @@ button { font: inherit; cursor: pointer; }
 #chatForm button:disabled { background: rgba(255,255,255,.07); color: var(--c-faint); cursor: default; }
 #chat.busy #chatForm button { opacity: .5; }
 #chatForm svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+#chatNote[hidden] { display: none; }
 #chatNote { flex: none; display: flex; align-items: center; gap: 8px; padding: 2px 14px 10px; font-size: 10.5px; color: var(--c-faint); }
 #chatNoteText { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 input { flex: 1; background: #0e0e11; border: 1px solid rgba(255,255,255,.1); color: var(--text); border-radius: 8px; padding: 6px 9px; font: inherit; outline: none; }
