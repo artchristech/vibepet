@@ -10,7 +10,7 @@ const { judge, commitMatches } = require('./goal');
 const content = require('./content');
 const ports = require('./ports');
 
-const W = 560, H = 900;
+const W = 660, H = 960;
 const { place, areaFor, minY } = require('./place');
 let petTop = 276;   // Net's top inside the window (panels-above layout); the renderer reports the real value
 let virt = null, below = false, room = 9999;   // wanted window pos (panels above; may sit above the screen top) + current flip

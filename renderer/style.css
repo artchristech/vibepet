@@ -71,14 +71,14 @@ button { font: inherit; cursor: pointer; }
 /* a composer that rises out of Net: solid pill material, anchored just above his head with a tail */
 #chat {
   --ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
-  position: relative; width: 520px; height: auto; max-height: min(640px, var(--room, 640px)); margin-bottom: -46px; z-index: 3; display: flex; flex-direction: column;
+  position: relative; width: 620px; height: auto; min-height: min(460px, var(--room, 460px)); max-height: min(720px, var(--room, 720px)); margin-bottom: -46px; z-index: 3; display: flex; flex-direction: column;
   background: rgb(24,24,27); border: 1px solid rgba(255,255,255,.07); border-radius: 18px; box-shadow: 0 8px 28px rgba(0,0,0,.5);
   font: 13.5px/1.45 var(--ui); user-select: text; animation: rise .18s cubic-bezier(.2,.9,.3,1);
 }
 #chat::after { content: ""; position: absolute; left: 50%; bottom: -8px; width: 14px; height: 8px; transform: translateX(-50%); background: rgb(24,24,27); clip-path: polygon(0 0, 100% 0, 50% 100%); }
 @keyframes rise { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
 #chat button, #chat input { font-family: var(--ui); }
-#msgs { flex: 0 1 auto; min-height: 0; overflow-y: auto; padding: 12px 12px 4px; display: flex; flex-direction: column; gap: 6px; }
+#msgs { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 12px 12px 4px; display: flex; flex-direction: column; gap: 6px; }
 #msgs:empty { display: none; }
 #msgs.fade { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px); mask-image: linear-gradient(to bottom, transparent 0, #000 14px); }
 .msg { max-width: 85%; padding: 6px 10px; border-radius: 14px; white-space: pre-wrap; word-wrap: break-word; }
