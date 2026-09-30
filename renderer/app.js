@@ -429,6 +429,7 @@ api.on('jumpTo', ({ id } = {}) => {   // a clicked banner: its agent, else whoev
 });
 // near the top of the screen there's no room above Net: main pins him to the window top and the panels flip below
 api.on('below', v => { $('stage').classList.toggle('below', v); wake(); });
+api.on('room', px => document.documentElement.style.setProperty('--room', `${px}px`));   // panel height that fits on screen
 if (!$('stage').classList.contains('below')) api.petTop?.(cv.offsetTop);
 api.on('summon', () => { document.body.classList.remove('away'); wantUntil = performance.now() + 1500; wake(); });   // relaunched / gesture: open the pill once, silently
 api.on('hide', () => { closeChat(); document.body.classList.add('away'); });

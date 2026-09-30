@@ -71,7 +71,7 @@ button { font: inherit; cursor: pointer; }
 /* a composer that rises out of Net: solid pill material, anchored just above his head with a tail */
 #chat {
   --ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
-  position: relative; width: 440px; height: auto; max-height: 500px; margin-bottom: -46px; z-index: 3; display: flex; flex-direction: column;
+  position: relative; width: 520px; height: auto; max-height: min(640px, var(--room, 640px)); margin-bottom: -46px; z-index: 3; display: flex; flex-direction: column;
   background: rgb(24,24,27); border: 1px solid rgba(255,255,255,.07); border-radius: 18px; box-shadow: 0 8px 28px rgba(0,0,0,.5);
   font: 13.5px/1.45 var(--ui); user-select: text; animation: rise .18s cubic-bezier(.2,.9,.3,1);
 }
@@ -118,7 +118,7 @@ input:focus { border-color: rgba(255,255,255,.22); }
 /* roster: the question in the pill. bubble material, same slot above the pet (stage is flex-end, so the pet never moves).
    opacity rides the pill's --a (set from app.js); no motion of its own. it replaces the bubble while shown */
 #roster {
-  position: relative; z-index: 2; width: max-content; min-width: 200px; max-width: 380px; margin-bottom: -18px; padding: 4px;
+  position: relative; z-index: 2; width: max-content; min-width: 200px; max-width: 380px; max-height: var(--room, 600px); overflow-y: auto; margin-bottom: -18px; padding: 4px;
   display: flex; flex-direction: column; gap: 2px;
   background: rgba(18,18,20,.92); border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.45);
 }

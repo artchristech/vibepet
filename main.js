@@ -10,10 +10,10 @@ const { judge, commitMatches } = require('./goal');
 const content = require('./content');
 const ports = require('./ports');
 
-const W = 480, H = 720;
+const W = 560, H = 900;
 const { place, areaFor, minY } = require('./place');
 let petTop = 276;   // Net's top inside the window (panels-above layout); the renderer reports the real value
-let virt = null, below = false;   // wanted window pos (panels above; may sit above the screen top) + current flip
+let virt = null, below = false, room = 9999;   // wanted window pos (panels above; may sit above the screen top) + current flip
 const CLAUDE_DIR = path.join(os.homedir(), '.claude', 'projects');
 const TICK_MS = 3000;
 
@@ -571,11 +571,12 @@ const areas = () => screen.getAllDisplays().map(d => d.workArea);
 function moveTo(v) {
   const a = areaFor({ x: v.x + W / 2, y: v.y + petTop + 104 }, areas());
   virt = { x: Math.round(v.x), y: Math.round(Math.max(v.y, minY(a, petTop))) };
-  const p = place(virt, areas(), W, petTop);
+  const p = place(virt, areas(), W, petTop, H);
   if (!win || win.isDestroyed()) return p;
   if (p.below !== below) { below = p.below; win.webContents.send('below', below); }
-  const [x, y] = win.getPosition();
-  if (x !== p.x || y !== p.y) win.setPosition(p.x, p.y);
+  if (p.room !== room) { room = p.room; win.webContents.send('room', room); }
+  const b = win.getBounds();
+  if (b.x !== p.x || b.y !== p.y || b.height !== p.h) win.setBounds({ x: p.x, y: p.y, width: W, height: p.h });
   return p;
 }
 function createWindow() {
@@ -606,7 +607,7 @@ function createWindow() {
 
 let drag = null;
 ipcMain.on('set-ignore', (_, v) => !win.isDestroyed() && win.setIgnoreMouseEvents(v, { forward: true }));
-ipcMain.on('pet-top', (_, t) => { if (t > 0 && t < H && t !== petTop) { petTop = t; if (virt && !below) moveTo(virt); } });
+ipcMain.on('pet-top', (_, t) => { if (t > 0 && t < H && t !== petTop && !below && win.getBounds().height === H) { petTop = t; if (virt && !below) moveTo(virt); } });
 ipcMain.on('drag-start', () => {
   const c = screen.getCursorScreenPoint(), { x, y } = virt || { x: win.getPosition()[0], y: win.getPosition()[1] };
   clearInterval(drag?.timer);

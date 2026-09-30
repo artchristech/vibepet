@@ -15,11 +15,20 @@ function areaFor(p, areas) {
   return best;
 }
 
-// v: virtual window pos (layout with panels above); W: window width; petTop: Net's top inside that layout
-function place(v, areas, W, petTop) {
+// v: virtual window pos (layout with panels above); W×H: full window; petTop: Net's top inside that layout.
+// Panels go on whichever side of Net has room (above unless below has more and above is cramped); the window is
+// trimmed so it never crosses the menu bar or the Dock, and `room` is the panel height that actually fits.
+const NEED = 360, FOOT = 40;   // panel height worth staying above for; hud pill + shadow under Net
+function place(v, areas, W, petTop, H = petTop + PET_H + FOOT) {
   const a = areaFor({ x: v.x + W / 2, y: v.y + petTop + PET_H / 2 }, areas);
-  if (v.y >= a.y) return { x: Math.round(v.x), y: Math.round(v.y), below: false };
-  return { x: Math.round(v.x), y: Math.round(Math.max(a.y, v.y + petTop)), below: true };
+  const pS = v.y + petTop, above = pS - a.y, belowRoom = a.y + a.height - (pS + PET_H + FOOT);
+  const x = Math.round(v.x);
+  if (above >= NEED || above >= belowRoom) {
+    const y = Math.max(a.y, v.y), top = pS - y;   // trimmed from the top: Net stays put, the panel area shrinks
+    return { x, y: Math.round(y), h: Math.round(Math.min(H - (y - v.y), a.y + a.height - y)), below: false, room: Math.max(0, Math.round(top - 12)) };
+  }
+  const y = Math.max(a.y, pS), bottom = a.y + a.height;
+  return { x, y: Math.round(y), h: Math.round(Math.min(H, bottom - y)), below: true, room: Math.max(0, Math.round(bottom - y - PET_H - FOOT - 12)) };
 }
 
 // lowest virtual y that still leaves Net fully under the menu bar (drag clamp, so the pet can't be lost upward)
