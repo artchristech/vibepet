@@ -121,7 +121,7 @@ function transition(s, prev) {
   } else if (phase === 'waiting' && was) {
     emit('agentNeeds', `${name} has a question`, { agent: name, id, notify: away() });
   } else if (phase === 'stalled' && prev.phase === 'working') {
-    emit('agentStalled', `${name} needs approval`, { agent: name, id, notify: away() });
+    stallQueue.add(id);   // announced after unstick() rules out a tool that's simply still running
   }
 }
 
@@ -219,6 +219,31 @@ function nag(list) {
   for (const id of nagged.keys()) if (!sessions.has(id)) nagged.delete(id);
 }
 
+// ---------- stalled vs. busy ----------
+// A tool call with 90s of silence is either waiting on your approval or just long (a build, a render, a sleep).
+// A running tool is a child process of that claude, started after the call: then it's working, not stuck.
+const stallQueue = new Set();
+async function unstick(list) {
+  const st = list.filter(a => a.phase === 'stalled' && a.toolAt);
+  if (st.length) {
+    let procs; try { procs = await psAll(); } catch {}
+    const kids = new Map();
+    for (const p of procs?.values() || []) (kids.get(p.ppid) || kids.set(p.ppid, []).get(p.ppid)).push(p);
+    const busy = (pid, since) => (kids.get(pid) || []).some(k => k.start >= since - 2000 || busy(k.pid, since));
+    for (const a of st) {
+      const loc = procs && await locateSession(a, procs).catch(() => null);
+      if (!loc || !busy(loc.pid, a.toolAt)) continue;
+      a.phase = 'working'; a.ask = undefined;
+      const s = sessions.get(a.id); if (s) s.phase = 'working';
+    }
+  }
+  for (const id of stallQueue) {
+    const a = list.find(x => x.id === id);
+    if (a?.phase === 'stalled') emit('agentStalled', `${a.name} needs approval`, { agent: a.name, id, notify: away() });
+  }
+  stallQueue.clear();
+}
+
 // ---------- git ----------
 const git = (cwd, args) => new Promise(res =>
   execFile('git', args, { cwd, timeout: 5000, maxBuffer: 8e6 }, (e, out) => res(e ? null : out.trimEnd())));
@@ -300,6 +325,7 @@ async function tick() {
   try {
     decay();
     agents = scanAgents();
+    await unstick(agents);
     for (const a of agents) { a.goal = goalFor(a); watchDrift(a); }
     pruneGoals();
     for (const id of drift.keys()) if (!sessions.has(id)) drift.delete(id);

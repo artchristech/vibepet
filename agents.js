@@ -156,7 +156,7 @@ function classify(file, mtimeMs, side = false) {
     cwd = d.cwd || cwd;
     if (d.type === 'assistant') {
       const m = d.message || {}, tools = (m.content || []).filter(c => c.type === 'tool_use');
-      if (tools.length) return idle > 90000 ? out('stalled', toolAsk(tools[tools.length - 1]), { agentWait: tools.some(c => c.name === 'Agent' || c.name === 'Task') }) : out('working');
+      if (tools.length) return idle > 90000 ? out('stalled', toolAsk(tools[tools.length - 1]), { agentWait: tools.some(c => c.name === 'Agent' || c.name === 'Task'), toolAt: Date.parse(d.timestamp) || 0 }) : out('working');
       if (['end_turn', 'stop_sequence', 'max_tokens'].includes(m.stop_reason)) {
         if (idle > 5 * 60e3) return out('parked');
         const t = textOf(m.content).trim();
@@ -278,7 +278,7 @@ function scan(root, sessions, onChange) {
       const prev = sessions.get(id);
       const name = c.cwd ? path.basename(c.cwd) : dname.split('-').pop();
       const s = { id, file: fp, name, cwd: c.cwd, phase, since: prev && prev.phase === phase ? prev.since : now, mtime: Math.max(st.mtimeMs, fo?.newestAt || 0),
-        ask: phase === 'stalled' && fo?.stuck && (c.phase !== 'stalled' || c.agentWait) ? fo.stuckAsk : c.ask, title: c.title || prev?.title, fanout: fo?.total ? fo : undefined, receipt, ev: c.ev };
+        ask: phase === 'stalled' && fo?.stuck && (c.phase !== 'stalled' || c.agentWait) ? fo.stuckAsk : c.ask, title: c.title || prev?.title, fanout: fo?.total ? fo : undefined, receipt, ev: c.ev, toolAt: c.toolAt };
       if (prev && prev.phase !== phase) onChange?.(s, prev);
       sessions.set(id, s);
       if (phase !== 'parked') out.push(s);
@@ -331,9 +331,13 @@ function hostApp(pid, procs) {
   }
   return null;
 }
+const bidCache = new Map();
 async function bundleId(app) {
+  if (bidCache.has(app)) return bidCache.get(app);
   const out = await run('/usr/bin/plutil', ['-extract', 'CFBundleIdentifier', 'raw', '-o', '-', path.join(app, 'Contents', 'Info.plist')]);
-  return out ? out.trim() : null;
+  const bid = out ? out.trim() : null;
+  if (bid) bidCache.set(app, bid);
+  return bid;
 }
 
 const FOCUS = {
@@ -376,9 +380,10 @@ end run`,
 // back. Exact even when every tab says "Claude Code". Needs Accessibility once; 'noax' tells the caller to ask.
 const TAG_FOCUS = `on run argv
   set tok to item 1 of argv
-  tell application id (item 2 of argv) to activate   -- Accessibility only sees windows on the current Space
-  repeat 8 times
-  delay 0.2
+  repeat with i from 1 to 12
+  -- first pass looks without switching apps; after that, activate (Accessibility only sees the current Space) and poll fast
+  if i = 2 then tell application id (item 2 of argv) to activate
+  if i > 2 then delay 0.08
   tell application "System Events"
     tell (first process whose bundle identifier is (item 2 of argv))
       repeat with w in windows
