@@ -9,7 +9,7 @@ const gesture = require('./gesture');
 const { judge, commitMatches } = require('./goal');
 const content = require('./content');
 
-const W = 360, H = 520;
+const W = 480, H = 720;
 const { place, areaFor, minY } = require('./place');
 let petTop = 276;   // Net's top inside the window (panels-above layout); the renderer reports the real value
 let virt = null, below = false;   // wanted window pos (panels above; may sit above the screen top) + current flip
