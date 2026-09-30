@@ -131,6 +131,7 @@ input:focus { border-color: rgba(255,255,255,.22); }
 #roster i { width: 6px; height: 6px; border-radius: 50%; }
 #roster b, #roster span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; min-width: 0; }
 #roster b { font-weight: 700; }
+#roster .local { color: var(--dim); font-size: 10px; padding: 2px 6px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #roster time { color: var(--dim); font-variant-numeric: tabular-nums; }
 #roster span { grid-column: 2 / 4; color: #b7bdd0; }
 /* fan-out gauge: static pips in the row's LED colour. filled = subagent done, hollow = still running */

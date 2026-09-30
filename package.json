@@ -23,6 +23,7 @@
       "main.js",
       "place.js",
       "agents.js",
+      "ports.js",
       "gesture.js",
       "preload.js",
       "renderer/**",
