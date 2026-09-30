@@ -371,9 +371,51 @@ end run`,
   return "no"
 end run`,
 };
-async function focusTty(bid, tty) {
-  if (!FOCUS[bid] || !tty) return false;
-  return (await run('/usr/bin/osascript', ['-e', FOCUS[bid], tty], 5000))?.trim() === 'ok';
+// Terminals with no scripting dictionary (Ghostty, WezTerm, kitty…): tag the session's own tty with a one-off window
+// title (OSC 2, invisible), find the window or native tab wearing it through Accessibility, raise it, then put a title
+// back. Exact even when every tab says "Claude Code". Needs Accessibility once; 'noax' tells the caller to ask.
+const TAG_FOCUS = `on run argv
+  set tok to item 1 of argv
+  tell application id (item 2 of argv) to activate   -- Accessibility only sees windows on the current Space
+  repeat 8 times
+  delay 0.2
+  tell application "System Events"
+    tell (first process whose bundle identifier is (item 2 of argv))
+      repeat with w in windows
+        if name of w contains tok then
+          perform action "AXRaise" of w
+          set frontmost to true
+          return "ok"
+        end if
+        try
+          repeat with b in radio buttons of tab group 1 of w
+            if name of b contains tok then
+              click b
+              perform action "AXRaise" of w
+              set frontmost to true
+              return "ok"
+            end if
+          end repeat
+        end try
+      end repeat
+    end tell
+  end tell
+  end repeat
+  return "no"
+end run`;
+const osc2 = (tty, title) => { try { fs.writeFileSync(tty, `\x1b]2;${title}\x07`); return true; } catch { return false; } };
+async function focusTagged(bid, tty, restore) {
+  const tok = `vibepet-${Math.random().toString(36).slice(2, 8)}`;
+  if (!osc2(tty, tok)) return false;
+  const out = await new Promise(res => execFile('/usr/bin/osascript', ['-e', TAG_FOCUS, tok, bid], { timeout: 8000 }, (e, o, err) => res(e ? String(err || e.message) : o)));
+  osc2(tty, restore || 'Claude Code');   // Claude Code re-titles on its next state change anyway
+  if (/-1719|-25211|assistive|not allowed/i.test(out || '')) return 'noax';
+  return out?.trim() === 'ok';
+}
+async function focusTty(bid, tty, restore) {
+  if (!tty) return false;
+  if (FOCUS[bid]) return (await run('/usr/bin/osascript', ['-e', FOCUS[bid], tty], 5000))?.trim() === 'ok';
+  return bid ? focusTagged(bid, tty, restore) : false;
 }
 
 module.exports = { CHECK_RE, firstPrompt, humanAt, receipt, readTail, textOf, classify, fanout, settle, scan, psAll, locateSession, hostApp, bundleId, focusTty, run };

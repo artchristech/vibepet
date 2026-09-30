@@ -600,6 +600,7 @@ ipcMain.on('copy', (_, text) => clipboard.writeText(text));
 // click → the terminal tab that session runs in (iTerm2/Terminal), else its app, else copy a resume command.
 // The only place ps/lsof/osascript ever run; nothing is typed into any terminal.
 const shq = s => /^[\w@%+=:,./-]+$/.test(s) ? s : `'${s.replace(/'/g, `'\\''`)}'`;
+let axAsked = false;
 ipcMain.handle('jump', async (_, id) => {
   const s = sessions.get(id);
   if (!s) return { ok: false };
@@ -607,7 +608,13 @@ ipcMain.handle('jump', async (_, id) => {
     const procs = await psAll(), loc = await locateSession(s, procs), host = loc && hostApp(loc.pid, procs);
     if (host) {
       const bid = await bundleId(host);
-      if (await focusTty(bid, loc.tty)) return { ok: true, level: 'tab' };
+      const f = await focusTty(bid, loc.tty, s.title ? `✳ ${s.title}` : null);
+      if (f === true) return { ok: true, level: 'tab' };
+      if (f === 'noax' && !axAsked) {   // once per run: explain, open the pane; the app still comes forward below
+        axAsked = true;
+        emit('content', `To jump to the exact ${path.basename(host, '.app')} tab, allow vibepet in Accessibility (opening it now), then click again.`, { alert: true });
+        require('electron').shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility');
+      }
       if (await run('/usr/bin/open', bid ? ['-b', bid] : ['-a', host]) !== null) return { ok: true, level: 'app' };
     }
   } catch (e) { console.error('jump:', e.message); }
