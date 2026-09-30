@@ -9,6 +9,7 @@ const gesture = require('./gesture');
 const { judge, commitMatches } = require('./goal');
 const content = require('./content');
 const ports = require('./ports');
+const theater = require('./theater');
 
 const W = 660, H = 960;
 const { place, areaFor, minY } = require('./place');
@@ -670,6 +671,8 @@ function buildMenu() {
     ] },
     localMenu(),
     { label: 'Chat…', click: () => emit('openChat') },
+    { label: 'Theater…', submenu: (() => { const r = theater.recent(CLAUDE_DIR); return r.length ? r.map(x => ({ label: `${x.title}  · ${x.project} · ${agoS(Date.now() - x.mtime)}`, toolTip: x.file, click: () => openTheater(x.file) }))
+      : [{ label: 'no sessions in the last 12h', enabled: false }]; })() },
     { label: content.status().recording ? 'Stop & make short' : content.status().busy ? 'Making your short…' : 'Start content session', enabled: !content.status().busy && !content.status().starting, accelerator: 'Control+Alt+Command+R', click: () => content.toggle() },
     { label: 'Finish last session', visible: !content.status().recording && !content.status().busy && !!content.unfinished(), click: () => content.finishLast() },
     { label: 'Open shorts folder', click: () => content.openFolder() },
@@ -717,6 +720,10 @@ function buildMenu() {
   ]);
 }
 ipcMain.on('rec-toggle', () => content.toggle());
+// Theater: replay a session; the player window asks for its own timeline (main owns which file it is)
+function openTheater(file) { app.focus({ steal: true }); theater.open(BrowserWindow, file); }
+ipcMain.on('theater', (_, id) => { const s = sessions.get(id); if (s?.file) openTheater(s.file); });
+ipcMain.handle('theater-timeline', e => theater.timeline(theater.fileFor(e.sender)));
 ipcMain.on('menu', () => buildMenu().popup({ window: win }));
 
 // ---------- menu bar icon: click toggles Net (he spawns under the icon), right-click is his menu ----------

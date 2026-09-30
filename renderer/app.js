@@ -576,7 +576,7 @@ function renderRoster() {
   $('roster').innerHTML = rows.slice(0, 6).map(a => { const sig = SIG[a.phase];
     const kids = (a.fanout?.items || []).filter(k => k.open).slice(0, 3).map(k =>
       `<span class="kid"><i class="tl" style="color:${k.stuck ? TL.stuck : TL.running};background:currentColor"></i><b>${esc(k.type || k.desc)}</b></span>`).join('');
-    return `<button data-id="${esc(a.id)}" title="${esc(sig)}"><i class="tl" style="color:${TL[sig]};background:currentColor"></i><b>${esc(a.title || a.name)}</b>${goalLine(a)}${kids}</button>`; }).join('');
+    return `<button data-id="${esc(a.id)}" title="${esc(sig)}"><i class="tl" style="color:${TL[sig]};background:currentColor"></i><b>${esc(a.title || a.name)}</b><em class="replay" data-theater title="replay in Theater">▶</em>${goalLine(a)}${kids}</button>`; }).join('');
   // localhost footer: what's listening + running in the background (right-click → Localhost for the list)
   const L = snap?.local;
   if (L && (L.servers || L.tasks || L.procs)) $('roster').insertAdjacentHTML('beforeend', `<small class="local" title="${esc((L.names || []).join('\n'))}">⌂ ${L.servers} server${L.servers === 1 ? '' : 's'}${L.tasks ? ` · ${L.tasks} bg task${L.tasks === 1 ? '' : 's'}` : ''}${L.procs ? ` · ${L.procs} dev proc${L.procs === 1 ? '' : 's'}` : ''}</small>`);
@@ -619,6 +619,7 @@ function rosterShow() {
 $('roster').onclick = e => {
   const id = e.target.closest('button[data-id]')?.dataset.id, a = (snap?.agents || []).find(x => x.id === id);
   if (!a) return;
+  if (e.target.closest('[data-theater]')) { api.theater?.(id); return; }   // replay, not a jump
   if (e.target.closest('[data-goal]')) { if (e.altKey) api.goalDone(id); else editGoal(id); return; }
   const v = e.target.closest('.rc var');   // the verdict chip copies its command; no jump, and the row stays unread
   if (v && a.receipt?.check) { api.copy(a.receipt.check.full); v.textContent = 'copied'; return; }

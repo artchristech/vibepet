@@ -19,6 +19,7 @@ contextBridge.exposeInMainWorld('pet', {
   goalDone: id => ipcRenderer.send('goal-done', id),
   recToggle: () => ipcRenderer.send('rec-toggle'),
   jump: id => ipcRenderer.invoke('jump', id),
+  theater: id => ipcRenderer.send('theater', id),
   gestureCancel: () => ipcRenderer.send('gesture-cancel'),
   gestureSample: pts => ipcRenderer.send('gesture-sample', pts),
   gestureUndo: () => ipcRenderer.send('gesture-undo'),
