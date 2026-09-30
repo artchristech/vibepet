@@ -6,8 +6,9 @@ rec.on('start', async ({ sourceId, width, height, fps = 30 }) => {
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio: false, video: { mandatory: {
       chromeMediaSource: 'desktop', chromeMediaSourceId: sourceId, maxWidth: width, maxHeight: height, minWidth: width, minHeight: height, maxFrameRate: fps } } });
-    const mime = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'].find(m => MediaRecorder.isTypeSupported(m));
-    mr = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 8e6 });
+    // H.264 first: hardware encode now, hardware decode at cut time. A keyframe every 2s keeps every seek cheap
+    const mime = ['video/webm;codecs=h264', 'video/webm;codecs=avc1', 'video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'].find(m => MediaRecorder.isTypeSupported(m));
+    mr = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 12e6, videoKeyFrameIntervalDuration: 2000 });
     mr.ondataavailable = e => { if (!e.data.size) return; const n = seq++; pending = pending.then(async () => rec.chunk(new Uint8Array(await e.data.arrayBuffer()), n)); };
     mr.onstop = () => pending.then(() => { stream.getTracks().forEach(t => t.stop()); rec.stopped({ chunks: seq }); mr = null; });
     mr.start(5000);

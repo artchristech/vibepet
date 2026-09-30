@@ -7,7 +7,10 @@ const path = require('path');
 const os = require('os');
 const { humanAt, textOf } = require('../agents');
 const { redact, tapLine, directFallback, caption } = require('./edl');
-const { render, findBin } = require('./render');
+const { render, findBin, remux, probeDuration } = require('./render');
+const signals = require('./signals');
+const { plan } = require('./camera');
+const compose = require('./compose');
 
 const ROOT = path.join(os.homedir(), 'Movies', 'Vibepet');
 const CLAUDE_DIR = path.join(os.homedir(), '.claude', 'projects');
@@ -101,7 +104,8 @@ async function start() {
   fs.mkdirSync(dir, { recursive: true });
   const json = { state: 'starting', display: { id: disp.id, bounds: disp.bounds, scale: disp.scaleFactor }, fps: 30 };
   writeJson(path.join(dir, 'session.json'), json);
-  cur = { dir, json, offsets: tapInit(), prompts: [], results: [], cursor: [], redactions: 0, fd: fs.openSync(path.join(dir, 'raw.webm'), 'a') };
+  signals.warm();
+  cur = { dir, json, offsets: tapInit(), prompts: [], results: [], cursor: [], windows: [], redactions: 0, fd: fs.openSync(path.join(dir, 'raw.webm'), 'a') };
   const w = recorder(); await ready(w);
   w.webContents.send('start', { sourceId: src.id, width: Math.round(disp.bounds.width * disp.scaleFactor), height: Math.round(disp.bounds.height * disp.scaleFactor), fps: 30 });
 }
@@ -114,6 +118,8 @@ ipcMain.on('rec-started', (_, info) => {
   cur.timer = setInterval(() => {
     tapPoll();
     const p = screen.getCursorScreenPoint();   // where the action is: no Accessibility needed
+    const s = cur, t = Math.round((Date.now() - s.json.startAt) / 100) / 10;
+    signals.frontWindow().then(w => { if (w && s === cur) s.windows.push({ t, ...w }); });   // what's in front, for the camera
     if (p.x >= b.x && p.x < b.x + b.width) cur.cursor.push({ t: Math.round((Date.now() - cur.json.startAt) / 100) / 10, x: Math.round((p.x - b.x) / b.width * 1000) / 1000 });
     if (Date.now() - cur.json.startAt > MAX_MS) { say('2 hour cap reached: wrapping up'); stop(); }
   }, 2000);
@@ -142,6 +148,7 @@ function stop() {
     s.json.state = 'recorded'; s.json.stopAt = Date.now(); s.json.redactions = s.redactions;
     writeJson(path.join(s.dir, 'session.json'), s.json);
     writeJson(path.join(s.dir, 'cursor.json'), s.cursor);
+    writeJson(path.join(s.dir, 'windows.json'), s.windows);
     writeJson(path.join(s.dir, 'results.json'), s.results);
     cur = null; stopWait = null; ctx.refresh();
     make(s.dir);
@@ -168,7 +175,6 @@ async function make(dir) {
       return;
     }
     say('Selecting moments…');
-    const { remux, probeDuration } = require('./render');
     const src = await remux(findBin('ffmpeg'), dir);
     const duration = await probeDuration(findBin('ffprobe'), src);
     const prompts = fs.existsSync(path.join(dir, 'prompts.jsonl'))
@@ -180,22 +186,13 @@ async function make(dir) {
     writeJson(path.join(dir, 'edl.json'), edl);
     if (!edl.clips.length) { say('that recording was too short to cut anything from', { alert: true }); return; }
 
-    say('Drawing the overlays…');
-    const cardDir = path.join(dir, 'cards'); fs.rmSync(cardDir, { recursive: true, force: true }); fs.mkdirSync(cardDir, { recursive: true });
-    const cardPaths = [];
-    for (const [i, c] of edl.clips.entries()) {
-      if (!c.overlay_prompt) { cardPaths.push(null); continue; }
-      const frames = await cards('prompt', c.overlay_prompt, { project });
-      if (!frames) { cardPaths.push(null); continue; }
-      const d = path.join(cardDir, `c${String(i).padStart(2, '0')}`); fs.mkdirSync(d);
-      frames.forEach((f, k) => fs.writeFileSync(path.join(d, `${String(k).padStart(3, '0')}.png`), Buffer.from(f)));
-      cardPaths.push(d);
+    let out;
+    try { out = await smartRender({ dir, edl, json, project }); }
+    catch (e) {
+      console.error('content: smart render failed, falling back:', e);
+      say(`smart camera failed (${e.message.slice(0, 80)}): making a simple cut instead`);
+      out = await simpleRender({ dir, edl, project });
     }
-    const tf = await cards('title', edl.hook_text, { sub: edl.title });
-    const title = tf ? path.join(cardDir, 'title.png') : null;
-    if (tf) fs.writeFileSync(title, Buffer.from(tf[0]));
-
-    const out = await render({ dir, edl, cards: cardPaths, title, pet: ctx.petPng, onStep: t => say(`${t}…`) });
     const minutes = Math.max(1, Math.round(duration / 60));
     fs.writeFileSync(path.join(dir, 'caption.txt'), caption({ project, prompts: prompts.length, minutes }) + '\n');
     json.state = 'done'; json.short = out.short; writeJson(path.join(dir, 'session.json'), json);
@@ -207,6 +204,49 @@ async function make(dir) {
     console.error('content:', e);
     say(`couldn't make the short: ${e.message.slice(0, 140)}. The recording is kept.`, { alert: true });
   } finally { busy = false; ctx.refresh(); }
+}
+
+// v1b: OCR finds the message bar, the camera zooms to it, pulls out to the window, shows the output full frame; HyperFrames renders
+async function smartRender({ dir, edl, json, project }) {
+  const ffmpeg = findBin('ffmpeg');
+  say('Finding your prompts on screen…');
+  const ocr = await signals.ocrFrames({ dir, edl, ffmpeg });
+  const windows = readJson(path.join(dir, 'windows.json')) || [];
+  const srcW = json.width, srcH = json.height;
+  if (!srcW || !srcH) throw new Error('no recording size');
+  const cam = plan({ clips: edl.clips, windows, ocr, disp: { bounds: json.display.bounds, scale: srcW / json.display.bounds.width }, srcW, srcH });
+  writeJson(path.join(dir, 'camera.json'), cam);
+  const { hf } = await compose.build({ dir, edl, cam, srcW, srcH, ffmpeg, title: edl.hook_text, sub: edl.title, project, petPng: ctx.petPng, onStep: t => say(`${t}…`) });
+  const raw = path.join(dir, 'work-hf.mp4');
+  await compose.renderHF({ hf, out: raw, onStep: t => say(`${t}…`) });
+  return finish({ dir, video: raw });
+}
+// silent AAC (music is v1c), faststart, cover
+async function finish({ dir, video }) {
+  const ffmpeg = findBin('ffmpeg'), short = path.join(dir, 'short.mp4');
+  await compose.run(ffmpeg, ['-y', '-v', 'error', '-i', video, '-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo', '-shortest',
+    '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', short]);
+  await compose.run(ffmpeg, ['-y', '-v', 'error', '-ss', '1', '-i', short, '-frames:v', '1', '-q:v', '3', path.join(dir, 'cover.jpg')]);
+  fs.rmSync(video, { force: true });
+  return { short, duration: await probeDuration(findBin('ffprobe'), short) };
+}
+// v1a path: cursor-follow crop + typewriter cards via plain ffmpeg. Used when the smart path can't run
+async function simpleRender({ dir, edl, project }) {
+  say('Drawing the overlays…');
+  const cardDir = path.join(dir, 'cards'); fs.rmSync(cardDir, { recursive: true, force: true }); fs.mkdirSync(cardDir, { recursive: true });
+  const cardPaths = [];
+  for (const [i, c] of edl.clips.entries()) {
+    if (!c.overlay_prompt) { cardPaths.push(null); continue; }
+    const frames = await cards('prompt', c.overlay_prompt, { project });
+    if (!frames) { cardPaths.push(null); continue; }
+    const d = path.join(cardDir, `c${String(i).padStart(2, '0')}`); fs.mkdirSync(d);
+    frames.forEach((f, k) => fs.writeFileSync(path.join(d, `${String(k).padStart(3, '0')}.png`), Buffer.from(f)));
+    cardPaths.push(d);
+  }
+  const tf = await cards('title', edl.hook_text, { sub: edl.title });
+  const title = tf ? path.join(cardDir, 'title.png') : null;
+  if (tf) fs.writeFileSync(title, Buffer.from(tf[0]));
+  return render({ dir, edl, cards: cardPaths, title, pet: ctx.petPng, onStep: t => say(`${t}…`) });
 }
 
 async function readyDialog(dir, dur, red) {
@@ -250,6 +290,6 @@ const status = () => ({ recording: !!cur && cur.json.state === 'recording', star
 const toggle = () => cur ? stop() : start();
 const openFolder = () => { fs.mkdirSync(ROOT, { recursive: true }); shell.openPath(ROOT); };
 // quitting mid-record: close the file cleanly; the chunks on disk are the footage
-app.on('before-quit', () => { if (cur) { try { fs.closeSync(cur.fd); } catch {} cur.json.state = 'recorded'; try { writeJson(path.join(cur.dir, 'session.json'), cur.json); writeJson(path.join(cur.dir, 'cursor.json'), cur.cursor); writeJson(path.join(cur.dir, 'results.json'), cur.results); } catch {} } });
+app.on('before-quit', () => { if (cur) { try { fs.closeSync(cur.fd); } catch {} cur.json.state = 'recorded'; try { writeJson(path.join(cur.dir, 'session.json'), cur.json); writeJson(path.join(cur.dir, 'cursor.json'), cur.cursor); writeJson(path.join(cur.dir, 'windows.json'), cur.windows); writeJson(path.join(cur.dir, 'results.json'), cur.results); } catch {} } });
 
 module.exports = { init, toggle, start, stop, make, status, openFolder, finishLast, unfinished, ROOT };
