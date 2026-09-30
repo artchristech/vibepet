@@ -186,16 +186,18 @@ function draw(now) {
   // gaze (decided up front so an unchanged frame can skip the repaint)
   const rc = cv.getBoundingClientRect();
   const pxX = rc.left + cx * S, pxY = rc.top + cy * S;
-  let lx = Math.max(-1, Math.min(1, Math.round((cursor.x - pxX) / 90)));
-  let ly = Math.max(-1, Math.min(1, Math.round((cursor.y - pxY) / 110)));
+  const gaze = moving || hovering;                   // calm default: eyes follow the cursor only when you're at the pet
+  let lx = gaze ? Math.max(-1, Math.min(1, Math.round((cursor.x - pxX) / 90))) : 0;
+  let ly = gaze ? Math.max(-1, Math.min(1, Math.round((cursor.y - pxY) / 110))) : 0;
   if (st === 'working' || (ex >= 0 && ex < EX.antic)) { lx = 0; ly = 1; }
   if (st === 'sleeping') lx = ly = 0;
-  if (moving && now > nextBlink) { blinkUntil = now + 110; nextBlink = now + rand(2500, 5500); }
-  const blink = moving && now < blinkUntil;
+  const blinks = moving || !reduceMotion;              // calm default keeps only a slow blink; reduced motion = fully still
+  if (blinks && now > nextBlink) { blinkUntil = now + (moving ? 110 : 160); nextBlink = now + (moving ? rand(2500, 5500) : rand(6000, 10000)); }
+  const blink = blinks && now < blinkUntil && st !== 'sleeping';
   const shades = lvl >= 5 && hovering && !['sleeping', 'alert', 'waiting'].includes(st);
   const active = moving || parts.length > 0 || now < haloUntil;
   const pet = CAST[snap?.pet] ? snap.pet : null;
-  const key = [pet, st, sig, pips.join('.'), lx, ly, cy, lvl, shades, snap?.game && snap.fuel, snap?.game && snap.mood].join();
+  const key = [pet, st, sig, pips.join('.'), lx, ly, cy, lvl, shades, blink, snap?.game && snap.fuel, snap?.game && snap.mood].join();
   if (!active && key === lastKey) return false;
   if (pet && active && key === lastKey && now - lastCast < 33) return true;   // cast pets animate at ~30fps like the site
   lastKey = key;
