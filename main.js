@@ -1,5 +1,5 @@
 // vibepet — a desktop pet that watches your coding agents and your repo.
-const { app, BrowserWindow, ipcMain, screen, Menu, dialog, safeStorage, Notification, clipboard, shell, powerMonitor, globalShortcut, Tray } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, Menu, dialog, safeStorage, Notification, clipboard, shell, powerMonitor, globalShortcut, Tray, systemPreferences } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -27,7 +27,7 @@ const PETS = [['net', 'Net'], ['slime', 'Slime'], ['cat', 'Cat'], ['sprout', 'Sp
 const DEFAULTS = {
   name: 'Net', xp: 0, fuel: 80, mood: 70, commits: 0, quickDraws: 0,
   repo: null, pos: null, model: 'claude-sonnet-5', keyEnc: null, keyPlain: null, engine: null,   // engine: null = auto (Claude Code login first), 'claude' | 'key'
-  contentTarget: 45, deleteRaw: false, size: 'm', muted: false, onTop: true, hotkey: 'Control+Alt+Command+J', animations: false, game: false, pet: 'net', goals: {}, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
+  contentTarget: 45, deleteRaw: false, size: 'm', alerts: 'done', feel: null, setupDone: false, muted: false, onTop: true, hotkey: 'Control+Alt+Command+J', animations: false, game: false, pet: 'net', goals: {}, born: Date.now(), lastDecay: Date.now(), lastSnack: 0, lastPet: 0,
 };
 let state, saveTimer, win, sessionKey = null;
 const statePath = () => path.join(app.getPath('userData'), 'state.json');
@@ -71,7 +71,10 @@ function gainXP(n) {
 }
 
 const send = (ch, data) => win && !win.isDestroyed() && win.webContents.send(ch, data);
+// alert level (Setup): 'blocked' = only what needs you · 'done' = + finished work · 'all' = + drift recoveries, localhost changes
+const QUIET = { blocked: new Set(['agentDone', 'goalBack', 'localhost']), done: new Set(['localhost']), all: new Set() };
 function emit(kind, text, { notify = false, ...extra } = {}) {
+  if (QUIET[state.alerts || 'done']?.has(kind)) return;
   send('event', { kind, text, ...extra });
   if (notify && !state.muted && Notification.isSupported()) banner(text, extra.id);
 }
@@ -117,7 +120,7 @@ function transition(s, prev) {
   const { name, id, phase } = s, was = prev.phase === 'working' || prev.phase === 'stalled';
   if (phase === 'ready' && was) {
     emit('agentDone', `${name} is done`, { agent: name, id });
-    if (away()) queueDone({ name, id });
+    if (away() && state.alerts !== 'blocked') queueDone({ name, id });
   } else if (phase === 'waiting' && was) {
     emit('agentNeeds', `${name} has a question`, { agent: name, id, notify: away() });
   } else if (phase === 'stalled' && prev.phase === 'working') {
@@ -347,6 +350,8 @@ function snapshot() {
       receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
     git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, pet: state.pet, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto', rec: content.status(), scale: petScale(),
+    size: state.size || 'm', alerts: state.alerts || 'done', feel: state.feel, setupDone: !!state.setupDone, pets: PETS, perms: perms(),
+    servers: local.servers.slice(0, 8).map(s => ({ port: s.port, pid: s.pid, name: s.title || ports.label(s), http: s.http !== false })),
     local: { servers: local.servers.length, procs: local.procs.length, tasks: local.tasks.filter(t => t.running).length,
       names: local.servers.slice(0, 4).map(s => `${s.kind} :${s.port}`) },
   };
@@ -384,6 +389,44 @@ function localMenu() {
       toolTip: t.file, click: () => shell.showItemInFolder(t.file) })) : [{ label: 'none', enabled: false }]),
   ] };
 }
+
+// ---------- Home panel + Setup ----------
+// permissions Net can use, checked live (no prompt): Accessibility = exact tab jumps + approve/reply; Screen = shorts
+const perms = () => process.platform !== 'darwin' ? { ax: true, screen: true } : {
+  ax: systemPreferences.isTrustedAccessibilityClient(false), screen: systemPreferences.getMediaAccessStatus('screen') === 'granted' };
+const PANES = { ax: 'Privacy_Accessibility', screen: 'Privacy_ScreenCapture' };
+ipcMain.on('open-perm', (_, k) => { if (k === 'ax') systemPreferences.isTrustedAccessibilityClient(true); if (PANES[k]) shell.openExternal(`x-apple.systempreferences:com.apple.preference.security?${PANES[k]}`); });
+// feel presets set several knobs at once; everything stays individually editable in the menu
+const FEELS = { calm: { animations: false }, lively: { animations: true }, still: { animations: false } };
+ipcMain.on('set-prefs', (_, p = {}) => {
+  if (p.pet && PETS.some(([id]) => id === p.pet)) state.pet = p.pet;
+  if (p.size && SIZES[p.size]) { const h0 = petH(); state.size = p.size; petTop += h0 - petH(); if (virt) moveTo(virt); }
+  if (p.feel && FEELS[p.feel]) { state.feel = p.feel; Object.assign(state, FEELS[p.feel]); }
+  if (['blocked', 'done', 'all'].includes(p.alerts)) state.alerts = p.alerts;
+  if (p.setupDone) state.setupDone = true;
+  save(); send('tick', snapshot());
+});
+ipcMain.handle('today', () => today());
+ipcMain.on('local-open', (_, port) => { if (Number.isInteger(port)) shell.openExternal(`http://localhost:${port}`); });
+ipcMain.on('local-stop', async (_, pid) => {
+  const s = local.servers.find(x => x.pid === pid); if (!s) return;
+  const r = await dialog.showMessageBox({ type: 'warning', buttons: ['Stop', 'Cancel'], defaultId: 1, cancelId: 1, message: `Stop ${ports.label(s)} on :${s.port}?`, detail: `pid ${pid}` });
+  if (r.response === 0) { send('event', { kind: 'localhost', text: await ports.stop(pid) }); setTimeout(() => ports.poll(0), 800); }
+});
+// approve / reply from the panel: bring that exact tab forward, then type into it. Refuses unless the tab was
+// found for sure, so keystrokes can never land in the wrong window.
+ipcMain.handle('send-to', async (_, { id, text }) => {
+  const s = sessions.get(id); if (!s) return { ok: false, why: 'gone' };
+  if (!perms().ax) { shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility'); return { ok: false, why: 'Allow Accessibility first' }; }
+  try {
+    const procs = await psAll(), loc = await locateSession(s, procs), host = loc && hostApp(loc.pid, procs), bid = host && await bundleId(host);
+    if (!bid || await focusTty(bid, loc.tty, s.title ? `✳ ${s.title}` : null) !== true) return { ok: false, why: "couldn't find its tab" };
+    const esc = t => t.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+    const script = text ? `tell application "System Events"\nkeystroke "${esc(String(text).slice(0, 2000))}"\nkey code 36\nend tell` : 'tell application "System Events" to key code 36';   // approve = Enter on the highlighted "Yes"
+    await run('/usr/bin/osascript', ['-e', script], 5000);
+    return { ok: true };
+  } catch (e) { return { ok: false, why: e.message }; }
+});
 
 // ---------- chat ----------
 // The keychain is touched only by getKey(), only at send time, and only when the saved key is the
@@ -669,7 +712,8 @@ function buildMenu() {
       { label: 'Choose a repo…', type: 'radio', checked: !!state.repo, click: pickRepo },
     ] },
     localMenu(),
-    { label: 'Chat…', click: () => emit('openChat') },
+    { label: 'Open Home', click: () => send('event', { kind: 'openChat' }) },
+    { label: 'Setup…', click: () => send('event', { kind: 'openSetup' }) },
     { label: content.status().recording ? 'Stop & make short' : content.status().busy ? 'Making your short…' : 'Start content session', enabled: !content.status().busy && !content.status().starting, accelerator: 'Control+Alt+Command+R', click: () => content.toggle() },
     { label: 'Finish last session', visible: !content.status().recording && !content.status().busy && !!content.unfinished(), click: () => content.finishLast() },
     { label: 'Open shorts folder', click: () => content.openFolder() },

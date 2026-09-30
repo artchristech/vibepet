@@ -217,7 +217,7 @@ function draw(now) {
   let ly = gaze ? Math.max(-1, Math.min(1, Math.round((cursor.y - pxY) / 110))) : 0;
   if (st === 'working' || (ex >= 0 && ex < EX.antic)) { lx = 0; ly = 1; }
   if (st === 'sleeping') lx = ly = 0;
-  const blinks = moving || !reduceMotion;              // calm default keeps only a slow blink; reduced motion = fully still
+  const blinks = (moving || !reduceMotion) && snap?.feel !== 'still';   // calm keeps a slow blink; reduced motion / Still = fully still
   if (blinks && now > nextBlink) { blinkUntil = now + (moving ? 110 : 160); nextBlink = now + (moving ? rand(MOTION.blinkMin, MOTION.blinkMax) : rand(6000, 10000)); }
   const blink = blinks && now < blinkUntil && st !== 'sleeping';
   const shades = lvl >= 5 && hovering && !['sleeping', 'alert', 'waiting'].includes(st);
@@ -433,6 +433,7 @@ api.on('cursor', c => { cursor = c; wake(); });
 api.on('tick', s => {
   const first = !snap;
   snap = s; wake();
+  if (chatOpen && !sending) renderHome();
   if (s.scale && s.scale !== +document.documentElement.style.getPropertyValue('--pet-scale')) { document.documentElement.style.setProperty('--pet-scale', s.scale); api.petTop?.(cv.offsetTop); }   // Small / Medium / Large
   renderHud();
   if (first) {                                  // speak at launch only when someone is actually waiting on you
@@ -724,7 +725,7 @@ document.addEventListener('mouseup', e => {
   const d = down; down = null;
   if (moved > 4) { say(pick(['wheee', 'new desk, who dis', 'ooh nice view']), { ms: 1800 }); return; }
   if (d.detail >= 2) { clearTimeout(jumpT); openChat(); return; }
-  clearTimeout(jumpT); jumpT = setTimeout(() => menuOpen ? closeMenu() : openMenu(), 250);   // waits out a double-click
+  clearTimeout(jumpT); jumpT = setTimeout(() => chatOpen ? closeChat() : openChat(), 220);   // one click = Home (waits out a double-click)
 });
 cv.addEventListener('contextmenu', e => { e.preventDefault(); api.menu(); });
 
@@ -789,6 +790,7 @@ async function openChat() {
   $('chatName').textContent = snap?.name || 'Net';
   $('chatMeta').textContent = [g?.root ? `${g.name}${g.branch ? '/' + g.branch : ''}` : 'no repo', via === 'claude' ? 'claude code' : 'api key'].join(' · ');
   $('chat').classList.toggle('fresh', !$('msgs').children.length);
+  renderHome();
   // the OS keychain prompt comes on the first send: say so first, so it's expected rather than alarming
   if (via === 'key-locked' && !keyExplained) { keyExplained = true; addMsg('pet', 'macOS will ask to unlock the API key you saved when you send. It stays encrypted on this Mac.', 'note'); }
 }
@@ -862,10 +864,11 @@ $('chatForm').onsubmit = e => {
   e.preventDefault();
   const v = $('chatInput').value.trim();
   if (!v) return;
-  $('chatInput').value = ''; $('chatSend').disabled = true;
+  $('chatInput').value = ''; $('chatSend').disabled = true; $('slash').classList.add('hidden');
+  if (v.startsWith('/')) return command(v);
   send(v);
 };
-$('chatInput').addEventListener('input', e => { $('chatSend').disabled = !e.target.value.trim(); });
+$('chatInput').addEventListener('input', e => { const v = e.target.value; $('chatSend').disabled = !v.trim(); slashHint(v); });
 $('chips').onclick = e => { const m = e.target.closest('button')?.dataset.mode; if (m) send(null, m); };
 $('keyForm').onsubmit = async e => {
   e.preventDefault();
@@ -882,3 +885,105 @@ $('renameForm').onsubmit = e => {
   if (n) { api.rename(n); addMsg('pet', `${n}. I love it.`); }
   $('renameForm').classList.add('hidden');
 };
+
+
+// ================= Home: one panel for everything (Now + chat + command bar) =================
+// Now = every live session with its actions, recording, localhost. Chat sits under it; the input doubles as a command bar.
+const byUrgency = () => [...(snap?.agents || [])].sort((a, b) => RANK.indexOf(SIG[a.phase]) - RANK.indexOf(SIG[b.phase]) || b.since - a.since);
+let replyOpen = null;   // session id whose inline reply box is open
+function renderHome() {
+  if (!snap) return;
+  const setup = !snap.setupDone || setupForced;
+  $('setup').classList.toggle('hidden', !setup); $('now').classList.toggle('hidden', setup);
+  if (setup) return renderSetup();
+  if ($('now').contains(document.activeElement) && document.activeElement.tagName === 'INPUT') return;   // don't wipe a reply mid-typing
+  const rows = byUrgency().slice(0, 8).map(a => {
+    const sig = SIG[a.phase], g = a.goal;
+    const acts = [
+      a.phase === 'stalled' ? `<button data-do="approve" title="Press Enter in its tab (the highlighted Yes)">Approve</button>` : '',
+      a.phase === 'waiting' ? `<button data-do="reply">Reply</button>` : '',
+      api.theater ? `<button data-do="replay" title="Replay this session">▶</button>` : '',
+      g && !g.done ? `<button data-do="done" title="Mark goal done">✓</button>` : '',
+      `<button data-do="goal" title="Set goal">◎</button>`,
+    ].join('');
+    return `<div class="nr ${sig}" data-id="${esc(a.id)}"><i class="tl" style="background:${TL[sig]}"></i>
+      <div class="nm"><b>${esc(a.title || a.name)}</b><small>${esc(a.name)} · ${esc(phaseTime(a, sig))}</small>
+      ${g ? `<span class="ng ${g.done ? 'done' : g.verdict || ''}">${g.done ? '✓' : '◎'} ${esc(g.text)}</span>` : ''}
+      ${a.ask && (sig === 'needs' || sig === 'stuck') ? `<span class="na">${esc(a.ask)}</span>` : ''}</div>
+      <div class="nb">${acts}</div>
+      ${replyOpen === a.id ? `<form class="nrep"><input placeholder="Reply to ${esc(a.title || a.name)}…" maxlength="2000"><button>Send</button></form>` : ''}</div>`;
+  }).join('') || '<div class="nempty">No live sessions. Start Claude Code anywhere and I’ll pick it up.</div>';
+  const rs = snap.rec || {};
+  const rec = `<button data-do="rec" class="chip ${rs.recording ? 'on' : ''}" ${rs.busy || rs.starting ? 'disabled' : ''}>${rs.recording ? '● Stop & make short' : rs.busy ? 'Making your short…' : '● Record a short'}</button>`;
+  const sv = (snap.servers || []).map(s => `<span class="srv" data-pid="${s.pid}" data-port="${s.port}"><button data-do="open" ${s.http ? '' : 'disabled'} title="Open">:${s.port} ${esc(s.name)}</button><button data-do="stop" title="Stop…">✕</button></span>`).join('');
+  $('now').innerHTML = `<div class="nlist">${rows}</div><div class="nfoot">${rec}<button data-do="today" class="chip">Today</button>${sv ? `<div class="srvs">${sv}</div>` : ''}</div>`;
+  const f = $('now').querySelector('.nrep');
+  if (f) { const inp = f.querySelector('input'); inp.focus(); f.onsubmit = async e => { e.preventDefault(); const id = replyOpen; replyOpen = null; const r = await api.sendTo(id, inp.value); if (!r.ok) addMsg('pet', `Couldn't send: ${r.why}`, 'note'); renderHome(); }; }
+}
+$('now').addEventListener('click', async e => {
+  const b = e.target.closest('button[data-do]'), row = e.target.closest('.nr'), id = row?.dataset.id;
+  const a = id && (snap?.agents || []).find(x => x.id === id);
+  if (!b) { if (a && !e.target.closest('form')) jumpTo(a); return; }   // row click = go to its tab
+  const d = b.dataset.do, srv = b.closest('.srv');
+  if (d === 'approve') { const r = await api.sendTo(id, null); if (!r.ok) addMsg('pet', `Couldn't approve: ${r.why}`, 'note'); }
+  else if (d === 'reply') { replyOpen = replyOpen === id ? null : id; renderHome(); }
+  else if (d === 'replay') api.theater?.(id);
+  else if (d === 'done') api.goalDone(id);
+  else if (d === 'goal') { $('chatInput').value = `/goal ${a?.goal && !a.goal.auto ? a.goal.text : ''}`; goalFor = id; $('chatInput').focus(); slashHint($('chatInput').value); }
+  else if (d === 'rec') api.recToggle();
+  else if (d === 'today') addMsg('pet', await api.today(), 'note');
+  else if (d === 'open') api.localOpen(+srv.dataset.port);
+  else if (d === 'stop') api.localStop(+srv.dataset.pid);
+});
+$('homeMore').onclick = () => api.menu();
+
+// ---------- command bar ----------
+let goalFor = null;   // session a "/goal" targets (set by its ◎), else the most urgent one
+const CMDS = [
+  ['/record', 'start or stop a short'], ['/goal <text>', 'set the goal of a session'], ['/jump <name>', 'go to a session’s tab'],
+  ['/replay <name>', 'replay a session'], ['/stop <port>', 'stop a localhost server'], ['/today', 'your day book'], ['/setup', 'quick setup'], ['/settings', 'all settings'],
+];
+function slashHint(v) {
+  const on = v.startsWith('/') && !v.includes(' ');
+  $('slash').classList.toggle('hidden', !on);
+  if (on) $('slash').innerHTML = CMDS.filter(([c]) => c.startsWith(v.split(' ')[0])).map(([c, d]) => `<button data-cmd="${esc(c.split(' ')[0])}"><b>${esc(c)}</b> ${esc(d)}</button>`).join('') || '<small>no such command</small>';
+}
+$('slash').onclick = e => { const c = e.target.closest('[data-cmd]')?.dataset.cmd; if (c) { $('chatInput').value = c + ' '; $('chatInput').focus(); slashHint(c + ' '); $('chatSend').disabled = false; } };
+const findSession = q => { q = (q || '').toLowerCase().trim(); const all = byUrgency(); return q ? all.find(a => `${a.title || ''} ${a.name}`.toLowerCase().includes(q)) : all[0]; };
+async function command(v) {
+  const [cmd, ...rest] = v.split(' '), arg = rest.join(' ').trim();
+  if (cmd === '/record') api.recToggle();
+  else if (cmd === '/goal') { const a = (goalFor && (snap?.agents || []).find(x => x.id === goalFor)) || findSession(); goalFor = null; if (a) { api.setGoal(a.id, arg); addMsg('pet', arg ? `Goal for ${a.title || a.name}: ${arg}` : `Goal for ${a.title || a.name} reset to its first prompt.`, 'note'); } }
+  else if (cmd === '/jump') { const a = findSession(arg); a ? jumpTo(a) : addMsg('pet', `No session matches “${arg}”.`, 'note'); }
+  else if (cmd === '/replay') { const a = findSession(arg); a && api.theater ? api.theater(a.id) : addMsg('pet', api.theater ? `No session matches “${arg}”.` : 'Replay is coming in the next build.', 'note'); }
+  else if (cmd === '/stop') { const s = (snap?.servers || []).find(x => String(x.port) === arg.replace(':', '')); s ? api.localStop(s.pid) : addMsg('pet', `Nothing listening on ${arg}.`, 'note'); }
+  else if (cmd === '/today') addMsg('pet', await api.today(), 'note');
+  else if (cmd === '/setup') { setupForced = true; renderHome(); }
+  else if (cmd === '/settings') api.menu();
+  else addMsg('pet', `Unknown command ${cmd}. Type / to see them.`, 'note');
+  renderHome();
+}
+
+// ---------- quick setup: one card, every step optional ----------
+let setupForced = false;
+const pick1 = (name, opts, cur) => `<div class="sq"><label>${name}</label><div class="seg">${opts.map(([v, l, t]) => `<button data-k="${name.toLowerCase()}" data-v="${v}" class="${v === cur ? 'on' : ''}" ${t ? `title="${esc(t)}"` : ''}>${esc(l)}</button>`).join('')}</div></div>`;
+function renderSetup() {
+  const p = snap.perms || {};
+  $('setup').innerHTML = `<h3>Quick setup</h3><p class="dim">30 seconds. Everything here can be changed later.</p>
+    ${pick1('Pet', (snap.pets || []).map(([id, l]) => [id, l]), snap.pet)}
+    ${pick1('Size', [['s', 'Small'], ['m', 'Medium'], ['l', 'Large']], snap.size)}
+    ${pick1('Feel', [['calm', 'Calm', 'still pet, gentle cues'], ['lively', 'Lively', 'animated'], ['still', 'Still', 'no motion at all']], snap.feel || (snap.animations ? 'lively' : 'calm'))}
+    ${pick1('Alerts', [['blocked', 'Only when blocked', 'questions + approvals'], ['done', '+ Finished', 'also when a session is done'], ['all', 'Everything', '+ drift recoveries, localhost changes']], snap.alerts)}
+    <div class="sq"><label>Permissions</label><div class="perm">
+      <button data-perm="ax" class="${p.ax ? 'ok' : ''}">${p.ax ? '✓' : '○'} Accessibility <small>exact tab jumps, approve & reply</small></button>
+      <button data-perm="screen" class="${p.screen ? 'ok' : ''}">${p.screen ? '✓' : '○'} Screen Recording <small>shorts</small></button></div></div>
+    <div class="sq"><label>Keys</label><div class="dim">⌃⌥⌘J jump to who needs you · ⌃⌥⌘R record a short</div></div>
+    <div class="sdone"><button data-done="1" class="primary">Done</button></div>`;
+}
+$('setup').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.k) { const k = b.dataset.k === 'alerts' ? 'alerts' : b.dataset.k; api.setPrefs({ [k]: b.dataset.v }); }
+  else if (b.dataset.perm) api.openPerm(b.dataset.perm);
+  else if (b.dataset.done) { setupForced = false; api.setPrefs({ setupDone: true }); }
+});
+api.on('event', e => { if (e.kind === 'openSetup') { setupForced = true; openChat(); } });
