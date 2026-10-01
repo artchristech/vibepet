@@ -1,4 +1,4 @@
-// node test/content.test.js — redaction, prompt tap, deterministic edit list; with ffmpeg present, a real render.
+// node test/content.test.js — redaction, prompt tap, deterministic edit list; VIBEPET_RENDER_TEST=1 adds a real render.
 const assert = require('assert');
 const fs = require('fs'), os = require('os'), path = require('path');
 const { execFileSync } = require('child_process');
@@ -39,20 +39,32 @@ const many = Array.from({ length: 30 }, (_, i) => ({ t: 20 + i * 100, text: `pro
 assert(directFallback({ prompts: many, duration: 3200 }).clips.reduce((n, c) => n + outLen(c), 0) <= 60);
 console.log('content edl ok');
 
-// render: synthetic 10-minute-ish screen (fast: 1280x800, 12fps) through the real pipeline
-let ff; try { ff = execFileSync('/usr/bin/which', ['ffmpeg'], { encoding: 'utf8' }).trim(); } catch {}
-if (!ff || process.env.SKIP_RENDER) { console.log('render skipped (no ffmpeg)'); process.exit(0); }
-const { render } = require('../content/render');
-const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'vibepet-short-'));
-execFileSync(ff, ['-v', 'error', '-f', 'lavfi', '-i', 'testsrc2=size=1280x800:rate=12:duration=600', '-c:v', 'libvpx-vp9', '-deadline', 'realtime', '-cpu-used', '8', '-b:v', '300k', path.join(dir, 'raw.webm')]);
-const card = path.join(dir, 'card'); fs.mkdirSync(card);
-execFileSync(ff, ['-v', 'error', '-f', 'lavfi', '-i', 'color=c=0x0e0f14:size=1000x200:rate=15:duration=1.4', path.join(card, '%03d.png')]);
-const t0 = Date.now();
-render({ dir, edl: e, cards: e.clips.map(c => c.overlay_prompt ? card : null), title: null, pet: path.join(__dirname, '..', 'content', 'net.png') }).then(out => {
-  const probe = JSON.parse(execFileSync(ff.replace(/ffmpeg$/, 'ffprobe'), ['-v', 'error', '-show_streams', '-show_format', '-of', 'json', out.short], { encoding: 'utf8' }));
-  const v = probe.streams.find(s => s.codec_type === 'video'), a = probe.streams.find(s => s.codec_type === 'audio');
-  assert.deepStrictEqual([v.codec_name, v.width, v.height, a.codec_name], ['h264', 1080, 1920, 'aac']);
-  assert(out.duration >= 30 && out.duration <= 60.5, `duration ${out.duration}`);
-  assert(fs.existsSync(path.join(dir, 'cover.jpg')));
-  console.log(`render ok: ${out.duration.toFixed(1)}s in ${((Date.now() - t0) / 1000).toFixed(1)}s → ${out.short}`);
-}).catch(err => { console.error(err); process.exit(1); });
+// render: the real pipeline (system ffmpeg + VideoToolbox) over a synthetic 10-minute screen recording. That is
+// minutes of CPU on a busy machine, so it stays out of the `npm test` gate: VIBEPET_RENDER_TEST=1 (npm run test:render).
+// VIBEPET_RENDER_KEEP=1 keeps the output folder and prints its path.
+const { render, findBin, run } = require('../content/render');
+const ff = findBin('ffmpeg'), ffprobe = findBin('ffprobe');
+if (!process.env.VIBEPET_RENDER_TEST || process.env.SKIP_RENDER || !ff || !ffprobe) {
+  console.log(`render skipped (${!ff || !ffprobe ? 'no ffmpeg' : 'opt-in: VIBEPET_RENDER_TEST=1 or npm run test:render'})`);
+} else {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'vibepet-short-')), keep = !!process.env.VIBEPET_RENDER_KEEP;
+  // a failed or killed run leaves nothing behind: on exit render.js kills its ffmpeg children, and the scratch dir goes
+  process.on('exit', () => { if (!keep) fs.rmSync(dir, { recursive: true, force: true }); });
+  for (const sig of ['SIGINT', 'SIGTERM']) process.once(sig, () => process.exit(128 + os.constants.signals[sig]));
+  (async () => {
+    // what the recorder writes on a Mac: H.264 in WebM (Matroska), a keyframe every 2 s. Async, so a signal can still
+    // reach the handlers above (execFileSync blocked them and stranded the encoder when the runner gave up)
+    await run(ff, ['-v', 'error', '-f', 'lavfi', '-i', 'testsrc2=size=1280x800:rate=12:duration=600',
+      '-c:v', 'h264_videotoolbox', '-b:v', '300k', '-g', '24', '-f', 'matroska', path.join(dir, 'raw.webm')]);
+    const card = path.join(dir, 'card'); fs.mkdirSync(card);
+    await run(ff, ['-v', 'error', '-f', 'lavfi', '-i', 'color=c=0x0e0f14:size=1000x200:rate=15:duration=1.4', path.join(card, '%03d.png')]);
+    const t0 = Date.now();
+    const out = await render({ dir, edl: e, cards: e.clips.map(c => c.overlay_prompt ? card : null), title: null, pet: path.join(__dirname, '..', 'content', 'net.png') });
+    const probe = JSON.parse(execFileSync(ffprobe, ['-v', 'error', '-show_streams', '-show_format', '-of', 'json', out.short], { encoding: 'utf8' }));
+    const v = probe.streams.find(s => s.codec_type === 'video'), a = probe.streams.find(s => s.codec_type === 'audio');
+    assert.deepStrictEqual([v.codec_name, v.width, v.height, a.codec_name], ['h264', 1080, 1920, 'aac']);
+    assert(out.duration >= 30 && out.duration <= 60.5, `duration ${out.duration}`);
+    assert(fs.existsSync(path.join(dir, 'cover.jpg')));
+    console.log(`render ok: ${out.duration.toFixed(1)}s in ${((Date.now() - t0) / 1000).toFixed(1)}s${keep ? ` → ${out.short}` : ''}`);
+  })().catch(err => { console.error(err); process.exitCode = 1; });
+}

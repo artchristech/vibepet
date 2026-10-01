@@ -12,9 +12,15 @@ function findBin(name) {
   try { return execFileSync('/usr/bin/which', [name], { encoding: 'utf8' }).trim() || null; } catch { return null; }
 }
 
+// every ffmpeg/ffprobe started here dies with this process: quitting mid-render (or a killed test run) must not
+// leave an encoder burning CPU for minutes with nobody left to read its output
+const live = new Set();
+process.on('exit', () => { for (const p of live) try { p.kill('SIGKILL'); } catch {} });
+function track(p) { live.add(p); const drop = () => live.delete(p); p.once('close', drop); p.once('error', drop); return p; }
+
 function run(bin, args, { cwd, timeout = 10 * 60e3 } = {}) {
   return new Promise((res, rej) => {
-    const p = spawn(bin, args, { cwd, stdio: ['ignore', 'ignore', 'pipe'] });
+    const p = track(spawn(bin, args, { cwd, stdio: ['ignore', 'ignore', 'pipe'] }));
     let err = '';
     p.stderr.on('data', d => { err = (err + d).slice(-4000); });
     const t = setTimeout(() => p.kill('SIGKILL'), timeout);
@@ -25,7 +31,7 @@ function run(bin, args, { cwd, timeout = 10 * 60e3 } = {}) {
 
 async function probeDuration(ffprobe, file) {
   const out = await new Promise((res, rej) => {
-    const p = spawn(ffprobe, ['-v', 'error', '-show_entries', 'format=duration', '-of', 'default=nw=1:nk=1', file]);
+    const p = track(spawn(ffprobe, ['-v', 'error', '-show_entries', 'format=duration', '-of', 'default=nw=1:nk=1', file]));
     let o = ''; p.stdout.on('data', d => o += d); p.on('close', c => c === 0 ? res(o) : rej(new Error('ffprobe failed'))); p.on('error', rej);
   });
   const d = parseFloat(out);
@@ -96,4 +102,4 @@ async function render({ dir, edl, cards = [], title, pet, onStep = () => {} }) {
   return { short, duration: await probeDuration(ffprobe, short) };
 }
 
-module.exports = { render, remux, probeDuration, findBin, clipArgs, W, H };
+module.exports = { render, remux, probeDuration, findBin, clipArgs, run, live, W, H };

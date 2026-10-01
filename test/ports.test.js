@@ -47,7 +47,8 @@ console.log('parsers ok');
 (async () => {   // live, read-only: shape only (whatever is running on this machine)
   const t0 = Date.now(), { servers, procs } = await p.listServers(), tasks = await p.listTasks();
   for (const s of servers) assert(s.pid > 0 && s.port > 0 && s.kind, JSON.stringify(s));
-  for (const t of tasks) assert(t.id && t.name && ['running', 'done', 'completed', 'failed', 'killed', 'stopped'].includes(t.status) || t.status, JSON.stringify(t));
+  // a task's name comes out of a real transcript: a failure reports its shape, never its text
+  for (const t of tasks) assert(t.id && t.name && ['running', 'done', 'completed', 'failed', 'killed', 'stopped'].includes(t.status) || t.status, JSON.stringify({ id: !!t.id, name: !!t.name, status: t.status }));
   console.log('live ok', { ms: Date.now() - t0, servers: servers.map(s => `${s.kind}:${s.port}${s.title ? ' "' + s.title + '"' : ''}`).slice(0, 6),
     procs: procs.length, tasks: tasks.filter(t => t.running).length + ' running / ' + tasks.length });
 })().catch(e => { console.error(e); process.exit(1); });

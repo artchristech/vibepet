@@ -10,16 +10,32 @@ const { judge, commitMatches } = require('./goal');
 const content = require('./content');
 const ports = require('./ports');
 const theater = require('./theater');
+const overrides = require('./overrides');
 
 const W = 660, H = 960;
 const { place, areaFor, minY } = require('./place');
 let petTop = 276;   // Net's top inside the window (panels-above layout); the renderer reports the real value
 let virt = null, below = false, room = 9999;   // wanted window pos (panels above; may sit above the screen top) + current flip
-const CLAUDE_DIR = path.join(os.homedir(), '.claude', 'projects');
+const CLAUDE_DIR = overrides.projectsDir();   // ~/.claude/projects unless VIBEPET_CLAUDE_DIR moves the root
 const TICK_MS = 3000;
+// VIBEPET_TEST (test/ultra/launch.js): an instance under test never takes the OS focus and never posts to Notification
+// Center: someone is working at this Mac while instances come and go. The harness drives it over CDP, which needs neither.
+const TEST = !!process.env.VIBEPET_TEST;
 
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 app.disableHardwareAcceleration();   // a 224×208 pixel canvas + one CSS capsule: the GPU process costs memory, buys nothing
+if (TEST) {
+  // an accessory app from its first moment: macOS activates a regular app it has just launched, which took the focus
+  // from whoever's window was in front (seen: the user's terminal → Electron on every launch, before any window showed)
+  if (process.platform === 'darwin') app.setActivationPolicy('accessory');
+  app.commandLine.appendSwitch('use-mock-keychain');   // Chromium's Safe Storage key: a mock, no login Keychain read or write
+  // its launcher died (a crashed or SIGKILLed harness): quit rather than linger on screen as an orphan
+  const ppid0 = process.ppid;
+  if (ppid0 > 1) setInterval(() => { if (process.ppid !== ppid0) app.quit(); }, 2000).unref();
+}
+// VIBEPET_USER_DATA: its own state, ledger and single-instance lock — so it must land before the lock is taken
+const USER_DATA = overrides.userData();
+if (USER_DATA) { fs.mkdirSync(USER_DATA, { recursive: true }); app.setPath('userData', USER_DATA); }
 const primary = app.requestSingleInstanceLock();
 if (!primary) app.quit();   // the running pet gets 'second-instance' instead
 
@@ -81,8 +97,9 @@ function emit(kind, text, { notify = false, ...extra } = {}) {
 }
 // a banner is a door: click → that agent's terminal (the renderer's queue decides). Electron drops the click
 // handler once a Notification is GC'd, so each one is held until it closes or is clicked.
-const banners = new Set();
+const banners = new Set(), notes = [];   // notes: what a test instance would have posted (VIBEPET_TEST), newest last
 function banner(body, id, silent = false) {
+  if (TEST) { notes.push({ body, id, silent, at: Date.now() }); if (notes.length > 200) notes.shift(); return null; }
   const n = new Notification({ title: state.name, body, silent }), drop = () => banners.delete(n);
   banners.add(n);
   if (banners.size > 16) banners.delete(banners.values().next().value);   // macOS never fires 'close' for one left in Notification Center
@@ -630,8 +647,10 @@ function createWindow() {
     width: W, height: H, x: pos.x, y: pos.y, frame: false, transparent: true, resizable: false,
     hasShadow: false, alwaysOnTop: state.onTop, skipTaskbar: true, fullscreenable: false, backgroundColor: '#00000000',
     acceptFirstMouse: true,   // Net is never the key window: without this macOS eats the first click to activate him
+    show: !TEST,   // show() activates the app; a test instance appears without taking the focus (showInactive below)
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false },
   });
+  if (TEST) win.showInactive();
   win.setAlwaysOnTop(state.onTop, 'floating');
   win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   win.setIgnoreMouseEvents(true, { forward: true });
@@ -667,7 +686,8 @@ ipcMain.on('drag-end', () => {
   clearInterval(drag.timer); drag = null;
   state.pos = { ...virt }; save();
 });
-ipcMain.on('focus', () => { app.focus({ steal: true }); win.focus(); });
+const takeFocus = () => { if (TEST) return; app.focus({ steal: true }); win.focus(); };   // never under test (see TEST)
+ipcMain.on('focus', takeFocus);
 ipcMain.on('copy', (_, text) => clipboard.writeText(text));
 // click → the terminal tab that session runs in (iTerm2/Terminal), else its app, else copy a resume command.
 // The only place ps/lsof/osascript ever run; nothing is typed into any terminal.
@@ -765,7 +785,7 @@ function buildMenu() {
 }
 ipcMain.on('rec-toggle', () => content.toggle());
 // Theater: replay a session; the player window asks for its own timeline (main owns which file it is)
-function openTheater(file) { app.focus({ steal: true }); theater.open(BrowserWindow, file); }
+function openTheater(file) { if (!TEST) app.focus({ steal: true }); theater.open(BrowserWindow, file, { inactive: TEST }); }
 ipcMain.on('theater', (_, id) => { const s = sessions.get(id); if (s?.file) openTheater(s.file); });
 ipcMain.handle('theater-timeline', e => theater.timeline(theater.fileFor(e.sender)));
 ipcMain.on('menu', () => buildMenu().popup({ window: win }));
@@ -782,11 +802,14 @@ function createTray() {
 
 // ---------- the jump door: a global key walks the renderer's queue (it owns pending()) ----------
 const KEYS = [['⌃⌥⌘J', 'Control+Alt+Command+J'], ['⌥⌘J', 'Alt+Command+J'], ['Off', null]];   // not ⌥Space (Raycast/ChatGPT) or ⌃⌥Space (input source)
+const HOTKEY = overrides.hotkey();   // VIBEPET_HOTKEY: undefined = the saved key, null = 'off', else that accelerator
+const jumpKey = () => HOTKEY === undefined ? state.hotkey : HOTKEY;
 let keyTaken = false;
 function bindKey() {
   globalShortcut.unregisterAll();
+  if (HOTKEY === null) { keyTaken = false; return; }   // 'off': instances run side by side in tests, none may grab a global key
   let ok = true;
-  if (state.hotkey) try { ok = globalShortcut.register(state.hotkey, () => { if (!win.isVisible()) win.showInactive(), send('summon'); send('hotkey'); }); } catch { ok = false; }
+  if (jumpKey()) try { ok = globalShortcut.register(jumpKey(), () => { if (!win.isVisible()) win.showInactive(), send('summon'); send('hotkey'); }); } catch { ok = false; }
   keyTaken = !ok;   // someone else has it: stay quiet, the menu says so
   try { globalShortcut.register('Control+Alt+Command+R', () => content.toggle()); } catch {}   // not ⌘⇧R: that's hard-reload in every browser
 }
@@ -829,7 +852,7 @@ function summonAt(p) {
 }
 function toggleNet(p) { toggledAt = Date.now(); win.isVisible() ? hideNet() : summonAt(p); }
 function hideNet() { send('hide'); setTimeout(() => { if (!win.isDestroyed()) win.hide(); }, 260); }
-function recordGesture() { rec = { samples: [] }; if (!win.isVisible()) send('summon'); win.show(); app.focus({ steal: true }); win.focus(); syncWatch(); recSend({ start: true }); }
+function recordGesture() { rec = { samples: [] }; if (!win.isVisible()) send('summon'); if (TEST) win.showInactive(); else { win.show(); takeFocus(); } syncWatch(); recSend({ start: true }); }
 ipcMain.on('gesture-cancel', () => { rec = null; syncWatch(); });
 
 // "Lost him? Open vibepet again." — a second launch re-homes the running pet and opens its pill once
@@ -852,6 +875,9 @@ app.whenReady().then(() => {
   syncWatch();
   setTimeout(findClaude, 3000);   // so the Chat engine menu knows whether the login exists
   setInterval(tick, TICK_MS);
-  if (process.env.VIBEPET_TEST) globalThis.__vibepet = { banners, banner, bindKey, keyTaken: () => keyTaken };
+  // test hook, VIBEPET_TEST only: test/ultra/launch.js reaches the running app through it (see test/ultra/README.md)
+  if (TEST) globalThis.__vibepet = { banners, banner, notes, bindKey, keyTaken: () => keyTaken, jumpKey,
+    win: () => win, state: () => state, snapshot, tick, require,
+    paths: { claude: overrides.claudeDir(), projects: CLAUDE_DIR, sessions: overrides.sessionsDir(), userData: app.getPath('userData') } };
 });
 app.on('window-all-closed', () => app.quit());
