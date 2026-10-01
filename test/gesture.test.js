@@ -64,13 +64,18 @@ assert(G.trivial([{ x: 0, y: 0 }, { x: 5, y: 3 }]) && G.trivial(Array.from({ len
 assert(JSON.parse(JSON.stringify(trained.circle))[0].p.length === 64, 'templates survive JSON (state.json)');
 
 // ---- summons: free cursor motion anywhere on screen ----
+// A stroke's score doesn't depend on sensitivity, only the bar does: recognize() each stroke once at the most
+// permissive level and read the stricter levels off that same score (re-scoring per level cost ~4x the time).
 const SENS = ['low', 'med', 'high'];
+assert(G.THRESH.high < G.THRESH.med && G.THRESH.med < G.THRESH.low, 'high is the most permissive level');
+const okAt = (r, s) => r.ok && r.score >= G.THRESH[s];
 const recall = Object.fromEntries(SENS.map(s => [s, 0])); let posN = 0; const missBy = {};
 for (const kind of Object.keys(SHAPES)) for (let i = 0; i < 150; i++) {
   const o = opt(kind), loops = o.loops || 1;
   const strokes = cursorRun(u => SHAPES[kind](u, o), { ms: U(450, 900) * loops, scale: U(0.7, 1.6), rot: U(-0.44, 0.44), noise: U(0.5, 3), pauses: Math.floor(rnd() * 3) });
   posN++;
-  for (const s of SENS) if (strokes.some(st => G.recognize(st, trained[kind], s).ok)) recall[s]++; else if (s === 'med') missBy[kind] = (missBy[kind] || 0) + 1;
+  const rs = strokes.map(st => G.recognize(st, trained[kind], 'high'));
+  for (const s of SENS) if (rs.some(r => okAt(r, s))) recall[s]++; else if (s === 'med') missBy[kind] = (missBy[kind] || 0) + 1;
 }
 
 // ---- negatives: what the cursor does all day, through the same segmenter ----
@@ -92,8 +97,9 @@ for (let i = 0; i < 3200; i++) {
   const kind = Object.keys(NEG)[i % Object.keys(NEG).length], [path, ms] = NEG[kind]();
   for (const st of cursorRun(path, { ms, rot: U(0, 6.28), noise: U(0.5, 3), pauses: Math.floor(rnd() * 2) })) {
     negN++;
-    if (G.plausible(st)) for (const [, T] of allT) maxNeg = Math.max(maxNeg, G.score(G.variants(st), T));
-    for (const s of SENS) if (allT.some(([, T]) => G.recognize(st, T, s).ok)) { fp[s]++; if (s === 'med') fpBy[kind] = (fpBy[kind] || 0) + 1; }
+    const rs = allT.map(([, T]) => G.recognize(st, T, 'high'));   // score is 0 unless plausible: the max is over plausible strokes
+    for (const r of rs) maxNeg = Math.max(maxNeg, r.score);
+    for (const s of SENS) if (rs.some(r => okAt(r, s))) { fp[s]++; if (s === 'med') fpBy[kind] = (fpBy[kind] || 0) + 1; }
   }
 }
 
