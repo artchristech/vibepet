@@ -14,7 +14,8 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^44.4.5",
-    "electron-builder": "^26.15.3"
+    "electron-builder": "^26.15.3",
+    "playwright-core": "^1.63.0"
   },
   "productName": "vibepet",
   "homepage": "https://vibepet.net",
