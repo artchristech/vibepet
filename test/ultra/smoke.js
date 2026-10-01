@@ -84,7 +84,7 @@ async function one(name, opts, { home = true } = {}) {
   }
   // 3. two instances at once, different userData: both up together, both answer a click, both close clean
   if (!flag('--no-parallel')) {
-    const p = results.parallel = {};
+    const p = results.parallel = { frontBefore: front() };
     const both = await Promise.allSettled(['a', 'b'].map(() => launch({ root, state: { setupDone: true } })));
     const [a, b] = both.map(x => x.value);
     if (both.some(x => x.status === 'rejected')) { await Promise.all([a, b].filter(Boolean).map(v => v.close())); throw both.find(x => x.reason).reason; }
@@ -99,6 +99,8 @@ async function one(name, opts, { home = true } = {}) {
       p.home = await Promise.all([a, b].map(v => v.openHome()));
       await a.shot(path.join(out, 'parallel-a-home.png')); await b.shot(path.join(out, 'parallel-b-home.png'));
       check(p.home.every(h => h.mode === 'now'), `parallel: Home modes ${p.home.map(h => h.mode)}`);
+      p.frontAfter = front();
+      check(p.frontAfter === p.frontBefore || p.frontAfter === null, `parallel: frontmost app changed ${p.frontBefore} → ${p.frontAfter}`);
     } finally { p.close = await Promise.all([a.close(), b.close()]); }
     check(p.close.every(c => c.how === 'quit' && !c.orphans.length), `parallel: close ${JSON.stringify(p.close)}`);
     console.log(`parallel: pids ${p.pids}, both alive ${p.bothAlive}, homes ${p.home?.map(h => h.mode)}, orphans ${p.close.map(c => c.orphans.length)}`);
