@@ -50,7 +50,7 @@ different userData. It writes PNGs and `smoke.json`, and exits 1 if any check fa
 ## Privacy guard (launch throws before anything starts; `shot()` re-checks before every capture)
 
 - `root`, `root/projects`, `root/sessions` and `userData` must resolve (symlinks followed) inside `~/.vibepet-ultra`.
-- Under `projects/` and `sessions/` (4 levels deep), every symlink must land inside `~/.vibepet-ultra` or in a
+- Under `projects/` and `sessions/` (down to 5 levels), every symlink must land inside `~/.vibepet-ultra` or in a
   fixture-fleet dir (a path segment containing `-vibepet-ultra-fleet-`). `sessions/` may also link a registry
   file `…/sessions/<pid>.json`. That is the fleet layout: `root/.claude/projects/<fleet dir>` →
   `~/.claude/projects/<fleet dir>`.
