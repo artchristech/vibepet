@@ -106,6 +106,83 @@
     .cmd { padding: 12px 12px 12px 16px; gap: 10px; }
   }
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ---------- #what: bird's-eye deck — sessions orbit the pet, one needs you, it answers ---------- */
+  #deck { --mint: #7ef0c1; --yel: #ffcf3f; --dim: #7d8496; margin-top: 8px; }
+  #deck .stage { position: relative; width: min(1100px, 100%); margin: 0 auto; aspect-ratio: 16 / 9; }
+  #deck canvas.px { image-rendering: pixelated; display: block; }
+  @media (max-width: 640px) { #deck .stage { aspect-ratio: 4 / 5; } #deck .tile { transform: scale(.8); } }
+  /* ===== A · Orbit deck: glass tiles on a tilted table, depth of field, Net standing on a light pad ===== */
+  #deck .stage { perspective: 1400px; }
+  #deck .deck { position: absolute; inset: 0 6% 6%; transform: rotateX(48deg); transform-style: preserve-3d; transform-origin: 50% 55%; animation: drift 22s ease-in-out infinite alternate; }
+  @keyframes drift { from { transform: rotateX(48deg) rotateZ(-6deg) } to { transform: rotateX(48deg) rotateZ(6deg) } }
+  #deck .floor { position: absolute; inset: -20%; background:
+      radial-gradient(closest-side, rgba(126,240,193,.10), transparent 70%) center / 60% 60% no-repeat,
+      repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 44px), repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 44px);
+    -webkit-mask-image: radial-gradient(closest-side, #000 40%, transparent); mask-image: radial-gradient(closest-side, #000 40%, transparent); }
+  #deck svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  #deck .pad { position: absolute; left: 50%; top: 50%; width: 170px; height: 170px; margin: -85px 0 0 -85px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(126,240,193,.35), rgba(126,240,193,.06) 45%, transparent 70%); box-shadow: 0 0 0 1px rgba(126,240,193,.25), 0 0 0 26px rgba(126,240,193,.04); }
+  #deck .tile { position: absolute; width: 178px; height: 112px; margin: -56px 0 0 -89px; border-radius: 16px; padding: 12px 13px;
+    background: linear-gradient(160deg, rgba(40,46,60,.85), rgba(16,18,25,.9)); border: 1px solid rgba(255,255,255,.09);
+    box-shadow: 0 24px 50px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.08); transition: transform .7s cubic-bezier(.2,.9,.3,1), border-color .4s, box-shadow .5s, filter .6s; }
+  #deck .tile .n { display: flex; align-items: center; gap: 7px; font: 650 12.5px -apple-system, system-ui; }
+  #deck .tile .n i { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 10px var(--mint); }
+  #deck .tile .ring { position: absolute; right: 11px; top: 10px; width: 26px; height: 26px; }
+  #deck .tile .bars { position: absolute; left: 13px; right: 13px; bottom: 12px; height: 28px; display: flex; align-items: flex-end; gap: 3px; }
+  #deck .tile .bars span { flex: 1; border-radius: 2px; background: rgba(143,211,255,.55); transition: height .45s; }
+  #deck .tile .bars span.e { background: rgba(126,240,193,.7); } #deck .tile .bars span.x { background: rgba(255,92,108,.75); }
+  #deck .tile.far { filter: blur(1.2px) brightness(.75); }
+  #deck .tile.need { border-color: rgba(255,207,63,.6); box-shadow: 0 30px 70px rgba(0,0,0,.6), 0 0 50px rgba(255,207,63,.18); filter: none; }
+  #deck .tile.need .n i { background: var(--yel); box-shadow: 0 0 14px var(--yel); animation: beat .9s ease-in-out infinite; }
+  #deck .tile.lift { transform: translateZ(110px) scale(1.1); filter: none; }
+  #deck .tile.ok { border-color: rgba(126,240,193,.55); box-shadow: 0 30px 70px rgba(0,0,0,.6), 0 0 50px rgba(126,240,193,.2); }
+  @keyframes beat { 50% { transform: scale(1.6) } }
+  #deck .anchor { position: absolute; left: 50%; top: 50%; width: 1px; height: 1px; }
+  /* plain 2D, outside the 3D table (Safari drops canvases inside preserve-3d): parked where the table's centre projects */
+  #deck .hub { position: absolute; left: 50%; top: 50%; width: 150px; transform: translate(-50%, -84%); z-index: 5; pointer-events: none; filter: drop-shadow(0 12px 14px rgba(0,0,0,.5)); }
+  #deck .hub canvas { width: 150px; }
+  #deck .say { position: absolute; left: 50%; bottom: 100%; margin-bottom: -6px; transform: translateX(-50%) scale(.9); opacity: 0; white-space: nowrap; padding: 8px 13px; border-radius: 12px;
+    background: rgba(18,20,26,.95); border: 1px solid rgba(255,255,255,.12); color: #eef0f5; font: 600 14px -apple-system, system-ui; box-shadow: 0 10px 30px rgba(0,0,0,.5); transition: opacity .25s, transform .25s; }
+  #deck .say.on { opacity: 1; transform: translateX(-50%) scale(1); }
+  #deck .say.gold { border-color: rgba(255,207,63,.6); color: #ffe39a; } #deck .say.mint { border-color: rgba(126,240,193,.55); color: #b8ffe2; }
+  #deck .say::after { content: ''; position: absolute; left: 50%; top: 100%; margin-left: -6px; border: 6px solid transparent; border-top-color: rgba(18,20,26,.95); }
+  #deck .tile .ask { position: absolute; left: 13px; right: 13px; bottom: 12px; font: 500 11px ui-monospace, Menlo, monospace; color: #ffe39a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; transition: opacity .3s; }
+  #deck .tile.need .ask, #deck .tile.ok .ask { opacity: 1; } #deck .tile.ok .ask { color: #b8ffe2; }
+  #deck .tile.need .bars, #deck .tile.ok .bars { opacity: 0; } #deck .tile .bars { transition: opacity .3s; }
+  .old-hub { none; }
+
+
+  /* ---------- #cta demo: gesture → Sprout appears → click → "what's running?" → processes in chat ---------- */
+  #cta .primary { margin-top: 44px; }
+  #demo { position: relative; width: min(860px, 100%); aspect-ratio: 16 / 9; margin: 0 auto; border-radius: 22px; overflow: hidden; text-align: left;
+    background: radial-gradient(80% 70% at 30% 20%, #1b2130, #0c0e13 70%); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 40px 100px rgba(0,0,0,.55); }
+  #demo .dwin { position: absolute; left: 5%; top: 9%; width: 52%; height: 62%; border-radius: 14px; background: #0f1117; border: 1px solid rgba(255,255,255,.07); }
+  #demo .dbar { display: flex; gap: 7px; padding: 12px 14px; } #demo .dbar i { width: 10px; height: 10px; border-radius: 50%; background: #2a2e38; }
+  #demo .dterm { padding: 4px 18px; font: 13px/1.9 ui-monospace, Menlo, monospace; color: #cfd6e4; } #demo .dterm p { margin: 0; } #demo .dterm b { color: #7ef0c1; font-weight: 500; } #demo .dterm .dim { color: #6f7788; }
+  #demo .dtrail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  #demo .dtrail path { fill: none; stroke: #7ef0c1; stroke-width: 3; stroke-linecap: round; filter: drop-shadow(0 0 6px #7ef0c1); opacity: .9; transition: opacity .5s; }
+  #demo .dpet { position: absolute; left: 76%; top: 80%; width: 110px; transform: translate(-50%, -50%) scale(0); transition: transform .45s cubic-bezier(.2,1.6,.4,1); filter: drop-shadow(0 12px 12px rgba(0,0,0,.5)); }
+  #demo .dpet.on { transform: translate(-50%, -50%) scale(1); } #demo .dpet canvas { width: 110px; image-rendering: pixelated; display: block; }
+  #demo .dchat { position: absolute; right: 4%; top: 6%; width: 44%; height: 60%; display: flex; flex-direction: column; border-radius: 14px; background: rgba(22,24,28,.96); border: 1px solid rgba(255,255,255,.09);
+    box-shadow: 0 20px 50px rgba(0,0,0,.5); opacity: 0; transform: translateY(10px) scale(.97); transition: .3s; font: 12.5px/1.4 -apple-system, system-ui, sans-serif; }
+  #demo .dchat.on { opacity: 1; transform: none; }
+  #demo .dhead { display: flex; align-items: center; gap: 7px; padding: 9px 12px; border-bottom: 1px solid rgba(255,255,255,.06); color: #e9ecf2; }
+  #demo .dhead i { width: 7px; height: 7px; border-radius: 50%; background: #7ef0c1; } #demo .dhead span { margin-left: auto; font: 11px ui-monospace, Menlo, monospace; color: #7d8496; }
+  #demo .dmsgs { flex: 1; overflow: hidden; padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; justify-content: flex-end; }
+  #demo .dm { max-width: 88%; padding: 6px 10px; border-radius: 11px; animation: din .25s ease; }
+  #demo .dm.u { align-self: flex-end; background: #1f3d35; color: #e4fff3; } #demo .dm.p { align-self: flex-start; background: rgba(255,255,255,.06); color: #e9ecf2; width: 88%; }
+  #demo .dm.p div { display: flex; justify-content: space-between; gap: 10px; font: 11.5px/1.7 ui-monospace, Menlo, monospace; color: #cfd6e4; opacity: 0; animation: din .25s ease forwards; }
+  #demo .dm.p div em { font-style: normal; color: #7ef0c1; } #demo .dm.p div.bg em { color: #b69cff; }
+  @keyframes din { from { opacity: 0; transform: translateY(4px) } to { opacity: 1; transform: none } }
+  #demo .din { display: flex; align-items: center; margin: 8px 10px 10px; padding: 7px 10px; border-radius: 9px; border: 1px solid rgba(126,240,193,.35); color: #e9ecf2; min-height: 30px; }
+  #demo .din em { margin-left: auto; font-style: normal; color: #7ef0c1; } #demo .dtype::after { content: ''; display: inline-block; width: 7px; height: 14px; margin-left: 1px; vertical-align: -2px; background: #7ef0c1; animation: dblink 1s steps(1) infinite; }
+  @keyframes dblink { 50% { opacity: 0 } }
+  #demo .dcur { position: absolute; left: 30%; top: 80%; width: 18px; height: 18px; z-index: 5; transition: left .7s cubic-bezier(.45,0,.2,1), top .7s cubic-bezier(.45,0,.2,1);
+    background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l14 11-6 1 4 8-3 1-4-8-5 4z' fill='white' stroke='black' stroke-width='1.4'/%3E%3C/svg%3E"); filter: drop-shadow(0 2px 3px rgba(0,0,0,.6)); }
+  #demo .dcur.click::after { content: ''; position: absolute; left: -12px; top: -12px; width: 30px; height: 30px; border-radius: 50%; border: 2px solid #7ef0c1; animation: dclick .45s ease-out forwards; }
+  @keyframes dclick { from { transform: scale(.3); opacity: 1 } to { transform: scale(1.6); opacity: 0 } }
+  @media (max-width: 640px) { #demo { aspect-ratio: 3 / 4; } #demo .dwin { width: 90%; height: 34%; } #demo .dchat { left: 5%; right: 5%; width: auto; top: auto; bottom: 5%; height: 40%; } #demo .dpet { left: 76%; top: 44%; } #demo .dchat { height: 50%; } }
 </style>
 </head>
 <body>
@@ -135,20 +212,24 @@
 <section id="what">
   <div class="wrap reveal">
     <h2 style="text-align:center">Your agent works.<br>Your pet keeps watch.</h2>
-    <div class="facts">
-      <div><span class="led" style="color:#ffcf3f;background:#ffcf3f"></span>Pings you when your agent's done</div>
-      <div><span class="led" style="color:#7ef0c1;background:#7ef0c1"></span>Eats your commits</div>
-      <div><span class="led" style="color:#ff7ab0;background:#ff7ab0"></span>Writes your commit messages</div>
-      <div><span class="led" style="color:#8fd3ff;background:#8fd3ff"></span>Never in your way</div>
-    </div>
+    <div id="deck"><div class="stage">
+      <div class="deck"><div class="floor"></div><div class="pad"></div><svg viewBox="0 0 1000 600" preserveAspectRatio="none"></svg></div>
+      <div class="hub"><div class="say" id="say"></div><canvas class="px" width="112" height="104"></canvas></div>
+    </div></div>
   </div>
 </section>
 
 <section id="cta">
   <div class="wrap reveal">
-    <h2>Adopt one.</h2>
-    <p class="sub" style="margin:0 auto">Takes ten seconds. Your agents will feel watched.</p>
-    <a class="primary" href="#install">Install vibepet →</a>
+    <div id="demo" aria-label="Preview: draw a gesture, your pet appears, ask what's running">
+      <div class="dwin"><div class="dbar"><i></i><i></i><i></i></div>
+        <div class="dterm"><p><b>~/app</b> $ claude</p><p class="dim">✳ Reading src/…</p><p class="dim">✳ Editing auth.ts</p><p class="dim">✳ Running tests…</p></div></div>
+      <svg class="dtrail" viewBox="0 0 800 450" preserveAspectRatio="none"><path id="dpath" d=""/></svg>
+      <div class="dpet"><canvas class="px" width="112" height="104"></canvas></div>
+      <div class="dchat"><div class="dhead"><i></i><b>Sprout</b><span>localhost</span></div><div class="dmsgs"></div><div class="din"><span class="dtype"></span><em>↑</em></div></div>
+      <div class="dcur"></div>
+    </div>
+    <a class="primary" href="#install">Install free</a>
   </div>
 </section>
 
@@ -163,6 +244,185 @@
 </footer>
 
 <script src="sprites.js"></script>
+<script>
+// cta demo: a gesture summons Sprout, a click opens chat, "what's running?" gets the live list. Loops; still under reduced motion.
+(() => {
+  const root = document.getElementById('demo'); if (!root) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cur = root.querySelector('.dcur'), path = root.querySelector('#dpath'), petEl = root.querySelector('.dpet'), chat = root.querySelector('.dchat'), msgs = root.querySelector('.dmsgs'), typ = root.querySelector('.dtype');
+  const cv = petEl.querySelector('canvas'), cx = cv.getContext('2d'), img = cx.createImageData(112, 104), S = { w: 112, h: 104, buf: new Uint32Array(img.data.buffer) };
+  let st = 'idle', last = 0, blinkUntil = 0, nextBlink = 0;
+  (function f(now) { requestAnimationFrame(f); if (now - last < 83 || !petEl.classList.contains('on')) return; last = now; if (now > nextBlink) { blinkUntil = now + 140; nextBlink = now + 3500; }
+    S.buf.fill(0); drawSprout(S, st, reduce ? 0 : now / 1000, { x: 0, y: 0, blink: now < blinkUntil }); cx.putImageData(img, 0, 0); })(0);
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const at = (x, y) => { cur.style.left = x + '%'; cur.style.top = y + '%'; };
+  const PROCS = [['vite · web', ':5173'], ['next · site', ':3000'], ['postgres', ':5432'], ['python · api', ':8000']], BG = [['tests (watch)', 'running'], ['build · ios', '2m']];
+  const ASKS = ["what's running on my machine?", 'what processes are running?', "what's on localhost?"];
+  let n = 0;
+  async function loop() {
+    // reset
+    msgs.innerHTML = ''; typ.textContent = ''; chat.classList.remove('on'); petEl.classList.remove('on'); path.setAttribute('d', ''); path.style.opacity = .9; st = 'idle';
+    at(30, 80); await wait(700);
+    // draw a loop gesture with the cursor, leaving a glowing trail
+    const c = { x: petEl.offsetLeft / root.clientWidth * 100, y: petEl.offsetTop / root.clientHeight * 100 }, pts = [], r = 10;   // wherever Sprout lives at this width
+    for (let k = 0; k <= 36; k++) { const a = -Math.PI / 2 + k / 36 * Math.PI * 2.15, x = c.x + Math.cos(a) * r, y = c.y + Math.sin(a) * r * 1.35; pts.push([x, y]); }
+    cur.style.transition = 'none';
+    for (const [x, y] of pts) { at(x, y); const d = pts.slice(0, pts.indexOf(pts.find(p => p[0] === x && p[1] === y)) + 1).map(([px, py], i) => `${i ? 'L' : 'M'}${px * 8},${py * 4.5}`).join(' '); path.setAttribute('d', d); await wait(28); }
+    cur.style.transition = '';
+    // Sprout pops in where the gesture was drawn
+    path.style.opacity = 0; petEl.classList.add('on'); st = 'celebrate'; await wait(700); st = 'idle';
+    // click Sprout → chat opens
+    at(c.x, c.y); await wait(750); cur.classList.remove('click'); void cur.offsetWidth; cur.classList.add('click'); chat.classList.add('on'); await wait(500);
+    // type the question
+    const q = ASKS[n++ % ASKS.length];
+    for (let k = 1; k <= q.length; k++) { typ.textContent = q.slice(0, k); await wait(38); }
+    await wait(250); typ.textContent = '';
+    msgs.insertAdjacentHTML('beforeend', `<div class="dm u">${q}</div>`); st = 'working'; await wait(700);
+    // answer: the live list, row by row
+    const rows = [...PROCS.map(([a, b]) => `<div><span>${a}</span><em>${b}</em></div>`), ...BG.map(([a, b]) => `<div class="bg"><span>● ${a}</span><em>${b}</em></div>`)];
+    const m = document.createElement('div'); m.className = 'dm p'; msgs.appendChild(m);
+    for (const [i, row] of rows.entries()) { m.insertAdjacentHTML('beforeend', row); m.lastElementChild.style.animationDelay = '0s'; await wait(160); }
+    st = 'celebrate'; await wait(900); st = 'idle';
+    await wait(2600); loop();
+  }
+  if (reduce) { petEl.classList.add('on'); chat.classList.add('on'); msgs.innerHTML = `<div class="dm u">${ASKS[0]}</div><div class="dm p">${PROCS.map(([a, b]) => `<div style="opacity:1"><span>${a}</span><em>${b}</em></div>`).join('')}</div>`; }
+  else new IntersectionObserver((e, o) => { if (e[0].isIntersecting) { o.disconnect(); loop(); } }).observe(root);
+})();
+
+// bird's-eye deck (self-contained: its own names so it can't collide with the hero below)
+(() => {
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const rnd = (a, b) => a + Math.random() * (b - a);
+// ---------- Net: one sprite runner for all three scenes (12 fps, like the app's calm mode) ----------
+const pets = [];
+function pet(cv, st = 'idle', draw = (S, st, t, l) => drawNet(S, st, t, l, 1, { flat: true })) {
+  const ctx = cv.getContext('2d'), img = ctx.createImageData(cv.width, cv.height);
+  const p = { st, draw, S: { w: cv.width, h: cv.height, buf: new Uint32Array(img.data.buffer) }, img, ctx }; pets.push(p); return p;
+}
+let blinkUntil = 0, nextBlink = 0, lastPet = 0;
+(function frame(now) {
+  requestAnimationFrame(frame);
+  if (now - lastPet < 83) return; lastPet = now;
+  if (now > nextBlink) { blinkUntil = now + 140; nextBlink = now + rnd(3000, 6000); }
+  for (const p of pets) { p.S.buf.fill(0); p.draw(p.S, p.st, reduce ? 0 : now / 1000, { x: 0, y: 0, blink: now < blinkUntil }); p.ctx.putImageData(p.img, 0, 0); }
+})(0);
+// one shared "story": sessions work, one needs you, Net answers, it goes green
+const NAMES = ['auth', 'site', 'api', 'ios', 'docs', 'infra'];
+function mkSessions(n) { return NAMES.slice(0, n).map((name, i) => ({ name, ctx: rnd(.2, .6), steps: Array.from({ length: 14 }, () => ({ h: rnd(.15, 1), k: Math.random() < .3 ? 'e' : '' })), kids: [2, 0, 1, 0, 1, 0][i], state: '' })); }
+function work(ss) { ss.forEach(s => { if (s.state) return; s.ctx = Math.min(.95, s.ctx + rnd(0, .05)); s.steps.shift(); s.steps.push({ h: rnd(.15, 1), k: Math.random() < .25 ? 'e' : Math.random() < .06 ? 'x' : '' }); }); }
+function storyLoop(ss, hub, on, picked) {
+  if (reduce) return;
+  let last = [];
+  const go = () => {
+    let i; do i = Math.floor(Math.random() * ss.length); while (last.includes(i) && ss.length > 3);
+    last.push(i); if (last.length > 2) last.shift(); picked?.(i);
+    const s = ss[i];
+    s.state = 'need'; hub.st = 'alert'; on?.('need', i);
+    setTimeout(() => { s.state = 'lift'; hub.st = 'working'; on?.('lift', i); }, 1200);
+    setTimeout(() => { s.state = 'ok'; s.ctx = .18; hub.st = 'celebrate'; on?.('ok', i); }, 2700);
+    setTimeout(() => { s.state = ''; hub.st = 'idle'; on?.('idle', i); }, 3800);
+  };
+  setTimeout(go, 800); setInterval(go, 4800);
+}
+
+// ======================= A · Orbit deck =======================
+(() => {
+  const root = document.getElementById('deck'), deck = root.querySelector('.deck'), svg = root.querySelector('svg'), NS = 'http://www.w3.org/2000/svg';
+  const hubEl = root.querySelector('.hub'), say = document.getElementById('say'), hub = pet(hubEl.querySelector('canvas'), 'idle', drawSlime);
+  const ss = mkSessions(6), C = { x: 500, y: 300 };
+  // on an ellipse, fully inside the table
+  ss.forEach((s, i) => {
+    const a = -Math.PI / 2 + i * (Math.PI * 2 / ss.length) + .3;
+    s.x = C.x + Math.cos(a) * 340; s.y = C.y + Math.sin(a) * 230;
+    const el = document.createElement('div'); el.className = 'tile' + (s.y < C.y - 120 ? ' far' : '');
+    el.style.left = s.x / 10 + '%'; el.style.top = s.y / 6 + '%';
+    el.innerHTML = `<div class="n"><i></i>${s.name}</div><svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="4"/><circle class="arc" cx="18" cy="18" r="15" fill="none" stroke="#7ef0c1" stroke-width="4" stroke-linecap="round" stroke-dasharray="94.2" transform="rotate(-90 18 18)"/></svg><div class="bars">${'<span></span>'.repeat(14)}</div><div class="ask"></div>`;
+    deck.appendChild(el); s.el = el; s.base = el.className; s.arc = el.querySelector('.arc'); s.bars = [...el.querySelectorAll('.bars span')];
+    const mx = (C.x + s.x) / 2, my = (C.y + s.y) / 2 - 40;
+    const p = document.createElementNS(NS, 'path'); p.setAttribute('d', `M${C.x},${C.y} Q${mx},${my} ${s.x},${s.y}`);
+    p.setAttribute('fill', 'none'); p.setAttribute('vector-effect', 'non-scaling-stroke'); svg.appendChild(p);
+    const g = document.createElementNS(NS, 'circle'); g.setAttribute('r', '4'); svg.appendChild(g);
+    s.path = p; s.len = p.getTotalLength(); s.g = g; s.off = Math.random();
+  });
+  const paint = () => ss.forEach(s => {
+    s.el.className = s.base + (s.state ? ' ' + s.state : '') + (s.state === 'lift' ? ' need' : '');
+    s.arc.setAttribute('stroke-dashoffset', 94.2 * (1 - s.ctx)); s.arc.setAttribute('stroke', s.ctx > .8 ? '#ffcf3f' : '#7ef0c1');
+    s.bars.forEach((b, k) => { b.style.height = s.steps[k].h * 100 + '%'; b.className = s.steps[k].k; });
+  });
+  (function tick(now) {
+    requestAnimationFrame(tick);
+    const t = now / 1000;
+    ss.forEach(s => {
+      const hot = s.state === 'need' || s.state === 'lift', q = (t * (hot ? 1 : .22) + s.off) % 1, pt = s.path.getPointAtLength(s.len * (hot ? 1 - q : q));
+      s.g.setAttribute('cx', pt.x); s.g.setAttribute('cy', pt.y);
+      s.g.setAttribute('fill', hot ? '#ffcf3f' : '#7ef0c1'); s.g.style.filter = `drop-shadow(0 0 ${hot ? 10 : 5}px ${hot ? '#ffcf3f' : '#7ef0c1'})`;
+      s.path.setAttribute('stroke', hot ? 'rgba(255,207,63,.7)' : s.state === 'ok' ? 'rgba(126,240,193,.6)' : 'rgba(126,240,193,.14)');
+      s.path.setAttribute('stroke-width', hot ? 3 : 1.4);
+    });
+  })(0);
+  paint(); if (!reduce) setInterval(() => { work(ss); paint(); }, 650);
+  // what each session asks, and what the slime says about it
+  // ---------- what Slime notices: a deck of scenes, dealt without repeats ----------
+  // each scene: card = what the session shows, then three beats of Slime talk; {s} = the session's name.
+  // lines are picked at random per beat, and a scene can't come back until most of the deck has played.
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const SCENES = [
+    // approvals
+    { ask: 'Allow: npm test', need: ['{s} wants to run the tests', '{s} is asking to run tests'], act: ['approving in {s}…', '↗ over to {s}'], done: ['✓ 42 tests pass', '✓ all green', '✓ 118 passed, 0 failed'] },
+    { ask: 'Allow: git push origin main', need: ['{s} wants to push', 'push from {s} needs your ok'], act: ['↗ jumping to {s}', 'approving the push…'], done: ['✓ pushed to main', '✓ 3 commits pushed'] },
+    { ask: 'Allow: rm -rf dist/', need: ['{s} wants to delete dist/', 'careful: {s} is deleting a folder'], act: ['checking it’s only dist/…', '↗ over to {s}'], done: ['✓ just build output, cleaned', '✓ dist/ cleared'] },
+    { ask: 'Allow: npx prisma migrate dev', need: ['{s} wants to migrate the DB', 'schema change in {s}'], act: ['↗ to {s}', 'approving the migration…'], done: ['✓ migration applied', '✓ 2 tables altered'] },
+    { ask: 'Allow: docker compose up', need: ['{s} wants to start containers'], act: ['↗ over to {s}'], done: ['✓ 3 containers up', '✓ stack is running'] },
+    { ask: 'Edit 6 files?', need: ['{s} wants to touch 6 files', 'big edit coming in {s}'], act: ['↗ reviewing in {s}'], done: ['✓ +214 −37 across 6 files', '✓ 6 files changed'] },
+    { ask: 'Allow: curl api.stripe.com', need: ['{s} wants to call Stripe'], act: ['↗ to {s}'], done: ['✓ test charge ok'] },
+    // questions
+    { ask: 'Postgres or SQLite?', need: ['{s} has a question', '{s} asked you something'], act: ['↗ answering in {s}…'], done: ['✓ going with Postgres', '✓ SQLite for now'] },
+    { ask: 'Keep the old API as v1?', need: ['{s} needs a decision'], act: ['↗ to {s}'], done: ['✓ v1 kept, v2 added'] },
+    { ask: 'Tabs or a sidebar?', need: ['{s} wants your taste on this'], act: ['↗ over to {s}'], done: ['✓ sidebar it is'] },
+    { ask: 'Rename User → Account?', need: ['{s} asks before a big rename'], act: ['↗ to {s}'], done: ['✓ renamed in 31 places'] },
+    { ask: 'Which color for errors?', need: ['{s} is asking about design'], act: ['↗ to {s}'], done: ['✓ using the brand red'] },
+    { ask: 'Ship behind a flag?', need: ['{s} wants to know how to ship'], act: ['↗ to {s}'], done: ['✓ flagged: new-onboarding'] },
+    // failures → fixes
+    { ask: '✗ 3 tests failing', need: ['{s} hit red tests', 'tests broke in {s}'], act: ['{s} is on it…', 'watching {s} fix it…'], done: ['✓ fixed, all green again', '✓ back to green in 40s'] },
+    { ask: '✗ type error in auth.ts', need: ['{s}: type error', 'the build broke in {s}'], act: ['{s} is fixing…'], done: ['✓ build passes', '✓ types check'] },
+    { ask: '✗ build failed', need: ['{s} build is red'], act: ['looking at the log…'], done: ['✓ missing import, fixed'] },
+    { ask: '✗ lint: 12 problems', need: ['{s} has lint errors'], act: ['{s} is cleaning up…'], done: ['✓ lint clean'] },
+    { ask: '✗ port 5173 in use', need: ['{s} can’t start the server'], act: ['freeing the port…'], done: ['✓ back on :5173'] },
+    // context + health
+    { ask: 'context 91%', need: ['{s} is almost out of context', '{s} is running long'], act: ['suggesting a fresh start…'], done: ['✓ summarised, 24% now', '✓ compacted, plenty of room'] },
+    { ask: 'idle 12m', need: ['{s} has gone quiet', '{s} waited 12 minutes'], act: ['↗ checking on {s}'], done: ['✓ it just needed a yes'] },
+    { ask: 'drifting: editing CSS', need: ['{s} wandered off its goal', 'hmm, {s} is off track'], act: ['nudging {s} back…'], done: ['✓ back on the auth fix'] },
+    { ask: 'goal: dark mode', need: ['{s} might be done', '{s} looks finished'], act: ['checking the goal…'], done: ['✓ goal hit: dark mode', '✓ goal done +15xp'] },
+    // subagents + background
+    { ask: '4 subagents running', need: ['{s} split into 4 agents', '{s} fanned out'], act: ['watching them work…'], done: ['✓ all 4 reported back', '✓ merged 4 results'] },
+    { ask: 'subagent stuck', need: ['one of {s}’s agents is stuck'], act: ['↗ to {s}'], done: ['✓ unstuck, moving again'] },
+    { ask: 'render 3m…', need: ['{s} is rendering'], act: ['still going, not stuck'], done: ['✓ render done, 34s video'] },
+    { ask: 'npm install…', need: ['{s} is installing deps'], act: ['this one takes a sec…'], done: ['✓ 312 packages added'] },
+    // wins
+    { ask: 'commit ready', need: ['{s} wants to commit'], act: ['writing the message…'], done: ['✓ feat: add dark mode', '✓ fix: session timeout'] },
+    { ask: 'PR #42 opened', need: ['{s} opened a PR'], act: ['↗ to the PR'], done: ['✓ CI green on #42', '✓ ready to merge'] },
+    { ask: 'deploy ready', need: ['{s} can deploy', 'preview build ready in {s}'], act: ['deploying preview…'], done: ['✓ live on preview', '✓ deployed in 48s'] },
+    { ask: 'localhost:3000 up', need: ['{s} started a server'], act: ['opening it…'], done: ['✓ :3000 looks good'] },
+    { ask: 'benchmarks done', need: ['{s} finished benchmarks'], act: ['reading the numbers…'], done: ['✓ 2.3× faster', '✓ p95 down 40%'] },
+  ];
+  const AMBIENT = ['{n} agents working', 'all quiet, all good', '{s} is cooking', 'nothing needs you', '{s} just read 14 files', '{s}: 8 edits so far', 'watching {n} sessions'];
+  let bag = [], recentS = [];
+  const deal = () => { if (!bag.length) bag = SCENES.map((_, i) => i).sort(() => Math.random() - .5); return SCENES[bag.pop()]; };
+  const fill = (t, s) => t.replace(/\{s\}/g, s.name).replace(/\{n\}/g, ss.length);
+  const bubble = (text, cls) => { say.textContent = text; say.className = 'say on ' + (cls || ''); };
+  let scene = null;
+  storyLoop(ss, hub, (phase, i) => {
+    const s = ss[i], ab = s.el.querySelector('.ask');
+    if (phase === 'need') { scene = deal(); ab.textContent = scene.ask; bubble(fill(pick(scene.need), s), scene.ask.startsWith('✗') ? 'gold' : 'gold'); }
+    if (phase === 'lift') bubble(fill(pick(scene.act), s));
+    if (phase === 'ok') { const d = fill(pick(scene.done), s); ab.textContent = d; bubble(d, 'mint'); }
+    if (phase === 'idle') { say.className = 'say'; setTimeout(() => { if (!ss.some(x => x.state)) { bubble(fill(pick(AMBIENT), pick(ss))); setTimeout(() => { if (!ss.some(x => x.state)) say.className = 'say'; }, 1600); } }, 200); }
+    paint();
+  }, i => { recentS.push(i); if (recentS.length > 2) recentS.shift(); });
+})();
+
+})();
+</script>
 <script>
 // ---------- hero: a different pet on every bounce, looping ----------
 const CAST = [
