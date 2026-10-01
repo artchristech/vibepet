@@ -17,6 +17,44 @@ Self-test, real app, about 30 s: `node test/ultra/smoke.js --out <dir>`. It does
 different userData. It writes PNGs and `smoke.json`, and exits 1 if any check fails. Flags: `--root`, `--runs N`,
 `--no-parallel`, `--no-first-run`.
 
+## Canonical capture: `canon.js` (every surface, against the live fleet)
+
+```sh
+node test/ultra/canon.js --app <worktree> --out <dir> [--userdata <dir>]   # ~25 s; exit 1 if a surface is unreachable
+node test/ultra/canon.js --compare <outA> <outB> [--json FILE]              # two runs side by side (exit 1 if they differ)
+```
+
+It runs from any checkout that has `test/ultra` and `test/fleet` (playwright-core from that checkout's `node_modules`,
+a symlink is fine) against the app in `--app` (Electron from *its* `node_modules`). Each run first reads the fleet's
+truth (`test/fleet/fleet.js status --json`, read-only), then opens the 7 surfaces through the real UI and writes
+`<out>/<n-surface>/*.png` plus `<out>/canon.json`:
+
+| surface | what it does | shots |
+|---|---|---|
+| 1-home | real click on Net → Home; rows vs. the fleet (`compare[]`: per member truth, row signal, label, actions, problems) | pet, panel |
+| 2-chat | types a message, Enter → reply. Engine = a stub `claude` (`VIBEPET_CLAUDE_BIN`, answers from the context's `Agents:` line, $0); `--live-chat` uses the user's login on Haiku | sending, reply |
+| 3-command | `/` lists 8 commands; `/today` posts its note | slash, today |
+| 4-rows | ◎ → `/goal canon goal` → ✓ (clicked again once if the first ✓ is dropped, see `firstClickDropped`); Reply opens its form; a row click jumps (`ipc:jump` result) | list, goal, reply, jump |
+| 5-theater | ▶ on a row → Theater window with beats; the middle beat | open, seek-mid |
+| 6-ports | a fixture HTTP server started by canon (cwd = a fleet repo) appears in the footer; Open; ✕ Stop (confirm dialog answered) kills it | footer, stopped |
+| 7-keys | main's jump-key handler (`send('hotkey')`) jumps to `pending()[0]`; ⋯ → Settings → Gesture → Record gesture… → 3 strokes on the pad → saved | hotkey, gesture-pad, gesture-saved |
+
+Before any click, main is instrumented: dialogs answer themselves, `shell.openExternal`/`openPath` and the clipboard
+only record, native menus are captured (then their items clicked), and `jump`/`send-to` are wrapped to record each
+call's result (`intercepted[]`). Flags: `--all-rows` (a shot + a jump of every row: the baseline view), `--act` (really
+press Approve / send the Reply; refused when the session's terminal is a GUI app; on a build that reaches tmux this
+answers a fleet session, which leaves its state: rearm after), `--root`, `--strict` (truth mismatches fail the run).
+
+## Over time: `watch.js` (what Home shows vs. the registry, every 2 s)
+
+```sh
+node test/ultra/watch.js [--app <worktree>] --out <dir> [--secs 300] [--every 2]
+```
+
+Keeps Home open and samples, on one clock, each live fleet session's registry status (+ tool processes under its pid)
+and its Home row (signal, label, snapshot phase, fan-out). Writes `timeline.jsonl` and `summary.json` (per member: the
+segments of truth vs. UI, and how long each truth change took to show). Read-only: drive the fleet from another shell.
+
 ## Env vars (all unset = vibepet as shipped)
 
 | var | effect |
