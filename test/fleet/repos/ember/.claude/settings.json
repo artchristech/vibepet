@@ -1,0 +1,5 @@
+{
+  "permissions": {
+    "allow": ["Bash(./tick.sh)", "Bash(./tick.sh:*)", "Bash(./tick.sh *)"]
+  }
+}
