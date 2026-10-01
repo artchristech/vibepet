@@ -24,6 +24,12 @@ const TEST = !!process.env.VIBEPET_TEST;
 
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 app.disableHardwareAcceleration();   // a 224×208 pixel canvas + one CSS capsule: the GPU process costs memory, buys nothing
+if (TEST) {
+  app.commandLine.appendSwitch('use-mock-keychain');   // Chromium's Safe Storage key: a mock, no login Keychain read or write
+  // its launcher died (a crashed or SIGKILLed harness): quit rather than linger on screen as an orphan
+  const ppid0 = process.ppid;
+  if (ppid0 > 1) setInterval(() => { if (process.ppid !== ppid0) app.quit(); }, 2000).unref();
+}
 // VIBEPET_USER_DATA: its own state, ledger and single-instance lock — so it must land before the lock is taken
 const USER_DATA = overrides.userData();
 if (USER_DATA) { fs.mkdirSync(USER_DATA, { recursive: true }); app.setPath('userData', USER_DATA); }
