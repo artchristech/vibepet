@@ -529,7 +529,8 @@ function compare(a, b) {
   const byId = R => new Map(R.assertions.map(x => [`${x.surface}/${x.id}`, x.ok]));
   const aa = byId(A), bb = byId(B), ids = [...new Set([...aa.keys(), ...bb.keys()])];
   const rows = R => Object.fromEntries(R.rows.map(r => [r.member || r.name || r.id.slice(0, 8), r.sig]));
-  const probs = R => Object.fromEntries(R.compare.map(c => [c.member || 'extra', (c.problems || []).join('; ')]));
+  // the kind of each problem, not its clock: "waiting for 21m" and "waiting for 22m" are the same finding
+  const probs = R => Object.fromEntries(R.compare.map(c => [c.member || 'extra', (c.problems || []).join('; ').replace(/\d+(\.\d+)?/g, '#')]));
   const pngs = d => { const o = []; const walk = x => { for (const e of fs.readdirSync(x, { withFileTypes: true })) { const p = path.join(x, e.name); if (e.isDirectory()) walk(p); else if (e.name.endsWith('.png')) o.push(path.relative(d, p)); } }; walk(d); return o; };
   const shots = [];
   for (const f of [...new Set([...pngs(a), ...pngs(b)])].sort()) {
@@ -546,6 +547,7 @@ function compare(a, b) {
     rows: { a: ra, b: rb, differ: [...new Set([...Object.keys(ra), ...Object.keys(rb)])].filter(k => ra[k] !== rb[k]) },
     mismatches: { a: A.summary.mismatches, b: B.summary.mismatches, differ: [...new Set([...Object.keys(pa), ...Object.keys(pb)])].filter(k => pa[k] !== pb[k]) },
     fleet: { a: `${A.summary.inState}/${A.summary.fleetMembers}`, b: `${B.summary.inState}/${B.summary.fleetMembers}`, changedDuring: [A.fleetChanged, B.fleetChanged] },
+    notes: { goalFirstClickDropped: [A, B].map(R => !!R.surfaces?.rows?.actions?.goal?.firstClickDropped), aboveFold: [A, B].map(R => R.surfaces?.home?.aboveFold ?? null) },
     shots,
   };
 }
