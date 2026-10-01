@@ -36,6 +36,9 @@ test('VIBEPET_CLAUDE_DIR moves projects/ and sessions/ together; ~ and relative 
 
 test('VIBEPET_USER_DATA and VIBEPET_HOTKEY', () => {
   assert.strictEqual(O.userData({ VIBEPET_USER_DATA: '/x/ud/a' }), '/x/ud/a');
+  // recordings follow the profile: a test instance never sees (or adds to) the user's real ~/Movies/Vibepet
+  assert.strictEqual(O.recordingsDir({}), path.join(HOME, 'Movies', 'Vibepet'));
+  assert.strictEqual(O.recordingsDir({ VIBEPET_USER_DATA: '/x/ud/a' }), '/x/ud/a/recordings');
   assert.strictEqual(O.userData({ VIBEPET_USER_DATA: '~/ud' }), path.join(HOME, 'ud'));
   for (const off of ['off', 'OFF', ' Off ']) assert.strictEqual(O.hotkey({ VIBEPET_HOTKEY: off }), null, off);
   assert.strictEqual(O.hotkey({ VIBEPET_HOTKEY: 'Alt+Command+K' }), 'Alt+Command+K');

@@ -46,6 +46,9 @@ async function one(name, opts, { home = true } = {}) {
   used.push(v.userData);
   try {
     Object.assign(r, { pid: v.pid, userData: path.relative(ULTRA, v.userData), readyMs: v.readyMs, processes: v.processes().length });
+    // shorts are recorded into the profile, never the user's ~/Movies/Vibepet (whose recordings it must not see)
+    r.recordings = path.relative(v.userData, await v.evalMain(() => globalThis.__vibepet.require('./content').ROOT));
+    check(r.recordings === 'recordings', `${name}: recordings dir outside its profile (${r.recordings})`);
     await v.shot(path.join(out, `${name}-idle.png`));
     if (home) {
       r.home = await v.openHome();

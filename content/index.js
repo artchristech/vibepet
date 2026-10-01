@@ -12,7 +12,7 @@ const signals = require('./signals');
 const { plan } = require('./camera');
 const compose = require('./compose');
 
-const ROOT = path.join(os.homedir(), 'Movies', 'Vibepet');
+const ROOT = require('../overrides').recordingsDir();   // ~/Movies/Vibepet unless VIBEPET_USER_DATA gives a profile of its own
 const CLAUDE_DIR = require('../overrides').projectsDir();
 const MAX_MS = 2 * 3600e3, MIN_FREE = 2 * 1024 ** 3;
 
