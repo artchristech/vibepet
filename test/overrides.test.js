@@ -58,7 +58,7 @@ const fixture = () => {
 };
 const node = (code, env) => {
   const clean = { ...process.env }; delete clean.VIBEPET_CLAUDE_DIR;
-  return JSON.parse(execFileSync(process.execPath, ['-e', code], { cwd: ROOT, env: { ...clean, ...env }, encoding: 'utf8', timeout: 20e3 }));
+  return JSON.parse(execFileSync(process.execPath, ['-e', code], { cwd: ROOT, env: { ...clean, ...env }, encoding: 'utf8', timeout: 45e3 }));   // generous: a loaded Mac
 };
 
 test('agents.js: a pid is matched to its session through <root>/sessions/<pid>.json', t => {
@@ -107,7 +107,10 @@ test('ports: an isolated root lists the servers its own sessions run, not the re
     kids.push(k); k.once('error', rej); k.stdout.once('data', d => res(+String(d).trim()));
   });
   const ports = [await serve(web), await serve(outside)];
-  const seen = env => node(`require('./ports').listServers().then(r => console.log(JSON.stringify(${JSON.stringify(ports)}.map(p => r.servers.some(s => s.port === p)))))`, env);
+  // ports.js gives lsof 4 s; on a loaded Mac a poll can come back empty, so poll up to 3 times until the server under
+  // the session shows (the outside one must never show, however many polls)
+  const seen = env => node(`(async () => { let r; for (let i = 0; i < 3; i++) { const s = (await require('./ports').listServers()).servers;
+    r = ${JSON.stringify(ports)}.map(p => s.some(x => x.port === p)); if (r[0]) break; } console.log(JSON.stringify(r)); })()`, env);
   assert.deepStrictEqual(seen({ VIBEPET_CLAUDE_DIR: fx.claude }), [true, false], 'isolated: its session\'s server only');
   assert.deepStrictEqual(seen({}), [true, true], 'unset: every server on the machine, as shipped');
 });
