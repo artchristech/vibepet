@@ -25,6 +25,9 @@ const TEST = !!process.env.VIBEPET_TEST;
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 app.disableHardwareAcceleration();   // a 224×208 pixel canvas + one CSS capsule: the GPU process costs memory, buys nothing
 if (TEST) {
+  // an accessory app from its first moment: macOS activates a regular app it has just launched, which took the focus
+  // from whoever's window was in front (seen: the user's terminal → Electron on every launch, before any window showed)
+  if (process.platform === 'darwin') app.setActivationPolicy('accessory');
   app.commandLine.appendSwitch('use-mock-keychain');   // Chromium's Safe Storage key: a mock, no login Keychain read or write
   // its launcher died (a crashed or SIGKILLed harness): quit rather than linger on screen as an orphan
   const ppid0 = process.ppid;
