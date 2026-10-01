@@ -50,6 +50,20 @@ const EXPECT = {
   loop: { sig: ['running', 'ready'], why: 'idle between /loop fires: alive and scheduled, not waiting on you' },
 };
 const PREFER = ['delta', 'kestrel', 'atlas', 'ember', 'vibepet', 'beacon'];   // a stable pick when one row is enough
+// a Home row label's duration back to ms (renderer/app.js phaseTime: dur(), ago(), 'stuck Nm', 'waiting Nm'), or null
+function labelMs(label) {
+  const t = String(label || '').split(' · ').pop();
+  let m;
+  if (/just now$/.test(t)) return 0;
+  if ((m = t.match(/(\d+)h (\d+)m$/))) return (+m[1] * 60 + +m[2]) * 60e3;
+  if ((m = t.match(/(\d+)m (\d+)s$/))) return +m[1] * 60e3 + +m[2] * 1e3;
+  if ((m = t.match(/^(\d+)s$/))) return +m[1] * 1e3;
+  if ((m = t.match(/(\d+)m( ago)?$/))) return +m[1] * 60e3;
+  if ((m = t.match(/(\d+)h ago$/))) return +m[1] * 3600e3;
+  if ((m = t.match(/(\d+)d ago$/))) return +m[1] * 864e5;
+  return null;
+}
+const fmt = ms => ms < 90e3 ? `${Math.round(ms / 1000)}s` : ms < 5400e3 ? `${Math.round(ms / 60e3)}m` : `${(ms / 3600e3).toFixed(1)}h`;
 const SEED = {   // a returning user, calm and quiet, nothing left over from an earlier run on the same --userdata
   setupDone: true, muted: true, alerts: 'all', model: 'claude-haiku-4-5-20251001', engine: 'claude', pos: null, name: 'Net',
   pet: 'net', size: 'm', feel: 'calm', animations: false, game: false, goals: {}, hotkey: null, onTop: true,
@@ -215,6 +229,8 @@ async function run(opts) {
   const rowSel = id => `#now .nr[data-id="${id}"]`;
   const memberOf = row => bySid.get(row.id)?.name || null;
   const rowFor = (rows, pred) => { for (const n of PREFER) { const r = rows.find(x => (memberOf(x) || x.name) === n && pred(x)); if (r) return r; } return rows.find(pred) || null; };
+  // Approve / Reply: first the row of a member whose true state calls for that action (kestrel's dialog, beacon's question)
+  const rowForAct = (rows, act) => rowFor(rows, r => r.actions.includes(act) && EXPECT[bySid.get(r.id)?.state]?.act === act && bySid.get(r.id)?.inState) || rowFor(rows, r => r.actions.includes(act));
   // an element's own pixels: scrolled into view first (the Now list scrolls: rows below its fold are clipped by it)
   const shotEl = async (file, sel, page = W) => {
     const loc = page.locator(sel).first();
@@ -234,6 +250,10 @@ async function run(opts) {
       await sleep(3300);   // one more tick, so the rows are the live ones
       await v.shot(path.join(d, 'panel.png'));
       const rows = await rowsDom(), snap = await v.evalMain(() => globalThis.__vibepet.snapshot());
+      R.surfaces.home.readAt = Date.now();
+      // how many rows the panel shows without scrolling (the Now list is a scroll box)
+      R.surfaces.home.aboveFold = await W.evaluate(() => { const box = document.getElementById('now').getBoundingClientRect();
+        return [...document.querySelectorAll('#now .nr[data-id]')].filter(r => { const b = r.getBoundingClientRect(); return b.top >= box.top - 1 && b.bottom <= box.bottom + 1; }).length; });
       const sa = new Map((snap.agents || []).map(a => [a.id, a]));
       R.rows = rows.map(r => ({ ...r, member: memberOf(r), name: sa.get(r.id)?.name || null, phase: sa.get(r.id)?.phase || null,
         fanout: sa.get(r.id)?.fanout ? { total: sa.get(r.id).fanout.total, open: sa.get(r.id).fanout.open, stuck: sa.get(r.id).fanout.stuck } : null }));
@@ -254,6 +274,11 @@ async function run(opts) {
       else {
         if (e.sig && !e.sig.includes(row.sig)) c.problems.push(`shows '${row.sig}' (${row.label}); truth: ${e.why}`);
         if (e.act && !row.actions.includes(e.act)) c.problems.push(`no ${e.act} action`);
+        // the label's clock vs. the registry's: how long the session has really been in this status
+        const trueMs = m.registry?.statusUpdatedAt && R.surfaces.home?.readAt ? R.surfaces.home.readAt - m.registry.statusUpdatedAt : null, shownMs = labelMs(row.label);
+        c.age = { trueMs, shownMs };
+        if (trueMs != null && shownMs != null && trueMs >= 120e3 && Math.abs(shownMs - trueMs) > Math.max(90e3, 0.25 * trueMs))
+          c.problems.push(`age: label says ${fmt(shownMs)} (${row.label}), the registry says ${m.registry.status} for ${fmt(trueMs)}`);
       }
       c.ok = m.inState ? c.problems.length === 0 : null;
       R.compare.push(c);
@@ -336,7 +361,7 @@ async function run(opts) {
       assert('rows', 'goalDone', done, `✓ on ${gm}`);
       // Reply (a row that waits on an answer): the inline form opens; --act sends it
       rows = await rowsDom();
-      const q = rowFor(rows, r => r.actions.includes('reply'));
+      const q = rowForAct(rows, 'reply');
       if (q) {
         await W.locator(`${rowSel(q.id)} button[data-do=reply]`).click();
         const form = await W.waitForSelector(`${rowSel(q.id)} form.nrep input`, { timeout: 3000 }).then(() => true).catch(() => false);
@@ -349,7 +374,7 @@ async function run(opts) {
       } else S.actions.reply = { none: 'no row offers Reply' };
       // Approve (a row stuck on a tool): --act presses it
       rows = await rowsDom();
-      const ap = rowFor(rows, r => r.actions.includes('approve'));
+      const ap = rowForAct(rows, 'approve');
       if (ap) {
         S.actions.approve = { member: memberOf(ap), button: true };
         if (opts.act) { S.actions.approve.pressed = await press(ap, `${rowSel(ap.id)} button[data-do=approve]`); await shotEl(path.join(d, 'approve.png'), '#chat').catch(() => {}); }
@@ -548,4 +573,4 @@ if (require.main === module && flag('--compare')) {
     process.exit(!s.ok || (flag('--strict') && s.mismatches.length) ? 1 : 0);
   }).catch(e => { console.error(e); process.exit(1); });
 }
-module.exports = { run, compare, fleetTruth, instrument, clickMenu, EXPECT, SEED };
+module.exports = { run, compare, fleetTruth, instrument, clickMenu, labelMs, EXPECT, SEED };
