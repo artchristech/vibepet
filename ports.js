@@ -141,6 +141,15 @@ async function listTasks(now = Date.now()) {
 function safeDir(d) { try { return fs.readdirSync(d); } catch { return []; } }
 
 // ---------- the poll ----------
+// an isolated root (VIBEPET_CLAUDE_DIR, a test fleet) sees what its own sessions run, never the machine's other servers:
+// a cwd is in view when it is, or sits under, a cwd that has a session dir in the root. Claude Code names that dir after
+// the cwd with every other character than [A-Za-z0-9] as '-' (as it names the tmp dirs listTasks reads).
+const sessionDirOf = d => d.replace(/[^A-Za-z0-9]/g, '-');
+function inView(dir) {
+  if (!ISOLATED) return true;
+  for (let d = dir; d && d !== path.dirname(d); d = path.dirname(d)) if (fs.existsSync(path.join(PROJECTS, sessionDirOf(d)))) return true;
+  return false;
+}
 const titles = new Map();   // pid:port → probe result (probe once per listener)
 async function listServers() {
   const rows = parseListen(await sh('/usr/sbin/lsof', ['-nP', '-iTCP', '-sTCP:LISTEN', '-Fpcn']));
@@ -154,6 +163,7 @@ async function listServers() {
     const p = ps.get(r.pid), dir = cwdOf(r.pid), args = p?.args || r.cmd;
     const sys = !dir?.startsWith(HOME) && SKIP_RE.test(args);
     if (sys) continue;   // AirPlay, ControlCenter, app helpers: not the user's
+    if (!inView(dir)) continue;   // isolated: not one of the watched sessions' (and never probed)
     const k = r.pid + ':' + r.port;
     if (!titles.has(k)) titles.set(k, probe(r.port));   // promise; new ports probed in parallel
     servers.push({ ...r, kind: kindOf(args, r.cmd), dir, project: projectName(dir), age: p?.age ?? null, k });
@@ -161,7 +171,7 @@ async function listServers() {
   for (const s of servers) { Object.assign(s, await titles.get(s.k)); delete s.k; }
   for (const k of titles.keys()) if (!servers.some(s => s.pid + ':' + s.port === k)) titles.delete(k);
   const listening = new Set(rows.map(r => r.pid));
-  const procs = devs.filter(d => !listening.has(d.pid) && cwdOf(d.pid)?.startsWith(HOME)).slice(0, 12)
+  const procs = devs.filter(d => !listening.has(d.pid) && cwdOf(d.pid)?.startsWith(HOME) && inView(cwdOf(d.pid))).slice(0, 12)
     .map(d => ({ pid: d.pid, kind: kindOf(d.args, path.basename(d.args.split(' ')[0])), dir: cwdOf(d.pid), project: projectName(cwdOf(d.pid)), age: d.age, args: d.args.slice(0, 120) }));
   return { servers, procs };
 }
@@ -195,4 +205,4 @@ async function stop(pid) {
   try { process.kill(pid, 'SIGTERM'); return `stopped pid ${pid}`; } catch (e) { return `couldn't stop pid ${pid}: ${e.code}`; }
 }
 
-module.exports = { parseListen, parsePidFiles, parsePs, etimeMs, titleOf, taskInfo, projOfDir, kindOf, diff, label, poll, stop, listTasks, listServers };
+module.exports = { parseListen, parsePidFiles, parsePs, etimeMs, titleOf, taskInfo, projOfDir, sessionDirOf, kindOf, diff, label, poll, stop, listTasks, listServers };

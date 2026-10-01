@@ -81,11 +81,32 @@ test('theater: replays a session under the watched root, refuses one outside it'
 
 test('ports: an isolated root lists only its own sessions\' background tasks (none from this machine\'s real ones)', t => {
   const fx = fixture(); t.after(() => fs.rmSync(fx.root, { recursive: true, force: true }));
-  assert.deepStrictEqual(node(`require('./ports').listTasks().then(r => console.log(JSON.stringify(r)))`, { VIBEPET_CLAUDE_DIR: fx.claude }), []);
+  // the child prints a count only: if isolation ever broke, a failure message must not carry real task text
+  assert.strictEqual(node(`require('./ports').listTasks().then(r => console.log(r.length))`, { VIBEPET_CLAUDE_DIR: fx.claude }), 0);
   // names only, to show the check isn't vacuous: how many real task outputs sit in Claude Code's tmp right now
   const TMP = `/private/tmp/claude-${process.getuid()}`, ls = d => { try { return fs.readdirSync(d); } catch { return []; } };
   const real = ls(TMP).flatMap(pd => ls(path.join(TMP, pd)).flatMap(sd => ls(path.join(TMP, pd, sd, 'tasks')).filter(f => f.endsWith('.output'))));
   t.diagnostic(`${real.length} task outputs from this machine's own sessions stayed out`);
+});
+
+test('ports: an isolated root lists the servers its own sessions run, not the rest of the machine\'s', async t => {
+  const { spawn } = require('child_process');
+  const fx = fixture(), outside = fs.mkdtempSync(path.join(os.tmpdir(), 'vibepet-outside-')), kids = [];
+  t.after(() => { for (const k of kids) k.kill('SIGKILL'); for (const d of [fx.root, outside]) fs.rmSync(d, { recursive: true, force: true }); });
+  // a session ran in <root>/app (lsof reports physical paths: name its session dir after the realpath); its dev server
+  // listens from app/web, a sub-dir. Another server, not any watched session's, listens from a dir outside.
+  const app = path.join(fs.realpathSync(fx.root), 'app'), web = path.join(app, 'web');
+  fs.mkdirSync(web, { recursive: true });
+  fs.mkdirSync(path.join(fx.claude, 'projects', require('../ports').sessionDirOf(app)));
+  const serve = cwd => new Promise((res, rej) => {
+    const k = spawn(process.execPath, ['-e', "require('http').createServer((q, r) => r.end('<title>fx</title>')).listen(0, '127.0.0.1', function () { console.log(this.address().port) })"],
+      { cwd, stdio: ['ignore', 'pipe', 'ignore'] });
+    kids.push(k); k.once('error', rej); k.stdout.once('data', d => res(+String(d).trim()));
+  });
+  const ports = [await serve(web), await serve(outside)];
+  const seen = env => node(`require('./ports').listServers().then(r => console.log(JSON.stringify(${JSON.stringify(ports)}.map(p => r.servers.some(s => s.port === p)))))`, env);
+  assert.deepStrictEqual(seen({ VIBEPET_CLAUDE_DIR: fx.claude }), [true, false], 'isolated: its session\'s server only');
+  assert.deepStrictEqual(seen({}), [true, true], 'unset: every server on the machine, as shipped');
 });
 
 test('no module builds a path into ~/.claude except through overrides.js', () => {
