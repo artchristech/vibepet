@@ -13,7 +13,7 @@ const { plan } = require('./camera');
 const compose = require('./compose');
 
 const ROOT = path.join(os.homedir(), 'Movies', 'Vibepet');
-const CLAUDE_DIR = path.join(os.homedir(), '.claude', 'projects');
+const CLAUDE_DIR = require('../overrides').projectsDir();
 const MAX_MS = 2 * 3600e3, MIN_FREE = 2 * 1024 ** 3;
 
 let ctx;              // { emit, getState, save, refresh, petPng }

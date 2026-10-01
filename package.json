@@ -26,6 +26,7 @@
       "place.js",
       "agents.js",
       "goal.js",
+      "overrides.js",
       "content/**",
       "theater/**",
       "ports.js",

@@ -1,8 +1,9 @@
 // theater/index.js — main-process side: read a session (+ subagents + git), list recent sessions, open the player window.
-const fs = require('fs'), path = require('path'), os = require('os');
+const fs = require('fs'), path = require('path');
 const { execFile } = require('child_process');
 const { build, parseGit } = require('./model');
 const { humanAt, textOf } = require('../agents');
+const { projectsDir } = require('../overrides');
 
 const readLines = f => { try { return fs.readFileSync(f, 'utf8').split('\n').filter(Boolean); } catch { return []; } };
 
@@ -20,7 +21,7 @@ const gitLog = (cwd, t0, t1) => new Promise(res => {
 });
 
 async function timeline(file) {
-  if (!file || !file.endsWith('.jsonl') || !path.resolve(file).startsWith(path.join(os.homedir(), '.claude', 'projects'))) throw new Error('not a session file');
+  if (!file || !file.endsWith('.jsonl') || !path.resolve(file).startsWith(projectsDir() + path.sep)) throw new Error('not a session file');
   const lines = readLines(file), subagents = subagentsOf(file);
   const first = build(lines, { subagents });
   const commits = await gitLog(first.meta.cwd, first.meta.t0, first.meta.t1);

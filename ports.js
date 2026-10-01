@@ -7,8 +7,10 @@ const os = require('os');
 const http = require('http');
 const { execFile } = require('child_process');
 const { readTail } = require('./agents');
+const overrides = require('./overrides');
 
 const HOME = os.homedir();
+const PROJECTS = overrides.projectsDir(), ISOLATED = overrides.isolated();   // ~/.claude/projects unless VIBEPET_CLAUDE_DIR
 const TMP = `/private/tmp/claude-${process.getuid?.() ?? 501}`;
 const DAY = 864e5;
 // lsof exits 1 when any path is missing but still prints the rest, so keep stdout on error
@@ -104,7 +106,8 @@ function taskInfo(text, id) {
 const infoCache = new Map();   // id → taskInfo; finished ones are final, unresolved retried once a minute
 async function listTasks(now = Date.now()) {
   const files = [];
-  for (const pd of safeDir(TMP)) for (const sd of safeDir(path.join(TMP, pd))) {
+  const watched = pd => !ISOLATED || fs.existsSync(path.join(PROJECTS, pd));   // an isolated root sees its own sessions' tasks, not the machine's
+  for (const pd of safeDir(TMP).filter(watched)) for (const sd of safeDir(path.join(TMP, pd))) {
     const td = path.join(TMP, pd, sd, 'tasks');
     for (const f of safeDir(td)) {
       if (!f.endsWith('.output')) continue;
@@ -120,7 +123,7 @@ async function listTasks(now = Date.now()) {
   const texts = new Map(), textOf = f => {
     const key = f.pd + '/' + f.sd;
     if (!texts.has(key)) {
-      const pdir = path.join(HOME, '.claude', 'projects', f.pd), recent = safeDir(pdir).filter(x => x.endsWith('.jsonl'))
+      const pdir = path.join(PROJECTS, f.pd), recent = safeDir(pdir).filter(x => x.endsWith('.jsonl'))
         .map(x => { try { return [x, fs.statSync(path.join(pdir, x)).mtimeMs]; } catch { return [x, 0]; } }).sort((a, b) => b[1] - a[1]).slice(0, 4).map(x => x[0]);
       texts.set(key, [...new Set([f.sd + '.jsonl', ...recent])].map(x => { try { return readTail(path.join(pdir, x), 524288, 524288); } catch { return ''; } }).join('\n'));
     }

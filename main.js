@@ -10,16 +10,20 @@ const { judge, commitMatches } = require('./goal');
 const content = require('./content');
 const ports = require('./ports');
 const theater = require('./theater');
+const overrides = require('./overrides');
 
 const W = 660, H = 960;
 const { place, areaFor, minY } = require('./place');
 let petTop = 276;   // Net's top inside the window (panels-above layout); the renderer reports the real value
 let virt = null, below = false, room = 9999;   // wanted window pos (panels above; may sit above the screen top) + current flip
-const CLAUDE_DIR = path.join(os.homedir(), '.claude', 'projects');
+const CLAUDE_DIR = overrides.projectsDir();   // ~/.claude/projects unless VIBEPET_CLAUDE_DIR moves the root
 const TICK_MS = 3000;
 
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 app.disableHardwareAcceleration();   // a 224×208 pixel canvas + one CSS capsule: the GPU process costs memory, buys nothing
+// VIBEPET_USER_DATA: its own state, ledger and single-instance lock — so it must land before the lock is taken
+const USER_DATA = overrides.userData();
+if (USER_DATA) { fs.mkdirSync(USER_DATA, { recursive: true }); app.setPath('userData', USER_DATA); }
 const primary = app.requestSingleInstanceLock();
 if (!primary) app.quit();   // the running pet gets 'second-instance' instead
 
@@ -782,11 +786,14 @@ function createTray() {
 
 // ---------- the jump door: a global key walks the renderer's queue (it owns pending()) ----------
 const KEYS = [['⌃⌥⌘J', 'Control+Alt+Command+J'], ['⌥⌘J', 'Alt+Command+J'], ['Off', null]];   // not ⌥Space (Raycast/ChatGPT) or ⌃⌥Space (input source)
+const HOTKEY = overrides.hotkey();   // VIBEPET_HOTKEY: undefined = the saved key, null = 'off', else that accelerator
+const jumpKey = () => HOTKEY === undefined ? state.hotkey : HOTKEY;
 let keyTaken = false;
 function bindKey() {
   globalShortcut.unregisterAll();
+  if (HOTKEY === null) { keyTaken = false; return; }   // 'off': instances run side by side in tests, none may grab a global key
   let ok = true;
-  if (state.hotkey) try { ok = globalShortcut.register(state.hotkey, () => { if (!win.isVisible()) win.showInactive(), send('summon'); send('hotkey'); }); } catch { ok = false; }
+  if (jumpKey()) try { ok = globalShortcut.register(jumpKey(), () => { if (!win.isVisible()) win.showInactive(), send('summon'); send('hotkey'); }); } catch { ok = false; }
   keyTaken = !ok;   // someone else has it: stay quiet, the menu says so
   try { globalShortcut.register('Control+Alt+Command+R', () => content.toggle()); } catch {}   // not ⌘⇧R: that's hard-reload in every browser
 }

@@ -2,11 +2,10 @@
 // Nothing here runs a process except locate/focus, which main.js calls only from the 'jump' handler (a click).
 const path = require('path');
 const fs = require('fs');
-const os = require('os');
 const { execFile } = require('child_process');
 
 const { intentful, evidence } = require('./goal');
-const SESS_DIR = path.join(os.homedir(), '.claude', 'sessions');   // Claude Code's own <pid>.json registry
+const SESS_DIR = require('./overrides').sessionsDir();   // Claude Code's own <pid>.json registry (~/.claude/sessions)
 
 function readTail(file, bytes = 131072, maxBytes = 16 * 1048576) {
   const fd = fs.openSync(file, 'r');
