@@ -443,7 +443,9 @@ ipcMain.handle('send-to', async (_, { id, action, key, text } = {}) => {
   if (!ACTIONS.has(action)) return { ok: false, why: `unknown action ${action}` };
   if (action === 'text' && !String(text ?? '').trim()) return { ok: false, why: 'nothing to send' };
   try {
-    const procs = await psAll(), loc = await locateSession(s, procs);
+    const procs = await psAll();
+    if (!procs.size) return { ok: false, why: "couldn't list processes" };   // ps timed out (a loaded Mac): don't guess where it runs
+    const loc = await locateSession(s, procs);
     if (loc?.reg?.tmux) return await tmux.send({ target: loc.reg.tmux, pid: loc.pid, procs, name: s.name, action, key, text });
     if (action !== 'approve' && action !== 'text') return { ok: false, why: `${s.name} isn't in tmux: only Approve and Reply reach its tab` };
     if (action === 'text' && loc?.reg?.waitingFor === 'input needed') return { ok: false, why: `${s.name} is showing a question: typing would pick an option blindly` };
