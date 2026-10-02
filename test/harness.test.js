@@ -12,7 +12,7 @@ function world(t) {   // base = a stand-in for ~/.vibepet-ultra; elsewhere = the
   t.after(() => { for (const d of [base, elsewhere]) fs.rmSync(d, { recursive: true, force: true }); });
   const root = path.join(base, 'root', '.claude');
   for (const d of ['projects', 'sessions']) fs.mkdirSync(path.join(root, d), { recursive: true });
-  const mk = (p, file) => { fs.mkdirSync(file ? path.dirname(p) : p, { recursive: true }); if (file) fs.writeFileSync(p, '{}'); return p; };
+  const mk = (p, file) => { fs.mkdirSync(file ? path.dirname(p) : p, { recursive: true }); if (file) fs.writeFileSync(p, typeof file === 'string' ? file : '{}'); return p; };
   return { base, elsewhere, root, mk, ok: (r = root, o = {}) => H.checkRoot(r, { base, ...o }) };
 }
 
@@ -31,7 +31,9 @@ test('guard: an isolated root inside the base passes, with fleet links and regis
   // the fleet layout: projects/<fleet dir> → the real ~/.claude/projects/<fleet dir>, sessions/<pid>.json → the registry
   const fleet = w.mk(path.join(w.elsewhere, '.claude', 'projects', '-Users-x--vibepet-ultra-fleet-kestrel'));
   fs.symlinkSync(fleet, path.join(w.root, 'projects', path.basename(fleet)));
-  fs.symlinkSync(w.mk(path.join(w.elsewhere, '.claude', 'sessions', '4821.json'), true), path.join(w.root, 'sessions', '4821.json'));
+  const registry = cwd => JSON.stringify({ pid: 4821, cwd, status: 'idle' });   // a fleet member runs in a repo under the base
+  fs.symlinkSync(w.mk(path.join(w.elsewhere, '.claude', 'sessions', '4821.json'), registry(path.join(w.base, 'fleet', 'kestrel'))), path.join(w.root, 'sessions', '4821.json'));
+  fs.symlinkSync(path.join(w.elsewhere, '.claude', 'sessions', '4999.json'), path.join(w.root, 'sessions', '4999.json'));   // a member that exited: dangling
   fs.symlinkSync(w.mk(path.join(w.base, 'fixtures', 'p')), path.join(w.root, 'projects', '-local'));   // inside the base
   w.ok(w.root, { userData: path.join(w.base, 'userdata', 'run-1') });
 });
@@ -52,6 +54,15 @@ test('guard: every way back to real data is refused', t => {
   refuse(v => fs.symlinkSync(w.mk(path.join(w.elsewhere, '.claude', 'sessions', '77.json'), true), path.join(v.root, 'projects', '77.json')), /neither under/);
   refuse(v => fs.symlinkSync(w.mk(path.join(w.elsewhere, 'notes', '1.json'), true), path.join(v.root, 'sessions', '1.json')), /neither under/);
   refuse(v => fs.symlinkSync(real, path.join(v.root, 'sessions', 'p')), /neither under/);
+  // a registry names a live session: only one whose cwd is under the base (a fleet repo) may be shown, linked or copied
+  const secret = JSON.stringify({ pid: 78, cwd: path.join(w.elsewhere, 'projects', 'secret'), status: 'busy' });
+  refuse(v => fs.symlinkSync(w.mk(path.join(w.elsewhere, '.claude', 'sessions', '78.json'), secret), path.join(v.root, 'sessions', '78.json')), /registry of a session/);
+  refuse(v => fs.writeFileSync(path.join(v.root, 'sessions', '79.json'), secret), /registry of a session/);
+  refuse(v => fs.writeFileSync(path.join(v.root, 'sessions', '80.json'), '{"status":"idle"}'), /registry of a session/);
+  // a fleet member's pid reused by one of the user's sessions: the same link now names a real session
+  { const v = world(t), target = v.mk(path.join(w.elsewhere, '.claude', 'sessions', '81.json'), JSON.stringify({ pid: 81, cwd: path.join(v.base, 'fleet', 'atlas') }));
+    fs.symlinkSync(target, path.join(v.root, 'sessions', '81.json')); v.ok();
+    fs.writeFileSync(target, secret); assert.throws(() => v.ok(), /registry of a session/); }
   // userData outside the base
   assert.throws(() => w.ok(w.root, { userData: path.join(w.elsewhere, 'ud') }), /refusing userData/);
 });

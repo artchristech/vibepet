@@ -10,8 +10,9 @@
 // Privacy guard: `root` (the Claude config root the instance watches, VIBEPET_CLAUDE_DIR) must resolve, symlinks
 // followed, inside ~/.vibepet-ultra, and so must userData. Under root/projects and root/sessions every symlink must land
 // inside ~/.vibepet-ultra or in a fixture-fleet session dir (its name contains -vibepet-ultra-fleet-); sessions/ may also
-// link one Claude Code registry file (<pid>.json). launch() throws before anything starts otherwise, and shot() checks
-// again before every capture. See test/ultra/README.md.
+// link one Claude Code registry file (<pid>.json), and every registry under sessions/ must name a session whose cwd is
+// inside ~/.vibepet-ultra (a fleet repo). launch() throws before anything starts otherwise, and shot() checks again
+// before every capture. See test/ultra/README.md.
 'use strict';
 const fs = require('fs');
 const os = require('os');
@@ -46,6 +47,14 @@ function allowedTarget(t, kind, base) {
   if (t.split(path.sep).some(seg => seg.includes(FLEET))) return true;
   return kind === 'sessions' && path.basename(path.dirname(t)) === 'sessions' && /^\d+\.json$/.test(path.basename(t));
 }
+// A registry file under sessions/ (linked or copied) puts one live session's name, cwd and status in front of the
+// instance, so it must describe a session that runs inside base (a fleet repo). This also catches a fleet link whose
+// pid was reused: the member exited, and a session of the user's now owns ~/.claude/sessions/<pid>.json. A registry
+// that is gone or unparseable is fine: vibepet can't show it either. The cwd itself never goes into an error message.
+function registryOk(p, base) {
+  let j; try { j = JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return true; }
+  return !!j && typeof j.cwd === 'string' && inside(base, j.cwd);
+}
 // throws unless root (with everything vibepet reads under it) and userData stay inside base (default ~/.vibepet-ultra)
 function checkRoot(root, { userData, base = ULTRA } = {}) {
   if (!root) throw new Error('launch: `root` is required: the isolated Claude config root the instance watches (VIBEPET_CLAUDE_DIR)');
@@ -61,6 +70,8 @@ function checkRoot(root, { userData, base = ULTRA } = {}) {
           const t = real(p);
           if (!allowedTarget(t, kind, base)) throw new Error(`launch: refusing root: ${p} links to ${t}, which is neither under ${base} nor a fixture-fleet dir (*${FLEET}*)`);
         } else if (e.isDirectory() && depth < 4) walk(p, depth + 1);
+        if (kind === 'sessions' && e.name.endsWith('.json') && !registryOk(p, base))
+          throw new Error(`launch: refusing root: ${p} is the registry of a session whose cwd is outside ${base} (privacy guard: fleet sessions only)`);
       }
     };
     walk(path.join(root, kind), 0);

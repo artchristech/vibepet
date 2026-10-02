@@ -112,6 +112,10 @@ Sounds are recorded instead of played; banners are recorded by test mode, never 
   fixture-fleet dir (a path segment containing `-vibepet-ultra-fleet-`). `sessions/` may also link a registry
   file `…/sessions/<pid>.json`. That is the fleet layout: `root/.claude/projects/<fleet dir>` →
   `~/.claude/projects/<fleet dir>`.
+- Every registry file under `sessions/`, linked or copied, must name a session whose `cwd` is inside `~/.vibepet-ultra`
+  (a fleet repo). A registry carries a live session's name, cwd and status, so this keeps the user's own sessions off
+  screen. It also catches a fleet link whose pid was reused: the member exited and one of the user's sessions now owns
+  `~/.claude/sessions/<pid>.json`. A dangling link (the member exited) passes, since there is nothing to show.
 - Never point an instance at `~/.claude`, and never screenshot one that isn't isolated. Real transcripts must not leave
   this machine, and a screenshot you read is text that leaves it.
 
