@@ -78,10 +78,10 @@ const RULE = /^\s*─{8,}\s*$/;
 // cell on it) doesn't count. Grey = black/bright black, the 256-colour grey ramp, or an achromatic truecolour below #d0d0d0.
 const grey256 = n => (n >= 232 && n <= 252) || [0, 8, 16, 59, 102, 145].includes(n);
 function typed(raw) {
-  let grey = false, dim = false, inv = false;
-  for (const part of raw.replace(/^(?:\x1b\[[0-9;:]*m)*❯/, '').split(/(\x1b\[[0-9;:]*m)/)) {
+  let grey = false, dim = false, inv = false, mark = true;   // mark: the box's own ❯ comes first, in whatever colour
+  for (const part of raw.split(/(\x1b\[[0-9;:]*m)/)) {
     const m = part.match(/^\x1b\[([0-9;:]*)m$/);
-    if (!m) { if (!grey && !dim && !inv && /\S/.test(part)) return true; continue; }
+    if (!m) { const t = mark && part ? (mark = false, part.replace(/^❯/, '')) : part; if (!grey && !dim && !inv && /\S/.test(t)) return true; continue; }
     const ps = (m[1] || '0').split(/[;:]/).map(Number);
     for (let i = 0; i < ps.length; i++) {
       const p = ps[i];

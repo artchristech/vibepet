@@ -181,6 +181,7 @@ test('guard: a grey prompt suggestion is not a draft; typed text is', () => {
     assert.strictEqual(guard(box(d), 'text', null, 'vibepet'), 'vibepet has unsent text in its input box', JSON.stringify(d));
   assert.strictEqual(guard(VIBEPET_PLAIN, 'text', null, 'vibepet'), 'vibepet has unsent text in its input box');   // why send() captures with -e
   assert.ok(!typed('\u001b[39m❯ ') && typed('\u001b[39m❯ hi'));
+  assert.ok(!typed('\u001b[38;5;246m❯\u00a0start it') && typed('\u001b[38;5;246m❯\u00a0\u001b[39mhi'));   // a grey ❯ greys what follows until a reset
 });
 
 test('guard: a busy session takes interrupt, and text (Claude Code queues it)', () => {
