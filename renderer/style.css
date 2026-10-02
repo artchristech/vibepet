@@ -106,12 +106,13 @@ button { font: inherit; cursor: pointer; }
 .nr:hover { background: rgba(255,255,255,.045); }
 .nr .tl { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; }
 .nr.needs, .nr.stuck { background: rgba(255,207,63,.05); }
+.nr.exited .nm { opacity: .6; }   /* its claude is gone: listed last for 10 min, ▶ and the resume command still work */
 .nm { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .nm b { font-weight: 650; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .nm small { color: var(--c-faint); font-size: 11px; }
 .ng, .na { font-size: 11.5px; color: var(--c-dim); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .ng.on { color: var(--c-accent2); } .ng.drift { color: #ffc46b; } .ng.done { color: var(--c-accent); }
-.na { color: #ffd98a; font-family: var(--mono, ui-monospace, Menlo, monospace); font-size: 11px; }
+.na { color: #ffd98a; font-family: var(--mono, ui-monospace, Menlo, monospace); font-size: 11px; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }   /* a question keeps its choices in view */
 .nb { display: flex; gap: 4px; opacity: .55; transition: opacity .12s; }
 .nr:hover .nb, .nr.needs .nb, .nr.stuck .nb { opacity: 1; }
 .nb button, .nfoot .chip, .srv button { background: var(--c-field); border: 1px solid var(--c-line); color: var(--c-fg); border-radius: 7px; padding: 3px 8px; font: 11.5px var(--ui); cursor: pointer; }

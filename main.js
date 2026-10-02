@@ -4,7 +4,8 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { execFile, spawn } = require('child_process');
-const { readTail, textOf, firstPrompt, scan, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
+const { readTail, textOf, firstPrompt, scan, byQueue, NEEDS, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
+const registry = require('./registry');
 const gesture = require('./gesture');
 const { judge, commitMatches } = require('./goal');
 const content = require('./content');
@@ -129,20 +130,24 @@ function flushDone() {
 const away = () => !win || win.isDestroyed() || !win.isVisible() || powerMonitor.getSystemIdleTime() > 60;
 
 // ---------- claude code sessions ----------
-const sessions = new Map(); // id -> { phase, since, … }
+const sessions = new Map(); // id -> { phase, kind, since, … }
 
-// phases are settled against each session's subagents (agents.js fanout/settle), so a fan-out never reads as stuck or done
-const scanAgents = () => scan(CLAUDE_DIR, sessions, transition);
+// a session in Claude Code's registry (registry.js) takes its state from there: needs-you, alive or exited, true ages.
+// Phases of the rest are settled against each session's subagents (agents.js fanout/settle), so a fan-out never reads as stuck or done
+let reg = new Map();   // sessionId -> live registry entry, read each tick (the last good read if one fails)
+const scanAgents = () => scan(CLAUDE_DIR, sessions, transition, reg);
 
+// a new episode = a new kind or a new since: an approval is announced at once when the registry says so; one inferred
+// from 90 s of transcript silence waits for unstick() to rule out a tool that's simply still running
 function transition(s, prev) {
-  const { name, id, phase } = s, was = prev.phase === 'working' || prev.phase === 'stalled';
-  if (phase === 'ready' && was) {
+  const { name, id, kind } = s;
+  if (kind === 'done' && prev.kind !== 'done' && prev.kind !== 'exited' && s.ask !== 'interrupted') {   // you stopped it yourself: nothing to say
     emit('agentDone', `${name} is done`, { agent: name, id });
     if (away() && state.alerts !== 'blocked') queueDone({ name, id });
-  } else if (phase === 'waiting' && was) {
-    emit('agentNeeds', `${name} has a question`, { agent: name, id, notify: away() });
-  } else if (phase === 'stalled' && prev.phase === 'working') {
-    stallQueue.add(id);   // announced after unstick() rules out a tool that's simply still running
+  } else if (NEEDS.has(kind) && (!NEEDS.has(prev.kind) || s.since !== prev.since)) {
+    if (kind === 'question' || kind === 'input') emit('agentNeeds', `${name} has a question`, { agent: name, id, notify: away() });
+    else if (s.alive) emit('agentNeeds', `${name} needs approval`, { agent: name, id, notify: away() });
+    else stallQueue.add(id);
   }
 }
 
@@ -227,40 +232,45 @@ function goalDone(a, how) {
 }
 ipcMain.on('goal-done', (_, id) => { const a = agents.find(x => x.id === id); if (a) { goalDone(a, 'marked'); save(); tick(); } });
 
-// blocked on you past NAG_MS: one nudge per episode (a new phase resets `since`, so a fresh block nags again)
-const NAG_MS = 3 * 60e3, nagged = new Map();   // id -> since it nagged for
+// blocked on you past NAG_MS: one nudge per episode, keyed on its true since (a fresh block nags again). A block already
+// past NAG_MS when this pet started was said at launch: no banner per old block.
+const NAG_MS = 3 * 60e3, nagged = new Map(), nagT0 = Date.now();   // id -> since it nagged for
 function nag(list) {
   const now = Date.now();
   for (const a of list) {
-    if ((a.phase !== 'stalled' && a.phase !== 'waiting') || now - a.since < NAG_MS || nagged.get(a.id) === a.since) continue;
+    if (!NEEDS.has(a.kind) || now - a.since < NAG_MS || nagged.get(a.id) === a.since) continue;
     nagged.set(a.id, a.since);
+    if (a.since + NAG_MS < nagT0) continue;
     const m = Math.round((now - a.since) / 60000);
     emit('agentNag', `${a.title || a.name} ${a.phase === 'waiting' ? 'has waited on your answer' : 'has been blocked on approval'} ${m}m`, { agent: a.name, id: a.id, notify: true });
   }
   for (const id of nagged.keys()) if (!sessions.has(id)) nagged.delete(id);
 }
 
-// ---------- stalled vs. busy ----------
+// ---------- stalled vs. busy (a session with no registry entry) ----------
 // A tool call with 90s of silence is either waiting on your approval or just long (a build, a render, a sleep).
-// A running tool is a child process of that claude, started after the call: then it's working, not stuck.
-const stallQueue = new Set();
+// A running tool is a child process of that claude, started after the call: then it's working, not stuck. The verdict is
+// kept per tool call (s.busyAt, which scan() reads back) and never written into s.phase: that flip reset the row's clock.
+// A registry session needs none of this: its status says busy or waiting.
+const stallQueue = new Set(), freeAt = new Map();   // id@toolAt -> when a 'not running' verdict may be checked again
 async function unstick(list) {
-  const st = list.filter(a => a.phase === 'stalled' && a.toolAt);
+  const now = Date.now(), st = list.filter(a => a.phase === 'stalled' && a.kind === 'approval' && a.toolAt && a.alive === null && now >= (freeAt.get(a.id + '@' + a.toolAt) || 0));
   if (st.length) {
     let procs; try { procs = await psAll(); } catch {}
     const kids = new Map();
     for (const p of procs?.values() || []) (kids.get(p.ppid) || kids.set(p.ppid, []).get(p.ppid)).push(p);
     const busy = (pid, since) => (kids.get(pid) || []).some(k => k.start >= since - 2000 || busy(k.pid, since));
+    if (freeAt.size > 500) freeAt.clear();
     for (const a of st) {
       const loc = procs && await locateSession(a, procs).catch(() => null);
-      if (!loc || !busy(loc.pid, a.toolAt)) continue;
-      a.phase = 'working'; a.ask = undefined;
-      const s = sessions.get(a.id); if (s) s.phase = 'working';
+      if (!loc || !busy(loc.pid, a.toolAt)) { freeAt.set(a.id + '@' + a.toolAt, now + 15e3); continue; }
+      const s = sessions.get(a.id); if (s) s.busyAt = a.toolAt;
+      Object.assign(a, { phase: 'working', kind: 'running', ask: undefined });   // this tick's copy; scan() keeps it from the next
     }
   }
   for (const id of stallQueue) {
     const a = list.find(x => x.id === id);
-    if (a?.phase === 'stalled') emit('agentStalled', `${a.name} needs approval`, { agent: a.name, id, notify: away() });
+    if (a?.phase === 'stalled') emit('agentNeeds', `${a.name} needs approval`, { agent: a.name, id, notify: away() });
   }
   stallQueue.clear();
 }
@@ -284,8 +294,8 @@ async function rootOf(dir) {
 async function scanGit(agents) {
   const roots = new Set();
   for (const a of agents) { const r = await rootOf(a.cwd); if (r) roots.add(r); }
-  // auto-focus is sticky: only move off the current repo once no live agent is working in it
-  const live = agents.filter(a => a.phase !== 'parked'), cur = gitInfo?.root;
+  // auto-focus is sticky: only move off the current repo once no live agent is working in it; else the latest active one
+  const live = agents.filter(a => a.kind !== 'exited').sort((a, b) => b.mtime - a.mtime), cur = gitInfo?.root;
   const stick = cur && (!live.length || live.some(a => a.cwd === cur || a.cwd?.startsWith(cur + path.sep)));
   const focusDir = state.repo || (stick ? cur : live[0]?.cwd || agents[0]?.cwd) || cur;
   const focus = await rootOf(focusDir);
@@ -345,8 +355,10 @@ async function tick() {
   busy = true;
   try {
     decay();
+    reg = (await registry.read()) || reg;
     agents = scanAgents();
     await unstick(agents);
+    agents.sort(byQueue);
     for (const a of agents) { a.goal = goalFor(a); watchDrift(a); }
     pruneGoals();
     for (const id of drift.keys()) if (!sessions.has(id)) drift.delete(id);
@@ -364,8 +376,9 @@ function snapshot() {
   return {
     name: state.name, level, xp: state.xp, xpLo: xpForLevel(level), xpHi: xpForLevel(level + 1),
     fuel: state.fuel, mood: state.mood, commits: state.commits,
-    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, goal: a.goal && { text: a.goal.text, auto: a.goal.auto, done: !!a.goal.done, verdict: a.verdict }, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout,
-      receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
+    // in the one queue order (agents.js byQueue): Home, the roster and the jump key show it as is
+    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, goal: a.goal && { text: a.goal.text, auto: a.goal.auto, done: !!a.goal.done, verdict: a.verdict }, phase: a.phase, kind: a.kind, since: a.since,
+      ask: a.ask, options: a.options, alive: a.alive, pid: a.pid ?? null, term: a.term, fanout: a.fanout, receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
     git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, pet: state.pet, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto', rec: content.status(), scale: petScale(),
     size: state.size || 'm', alerts: state.alerts || 'done', feel: state.feel, setupDone: !!state.setupDone, pets: PETS, perms: perms(),
@@ -485,15 +498,19 @@ function agentTranscript(s, n = 4) {
       if (t && !t.startsWith('<')) out.push('HUMAN: ' + t.slice(0, 400));
     }
   }
-  return `[${s.name} · ${s.phase}]\n` + out.reverse().join('\n');
+  return `[${s.name} · ${SAYS[s.kind] || s.phase}]\n` + out.reverse().join('\n');
 }
+// the chat model's view of each session, in queue order: its state, for how long on Claude Code's clock, what it asks
+const SAYS = { approval: 'needs approval', plan: 'needs plan approval', question: 'waiting for an answer', input: 'waiting for an answer', done: 'done', running: 'running', exited: 'exited' };
+const span = ms => { const s = Math.max(0, Math.round(ms / 1000)); return s < 60 ? `${s}s` : s < 3600 ? `${Math.floor(s / 60)}m ${s % 60}s` : `${Math.floor(s / 3600)}h ${Math.floor(s % 3600 / 60)}m`; };
+const agentLine = a => `${a.name}=${SAYS[a.kind] || a.phase} for ${span(Date.now() - a.since)}${a.ask ? ' - ' + a.ask.replace(/;\s*/g, ', ') : ''}`;
 
 async function buildContext(mode) {
   const g = gitInfo;
   const parts = [
     state.game && `Pet stats: level ${levelFor(state.xp)}, fuel ${Math.round(state.fuel)}/100, mood ${Math.round(state.mood)}/100, total commits witnessed ${state.commits}.`,
     `Local time: ${new Date().toLocaleString()}.`,
-    `Agents: ${agents.length ? agents.map(a => `${a.name}=${a.phase} for ${Math.round((Date.now() - a.since) / 1000)}s`).join(', ') : 'none active'}.`,
+    `Agents: ${agents.length ? agents.map(agentLine).join('; ').replace(/[^.?!]$/, '$&.') : 'none active.'}`,
   ];
   if (g?.root) {
     parts.push(`Repo: ${g.name} (branch ${g.branch || '?'}): ${g.lines} uncommitted lines across ${g.files} files, ${g.untracked} untracked files. Last commit ${g.lastCommitAt ? Math.round((Date.now() - g.lastCommitAt) / 60000) + ' min ago' : 'never'}: "${g.lastSubject}".`);
