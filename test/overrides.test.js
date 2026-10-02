@@ -67,7 +67,7 @@ test('agents.js: a pid is matched to its session through <root>/sessions/<pid>.j
   fs.writeFileSync(path.join(fx.claude, 'sessions', PID + '.json'), JSON.stringify({ pid: PID, sessionId: 'sess-1' }));
   const code = `require('./agents').locateSession({ id: 'sess-1' }, new Map([[${PID}, { pid: ${PID}, ppid: 1, tty: '/dev/ttys999', start: 0, comm: '/opt/x/claude' }]]))
     .then(r => console.log(JSON.stringify(r)))`;
-  assert.deepStrictEqual(node(code, { VIBEPET_CLAUDE_DIR: fx.claude }), { pid: PID, tty: '/dev/ttys999' });
+  assert.deepStrictEqual(node(code, { VIBEPET_CLAUDE_DIR: fx.claude }), { pid: PID, tty: '/dev/ttys999', reg: { pid: PID, sessionId: 'sess-1' } });   // + the entry itself (its tmux pane)
   assert.strictEqual(node(code, {}), null, 'unset: ~/.claude/sessions has no such pid');
 });
 
