@@ -12,6 +12,8 @@ const content = require('./content');
 const ports = require('./ports');
 const theater = require('./theater');
 const overrides = require('./overrides');
+const chatCtx = require('./chat-context');
+const { SAYS, agentLine } = chatCtx;
 
 const W = 660, H = 960;
 const { place, areaFor, minY } = require('./place');
@@ -513,20 +515,26 @@ function agentTranscript(s, n = 4) {
   }
   return `[${s.name} · ${SAYS[s.kind] || s.phase}]\n` + out.reverse().join('\n');
 }
-// the chat model's view of each session, in queue order: its state, for how long on Claude Code's clock, what it asks
-const SAYS = { approval: 'needs approval', plan: 'needs plan approval', question: 'waiting for an answer', input: 'waiting for an answer', done: 'done', running: 'running', exited: 'exited' };
-const span = ms => { const s = Math.max(0, Math.round(ms / 1000)); return s < 60 ? `${s}s` : s < 3600 ? `${Math.floor(s / 60)}m ${s % 60}s` : `${Math.floor(s / 3600)}h ${Math.floor(s % 3600 / 60)}m`; };
-const agentLine = a => `${a.name}=${SAYS[a.kind] || a.phase} for ${span(Date.now() - a.since)}${a.ask ? ' - ' + a.ask.replace(/;\s*/g, ', ') : ''}`;
-
-async function buildContext(mode) {
-  const g = gitInfo;
+// what each session is, needs and touched, and the sessions a message is about (chat-context.js formats; this reads git)
+const repoOf = root => Promise.all([['diff', 'HEAD', '--stat'], ['ls-files', '--others', '--exclude-standard'], ['log', '--format=%h%x09%ct%x09%s (%cr)', '-6']]
+  .map(a => git(root, ['--no-optional-locks', ...a]))).then(([stat, untracked, log]) => ({ stat, untracked, log }));
+const bornAt = f => { try { return fs.statSync(f).birthtimeMs || null; } catch { return null; } };   // when a session began
+async function buildContext(mode, messages = []) {
+  const g = gitInfo, now = Date.now();
+  const all = await Promise.all(agents.map(async a => { const e = reg.get(a.id);   // regName: '@kestrel-4d'; alias: one the user gave it (/rename)
+    return { ...a, root: await rootOf(a.cwd), regName: e?.name, alias: !!e?.nameSource && e.nameSource !== 'derived' }; }));
+  const br = new Map(await Promise.all([...new Set(all.map(a => a.root).filter(Boolean))].map(async r => [r, await git(r, ['branch', '--show-current']) || 'detached HEAD'])));
+  for (const a of all) a.branch = br.get(a.root);
   const parts = [
     state.game && `Pet stats: level ${levelFor(state.xp)}, fuel ${Math.round(state.fuel)}/100, mood ${Math.round(state.mood)}/100, total commits witnessed ${state.commits}.`,
     `Local time: ${new Date().toLocaleString()}.`,
-    `Agents: ${agents.length ? agents.map(agentLine).join('; ').replace(/[^.?!]$/, '$&.') : 'none active.'}`,
+    `Agents: ${all.length ? all.map(a => agentLine(a, now)).join('; ').replace(/[^.?!]$/, '$&.') : 'none active.'}`,   // first: canon's stub reads this line
+    all.length && chatCtx.sessions(all, now),
+    all.length && chatCtx.overlaps(all),
   ];
   if (g?.root) {
-    parts.push(`Repo: ${g.name} (branch ${g.branch || '?'}): ${g.lines} uncommitted lines across ${g.files} files, ${g.untracked} untracked files. Last commit ${g.lastCommitAt ? Math.round((Date.now() - g.lastCommitAt) / 60000) + ' min ago' : 'never'}: "${g.lastSubject}".`);
+    const here = [...new Set(all.filter(a => a.root === g.root).map(a => a.name))];
+    parts.push(`Watched repo: ${g.name} (branch ${g.branch || '?'}${here.length ? `; sessions in it: ${here.join(', ')}` : ''}): ${g.lines} uncommitted lines across ${g.files} files, ${g.untracked} untracked files. Last commit ${g.lastCommitAt ? Math.round((Date.now() - g.lastCommitAt) / 60000) + ' min ago' : 'never'}: "${g.lastSubject}".`);
     const [stat, log] = await Promise.all([git(g.root, ['diff', 'HEAD', '--stat']), git(g.root, ['log', '--oneline', '-8'])]);
     parts.push('Recent commits:\n' + (log || '(none)'));
     parts.push('Diff stat:\n' + (stat || '(clean)').split('\n').slice(-30).join('\n'));
@@ -535,12 +543,15 @@ async function buildContext(mode) {
       parts.push('Diff (truncated):\n' + (diff || '').slice(0, 16000));
       if (untracked) parts.push('Untracked files:\n' + untracked.split('\n').slice(0, 30).join('\n'));
     }
-  } else parts.push('Repo: none detected.');
+  } else parts.push('Watched repo: none detected.');
   if (mode === 'goal') {
     const live = agents.filter(a => a.goal).slice(0, 4);
     parts.push(live.length ? live.map(a => `GOAL (${a.goal.auto ? 'guessed from first prompt' : 'set by user'}): ${a.goal.text}\nLexical check: ${a.verdict}\n${agentTranscript(a, 8)}`).join('\n\n---\n\n') : 'No session has a goal yet.');
   }
-  if (mode === 'agent' || mode === 'next') parts.push('Latest agent transcript:\n' + agentTranscript(agents[0]));
+  // a session the message names (or, for the agent/next quick asks, the ones that need you) brings its own repo and transcript
+  const ab = chatCtx.about([...messages].reverse().find(m => m.role === 'user')?.content, mode, all);
+  parts.push(...await Promise.all(ab.list.map(async a => `About ${a.name} (${ab.why}):\n${a.root ? chatCtx.repoText(a, await repoOf(a.root), bornAt(a.file), now) : `${a.name} isn't in a git repo.`}\n${agentTranscript(a, 6)}`)));
+  if (!ab.list.length && (mode === 'agent' || mode === 'next')) parts.push('Latest agent transcript:\n' + agentTranscript(all[0]));
   return parts.filter(Boolean).join('\n\n');
 }
 
@@ -594,7 +605,7 @@ async function chatViaClaude(bin, messages, mode) {
   try {
     // the repo context (diff included) rides stdin, never argv: argv is readable by `ps` and logged by endpoint agents
     const sys = SYSTEM(state.name) + '\n\nThe user\'s message starts with a <live_context> block the app attached: their live repo and agent state.';
-    const input = '<live_context>\n' + await buildContext(mode) + '\n</live_context>\n\n' +
+    const input = '<live_context>\n' + await buildContext(mode, messages) + '\n</live_context>\n\n' +
       messages.map(m => `${m.role === 'user' ? 'User' : state.name}: ${m.content}`).join('\n\n');
     const base = ['-p', '--no-session-persistence', '--tools', '', '--setting-sources', '', '--strict-mcp-config', '--output-format', 'json'];
     const parse = s => { try { return JSON.parse(s); } catch { return null; } };
@@ -619,7 +630,7 @@ ipcMain.handle('chat', async (_, { messages, mode }) => {
     return via === 'key-locked' && !r.error ? { ...r, note: 'Couldn\'t unlock the saved key, so I used your Claude Code login.' } : r;
   }
   try {
-    const ctx = await buildContext(mode);
+    const ctx = await buildContext(mode, messages);
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },

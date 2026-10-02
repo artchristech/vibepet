@@ -28,6 +28,7 @@
       "agents.js",
       "registry.js",
       "tmux.js",
+      "chat-context.js",
       "goal.js",
       "overrides.js",
       "content/**",
