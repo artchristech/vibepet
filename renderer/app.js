@@ -102,11 +102,13 @@ const unseen = a => !(a.phase === 'ready' && seenReady.has(rkey(a)));
 function agentsIn(phase) { return (snap?.agents || []).filter(a => a.phase === phase && unseen(a)); }
 const heldReady = new Set();   // ready rows seen by this hover stay in the roster until the pill closes
 function markSeen() { const r = agentsIn('ready'); for (const a of r) { seenReady.add(rkey(a)); heldReady.add(rkey(a)); } if (r.length) { renderHud(); wake(); } }
+// needs you: an approval or a plan (phase 'stalled'), a question or a turn that ended asking ('waiting'). One amber face.
+const needsYou = a => a.phase === 'waiting' || a.phase === 'stalled';
 function baseState(now) {
   if (!snap) return 'idle';
-  if (agentsIn('waiting').some(a => Date.now() - a.since < 8000)) return 'alert';
-  if (agentsIn('waiting').length) return 'waiting';
-  if (agentsIn('stalled').length) return 'stalled';
+  const need = (snap.agents || []).filter(needsYou);
+  if (need.some(a => Date.now() - a.since < 8000)) return 'alert';
+  if (need.length) return 'waiting';
   if (agentsIn('ready').length) return 'ready';
   if (agentsIn('working').length) return 'working';
   if (snap.game && snap.fuel < 20) return 'hungry';
@@ -114,15 +116,15 @@ function baseState(now) {
   if ((late || now - lastInteract > 15 * 60e3) && !hovering && !chatOpen) return 'sleeping';
   return 'idle';
 }
-// one resolver for LED + face: needs input > stuck > ready > running > none; [0] wins, the rest become pips
-const SIG = { waiting: 'needs', stalled: 'stuck', ready: 'ready', working: 'running' }, RANK = ['needs', 'stuck', 'ready', 'running'];
-function agentSignals() { return (snap?.agents || []).filter(a => SIG[a.phase] && unseen(a)).map(a => SIG[a.phase]).sort((a, b) => RANK.indexOf(a) - RANK.indexOf(b)); }
-const TL = { running: '#3fe08f', needs: '#ffcf3f', ready: '#ffcf3f', stuck: '#ff5c6c' };
+// one resolver for LED + face: needs you (approval, plan, question) > ready > running > none; [0] wins, the rest become pips.
+// An exited session is listed last in Home and lights nothing. ('stuck' is left for a subagent stuck on its own tool.)
+const SIG = { waiting: 'needs', stalled: 'needs', ready: 'ready', working: 'running', exited: 'exited' }, RANK = ['needs', 'ready', 'running', 'exited'];
+function agentSignals() { return (snap?.agents || []).filter(a => SIG[a.phase] && SIG[a.phase] !== 'exited' && unseen(a)).map(a => SIG[a.phase]).sort((a, b) => RANK.indexOf(a) - RANK.indexOf(b)); }
+const TL = { running: '#3fe08f', needs: '#ffcf3f', ready: '#ffcf3f', stuck: '#ff5c6c', exited: '#8a93b8' };
 const LED = { needs: '#ffcf3f', stuck: '#ff5c6c', ready: '#9ff5d6', running: '#3fe08f', none: '#8a93b8' };
-// agents that want you, most urgent first (needs > stuck > ready), oldest first within a rank
+// agents that want you, in main's one queue order (needs you, oldest block first → done, oldest first): never re-sorted here
 function pending(held) {
-  return (snap?.agents || []).filter(a => SIG[a.phase] && SIG[a.phase] !== 'running' && (unseen(a) || (held && heldReady.has(rkey(a)))))
-    .sort((a, b) => RANK.indexOf(SIG[a.phase]) - RANK.indexOf(SIG[b.phase]) || a.since - b.since);
+  return (snap?.agents || []).filter(a => SIG[a.phase] === 'needs' || (SIG[a.phase] === 'ready' && (unseen(a) || (held && heldReady.has(rkey(a))))));
 }
 // exit: a hole opens under the pet and it drops in (ms offsets from the start)
 let exiting = null;
@@ -437,7 +439,7 @@ api.on('tick', s => {
   if (s.scale && s.scale !== +document.documentElement.style.getPropertyValue('--pet-scale')) { document.documentElement.style.setProperty('--pet-scale', s.scale); api.petTop?.(cv.offsetTop); }   // Small / Medium / Large
   renderHud();
   if (first) {                                  // speak at launch only when someone is actually waiting on you
-    const w = agentsIn('waiting');
+    const w = (s.agents || []).filter(needsYou);
     if (w.length) say(`${w.map(a => a.name).join(', ')} ${w.length > 1 ? 'are' : 'is'} waiting on you`, { alert: true });
   }
 });
@@ -541,7 +543,7 @@ function renderHud() {
     $('hudRepo').innerHTML = `⎇ <b>${esc(g.name)}</b>${g.branch ? '/' + esc(g.branch) : ''} · ±${g.lines} in ${g.files}f${g.untracked ? ` +${g.untracked}new` : ''} · ${g.lastCommitAt ? ago(Date.now() - g.lastCommitAt) : 'no commits'}`;
   } else $('hudRepo').textContent = g?.dir ? `${g.dir.split('/').pop()} isn't a git repo` : 'no repo — start an agent or right-click → watch';
   $('hudAgents').innerHTML = (snap.agents || []).slice(0, 6).map(a =>
-    `<span class="chip ${a.phase}" title="${a.phase} since ${ago(Date.now() - a.since)}">${esc(a.name)}${a.phase === 'waiting' ? ' · your move' : a.phase === 'stalled' ? ' · stuck?' : a.phase === 'ready' ? ' · done' : ''}</span>`).join('');
+    `<span class="chip ${a.phase}" title="${esc(phaseTime(a, SIG[a.phase]))}">${esc(a.name)}${a.phase === 'waiting' ? ' · your move' : a.phase === 'stalled' ? ' · approve?' : a.phase === 'ready' ? ' · done' : a.phase === 'exited' ? ' · exited' : ''}</span>`).join('');
   renderRoster();
 }
 // the question in the pill: what each waiting/stuck/finished agent wants, shown only while the pill is open.
@@ -570,10 +572,10 @@ function editGoal(id) {
 }
 function renderRoster() {
   if (editing) return;
-  // every live session, most urgent first; unseen needs/stuck/ready from pending(), then everything still running
+  // every live session in the queue order: needs you + unseen done from pending(), then everything still running
   const rows = pending(true), has = new Set(rows.map(a => a.id));
   rows.push(...(snap?.agents || []).filter(a => a.phase === 'working' && !has.has(a.id)));
-  // traffic light: green = working, yellow = your move (needs input / finished, unread), red = stuck/error
+  // traffic light: green = working, yellow = your move (an approval, a question, finished and unread), red = a subagent stuck
   $('roster').innerHTML = rows.slice(0, 6).map(a => { const sig = SIG[a.phase];
     const kids = (a.fanout?.items || []).filter(k => k.open).slice(0, 3).map(k =>
       `<span class="kid"><i class="tl" style="color:${k.stuck ? TL.stuck : TL.running};background:currentColor"></i><b>${esc(k.type || k.desc)}</b></span>`).join('');
@@ -583,12 +585,15 @@ function renderRoster() {
   if (L && (L.servers || L.tasks || L.procs)) $('roster').insertAdjacentHTML('beforeend', `<small class="local" title="${esc((L.names || []).join('\n'))}">⌂ ${L.servers} server${L.servers === 1 ? '' : 's'}${L.tasks ? ` · ${L.tasks} bg task${L.tasks === 1 ? '' : 's'}` : ''}${L.procs ? ` · ${L.procs} dev proc${L.procs === 1 ? '' : 's'}` : ''}</small>`);
   rosterShow();
 }
-// "waiting 4m" says whose move it is and for how long; "just now" said neither
+// "needs approval 42s" says whose move it is and for how long, on Claude Code's clock (main's since): seconds under a
+// minute, then whole minutes ('asking 14m', 'done 3m ago', 'exited 20s ago'); a running clock keeps its seconds
 const dur = ms => { const s = Math.max(0, Math.round(ms / 1000)); return s < 60 ? `${s}s` : s < 3600 ? `${Math.floor(s / 60)}m ${s % 60}s` : `${Math.floor(s / 3600)}h ${Math.floor(s % 3600 / 60)}m`; };
+const span = ms => { const s = Math.max(0, Math.round(ms / 1000)), m = Math.floor(s / 60); return s < 60 ? `${s}s` : m < 60 ? `${m}m` : m < 1440 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${Math.floor(m / 1440)}d`; };
 const kfmt = n => n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${(n / 1e3).toFixed(1)}k` : String(n);
+const SAYS = { approval: 'needs approval', plan: 'plan to approve', question: 'asking', input: 'asking', done: 'done', exited: 'exited' };
 function phaseTime(a, sig) {
-  const t = Date.now() - a.since, m = Math.max(1, Math.round(t / 60000));
-  return sig === 'needs' ? `waiting ${m}m` : sig === 'stuck' ? `stuck ${m}m` : sig === 'ready' ? `done ${ago(t)}` : dur(t);
+  const t = Date.now() - a.since, k = a.kind || { needs: 'question', ready: 'done', running: 'running', exited: 'exited' }[sig];
+  return k === 'done' || k === 'exited' ? `${SAYS[k]} ${span(t)} ago` : SAYS[k] ? `${SAYS[k]} ${span(t)}` : `running ${dur(t)}`;
 }
 // the receipt: what the turn touched, and whether a check ran green after it. Pull-only: never feeds the LED, bubble or sound
 const short = f => f.split('/').slice(-2).join('/');
@@ -890,7 +895,8 @@ $('renameForm').onsubmit = e => {
 
 // ================= Home: one panel for everything (Now + chat + command bar) =================
 // Now = every live session with its actions, recording, localhost. Chat sits under it; the input doubles as a command bar.
-const byUrgency = () => [...(snap?.agents || [])].sort((a, b) => RANK.indexOf(SIG[a.phase]) - RANK.indexOf(SIG[b.phase]) || b.since - a.since);
+// rows come in main's one queue order (needs you, oldest block first → done, oldest first → running → exited), as pending() does
+const byUrgency = () => [...(snap?.agents || [])];
 let replyOpen = null;   // session id whose inline reply box is open
 function renderHome() {
   if (!snap) return;
