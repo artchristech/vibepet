@@ -1,0 +1,133 @@
+{
+  "a": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/chat-context/before/canon-base-now",
+  "b": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/chat-context/canon",
+  "gitA": null,
+  "gitB": "8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane @ ultra/r1/chat-context",
+  "msA": 31733,
+  "msB": 28994,
+  "assertions": {
+    "a": "30/31",
+    "b": "31/31",
+    "differ": [
+      {
+        "id": "chat/contextSessions",
+        "a": false,
+        "b": true
+      }
+    ]
+  },
+  "rows": {
+    "a": {
+      "beacon": "needs",
+      "kestrel": "needs",
+      "delta": "ready",
+      "atlas": "ready",
+      "vibepet": "ready",
+      "ember": "ready"
+    },
+    "b": {
+      "beacon": "needs",
+      "kestrel": "needs",
+      "delta": "ready",
+      "atlas": "ready",
+      "vibepet": "ready",
+      "ember": "ready"
+    },
+    "differ": []
+  },
+  "mismatches": {
+    "a": [],
+    "b": [],
+    "differ": [
+      "ember"
+    ]
+  },
+  "fleet": {
+    "a": "4/6",
+    "b": "3/6",
+    "changedDuring": [
+      [],
+      []
+    ]
+  },
+  "notes": {
+    "goalFirstClickDropped": [
+      false,
+      false
+    ],
+    "aboveFold": [
+      4,
+      4
+    ]
+  },
+  "shots": [
+    {
+      "file": "1-home/panel.png",
+      "changedPct": 0.1
+    },
+    {
+      "file": "1-home/pet.png",
+      "changedPct": 1.2
+    },
+    {
+      "file": "2-chat/reply.png",
+      "changedPct": 16.52
+    },
+    {
+      "file": "2-chat/sending.png",
+      "changedPct": 11.18
+    },
+    {
+      "file": "3-command/slash.png",
+      "changedPct": 0.31
+    },
+    {
+      "file": "3-command/today.png",
+      "changedPct": 5.82
+    },
+    {
+      "file": "4-rows/goal.png",
+      "changedPct": 0.26
+    },
+    {
+      "file": "4-rows/jump.png",
+      "changedPct": 3.98
+    },
+    {
+      "file": "4-rows/list.png",
+      "changedPct": 0.45
+    },
+    {
+      "file": "4-rows/reply.png",
+      "changedPct": 0.12
+    },
+    {
+      "file": "5-theater/open.png",
+      "changedPct": 0.51
+    },
+    {
+      "file": "5-theater/seek-mid.png",
+      "changedPct": 0
+    },
+    {
+      "file": "6-ports/footer.png",
+      "changedPct": 1.17
+    },
+    {
+      "file": "6-ports/stopped.png",
+      "changedPct": 4.21
+    },
+    {
+      "file": "7-keys/gesture-pad.png",
+      "changedPct": 0.08
+    },
+    {
+      "file": "7-keys/gesture-saved.png",
+      "changedPct": 0
+    },
+    {
+      "file": "7-keys/hotkey.png",
+      "changedPct": 7.23
+    }
+  ]
+}

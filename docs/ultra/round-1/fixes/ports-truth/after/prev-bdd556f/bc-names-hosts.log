@@ -1,0 +1,96 @@
+{
+ "chips": [
+  ":62150 delta · canon fixture",
+  ":47634 vibepet · Directory listing",
+  ":47637 vibepet · Vite on [::1]",
+  ":47639 kestrel · Kestrel dashboard",
+  ":47639 beacon · Beacon status",
+  ":47640 vibepet · Next.js app",
+  ":47635 vibepet · Vite + React + TS",
+  ":47636 delta · Vite + React + TS",
+  ":47638 vibepet · Secure dev app"
+ ],
+ "opens": [
+  {
+   "port": 47634,
+   "chip": ":47634 vibepet · Directory listing",
+   "url": "http://localhost:47634",
+   "servesTitle": "Directory listing for /"
+  },
+  {
+   "port": 47637,
+   "chip": ":47637 vibepet · Vite on [::1]",
+   "url": "http://localhost:47637",
+   "servesTitle": "Vite on [::1]"
+  },
+  {
+   "port": 47639,
+   "chip": ":47639 kestrel · Kestrel dashboard",
+   "url": "http://[::1]:47639",
+   "servesTitle": "Kestrel dashboard"
+  },
+  {
+   "port": 47639,
+   "chip": ":47639 beacon · Beacon status",
+   "url": "http://127.0.0.1:47639",
+   "servesTitle": "Beacon status"
+  },
+  {
+   "port": 47635,
+   "chip": ":47635 vibepet · Vite + React + TS",
+   "url": "http://localhost:47635",
+   "servesTitle": "Vite + React + TS"
+  },
+  {
+   "port": 47636,
+   "chip": ":47636 delta · Vite + React + TS",
+   "url": "http://localhost:47636",
+   "servesTitle": "Vite + React + TS"
+  },
+  {
+   "port": 47638,
+   "chip": ":47638 vibepet · Secure dev app",
+   "url": "https://localhost:47638",
+   "servesTitle": "Secure dev app"
+  },
+  {
+   "port": 47640,
+   "chip": ":47640 vibepet · Next.js app",
+   "url": "http://localhost:47640",
+   "servesTitle": "Next.js app"
+  }
+ ],
+ "slow": {
+  "listenAt": 1790937234857,
+  "readyAt": 1790937254849,
+  "activeAt": 1790937254858,
+  "msAfterReady": 9,
+  "load": [
+   19.07,
+   25.14,
+   30.27
+  ]
+ },
+ "slowFirst": {
+  "snapshot": {
+   "key": "47640/68056",
+   "port": 47640,
+   "pid": 68056,
+   "sid": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "name": "vibepet · node",
+   "http": null,
+   "url": "http://localhost:47640",
+   "why": "No answer yet from [::1]:47640 (still starting?)"
+  },
+  "chip": {
+   "port": 47640,
+   "key": "47640/68056",
+   "label": ":47640 vibepet · node",
+   "inactive": true,
+   "disabled": false,
+   "title": "No answer yet from [::1]:47640 (still starting?) · press to ask again",
+   "cls": "off"
+  },
+  "msAfterListen": 2005
+ }
+}

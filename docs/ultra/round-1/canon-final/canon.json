@@ -1,0 +1,1264 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/int",
+  "out": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/canon-final",
+  "root": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+  "startedAt": "2026-10-02T13:20:11.601Z",
+  "flags": {
+    "allRows": false,
+    "act": false,
+    "liveChat": false,
+    "asks": 0
+  },
+  "git": "3488d20 Merge ultra/r1/chat-context (gate green) @ ultra/round-1",
+  "fleet": {
+    "at": "2026-10-02T13:20:12.172Z",
+    "allOk": false,
+    "spend": {
+      "transcriptsUsd": 2.333884,
+      "estimateWithHiddenUsd": 3.4754,
+      "stop": 3.5,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": false,
+        "paused": false,
+        "pid": 55946,
+        "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790947211472
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T13:20:11.440Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "registry.waitingFor",
+          "pane"
+        ]
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910787682
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T03:13:07.635Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910180805
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-02T03:03:00.799Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": false,
+        "paused": false,
+        "pid": 48539,
+        "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790947172172
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-02T13:19:32.039Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "registry.waitingFor",
+          "pane"
+        ]
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790906449089
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T02:00:48.941Z"
+        },
+        "toolProcs": 0,
+        "subagents": 36,
+        "failing": [
+          "registry.status",
+          "child",
+          "subagents"
+        ]
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "registry": null,
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T08:54:24.091Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "claude",
+          "registry.status",
+          "loop",
+          "loopLock"
+        ]
+      }
+    ]
+  },
+  "surfaces": {
+    "home": {
+      "mode": "now",
+      "ms": 419,
+      "readAt": 1790947218759,
+      "aboveFold": 4,
+      "order": {
+        "home": [
+          "delta",
+          "atlas",
+          "vibepet",
+          "beacon",
+          "kestrel"
+        ],
+        "snapshot": [
+          "delta",
+          "atlas",
+          "vibepet",
+          "beacon",
+          "kestrel"
+        ]
+      },
+      "rows": 5,
+      "snapshotAgents": 5
+    },
+    "chat": {
+      "input": true,
+      "chips": [
+        "agent",
+        "commit",
+        "goal",
+        "next",
+        "vibe"
+      ],
+      "fresh": true,
+      "meta": "kestrel/main · claude code",
+      "note": "Via Claude Code · sends message + repo context",
+      "reply": {
+        "err": false,
+        "text": "Canon stub engine. Live agents in my context: delta=done for 11h 19m - All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled; atlas=done for 10h 17m - interrupted; vibepet=done for 10h 7m - The app's main entry file is main.js.; beacon=done for 47s - interrupted; kestrel=done for 7s - Dry-run would build kestrel f7a28d0, upload to staging.kestrel.invalid, with no changes."
+      },
+      "engine": {
+        "kind": "stub",
+        "calls": [
+          {
+            "at": 1790947219432,
+            "model": "claude-haiku-4-5-20251001",
+            "print": true,
+            "noPersist": true,
+            "bytes": 2078,
+            "agents": 5
+          }
+        ]
+      },
+      "context": {
+        "file": "2-chat/context.txt",
+        "bytes": 2024,
+        "sends": 1,
+        "sessions": [
+          {
+            "member": "delta",
+            "name": "delta",
+            "line": "- delta · \"Reconcile three shards in parallel\" · folder ~/.vibepet-ultra/fleet/delta · repo delta/main · done for 11h 19m · last said: All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled · edited this turn: nothing · fan-out 3/3 subagents done",
+            "has": {
+              "stateAge": true,
+              "ask": true,
+              "title": true,
+              "repo": true
+            }
+          },
+          {
+            "member": "atlas",
+            "name": "atlas",
+            "line": "- atlas · \"Run build.sh\" · folder ~/.vibepet-ultra/fleet/atlas · repo atlas/main · done for 10h 17m · its turn was interrupted · edited this turn: nothing",
+            "has": {
+              "stateAge": true,
+              "ask": true,
+              "title": true,
+              "repo": true
+            }
+          },
+          {
+            "member": "vibepet",
+            "name": "vibepet",
+            "line": "- vibepet · \"Read package.json\" · folder ~/.vibepet-ultra/fleet/vibepet · repo vibepet/main · done for 10h 7m · last said: The app's main entry file is main.js. · edited this turn: nothing",
+            "has": {
+              "stateAge": true,
+              "ask": true,
+              "title": true,
+              "repo": true
+            }
+          },
+          {
+            "member": "beacon",
+            "name": "beacon",
+            "line": "- beacon · \"Beacon database choice\" · folder ~/.vibepet-ultra/fleet/beacon · repo beacon/main · done for 47s · its turn was interrupted · edited this turn: nothing",
+            "has": {
+              "stateAge": true,
+              "ask": true,
+              "title": true,
+              "repo": true
+            }
+          },
+          {
+            "member": "kestrel",
+            "name": "kestrel",
+            "line": "- kestrel · \"Deploy.sh dry run\" · folder ~/.vibepet-ultra/fleet/kestrel · repo kestrel/main · done for 7s · last said: Dry-run would build kestrel f7a28d0, upload to staging.kestrel.invalid, with no changes. · edited this turn: nothing",
+            "has": {
+              "stateAge": true,
+              "ask": true,
+              "title": true,
+              "repo": true
+            }
+          }
+        ],
+        "cameOrWent": [],
+        "overlaps": "Overlaps: none. No two sessions share a repo (5 sessions in 5 repos)."
+      },
+      "asks": []
+    },
+    "command": {
+      "cmds": [
+        "/record",
+        "/goal",
+        "/jump",
+        "/replay",
+        "/stop",
+        "/today",
+        "/setup",
+        "/settings"
+      ],
+      "today": true
+    },
+    "rows": {
+      "actions": {
+        "goal": {
+          "member": "delta",
+          "prefill": "/goal ",
+          "set": true,
+          "done": true,
+          "clicks": 1,
+          "firstClickDropped": false
+        },
+        "reply": {
+          "member": "beacon",
+          "form": true
+        },
+        "approve": {
+          "none": "no row offers Approve"
+        },
+        "jump": [
+          {
+            "member": "delta",
+            "result": {
+              "ok": false,
+              "why": "no terminal is attached to tmux session vp-delta",
+              "attach": "tmux attach -t vp-delta"
+            },
+            "ms": 146,
+            "clipboardWrites": 0
+          }
+        ]
+      }
+    },
+    "theater": {
+      "member": "delta",
+      "beats": 149,
+      "title": "Reconcile the three shards in parallel. In ONE message, start three subagents at",
+      "midBeat": 74
+    },
+    "ports": {
+      "fixture": {
+        "port": 58884,
+        "repo": "delta"
+      },
+      "footer": {
+        "servers": [
+          {
+            "port": 58884,
+            "text": ":58884 canon fixture✕"
+          }
+        ]
+      },
+      "open": "http://localhost:58884",
+      "stop": {
+        "confirm": "Stop node (delta) on :58884?",
+        "killed": true
+      }
+    },
+    "keys": {
+      "jumpKey": {
+        "key": null,
+        "taken": false
+      },
+      "queue": [
+        {
+          "member": "beacon",
+          "phase": "waiting"
+        }
+      ],
+      "hotkey": {
+        "jumped": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "expected": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "result": {
+          "ok": false,
+          "why": "no terminal is attached to tmux session vp-beacon",
+          "attach": "tmux attach -t vp-beacon"
+        }
+      },
+      "gesture": {
+        "menu": {
+          "ok": true,
+          "label": "Record gesture…"
+        },
+        "padOpen": true,
+        "message": "Saved. Hide Net, then move the mouse in that shape to bring him back.",
+        "templates": 3
+      }
+    }
+  },
+  "assertions": [
+    {
+      "surface": "home",
+      "id": "panelOpens",
+      "ok": true,
+      "detail": "mode now in 419 ms"
+    },
+    {
+      "surface": "home",
+      "id": "rowsInSnapshotOrder",
+      "ok": true,
+      "detail": {
+        "home": [
+          "delta",
+          "atlas",
+          "vibepet",
+          "beacon",
+          "kestrel"
+        ],
+        "snapshot": [
+          "delta",
+          "atlas",
+          "vibepet",
+          "beacon",
+          "kestrel"
+        ]
+      }
+    },
+    {
+      "surface": "home",
+      "id": "rowsRender",
+      "ok": true,
+      "detail": "5 rows, 5 agents in the snapshot"
+    },
+    {
+      "surface": "home",
+      "id": "rowsMatchSnapshot",
+      "ok": true,
+      "detail": "5 rows vs 5 snapshot agents (Home caps at 8)"
+    },
+    {
+      "surface": "chat",
+      "id": "inputVisible",
+      "ok": true,
+      "detail": {
+        "input": true,
+        "chips": [
+          "agent",
+          "commit",
+          "goal",
+          "next",
+          "vibe"
+        ],
+        "fresh": true,
+        "meta": "kestrel/main · claude code",
+        "note": "Via Claude Code · sends message + repo context"
+      }
+    },
+    {
+      "surface": "chat",
+      "id": "chipsVisible",
+      "ok": true,
+      "detail": [
+        "agent",
+        "commit",
+        "goal",
+        "next",
+        "vibe"
+      ]
+    },
+    {
+      "surface": "chat",
+      "id": "userMessage",
+      "ok": true,
+      "detail": "the typed message shows"
+    },
+    {
+      "surface": "chat",
+      "id": "reply",
+      "ok": true,
+      "detail": {
+        "err": false,
+        "text": "Canon stub engine. Live agents in my context: delta=done for 11h 19m - All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled; atlas=done for 10h 17m - interrupted; vibepet=done for 10h 7m - The app's main entry file is main.js.; beacon=done for 47s - interrupted; kestrel=done for 7s - Dry-run would build kestrel f7a28d0, upload to staging.kestrel.invalid, with no changes."
+      }
+    },
+    {
+      "surface": "chat",
+      "id": "engineCalled",
+      "ok": true,
+      "detail": [
+        {
+          "at": 1790947219432,
+          "model": "claude-haiku-4-5-20251001",
+          "print": true,
+          "noPersist": true,
+          "bytes": 2078,
+          "agents": 5
+        }
+      ]
+    },
+    {
+      "surface": "chat",
+      "id": "contextSessions",
+      "ok": true,
+      "detail": "a line for each of 5 sessions + Overlaps"
+    },
+    {
+      "surface": "chat",
+      "id": "stubEchoesEverySession",
+      "ok": true,
+      "detail": "Canon stub engine. Live agents in my context: delta=done for 11h 19m - All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled; atlas=done for 10h 17m - interrupted; vibepet=done for 10h 7m - The app's main entry file is main.js.; beacon=done for 47s - interrupted; kestrel=done for 7s - Dry-run would build kestrel f7a28d0, upload to staging.kestrel.invalid, with no changes."
+    },
+    {
+      "surface": "command",
+      "id": "barOpens",
+      "ok": true,
+      "detail": [
+        "/record",
+        "/goal",
+        "/jump",
+        "/replay",
+        "/stop",
+        "/today",
+        "/setup",
+        "/settings"
+      ]
+    },
+    {
+      "surface": "command",
+      "id": "todayRuns",
+      "ok": true,
+      "detail": "/today posts its note"
+    },
+    {
+      "surface": "rows",
+      "id": "goalPrefill",
+      "ok": true,
+      "detail": "/goal "
+    },
+    {
+      "surface": "rows",
+      "id": "goalSet",
+      "ok": true,
+      "detail": "◎ then /goal on delta"
+    },
+    {
+      "surface": "rows",
+      "id": "goalDone",
+      "ok": true,
+      "detail": "✓ on delta"
+    },
+    {
+      "surface": "rows",
+      "id": "replyForm",
+      "ok": true,
+      "detail": "beacon"
+    },
+    {
+      "surface": "rows",
+      "id": "jumpRuns:delta",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-delta",
+        "attach": "tmux attach -t vp-delta"
+      }
+    },
+    {
+      "surface": "theater",
+      "id": "opens",
+      "ok": true,
+      "detail": "▶ on delta"
+    },
+    {
+      "surface": "theater",
+      "id": "hasBeats",
+      "ok": true,
+      "detail": {
+        "beats": 149,
+        "title": "Reconcile the three shards in parallel. In ONE message, start three subagents at"
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "sectionRenders",
+      "ok": true,
+      "detail": {
+        "servers": [
+          {
+            "port": 58884,
+            "text": ":58884 canon fixture✕"
+          }
+        ]
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "fixtureListed",
+      "ok": true,
+      "detail": ":58884 (cwd delta)"
+    },
+    {
+      "surface": "ports",
+      "id": "openButton",
+      "ok": true,
+      "detail": {
+        "kind": "openExternal",
+        "at": 1790947229453,
+        "url": "http://localhost:58884"
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "stopConfirms",
+      "ok": true,
+      "detail": {
+        "kind": "dialog",
+        "at": 1790947229503,
+        "message": "Stop node (delta) on :58884?",
+        "buttons": [
+          "Stop",
+          "Cancel"
+        ]
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "stopKills",
+      "ok": true,
+      "detail": "fixture pid 18481"
+    },
+    {
+      "surface": "keys",
+      "id": "hotkeyJumps",
+      "ok": true,
+      "detail": "beacon first in line"
+    },
+    {
+      "surface": "keys",
+      "id": "menuOpens",
+      "ok": true,
+      "detail": "14 items"
+    },
+    {
+      "surface": "keys",
+      "id": "gesturePadOpens",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "label": "Record gesture…"
+      }
+    },
+    {
+      "surface": "keys",
+      "id": "gestureSaved",
+      "ok": true,
+      "detail": "Saved. Hide Net, then move the mouse in that shape to bring him back."
+    },
+    {
+      "surface": "run",
+      "id": "cleanClose",
+      "ok": true,
+      "detail": {
+        "how": "quit",
+        "ms": 380,
+        "procs": 7,
+        "orphans": []
+      }
+    }
+  ],
+  "rows": [
+    {
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "sig": "ready",
+      "title": "Reconcile three shards in parallel · delta",
+      "label": "done 11h 19m ago",
+      "goal": "◎ Reconcile the three shards in parallel.",
+      "goalDone": false,
+      "ask": null,
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "member": "delta",
+      "name": "delta",
+      "phase": "ready",
+      "kind": "done",
+      "since": 1790906449089,
+      "fanout": {
+        "total": 3,
+        "open": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "sig": "ready",
+      "title": "Run build.sh · atlas",
+      "label": "done 10h 17m ago",
+      "goal": "◎ Run exactly ./build.sh with the Bash tool in the foreground (do not run it in t…",
+      "goalDone": false,
+      "ask": null,
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "member": "atlas",
+      "name": "atlas",
+      "phase": "ready",
+      "kind": "done",
+      "since": 1790910180805,
+      "fanout": null
+    },
+    {
+      "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+      "sig": "ready",
+      "title": "Read package.json · vibepet",
+      "label": "done 10h 7m ago",
+      "goal": "◎ Read package.json and tell me in one plain sentence what this project is.",
+      "goalDone": false,
+      "ask": null,
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "member": "vibepet",
+      "name": "vibepet",
+      "phase": "ready",
+      "kind": "done",
+      "since": 1790910787682,
+      "fanout": null
+    },
+    {
+      "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+      "sig": "ready",
+      "title": "Beacon database choice · beacon",
+      "label": "done 44s ago",
+      "goal": "◎ Before anything else, use the AskUserQuestion tool to ask me one multiple-choi…?",
+      "goalDone": false,
+      "ask": null,
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "member": "beacon",
+      "name": "beacon",
+      "phase": "ready",
+      "kind": "done",
+      "since": 1790947172172,
+      "fanout": null
+    },
+    {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "sig": "ready",
+      "title": "Deploy.sh dry run · kestrel",
+      "label": "done 5s ago",
+      "goal": "◎ Run exactly ./deploy.sh --dry-run with the Bash tool.",
+      "goalDone": false,
+      "ask": null,
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "member": "kestrel",
+      "name": "kestrel",
+      "phase": "ready",
+      "kind": "done",
+      "since": 1790947211472,
+      "fanout": null
+    }
+  ],
+  "compare": [
+    {
+      "member": "kestrel",
+      "state": "approval",
+      "inState": false,
+      "truth": "idle",
+      "shown": true,
+      "sig": "ready",
+      "label": "done 5s ago",
+      "ask": null,
+      "phase": "ready",
+      "kind": "done",
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "expected": [
+        "ready",
+        "needs"
+      ],
+      "problems": [],
+      "age": {
+        "trueMs": 7287,
+        "sinceMs": 7287,
+        "shownMs": 5000,
+        "unit": 1000
+      },
+      "ok": true
+    },
+    {
+      "member": "vibepet",
+      "state": "done",
+      "inState": true,
+      "truth": "idle",
+      "shown": true,
+      "sig": "ready",
+      "label": "done 10h 7m ago",
+      "ask": null,
+      "phase": "ready",
+      "kind": "done",
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "expected": [
+        "ready"
+      ],
+      "problems": [],
+      "age": {
+        "trueMs": 36431077,
+        "sinceMs": 36431077,
+        "shownMs": 36420000,
+        "unit": 60000
+      },
+      "ok": true
+    },
+    {
+      "member": "atlas",
+      "state": "working",
+      "inState": false,
+      "truth": "idle",
+      "shown": true,
+      "sig": "ready",
+      "label": "done 10h 17m ago",
+      "ask": null,
+      "phase": "ready",
+      "kind": "done",
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "expected": [
+        "ready",
+        "needs"
+      ],
+      "problems": [],
+      "age": {
+        "trueMs": 37037954,
+        "sinceMs": 37037954,
+        "shownMs": 37020000,
+        "unit": 60000
+      },
+      "ok": true
+    },
+    {
+      "member": "beacon",
+      "state": "question",
+      "inState": false,
+      "truth": "idle",
+      "shown": true,
+      "sig": "ready",
+      "label": "done 44s ago",
+      "ask": null,
+      "phase": "ready",
+      "kind": "done",
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "expected": [
+        "ready",
+        "needs"
+      ],
+      "problems": [],
+      "age": {
+        "trueMs": 46587,
+        "sinceMs": 46587,
+        "shownMs": 44000,
+        "unit": 1000
+      },
+      "ok": true
+    },
+    {
+      "member": "delta",
+      "state": "fanout",
+      "inState": false,
+      "truth": "idle",
+      "shown": true,
+      "sig": "ready",
+      "label": "done 11h 19m ago",
+      "ask": null,
+      "phase": "ready",
+      "kind": "done",
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "expected": [
+        "ready",
+        "needs"
+      ],
+      "problems": [],
+      "age": {
+        "trueMs": 40769670,
+        "sinceMs": 40769670,
+        "shownMs": 40740000,
+        "unit": 60000
+      },
+      "ok": true
+    },
+    {
+      "member": "ember",
+      "state": "loop",
+      "inState": false,
+      "truth": "no claude",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": null,
+      "problems": [
+        "not in its fixture state (paused): not scored"
+      ],
+      "ok": null
+    }
+  ],
+  "intercepted": [
+    {
+      "kind": "ipc:jump",
+      "at": 11542,
+      "args": [
+        "eb59a756-0b6f-4a82-8d55-1f0bc2c40358"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-delta",
+        "attach": "tmux attach -t vp-delta"
+      },
+      "ms": 146
+    },
+    {
+      "kind": "ipc:theater",
+      "at": 12562,
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358"
+    },
+    {
+      "kind": "openExternal",
+      "at": 17852,
+      "url": "http://localhost:58884"
+    },
+    {
+      "kind": "ipc:local-open",
+      "at": 17852,
+      "port": 58884
+    },
+    {
+      "kind": "dialog",
+      "at": 17902,
+      "message": "Stop node (delta) on :58884?",
+      "buttons": [
+        "Stop",
+        "Cancel"
+      ]
+    },
+    {
+      "kind": "ipc:local-stop",
+      "at": 17902,
+      "pid": 18481
+    },
+    {
+      "kind": "ipc:jump",
+      "at": 19416,
+      "args": [
+        "a9377f08-ad27-4bd5-bb77-dbd576eab89e"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-beacon",
+        "attach": "tmux attach -t vp-beacon"
+      },
+      "ms": 180
+    },
+    {
+      "kind": "menuPopup",
+      "at": 20519,
+      "items": [
+        "Watching kestrel",
+        "Localhost",
+        "Open Home",
+        "Setup…",
+        "Theater…",
+        "Start content session",
+        "Finish last session",
+        "Open shorts folder",
+        "Today…",
+        "Pet",
+        "Toss a snack",
+        "Settings",
+        "Hide Net",
+        "Quit Net"
+      ]
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 21380,
+      "points": 37
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 22448,
+      "points": 37
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 23620,
+      "points": 37
+    }
+  ],
+  "timings": {
+    "home": 4844,
+    "chat": 1380,
+    "command": 997,
+    "rows": 2892,
+    "theater": 5014,
+    "ports": 1786,
+    "keys": 5032
+  },
+  "failures": [],
+  "launch": {
+    "pid": 18492,
+    "readyMs": 1246,
+    "paths": {
+      "claude": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+      "userData": "userdata/r1-canon-final"
+    },
+    "perms": {
+      "ax": true,
+      "screen": true
+    },
+    "first": {
+      "msAfterLaunchCall": 1673,
+      "agents": [
+        {
+          "member": "delta",
+          "name": "delta",
+          "kind": "done",
+          "phase": "ready",
+          "ask": "All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled"
+        },
+        {
+          "member": "atlas",
+          "name": "atlas",
+          "kind": "done",
+          "phase": "ready",
+          "ask": "interrupted"
+        },
+        {
+          "member": "vibepet",
+          "name": "vibepet",
+          "kind": "done",
+          "phase": "ready",
+          "ask": "The app's main entry file is main.js."
+        },
+        {
+          "member": "beacon",
+          "name": "beacon",
+          "kind": "done",
+          "phase": "ready",
+          "ask": "interrupted"
+        },
+        {
+          "member": "kestrel",
+          "name": "kestrel",
+          "kind": "done",
+          "phase": "ready",
+          "ask": "Dry-run would build kestrel f7a28d0, upload to staging.kestrel.invalid, with no changes."
+        }
+      ]
+    }
+  },
+  "instrument": {
+    "spied": [
+      "jump",
+      "send-to"
+    ]
+  },
+  "notes": 0,
+  "close": {
+    "how": "quit",
+    "ms": 380,
+    "procs": 7,
+    "orphans": []
+  },
+  "fleetAfter": {
+    "at": "2026-10-02T13:20:36.875Z",
+    "allOk": false,
+    "spend": {
+      "transcriptsUsd": 2.366986,
+      "estimateWithHiddenUsd": 3.525,
+      "stop": 3.5,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": false,
+        "paused": false,
+        "pid": 55946,
+        "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790947211472
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T13:20:11.440Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "registry.waitingFor",
+          "pane"
+        ]
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910787682
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T03:13:07.635Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910180805
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-02T03:03:00.799Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": false,
+        "paused": false,
+        "pid": 48539,
+        "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790947236372
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-02T13:20:36.354Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "registry.waitingFor",
+          "pane"
+        ]
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790906449089
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T02:00:48.941Z"
+        },
+        "toolProcs": 0,
+        "subagents": 36,
+        "failing": [
+          "registry.status",
+          "child",
+          "subagents"
+        ]
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "registry": null,
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T08:54:24.091Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "claude",
+          "registry.status",
+          "loop",
+          "loopLock"
+        ]
+      }
+    ]
+  },
+  "fleetChanged": [],
+  "ms": 25281,
+  "summary": {
+    "ok": true,
+    "assertions": "30/30",
+    "rows": [
+      "delta:ready",
+      "atlas:ready",
+      "vibepet:ready",
+      "beacon:ready",
+      "kestrel:ready"
+    ],
+    "fleetMembers": 6,
+    "inState": 1,
+    "mismatches": []
+  }
+}

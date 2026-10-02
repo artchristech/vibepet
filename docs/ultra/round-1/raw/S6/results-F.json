@@ -1,0 +1,882 @@
+{
+ "phase": "F",
+ "startedAt": "2026-10-02T02:13:42.518Z",
+ "load0": [
+  2.89,
+  3.53,
+  3.84
+ ],
+ "shots": [
+  {
+   "name": "26-F5x-dev-server-shapes.png",
+   "at": 1790907263464,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+      "sig": "ready",
+      "title": "Read package.json",
+      "small": "vibepet · done 1m ago",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+      "sig": "running",
+      "title": "Beacon database choice",
+      "small": "beacon · 39s",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47181,
+      "pid": 47101,
+      "label": ":47181 node (vibepet)",
+      "disabled": true,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47182,
+      "pid": 47102,
+      "label": ":47182 Next.js app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47183,
+      "pid": 47103,
+      "label": ":47183 node (vibepet)",
+      "disabled": true,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47184,
+      "pid": 47119,
+      "label": ":47184 gunicorn app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47184,
+      "pid": 47120,
+      "label": ":47184 gunicorn app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47184,
+      "pid": 47121,
+      "label": ":47184 gunicorn app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47184,
+      "pid": 47122,
+      "label": ":47184 gunicorn app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 269,
+     "full": 269
+    },
+    "bubble": {
+     "text": "",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 7 servers"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "27-F5x-worker-stopped-server-still-up.png",
+   "at": 1790907268532,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+      "sig": "ready",
+      "title": "Read package.json",
+      "small": "vibepet · done 1m ago",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+      "sig": "running",
+      "title": "Beacon database choice",
+      "small": "beacon · 45s",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47181,
+      "pid": 47101,
+      "label": ":47181 node (vibepet)",
+      "disabled": true,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47182,
+      "pid": 47102,
+      "label": ":47182 Next.js app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47183,
+      "pid": 47103,
+      "label": ":47183 node (vibepet)",
+      "disabled": true,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47184,
+      "pid": 47119,
+      "label": ":47184 gunicorn app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47184,
+      "pid": 47121,
+      "label": ":47184 gunicorn app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47184,
+      "pid": 47122,
+      "label": ":47184 gunicorn app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47184,
+      "pid": 50677,
+      "label": ":47184 gunicorn app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 269,
+     "full": 269
+    },
+    "bubble": {
+     "text": "stopped pid 47120",
+     "hidden": false,
+     "occludedByPanel": true
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 7 servers"
+    },
+    "msgs": []
+   }
+  }
+ ],
+ "timings": [],
+ "notes": [
+  {
+   "at": 1790907226150,
+   "openHome": {
+    "mode": "now",
+    "at": {
+     "x": 330.5,
+     "y": 732.5
+    },
+    "ms": 412
+   }
+  },
+  {
+   "at": 1790907227090,
+   "step": "started",
+   "binds": {
+    "v6": [
+     {
+      "pid": 47101,
+      "addr": "[::1]:47181"
+     }
+    ],
+    "slow": [
+     {
+      "pid": 47102,
+      "addr": "*:47182"
+     }
+    ],
+    "tls": [
+     {
+      "pid": 47103,
+      "addr": "127.0.0.1:47183"
+     }
+    ],
+    "pf": [
+     {
+      "pid": 47119,
+      "addr": "127.0.0.1:47184"
+     },
+     {
+      "pid": 47120,
+      "addr": "127.0.0.1:47184"
+     },
+     {
+      "pid": 47121,
+      "addr": "127.0.0.1:47184"
+     },
+     {
+      "pid": 47122,
+      "addr": "127.0.0.1:47184"
+     }
+    ]
+   },
+   "v6address": "::1"
+  },
+  {
+   "at": "02:13:57.957Z",
+   "step": "all listed"
+  },
+  {
+   "at": 1790907263475,
+   "step": "chips vs reality",
+   "v6": {
+    "chip": [
+     {
+      "label": ":47181 node (vibepet)",
+      "disabled": true
+     }
+    ],
+    "browserAtLocalhost": "200 Vite + React + TS",
+    "probeTarget127": "ECONNREFUSED"
+   },
+   "slow": {
+    "chip": [
+     {
+      "label": ":47182 Next.js app",
+      "disabled": false
+     }
+    ],
+    "browserAtLocalhost": "200 Next.js app"
+   },
+   "tls": {
+    "chip": [
+     {
+      "label": ":47183 node (vibepet)",
+      "disabled": true
+     }
+    ],
+    "httpAtLocalhost": "error ECONNRESET"
+   },
+   "pf": {
+    "chip": [
+     {
+      "label": ":47184 gunicorn app",
+      "disabled": false
+     },
+     {
+      "label": ":47184 gunicorn app",
+      "disabled": false
+     },
+     {
+      "label": ":47184 gunicorn app",
+      "disabled": false
+     },
+     {
+      "label": ":47184 gunicorn app",
+      "disabled": false
+     }
+    ]
+   },
+   "disabledTooltips": [
+    "Open",
+    "Open"
+   ]
+  },
+  {
+   "at": 1790907268536,
+   "step": "worker stop",
+   "victim": 47120,
+   "dialog": {
+    "kind": "dialog",
+    "at": 1790907263506,
+    "message": "Stop gunicorn (vibepet) on :47184?",
+    "detail": "pid 47120",
+    "buttons": [
+     "Stop",
+     "Cancel"
+    ],
+    "defaultId": 1,
+    "answer": 0
+   },
+   "events": [
+    {
+     "kind": "localhost",
+     "text": "stopped pid 47120"
+    }
+   ],
+   "respawns": [
+    {
+     "respawned": 50677,
+     "replaced": 47120,
+     "at": 1790907263526
+    }
+   ],
+   "chipsAfter": [
+    47119,
+    47121,
+    47122,
+    50677
+   ],
+   "serverStillAnswers": true,
+   "bubble": {
+    "text": "stopped pid 47120",
+    "hidden": false,
+    "occludedByPanel": true
+   }
+  }
+ ],
+ "readyMs": 395,
+ "truth0": {
+  "at": "2026-10-02T02:13:42.517Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": null
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": false,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": false,
+    "paused": false,
+    "pid": 48539,
+    "reg": "busy",
+    "last": "user_prompt",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": false,
+    "pid": 29074,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   }
+  ]
+ },
+ "pmset0": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "binds": {
+  "v6": [
+   {
+    "pid": 47101,
+    "addr": "[::1]:47181"
+   }
+  ],
+  "slow": [
+   {
+    "pid": 47102,
+    "addr": "*:47182"
+   }
+  ],
+  "tls": [
+   {
+    "pid": 47103,
+    "addr": "127.0.0.1:47183"
+   }
+  ],
+  "pf": [
+   {
+    "pid": 47119,
+    "addr": "127.0.0.1:47184"
+   },
+   {
+    "pid": 47120,
+    "addr": "127.0.0.1:47184"
+   },
+   {
+    "pid": 47121,
+    "addr": "127.0.0.1:47184"
+   },
+   {
+    "pid": 47122,
+    "addr": "127.0.0.1:47184"
+   }
+  ]
+ },
+ "chips": {
+  "v6": {
+   "chip": [
+    {
+     "label": ":47181 node (vibepet)",
+     "disabled": true
+    }
+   ],
+   "browserAtLocalhost": "200 Vite + React + TS",
+   "probeTarget127": "ECONNREFUSED"
+  },
+  "slow": {
+   "chip": [
+    {
+     "label": ":47182 Next.js app",
+     "disabled": false
+    }
+   ],
+   "browserAtLocalhost": "200 Next.js app"
+  },
+  "tls": {
+   "chip": [
+    {
+     "label": ":47183 node (vibepet)",
+     "disabled": true
+    }
+   ],
+   "httpAtLocalhost": "error ECONNRESET"
+  },
+  "pf": {
+   "chip": [
+    {
+     "label": ":47184 gunicorn app",
+     "disabled": false
+    },
+    {
+     "label": ":47184 gunicorn app",
+     "disabled": false
+    },
+    {
+     "label": ":47184 gunicorn app",
+     "disabled": false
+    },
+    {
+     "label": ":47184 gunicorn app",
+     "disabled": false
+    }
+   ]
+  },
+  "disabledTooltips": [
+   "Open",
+   "Open"
+  ]
+ },
+ "worker": {
+  "victim": 47120,
+  "dialog": {
+   "kind": "dialog",
+   "at": 1790907263506,
+   "message": "Stop gunicorn (vibepet) on :47184?",
+   "detail": "pid 47120",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 0
+  },
+  "events": [
+   {
+    "kind": "localhost",
+    "text": "stopped pid 47120"
+   }
+  ],
+  "respawns": [
+   {
+    "respawned": 50677,
+    "replaced": 47120,
+    "at": 1790907263526
+   }
+  ],
+  "chipsAfter": [
+   47119,
+   47121,
+   47122,
+   50677
+  ],
+  "serverStillAnswers": true,
+  "bubble": {
+   "text": "stopped pid 47120",
+   "hidden": false,
+   "occludedByPanel": true
+  }
+ },
+ "leftovers": [],
+ "truth1": {
+  "at": "2026-10-02T02:14:29.889Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": null
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": null
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": false,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": false,
+    "pid": 29074,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   }
+  ]
+ },
+ "pmset1": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "load1": [
+  3.29,
+  3.5,
+  3.81
+ ],
+ "endedAt": "2026-10-02T02:14:31.972Z",
+ "polls": [
+  {
+   "at": 1790907223171,
+   "seen": 1790907223253,
+   "servers": [],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907235093,
+   "seen": 1790907235157,
+   "servers": [
+    "47101:47181",
+    "47102:47182",
+    "47103:47183",
+    "47119:47184",
+    "47120:47184",
+    "47121:47184",
+    "47122:47184"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907247092,
+   "seen": 1790907247164,
+   "servers": [
+    "47101:47181",
+    "47102:47182",
+    "47103:47183",
+    "47119:47184",
+    "47120:47184",
+    "47121:47184",
+    "47122:47184"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907259100,
+   "seen": 1790907259173,
+   "servers": [
+    "47101:47181",
+    "47102:47182",
+    "47103:47183",
+    "47119:47184",
+    "47120:47184",
+    "47121:47184",
+    "47122:47184"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907264434,
+   "seen": 1790907264466,
+   "servers": [
+    "47101:47181",
+    "47102:47182",
+    "47103:47183",
+    "47119:47184",
+    "47121:47184",
+    "47122:47184",
+    "50677:47184"
+   ],
+   "procs": 0,
+   "tasks": 20
+  }
+ ],
+ "allCalls": [
+  {
+   "kind": "dialog",
+   "at": 1790907263506,
+   "message": "Stop gunicorn (vibepet) on :47184?",
+   "detail": "pid 47120",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 0
+  },
+  {
+   "kind": "event",
+   "at": 1790907263511,
+   "data": {
+    "kind": "localhost",
+    "text": "stopped pid 47120"
+   }
+  }
+ ],
+ "footerLog": [
+  {
+   "at": 1790907223172,
+   "srv": []
+  },
+  {
+   "at": 1790907237957,
+   "srv": [
+    {
+     "port": 47181,
+     "pid": 47101,
+     "label": ":47181 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    },
+    {
+     "port": 47182,
+     "pid": 47102,
+     "label": ":47182 Next.js app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47183,
+     "pid": 47103,
+     "label": ":47183 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    },
+    {
+     "port": 47184,
+     "pid": 47119,
+     "label": ":47184 gunicorn app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47184,
+     "pid": 47120,
+     "label": ":47184 gunicorn app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47184,
+     "pid": 47121,
+     "label": ":47184 gunicorn app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47184,
+     "pid": 47122,
+     "label": ":47184 gunicorn app",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790907264977,
+   "srv": [
+    {
+     "port": 47181,
+     "pid": 47101,
+     "label": ":47181 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    },
+    {
+     "port": 47182,
+     "pid": 47102,
+     "label": ":47182 Next.js app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47183,
+     "pid": 47103,
+     "label": ":47183 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    },
+    {
+     "port": 47184,
+     "pid": 47119,
+     "label": ":47184 gunicorn app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47184,
+     "pid": 47121,
+     "label": ":47184 gunicorn app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47184,
+     "pid": 47122,
+     "label": ":47184 gunicorn app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47184,
+     "pid": 50677,
+     "label": ":47184 gunicorn app",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  }
+ ],
+ "rendererEvents": [
+  {
+   "at": 1790907263511,
+   "kind": "localhost",
+   "text": "stopped pid 47120"
+  }
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 270,
+  "procs": 7,
+  "orphans": []
+ }
+}

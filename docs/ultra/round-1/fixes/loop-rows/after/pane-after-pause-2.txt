@@ -1,0 +1,12 @@
+❯ /exit                                                                                                                                                                                                 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  Background work is running                                                                                                                                                                          
+  The following will stop when you exit:                                         
+  scheduled task · Every 5 minutes · run ./tick.sh
+  ❯ 1. Exit and stop tasks
+    2. Move to background and exit
+    3. Stay
+  Enter to confirm · Esc to cancel
+Resume this session with:
+claude --resume db0c1ec0-b899-4ca1-a238-7d979e61e099
+vp-ember$ 

@@ -1,0 +1,122 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-queue-state",
+  "root": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+  "startedAt": "2026-10-02T05:43:50.062Z",
+  "secs": 420,
+  "every": 2,
+  "samples": 210,
+  "homeOpens": 1,
+  "close": {
+    "how": "quit",
+    "ms": 307,
+    "procs": 7,
+    "orphans": []
+  },
+  "drops": {
+    "delta": 0,
+    "vibepet": 0,
+    "atlas": 0,
+    "beacon": 0,
+    "kestrel": 0
+  },
+  "order": {
+    "samples": 210,
+    "mismatches": 0,
+    "firstMismatch": null,
+    "last": {
+      "snapshot": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "home": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "pending": [
+        "beacon",
+        "kestrel"
+      ],
+      "held": [
+        "beacon",
+        "kestrel"
+      ]
+    }
+  },
+  "members": {
+    "delta": {
+      "segments": [
+        {
+          "from": 945,
+          "to": 419522,
+          "truth": "idle",
+          "ui": "ready",
+          "label": "delta · done 3h 49m ago",
+          "fan": [
+            0,
+            3,
+            0
+          ]
+        }
+      ],
+      "changes": []
+    },
+    "vibepet": {
+      "segments": [
+        {
+          "from": 945,
+          "to": 419522,
+          "truth": "idle",
+          "ui": "ready",
+          "label": "vibepet · done 2h 37m ago",
+          "fan": null
+        }
+      ],
+      "changes": []
+    },
+    "atlas": {
+      "segments": [
+        {
+          "from": 945,
+          "to": 419522,
+          "truth": "idle",
+          "ui": "ready",
+          "label": "atlas · done 2h 47m ago",
+          "fan": null
+        }
+      ],
+      "changes": []
+    },
+    "beacon": {
+      "segments": [
+        {
+          "from": 945,
+          "to": 419522,
+          "truth": "question",
+          "ui": "needs",
+          "label": "beacon · asking 3h 37m",
+          "fan": null
+        }
+      ],
+      "changes": []
+    },
+    "kestrel": {
+      "segments": [
+        {
+          "from": 945,
+          "to": 419522,
+          "truth": "approval",
+          "ui": "needs",
+          "label": "kestrel · needs approval 2h 38m",
+          "fan": null
+        }
+      ],
+      "changes": []
+    }
+  }
+}

@@ -1,0 +1,14 @@
+[08:37:27.031] app 8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane · live hook true · 1096 ms to ready · load 30.25 29.60 82.67
+[08:38:01.104] watch: 14 paths · idle 30 s: {"rendererSnapshots":10,"rendererPerSec":0.33,"mainTicks":10,"mainTicksPerSec":0.33,"liveTicks":0,"watcherEvents":0}
+[08:38:20.685] pipe: poke → tick done median 163.5 ms (live tick 13 ms) · renderHome 0.3 ms · load 22.12 27.57 79.78 → load 17.27 26.14 78.06
+[08:38:23.239] verdict vibepet approve: {"ok":false,"why":"Didn't land - vibepet isn't waiting on an approval (it's idle)"} · 97 ms · row note 97 ms · load 17.27 26.14 78.06
+[08:38:24.221] verdict vibepet interrupt: {"ok":false,"why":"Didn't land - vibepet isn't running (it's idle)"} · 90 ms · row note 90 ms · load 17.27 26.14 78.06
+[08:38:25.216] verdict atlas approve: {"ok":false,"why":"Didn't land - atlas isn't waiting on an approval (it's idle)"} · 111 ms · row note 111 ms · load 15.97 25.72 77.61
+[08:38:26.298] verdict beacon deny: {"ok":false,"why":"Didn't land - beacon isn't waiting on an approval (it's asking a question)"} · 95 ms · row note 95 ms · load 15.97 25.72 77.61
+[08:38:27.289] verdict beacon option 9: {"ok":false,"why":"beacon's question has no option 9"} · 121 ms · row note 121 ms · load 15.97 25.72 77.61
+[08:38:28.280] verdict kestrel option 2: {"ok":false,"why":"Didn't land - kestrel isn't asking a question (it's waiting on an approval)"} · 95 ms · row note 95 ms · load 15.97 25.72 77.61
+[08:38:29.269] verdict kestrel text: {"ok":false,"why":"kestrel is showing an approval prompt, not its input box"} · 120 ms · row note 120 ms · load 15.97 25.72 77.61
+[08:38:30.289] verdict kestrel interrupt: {"ok":false,"why":"Didn't land - kestrel isn't running (it's waiting on an approval)"} · 94 ms · row note 94 ms · load 14.77 25.31 77.16
+[08:38:32.463] verdict summary {"calls":8,"logged":8,"unverifiedSuccesses":0,"okResults":0,"rowNoteMedianMs":96,"rowNotesShown":8,"ipcMedianMs":96,"fleetUnchanged":true}
+[08:38:42.753] hold: slot 1 held 4956 ms after the verdict, moved at 5212 ms · restored beacon:needs kestrel:needs delta:ready atlas:ready vibepet:ready ember:ready
+[08:38:43.098] closed quit 264 ms, 0 orphans · load 13.32 24.66 76.32

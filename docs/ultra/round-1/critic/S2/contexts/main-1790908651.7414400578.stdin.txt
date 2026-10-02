@@ -1,0 +1,46 @@
+<live_context>
+Local time: 10/1/2026, 8:37:31 PM.
+
+Agents: none active.
+
+Repo: vibepet (branch main): 0 uncommitted lines across 0 files, 0 untracked files. Last commit 232 min ago: "canon --compare: compare the kind of each truth mismatch, not its clock; report dropped first clicks and the fold".
+
+Recent commits:
+c2b5c0a canon --compare: compare the kind of each truth mismatch, not its clock; report dropped first clicks and the fold
+6b26f35 canon: flag row ages that disagree with the registry; Approve/Reply go to the member whose state asks for them
+ad863b8 harness: canon.js captures all 7 surfaces against the live fleet; watch.js logs Home vs. the registry over time
+0c5fd29 Merge ultra/r0-fleet: fixture fleet of real Claude Code sessions in tmux
+85ed1af Merge ultra/r0-harness: isolated test harness, overrides, fast unit gate
+014b8ac test/fleet: fixture fleet of real Claude Code sessions in tmux
+6c93f06 harness(readme): the guard walks 5 levels under projects/ and sessions/
+773195c harness(readme): test mode starts as an accessory app
+
+Diff stat:
+(clean)
+</live_context>
+
+User: what is each of my sessions doing right now?
+
+Net: Just the one agent showing: vibepet, which has been idle/ready for about 20 seconds — no active work in progress.
+
+User: what does kestrel need from me?
+
+Net: I don't see a session called kestrel — only vibepet is showing, and it's just sitting ready. Could be a naming mismatch or it's not in this workspace's view.
+
+User: tell the vibepet session to run its tests
+
+Net: I can't send commands to agent sessions myself — I can only see state. You'd need to send that through the agent's own interface.
+
+User: which of my sessions are idle right now?
+
+Net: None right now — the context shows no active agents at all.
+
+User: what did atlas change?
+
+Net: I don't see anything called "atlas" either — only the vibepet repo and its single idle agent are visible in this context.
+
+User: are any two of my sessions about to edit the same file?
+
+Net: No, there's no conflict to check — no agents are active right now, so nothing's editing anything.
+
+User: which session needs me first?

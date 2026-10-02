@@ -1,0 +1,265 @@
+{
+ "phase": "F2",
+ "startedAt": "2026-10-02T02:15:06.706Z",
+ "load0": [
+  2.84,
+  3.39,
+  3.76
+ ],
+ "shots": [
+  {
+   "name": "28-F5x-compiling-server-open-disabled.png",
+   "at": 1790907359095,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+      "sig": "ready",
+      "title": "Read package.json",
+      "small": "vibepet · done 1m ago",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47185,
+      "pid": 54643,
+      "label": ":47185 node (vibepet)",
+      "disabled": true,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 144,
+     "full": 144
+    },
+    "bubble": {
+     "text": "",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 1 server"
+    },
+    "msgs": []
+   }
+  }
+ ],
+ "timings": [],
+ "notes": [
+  {
+   "at": 1790907308519,
+   "openHome": {
+    "mode": "now",
+    "at": {
+     "x": 330.5,
+     "y": 732.5
+    },
+    "ms": 410
+   }
+  },
+  {
+   "at": 1790907322174,
+   "step": "first seen",
+   "ms": 12999,
+   "chip": {
+    "port": 47185,
+    "pid": 54643,
+    "label": ":47185 node (vibepet)",
+    "disabled": true,
+    "title": "Open"
+   }
+  },
+  {
+   "at": 1790907359102,
+   "step": "after compile + 3 polls",
+   "sinceListenS": 50,
+   "chip": {
+    "port": 47185,
+    "pid": 54643,
+    "label": ":47185 node (vibepet)",
+    "disabled": true,
+    "visibleInScrollBox": true,
+    "clipped": false
+   },
+   "browserAtLocalhost": "200 Next.js app"
+  }
+ ],
+ "readyMs": 374,
+ "truth0": {
+  "at": "2026-10-02T02:15:07.606Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": null
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": null
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": false,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": false,
+    "pid": 29074,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   }
+  ]
+ },
+ "first": {
+  "ms": 12999,
+  "chip": {
+   "port": 47185,
+   "pid": 54643,
+   "label": ":47185 node (vibepet)",
+   "disabled": true,
+   "title": "Open"
+  }
+ },
+ "later": {
+  "sinceListenS": 50,
+  "chip": {
+   "port": 47185,
+   "pid": 54643,
+   "label": ":47185 node (vibepet)",
+   "disabled": true,
+   "visibleInScrollBox": true,
+   "clipped": false
+  },
+  "browserAtLocalhost": "200 Next.js app"
+ },
+ "leftovers": [],
+ "load1": [
+  1.77,
+  3.03,
+  3.6
+ ],
+ "endedAt": "2026-10-02T02:15:59.743Z",
+ "polls": [
+  {
+   "at": 1790907307334,
+   "seen": 1790907307409,
+   "servers": [],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907320063,
+   "seen": 1790907320120,
+   "servers": [
+    "54643:47185"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907331275,
+   "seen": 1790907331328,
+   "servers": [
+    "54643:47185"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907343257,
+   "seen": 1790907343348,
+   "servers": [
+    "54643:47185"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907355262,
+   "seen": 1790907355267,
+   "servers": [
+    "54643:47185"
+   ],
+   "procs": 0,
+   "tasks": 20
+  }
+ ],
+ "allCalls": [],
+ "footerLog": [
+  {
+   "at": 1790907307308,
+   "srv": []
+  },
+  {
+   "at": 1790907322148,
+   "srv": [
+    {
+     "port": 47185,
+     "pid": 54643,
+     "label": ":47185 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    }
+   ]
+  }
+ ],
+ "rendererEvents": [],
+ "close": {
+  "how": "quit",
+  "ms": 263,
+  "procs": 7,
+  "orphans": []
+ }
+}

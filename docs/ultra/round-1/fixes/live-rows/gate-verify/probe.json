@@ -1,0 +1,321 @@
+{
+  "at": "2026-10-02T13:02:07.648Z",
+  "uptimeStart": "load 4.58 7.57 29.05",
+  "spend": {
+    "transcriptsUsd": 2.223186,
+    "estimateWithHiddenUsd": 3.3093,
+    "stop": 3.32,
+    "cap": 5
+  },
+  "fleet": [
+    {
+      "name": "kestrel",
+      "registry": {
+        "status": "waiting",
+        "waitingFor": "permission prompt",
+        "statusUpdatedAt": 1790910742347
+      },
+      "paused": false
+    },
+    {
+      "name": "vibepet",
+      "registry": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910787682
+      },
+      "paused": false
+    },
+    {
+      "name": "atlas",
+      "registry": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910180805
+      },
+      "paused": true
+    },
+    {
+      "name": "beacon",
+      "registry": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790907222729
+      },
+      "paused": false
+    },
+    {
+      "name": "delta",
+      "registry": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790906449089
+      },
+      "paused": true
+    },
+    {
+      "name": "ember",
+      "registry": null,
+      "paused": true
+    }
+  ],
+  "launch": {
+    "ms": 1337,
+    "uptime": "load 4.70 7.54 28.92"
+  },
+  "idle": {
+    "uptime": [
+      "load 4.64 7.48 28.77",
+      "load 4.94 7.29 27.96"
+    ],
+    "secs": 30.029,
+    "watching": 12,
+    "paths": [
+      "~/.vibepet-ultra/root/.claude/sessions",
+      "~/.claude/sessions/29074.json",
+      "~/.claude/sessions/48221.json",
+      "~/.claude/sessions/48392.json",
+      "~/.claude/sessions/48539.json",
+      "~/.claude/sessions/55946.json",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-beacon/a9377f08-ad27-4bd5-bb77-dbd576eab89e.jsonl",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-kestrel/13a1427d-6cb0-4561-b5a3-22453a34bf93.jsonl",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-delta/eb59a756-0b6f-4a82-8d55-1f0bc2c40358.jsonl",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-delta/eb59a756-0b6f-4a82-8d55-1f0bc2c40358/subagents",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-atlas/5c051e84-b74f-41b6-845f-bde937a9ef90.jsonl",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-vibepet/6101876b-19c6-42a1-824f-6f1c7d4fd83e.jsonl"
+    ],
+    "realTranscriptsWatched": 0,
+    "mainTicksPerSec": 0.33,
+    "liveTicks": 0,
+    "watcherEvents": 0,
+    "rendererSnapshotsPerSec": 0.33
+  },
+  "pipe": {
+    "uptime": [
+      "load 4.94 7.29 27.96",
+      "load 5.92 7.41 27.76"
+    ],
+    "pokeToTickDoneMs": [
+      167,
+      162,
+      162,
+      163,
+      159,
+      161,
+      164,
+      162,
+      237,
+      160,
+      160,
+      160,
+      165,
+      160,
+      163
+    ],
+    "medianMs": 162,
+    "liveTickMs": [
+      17,
+      10,
+      10,
+      12,
+      10,
+      11,
+      12,
+      12,
+      9,
+      10,
+      10,
+      9,
+      14,
+      10,
+      12
+    ],
+    "liveTickMedianMs": 10
+  },
+  "probe": {
+    "uptime": [
+      "load 5.69 7.34 27.62",
+      "load 5.31 7.23 27.46"
+    ],
+    "cases": [
+      {
+        "name": "kestrel",
+        "action": "option",
+        "key": "9",
+        "result": {
+          "ok": false,
+          "why": "Didn't land - kestrel isn't asking a question (it's waiting on an approval)"
+        },
+        "ipcMs": 140,
+        "rowNote": "Didn't land - kestrel isn't asking a question (it's waiting on an approval)",
+        "rowNoteMs": 140,
+        "uptime": "load 5.69 7.34 27.62"
+      },
+      {
+        "name": "vibepet",
+        "action": "option",
+        "key": "9",
+        "result": {
+          "ok": false,
+          "why": "Didn't land - vibepet isn't asking a question (it's idle)"
+        },
+        "ipcMs": 137,
+        "rowNote": "Didn't land - vibepet isn't asking a question (it's idle)",
+        "rowNoteMs": 137,
+        "uptime": "load 5.69 7.34 27.62"
+      },
+      {
+        "name": "beacon",
+        "action": "option",
+        "key": "9",
+        "result": {
+          "ok": false,
+          "why": "beacon's question has no option 9"
+        },
+        "ipcMs": 129,
+        "rowNote": "beacon's question has no option 9",
+        "rowNoteMs": 129,
+        "uptime": "load 5.69 7.34 27.62"
+      }
+    ],
+    "ticks": {
+      "n": 2,
+      "live": 1,
+      "secs": 3.3,
+      "perSec": 0.6
+    },
+    "acts": [
+      {
+        "at": 1790946178441,
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "name": "kestrel",
+        "action": "option",
+        "ok": false,
+        "verdict": "refused",
+        "text": "Didn't land - kestrel isn't asking a question (it's waiting on an approval)",
+        "ms": 137
+      },
+      {
+        "at": 1790946179675,
+        "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "name": "vibepet",
+        "action": "option",
+        "ok": false,
+        "verdict": "refused",
+        "text": "Didn't land - vibepet isn't asking a question (it's idle)",
+        "ms": 135
+      },
+      {
+        "at": 1790946180750,
+        "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "name": "beacon",
+        "action": "option",
+        "ok": false,
+        "verdict": "refused",
+        "text": "beacon's question has no option 9",
+        "ms": 128
+      }
+    ],
+    "rendererResults": [
+      {
+        "t": 1790946178578,
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "text": "Didn't land - kestrel isn't asking a question (it's waiting on an approval)",
+        "kind": "err",
+        "phase": "verdict"
+      },
+      {
+        "t": 1790946179810,
+        "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "text": "Didn't land - vibepet isn't asking a question (it's idle)",
+        "kind": "err",
+        "phase": "verdict"
+      },
+      {
+        "t": 1790946180852,
+        "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "text": "Answering…",
+        "kind": "",
+        "phase": "pending"
+      },
+      {
+        "t": 1790946180866,
+        "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "text": "beacon's question has no option 9",
+        "kind": "err",
+        "phase": "verdict"
+      }
+    ],
+    "fleetBefore": {
+      "kestrel": {
+        "status": "waiting",
+        "waitingFor": "permission prompt",
+        "statusUpdatedAt": 1790910742347,
+        "pane": "29a87e353655"
+      },
+      "vibepet": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910787682,
+        "pane": "c50b08de0838"
+      },
+      "atlas": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910180805,
+        "pane": "235b8e132da6"
+      },
+      "beacon": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790907222729,
+        "pane": "b1e459769523"
+      },
+      "delta": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790906449089,
+        "pane": "d03b4426dd1b"
+      }
+    },
+    "fleetAfter": {
+      "kestrel": {
+        "status": "waiting",
+        "waitingFor": "permission prompt",
+        "statusUpdatedAt": 1790910742347,
+        "pane": "29a87e353655"
+      },
+      "vibepet": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910787682,
+        "pane": "c50b08de0838"
+      },
+      "atlas": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910180805,
+        "pane": "235b8e132da6"
+      },
+      "beacon": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790907222729,
+        "pane": "b1e459769523"
+      },
+      "delta": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790906449089,
+        "pane": "d03b4426dd1b"
+      }
+    },
+    "fleetUnchanged": true
+  },
+  "close": {
+    "how": "quit",
+    "ms": 298,
+    "orphans": 0
+  },
+  "uptimeEnd": "load 5.31 7.23 27.46"
+}

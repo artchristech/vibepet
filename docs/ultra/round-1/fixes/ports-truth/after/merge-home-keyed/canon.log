@@ -1,0 +1,14 @@
+FAIL 19/23 assertions in 3322.7 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/ports-truth/after/merge-home-keyed/canon
+rows: (none)   fleet: 3/6 in state
+fold: 5/5, footer in view (after 3 messages)
+  mismatch kestrel: missing: a permission dialog is open: it needs you, Approve, but Home has no row for it
+  mismatch vibepet: missing: the turn ended with a statement: done, your move, but Home has no row for it
+  mismatch atlas: missing: idle at its prompt (registry): done, or asking, but Home has no row for it
+  mismatch beacon: missing: an AskUserQuestion dialog is open: it needs you, Reply, but Home has no row for it
+  mismatch delta: missing: idle at its prompt (registry): done, or asking, but Home has no row for it
+  FAIL home/ran: openHome: no Home panel after the click
+  FAIL ports/sectionRenders: {"servers":[]}
+  FAIL ports/fixtureListed: :64672 (cwd delta)
+  FAIL run/cleanClose: {"how":"timeout","ms":25841,"procs":4,"orphans":[{"pid":63014,"name":"Electron"}]}
+node test/ultra/canon.js --app  --out $E/canon --userdata   40.41s user 20.43s system 1% cpu 55:24.70 total
+exit=1

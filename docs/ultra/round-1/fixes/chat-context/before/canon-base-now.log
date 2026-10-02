@@ -1,0 +1,7 @@
+ 2:40  up 6 days, 13:26, 19 users, load averages: 6.49 18.21 66.68
+fatal: not a git repository (or any of the parent directories): .git
+FAIL 30/31 assertions in 31.7 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/chat-context/before/canon-base-now
+rows: beacon:needs kestrel:needs delta:ready atlas:ready vibepet:ready ember:ready   fleet: 4/6 in state
+  FAIL chat/contextSessions: beacon: no line; kestrel: no line; delta: no line; atlas: no line; vibepet: no line; ember: no line
+exit 1
+ 2:41  up 6 days, 13:26, 19 users, load averages: 34.29 22.94 66.40

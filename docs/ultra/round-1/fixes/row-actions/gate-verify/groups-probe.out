@@ -1,0 +1,4 @@
+truncated | asks equal: true | batched: 2 | "Bash: cd /Users/me/projects/some-long-project-name && npm run build -- --mode production --config ./config/build.produc…"
+backticks | asks equal: true | batched: 2 | "Bash: echo rm -rf build"
+whitespace | asks equal: true | batched: 2 | "Bash: git commit -m \"a b\""
+editSameFile | batched: 2

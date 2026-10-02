@@ -1,0 +1,18 @@
+same: assertions 29/29 vs 29/29; rows {"beacon":"needs","kestrel":"needs","delta":"ready","atlas":"ready","vibepet":"ready"}
+  1-home/panel.png: 0.2% of pixels changed
+  1-home/pet.png: 1% of pixels changed
+  2-chat/reply.png: 15.82% of pixels changed
+  2-chat/sending.png: 11.29% of pixels changed
+  3-command/slash.png: 12.57% of pixels changed
+  3-command/today.png: 0.73% of pixels changed
+  4-rows/goal.png: 1.07% of pixels changed
+  4-rows/jump.png: 0.66% of pixels changed
+  4-rows/list.png: 0.54% of pixels changed
+  4-rows/reply.png: 0.26% of pixels changed
+  5-theater/open.png: 1.25% of pixels changed
+  5-theater/seek-mid.png: 0% of pixels changed
+  6-ports/footer.png: 26.32% of pixels changed
+  6-ports/stopped.png: 0.89% of pixels changed
+  7-keys/gesture-pad.png: 17.34% of pixels changed
+  7-keys/gesture-saved.png: 0% of pixels changed
+  7-keys/hotkey.png: 4.38% of pixels changed

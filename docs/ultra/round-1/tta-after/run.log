@@ -1,0 +1,25 @@
+[13:17:29.723] plan approval#1 approval#2 askuser#1 · spend est $3.3093 · this probe so far $0.0000 of $0.6
+[13:17:32.792] instances A pid 12697 (Home closed), B pid 12698 (Home open) · app 3488d20 Merge ultra/r1/chat-context (gate green) @ ultra/round-1 · perms {"ax":true,"screen":true}
+Error: tmux send-keys failed: client is read-only
+    at tmux (/Users/christopherharris/.vibepet-ultra/int/test/fleet/lib.js:161:43)
+    at Object.sendKeys (/Users/christopherharris/.vibepet-ultra/int/test/fleet/lib.js:182:58)
+    at escIfWaiting (/Users/christopherharris/.vibepet-ultra/int/test/ultra/tta.js:364:7)
+    at run (/Users/christopherharris/.vibepet-ultra/int/test/ultra/tta.js:482:107)
+[13:19:25.124] plan approval#1 approval#2 askuser#1 · spend est $3.3093 · this probe so far $0.0000 of $0.6
+[13:19:30.217] instances A pid 14568 (Home closed), B pid 14569 (Home open) · app 3488d20 Merge ultra/r1/chat-context (gate green) @ ultra/round-1 · perms {"ax":true,"screen":true}
+[13:19:30.397]   kestrel: Esc (quiet the fleet before the trials)
+[13:19:31.850]   beacon: Esc (quiet the fleet before the trials)
+[13:19:39.157] == approval #1 (kestrel) · status idle
+[13:19:47.173]   block: reg waiting/permission prompt at +2.6 s · record +2.4 s Bash
+[13:19:57.922]   attempt: {"clicks":2,"keys":0,"action":"approve","sendTo":{"ok":true},"resolved":true}
+[13:19:58.390]   result {"t0":"2026-10-02T13:19:45.018Z","t0From":"transcript","detectAmbientS":1.1,"detectAmbientRegS":0.8,"bubbleS":1.1,"ledS":null,"faceS":1.1,"rowS":1.1,"rowRegS":0.8,"offerS":1.1,"offerAction":"approve","bannerS":null,"soundS":0.9,"goneS":null,"phaseS":1.1,"queueHeadS":1.1,"wrong":null,"otherBubble":null,"actionWorks":true,"clicks":2,"keys":0} · spent ~$0.135
+[13:19:58.443] == approval #2 (kestrel) · status idle
+[13:20:05.077]   block: reg waiting/permission prompt at +1.8 s · record withheld
+[13:20:15.138]   attempt: {"clicks":2,"keys":0,"action":"approve","sendTo":{"ok":true},"resolved":true}
+[13:20:15.652]   result {"t0":"2026-10-02T13:20:03.480Z","t0From":"registry","detectAmbientS":0.3,"detectAmbientRegS":0.3,"bubbleS":0.6,"ledS":null,"faceS":0.3,"rowS":0.3,"rowRegS":0.3,"offerS":0.3,"offerAction":"approve","bannerS":null,"soundS":0.3,"goneS":null,"phaseS":0.3,"queueHeadS":0.3,"wrong":null,"otherBubble":null,"actionWorks":true,"clicks":2,"keys":0} · spent ~$0.0148
+[13:20:15.762] == askuser #1 (beacon) · status idle
+[13:20:23.958]   block: reg waiting/input needed at +3 s · record withheld
+[13:20:36.234]   attempt: {"clicks":3,"keys":7,"action":"reply","sendTo":{"ok":false,"why":"beacon is showing a question: pick one of its options"},"resolved":false,"jump":false}
+[13:20:36.295]   beacon: Esc (end of trial)
+[13:20:36.962]   result {"t0":"2026-10-02T13:20:22.098Z","t0From":"registry","detectAmbientS":2.8,"detectAmbientRegS":2.8,"bubbleS":3.1,"ledS":2.8,"faceS":2.8,"rowS":2.8,"rowRegS":2.8,"offerS":2.8,"offerAction":"reply","bannerS":null,"soundS":2.8,"goneS":null,"phaseS":2.8,"queueHeadS":2.8,"wrong":null,"otherBubble":null,"actionWorks":false,"clicks":3,"keys":7} · spent ~$0.0496
+[13:20:37.920] closed quit/0 orphans, quit/0 orphans · B reopened 0× · poll errors 0 · spend est $3.5250 · this probe $0.2157 of $0.6

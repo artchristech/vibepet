@@ -1,0 +1,540 @@
+{
+ "calls": [
+  {
+   "kind": "clipboard",
+   "at": 1790910496517,
+   "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume 13a1427d-6cb0-4561-b5a3-22453a34bf93"
+  },
+  {
+   "kind": "ipc:jump",
+   "at": 1790910496517,
+   "args": [
+    "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+   ],
+   "result": {
+    "ok": false,
+    "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume 13a1427d-6cb0-4561-b5a3-22453a34bf93"
+   },
+   "ms": 79
+  },
+  {
+   "kind": "clipboard",
+   "at": 1790910518968,
+   "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume 13a1427d-6cb0-4561-b5a3-22453a34bf93"
+  },
+  {
+   "kind": "ipc:jump",
+   "at": 1790910518968,
+   "args": [
+    "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+   ],
+   "result": {
+    "ok": false,
+    "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume 13a1427d-6cb0-4561-b5a3-22453a34bf93"
+   },
+   "ms": 74
+  },
+  {
+   "kind": "clipboard",
+   "at": 1790910540979,
+   "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume 13a1427d-6cb0-4561-b5a3-22453a34bf93"
+  },
+  {
+   "kind": "ipc:jump",
+   "at": 1790910540979,
+   "args": [
+    "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+   ],
+   "result": {
+    "ok": false,
+    "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume 13a1427d-6cb0-4561-b5a3-22453a34bf93"
+   },
+   "ms": 74
+  },
+  {
+   "kind": "menuPopup",
+   "at": 1790910567901,
+   "items": [
+    "Watching kestrel",
+    "Localhost",
+    "Open Home",
+    "Setup…",
+    "Theater…",
+    "Start content session",
+    "Finish last session",
+    "Open shorts folder",
+    "Today…",
+    "Pet",
+    "Toss a snack",
+    "Settings",
+    "Hide Net",
+    "Quit Net"
+   ]
+  },
+  {
+   "kind": "clipboard",
+   "at": 1790910569633,
+   "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume 13a1427d-6cb0-4561-b5a3-22453a34bf93"
+  },
+  {
+   "kind": "ipc:jump",
+   "at": 1790910569633,
+   "args": [
+    "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+   ],
+   "result": {
+    "ok": false,
+    "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume 13a1427d-6cb0-4561-b5a3-22453a34bf93"
+   },
+   "ms": 85
+  },
+  {
+   "kind": "clipboard",
+   "at": 1790910796838,
+   "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+  },
+  {
+   "kind": "ipc:jump",
+   "at": 1790910796838,
+   "args": [
+    "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+   ],
+   "result": {
+    "ok": false,
+    "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+   },
+   "ms": 78
+  },
+  {
+   "kind": "menuPopup",
+   "at": 1790910968144,
+   "items": [
+    "Watching vibepet",
+    "Localhost (1)",
+    "Open Home",
+    "Setup…",
+    "Theater…",
+    "Start content session",
+    "Finish last session",
+    "Open shorts folder",
+    "Today…",
+    "Pet",
+    "Toss a snack",
+    "Settings",
+    "Hide Net",
+    "Quit Net"
+   ]
+  },
+  {
+   "kind": "menuPopup",
+   "at": 1790911100856,
+   "items": [
+    "Watching vibepet",
+    "Localhost (1)",
+    "Open Home",
+    "Setup…",
+    "Theater…",
+    "Start content session",
+    "Finish last session",
+    "Open shorts folder",
+    "Today…",
+    "Pet",
+    "Toss a snack",
+    "Settings",
+    "Hide Net",
+    "Quit Net"
+   ]
+  },
+  {
+   "kind": "ipc:gesture-sample",
+   "at": 1790911103395,
+   "points": 49
+  },
+  {
+   "kind": "ipc:gesture-sample",
+   "at": 1790911105345,
+   "points": 49
+  },
+  {
+   "kind": "ipc:gesture-sample",
+   "at": 1790911106128,
+   "points": 5
+  },
+  {
+   "kind": "ipc:gesture-sample",
+   "at": 1790911125683,
+   "points": 49
+  },
+  {
+   "kind": "menuPopup",
+   "at": 1790911244732,
+   "items": [
+    "Watching vibepet",
+    "Localhost",
+    "Open Home",
+    "Setup…",
+    "Theater…",
+    "Start content session",
+    "Finish last session",
+    "Open shorts folder",
+    "Today…",
+    "Pet",
+    "Toss a snack",
+    "Settings",
+    "Hide Net",
+    "Quit Net"
+   ]
+  },
+  {
+   "kind": "menuPopup",
+   "at": 1790911264463,
+   "items": [
+    "Watching vibepet",
+    "Localhost",
+    "Open Home",
+    "Setup…",
+    "Theater…",
+    "Start content session",
+    "Finish last session",
+    "Open shorts folder",
+    "Today…",
+    "Pet",
+    "Toss a snack",
+    "Settings",
+    "Hide Net",
+    "Quit Net"
+   ]
+  }
+ ],
+ "sends": [
+  {
+   "ch": "hotkey",
+   "at": 1790910496438
+  },
+  {
+   "ch": "hotkey",
+   "at": 1790910518894
+  },
+  {
+   "ch": "hotkey",
+   "at": 1790910540905
+  },
+  {
+   "ch": "hide",
+   "at": 1790910568306
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790910568567
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790910569541
+  },
+  {
+   "ch": "summon",
+   "at": 1790910569542
+  },
+  {
+   "ch": "hotkey",
+   "at": 1790910569542
+  },
+  {
+   "ch": "hotkey",
+   "at": 1790910713185
+  },
+  {
+   "ch": "hotkey",
+   "at": 1790910719405
+  },
+  {
+   "ch": "hotkey",
+   "at": 1790910725449
+  },
+  {
+   "ch": "hotkey",
+   "at": 1790910796760
+  },
+  {
+   "ch": "hotkey",
+   "at": 1790910802605
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911101158
+  },
+  {
+   "ch": "gesture-rec",
+   "at": 1790911101160
+  },
+  {
+   "ch": "gesture-rec",
+   "at": 1790911103395
+  },
+  {
+   "ch": "gesture-rec",
+   "at": 1790911105345
+  },
+  {
+   "ch": "gesture-rec",
+   "at": 1790911106128
+  },
+  {
+   "ch": "gesture-rec",
+   "at": 1790911125683
+  },
+  {
+   "ch": "hide",
+   "at": 1790911177054
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911177315
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911181306
+  },
+  {
+   "ch": "summon",
+   "at": 1790911181308
+  },
+  {
+   "ch": "hide",
+   "at": 1790911206612
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911206873
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911210985
+  },
+  {
+   "ch": "summon",
+   "at": 1790911210986
+  },
+  {
+   "ch": "hide",
+   "at": 1790911215436
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911215696
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911219695
+  },
+  {
+   "ch": "summon",
+   "at": 1790911219697
+  },
+  {
+   "ch": "hide",
+   "at": 1790911224151
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911224412
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911228383
+  },
+  {
+   "ch": "summon",
+   "at": 1790911228384
+  },
+  {
+   "ch": "hide",
+   "at": 1790911248063
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911248325
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911252523
+  },
+  {
+   "ch": "summon",
+   "at": 1790911252524
+  },
+  {
+   "ch": "hide",
+   "at": 1790911256766
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911257027
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911261035
+  },
+  {
+   "ch": "summon",
+   "at": 1790911261037
+  },
+  {
+   "ch": "hide",
+   "at": 1790911302231
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911302492
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911308215
+  },
+  {
+   "ch": "summon",
+   "at": 1790911308219
+  },
+  {
+   "ch": "hide",
+   "at": 1790911312647
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911312908
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911318894
+  },
+  {
+   "ch": "summon",
+   "at": 1790911318895
+  },
+  {
+   "ch": "hide",
+   "at": 1790911323245
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911323506
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911329803
+  },
+  {
+   "ch": "summon",
+   "at": 1790911329805
+  },
+  {
+   "ch": "hide",
+   "at": 1790911334146
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911334407
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911337167
+  },
+  {
+   "ch": "summon",
+   "at": 1790911337169
+  },
+  {
+   "ch": "hide",
+   "at": 1790911386015
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911386276
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911395824
+  },
+  {
+   "ch": "summon",
+   "at": 1790911395824
+  },
+  {
+   "ch": "hide",
+   "at": 1790911400966
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911401227
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911429014
+  },
+  {
+   "ch": "summon",
+   "at": 1790911429015
+  },
+  {
+   "ch": "hide",
+   "at": 1790911437145
+  },
+  {
+   "ch": "win.hide",
+   "at": 1790911437406
+  },
+  {
+   "ch": "win.showInactive",
+   "at": 1790911449472
+  },
+  {
+   "ch": "summon",
+   "at": 1790911449473
+  },
+  {
+   "ch": "hotkey",
+   "at": 1790911611733
+  }
+ ],
+ "meta": {
+  "t0": 1790910475093,
+  "readyMs": 445,
+  "load": "1.85 1.74 2.03",
+  "atLaunch": {
+   "keyTaken": false,
+   "jumpKey": "Control+Alt+Command+J",
+   "isReg": {
+    "ctrlAltCmdJ": true,
+    "altCmdJ": false,
+    "ctrlAltCmdR": true
+   }
+  },
+  "extras": {
+   "regLog": [
+    {
+     "acc": "Control+Alt+Command+J",
+     "at": 1790910475763,
+     "ok": true
+    },
+    {
+     "acc": "Control+Alt+Command+R",
+     "at": 1790910475763,
+     "skipped": true
+    }
+   ],
+   "keyTaken": false,
+   "jumpKey": "Control+Alt+Command+J",
+   "isReg": {
+    "ctrlAltCmdJ": true,
+    "altCmdJ": false,
+    "ctrlAltCmdR": false
+   }
+  },
+  "inst": {
+   "spied": [
+    "jump",
+    "send-to"
+   ]
+  }
+ }
+}

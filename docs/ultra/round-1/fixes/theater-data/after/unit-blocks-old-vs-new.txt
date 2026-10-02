@@ -1,0 +1,21 @@
+test/theater.test.js, each '// ----' block run alone (consts hoisted to var), against the base model (8e5fe27) and the fix (5b4f689)
+== oldtree
+pass  diff
+FAIL  a two-prompt session: read, edit, failing test, fix, passing t :: Expected values to be strictly equal:
+FAIL  a session that made no commit (only a Read): the repo's busy l :: commits it did not make never become its milestones
+FAIL  a live session ends on what it is doing now (main's snapshot:  :: Expected values to be strictly deep-equal:
+FAIL  AskUserQuestion: a question with its choices, then the answer  :: Expected values to be strictly deep-equal:
+FAIL  /loop: each scheduled fire is a beat; a closed session that co :: Expected values to be strictly deep-equal:
+FAIL  branches are numbered in spawn order, whatever order their fil :: Expected values to be strictly deep-equal:
+FAIL  typed: a /command shown as it was typed :: typed is not a function
+FAIL  Theater… entries: ordered and aged by each session's last reco :: Expected values to be strictly deep-equal:
+== new
+pass  diff
+pass  a two-prompt session: read, edit, failing test, fix, passing t
+pass  a session that made no commit (only a Read): the repo's busy l
+pass  a live session ends on what it is doing now (main's snapshot: 
+pass  AskUserQuestion: a question with its choices, then the answer 
+pass  /loop: each scheduled fire is a beat; a closed session that co
+pass  branches are numbered in spawn order, whatever order their fil
+pass  typed: a /command shown as it was typed
+pass  Theater… entries: ordered and aged by each session's last reco

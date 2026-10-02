@@ -1,0 +1,540 @@
+{
+ "branch": "ultra/r1/home-feedback",
+ "commits": [
+  "191b608",
+  "03b6206",
+  "484e9b4"
+ ],
+ "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-home-feedback",
+ "git": "8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane",
+ "a_rowJumpNote": {
+  "after": {
+   "runs": [
+    {
+     "dir": "after",
+     "summary": {
+      "pressToNoteMedianMs": 389,
+      "ipcMedianMs": 384,
+      "ipcDoneToNoteMedianMs": 3,
+      "noteInRow": "5/5",
+      "toastOnTop": "5/5",
+      "doneRowsStillPending": true
+     },
+     "jumps": [
+      {
+       "pressToNoteMs": 389,
+       "ipcMs": 384,
+       "ipcDoneToNoteMs": 3,
+       "load": "72.48 31.46 68.91"
+      },
+      {
+       "pressToNoteMs": 392,
+       "ipcMs": 389,
+       "ipcDoneToNoteMs": 2,
+       "load": "127.94 44.66 73.16"
+      },
+      {
+       "pressToNoteMs": 209,
+       "ipcMs": 206,
+       "ipcDoneToNoteMs": 3,
+       "load": "161.40 54.74 76.41"
+      },
+      {
+       "pressToNoteMs": 481,
+       "ipcMs": 476,
+       "ipcDoneToNoteMs": 5,
+       "load": "165.21 57.30 77.19"
+      },
+      {
+       "pressToNoteMs": 269,
+       "ipcMs": 266,
+       "ipcDoneToNoteMs": 3,
+       "load": "161.82 60.16 77.97"
+      }
+     ]
+    },
+    {
+     "dir": "after/timing-1",
+     "summary": {
+      "pressToNoteMedianMs": 2347,
+      "ipcMedianMs": 2345,
+      "ipcDoneToNoteMedianMs": 3,
+      "noteInRow": "5/5"
+     },
+     "jumps": [
+      {
+       "pressToNoteMs": 787,
+       "ipcMs": 781,
+       "ipcDoneToNoteMs": 4,
+       "load": "150.22 147.18 109.96"
+      },
+      {
+       "pressToNoteMs": 2347,
+       "ipcMs": 2345,
+       "ipcDoneToNoteMs": 3,
+       "load": "139.68 145.02 109.63"
+      },
+      {
+       "pressToNoteMs": 3060,
+       "ipcMs": 3058,
+       "ipcDoneToNoteMs": 2,
+       "load": "129.00 142.54 109.16"
+      },
+      {
+       "pressToNoteMs": 2007,
+       "ipcMs": 2004,
+       "ipcDoneToNoteMs": 3,
+       "load": "120.78 140.35 108.77"
+      },
+      {
+       "pressToNoteMs": 3011,
+       "ipcMs": 3006,
+       "ipcDoneToNoteMs": 4,
+       "load": "107.96 136.52 107.95"
+      }
+     ]
+    },
+    {
+     "dir": "after/timing-2",
+     "summary": {
+      "pressToNoteMedianMs": 331,
+      "ipcMedianMs": 329,
+      "ipcDoneToNoteMedianMs": 2,
+      "noteInRow": "5/5"
+     },
+     "jumps": [
+      {
+       "pressToNoteMs": 385,
+       "ipcMs": 382,
+       "ipcDoneToNoteMs": 2,
+       "load": "65.34 122.77 104.10"
+      },
+      {
+       "pressToNoteMs": 334,
+       "ipcMs": 332,
+       "ipcDoneToNoteMs": 3,
+       "load": "60.67 120.85 103.53"
+      },
+      {
+       "pressToNoteMs": 213,
+       "ipcMs": 211,
+       "ipcDoneToNoteMs": 2,
+       "load": "54.56 117.56 102.57"
+      },
+      {
+       "pressToNoteMs": 186,
+       "ipcMs": 184,
+       "ipcDoneToNoteMs": 2,
+       "load": "50.59 115.69 101.99"
+      },
+      {
+       "pressToNoteMs": 331,
+       "ipcMs": 329,
+       "ipcDoneToNoteMs": 3,
+       "load": "49.41 113.26 101.29"
+      }
+     ]
+    }
+   ],
+   "note": "no terminal is attached to tmux session vp-kestrel — tmux attach -t vp-kestrel",
+   "toastOnTop": "5/5"
+  },
+  "before": {
+   "noteInRow": 0,
+   "bubbleAtCentre": [
+    "#chatInput",
+    "#chatInput",
+    null,
+    null,
+    null
+   ]
+  }
+ },
+ "a_toast": {
+  "jumpFail": {
+   "text": "Deploy.sh dry run · kestrel: no terminal is attached",
+   "cls": "hit",
+   "display": "block",
+   "position": "absolute",
+   "zIndex": "4",
+   "rect": [
+    180,
+    66,
+    300,
+    41
+   ],
+   "atCentre": "#bubble",
+   "onTop": true,
+   "chatTop": 58,
+   "homeOpen": true
+  },
+  "goalHit": {
+   "text": "goal hit: \"Reconcile the three shards in parallel.\" +15xp",
+   "cls": "hit",
+   "display": "block",
+   "position": "absolute",
+   "zIndex": "4",
+   "rect": [
+    180,
+    66,
+    300,
+    41
+   ],
+   "atCentre": "#bubble",
+   "onTop": true,
+   "chatTop": 58,
+   "homeOpen": true
+  },
+  "stop": {
+   "text": "stopped pid 56864",
+   "cls": "hit",
+   "display": "block",
+   "position": "absolute",
+   "zIndex": "4",
+   "rect": [
+    262,
+    66,
+    137,
+    25
+   ],
+   "atCentre": "#bubble",
+   "onTop": true,
+   "chatTop": 58,
+   "homeOpen": true,
+   "serverDiedMs": 920,
+   "load": "137.17 64.86 78.94"
+  },
+  "before": {
+   "goalHit": "#chatInput",
+   "stop": "#chatInput"
+  }
+ },
+ "a_pill": {
+  "hotkey": {
+   "jumped": "beacon",
+   "rowNotes": [
+    {
+     "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+     "label": "Beacon database choice · beacon",
+     "note": "no terminal is attached to tmux session vp-beacon — tmux attach -t vp-beacon"
+    }
+   ],
+   "bubbleDisplay": "none"
+  },
+  "clickKestrel": {
+   "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "label": "Deploy.sh dry run · kestrel",
+   "note": "no terminal is attached to tmux session vp-kestrel — tmux attach -t vp-kestrel"
+  },
+  "before": {
+   "notes": []
+  }
+ },
+ "a_lowRow": {
+  "row": "ember",
+  "before": {
+   "rowBottom": 399,
+   "listBottom": 465
+  },
+  "atNote": {
+   "note": "no terminal is attached to tmux session vp-ember — tmux attach -t vp-ember",
+   "inView": true,
+   "scrollTop": 186.5
+  },
+  "afterATick": {
+   "note": "no terminal is attached to tmux session vp-ember — tmux attach -t vp-ember",
+   "inView": true,
+   "scrollTop": 186.5
+  },
+  "load": "148.38 62.08 78.34"
+ },
+ "b_queue": {
+  "pendingAtLaunch": [
+   "beacon",
+   "kestrel",
+   "delta",
+   "atlas",
+   "vibepet",
+   "ember"
+  ],
+  "pendingAfterFailedKestrelJumps": [
+   [
+    "beacon",
+    "kestrel",
+    "delta",
+    "atlas",
+    "vibepet",
+    "ember"
+   ],
+   [
+    "beacon",
+    "kestrel",
+    "delta",
+    "atlas",
+    "vibepet",
+    "ember"
+   ],
+   [
+    "beacon",
+    "kestrel",
+    "delta",
+    "atlas",
+    "vibepet",
+    "ember"
+   ],
+   [
+    "beacon",
+    "kestrel",
+    "delta",
+    "atlas",
+    "vibepet",
+    "ember"
+   ],
+   [
+    "beacon",
+    "kestrel",
+    "delta",
+    "atlas",
+    "vibepet",
+    "ember"
+   ]
+  ],
+  "before": [
+   [
+    "beacon",
+    "kestrel"
+   ]
+  ],
+  "emptyQueue": {
+   "via": "test hook: ticks without kestrel and beacon (the two that need you)",
+   "pendingBefore": [],
+   "said": [
+    "Nobody's waiting on you",
+    "Nobody's waiting on you",
+    "Nobody's waiting on you"
+   ],
+   "jumpsTotal": 0
+  },
+  "emptyBubble": {
+   "text": "Nobody's waiting on you",
+   "cls": "hit",
+   "display": "block",
+   "position": "relative",
+   "zIndex": "2",
+   "rect": [
+    242,
+    601,
+    176,
+    25
+   ],
+   "atCentre": "#bubble",
+   "onTop": true,
+   "chatTop": 0,
+   "homeOpen": false
+  },
+  "emptyHomeOpen": {
+   "text": "Nobody's waiting on you",
+   "cls": "hit",
+   "display": "block",
+   "position": "absolute",
+   "zIndex": "4",
+   "rect": [
+    242,
+    66,
+    176,
+    25
+   ],
+   "atCentre": "#bubble",
+   "onTop": true,
+   "chatTop": 58,
+   "homeOpen": true
+  }
+ },
+ "c_rows": {
+  "rows": [
+   {
+    "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+    "label": "Beacon database choice · beacon",
+    "state": "asking 6h 27m",
+    "gauge": null,
+    "pips": null,
+    "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Redis)",
+    "note": null
+   },
+   {
+    "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+    "label": "Deploy.sh dry run · kestrel",
+    "state": "needs approval 5h 29m",
+    "gauge": null,
+    "pips": null,
+    "ask": "Bash: ./deploy.sh --dry-run",
+    "note": null
+   },
+   {
+    "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+    "label": "Reconcile three shards in parallel · delta",
+    "state": "done 6h 40m ago",
+    "gauge": "3/3 subagents done",
+    "pips": [
+     3,
+     0
+    ],
+    "ask": null,
+    "note": null
+   },
+   {
+    "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+    "label": "Run build.sh · atlas",
+    "state": "done 5h 38m ago",
+    "gauge": null,
+    "pips": null,
+    "ask": null,
+    "note": null
+   },
+   {
+    "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+    "label": "Read package.json · vibepet",
+    "state": "done 5h 28m ago",
+    "gauge": null,
+    "pips": null,
+    "ask": null,
+    "note": null
+   },
+   {
+    "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+    "label": "ember",
+    "state": "done 2m ago",
+    "gauge": null,
+    "pips": null,
+    "ask": null,
+    "note": null
+   }
+  ],
+  "askContrast": {
+   "light": {
+    "contrast": 6.8,
+    "bg": [
+     244,
+     245,
+     239
+    ],
+    "text": "Bash: ./deploy.sh --dry-run",
+    "cssColor": "rgb(122, 75, 0)"
+   },
+   "dark": {
+    "contrast": 10.99,
+    "bg": [
+     40,
+     40,
+     36
+    ],
+    "text": "Bash: ./deploy.sh --dry-run",
+    "cssColor": "rgb(255, 217, 138)"
+   }
+  },
+  "askContrastBefore": {
+   "light": 1.24,
+   "dark": 10.99
+  },
+  "untitledHook": {
+   "via": "test hook: vibepet tick without its title",
+   "row": {
+    "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+    "label": "vibepet",
+    "state": "done 5h 29m ago",
+    "gauge": null,
+    "pips": null,
+    "ask": null,
+    "note": null
+   },
+   "nameCount": 1
+  },
+  "pillReplay": [
+   {
+    "w": 24,
+    "h": 24,
+    "opacity": "1",
+    "color": "rgb(138, 146, 168)",
+    "rowHovered": false
+   },
+   {
+    "w": 24,
+    "h": 24,
+    "opacity": "1",
+    "color": "rgb(138, 146, 168)",
+    "rowHovered": false
+   },
+   {
+    "w": 24,
+    "h": 24,
+    "opacity": "1",
+    "color": "rgb(138, 146, 168)",
+    "rowHovered": false
+   },
+   {
+    "w": 24,
+    "h": 24,
+    "opacity": "1",
+    "color": "rgb(138, 146, 168)",
+    "rowHovered": false
+   },
+   {
+    "w": 24,
+    "h": 24,
+    "opacity": "1",
+    "color": "rgb(138, 146, 168)",
+    "rowHovered": false
+   },
+   {
+    "w": 24,
+    "h": 24,
+    "opacity": "1",
+    "color": "rgb(138, 146, 168)",
+    "rowHovered": false
+   }
+  ],
+  "pillReplayBefore": [
+   {
+    "w": 13,
+    "h": 15,
+    "opacity": "0",
+    "color": "rgb(138, 146, 168)",
+    "rowHovered": false
+   }
+  ]
+ },
+ "d_label": {
+  "row": "Deploy.sh dry run · kestrel",
+  "bubble": "Deploy.sh dry run · kestrel: no terminal is attached",
+  "pill": "Deploy.sh dry run · kestrel"
+ },
+ "e_canon": {
+  "out": "canon",
+  "assertions": "29/29",
+  "w1Passing": 29,
+  "stillPassing": 29,
+  "regressions": [],
+  "ms": 70972,
+  "fleetChanged": [
+   "ember"
+  ]
+ },
+ "fleetSpend": {
+  "before": "fleet spend: transcripts $2.2232 at Haiku 4.5 prices; estimate incl. hidden calls $3.3093 ",
+  "after": "fleet spend: transcripts $2.2232 at Haiku 4.5 prices; estimate incl. hidden calls $3.3093 "
+ },
+ "load": {
+  "after": [
+   "34.29 22.94 66.40",
+   "102.50 62.53 77.70"
+  ],
+  "timing1": [
+   "183.01 152.68 110.96",
+   "102.36 134.88 107.54"
+  ],
+  "timing2": [
+   "75.14 126.56 105.20",
+   "222.47 147.29 114.04"
+  ]
+ }
+}

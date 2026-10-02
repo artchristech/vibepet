@@ -1,0 +1,707 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-home-keyed-x",
+  "fixture": false,
+  "git": "1d4bdc9 test integration (throwaway, never pushed): ultra/r1/home-keyed 5e8f472 into the queue-state integration",
+  "startedAt": "2026-10-02T06:24:24.220Z",
+  "runs": {
+    "one": {
+      "load": "669.65 426.23 980.03",
+      "readyMs": 5569,
+      "cursor": {
+        "x": 777,
+        "y": 397,
+        "inWindow": true
+      },
+      "home": {
+        "openMs": 1381,
+        "rows": [
+          {
+            "id": "a9377f08",
+            "title": "Beacon database choice",
+            "label": "beacon · asking 4h 11m",
+            "sig": "needs",
+            "acts": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ]
+          },
+          {
+            "id": "13a1427d",
+            "title": "Deploy.sh dry run",
+            "label": "kestrel · needs approval 3h 12m",
+            "sig": "needs",
+            "acts": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ]
+          },
+          {
+            "id": "eb59a756",
+            "title": "Reconcile three shards in parallel",
+            "label": "delta · done 4h 23m ago",
+            "sig": "ready",
+            "acts": [
+              "replay",
+              "done",
+              "goal"
+            ]
+          },
+          {
+            "id": "5c051e84",
+            "title": "Run build.sh",
+            "label": "atlas · done 3h 21m ago",
+            "sig": "ready",
+            "acts": [
+              "replay",
+              "done",
+              "goal"
+            ]
+          },
+          {
+            "id": "6101876b",
+            "title": "Read package.json",
+            "label": "vibepet · done 3h 11m ago",
+            "sig": "ready",
+            "acts": [
+              "replay",
+              "done",
+              "goal"
+            ]
+          }
+        ],
+        "snapshot": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ]
+      },
+      "foldEmpty": {
+        "rows": 5,
+        "inView": 5,
+        "needs": 2,
+        "needsInView": 2,
+        "footer": [
+          "● Record a short",
+          "Today"
+        ],
+        "footerInView": true,
+        "msgs": 0,
+        "fresh": true,
+        "panel": 539,
+        "load": "708.35 438.30 981.04"
+      },
+      "foldOneNote": {
+        "rows": 5,
+        "inView": 5,
+        "needs": 2,
+        "needsInView": 2,
+        "footer": [
+          "● Record a short",
+          "Today"
+        ],
+        "footerInView": true,
+        "msgs": 1,
+        "fresh": true,
+        "panel": 582,
+        "load": "729.46 447.16 980.99"
+      },
+      "presses": [
+        {
+          "kind": "goal",
+          "row": "beacon",
+          "ticksDuringPress": 1,
+          "took": true,
+          "holdMs": 3300,
+          "load": "762.58 458.71 981.94"
+        },
+        {
+          "kind": "goal",
+          "row": "kestrel",
+          "ticksDuringPress": 2,
+          "took": true,
+          "holdMs": 3300,
+          "load": "792.72 470.00 982.86"
+        },
+        {
+          "kind": "goal",
+          "row": "delta",
+          "ticksDuringPress": 1,
+          "took": true,
+          "holdMs": 3300,
+          "load": "819.41 480.89 983.69"
+        },
+        {
+          "kind": "goal",
+          "row": "atlas",
+          "ticksDuringPress": 1,
+          "took": true,
+          "holdMs": 3300,
+          "load": "845.88 492.00 984.67"
+        },
+        {
+          "kind": "goal",
+          "row": "vibepet",
+          "ticksDuringPress": 1,
+          "took": true,
+          "holdMs": 3300,
+          "load": "869.19 502.71 985.56"
+        },
+        {
+          "kind": "replay",
+          "row": "beacon",
+          "ticksDuringPress": 2,
+          "took": true,
+          "theaterWindows": 1,
+          "theaterMsAfterRelease": 6387,
+          "holdMs": 3300,
+          "load": "884.20 517.90 985.31"
+        },
+        {
+          "kind": "replay",
+          "row": "kestrel",
+          "ticksDuringPress": 2,
+          "took": true,
+          "theaterWindows": 1,
+          "theaterMsAfterRelease": 7571,
+          "holdMs": 3300,
+          "load": "923.19 544.39 986.58"
+        },
+        {
+          "kind": "replay",
+          "row": "delta",
+          "ticksDuringPress": 2,
+          "took": true,
+          "theaterWindows": 1,
+          "theaterMsAfterRelease": 2836,
+          "holdMs": 3300,
+          "load": "928.54 551.79 986.60"
+        },
+        {
+          "kind": "replay",
+          "row": "atlas",
+          "ticksDuringPress": 2,
+          "took": true,
+          "theaterWindows": 1,
+          "theaterMsAfterRelease": 2127,
+          "holdMs": 3300,
+          "load": "926.78 563.84 985.80"
+        },
+        {
+          "kind": "replay",
+          "row": "vibepet",
+          "ticksDuringPress": 2,
+          "took": false,
+          "theaterWindows": 0,
+          "theaterMsAfterRelease": null,
+          "holdMs": 3300,
+          "load": "982.26 593.62 989.03"
+        }
+      ],
+      "pressesTook": "9/10",
+      "focus": {
+        "focused": {
+          "el": "<button data-do=\"reply\">Reply</button>",
+          "row": "Beacon database choice"
+        },
+        "afterTicks": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "load": "131.88 632.67 996.04"
+      },
+      "selection": {
+        "row": "kestrel",
+        "text": "Bash: ./deploy.sh --dry-",
+        "ticks": 4,
+        "survivedEachTick": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "jumps": 0,
+        "load": "695.86 40.13 186.87"
+      },
+      "reply": {
+        "row": "beacon",
+        "openedFocus": "the reply box (opened by you)",
+        "typingMs": 6616,
+        "ticksWhileTyping": 2,
+        "chatBar": "what is atlas doing",
+        "replyBox": "",
+        "replyBoxOpen": true,
+        "load": "154.75 187.46 235.77"
+      },
+      "keys": {
+        "load": "286.73 214.28 244.95",
+        "cmd1": {
+          "id": null,
+          "tag": "DIV",
+          "row": 0,
+          "onRow": true,
+          "text": "Beacon database choicebe"
+        },
+        "enterTop": {
+          "focus": {
+            "id": null,
+            "tag": "INPUT",
+            "row": 0,
+            "onRow": false,
+            "text": ""
+          },
+          "replyBoxOpen": true,
+          "ipc": []
+        },
+        "escFromReplyBox": {
+          "id": "chatInput",
+          "tag": "INPUT",
+          "row": null,
+          "onRow": false,
+          "text": ""
+        },
+        "cmdN": {
+          "n": 2,
+          "at": {
+            "id": null,
+            "tag": "DIV",
+            "row": 1,
+            "onRow": true,
+            "text": "Deploy.sh dry runkestrel"
+          }
+        },
+        "enterApproval": [
+          {
+            "args": [
+              {
+                "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+                "text": null
+              }
+            ],
+            "member": "kestrel"
+          }
+        ],
+        "down": {
+          "id": null,
+          "tag": "DIV",
+          "row": 2,
+          "onRow": true,
+          "text": "Reconcile three shards i"
+        },
+        "up": {
+          "id": null,
+          "tag": "DIV",
+          "row": 1,
+          "onRow": true,
+          "text": "Deploy.sh dry runkestrel"
+        },
+        "escFromRow": {
+          "id": "chatInput",
+          "tag": "INPUT",
+          "row": null,
+          "onRow": false,
+          "text": ""
+        },
+        "tabFromLast": {
+          "id": "homeMore",
+          "tag": "BUTTON",
+          "row": null,
+          "onRow": false,
+          "text": "⋯"
+        },
+        "shiftTabFromFirst": {
+          "id": "chatInput",
+          "tag": "INPUT",
+          "row": null,
+          "onRow": false,
+          "text": ""
+        },
+        "blurs": 0,
+        "homeOpen": "now",
+        "keysTo": {
+          "topRowFirstAction": 2
+        }
+      },
+      "intercepted": [
+        {
+          "kind": "ipc:theater",
+          "at": 1790922317019
+        },
+        {
+          "kind": "ipc:theater",
+          "at": 1790922333444
+        },
+        {
+          "kind": "ipc:theater",
+          "at": 1790922344165
+        },
+        {
+          "kind": "ipc:theater",
+          "at": 1790922350681
+        },
+        {
+          "kind": "ipc:theater",
+          "at": 1790922357401
+        },
+        {
+          "kind": "ipc:send-to",
+          "args": [
+            {
+              "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+              "text": null
+            }
+          ],
+          "at": 1790922549961
+        }
+      ],
+      "close": {
+        "how": "timeout",
+        "ms": 37380,
+        "procs": 9,
+        "orphans": [
+          {
+            "pid": 98419,
+            "name": "Electron"
+          }
+        ]
+      }
+    },
+    "two": {
+      "load": "479.08 500.48 349.36",
+      "readyMs": 8139,
+      "rest": {
+        "on": "Reconcile three shards in parallel",
+        "cursorStart": {
+          "x": 777,
+          "y": 397,
+          "inWindow": true
+        },
+        "load": "601.60 525.52 359.08",
+        "held": true,
+        "ms": 180155,
+        "ticks": 61,
+        "samples": 646,
+        "samplesWithAMovedRow": 0,
+        "firstMove": null,
+        "realCursorMovedSamples": 0,
+        "cursorEnd": {
+          "x": 777,
+          "y": 397,
+          "inWindow": true
+        },
+        "loadEnd": "885.18 920.27 562.36",
+        "startBoxes": [
+          [
+            "a9377f08",
+            29,
+            162.5,
+            594,
+            105.3,
+            false
+          ],
+          [
+            "13a1427d",
+            29,
+            269.8,
+            594,
+            88.8,
+            false
+          ],
+          [
+            "eb59a756",
+            29,
+            360.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "5c051e84",
+            29,
+            390.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "6101876b",
+            29,
+            420.5,
+            594,
+            28,
+            false
+          ]
+        ],
+        "endBoxes": [
+          [
+            "a9377f08",
+            29,
+            162.5,
+            594,
+            105.3,
+            false
+          ],
+          [
+            "13a1427d",
+            29,
+            269.8,
+            594,
+            88.8,
+            false
+          ],
+          [
+            "eb59a756",
+            29,
+            360.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "5c051e84",
+            29,
+            390.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "6101876b",
+            29,
+            420.5,
+            594,
+            28,
+            false
+          ]
+        ]
+      },
+      "injected": {
+        "samples": 57,
+        "samplesWithAMovedRow": 0,
+        "firstMove": null,
+        "before": [
+          [
+            "a9377f08",
+            29,
+            162.5,
+            594,
+            105.3,
+            false
+          ],
+          [
+            "13a1427d",
+            29,
+            269.8,
+            594,
+            88.8,
+            false
+          ],
+          [
+            "eb59a756",
+            29,
+            360.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "5c051e84",
+            29,
+            390.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "6101876b",
+            29,
+            420.5,
+            594,
+            28,
+            false
+          ]
+        ],
+        "during": [
+          [
+            "a9377f08",
+            29,
+            162.5,
+            594,
+            105.3,
+            true
+          ],
+          [
+            "13a1427d",
+            29,
+            269.8,
+            594,
+            88.8,
+            false
+          ],
+          [
+            "eb59a756",
+            29,
+            360.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "5c051e84",
+            29,
+            390.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "6101876b",
+            29,
+            420.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "00000000",
+            29,
+            450.5,
+            594,
+            70.5,
+            false
+          ]
+        ],
+        "cursor": {
+          "x": 777,
+          "y": 397,
+          "inWindow": true
+        },
+        "load": "976.53 938.88 575.27",
+        "release": {
+          "ms": 149,
+          "inQueueOrder": true,
+          "rows": [
+            {
+              "id": "6101876b",
+              "title": "Read package.json",
+              "label": "vibepet · running 3h 20m",
+              "sig": "running",
+              "acts": [
+                "replay",
+                "done",
+                "goal"
+              ]
+            },
+            {
+              "id": "5c051e84",
+              "title": "Run build.sh",
+              "label": "atlas · done 3h 30m ago",
+              "sig": "ready",
+              "acts": [
+                "replay",
+                "done",
+                "goal"
+              ]
+            },
+            {
+              "id": "eb59a756",
+              "title": "Reconcile three shards in parallel",
+              "label": "delta · done 4h 32m ago",
+              "sig": "ready",
+              "acts": [
+                "replay",
+                "done",
+                "goal"
+              ]
+            },
+            {
+              "id": "13a1427d",
+              "title": "Deploy.sh dry run",
+              "label": "kestrel · needs approval 3h 21m",
+              "sig": "needs",
+              "acts": [
+                "approve",
+                "replay",
+                "done",
+                "goal"
+              ]
+            },
+            {
+              "id": "00000000",
+              "title": "Injected session (test hook)",
+              "label": "injected · asking 7s",
+              "sig": "needs",
+              "acts": [
+                "reply",
+                "replay",
+                "goal"
+              ]
+            }
+          ],
+          "load": "976.53 938.88 575.27"
+        }
+      },
+      "cycles": [
+        {
+          "change": "inject",
+          "samplesWithAMovedRow": 0,
+          "releaseMs": 149,
+          "inQueueOrder": true,
+          "load": "976.53 938.88 575.27"
+        },
+        {
+          "change": "undo",
+          "samplesWithAMovedRow": 0,
+          "releaseMs": 192,
+          "inQueueOrder": true,
+          "load": "997.47 943.85 579.15"
+        },
+        {
+          "change": "inject",
+          "samplesWithAMovedRow": 0,
+          "releaseMs": 121,
+          "inQueueOrder": true,
+          "load": "1015.61 948.50 582.93"
+        }
+      ],
+      "releaseMedianMs": 149,
+      "fifteen": {
+        "sent": 15,
+        "rows": 15,
+        "inView": 6,
+        "needs": 4,
+        "needsInView": 4,
+        "footer": [
+          "● Record a short",
+          "Today"
+        ],
+        "footerInView": true,
+        "msgs": 0,
+        "fresh": true,
+        "panel": 596,
+        "load": "127.26 962.05 592.00"
+      },
+      "close": {
+        "how": "quit",
+        "ms": 2618,
+        "procs": 7,
+        "orphans": []
+      }
+    }
+  },
+  "loadStart": "530.09 388.47 976.84",
+  "fleetSpendBefore": "fleet spend: transcripts $2.2232 at Haiku 4.5 prices; estimate incl. hidden calls $3.3093 (cost-state of 14 exited sessions $2.1147 vs their transcripts $1.4268 = +48%; applied +50% to the rest); stop $3.32 (/Users/christopherharris/.vibepet-ultra/fleet/spend-stop), cap $5; 259 responses; models {\"claude-haiku-4-5-20251001\":259}",
+  "loadEnd": "243.68 972.33 597.79",
+  "fleetSpendAfter": "fleet spend: transcripts $2.2232 at Haiku 4.5 prices; estimate incl. hidden calls $3.3093 (cost-state of 14 exited sessions $2.1147 vs their transcripts $1.4268 = +48%; applied +50% to the rest); stop $3.32 (/Users/christopherharris/.vibepet-ultra/fleet/spend-stop), cap $5; 259 responses; models {\"claude-haiku-4-5-20251001\":259}",
+  "endedAt": "2026-10-02T06:33:48.438Z"
+}

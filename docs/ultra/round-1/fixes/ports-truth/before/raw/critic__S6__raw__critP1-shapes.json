@@ -1,0 +1,991 @@
+{
+ "flow": "P1",
+ "startedAt": "2026-10-02T03:06:00.933Z",
+ "load": [
+  [
+   2.06,
+   1.79,
+   2.09
+  ],
+  [
+   1.73,
+   1.71,
+   2.01
+  ]
+ ],
+ "steps": [
+  {
+   "name": "home",
+   "at": "2026-10-02T03:06:02.786Z",
+   "load": [
+    2.13,
+    1.81,
+    2.1
+   ],
+   "mode": "now",
+   "rows": [
+    "Deploy.sh dry run kestrel · stuck 1m ◎ Run exactly ./deploy.sh --dry-run with the Bash tool. Bash: ./deploy.sh --dry-run"
+   ],
+   "chips": []
+  },
+  {
+   "name": "01-chips",
+   "at": "2026-10-02T03:06:16.828Z",
+   "load": [
+    2.03,
+    1.8,
+    2.09
+   ],
+   "chips": [
+    {
+     "port": 47302,
+     "pid": 99605,
+     "label": ":47302 Directory listing for /",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47353,
+     "pid": 99608,
+     "label": ":47353 Vite + React + TS",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47354,
+     "pid": 99611,
+     "label": ":47354 Vite + React + TS",
+     "disabled": false,
+     "title": "Open"
+    }
+   ],
+   "cache": [
+    {
+     "pid": 99605,
+     "port": 47302,
+     "host": "*",
+     "kind": "http.server",
+     "project": "vibepet",
+     "dir": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+     "http": true,
+     "status": 200,
+     "title": "Directory listing for /"
+    },
+    {
+     "pid": 99608,
+     "port": 47353,
+     "host": "*",
+     "kind": "node",
+     "project": "vibepet",
+     "dir": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+     "http": true,
+     "status": 200,
+     "title": "Vite + React + TS"
+    },
+    {
+     "pid": 99611,
+     "port": 47354,
+     "host": "*",
+     "kind": "node",
+     "project": "delta",
+     "dir": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+     "http": true,
+     "status": 200,
+     "title": "Vite + React + TS"
+    }
+   ],
+   "snapServers": [
+    {
+     "port": 47302,
+     "pid": 99605,
+     "name": "Directory listing for /",
+     "http": true
+    },
+    {
+     "port": 47353,
+     "pid": 99608,
+     "name": "Vite + React + TS",
+     "http": true
+    },
+    {
+     "port": 47354,
+     "pid": 99611,
+     "name": "Vite + React + TS",
+     "http": true
+    }
+   ]
+  },
+  {
+   "name": "02-binds",
+   "at": "2026-10-02T03:06:18.252Z",
+   "load": [
+    1.87,
+    1.77,
+    2.08
+   ],
+   "l47381": [
+    "p100",
+    "n[::1]:47381"
+   ],
+   "l47351": [
+    "p103",
+    "n*:47351",
+    "p115",
+    "n127.0.0.1:47351"
+   ],
+   "l47383": [
+    "p118",
+    "n127.0.0.1:47383"
+   ],
+   "e2out": "LISTENING 1790910377512\n",
+   "e2exit": null
+  },
+  {
+   "name": "02-direct",
+   "at": "2026-10-02T03:06:18.300Z",
+   "load": [
+    1.87,
+    1.77,
+    2.08
+   ],
+   "v6_localhost": {
+    "status": 200,
+    "title": "Vite + React + TS"
+   },
+   "v6_127": {
+    "error": "ECONNREFUSED"
+   },
+   "v6_curl": "Vite + React + TS",
+   "shared_127": {
+    "status": 200,
+    "title": "Vibepet status"
+   },
+   "shared_v6": {
+    "status": 200,
+    "title": "Delta dashboard"
+   },
+   "shared_localhost_node": {
+    "status": 200,
+    "title": "Delta dashboard"
+   },
+   "shared_localhost_curl": "Delta dashboard",
+   "https_https": {
+    "status": 200,
+    "title": "Secure app"
+   },
+   "https_http": {
+    "error": "ECONNRESET"
+   }
+  },
+  {
+   "name": "02-chips",
+   "at": "2026-10-02T03:06:32.147Z",
+   "load": [
+    1.58,
+    1.71,
+    2.05
+   ],
+   "chips": [
+    {
+     "port": 47351,
+     "pid": 103,
+     "label": ":47351 Vibepet status",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47351,
+     "pid": 115,
+     "label": ":47351 Vibepet status",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47364,
+     "pid": 123,
+     "label": ":47364 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    },
+    {
+     "port": 47381,
+     "pid": 100,
+     "label": ":47381 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    },
+    {
+     "port": 47382,
+     "pid": 129,
+     "label": ":47382 Next.js app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47383,
+     "pid": 118,
+     "label": ":47383 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    }
+   ],
+   "cache": [
+    {
+     "pid": 103,
+     "port": 47351,
+     "host": "*",
+     "kind": "node",
+     "project": "delta",
+     "dir": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+     "http": true,
+     "status": 200,
+     "title": "Vibepet status"
+    },
+    {
+     "pid": 115,
+     "port": 47351,
+     "host": "127.0.0.1",
+     "kind": "Python",
+     "project": "vibepet",
+     "dir": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+     "http": true,
+     "status": 200,
+     "title": "Vibepet status"
+    },
+    {
+     "pid": 123,
+     "port": 47364,
+     "host": "*",
+     "kind": "node",
+     "project": "vibepet",
+     "dir": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+     "http": false
+    },
+    {
+     "pid": 100,
+     "port": 47381,
+     "host": "::1",
+     "kind": "node",
+     "project": "vibepet",
+     "dir": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+     "http": false
+    },
+    {
+     "pid": 129,
+     "port": 47382,
+     "host": "127.0.0.1",
+     "kind": "node",
+     "project": "vibepet",
+     "dir": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+     "http": true,
+     "status": 200,
+     "title": "Next.js app"
+    },
+    {
+     "pid": 118,
+     "port": 47383,
+     "host": "127.0.0.1",
+     "kind": "node",
+     "project": "vibepet",
+     "dir": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+     "http": false
+    }
+   ]
+  },
+  {
+   "name": "17-style",
+   "at": "2026-10-02T03:06:32.149Z",
+   "load": [
+    1.58,
+    1.71,
+    2.05
+   ],
+   "v6only": {
+    "disabled": true,
+    "title": "Open",
+    "color": "rgb(26, 31, 39)",
+    "bg": "rgba(15, 23, 32, 0.04)",
+    "border": "rgba(15, 23, 32, 0.08)",
+    "opacity": "1",
+    "cursor": "pointer",
+    "textDecoration": "none"
+   },
+   "https": {
+    "disabled": true,
+    "title": "Open",
+    "color": "rgb(26, 31, 39)",
+    "bg": "rgba(15, 23, 32, 0.04)",
+    "border": "rgba(15, 23, 32, 0.08)",
+    "opacity": "1",
+    "cursor": "pointer",
+    "textDecoration": "none"
+   },
+   "tcp": {
+    "disabled": true,
+    "title": "Open",
+    "color": "rgb(26, 31, 39)",
+    "bg": "rgba(15, 23, 32, 0.04)",
+    "border": "rgba(15, 23, 32, 0.08)",
+    "opacity": "1",
+    "cursor": "pointer",
+    "textDecoration": "none"
+   },
+   "enabled": {
+    "disabled": false,
+    "title": "Open",
+    "color": "rgb(26, 31, 39)",
+    "bg": "rgba(15, 23, 32, 0.04)",
+    "border": "rgba(15, 23, 32, 0.08)",
+    "opacity": "1",
+    "cursor": "pointer",
+    "textDecoration": "none"
+   }
+  },
+  {
+   "name": "02-opens",
+   "at": "2026-10-02T03:06:33.275Z",
+   "load": [
+    1.54,
+    1.69,
+    2.05
+   ],
+   "opens": [
+    {
+     "pid": 103,
+     "label": ":47351 Vibepet status",
+     "url": "http://localhost:47351",
+     "tries": 1,
+     "reaches_node": {
+      "status": 200,
+      "title": "Delta dashboard"
+     },
+     "reaches_curl": "Delta dashboard"
+    },
+    {
+     "pid": 115,
+     "label": ":47351 Vibepet status",
+     "url": "http://localhost:47351",
+     "tries": 1,
+     "reaches_node": {
+      "status": 200,
+      "title": "Delta dashboard"
+     },
+     "reaches_curl": "Delta dashboard"
+    }
+   ],
+   "pids": {
+    "e1": 103,
+    "e2": 115
+   },
+   "disabledClicks": []
+  },
+  {
+   "name": "03-first-seen",
+   "at": "2026-10-02T03:06:40.876Z",
+   "load": [
+    1.41,
+    1.67,
+    2.04
+   ],
+   "msAfterListen": 7544,
+   "chip": {
+    "port": 47385,
+    "pid": 707,
+    "label": ":47385 node (vibepet)",
+    "disabled": true,
+    "title": "Open"
+   }
+  },
+  {
+   "name": "03-after-56s",
+   "at": "2026-10-02T03:07:33.413Z",
+   "load": [
+    1.87,
+    1.74,
+    2.04
+   ],
+   "samples": [
+    {
+     "s": 11.5,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 15.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 19.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 23.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 27.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 31.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 35.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 39.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 43.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 47.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 51.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 55.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    },
+    {
+     "s": 59.6,
+     "label": ":47385 node (vibepet)",
+     "disabled": true
+    }
+   ],
+   "direct": {
+    "status": 200,
+    "title": "Next.js app"
+   },
+   "direct4": {
+    "status": 200,
+    "title": "Next.js app"
+   },
+   "menuItem": {
+    "label": ":47385  node (vibepet)  · 1m",
+    "enabled": true,
+    "type": "submenu",
+    "sub": [
+     {
+      "label": "Open http://localhost:47385",
+      "enabled": false,
+      "type": "normal"
+     },
+     {
+      "label": "node (vibepet) — ~/.vibepet-ultra/fleet/vibepet",
+      "enabled": false,
+      "type": "normal"
+     },
+     {
+      "label": "",
+      "enabled": true,
+      "type": "separator"
+     },
+     {
+      "label": "Stop node (pid 707)…",
+      "enabled": true,
+      "type": "normal"
+     }
+    ]
+   },
+   "cache": {
+    "pid": 707,
+    "port": 47385,
+    "host": "*",
+    "kind": "node",
+    "project": "vibepet",
+    "dir": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+    "http": false
+   }
+  },
+  {
+   "name": "08-chips",
+   "at": "2026-10-02T03:07:41.444Z",
+   "load": [
+    1.72,
+    1.71,
+    2.02
+   ],
+   "chips": [
+    {
+     "port": 47362,
+     "pid": 2212,
+     "label": ":47362 Inspected app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47363,
+     "pid": 2212,
+     "label": ":47363 node (vibepet)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47384,
+     "pid": 2209,
+     "label": ":47384 Prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47384,
+     "pid": 2217,
+     "label": ":47384 Prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47384,
+     "pid": 2218,
+     "label": ":47384 Prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47384,
+     "pid": 2219,
+     "label": ":47384 Prefork app",
+     "disabled": false,
+     "title": "Open"
+    }
+   ],
+   "masterPid": 2209,
+   "inspectPid": 2212,
+   "l47384": [
+    "p2209",
+    "n127.0.0.1:47384",
+    "p2217",
+    "n127.0.0.1:47384",
+    "p2218",
+    "n127.0.0.1:47384",
+    "p2219",
+    "n127.0.0.1:47384"
+   ],
+   "l47362": [
+    "p2212",
+    "n*:47362"
+   ],
+   "l47363": [
+    "p2212",
+    "n127.0.0.1:47363"
+   ]
+  },
+  {
+   "name": "08-stop-worker",
+   "at": "2026-10-02T03:07:43.257Z",
+   "load": [
+    1.74,
+    1.71,
+    2.02
+   ],
+   "worker": 2217,
+   "dialog": {
+    "kind": "dialog",
+    "at": 1790910461681,
+    "message": "Stop Python (vibepet) on :47384?",
+    "detail": "pid 2217",
+    "buttons": [
+     "Stop",
+     "Cancel"
+    ],
+    "defaultId": 1,
+    "answered": 0
+   },
+   "events": [
+    {
+     "kind": "localhost",
+     "text": "stopped pid 2217"
+    }
+   ],
+   "serverStillAnswers": {
+    "status": 200,
+    "title": "Prefork app"
+   },
+   "respawn": [
+    "RESPAWN after 2217 at 1790910461687"
+   ],
+   "l47384": [
+    "p2209",
+    "n127.0.0.1:47384",
+    "p2218",
+    "n127.0.0.1:47384",
+    "p2219",
+    "n127.0.0.1:47384",
+    "p2440",
+    "n127.0.0.1:47384"
+   ]
+  },
+  {
+   "name": "08-after-refresh",
+   "at": "2026-10-02T03:07:56.260Z",
+   "load": [
+    1.85,
+    1.74,
+    2.03
+   ],
+   "chips47384": [
+    {
+     "port": 47384,
+     "pid": 2209,
+     "label": ":47384 Prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47384,
+     "pid": 2218,
+     "label": ":47384 Prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47384,
+     "pid": 2219,
+     "label": ":47384 Prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47384,
+     "pid": 2440,
+     "label": ":47384 Prefork app",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "name": "08-stop-inspector-chip",
+   "at": "2026-10-02T03:07:57.570Z",
+   "load": [
+    1.85,
+    1.74,
+    2.03
+   ],
+   "dialog": {
+    "kind": "dialog",
+    "at": 1790910476281,
+    "message": "Stop node (vibepet) on :47362?",
+    "detail": "pid 2212",
+    "buttons": [
+     "Stop",
+     "Cancel"
+    ],
+    "defaultId": 1,
+    "answered": 0
+   },
+   "l47362": [],
+   "l47363": [],
+   "insExit": 29,
+   "events": [
+    {
+     "kind": "localhost",
+     "text": "stopped pid 2212"
+    }
+   ]
+  },
+  {
+   "name": "07-cap",
+   "at": "2026-10-02T03:08:17.462Z",
+   "load": [
+    1.7,
+    1.71,
+    2.01
+   ],
+   "chips": [
+    ":47391 app 1",
+    ":47392 app 2",
+    ":47393 app 3",
+    ":47394 app 4",
+    ":47395 app 5",
+    ":47396 app 6",
+    ":47397 app 7",
+    ":47398 app 8"
+   ],
+   "snapLocal": {
+    "servers": 10,
+    "procs": 0,
+    "tasks": 0,
+    "names": [
+     "node :47391",
+     "node :47392",
+     "node :47393",
+     "node :47394"
+    ]
+   },
+   "footText": "● Record a short Today :47391 app 1 ✕ :47392 app 2 ✕ :47393 app 3 ✕ :47394 app 4 ✕ :47395 app 5 ✕ :47396 app 6 ✕ :47397 app 7 ✕ :47398 app 8 ✕",
+   "hasMore": false
+  },
+  {
+   "name": "close",
+   "at": "2026-10-02T03:08:18.948Z",
+   "load": [
+    1.73,
+    1.71,
+    2.01
+   ],
+   "how": "quit",
+   "ms": 266,
+   "procs": 7,
+   "orphans": []
+  }
+ ],
+ "truthStart": [
+  "kestrel:approval reg=waiting(permission prompt) last=pending_tool_use",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "truthEnd": [
+  "kestrel:approval reg=waiting(permission prompt) last=pending_tool_use",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "servers": [
+  {
+   "tag": "py-vibepet",
+   "cmd": "python3 -u -m http.server 47302",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 99605,
+   "listenAt": 1790910363112,
+   "exitAt": 1790910377087,
+   "code": null,
+   "sig": "SIGTERM"
+  },
+  {
+   "tag": "vite-vibepet",
+   "cmd": "node …/scripts/fx/titled.js 47353 Vite + React + TS",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 99608,
+   "listenAt": 1790910363081,
+   "exitAt": 1790910377087,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "vite-delta",
+   "cmd": "node …/scripts/fx/titled.js 47354 Vite + React + TS",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "pid": 99611,
+   "listenAt": 1790910363081,
+   "exitAt": 1790910377087,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "v6only",
+   "cmd": "node …/scripts/fx/titled.js 47381 Vite + React + TS localhost",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 100,
+   "listenAt": 1790910377079,
+   "exitAt": 1790910393343,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "star-delta",
+   "cmd": "node …/scripts/fx/titled.js 47351 Delta dashboard",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "pid": 103,
+   "listenAt": 1790910377074,
+   "exitAt": 1790910393343,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "v4-vibepet",
+   "cmd": "python3 …/scripts/fx/page.py 47351 127.0.0.1 Vibepet status",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 115,
+   "listenAt": 1790910377502,
+   "exitAt": 1790910393343,
+   "code": null,
+   "sig": "SIGTERM"
+  },
+  {
+   "tag": "https",
+   "cmd": "node …/scripts/fx/https.js 47383 /private/tmp/claude-501/-Users-christopherharris-projects/2aec191f-bd46-4d22-b2da-e8c859fd18a3/scratchpad/s6crit-key.pem /private/tmp/claude-501/-Users-christopherharris-projects/2aec191f-bd46-4d22-b2da-e8c859fd18a3/scratchpad/s6crit-cert.pem Secure app",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 118,
+   "listenAt": 1790910377537,
+   "exitAt": 1790910393343,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "tcp",
+   "cmd": "node …/scripts/fx/tcp.js 47364",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 123,
+   "listenAt": 1790910377571,
+   "exitAt": 1790910393343,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "enabled-ref",
+   "cmd": "node …/scripts/fx/titled.js 47382 Next.js app 127.0.0.1",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 129,
+   "listenAt": 1790910377606,
+   "exitAt": 1790910393343,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "slow",
+   "cmd": "node …/scripts/fx/slow.js 47385 Next.js app 20000",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 707,
+   "listenAt": 1790910393332,
+   "exitAt": 1790910453694,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "prefork",
+   "cmd": "python3 …/scripts/fx/prefork.py 47384 Prefork app 3",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 2209,
+   "listenAt": 1790910453685,
+   "exitAt": 1790910477571,
+   "code": 0,
+   "sig": null
+  },
+  {
+   "tag": "inspect",
+   "cmd": "node --inspect=127.0.0.1:47363 …/scripts/fx/titled.js 47362 Inspected app",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 2212,
+   "listenAt": 1790910453684,
+   "exitAt": 1790910476289,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "ten0",
+   "cmd": "node …/scripts/fx/titled.js 47391 app 1",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 2948,
+   "listenAt": 1790910478411,
+   "exitAt": 1790910497997,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "ten1",
+   "cmd": "node …/scripts/fx/titled.js 47392 app 2",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "pid": 3010,
+   "listenAt": 1790910478653,
+   "exitAt": 1790910497995,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "ten2",
+   "cmd": "node …/scripts/fx/titled.js 47393 app 3",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 3015,
+   "listenAt": 1790910478905,
+   "exitAt": 1790910497996,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "ten3",
+   "cmd": "node …/scripts/fx/titled.js 47394 app 4",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "pid": 3021,
+   "listenAt": 1790910479148,
+   "exitAt": 1790910497995,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "ten4",
+   "cmd": "node …/scripts/fx/titled.js 47395 app 5",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 3089,
+   "listenAt": 1790910479397,
+   "exitAt": 1790910497995,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "ten5",
+   "cmd": "node …/scripts/fx/titled.js 47396 app 6",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "pid": 3094,
+   "listenAt": 1790910479651,
+   "exitAt": 1790910497995,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "ten6",
+   "cmd": "node …/scripts/fx/titled.js 47397 app 7",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 3107,
+   "listenAt": 1790910479893,
+   "exitAt": 1790910497995,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "ten7",
+   "cmd": "node …/scripts/fx/titled.js 47398 app 8",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "pid": 3117,
+   "listenAt": 1790910480155,
+   "exitAt": 1790910497996,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "ten8",
+   "cmd": "node …/scripts/fx/titled.js 47399 app 9",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "pid": 3122,
+   "listenAt": 1790910480427,
+   "exitAt": 1790910497996,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "ten9",
+   "cmd": "node …/scripts/fx/titled.js 47400 Newest app",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "pid": 3127,
+   "listenAt": 1790910480704,
+   "exitAt": 1790910497996,
+   "code": 143,
+   "sig": null
+  }
+ ],
+ "endedAt": "2026-10-02T03:08:18.948Z"
+}

@@ -1,0 +1,350 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-home-feedback",
+  "git": "484e9b4 home-feedback: rows read at a glance: one label, state + age first, the fan-out gauge, a legible ask line",
+  "startedAt": "2026-10-02T08:52:12.359Z",
+  "userData": "/Users/christopherharris/.vibepet-ultra/userdata/r1-home-feedback-timing",
+  "loadStart": "75.14 126.56 105.20",
+  "fleetSpendBefore": "fleet spend: transcripts $2.2232 at Haiku 4.5 prices; estimate incl. hidden calls $3.3093 (cost-state of 14 exited sessions $2.1147 vs their",
+  "tmuxClientsBefore": 0,
+  "readyMs": 1086,
+  "loadAtLaunch": "75.14 126.56 105.20",
+  "cursor": {
+    "inWindow": false
+  },
+  "members": {
+    "kestrel": {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "name": "kestrel",
+      "title": "Deploy.sh dry run",
+      "phase": "stalled"
+    },
+    "delta": {
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "name": "delta",
+      "title": "Reconcile three shards in parallel",
+      "phase": "ready"
+    },
+    "vibepet": {
+      "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+      "name": "vibepet",
+      "title": "Read package.json",
+      "phase": "ready"
+    }
+  },
+  "pendingAtLaunch": [
+    "beacon",
+    "kestrel",
+    "delta",
+    "atlas",
+    "vibepet"
+  ],
+  "home": {
+    "rows": [
+      {
+        "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "label": "Beacon database choice · beacon",
+        "state": "asking 6h 38m",
+        "gauge": null,
+        "pips": null,
+        "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Redis)",
+        "note": null
+      },
+      {
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "label": "Deploy.sh dry run · kestrel",
+        "state": "needs approval 5h 39m",
+        "gauge": null,
+        "pips": null,
+        "ask": "Bash: ./deploy.sh --dry-run",
+        "note": null
+      },
+      {
+        "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "label": "Reconcile three shards in parallel · delta",
+        "state": "done 6h 51m ago",
+        "gauge": "3/3 subagents done",
+        "pips": [
+          3,
+          0
+        ],
+        "ask": null,
+        "note": null
+      },
+      {
+        "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "label": "Run build.sh · atlas",
+        "state": "done 5h 49m ago",
+        "gauge": null,
+        "pips": null,
+        "ask": null,
+        "note": null
+      },
+      {
+        "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "label": "Read package.json · vibepet",
+        "state": "done 5h 39m ago",
+        "gauge": null,
+        "pips": null,
+        "ask": null,
+        "note": null
+      }
+    ],
+    "pending": [
+      "beacon",
+      "kestrel",
+      "delta",
+      "atlas",
+      "vibepet"
+    ],
+    "load": "70.33 124.71 104.67",
+    "systemDark": false
+  },
+  "rowJump": [
+    {
+      "n": 0,
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      },
+      "ipcMs": 382,
+      "pressToNoteMs": 385,
+      "ipcDoneToNoteMs": 2,
+      "pressToBubbleMs": 404,
+      "note": "no terminal is attached to tmux session vp-kestrel — tmux attach -t vp-kestrel",
+      "bubble": {
+        "text": "Deploy.sh dry run · kestrel: no terminal is attached t",
+        "cls": "hit",
+        "display": "block",
+        "position": "absolute",
+        "zIndex": "4",
+        "rect": [
+          180,
+          66,
+          300,
+          41
+        ],
+        "atCentre": "#bubble",
+        "onTop": true,
+        "chatTop": 58,
+        "homeOpen": true
+      },
+      "pendingBefore": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "pendingAfter": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "load": "65.34 122.77 104.10"
+    },
+    {
+      "n": 1,
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      },
+      "ipcMs": 332,
+      "pressToNoteMs": 334,
+      "ipcDoneToNoteMs": 3,
+      "pressToBubbleMs": 353,
+      "note": "no terminal is attached to tmux session vp-kestrel — tmux attach -t vp-kestrel",
+      "bubble": {
+        "text": "Deploy.sh dry run · kestrel: no terminal is attached to",
+        "cls": "hit",
+        "display": "block",
+        "position": "absolute",
+        "zIndex": "4",
+        "rect": [
+          180,
+          66,
+          300,
+          41
+        ],
+        "atCentre": "#bubble",
+        "onTop": true,
+        "chatTop": 58,
+        "homeOpen": true
+      },
+      "pendingBefore": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "pendingAfter": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "load": "60.67 120.85 103.53"
+    },
+    {
+      "n": 2,
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      },
+      "ipcMs": 211,
+      "pressToNoteMs": 213,
+      "ipcDoneToNoteMs": 2,
+      "pressToBubbleMs": 233,
+      "note": "no terminal is attached to tmux session vp-kestrel — tmux attach -t vp-kestrel",
+      "bubble": {
+        "text": "Deploy.sh dry run · kestrel: no terminal is attache",
+        "cls": "hit",
+        "display": "block",
+        "position": "absolute",
+        "zIndex": "4",
+        "rect": [
+          180,
+          66,
+          300,
+          41
+        ],
+        "atCentre": "#bubble",
+        "onTop": true,
+        "chatTop": 58,
+        "homeOpen": true
+      },
+      "pendingBefore": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "pendingAfter": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "load": "54.56 117.56 102.57"
+    },
+    {
+      "n": 3,
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      },
+      "ipcMs": 184,
+      "pressToNoteMs": 186,
+      "ipcDoneToNoteMs": 2,
+      "pressToBubbleMs": 207,
+      "note": "no terminal is attached to tmux session vp-kestrel — tmux attach -t vp-kestrel",
+      "bubble": {
+        "text": "Deploy.sh dry run · kestrel: no terminal is attached",
+        "cls": "hit",
+        "display": "block",
+        "position": "absolute",
+        "zIndex": "4",
+        "rect": [
+          180,
+          66,
+          300,
+          41
+        ],
+        "atCentre": "#bubble",
+        "onTop": true,
+        "chatTop": 58,
+        "homeOpen": true
+      },
+      "pendingBefore": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "pendingAfter": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "load": "50.59 115.69 101.99"
+    },
+    {
+      "n": 4,
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      },
+      "ipcMs": 329,
+      "pressToNoteMs": 331,
+      "ipcDoneToNoteMs": 3,
+      "pressToBubbleMs": 351,
+      "note": "no terminal is attached to tmux session vp-kestrel — tmux attach -t vp-kestrel",
+      "bubble": {
+        "text": "Deploy.sh dry run · kestrel: no terminal is attached to",
+        "cls": "hit",
+        "display": "block",
+        "position": "absolute",
+        "zIndex": "4",
+        "rect": [
+          180,
+          66,
+          300,
+          41
+        ],
+        "atCentre": "#bubble",
+        "onTop": true,
+        "chatTop": 58,
+        "homeOpen": true
+      },
+      "pendingBefore": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "pendingAfter": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "load": "49.41 113.26 101.29"
+    }
+  ],
+  "only": "row jumps (JUMPS_ONLY=1)",
+  "rowJumpSummary": {
+    "pressToNoteMedianMs": 331,
+    "ipcMedianMs": 329,
+    "ipcDoneToNoteMedianMs": 2,
+    "noteInRow": "5/5"
+  },
+  "close": {
+    "how": "timeout",
+    "ms": 27977,
+    "procs": 8,
+    "orphans": [
+      {
+        "pid": 66530,
+        "name": "Electron"
+      }
+    ]
+  },
+  "loadEnd": "222.47 147.29 114.04",
+  "fleetSpendAfter": "fleet spend: transcripts $2.2232 at Haiku 4.5 prices; estimate incl. hidden calls $3.3093 (cost-state of 14 exited sessions $2.1147 vs their",
+  "endedAt": "2026-10-02T08:53:29.813Z"
+}

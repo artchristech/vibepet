@@ -1,0 +1,208 @@
+{
+  "label": "base-2",
+  "app": "/private/tmp/claude-501/-Users-christopherharris-projects/2aec191f-bd46-4d22-b2da-e8c859fd18a3/scratchpad/base-app",
+  "at": "2026-10-02T10:30:26.424Z",
+  "runs": 5,
+  "loadStart": "15.12 22.96 30.72",
+  "opens": {
+    "kestrel": [
+      {
+        "firstFrameMs": 475,
+        "mainBuildMs": 126,
+        "beats": 61,
+        "load": "27.53 25.37 31.49"
+      },
+      {
+        "firstFrameMs": 500,
+        "mainBuildMs": 78,
+        "beats": 61,
+        "load": "30.86 26.17 31.70"
+      },
+      {
+        "firstFrameMs": 388,
+        "mainBuildMs": 76,
+        "beats": 61,
+        "load": "30.71 26.21 31.68"
+      },
+      {
+        "firstFrameMs": 475,
+        "mainBuildMs": 104,
+        "beats": 61,
+        "load": "32.02 26.56 31.77"
+      },
+      {
+        "firstFrameMs": 322,
+        "mainBuildMs": 94,
+        "beats": 61,
+        "load": "38.60 28.18 32.28"
+      }
+    ],
+    "beacon": [
+      {
+        "firstFrameMs": 405,
+        "mainBuildMs": 45,
+        "beats": 29,
+        "load": "29.81 25.88 31.63"
+      },
+      {
+        "firstFrameMs": 353,
+        "mainBuildMs": 54,
+        "beats": 29,
+        "load": "30.86 26.17 31.70"
+      },
+      {
+        "firstFrameMs": 291,
+        "mainBuildMs": 59,
+        "beats": 29,
+        "load": "30.71 26.21 31.68"
+      },
+      {
+        "firstFrameMs": 629,
+        "mainBuildMs": 125,
+        "beats": 29,
+        "load": "37.78 27.84 32.19"
+      },
+      {
+        "firstFrameMs": 409,
+        "mainBuildMs": 68,
+        "beats": 29,
+        "load": "38.60 28.18 32.28"
+      }
+    ],
+    "vibepet": [
+      {
+        "firstFrameMs": 337,
+        "mainBuildMs": 98,
+        "beats": 56,
+        "load": "29.81 25.88 31.63"
+      },
+      {
+        "firstFrameMs": 491,
+        "mainBuildMs": 245,
+        "beats": 56,
+        "load": "30.86 26.17 31.70"
+      },
+      {
+        "firstFrameMs": 303,
+        "mainBuildMs": 41,
+        "beats": 56,
+        "load": "30.71 26.21 31.68"
+      },
+      {
+        "firstFrameMs": 453,
+        "mainBuildMs": 74,
+        "beats": 56,
+        "load": "37.78 27.84 32.19"
+      },
+      {
+        "firstFrameMs": 340,
+        "mainBuildMs": 137,
+        "beats": 56,
+        "load": "38.71 28.37 32.33"
+      }
+    ],
+    "ember": [
+      {
+        "firstFrameMs": 832,
+        "mainBuildMs": 123,
+        "beats": 61,
+        "load": "29.81 25.88 31.63"
+      },
+      {
+        "firstFrameMs": 378,
+        "mainBuildMs": 108,
+        "beats": 61,
+        "load": "30.86 26.17 31.70"
+      },
+      {
+        "firstFrameMs": 425,
+        "mainBuildMs": 69,
+        "beats": 61,
+        "load": "32.02 26.56 31.77"
+      },
+      {
+        "firstFrameMs": 1712,
+        "mainBuildMs": 376,
+        "beats": 61,
+        "load": "38.60 28.18 32.28"
+      },
+      {
+        "firstFrameMs": 576,
+        "mainBuildMs": 114,
+        "beats": 61,
+        "load": "38.71 28.37 32.33"
+      }
+    ],
+    "delta": [
+      {
+        "firstFrameMs": 370,
+        "mainBuildMs": 122,
+        "beats": 149,
+        "load": "29.81 25.88 31.63"
+      },
+      {
+        "firstFrameMs": 630,
+        "mainBuildMs": 164,
+        "beats": 149,
+        "load": "30.71 26.21 31.68"
+      },
+      {
+        "firstFrameMs": 480,
+        "mainBuildMs": 201,
+        "beats": 149,
+        "load": "32.02 26.56 31.77"
+      },
+      {
+        "firstFrameMs": 581,
+        "mainBuildMs": 181,
+        "beats": 149,
+        "load": "38.60 28.18 32.28"
+      },
+      {
+        "firstFrameMs": 339,
+        "mainBuildMs": 135,
+        "beats": 149,
+        "load": "38.71 28.37 32.33"
+      }
+    ]
+  },
+  "median": {
+    "kestrel": {
+      "firstFrameMs": 475,
+      "mainBuildMs": 94,
+      "n": 5,
+      "beats": 61
+    },
+    "beacon": {
+      "firstFrameMs": 405,
+      "mainBuildMs": 59,
+      "n": 5,
+      "beats": 29
+    },
+    "vibepet": {
+      "firstFrameMs": 340,
+      "mainBuildMs": 98,
+      "n": 5,
+      "beats": 56
+    },
+    "ember": {
+      "firstFrameMs": 576,
+      "mainBuildMs": 114,
+      "n": 5,
+      "beats": 61
+    },
+    "delta": {
+      "firstFrameMs": 480,
+      "mainBuildMs": 164,
+      "n": 5,
+      "beats": 149
+    }
+  },
+  "close": {
+    "how": "quit",
+    "ms": 618,
+    "procs": 8,
+    "orphans": []
+  },
+  "loadEnd": "38.71 28.37 32.33"
+}

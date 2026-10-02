@@ -1,0 +1,168 @@
+{
+  "load": {
+    "start": "load 10.15 8.91 27.04",
+    "end": "load 9.78 8.90 26.72"
+  },
+  "stat": {
+    "n": 10,
+    "p50": 81,
+    "p95": 118,
+    "min": 32,
+    "max": 118
+  },
+  "retryNow": {
+    "hitsBefore": 1,
+    "hitsAfter": 2,
+    "say": "Rate limited by Anthropic. Retrying in 23 s."
+  },
+  "hits": 13,
+  "errors": [],
+  "close": {
+    "how": "quit",
+    "ms": 279,
+    "procs": 8,
+    "orphans": []
+  },
+  "data": [
+    {
+      "ms": 118,
+      "load": "load 10.38 8.98 26.96",
+      "say": "Rate limited by Anthropic. Retrying in 23 s.",
+      "later": "Rate limited by Anthropic. Retrying in 21 s.",
+      "acts": [
+        "Retry now"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "quick one (1)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 85,
+      "load": "load 10.19 8.96 26.85",
+      "say": "Rate limited by Anthropic. Retrying in 23 s.",
+      "later": null,
+      "acts": [
+        "Retry now"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "quick one (2)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 44,
+      "load": "load 10.19 8.96 26.85",
+      "say": "Rate limited by Anthropic. Retrying in 23 s.",
+      "later": null,
+      "acts": [
+        "Retry now"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "quick one (3)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 84,
+      "load": "load 10.19 8.96 26.85",
+      "say": "Rate limited by Anthropic. Retrying in 23 s.",
+      "later": null,
+      "acts": [
+        "Retry now"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "quick one (4)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 82,
+      "load": "load 10.19 8.96 26.85",
+      "say": "Rate limited by Anthropic. Retrying in 23 s.",
+      "later": null,
+      "acts": [
+        "Retry now"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "quick one (5)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 81,
+      "load": "load 10.19 8.96 26.85",
+      "say": "Rate limited by Anthropic. Retrying in 23 s.",
+      "later": null,
+      "acts": [
+        "Retry now"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "quick one (6)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 83,
+      "load": "load 10.19 8.96 26.85",
+      "say": "Rate limited by Anthropic. Retrying in 23 s.",
+      "later": null,
+      "acts": [
+        "Retry now"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "quick one (7)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 33,
+      "load": "load 10.19 8.96 26.85",
+      "say": "Rate limited by Anthropic. Retrying in 23 s.",
+      "later": null,
+      "acts": [
+        "Retry now"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "quick one (8)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 32,
+      "load": "load 10.19 8.96 26.85",
+      "say": "Rate limited by Anthropic. Retrying in 23 s.",
+      "later": null,
+      "acts": [
+        "Retry now"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "quick one (9)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 36,
+      "load": "load 9.78 8.90 26.72",
+      "say": "Rate limited by Anthropic. Retrying in 23 s.",
+      "later": null,
+      "acts": [
+        "Retry now"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "quick one (10)",
+        "retry": true
+      }
+    }
+  ]
+}

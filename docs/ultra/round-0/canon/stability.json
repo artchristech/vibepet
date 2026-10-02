@@ -1,0 +1,131 @@
+{
+  "a": "/Users/christopherharris/projects/vibepet/docs/ultra/round-0/canon/run-1",
+  "b": "/Users/christopherharris/projects/vibepet/docs/ultra/round-0/canon/run-2",
+  "gitA": "6b26f35 canon: flag row ages that disagree with the registry; Approve/Reply go to the member whose state asks for them @ ultra/round-0",
+  "gitB": "6b26f35 canon: flag row ages that disagree with the registry; Approve/Reply go to the member whose state asks for them @ ultra/round-0",
+  "msA": 32580,
+  "msB": 24631,
+  "assertions": {
+    "a": "26/26",
+    "b": "26/26",
+    "differ": []
+  },
+  "rows": {
+    "a": {
+      "kestrel": "stuck",
+      "beacon": "stuck",
+      "vibepet": "ready",
+      "ember": "ready",
+      "atlas": "running",
+      "delta": "running"
+    },
+    "b": {
+      "kestrel": "stuck",
+      "beacon": "stuck",
+      "vibepet": "ready",
+      "ember": "ready",
+      "atlas": "running",
+      "delta": "running"
+    },
+    "differ": []
+  },
+  "mismatches": {
+    "a": [
+      "kestrel: age: label says 60s (kestrel · stuck 1m), the registry says waiting for 21m",
+      "atlas: age: label says 0s (atlas · 0s), the registry says busy for 3m",
+      "beacon: shows 'stuck' (beacon · stuck 1m); truth: an AskUserQuestion dialog is open: it needs you, Reply; no reply action; age: label says 60s (beacon · stuck 1m), the registry says waiting for 21m",
+      "ember: age: label says 0s (ember · done just now), the registry says idle for 3m"
+    ],
+    "b": [
+      "kestrel: age: label says 60s (kestrel · stuck 1m), the registry says waiting for 21m",
+      "atlas: age: label says 0s (atlas · 0s), the registry says busy for 4m",
+      "beacon: shows 'stuck' (beacon · stuck 1m); truth: an AskUserQuestion dialog is open: it needs you, Reply; no reply action; age: label says 60s (beacon · stuck 1m), the registry says waiting for 21m",
+      "ember: age: label says 0s (ember · done just now), the registry says idle for 4m"
+    ],
+    "differ": []
+  },
+  "fleet": {
+    "a": "6/6",
+    "b": "6/6",
+    "changedDuring": [
+      [],
+      []
+    ]
+  },
+  "notes": {
+    "goalFirstClickDropped": [
+      true,
+      false
+    ],
+    "aboveFold": [
+      4,
+      4
+    ]
+  },
+  "shots": [
+    {
+      "file": "1-home/panel.png",
+      "changedPct": 0
+    },
+    {
+      "file": "1-home/pet.png",
+      "changedPct": 0
+    },
+    {
+      "file": "2-chat/reply.png",
+      "changedPct": 0
+    },
+    {
+      "file": "2-chat/sending.png",
+      "changedPct": 0.97
+    },
+    {
+      "file": "3-command/slash.png",
+      "changedPct": 0.13
+    },
+    {
+      "file": "3-command/today.png",
+      "changedPct": 0
+    },
+    {
+      "file": "4-rows/goal.png",
+      "changedPct": 0.87
+    },
+    {
+      "file": "4-rows/jump.png",
+      "changedPct": 0.11
+    },
+    {
+      "file": "4-rows/list.png",
+      "changedPct": 0
+    },
+    {
+      "file": "5-theater/open.png",
+      "changedPct": 0.68
+    },
+    {
+      "file": "5-theater/seek-mid.png",
+      "changedPct": 0
+    },
+    {
+      "file": "6-ports/footer.png",
+      "changedPct": 1.25
+    },
+    {
+      "file": "6-ports/stopped.png",
+      "changedPct": 0.24
+    },
+    {
+      "file": "7-keys/gesture-pad.png",
+      "changedPct": 0.72
+    },
+    {
+      "file": "7-keys/gesture-saved.png",
+      "changedPct": 0
+    },
+    {
+      "file": "7-keys/hotkey.png",
+      "changedPct": 17.37
+    }
+  ]
+}

@@ -1,0 +1,947 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-ports-truth-x",
+  "out": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/ports-truth/after/merge-home-keyed/canon",
+  "root": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+  "startedAt": "2026-10-02T10:51:57.692Z",
+  "flags": {
+    "allRows": false,
+    "act": false,
+    "liveChat": false
+  },
+  "git": "d49084f test integration (throwaway, never pushed): ultra/r1/home-keyed into ultra/r1/ports-truth @ ultra/r1/ports-truth-x",
+  "fleet": {
+    "at": "2026-10-02T10:52:06.087Z",
+    "allOk": false,
+    "spend": {
+      "transcriptsUsd": 2.223186,
+      "estimateWithHiddenUsd": 3.3093,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "permission prompt",
+          "statusUpdatedAt": 1790910742347
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T03:12:20.929Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910787682
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T03:13:07.635Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910180805
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-02T03:03:00.799Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "input needed",
+          "statusUpdatedAt": 1790907222729
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T02:13:41.070Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790906449089
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T02:00:48.941Z"
+        },
+        "toolProcs": 0,
+        "subagents": 36,
+        "failing": [
+          "registry.status",
+          "child",
+          "subagents"
+        ]
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "registry": null,
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T08:54:24.091Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "claude",
+          "registry.status",
+          "loop",
+          "loopLock"
+        ]
+      }
+    ]
+  },
+  "surfaces": {
+    "chat": {
+      "input": true,
+      "chips": [
+        "agent",
+        "commit",
+        "goal",
+        "next",
+        "vibe"
+      ],
+      "fresh": true,
+      "meta": "kestrel/main · claude code",
+      "note": "Via Claude Code · sends message + repo context",
+      "reply": {
+        "err": false,
+        "text": "Canon stub engine. Live agents in my context: beacon=waiting for an answer for 9h 31m - Which database should beacon use to store check results? (SQLite / Postgres / Redis); kestrel=needs approval for 8h 33m - Bash: ./deploy.sh --dry-run; delta=done for 9h 44m - All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled; atlas=done for 8h 42m - interrupted; vibepet=done for 8h 32m - The app's main entry file is main.js."
+      },
+      "engine": {
+        "kind": "stub",
+        "calls": [
+          {
+            "at": 1790941537095,
+            "model": "claude-haiku-4-5-20251001",
+            "print": true,
+            "noPersist": true,
+            "bytes": 750,
+            "agents": 5
+          }
+        ]
+      }
+    },
+    "command": {
+      "cmds": [
+        "/record",
+        "/goal",
+        "/jump",
+        "/replay",
+        "/stop",
+        "/today",
+        "/setup",
+        "/settings"
+      ],
+      "today": true,
+      "fold": {
+        "rows": 5,
+        "visible": 5,
+        "foot": true,
+        "msgs": 3
+      }
+    },
+    "rows": {
+      "actions": {
+        "goal": {
+          "member": "delta",
+          "prefill": "/goal ",
+          "set": true,
+          "done": true,
+          "clicks": 1,
+          "firstClickDropped": false
+        },
+        "reply": {
+          "member": "beacon",
+          "form": true
+        },
+        "approve": {
+          "member": "kestrel",
+          "button": true
+        },
+        "jump": [
+          {
+            "member": "delta",
+            "result": {
+              "ok": false,
+              "why": "no terminal is attached to tmux session vp-delta",
+              "attach": "tmux attach -t vp-delta"
+            },
+            "ms": 660,
+            "clipboardWrites": 0
+          }
+        ]
+      }
+    },
+    "theater": {
+      "member": "delta",
+      "beats": 149,
+      "title": "Reconcile the three shards in parallel. In ONE message, start three subagents at",
+      "midBeat": 74
+    },
+    "ports": {
+      "fixture": {
+        "port": 64672,
+        "repo": "delta"
+      },
+      "footer": {
+        "servers": []
+      }
+    },
+    "keys": {
+      "jumpKey": {
+        "key": null,
+        "taken": false
+      },
+      "queue": [
+        {
+          "member": "beacon",
+          "phase": "waiting"
+        },
+        {
+          "member": "kestrel",
+          "phase": "stalled"
+        }
+      ],
+      "hotkey": {
+        "jumped": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "expected": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "result": {
+          "ok": false,
+          "why": "couldn't list processes"
+        }
+      },
+      "hotkey2": {
+        "jumped": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "member": "kestrel",
+        "expected": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "gapMs": 3203
+      },
+      "gesture": {
+        "menu": {
+          "ok": true,
+          "label": "Record gesture…"
+        },
+        "padOpen": true,
+        "message": "Saved. Hide Net, then move the mouse in that shape to bring him back.",
+        "templates": 3
+      }
+    }
+  },
+  "assertions": [
+    {
+      "surface": "home",
+      "id": "ran",
+      "ok": false,
+      "detail": "openHome: no Home panel after the click"
+    },
+    {
+      "surface": "chat",
+      "id": "inputVisible",
+      "ok": true,
+      "detail": {
+        "input": true,
+        "chips": [
+          "agent",
+          "commit",
+          "goal",
+          "next",
+          "vibe"
+        ],
+        "fresh": true,
+        "meta": "kestrel/main · claude code",
+        "note": "Via Claude Code · sends message + repo context"
+      }
+    },
+    {
+      "surface": "chat",
+      "id": "chipsVisible",
+      "ok": true,
+      "detail": [
+        "agent",
+        "commit",
+        "goal",
+        "next",
+        "vibe"
+      ]
+    },
+    {
+      "surface": "chat",
+      "id": "userMessage",
+      "ok": true,
+      "detail": "the typed message shows"
+    },
+    {
+      "surface": "chat",
+      "id": "reply",
+      "ok": true,
+      "detail": {
+        "err": false,
+        "text": "Canon stub engine. Live agents in my context: beacon=waiting for an answer for 9h 31m - Which database should beacon use to store check results? (SQLite / Postgres / Redis); kestrel=needs approval for 8h 33m - Bash: ./deploy.sh --dry-run; delta=done for 9h 44m - All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled; atlas=done for 8h 42m - interrupted; vibepet=done for 8h 32m - The app's main entry file is main.js."
+      }
+    },
+    {
+      "surface": "chat",
+      "id": "engineCalled",
+      "ok": true,
+      "detail": [
+        {
+          "at": 1790941537095,
+          "model": "claude-haiku-4-5-20251001",
+          "print": true,
+          "noPersist": true,
+          "bytes": 750,
+          "agents": 5
+        }
+      ]
+    },
+    {
+      "surface": "command",
+      "id": "barOpens",
+      "ok": true,
+      "detail": [
+        "/record",
+        "/goal",
+        "/jump",
+        "/replay",
+        "/stop",
+        "/today",
+        "/setup",
+        "/settings"
+      ]
+    },
+    {
+      "surface": "command",
+      "id": "todayRuns",
+      "ok": true,
+      "detail": "/today posts its note"
+    },
+    {
+      "surface": "rows",
+      "id": "goalPrefill",
+      "ok": true,
+      "detail": "/goal "
+    },
+    {
+      "surface": "rows",
+      "id": "goalSet",
+      "ok": true,
+      "detail": "◎ then /goal on delta"
+    },
+    {
+      "surface": "rows",
+      "id": "goalDone",
+      "ok": true,
+      "detail": "✓ on delta"
+    },
+    {
+      "surface": "rows",
+      "id": "replyForm",
+      "ok": true,
+      "detail": "beacon"
+    },
+    {
+      "surface": "rows",
+      "id": "jumpRuns:delta",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-delta",
+        "attach": "tmux attach -t vp-delta"
+      }
+    },
+    {
+      "surface": "theater",
+      "id": "opens",
+      "ok": true,
+      "detail": "▶ on delta"
+    },
+    {
+      "surface": "theater",
+      "id": "hasBeats",
+      "ok": true,
+      "detail": {
+        "beats": 149,
+        "title": "Reconcile the three shards in parallel. In ONE message, start three subagents at"
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "sectionRenders",
+      "ok": false,
+      "detail": {
+        "servers": []
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "fixtureListed",
+      "ok": false,
+      "detail": ":64672 (cwd delta)"
+    },
+    {
+      "surface": "keys",
+      "id": "hotkeyJumps",
+      "ok": true,
+      "detail": "beacon first in line"
+    },
+    {
+      "surface": "keys",
+      "id": "hotkeyWalks",
+      "ok": true,
+      "detail": "then kestrel"
+    },
+    {
+      "surface": "keys",
+      "id": "menuOpens",
+      "ok": true,
+      "detail": "14 items"
+    },
+    {
+      "surface": "keys",
+      "id": "gesturePadOpens",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "label": "Record gesture…"
+      }
+    },
+    {
+      "surface": "keys",
+      "id": "gestureSaved",
+      "ok": true,
+      "detail": "Saved. Hide Net, then move the mouse in that shape to bring him back."
+    },
+    {
+      "surface": "run",
+      "id": "cleanClose",
+      "ok": false,
+      "detail": {
+        "how": "timeout",
+        "ms": 25841,
+        "procs": 4,
+        "orphans": [
+          {
+            "pid": 63014,
+            "name": "Electron"
+          }
+        ]
+      }
+    }
+  ],
+  "rows": [],
+  "compare": [
+    {
+      "member": "kestrel",
+      "state": "approval",
+      "inState": true,
+      "truth": "waiting (permission prompt)",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": [
+        "needs"
+      ],
+      "problems": [
+        "missing: a permission dialog is open: it needs you, Approve, but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "vibepet",
+      "state": "done",
+      "inState": true,
+      "truth": "idle",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": [
+        "ready"
+      ],
+      "problems": [
+        "missing: the turn ended with a statement: done, your move, but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "atlas",
+      "state": "working",
+      "inState": false,
+      "truth": "idle",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": [
+        "ready",
+        "needs"
+      ],
+      "problems": [
+        "missing: idle at its prompt (registry): done, or asking, but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "beacon",
+      "state": "question",
+      "inState": true,
+      "truth": "waiting (input needed)",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": [
+        "needs"
+      ],
+      "problems": [
+        "missing: an AskUserQuestion dialog is open: it needs you, Reply, but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "delta",
+      "state": "fanout",
+      "inState": false,
+      "truth": "idle",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": [
+        "ready",
+        "needs"
+      ],
+      "problems": [
+        "missing: idle at its prompt (registry): done, or asking, but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "ember",
+      "state": "loop",
+      "inState": false,
+      "truth": "no claude",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": null,
+      "problems": [
+        "not in its fixture state (paused): not scored"
+      ],
+      "ok": null
+    }
+  ],
+  "intercepted": [
+    {
+      "kind": "ipc:jump",
+      "at": 3227493,
+      "args": [
+        "eb59a756-0b6f-4a82-8d55-1f0bc2c40358"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-delta",
+        "attach": "tmux attach -t vp-delta"
+      },
+      "ms": 660
+    },
+    {
+      "kind": "ipc:theater",
+      "at": 3228914,
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358"
+    },
+    {
+      "kind": "ipc:jump",
+      "at": 3278079,
+      "args": [
+        "a9377f08-ad27-4bd5-bb77-dbd576eab89e"
+      ],
+      "result": {
+        "ok": false,
+        "why": "couldn't list processes"
+      },
+      "ms": 3010
+    },
+    {
+      "kind": "ipc:jump",
+      "at": 3280951,
+      "args": [
+        "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      },
+      "ms": 2739
+    },
+    {
+      "kind": "menuPopup",
+      "at": 3285679,
+      "items": [
+        "Watching kestrel",
+        "Localhost",
+        "Open Home",
+        "Setup…",
+        "Theater…",
+        "Start content session",
+        "Finish last session",
+        "Open shorts folder",
+        "Today…",
+        "Pet",
+        "Toss a snack",
+        "Settings",
+        "Hide Net",
+        "Quit Net"
+      ]
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 3288477,
+      "points": 37
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 3290275,
+      "points": 37
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 3291914,
+      "points": 37
+    }
+  ],
+  "timings": {
+    "home": 3191644,
+    "chat": 8862,
+    "command": 2367,
+    "rows": 4655,
+    "theater": 15729,
+    "ports": 30354,
+    "keys": 18470
+  },
+  "failures": [
+    "home/ran: openHome: no Home panel after the click",
+    "ports/sectionRenders: {\"servers\":[]}",
+    "ports/fixtureListed: :64672 (cwd delta)",
+    "run/cleanClose: {\"how\":\"timeout\",\"ms\":25841,\"procs\":4,\"orphans\":[{\"pid\":63014,\"name\":\"Electron\"}]}"
+  ],
+  "launch": {
+    "pid": 63014,
+    "readyMs": 4172,
+    "paths": {
+      "claude": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+      "userData": "userdata/r1-ports-truth-x-canon"
+    },
+    "perms": {
+      "ax": true,
+      "screen": true
+    },
+    "first": {
+      "msAfterLaunchCall": 11582,
+      "agents": [
+        {
+          "member": "beacon",
+          "name": "beacon",
+          "kind": "question",
+          "phase": "waiting",
+          "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Redis)"
+        },
+        {
+          "member": "kestrel",
+          "name": "kestrel",
+          "kind": "approval",
+          "phase": "stalled",
+          "ask": "Bash: ./deploy.sh --dry-run"
+        },
+        {
+          "member": "delta",
+          "name": "delta",
+          "kind": "done",
+          "phase": "ready",
+          "ask": "All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled"
+        },
+        {
+          "member": "atlas",
+          "name": "atlas",
+          "kind": "done",
+          "phase": "ready",
+          "ask": "interrupted"
+        },
+        {
+          "member": "vibepet",
+          "name": "vibepet",
+          "kind": "done",
+          "phase": "ready",
+          "ask": "The app's main entry file is main.js."
+        }
+      ]
+    }
+  },
+  "instrument": {
+    "spied": [
+      "jump",
+      "send-to"
+    ]
+  },
+  "notes": 0,
+  "close": {
+    "how": "timeout",
+    "ms": 25841,
+    "procs": 4,
+    "orphans": [
+      {
+        "pid": 63014,
+        "name": "Electron"
+      }
+    ]
+  },
+  "fleetAfter": {
+    "at": "2026-10-02T11:47:20.352Z",
+    "allOk": false,
+    "spend": {
+      "transcriptsUsd": 2.223186,
+      "estimateWithHiddenUsd": 3.3093,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "permission prompt",
+          "statusUpdatedAt": 1790910742347
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T03:12:20.929Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910787682
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T03:13:07.635Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910180805
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-02T03:03:00.799Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "input needed",
+          "statusUpdatedAt": 1790907222729
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T02:13:41.070Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790906449089
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T02:00:48.941Z"
+        },
+        "toolProcs": 0,
+        "subagents": 36,
+        "failing": [
+          "registry.status",
+          "child",
+          "subagents"
+        ]
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "registry": null,
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T08:54:24.091Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "claude",
+          "registry.status",
+          "loop",
+          "loopLock"
+        ]
+      }
+    ]
+  },
+  "fleetChanged": [],
+  "ms": 3322696,
+  "summary": {
+    "ok": false,
+    "assertions": "19/23",
+    "rows": [],
+    "fleetMembers": 6,
+    "inState": 3,
+    "mismatches": [
+      "kestrel: missing: a permission dialog is open: it needs you, Approve, but Home has no row for it",
+      "vibepet: missing: the turn ended with a statement: done, your move, but Home has no row for it",
+      "atlas: missing: idle at its prompt (registry): done, or asking, but Home has no row for it",
+      "beacon: missing: an AskUserQuestion dialog is open: it needs you, Reply, but Home has no row for it",
+      "delta: missing: idle at its prompt (registry): done, or asking, but Home has no row for it"
+    ],
+    "fold": "5/5, footer in view (after 3 messages)"
+  }
+}

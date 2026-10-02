@@ -1,0 +1,33 @@
+[23:09:01.784] plan approval#1 approval#2 approval#3 askuser#1 askuser#2 askuser#3 · spend est $2.0622 · this probe so far $0.0147 of $0.6
+[23:09:04.482] instances A pid 70523 (Home closed), B pid 70524 (Home open) · app c2b5c0a canon --compare: compare the kind of each truth mismatch, not its clock; report dropped first clicks and the fold @ ultra/round-0 · perms {"ax":true,"screen":true}
+[23:09:04.570]   kestrel: Esc (quiet the fleet before the trials)
+[23:09:11.212] == approval #1 (kestrel) · status idle
+[23:09:17.933]   block: reg waiting/permission prompt at +1.7 s · record withheld
+[23:13:18.922]   attempt: {"clicks":1,"keys":0,"result":"no row for this session in Home"}
+[23:13:19.021]   kestrel: Esc (end of trial)
+[23:13:19.753]   result {"t0":"2026-10-01T23:09:16.284Z","t0From":"registry","detectAmbientS":null,"detectAmbientRegS":null,"bubbleS":null,"ledS":null,"faceS":null,"rowS":null,"rowRegS":null,"offerS":null,"offerAction":null,"bannerS":null,"soundS":null,"goneS":121.8,"phaseS":null,"queueHeadS":null,"wrong":null,"otherBubble":null,"actionWorks":false,"clicks":1,"keys":0} · spent ~$0.0077
+[23:13:19.887] == approval #2 (kestrel) · status idle
+[23:13:26.652]   block: reg waiting/permission prompt at +1.7 s · record withheld
+[23:17:27.187]   attempt: {"clicks":1,"keys":0,"result":"no row for this session in Home"}
+[23:17:31.980]   result {"t0":"2026-10-01T23:13:24.877Z","t0From":"registry","detectAmbientS":null,"detectAmbientRegS":null,"bubbleS":null,"ledS":null,"faceS":null,"rowS":null,"rowRegS":null,"offerS":null,"offerAction":null,"bannerS":null,"soundS":null,"goneS":119.4,"phaseS":null,"queueHeadS":null,"wrong":null,"otherBubble":null,"actionWorks":false,"clicks":1,"keys":0} · spent ~$0.0149
+[23:17:32.063] == approval #3 (kestrel) · status idle
+[23:17:38.791]   block: reg waiting/permission prompt at +1.7 s · record +1.7 s Bash
+[23:19:21.118]   attempt: {"clicks":3,"keys":0,"action":"approve","sendTo":{"ok":false,"why":"couldn't find its tab"},"resolved":false,"jump":false}
+[23:19:21.238]   kestrel: Esc (end of trial)
+[23:19:22.001]   result {"t0":"2026-10-01T23:17:37.073Z","t0From":"transcript","detectAmbientS":92.4,"detectAmbientRegS":92.4,"bubbleS":93.1,"ledS":92.4,"faceS":92.4,"rowS":92.4,"rowRegS":92.4,"offerS":92.4,"offerAction":"approve","bannerS":92.4,"soundS":92.4,"goneS":null,"phaseS":92.4,"queueHeadS":92.4,"wrong":null,"otherBubble":{"s":92.4,"text":"kestrel"},"actionWorks":false,"clicks":3,"keys":0} · spent ~$0.0069
+[23:19:22.092] == askuser #1 (beacon) · status idle
+[23:19:29.888]   block: reg waiting/input needed at +2.8 s · record withheld
+[23:23:30.440]   attempt: {"clicks":1,"keys":0,"result":"no row for this session in Home"}
+[23:23:30.517]   beacon: Esc (end of trial)
+[23:23:31.236]   result {"t0":"2026-10-01T23:19:28.194Z","t0From":"registry","detectAmbientS":null,"detectAmbientRegS":null,"bubbleS":null,"ledS":null,"faceS":null,"rowS":null,"rowRegS":null,"offerS":null,"offerAction":null,"bannerS":null,"soundS":null,"goneS":119.3,"phaseS":null,"queueHeadS":null,"wrong":null,"otherBubble":null,"actionWorks":false,"clicks":1,"keys":0} · spent ~$0.0084
+[23:23:31.305] == askuser #2 (beacon) · status idle
+[23:23:38.843]   block: reg waiting/input needed at +2.4 s · record +2.3 s AskUserQuestion
+[23:25:20.721]   attempt: {"clicks":3,"keys":0,"action":"approve","sendTo":{"ok":false,"why":"couldn't find its tab"},"resolved":false,"jump":false}
+[23:25:20.810]   beacon: Esc (end of trial)
+[23:25:21.639]   result {"t0":"2026-10-01T23:23:36.891Z","t0From":"transcript","detectAmbientS":92.7,"detectAmbientRegS":92.7,"bubbleS":93.1,"ledS":92.7,"faceS":92.7,"rowS":92.7,"rowRegS":92.7,"offerS":92.7,"offerAction":"approve","bannerS":92.7,"soundS":92.7,"goneS":null,"phaseS":92.7,"queueHeadS":92.7,"wrong":null,"otherBubble":null,"actionWorks":false,"clicks":3,"keys":0} · spent ~$0.0086
+[23:25:21.745] == askuser #3 (beacon) · status idle
+[23:25:29.252]   block: reg waiting/input needed at +2.3 s · record withheld
+[23:29:29.547]   attempt: {"clicks":1,"keys":0,"result":"no row for this session in Home"}
+[23:29:29.632]   beacon: Esc (end of trial)
+[23:29:30.426]   result {"t0":"2026-10-01T23:25:27.425Z","t0From":"registry","detectAmbientS":null,"detectAmbientRegS":null,"bubbleS":null,"ledS":null,"faceS":null,"rowS":null,"rowRegS":null,"offerS":null,"offerAction":null,"bannerS":null,"soundS":null,"goneS":120.2,"phaseS":null,"queueHeadS":null,"wrong":null,"otherBubble":null,"actionWorks":false,"clicks":1,"keys":0} · spent ~$0.0083
+[23:29:31.592] closed quit/0 orphans, quit/0 orphans · B reopened 0× · poll errors 0 · spend est $2.1243 · this probe $0.0768 of $0.6

@@ -1,0 +1,3 @@
+ok 43/43 assertions in 28.6 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/row-actions/gate-verify/canon-head-3
+rows: beacon:needs kestrel:needs delta:ready atlas:ready vibepet:ready   fleet: 3/6 in state
+exit=0

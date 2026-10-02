@@ -1,0 +1,393 @@
+git: 4f4e2df gesture: redraw at once to bring Net back; the Saved copy says it toggles
+ 4:31  up 6 days, 15:16, 19 users, load averages: 31.81 27.59 31.93
+
+> vibepet@0.3.0 test
+> node --test test/*.test.js
+
+TAP version 13
+# classify ok {
+#   waiting: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx…?',
+#   stalled: 'Bash: npm test',
+#   ready: 'Done: the roster now renders under the pill.',
+#   title: 'Roster in the pill'
+# }
+# locate ok {
+#   cwd: '/Users/christopherharris/projects',
+#   pid: 40976,
+#   tty: '/dev/ttys000',
+#   registered: true,
+#   none: null
+# }
+# Subtest: test/agents.test.js
+ok 1 - test/agents.test.js
+  ---
+  duration_ms: 1823.412333
+  type: 'test'
+  ...
+# camera ok
+# Subtest: test/camera.test.js
+ok 2 - test/camera.test.js
+  ---
+  duration_ms: 336.596625
+  type: 'test'
+  ...
+# content edl ok
+# render skipped (opt-in: VIBEPET_RENDER_TEST=1 or npm run test:render)
+# Subtest: test/content.test.js
+ok 3 - test/content.test.js
+  ---
+  duration_ms: 350.348167
+  type: 'test'
+  ...
+# fixtures a–g ok
+# cache ok: second fanout read 0 children
+# scan ok: 11 live; silent parent working 1/1
+# Subtest: test/fanout.test.js
+ok 4 - test/fanout.test.js
+  ---
+  duration_ms: 795.089291
+  type: 'test'
+  ...
+# Subtest: spend stop: default, round file, env; the lowest wins and junk is ignored
+ok 5 - spend stop: default, round file, env; the lowest wins and junk is ignored
+  ---
+  duration_ms: 1517.021
+  type: 'test'
+  ...
+# Subtest: lease: taken, held against others, renewed by the holder, released
+ok 6 - lease: taken, held against others, renewed by the holder, released
+  ---
+  duration_ms: 59.176625
+  type: 'test'
+  ...
+# Subtest: lease: a lease past its ttl is stale, and the next taker breaks it
+ok 7 - lease: a lease past its ttl is stale, and the next taker breaks it
+  ---
+  duration_ms: 497.706458
+  type: 'test'
+  ...
+# Subtest: lease: names that could escape the lease dir are refused; move-aside leftovers are not leases
+ok 8 - lease: names that could escape the lease dir are refused; move-aside leftovers are not leases
+  ---
+  duration_ms: 6.744292
+  type: 'test'
+  ...
+# Subtest: lease CLI: of 8 processes racing for one member exactly one wins (exit 0), the rest get exit 3
+ok 9 - lease CLI: of 8 processes racing for one member exactly one wins (exit 0), the rest get exit 3
+  ---
+  duration_ms: 1269.875917
+  type: 'test'
+  ...
+# Subtest: status shows holders; rearm/pause warn, or refuse when --as names someone else
+ok 10 - status shows holders; rearm/pause warn, or refuse when --as names someone else
+  ---
+  duration_ms: 5327.735375
+  type: 'test'
+  ...
+# critic: cw circle r110 600 ms              0.955 (fire)
+# critic: ccw circle r110 600 ms (start 0 rad) 0.955 (fire)
+# critic: ccw circle r110 600 ms (start 2.1 rad) 0.955 (fire)
+# critic: ccw circle r110 600 ms (start 4.2 rad) 0.955 (fire)
+# critic: cw ellipse 2:1 700 ms              0.939 (fire)
+# critic: ccw ellipse 2:1 700 ms             0.939 (fire)
+# critic: cw square 180 px 800 ms            0.198 (miss)
+# critic: ccw square 180 px 800 ms           0.198 (miss)
+# critic: cw square from mid-side            0.208 (miss)
+# critic: cw triangle 180 px 700 ms          0.140 (miss)
+# critic: ccw triangle 180 px 700 ms         0.140 (miss)
+# low  (≥0.88): recall 600/600 = 100.0% · false positives 0/3200 strokes
+# med  (≥0.85): recall 600/600 = 100.0% · false positives 0/3200 strokes
+# high (≥0.825): recall 600/600 = 100.0% · false positives 0/3200 strokes
+# misses at med by shape: {} · med FPs by kind: {} · best negative score 0.814
+# ok
+# Subtest: test/gesture.test.js
+ok 7 - test/gesture.test.js
+  ---
+  duration_ms: 11728.364834
+  type: 'test'
+  ...
+# goal ok
+# Subtest: test/goal.test.js
+ok 8 - test/goal.test.js
+  ---
+  duration_ms: 731.50125
+  type: 'test'
+  ...
+# Subtest: guard: the real ~/.claude and anything outside ~/.vibepet-ultra are refused before a byte is read
+ok 13 - guard: the real ~/.claude and anything outside ~/.vibepet-ultra are refused before a byte is read
+  ---
+  duration_ms: 7.996542
+  type: 'test'
+  ...
+# Subtest: guard: an isolated root inside the base passes, with fleet links and registry links
+ok 14 - guard: an isolated root inside the base passes, with fleet links and registry links
+  ---
+  duration_ms: 18.402208
+  type: 'test'
+  ...
+# Subtest: guard: every way back to real data is refused
+ok 15 - guard: every way back to real data is refused
+  ---
+  duration_ms: 423.87675
+  type: 'test'
+  ...
+# Subtest: shot(): a transparent capture is composited onto the neutral background, straight alpha
+ok 16 - shot(): a transparent capture is composited onto the neutral background, straight alpha
+  ---
+  duration_ms: 25.407708
+  type: 'test'
+  ...
+# Subtest: close() bookkeeping: a process tree is ours, a dead pid is not, other people's command lines never come back
+ok 17 - close() bookkeeping: a process tree is ours, a dead pid is not, other people's command lines never come back
+  ---
+  duration_ms: 4643.267125
+  type: 'test'
+  ...
+# Subtest: unset: the shipped paths, no userData override, the saved jump key
+ok 18 - unset: the shipped paths, no userData override, the saved jump key
+  ---
+  duration_ms: 6.064792
+  type: 'test'
+  ...
+# Subtest: VIBEPET_CLAUDE_DIR moves projects/ and sessions/ together; ~ and relative paths resolve
+ok 19 - VIBEPET_CLAUDE_DIR moves projects/ and sessions/ together; ~ and relative paths resolve
+  ---
+  duration_ms: 23.558
+  type: 'test'
+  ...
+# Subtest: VIBEPET_USER_DATA and VIBEPET_HOTKEY
+ok 20 - VIBEPET_USER_DATA and VIBEPET_HOTKEY
+  ---
+  duration_ms: 14.926833
+  type: 'test'
+  ...
+# Subtest: agents.js: a pid is matched to its session through <root>/sessions/<pid>.json
+ok 21 - agents.js: a pid is matched to its session through <root>/sessions/<pid>.json
+  ---
+  duration_ms: 355.888458
+  type: 'test'
+  ...
+# Subtest: theater: replays a session under the watched root, refuses one outside it
+ok 22 - theater: replays a session under the watched root, refuses one outside it
+  ---
+  duration_ms: 837.233333
+  type: 'test'
+  ...
+# Subtest: ports: an isolated root lists only its own sessions' background tasks (none from this machine's real ones)
+ok 23 - ports: an isolated root lists only its own sessions' background tasks (none from this machine's real ones)
+  ---
+  duration_ms: 188.516792
+  type: 'test'
+  ...
+# 998 task outputs from this machine's own sessions stayed out
+# Subtest: ports: an isolated root lists the servers its own sessions run, not the rest of the machine's
+ok 24 - ports: an isolated root lists the servers its own sessions run, not the rest of the machine's
+  ---
+  duration_ms: 4688.217458
+  type: 'test'
+  ...
+# Subtest: no module builds a path into ~/.claude except through overrides.js
+ok 25 - no module builds a path into ~/.claude except through overrides.js
+  ---
+  duration_ms: 48.659625
+  type: 'test'
+  ...
+# Subtest: the packaged app ships overrides.js
+ok 26 - the packaged app ships overrides.js
+  ---
+  duration_ms: 1.043125
+  type: 'test'
+  ...
+# place: ok
+# Subtest: test/place.test.js
+ok 11 - test/place.test.js
+  ---
+  duration_ms: 216.775458
+  type: 'test'
+  ...
+# parsers ok
+# live ok {
+#   ms: 5419,
+#   servers: [
+#     'limactl:53',
+#     'Python:4180 "evaluna"',
+#     'node:4444 "notepad — goals & pomodoro"',
+#     'node:4830 "Attune"',
+#     'vite:5173 "Spiderbench"',
+#     'vite:5190'
+#   ],
+#   procs: 12,
+#   tasks: '7 running / 20'
+# }
+# Subtest: test/ports.test.js
+ok 12 - test/ports.test.js
+  ---
+  duration_ms: 5575.293709
+  type: 'test'
+  ...
+# receipt: a–j ok, cache ok
+# Subtest: test/receipt.test.js
+ok 13 - test/receipt.test.js
+  ---
+  duration_ms: 354.202375
+  type: 'test'
+  ...
+# Subtest: parseDialog: the approval names its command; the question its text and choices (keys kept, free text dropped)
+ok 30 - parseDialog: the approval names its command; the question its text and choices (keys kept, free text dropped)
+  ---
+  duration_ms: 19.94
+  type: 'test'
+  ...
+# Subtest: read(): live entries only — a dead pid, a dangling link and a reused pid are out; a half-written file keeps its last parse
+ok 31 - read(): live entries only — a dead pid, a dangling link and a reused pid are out; a half-written file keeps its last parse
+  ---
+  duration_ms: 561.188084
+  type: 'test'
+  ...
+# Subtest: sameStart: procStart in UTC (as Claude Code writes it) or local time; anything else is another process
+ok 32 - sameStart: procStart in UTC (as Claude Code writes it) or local time; anything else is another process
+  ---
+  duration_ms: 2.478042
+  type: 'test'
+  ...
+# Subtest: scan + registry: a withheld approval and a withheld question need you at once, with the pane's ask and the registry's clock
+ok 33 - scan + registry: a withheld approval and a withheld question need you at once, with the pane's ask and the registry's clock
+  ---
+  duration_ms: 19.692083
+  type: 'test'
+  ...
+# Subtest: scan + registry: done stays listed while its claude lives; busy is running however quiet, never stalled; interrupted is done
+ok 34 - scan + registry: done stays listed while its claude lives; busy is running however quiet, never stalled; interrupted is done
+  ---
+  duration_ms: 17.248708
+  type: 'test'
+  ...
+# Subtest: scan + registry: an entry that disappears is exited within one tick, listed last for 10 min, never running
+ok 35 - scan + registry: an entry that disappears is exited within one tick, listed last for 10 min, never running
+  ---
+  duration_ms: 19.0995
+  type: 'test'
+  ...
+# Subtest: scan: /exit in the tail is an exit at its record time, with or without a registry; /clear in the same claude is not
+ok 36 - scan: /exit in the tail is an exit at its record time, with or without a registry; /clear in the same claude is not
+  ---
+  duration_ms: 15.2355
+  type: 'test'
+  ...
+# Subtest: scan without a registry entry: a written AskUserQuestion needs you at once (not after 90 s); other tools keep the 90 s rule
+ok 37 - scan without a registry entry: a written AskUserQuestion needs you at once (not after 90 s); other tools keep the 90 s rule
+  ---
+  duration_ms: 14.082083
+  type: 'test'
+  ...
+# Subtest: the one queue order: needs you (approval, question, plan, input together, oldest block first) → done → running → exited
+ok 38 - the one queue order: needs you (approval, question, plan, input together, oldest block first) → done → running → exited
+  ---
+  duration_ms: 1.806875
+  type: 'test'
+  ...
+# Subtest: the packaged app ships registry.js
+ok 39 - the packaged app ships registry.js
+  ---
+  duration_ms: 4.322834
+  type: 'test'
+  ...
+# theater: ok {
+#   prompts: 2,
+#   edits: 2,
+#   files: 2,
+#   add: 3,
+#   del: 1,
+#   commands: 1,
+#   checks: 2,
+#   passed: 1,
+#   failed: 1,
+#   agents: 1,
+#   commits: 1,
+#   beats: 13,
+#   realMs: 3706000,
+#   playMs: 37500
+# }
+# Subtest: test/theater.test.js
+ok 15 - test/theater.test.js
+  ---
+  duration_ms: 333.691542
+  type: 'test'
+  ...
+# Subtest: parseTarget: the registry tmux field → session, window, pane
+ok 41 - parseTarget: the registry tmux field → session, window, pane
+  ---
+  duration_ms: 1.474041
+  type: 'test'
+  ...
+# Subtest: parsePane: where the pane is now, and whether keys would reach claude alone
+ok 42 - parsePane: where the pane is now, and whether keys would reach claude alone
+  ---
+  duration_ms: 0.95225
+  type: 'test'
+  ...
+# Subtest: owns: the pane pid must be claude itself or one of its ancestors
+ok 43 - owns: the pane pid must be claude itself or one of its ancestors
+  ---
+  duration_ms: 0.539375
+  type: 'test'
+  ...
+# Subtest: pickClient: a client already on the session, else the most recently used one
+ok 44 - pickClient: a client already on the session, else the most recently used one
+  ---
+  duration_ms: 0.565416
+  type: 'test'
+  ...
+# Subtest: guard: an approval prompt takes approve / always / deny, nothing else
+ok 45 - guard: an approval prompt takes approve / always / deny, nothing else
+  ---
+  duration_ms: 1.699208
+  type: 'test'
+  ...
+# Subtest: guard: an AskUserQuestion list takes its own option digits only; a text reply is refused
+ok 46 - guard: an AskUserQuestion list takes its own option digits only; a text reply is refused
+  ---
+  duration_ms: 4.263625
+  type: 'test'
+  ...
+# Subtest: guard: an idle input box takes text; approve, option and interrupt are refused
+ok 47 - guard: an idle input box takes text; approve, option and interrupt are refused
+  ---
+  duration_ms: 0.850875
+  type: 'test'
+  ...
+# Subtest: guard: a grey prompt suggestion is not a draft; typed text is
+ok 48 - guard: a grey prompt suggestion is not a draft; typed text is
+  ---
+  duration_ms: 0.241334
+  type: 'test'
+  ...
+# Subtest: guard: a busy session takes interrupt, and text (Claude Code queues it)
+ok 49 - guard: a busy session takes interrupt, and text (Claude Code queues it)
+  ---
+  duration_ms: 0.457292
+  type: 'test'
+  ...
+# Subtest: literal: a reply ending in ";" survives tmux argument parsing
+ok 50 - literal: a reply ending in ";" survives tmux argument parsing
+  ---
+  duration_ms: 0.339791
+  type: 'test'
+  ...
+# Subtest: locateSession: exact registry hit carries the entry; exited sessions get null; an unregistered claude is found by cwd
+ok 51 - locateSession: exact registry hit carries the entry; exited sessions get null; an unregistered claude is found by cwd
+  ---
+  duration_ms: 3570.6265
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11771.848417
+npm test 2>&1  10.22s user 5.62s system 124% cpu 12.750 total
+ 4:31  up 6 days, 15:17, 19 users, load averages: 29.46 27.22 31.75

@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-02T08:45:22.812Z",
+  "allOk": false,
+  "members": [
+    {
+      "name": "ember",
+      "state": "loop",
+      "ok": false,
+      "paused": true,
+      "target": "vp-ember:0.0",
+      "tty": "/dev/ttys023",
+      "pid": null,
+      "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-ember/db0c1ec0-b899-4ca1-a238-7d979e61e099.jsonl",
+      "registry": null,
+      "last": {
+        "kind": "end_turn",
+        "pending": [],
+        "stopReason": "stop_sequence",
+        "lastTs": "2026-10-02T08:44:13.414Z"
+      },
+      "subagents": [],
+      "procs": [],
+      "toolProcs": 0,
+      "loop": null,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-ember"
+        },
+        {
+          "name": "claude",
+          "ok": false,
+          "detail": "claude not running"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": false,
+          "detail": "∅"
+        },
+        {
+          "name": "loop",
+          "ok": false,
+          "detail": "no live cron job in this process"
+        },
+        {
+          "name": "loopLock",
+          "ok": false,
+          "detail": "no .claude/scheduled_tasks.lock"
+        }
+      ],
+      "spendUsd": 0.4122,
+      "lease": null
+    }
+  ],
+  "spend": {
+    "transcriptsUsd": 2.223186,
+    "estimateWithHiddenUsd": 3.3093,
+    "stop": 3.32,
+    "cap": 5
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-row-actions",
+  "git": "9628925 harness: canon checks the row actions; tta resolves askuser with the option button @ ultra/r1/row-actions",
+  "root": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+  "startedAt": "2026-10-02T09:00:32.633Z",
+  "pollMs": 250,
+  "setup": {
+    "A": {
+      "pid": 19033,
+      "readyMs": 961,
+      "instrument": {
+        "spied": [
+          "jump",
+          "send-to",
+          "diff",
+          "goal-done",
+          "goal-undo"
+        ],
+        "stubSendTo": false
+      },
+      "audio": {
+        "realContext": false
+      },
+      "prefs": {
+        "muted": false,
+        "alerts": "done",
+        "feel": "calm",
+        "animations": false
+      }
+    },
+    "B": {
+      "pid": 19031,
+      "readyMs": 740,
+      "instrument": {
+        "spied": [
+          "jump",
+          "send-to",
+          "diff",
+          "goal-done",
+          "goal-undo"
+        ],
+        "stubSendTo": false
+      },
+      "audio": {
+        "realContext": false
+      },
+      "prefs": {
+        "muted": false,
+        "alerts": "done",
+        "feel": "calm",
+        "animations": false
+      }
+    }
+  },
+  "perms": {
+    "ax": true,
+    "screen": true
+  },
+  "prefs": {
+    "muted": false,
+    "alerts": "done",
+    "feel": "calm",
+    "animations": false
+  },
+  "plan": []
+}

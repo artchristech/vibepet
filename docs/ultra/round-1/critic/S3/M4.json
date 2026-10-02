@@ -1,0 +1,285 @@
+{
+  "truth": {
+    "at": "2026-10-02T02:43:48.462Z",
+    "spend": {
+      "transcriptsUsd": 2.172409,
+      "estimateWithHiddenUsd": 3.2285,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sid": "13a1427d",
+        "reg": "waiting(permission prompt)",
+        "regAgeS": 846,
+        "last": "user_prompt"
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sid": "6101876b",
+        "reg": "idle",
+        "regAgeS": 172,
+        "last": "end_turn"
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": true,
+        "paused": false,
+        "pid": 48392,
+        "sid": "5c051e84",
+        "reg": "busy",
+        "regAgeS": 190,
+        "last": "pending_tool_use"
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sid": "a9377f08",
+        "reg": "waiting(input needed)",
+        "regAgeS": 1806,
+        "last": "user_prompt"
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sid": "eb59a756",
+        "reg": "idle",
+        "regAgeS": 2579,
+        "last": "end_turn"
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sid": "db0c1ec0",
+        "reg": null,
+        "regAgeS": null,
+        "last": "user_prompt"
+      }
+    ]
+  },
+  "samples": [
+    {
+      "t": "02:43:50",
+      "load": 3.31,
+      "phase": "working",
+      "sinceAgoS": 1,
+      "label": "atlas · 1s",
+      "order": [
+        "vibepet:ready:1",
+        "atlas:working:1"
+      ]
+    },
+    {
+      "t": "02:43:51",
+      "load": 3.31,
+      "phase": "working",
+      "sinceAgoS": 3,
+      "label": "atlas · 1s",
+      "order": [
+        "vibepet:ready:3",
+        "atlas:working:3"
+      ]
+    },
+    {
+      "t": "02:43:52",
+      "load": 3.31,
+      "phase": "working",
+      "sinceAgoS": 1,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:4",
+        "atlas:working:1"
+      ]
+    },
+    {
+      "t": "02:43:53",
+      "load": 3.52,
+      "phase": "working",
+      "sinceAgoS": 2,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:5",
+        "atlas:working:2"
+      ]
+    },
+    {
+      "t": "02:43:54",
+      "load": 3.52,
+      "phase": "working",
+      "sinceAgoS": 3,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:6",
+        "atlas:working:3"
+      ]
+    },
+    {
+      "t": "02:43:55",
+      "load": 3.52,
+      "phase": "working",
+      "sinceAgoS": 1,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:7",
+        "atlas:working:1"
+      ]
+    },
+    {
+      "t": "02:43:56",
+      "load": 3.52,
+      "phase": "working",
+      "sinceAgoS": 2,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:8",
+        "atlas:working:2"
+      ]
+    },
+    {
+      "t": "02:43:57",
+      "load": 3.52,
+      "phase": "working",
+      "sinceAgoS": 3,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:9",
+        "atlas:working:3"
+      ]
+    },
+    {
+      "t": "02:43:58",
+      "load": 3.56,
+      "phase": "working",
+      "sinceAgoS": 1,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:10",
+        "atlas:working:1"
+      ]
+    },
+    {
+      "t": "02:43:59",
+      "load": 3.56,
+      "phase": "working",
+      "sinceAgoS": 2,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:11",
+        "atlas:working:2"
+      ]
+    },
+    {
+      "t": "02:44:00",
+      "load": 3.56,
+      "phase": "stalled",
+      "sinceAgoS": 0,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:12",
+        "atlas:working:3"
+      ]
+    },
+    {
+      "t": "02:44:02",
+      "load": 3.56,
+      "phase": "working",
+      "sinceAgoS": 1,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:13",
+        "atlas:working:1"
+      ]
+    },
+    {
+      "t": "02:44:03",
+      "load": 3.56,
+      "phase": "working",
+      "sinceAgoS": 2,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:14",
+        "atlas:working:2"
+      ]
+    },
+    {
+      "t": "02:44:04",
+      "load": 3.35,
+      "phase": "stalled",
+      "sinceAgoS": 0,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:15",
+        "atlas:working:3"
+      ]
+    },
+    {
+      "t": "02:44:05",
+      "load": 3.35,
+      "phase": "working",
+      "sinceAgoS": 1,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:16",
+        "atlas:working:1"
+      ]
+    },
+    {
+      "t": "02:44:06",
+      "load": 3.35,
+      "phase": "working",
+      "sinceAgoS": 2,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:17",
+        "atlas:working:2"
+      ]
+    },
+    {
+      "t": "02:44:07",
+      "load": 3.35,
+      "phase": "stalled",
+      "sinceAgoS": 0,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:18",
+        "atlas:working:3"
+      ]
+    },
+    {
+      "t": "02:44:08",
+      "load": 3.35,
+      "phase": "working",
+      "sinceAgoS": 1,
+      "label": "atlas · 0s",
+      "order": [
+        "vibepet:ready:19",
+        "atlas:working:1"
+      ]
+    }
+  ],
+  "close": {
+    "how": "quit",
+    "ms": 261,
+    "procs": 7,
+    "orphans": []
+  }
+}

@@ -1,0 +1,208 @@
+{
+  "label": "base-1",
+  "app": "/private/tmp/claude-501/-Users-christopherharris-projects/2aec191f-bd46-4d22-b2da-e8c859fd18a3/scratchpad/base-app",
+  "at": "2026-10-02T10:29:07.635Z",
+  "runs": 5,
+  "loadStart": "18.13 26.05 32.50",
+  "opens": {
+    "kestrel": [
+      {
+        "firstFrameMs": 344,
+        "mainBuildMs": 29,
+        "beats": 61,
+        "load": "17.08 25.70 32.34"
+      },
+      {
+        "firstFrameMs": 154,
+        "mainBuildMs": 23,
+        "beats": 61,
+        "load": "17.08 25.70 32.34"
+      },
+      {
+        "firstFrameMs": 153,
+        "mainBuildMs": 24,
+        "beats": 61,
+        "load": "16.03 25.34 32.17"
+      },
+      {
+        "firstFrameMs": 190,
+        "mainBuildMs": 44,
+        "beats": 61,
+        "load": "16.03 25.34 32.17"
+      },
+      {
+        "firstFrameMs": 187,
+        "mainBuildMs": 37,
+        "beats": 61,
+        "load": "15.47 25.07 32.03"
+      }
+    ],
+    "beacon": [
+      {
+        "firstFrameMs": 134,
+        "mainBuildMs": 20,
+        "beats": 29,
+        "load": "17.08 25.70 32.34"
+      },
+      {
+        "firstFrameMs": 195,
+        "mainBuildMs": 36,
+        "beats": 29,
+        "load": "17.08 25.70 32.34"
+      },
+      {
+        "firstFrameMs": 157,
+        "mainBuildMs": 16,
+        "beats": 29,
+        "load": "16.03 25.34 32.17"
+      },
+      {
+        "firstFrameMs": 150,
+        "mainBuildMs": 18,
+        "beats": 29,
+        "load": "15.47 25.07 32.03"
+      },
+      {
+        "firstFrameMs": 248,
+        "mainBuildMs": 70,
+        "beats": 29,
+        "load": "15.47 25.07 32.03"
+      }
+    ],
+    "vibepet": [
+      {
+        "firstFrameMs": 168,
+        "mainBuildMs": 41,
+        "beats": 56,
+        "load": "17.08 25.70 32.34"
+      },
+      {
+        "firstFrameMs": 175,
+        "mainBuildMs": 39,
+        "beats": 56,
+        "load": "16.03 25.34 32.17"
+      },
+      {
+        "firstFrameMs": 157,
+        "mainBuildMs": 30,
+        "beats": 56,
+        "load": "16.03 25.34 32.17"
+      },
+      {
+        "firstFrameMs": 162,
+        "mainBuildMs": 23,
+        "beats": 56,
+        "load": "15.47 25.07 32.03"
+      },
+      {
+        "firstFrameMs": 236,
+        "mainBuildMs": 56,
+        "beats": 56,
+        "load": "15.47 25.07 32.03"
+      }
+    ],
+    "ember": [
+      {
+        "firstFrameMs": 247,
+        "mainBuildMs": 66,
+        "beats": 61,
+        "load": "17.08 25.70 32.34"
+      },
+      {
+        "firstFrameMs": 176,
+        "mainBuildMs": 23,
+        "beats": 61,
+        "load": "16.03 25.34 32.17"
+      },
+      {
+        "firstFrameMs": 176,
+        "mainBuildMs": 30,
+        "beats": 61,
+        "load": "16.03 25.34 32.17"
+      },
+      {
+        "firstFrameMs": 186,
+        "mainBuildMs": 35,
+        "beats": 61,
+        "load": "15.47 25.07 32.03"
+      },
+      {
+        "firstFrameMs": 158,
+        "mainBuildMs": 20,
+        "beats": 61,
+        "load": "15.47 25.07 32.03"
+      }
+    ],
+    "delta": [
+      {
+        "firstFrameMs": 214,
+        "mainBuildMs": 74,
+        "beats": 149,
+        "load": "17.08 25.70 32.34"
+      },
+      {
+        "firstFrameMs": 176,
+        "mainBuildMs": 42,
+        "beats": 149,
+        "load": "16.03 25.34 32.17"
+      },
+      {
+        "firstFrameMs": 273,
+        "mainBuildMs": 48,
+        "beats": 149,
+        "load": "16.03 25.34 32.17"
+      },
+      {
+        "firstFrameMs": 179,
+        "mainBuildMs": 49,
+        "beats": 149,
+        "load": "15.47 25.07 32.03"
+      },
+      {
+        "firstFrameMs": 259,
+        "mainBuildMs": 108,
+        "beats": 149,
+        "load": "15.19 24.85 31.92"
+      }
+    ]
+  },
+  "median": {
+    "kestrel": {
+      "firstFrameMs": 187,
+      "mainBuildMs": 29,
+      "n": 5,
+      "beats": 61
+    },
+    "beacon": {
+      "firstFrameMs": 157,
+      "mainBuildMs": 20,
+      "n": 5,
+      "beats": 29
+    },
+    "vibepet": {
+      "firstFrameMs": 168,
+      "mainBuildMs": 39,
+      "n": 5,
+      "beats": 56
+    },
+    "ember": {
+      "firstFrameMs": 176,
+      "mainBuildMs": 30,
+      "n": 5,
+      "beats": 61
+    },
+    "delta": {
+      "firstFrameMs": 214,
+      "mainBuildMs": 49,
+      "n": 5,
+      "beats": 149
+    }
+  },
+  "close": {
+    "how": "quit",
+    "ms": 514,
+    "procs": 7,
+    "orphans": []
+  },
+  "loadEnd": "15.19 24.85 31.92"
+}

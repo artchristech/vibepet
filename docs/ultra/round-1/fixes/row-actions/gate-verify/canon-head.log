@@ -1,0 +1,12 @@
+FAIL 27/31 assertions in 55.3 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/row-actions/gate-verify/canon-head
+rows: (none)   fleet: 3/6 in state
+  mismatch kestrel: missing: a permission dialog is open: it needs you, Approve, but Home has no row for it
+  mismatch vibepet: missing: the turn ended with a statement: done, your move (Reply), but Home has no row for it
+  mismatch atlas: missing: idle at its prompt (registry): done, or asking, but Home has no row for it
+  mismatch beacon: missing: an AskUserQuestion dialog is open: it needs you, an option button, but Home has no row for it
+  mismatch delta: missing: idle at its prompt (registry): done, or asking, but Home has no row for it
+  FAIL home/ran: openHome: no Home panel after the click
+  FAIL chat/ran: openHome: no Home panel after the click
+  FAIL rows/replyOnDone: []
+  FAIL rows/slotsFixed: {"sameView":false,"samePanel":false,"before":{"bubble":false,"replay":{"view":[469,386,58,21.5],"panel":[449,328]},"goal":{"view":[531,386,46,21.5],"panel":[511,328]},"diff":{"view":[581,386,42,21.5],"panel":[561,328]}},"after":{"bubble":false,"replay":{"view":[469,393,58,21.5],"panel":[449,335]},"goal":{"view":[531,393,46,21.5],"panel":[511,335]},"diff":{"view":[581,393,42,21.5],"panel":[561,335]}}}
+exit=1

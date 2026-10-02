@@ -1,0 +1,38 @@
+<live_context>
+Local time: 10/2/2026, 2:35:14 AM.
+
+Agents: beacon=waiting for an answer for 6h 21m - Which database should beacon use to store check results? (SQLite / Postgres / Redis); kestrel=needs approval for 5h 22m - Bash: ./deploy.sh --dry-run; delta=done for 6h 34m - All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled; atlas=done for 5h 32m - interrupted; vibepet=done for 5h 22m - The app's main entry file is main.js.; ember=done for 30s - API Error: 400 vibepet-ultra fault injection: no API in this run.
+
+Sessions, in the order they need you (needs you first, then done, running, exited; longest-waiting first). Ages are on Claude Code's own clock; "edited this turn" = files the session changed since its last prompt:
+- beacon · "Beacon database choice" · folder ~/.vibepet-ultra/fleet/beacon · repo beacon/main · waiting for an answer for 6h 21m · asks: Which database should beacon use to store check results? (SQLite / Postgres / Redis) · edited this turn: nothing
+- kestrel · "Deploy.sh dry run" · folder ~/.vibepet-ultra/fleet/kestrel · repo kestrel/main · needs approval for 5h 22m · asks: Bash: ./deploy.sh --dry-run · edited this turn: nothing
+- delta · "Reconcile three shards in parallel" · folder ~/.vibepet-ultra/fleet/delta · repo delta/main · done for 6h 34m · last said: All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled · edited this turn: nothing · fan-out 3/3 subagents done
+- atlas · "Run build.sh" · folder ~/.vibepet-ultra/fleet/atlas · repo atlas/main · done for 5h 32m · its turn was interrupted · edited this turn: nothing
+- vibepet · "Read package.json" · folder ~/.vibepet-ultra/fleet/vibepet · repo vibepet/main · done for 5h 22m · last said: The app's main entry file is main.js. · edited this turn: nothing
+- ember · folder ~/.vibepet-ultra/fleet/ember · repo ember/main · done for 30s · last said: API Error: 400 vibepet-ultra fault injection: no API in this run · edited this turn: nothing
+Needs you now: beacon first ("Which database should beacon use to store check results? (SQLite / Postgres / Redis)"), then kestrel ("Bash: ./deploy.sh --dry-run"). Quote these asks exactly.
+
+Overlaps: none. No two sessions share a repo (6 sessions in 6 repos).
+
+Watched repo: delta (branch main; sessions in it: delta): 0 uncommitted lines across 0 files, 0 untracked files. Last commit 737 min ago: "delta: shards and reconciler".
+
+Recent commits:
+4dcf8f9 delta: shards and reconciler
+
+Diff stat:
+(clean)
+</live_context>
+
+User: what's running?
+
+Net: Nothing's actively running right now. You have two agents waiting on you: **beacon** needs to know which database to use (SQLite / Postgres / Redis), and **kestrel** is ready to run a deploy dry-run once you approve. The other three agents finished their work a while ago.
+
+User: which session needs me first?
+
+Net: Beacon—it's been waiting 6+ hours for a database choice. Once you answer that, kestrel's next in line for approval on the deploy dry-run.
+
+User: what did atlas change?
+
+Net: Atlas didn't change anything—the repo is clean. The last commit there was "atlas: tile renderer and build script" from 12 hours ago, before atlas's current session even started.
+
+User: are any two of my sessions about to edit the same file?

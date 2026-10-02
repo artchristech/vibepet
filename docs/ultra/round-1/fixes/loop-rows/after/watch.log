@@ -1,0 +1,22 @@
+delta
+     1–799 s  truth idle       ui ready    delta · done 6h 46m ago fan 0/3/0
+vibepet
+     1–799 s  truth idle       ui ready    vibepet · done 5h 34m ago
+atlas
+     1–799 s  truth idle       ui ready    atlas · done 5h 44m ago
+beacon
+     1–799 s  truth question   ui needs    beacon · asking 6h 33m
+kestrel
+     1–799 s  truth approval   ui needs    kestrel · needs approval 5h 35m
+extra:ember
+    33–642 s  truth not a live fleet session ui loop     ember · looping · every 5m · fired 7s ago · next ≈4m 36s
+   644–799 s  truth not a live fleet session ui exited   ember · exited 0s ago
+ember
+    39–597 s  truth idle       ui loop     ember · looping · every 5m · fired 4m ago · next ≈3s
+   601–601 s  truth busy       ui loop     ember · looping · every 5m · fired 4m ago · next ≈now
+   603–636 s  truth idle       ui loop     ember · looping · every 5m · fired 35s ago · next ≈4m 5s
+   640–640 s  truth waiting    ui loop     ember · looping · every 5m · fired 39s ago · next ≈4m 1s
+drops (samples with no row while the registry entry exists): {"delta":0,"vibepet":0,"atlas":0,"beacon":0,"kestrel":0,"ember":0}
+order: 0 of 392 samples off (Home = snapshot, pending() ⊆ snapshot in order); last {"snapshot":["beacon","kestrel","delta","atlas","vibepet","ember"],"home":["beacon","kestrel","delta","atlas","vibepet","ember"],"pending":["beacon","kestrel"],"held":["beacon","kestrel"]}
+events (bubbles) per member: {"?":{"localhost":23}}; banners posted: 0
+392 samples → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/loop-rows/after/watch  (close quit, orphans 0)

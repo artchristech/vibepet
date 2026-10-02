@@ -1,0 +1,50 @@
+✻ Crunched for 1s · done 2:52 PM
+
+❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.
+
+⏺ Bash(./deploy.sh --dry-run)
+  ⎿  Interrupted · What should Claude do instead?
+
+✻ Crunched for 1s · done 2:53 PM
+
+❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.
+
+⏺ Bash(./deploy.sh --dry-run)
+  ⎿  Interrupted · What should Claude do instead?
+
+✻ Worked for 1s · done 2:54 PM
+
+❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.
+
+⏺ Bash(./deploy.sh --dry-run)
+  ⎿  Interrupted · What should Claude do instead?
+
+✻ Worked for 1s · done 2:56 PM
+
+❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.
+
+⏺ Bash(./deploy.sh --dry-run)
+  ⎿  Interrupted · What should Claude do instead?
+
+✻ Baked for 1s · done 2:56 PM
+
+❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.
+
+⏺ Bash(./deploy.sh --dry-run)
+  ⎿  Waiting…
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ Bash command
+ Run dry-run deploy script
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+ ./deploy.sh --dry-run
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+ This command requires approval
+
+ Do you want to proceed?
+ ❯ 1. Yes
+   2. Yes, and don’t ask again for: ./deploy.sh *
+   3. No
+
+ Esc to cancel · Tab to amend
+

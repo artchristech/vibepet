@@ -1,0 +1,98 @@
+{
+  "member": "ember",
+  "window": {
+    "from": "2026-10-02T08:34:12.759Z",
+    "to": "2026-10-02T08:47:30.339Z",
+    "samples": 392
+  },
+  "fires": [
+    {
+      "fire": "2026-10-02T08:34:36.276Z",
+      "turnEnd": "2026-10-02T08:34:43.085Z",
+      "idleFlip": "2026-10-02T08:34:43.914Z",
+      "durMs": 7638,
+      "busySeenByWatch": false,
+      "resetShownAt": "2026-10-02T08:34:45.097Z",
+      "resetLabel": "ember · looping · every 5m · fired 7s ago · next ≈4m 36s",
+      "resetAfterIdleMs": 1183,
+      "nextShownBefore": null,
+      "predictedFromLabel": null,
+      "errorS": null,
+      "snapshotNext": null,
+      "snapshotErrorS": null
+    },
+    {
+      "fire": "2026-10-02T08:39:21.990Z",
+      "turnEnd": "2026-10-02T08:39:22.140Z",
+      "idleFlip": "2026-10-02T08:39:22.148Z",
+      "durMs": 158,
+      "busySeenByWatch": false,
+      "resetShownAt": "2026-10-02T08:39:25.293Z",
+      "resetLabel": "ember · looping · every 5m · fired 2s ago · next ≈4m 43s",
+      "resetAfterIdleMs": 3145,
+      "nextShownBefore": {
+        "at": "2026-10-02T08:39:21.290Z",
+        "label": "ember · looping · every 5m · fired 4m ago · next ≈0s"
+      },
+      "predictedFromLabel": "2026-10-02T08:39:21.290Z",
+      "errorS": -0.7,
+      "snapshotNext": "2026-10-02T08:39:21.276Z",
+      "snapshotErrorS": -0.7
+    },
+    {
+      "fire": "2026-10-02T08:44:08.189Z",
+      "turnEnd": "2026-10-02T08:44:13.457Z",
+      "idleFlip": "2026-10-02T08:44:13.535Z",
+      "durMs": 5346,
+      "busySeenByWatch": true,
+      "resetShownAt": "2026-10-02T08:44:16.874Z",
+      "resetLabel": "ember · looping · every 5m · fired 4s ago · next ≈4m 37s",
+      "resetAfterIdleMs": 3339,
+      "nextShownBefore": {
+        "at": "2026-10-02T08:44:03.809Z",
+        "label": "ember · looping · every 5m · fired 4m ago · next ≈6s"
+      },
+      "predictedFromLabel": "2026-10-02T08:44:09.809Z",
+      "errorS": 1.6,
+      "snapshotNext": "2026-10-02T08:44:06.990Z",
+      "snapshotErrorS": -1.2
+    }
+  ],
+  "between": {
+    "idleSamples": 293,
+    "sigs": {
+      "loop": 293
+    },
+    "labels": [
+      "ember · looping · every Nm · fired Ns ago · next ≈Nm Ns",
+      "ember · looping · every Nm · fired Nm ago · next ≈Nm Ns",
+      "ember · looping · every Nm · fired Nm ago · next ≈Ns",
+      "ember · looping · every Nm · fired Nm ago · next ≈now"
+    ],
+    "inPending": 0,
+    "inHeld": 0,
+    "yellow": 0
+  },
+  "exit": {
+    "samples": 79,
+    "firstAt": "2026-10-02T08:44:53.905Z",
+    "sigs": [
+      "loop",
+      "exited"
+    ],
+    "labels": [
+      "ember · looping · every Nm · fired Ns ago · next ≈Nm Ns",
+      "ember · exited Ns ago",
+      "ember · exited Nm ago"
+    ],
+    "everDone": 0
+  },
+  "events": {},
+  "spellsSeenBusy": [
+    {
+      "from": "2026-10-02T08:44:12.360Z",
+      "to": "2026-10-02T08:44:12.360Z"
+    }
+  ],
+  "banners": 0
+}

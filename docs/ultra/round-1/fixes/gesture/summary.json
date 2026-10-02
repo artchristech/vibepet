@@ -1,0 +1,707 @@
+{
+  "branch": "ultra/r1/gesture",
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-gesture",
+  "git": "4f4e2df gesture: redraw at once to bring Net back; the Saved copy says it toggles",
+  "after": {
+    "loopDragHides": "0/4",
+    "loopDragPressSpansLoop": "4/4",
+    "loopDragWindowFollowed": "4/4",
+    "partialLoopDragHides": "0/2",
+    "sameLoopNoButtonHides": "1/1",
+    "squareMediumToggles": "0/3",
+    "squareLowToggles": "0/2",
+    "circleLowToggles": "1/1",
+    "ccwCircleToggles": "3/3",
+    "resummon": [
+      {
+        "endAfterHideMs": 550,
+        "summoned": true,
+        "msAfterEnd": 185,
+        "load": "20.30 25.48 30.42"
+      },
+      {
+        "endAfterHideMs": 1200,
+        "summoned": true,
+        "msAfterEnd": 221,
+        "load": "19.07 25.14 30.27"
+      },
+      {
+        "endAfterHideMs": 1900,
+        "summoned": true,
+        "msAfterEnd": 191,
+        "load": "18.91 25.01 30.19"
+      }
+    ],
+    "resummonSummoned": "3/3",
+    "truePositivesMedium": {
+      "circle": "2/2",
+      "zigzag": "2/2",
+      "Z": "2/2"
+    },
+    "toggleLatencyMs": {
+      "median": 204,
+      "n": 14
+    },
+    "copy": {
+      "pad": "Click and drag on the pad. A circle, a zig-zag or a \u201cZ\u201d works well \u2014 later, just move the mouse in that shape anywhere, no click. A circle works either way round; a zig-zag only the way you drew it.",
+      "saved": "Saved. Draw it to hide Net; draw it again to bring him back."
+    },
+    "load": {
+      "start": "25.72 26.50 31.33",
+      "end": "27.58 25.65 30.06",
+      "perTrial": [
+        "30.58 27.53 31.53",
+        "30.93 27.65 31.55",
+        "30.45 27.61 31.51",
+        "30.10 27.58 31.48",
+        "30.25 27.65 31.48",
+        "30.25 27.65 31.48",
+        "31.75 28.01 31.58",
+        "30.41 27.79 31.48",
+        "30.41 27.79 31.48",
+        "28.61 27.46 31.35",
+        "28.32 27.42 31.31",
+        "28.32 27.42 31.31",
+        "26.30 27.01 31.14",
+        "24.75 26.68 31.00",
+        "23.09 26.31 30.84",
+        "23.09 26.31 30.84",
+        "24.60 26.57 30.91",
+        "24.31 26.47 30.85",
+        "23.09 26.18 30.72",
+        "21.72 25.85 30.58",
+        "21.72 25.85 30.58",
+        "15.68 24.00 29.74",
+        "15.46 23.81 29.64",
+        "19.02 24.06 29.59",
+        "21.42 24.47 29.71"
+      ]
+    },
+    "failures": [],
+    "close": {
+      "how": "quit",
+      "ms": 8866,
+      "procs": 8,
+      "orphans": []
+    }
+  },
+  "afterRepeat": {
+    "loopDragHides": "0/4",
+    "loopDragPressSpansLoop": "4/4",
+    "loopDragWindowFollowed": "2/4",
+    "partialLoopDragHides": "0/2",
+    "sameLoopNoButtonHides": "1/1",
+    "squareMediumToggles": "0/3",
+    "squareLowToggles": "0/2",
+    "circleLowToggles": "1/1",
+    "ccwCircleToggles": "3/3",
+    "resummon": [
+      {
+        "endAfterHideMs": 550,
+        "summoned": true,
+        "msAfterEnd": 209,
+        "load": "70.19 58.97 44.15"
+      },
+      {
+        "endAfterHideMs": 1200,
+        "summoned": true,
+        "msAfterEnd": 196,
+        "load": "66.09 58.31 44.00"
+      },
+      {
+        "endAfterHideMs": 1900,
+        "summoned": true,
+        "msAfterEnd": 199,
+        "load": "59.47 57.15 43.75"
+      }
+    ],
+    "resummonSummoned": "3/3",
+    "truePositivesMedium": {
+      "circle": "2/2",
+      "zigzag": "2/2",
+      "Z": "2/2"
+    },
+    "toggleLatencyMs": {
+      "median": 205.5,
+      "n": 14
+    },
+    "copy": {
+      "pad": "Click and drag on the pad. A circle, a zig-zag or a \u201cZ\u201d works well \u2014 later, just move the mouse in that shape anywhere, no click. A circle works either way round; a zig-zag only the way you drew it.",
+      "saved": "Saved. Draw it to hide Net; draw it again to bring him back."
+    },
+    "load": {
+      "start": "85.01 44.67 36.88",
+      "end": "40.97 52.95 42.85",
+      "perTrial": [
+        "100.83 53.02 40.21",
+        "100.20 53.68 40.52",
+        "98.82 54.17 40.77",
+        "98.18 55.47 41.39",
+        "100.57 57.35 42.22",
+        "105.57 59.11 42.93",
+        "109.45 60.68 43.58",
+        "110.93 61.80 44.07",
+        "110.93 61.80 44.07",
+        "104.85 61.35 44.02",
+        "103.50 61.80 44.28",
+        "98.10 61.37 44.23",
+        "98.10 61.37 44.23",
+        "90.21 60.88 44.25",
+        "90.21 60.88 44.25",
+        "88.11 60.93 44.37",
+        "84.90 60.72 44.39",
+        "81.47 60.41 44.38",
+        "78.46 60.13 44.37",
+        "74.82 59.68 44.31",
+        "70.19 58.97 44.15",
+        "57.56 56.78 43.85",
+        "57.56 56.78 43.85",
+        "47.09 54.50 43.27",
+        "44.36 53.81 43.09"
+      ]
+    },
+    "failures": [],
+    "close": {
+      "how": "quit",
+      "ms": 886,
+      "procs": 8,
+      "orphans": []
+    }
+  },
+  "beforeSameHarness": {
+    "loopDragHides": "4/4",
+    "loopDragPressSpansLoop": "4/4",
+    "loopDragWindowFollowed": "4/4",
+    "partialLoopDragHides": "2/2",
+    "sameLoopNoButtonHides": "1/1",
+    "squareMediumToggles": "3/3",
+    "squareLowToggles": "0/2",
+    "circleLowToggles": "1/1",
+    "ccwCircleToggles": "0/3",
+    "resummon": [
+      {
+        "endAfterHideMs": 550,
+        "summoned": false,
+        "msAfterEnd": null,
+        "load": "24.33 29.84 47.52"
+      },
+      {
+        "endAfterHideMs": 1200,
+        "summoned": false,
+        "msAfterEnd": null,
+        "load": "21.13 28.97 47.00"
+      },
+      {
+        "endAfterHideMs": 1900,
+        "summoned": false,
+        "msAfterEnd": null,
+        "load": "19.76 28.56 46.75"
+      }
+    ],
+    "resummonSummoned": "0/3",
+    "truePositivesMedium": {
+      "circle": "2/2",
+      "zigzag": "1/2",
+      "Z": "2/2"
+    },
+    "toggleLatencyMs": {
+      "median": 197,
+      "n": 31
+    },
+    "copy": {
+      "pad": "Click and drag on the pad. A circle, a zig-zag or a \u201cZ\u201d works well \u2014 later, just move the mouse in that shape anywhere, no click.",
+      "saved": "Saved. Hide Net, then move the mouse in that shape to bring him back."
+    },
+    "load": {
+      "start": "28.55 35.20 52.28",
+      "end": "15.58 26.23 44.95",
+      "perTrial": [
+        "23.79 33.83 51.49",
+        "22.53 33.40 51.24",
+        "22.53 33.40 51.24",
+        "21.37 32.98 50.98",
+        "20.38 32.58 50.74",
+        "20.67 32.44 50.58",
+        "19.25 31.95 50.30",
+        "17.95 31.47 50.03",
+        "16.75 30.99 49.75",
+        "15.65 30.53 49.48",
+        "15.65 30.53 49.48",
+        "15.20 30.19 49.24",
+        "17.26 30.37 49.20",
+        "20.52 30.83 49.25",
+        "22.40 31.04 49.22",
+        "21.01 30.61 48.96",
+        "21.97 30.65 48.86",
+        "24.94 31.12 48.92",
+        "24.06 30.84 48.72",
+        "23.25 30.56 48.51",
+        "22.59 30.30 48.32",
+        "22.59 30.30 48.32",
+        "21.18 29.88 48.06",
+        "21.17 29.73 47.90",
+        "21.15 29.59 47.75",
+        "21.15 29.59 47.75",
+        "21.62 29.54 47.63",
+        "21.57 29.40 47.47",
+        "21.57 29.40 47.47",
+        "22.62 29.40 47.26",
+        "21.13 28.97 47.00",
+        "18.33 28.12 46.49",
+        "17.65 27.48 45.94",
+        "17.65 27.48 45.94",
+        "18.08 27.40 45.80",
+        "15.89 26.47 45.15",
+        "15.58 26.23 44.95"
+      ]
+    },
+    "failures": [],
+    "close": {
+      "how": "quit",
+      "ms": 548,
+      "procs": 8,
+      "orphans": []
+    }
+  },
+  "toggleLatencyMedianOfRunsMs": 204.75,
+  "canon": [
+    {
+      "dir": "canon",
+      "git": "4f4e2df gesture: redraw at once to bring Net back; the Saved copy says it toggles @ ultra/r1/gesture",
+      "pass": "29/29",
+      "uptime": [
+        "4:40  up 6 days, 15:26, 19 users, load averages: 30.83 48.25 41.62",
+        " 4:41  up 6 days, 15:27, 19 users, load averages: 31.12 44.47 40.69"
+      ]
+    },
+    {
+      "dir": "canon-r2",
+      "git": "4f4e2df gesture: redraw at once to bring Net back; the Saved copy says it toggles @ ultra/r1/gesture",
+      "pass": "29/29",
+      "uptime": [
+        "4:42  up 6 days, 15:27, 19 users, load averages: 28.97 43.58 40.42",
+        " 4:43  up 6 days, 15:28, 19 users, load averages: 25.39 39.95 39.33"
+      ]
+    }
+  ],
+  "npmTest": {
+    "pass": "51",
+    "fail": "0",
+    "total": "12.750 s"
+  },
+  "offline": {
+    "note": "after-run watcher samples re-scored with gesture.js (new = this branch, old = ultra/round-1 8e5fe27). best = top score ignoring the button; firesMed/firesLow = a stroke kept after the drag check fires",
+    "againstThisRunsTemplates": [
+      {
+        "label": "sanity: cw circle r110 600 ms (visible)",
+        "new": 0.955,
+        "old": 0.955,
+        "newFiresMed": true,
+        "oldFiresMed": true
+      },
+      {
+        "label": "sanity: cw circle r110 600 ms (hidden)",
+        "new": 0.954,
+        "old": 0.954,
+        "newFiresMed": true,
+        "oldFiresMed": true
+      },
+      {
+        "label": "loop drag of Net #1: closed r110 900 ms, button held",
+        "new": 0.955,
+        "old": 0.955,
+        "newFiresMed": false,
+        "oldFiresMed": true
+      },
+      {
+        "label": "loop drag of Net #2: closed r110 900 ms, button held",
+        "new": 0.953,
+        "old": 0.953,
+        "newFiresMed": false,
+        "oldFiresMed": true
+      },
+      {
+        "label": "loop drag of Net #3: closed r110 900 ms, button held",
+        "new": 0.971,
+        "old": 0.971,
+        "newFiresMed": false,
+        "oldFiresMed": true
+      },
+      {
+        "label": "loop drag of Net #4: closed r110 900 ms, button held",
+        "new": 0.957,
+        "old": 0.957,
+        "newFiresMed": false,
+        "oldFiresMed": true
+      },
+      {
+        "label": "loop drag of Net: 0.85 turn r110 900 ms, button held",
+        "new": 0.92,
+        "old": 0.92,
+        "newFiresMed": false,
+        "oldFiresMed": true
+      },
+      {
+        "label": "loop drag of Net: 0.8 turn r110 900 ms, button held",
+        "new": 0.879,
+        "old": 0.879,
+        "newFiresMed": false,
+        "oldFiresMed": true
+      },
+      {
+        "label": "control: same closed loop, no button",
+        "new": 0.955,
+        "old": 0.955,
+        "newFiresMed": true,
+        "oldFiresMed": true
+      },
+      {
+        "label": "square 180 px cw 800 ms #1 (Medium)",
+        "new": 0.201,
+        "old": 0.87,
+        "newFiresMed": false,
+        "oldFiresMed": true
+      },
+      {
+        "label": "square 180 px cw 800 ms #2 (Medium)",
+        "new": 0.194,
+        "old": 0.863,
+        "newFiresMed": false,
+        "oldFiresMed": true
+      },
+      {
+        "label": "square 180 px cw 800 ms #3 (Medium)",
+        "new": 0.197,
+        "old": 0.865,
+        "newFiresMed": false,
+        "oldFiresMed": true
+      },
+      {
+        "label": "square 180 px cw 800 ms #1 (Low)",
+        "new": 0.195,
+        "old": 0.863,
+        "newFiresMed": false,
+        "oldFiresMed": true
+      },
+      {
+        "label": "square 180 px cw 800 ms #2 (Low)",
+        "new": 0.2,
+        "old": 0.868,
+        "newFiresMed": false,
+        "oldFiresMed": true
+      },
+      {
+        "label": "control: cw circle (Low)",
+        "new": 0.955,
+        "old": 0.955,
+        "newFiresMed": true,
+        "oldFiresMed": true
+      },
+      {
+        "label": "ccw circle r110 600 ms #1",
+        "new": 0.955,
+        "old": 0.096,
+        "newFiresMed": true,
+        "oldFiresMed": false
+      },
+      {
+        "label": "ccw circle r110 600 ms #2",
+        "new": 0.955,
+        "old": 0.097,
+        "newFiresMed": true,
+        "oldFiresMed": false
+      },
+      {
+        "label": "ccw circle r110 600 ms #3",
+        "new": 0.955,
+        "old": 0.098,
+        "newFiresMed": true,
+        "oldFiresMed": false
+      },
+      {
+        "label": "zigzag 700 ms #1 (trained zigzag, Medium)",
+        "new": 0.985,
+        "old": 0.985,
+        "newFiresMed": true,
+        "oldFiresMed": true
+      },
+      {
+        "label": "zigzag 700 ms #2 (trained zigzag, Medium)",
+        "new": 0.981,
+        "old": 0.981,
+        "newFiresMed": true,
+        "oldFiresMed": true
+      },
+      {
+        "label": "Z 700 ms #1 (trained Z, Medium)",
+        "new": 0.99,
+        "old": 0.99,
+        "newFiresMed": true,
+        "oldFiresMed": true
+      },
+      {
+        "label": "Z 700 ms #2 (trained Z, Medium)",
+        "new": 0.99,
+        "old": 0.99,
+        "newFiresMed": true,
+        "oldFiresMed": true
+      }
+    ],
+    "againstCriticTemplates": [
+      {
+        "label": "sanity: cw circle r110 600 ms (visible)",
+        "new": {
+          "best": 0.996,
+          "firesMed": true,
+          "firesLow": true
+        },
+        "old": {
+          "best": 0.996,
+          "firesMed": true,
+          "firesLow": true
+        }
+      },
+      {
+        "label": "sanity: cw circle r110 600 ms (hidden)",
+        "new": {
+          "best": 0.997,
+          "firesMed": true,
+          "firesLow": true
+        },
+        "old": {
+          "best": 0.997,
+          "firesMed": true,
+          "firesLow": true
+        }
+      },
+      {
+        "label": "loop drag of Net #1: closed r110 900 ms, button held",
+        "new": {
+          "best": 0.997,
+          "firesMed": false,
+          "firesLow": false
+        },
+        "old": {
+          "best": 0.997,
+          "firesMed": true,
+          "firesLow": true
+        }
+      },
+      {
+        "label": "loop drag of Net #2: closed r110 900 ms, button held",
+        "new": {
+          "best": 0.975,
+          "firesMed": false,
+          "firesLow": false
+        },
+        "old": {
+          "best": 0.975,
+          "firesMed": true,
+          "firesLow": true
+        }
+      },
+      {
+        "label": "loop drag of Net #3: closed r110 900 ms, button held",
+        "new": {
+          "best": 0.983,
+          "firesMed": false,
+          "firesLow": false
+        },
+        "old": {
+          "best": 0.983,
+          "firesMed": true,
+          "firesLow": true
+        }
+      },
+      {
+        "label": "loop drag of Net #4: closed r110 900 ms, button held",
+        "new": {
+          "best": 0.987,
+          "firesMed": false,
+          "firesLow": false
+        },
+        "old": {
+          "best": 0.987,
+          "firesMed": true,
+          "firesLow": true
+        }
+      },
+      {
+        "label": "loop drag of Net: 0.85 turn r110 900 ms, button held",
+        "new": {
+          "best": 0.868,
+          "firesMed": false,
+          "firesLow": false
+        },
+        "old": {
+          "best": 0.868,
+          "firesMed": true,
+          "firesLow": false
+        }
+      },
+      {
+        "label": "loop drag of Net: 0.8 turn r110 900 ms, button held",
+        "new": {
+          "best": 0.828,
+          "firesMed": false,
+          "firesLow": false
+        },
+        "old": {
+          "best": 0.828,
+          "firesMed": false,
+          "firesLow": false
+        }
+      },
+      {
+        "label": "control: same closed loop, no button",
+        "new": {
+          "best": 0.997,
+          "firesMed": true,
+          "firesLow": true
+        },
+        "old": {
+          "best": 0.997,
+          "firesMed": true,
+          "firesLow": true
+        }
+      },
+      {
+        "label": "square 180 px cw 800 ms #1 (Medium)",
+        "new": {
+          "best": 0.195,
+          "firesMed": false,
+          "firesLow": false
+        },
+        "old": {
+          "best": 0.88,
+          "firesMed": true,
+          "firesLow": true
+        }
+      },
+      {
+        "label": "square 180 px cw 800 ms #2 (Medium)",
+        "new": {
+          "best": 0.184,
+          "firesMed": false,
+          "firesLow": false
+        },
+        "old": {
+          "best": 0.869,
+          "firesMed": true,
+          "firesLow": false
+        }
+      },
+      {
+        "label": "square 180 px cw 800 ms #3 (Medium)",
+        "new": {
+          "best": 0.191,
+          "firesMed": false,
+          "firesLow": false
+        },
+        "old": {
+          "best": 0.876,
+          "firesMed": true,
+          "firesLow": false
+        }
+      },
+      {
+        "label": "square 180 px cw 800 ms #1 (Low)",
+        "new": {
+          "best": 0.188,
+          "firesMed": false,
+          "firesLow": false
+        },
+        "old": {
+          "best": 0.873,
+          "firesMed": true,
+          "firesLow": false
+        }
+      },
+      {
+        "label": "square 180 px cw 800 ms #2 (Low)",
+        "new": {
+          "best": 0.195,
+          "firesMed": false,
+          "firesLow": false
+        },
+        "old": {
+          "best": 0.88,
+          "firesMed": true,
+          "firesLow": false
+        }
+      },
+      {
+        "label": "control: cw circle (Low)",
+        "new": {
+          "best": 0.997,
+          "firesMed": true,
+          "firesLow": true
+        },
+        "old": {
+          "best": 0.997,
+          "firesMed": true,
+          "firesLow": true
+        }
+      },
+      {
+        "label": "ccw circle r110 600 ms #1",
+        "new": {
+          "best": 0.997,
+          "firesMed": true,
+          "firesLow": true
+        },
+        "old": {
+          "best": 0.113,
+          "firesMed": false,
+          "firesLow": false
+        }
+      },
+      {
+        "label": "ccw circle r110 600 ms #2",
+        "new": {
+          "best": 0.998,
+          "firesMed": true,
+          "firesLow": true
+        },
+        "old": {
+          "best": 0.114,
+          "firesMed": false,
+          "firesLow": false
+        }
+      },
+      {
+        "label": "ccw circle r110 600 ms #3",
+        "new": {
+          "best": 0.997,
+          "firesMed": true,
+          "firesLow": true
+        },
+        "old": {
+          "best": 0.115,
+          "firesMed": false,
+          "firesLow": false
+        }
+      }
+    ],
+    "squareVsThresholds": {
+      "thresholds": {
+        "low": 0.88,
+        "med": 0.85,
+        "high": 0.825
+      },
+      "newBest": 0.195,
+      "oldBest": 0.88
+    }
+  },
+  "commits": [
+    "4f4e2df gesture: redraw at once to bring Net back; the Saved copy says it toggles",
+    "1872df8 gesture: a square no longer passes for a circle; a circle counts either way round",
+    "a1d0713 gesture: a stroke Net was dragged through is a drag, not the gesture"
+  ],
+  "notes": [
+    "before/harness = the same recapture.js against ultra/round-1 8e5fe27 (git archive export, userData r1-gesture-before); before/bugs, before/critic, before/packs = the round-1 evidence for r1-S7-09/10/11/12/14",
+    "before zig-zag 1/2: main stalled 260 ms at the stroke's start (load ~18-27), the watcher missed its first third (0.775 offline with either gesture.js) - a load artifact, not a recognizer difference",
+    "harness: main's cursor feed is a replay (the user's pointer never reaches the instance) and the test window passes OS mouse input through; Net is pressed on an uncovered pixel - with Home open launch.js's petPoint pick lies under #chatInput (2 of 6 drags), which made two early runs press the input bar instead of Net (no drag-start reached main)",
+    "seen, not fixed (outside this task): a closed-loop drag released where it began counts as a click (Home toggles); during a Net drag with Home open the watcher polled ~10 times in 900 ms (main busy); squares with corner radius >= ~25% of the side still pass for a circle (0.93); a loop the watcher saw only 7 times (heavy stall) now scores 0.76 (0.95 before; 8+ samples unchanged); zig-zags stay direction-sensitive (the pad copy says so)"
+  ]
+}

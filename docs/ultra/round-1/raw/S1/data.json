@@ -1,0 +1,1673 @@
+{
+ "truth0": {
+  "at": "2026-10-02T01:45:33.128Z",
+  "allOk": false,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "target": "vp-kestrel:0.0",
+    "tty": "/dev/ttys007",
+    "pid": 55946,
+    "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-kestrel/13a1427d-6cb0-4561-b5a3-22453a34bf93.jsonl",
+    "registry": {
+     "status": "waiting",
+     "waitingFor": "permission prompt",
+     "statusUpdatedAt": 1790901173271,
+     "messagingSocketPath": "/tmp/cc-socks/55946.sock",
+     "tmux": "vp-kestrel:@8.%8",
+     "name": "kestrel-4d"
+    },
+    "last": {
+     "kind": "user_prompt",
+     "pending": [],
+     "stopReason": "tool_use",
+     "lastTs": "2026-10-02T00:32:51.904Z"
+    },
+    "subagents": [],
+    "toolProcs": 0,
+    "spendUsd": 0.1437,
+    "lease": null,
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T00:32:51.904Z",
+     "stopReason": "tool_use",
+     "pending": [],
+     "lastAsstText": "",
+     "lastUses": [
+      {
+       "name": "Bash",
+       "ts": "2026-10-01T23:13:24.855Z",
+       "input": "{\"command\":\"./deploy.sh --dry-run\",\"description\":\"Run dry-run deploy script\"}"
+      },
+      {
+       "name": "Bash",
+       "ts": "2026-10-01T23:17:37.073Z",
+       "input": "{\"command\":\"./deploy.sh --dry-run\",\"description\":\"Run dry-run deploy script\"}"
+      }
+     ]
+    }
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "target": "vp-vibepet:0.0",
+    "tty": "/dev/ttys013",
+    "pid": 48221,
+    "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-vibepet/6101876b-19c6-42a1-824f-6f1c7d4fd83e.jsonl",
+    "registry": {
+     "status": "idle",
+     "statusUpdatedAt": 1790902861894,
+     "messagingSocketPath": "/tmp/cc-socks/48221.sock",
+     "tmux": "vp-vibepet:@1.%1",
+     "name": "vibepet-d2"
+    },
+    "last": {
+     "kind": "end_turn",
+     "pending": [],
+     "stopReason": "end_turn",
+     "lastTs": "2026-10-02T01:01:01.846Z"
+    },
+    "subagents": [],
+    "toolProcs": 0,
+    "spendUsd": 0.1184,
+    "lease": null,
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T01:01:01.846Z",
+     "stopReason": "end_turn",
+     "pending": [],
+     "lastAsstText": "The app's main entry file is main.js.",
+     "lastUses": [
+      {
+       "name": "Read",
+       "ts": "2026-10-01T20:24:59.499Z",
+       "input": "{\"file_path\":\"/Users/christopherharris/.vibepet-ultra/fleet/vibepet/package.json\"}"
+      }
+     ]
+    }
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": true,
+    "target": "vp-atlas:0.0",
+    "tty": "/dev/ttys015",
+    "pid": 48392,
+    "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-atlas/5c051e84-b74f-41b6-845f-bde937a9ef90.jsonl",
+    "registry": {
+     "status": "idle",
+     "statusUpdatedAt": 1790894712119,
+     "messagingSocketPath": "/tmp/cc-socks/48392.sock",
+     "tmux": "vp-atlas:@2.%2",
+     "name": "atlas-c4"
+    },
+    "last": {
+     "kind": "interrupted",
+     "pending": [],
+     "stopReason": "tool_use",
+     "lastTs": "2026-10-01T22:45:12.111Z"
+    },
+    "subagents": [],
+    "toolProcs": 0,
+    "spendUsd": 0.0608,
+    "lease": null,
+    "tail": {
+     "kind": "interrupted",
+     "lastTs": "2026-10-01T22:45:12.111Z",
+     "stopReason": "tool_use",
+     "pending": [],
+     "lastAsstText": "",
+     "lastUses": [
+      {
+       "name": "Bash",
+       "ts": "2026-10-01T22:32:25.484Z",
+       "input": "{\"command\":\"./build.sh\",\"description\":\"Run build script\",\"timeout\":600000}"
+      },
+      {
+       "name": "Bash",
+       "ts": "2026-10-01T22:40:50.557Z",
+       "input": "{\"command\":\"./build.sh\",\"description\":\"Run build script\",\"timeout\":600000}"
+      }
+     ]
+    }
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "target": "vp-beacon:0.0",
+    "tty": "/dev/ttys017",
+    "pid": 48539,
+    "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-beacon/a9377f08-ad27-4bd5-bb77-dbd576eab89e.jsonl",
+    "registry": {
+     "status": "waiting",
+     "waitingFor": "input needed",
+     "statusUpdatedAt": 1790901176447,
+     "messagingSocketPath": "/tmp/cc-socks/48539.sock",
+     "tmux": "vp-beacon:@3.%3",
+     "name": "beacon-18"
+    },
+    "last": {
+     "kind": "user_prompt",
+     "pending": [],
+     "stopReason": "tool_use",
+     "lastTs": "2026-10-02T00:32:54.386Z"
+    },
+    "subagents": [],
+    "toolProcs": 0,
+    "spendUsd": 0.1045,
+    "lease": null,
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T00:32:54.386Z",
+     "stopReason": "tool_use",
+     "pending": [],
+     "lastAsstText": "",
+     "lastUses": [
+      {
+       "name": "AskUserQuestion",
+       "ts": "2026-10-01T23:23:36.891Z",
+       "input": "{\"questions\":[{\"question\":\"Which database should beacon use to store check results?\",\"header\":\"Database choice\",\"multiSelect\":false,\"options\":[{\"label\":\"SQLite\""
+      },
+      {
+       "name": "AskUserQuestion",
+       "ts": "2026-10-01T23:25:27.408Z",
+       "input": "{\"questions\":[{\"question\":\"Which database should beacon use to store check results?\",\"header\":\"Database choice\",\"multiSelect\":false,\"options\":[{\"label\":\"SQLite\""
+      }
+     ]
+    }
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": true,
+    "target": "vp-delta:0.0",
+    "tty": "/dev/ttys021",
+    "pid": null,
+    "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-delta/eb59a756-0b6f-4a82-8d55-1f0bc2c40358.jsonl",
+    "registry": null,
+    "last": {
+     "kind": "user_prompt",
+     "pending": [],
+     "stopReason": "end_turn",
+     "lastTs": "2026-10-02T00:39:32.524Z"
+    },
+    "subagents": [
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790894616215.8547
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893561892.025
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894214112.248
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790888567686.3704
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790899908091.0469
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894722501.3132
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790887439799.705
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790887440401.745
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790891823454.4905
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893787023.85
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894722498.2302
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893564199.2212
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790894103678.407
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790887439793.2415
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790891824212.5696
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790900581467.6956
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790894616746.552
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790888567644.45
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893562869.5686
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790891823928.2356
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790900263914.462
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893786787.7073
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790894105218.9543
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893787363.1067
+     },
+     {
+      "kind": "interrupted",
+      "pending": [],
+      "mtime": 1790888398123.3796
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790894103619.4402
+     },
+     {
+      "kind": "interrupted",
+      "pending": [],
+      "mtime": 1790888398120.8875
+     },
+     {
+      "kind": "interrupted",
+      "pending": [],
+      "mtime": 1790888398122.6323
+     },
+     {
+      "kind": "assistant_streaming",
+      "pending": [],
+      "mtime": 1790894615691.8984
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894214111.6057
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790888567625.1365
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894722500.5576
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894214111.1565
+     }
+    ],
+    "toolProcs": 0,
+    "spendUsd": 0.7549,
+    "lease": null,
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T00:39:32.524Z",
+     "stopReason": "end_turn",
+     "pending": [],
+     "lastAsstText": "rejected",
+     "lastUses": [
+      {
+       "name": "Agent",
+       "ts": "2026-10-02T00:12:34.142Z",
+       "input": "{\"description\":\"Run probe command\",\"subagent_type\":\"general-purpose\",\"prompt\":\"Run `touch shards/.probe` with the Bash tool. If successful, reply with the singl"
+      },
+      {
+       "name": "Agent",
+       "ts": "2026-10-02T00:17:51.313Z",
+       "input": "{\"description\":\"Run probe command\",\"subagent_type\":\"general-purpose\",\"prompt\":\"Run `touch shards/.probe` with the Bash tool. If successful, reply with the singl"
+      }
+     ]
+    }
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "target": "vp-ember:0.0",
+    "tty": "/dev/ttys023",
+    "pid": null,
+    "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-ember/db0c1ec0-b899-4ca1-a238-7d979e61e099.jsonl",
+    "registry": null,
+    "last": {
+     "kind": "user_prompt",
+     "pending": [],
+     "stopReason": "end_turn",
+     "lastTs": "2026-10-02T00:31:59.879Z"
+    },
+    "subagents": [],
+    "toolProcs": 0,
+    "loop": null,
+    "spendUsd": 0.3215,
+    "lease": null,
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T00:31:59.879Z",
+     "stopReason": "end_turn",
+     "pending": [],
+     "lastAsstText": "Done. Tick 24 executed at 2026-10-01T18:31:56-0600.",
+     "lastUses": [
+      {
+       "name": "Bash",
+       "ts": "2026-10-02T00:23:44.511Z",
+       "input": "{\"command\":\"./tick.sh\",\"description\":\"Run tick script\"}"
+      },
+      {
+       "name": "Bash",
+       "ts": "2026-10-02T00:28:29.987Z",
+       "input": "{\"command\":\"./tick.sh\",\"description\":\"Run tick script\"}"
+      }
+     ]
+    }
+   }
+  ],
+  "spend": {
+   "transcriptsUsd": 1.731016,
+   "estimateWithHiddenUsd": 2.5704,
+   "stop": 3.32,
+   "cap": 5
+  }
+ },
+ "firstOpen": {
+  "mode": "setup",
+  "at": {
+   "x": 330.5,
+   "y": 732.5
+  },
+  "upToShown": 221.8,
+  "upToPaint": 249.8,
+  "wallClickToDetect": 377,
+  "trusted": true,
+  "ev": [
+   [
+    "down",
+    24723,
+    1
+   ],
+   [
+    "up",
+    24786.7,
+    1
+   ],
+   [
+    "shown",
+    25008.5,
+    null
+   ],
+   [
+    "shownPaint",
+    25036.5,
+    null
+   ]
+  ],
+  "load": [
+   2.302734375,
+   1.962890625,
+   2.154296875
+  ],
+  "shot": "shots/02-F6-setup-firstrun.png",
+  "shotPanel": "shots/03-F6-setup-firstrun-panel.png",
+  "setupText": "Quick setup\n\n30 seconds. Everything here can be changed later.\n\nPet\nNet\nSlime\nCat\nSprout\nShroom\nStar\nKoi\nSize\nSmall\nMedium\nLarge\nFeel\nCalm\nLively\nStill\nAlerts\nOnly when blocked\n+ Finished\nEverything\nPermissions\n✓ Accessibility exact tab jumps, approve & reply\n✓ Screen Recording shorts\nKeys\n⌃⌥⌘J jump to who needs you · ⌃⌥⌘R record a short\nDone"
+ },
+ "f1": {
+  "opens": [
+   {
+    "i": 1,
+    "okOpen": true,
+    "upToShown": 220.2,
+    "upToPaint": 245,
+    "wall": 394,
+    "load": 3.20849609375
+   },
+   {
+    "i": 2,
+    "okOpen": true,
+    "upToShown": 221.4,
+    "upToPaint": 234.1,
+    "wall": 373,
+    "load": 3.20849609375
+   },
+   {
+    "i": 3,
+    "okOpen": true,
+    "upToShown": 221.9,
+    "upToPaint": 236,
+    "wall": 370,
+    "load": 3.20849609375
+   },
+   {
+    "i": 4,
+    "okOpen": true,
+    "upToShown": 220.6,
+    "upToPaint": 240.1,
+    "wall": 366,
+    "load": 2.951171875
+   },
+   {
+    "i": 5,
+    "okOpen": true,
+    "upToShown": 222.6,
+    "upToPaint": 230,
+    "wall": 378,
+    "load": 2.951171875
+   }
+  ],
+  "escCloses": [
+   {
+    "i": 1,
+    "okClose": true,
+    "keyToHidden": 0.1,
+    "keyToPaint": 2.6,
+    "wall": 6
+   },
+   {
+    "i": 2,
+    "okClose": true,
+    "keyToHidden": 0.1,
+    "keyToPaint": 14.2,
+    "wall": 2
+   },
+   {
+    "i": 3,
+    "okClose": true,
+    "keyToHidden": 0,
+    "keyToPaint": 14.1,
+    "wall": 2
+   },
+   {
+    "i": 4,
+    "okClose": true,
+    "keyToHidden": 0.1,
+    "keyToPaint": 17.3,
+    "wall": 3
+   },
+   {
+    "i": 5,
+    "okClose": true,
+    "keyToHidden": 0.1,
+    "keyToPaint": 18.9,
+    "wall": 3
+   }
+  ],
+  "load0": [
+   2.79150390625,
+   2.22412109375,
+   2.24072265625
+  ],
+  "median": {
+   "upToShown": 221.4,
+   "upToPaint": 236,
+   "wall": 373,
+   "escToHidden": 0.1,
+   "escToPaint": 14.2
+  },
+  "load1": [
+   3.03515625,
+   2.3095703125,
+   2.2705078125
+  ]
+ },
+ "f1b": {
+  "dbl": [
+   {
+    "i": 1,
+    "ok": true,
+    "secondUpToShown": 0.1,
+    "secondUpToPaint": 14.1,
+    "firstUpToShown": 69.6,
+    "shownCount": 1,
+    "hiddenCount": 0,
+    "stillOpenAfter600": true
+   },
+   {
+    "i": 2,
+    "ok": true,
+    "secondUpToShown": 0.1,
+    "secondUpToPaint": 36.3,
+    "firstUpToShown": 66.6,
+    "shownCount": 1,
+    "hiddenCount": 0,
+    "stillOpenAfter600": true
+   },
+   {
+    "i": 3,
+    "ok": true,
+    "secondUpToShown": 0.2,
+    "secondUpToPaint": 20.9,
+    "firstUpToShown": 66.5,
+    "shownCount": 1,
+    "hiddenCount": 0,
+    "stillOpenAfter600": true
+   }
+  ],
+  "btnClose": [
+   {
+    "i": 1,
+    "ok": true,
+    "upToHidden": 0.1
+   },
+   {
+    "i": 2,
+    "ok": true,
+    "upToHidden": 0.1
+   },
+   {
+    "i": 3,
+    "ok": true,
+    "upToHidden": 0
+   }
+  ],
+  "toggleClose": [
+   {
+    "i": 1,
+    "ok": true,
+    "upToHidden": 220.6,
+    "upToPaint": 233.1
+   },
+   {
+    "i": 2,
+    "ok": true,
+    "upToHidden": 221.4,
+    "upToPaint": 232.9
+   },
+   {
+    "i": 3,
+    "ok": true,
+    "upToHidden": 221,
+    "upToPaint": 232.3
+   }
+  ],
+  "blurClose": {
+   "emulated": true,
+   "docHadFocus": true,
+   "closed": true
+  },
+  "load": [
+   3.15576171875,
+   2.41845703125,
+   2.3115234375
+  ]
+ },
+ "rearmEmber": {
+  "t0": 1790905699895,
+  "t1": 1790905703987,
+  "code": 0
+ },
+ "tt0-asfound": {
+  "label": "tt0-asfound",
+  "at": "2026-10-02T01:52:09.285Z",
+  "fleetAt": "2026-10-02T01:52:09.267Z",
+  "rowsReadAt": "2026-10-02T01:52:09.177Z",
+  "rowsChangedDuringRead": false,
+  "rowsOrder": [
+   "ready:ember · done 4m ago"
+  ],
+  "aboveFold": 1,
+  "totalRows": 1,
+  "empty": null,
+  "extra": [],
+  "members": [
+   {
+    "member": "kestrel",
+    "state": "approval",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "waiting",
+     "waitingFor": "permission prompt",
+     "since": "2026-10-02T00:32:53.271Z"
+    },
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T00:32:51.904Z",
+     "pending": [],
+     "lastText": ""
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 4756,
+    "ageBasis": "registry waiting since 2026-10-02T00:32:53.271Z",
+    "shownAgeS": null,
+    "expected": "needs you: approval, with the command and Approve",
+    "problems": [
+     "no row"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "vibepet",
+    "state": "done",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "idle",
+     "waitingFor": null,
+     "since": "2026-10-02T01:01:01.894Z"
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T01:01:01.846Z",
+     "pending": [],
+     "lastText": "The app's main entry file is main.js."
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 3067,
+    "ageBasis": "end_turn at 2026-10-02T01:01:01.846Z",
+    "shownAgeS": null,
+    "expected": "done, your move (finished turn), age since the turn ended",
+    "problems": [
+     "no row"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "atlas",
+    "state": "working",
+    "inState": false,
+    "paused": true,
+    "registry": {
+     "status": "idle",
+     "waitingFor": null,
+     "since": "2026-10-01T22:45:12.119Z"
+    },
+    "tail": {
+     "kind": "interrupted",
+     "lastTs": "2026-10-01T22:45:12.111Z",
+     "pending": [],
+     "lastText": ""
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 11217,
+    "ageBasis": "registry idle since 2026-10-01T22:45:12.119Z",
+    "shownAgeS": null,
+    "expected": "running: the long tool, age since it started",
+    "problems": [
+     "member not in its state (paused)"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "beacon",
+    "state": "question",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "waiting",
+     "waitingFor": "input needed",
+     "since": "2026-10-02T00:32:56.447Z"
+    },
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T00:32:54.386Z",
+     "pending": [],
+     "lastText": ""
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 4753,
+    "ageBasis": "registry waiting since 2026-10-02T00:32:56.447Z",
+    "shownAgeS": null,
+    "expected": "needs you: question, with the question text and Reply (pick an option)",
+    "problems": [
+     "no row"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "delta",
+    "state": "fanout",
+    "inState": false,
+    "paused": true,
+    "registry": null,
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T00:39:32.524Z",
+     "pending": [],
+     "lastText": "rejected"
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 33,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": null,
+    "ageBasis": null,
+    "shownAgeS": null,
+    "expected": "running with 3 subagents open (fan-out gauge)",
+    "problems": [
+     "member not in its state (paused)"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "ember",
+    "state": "loop",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "idle",
+     "waitingFor": null,
+     "since": "2026-10-02T01:48:23.752Z"
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T01:48:23.720Z",
+     "pending": [],
+     "lastText": "Done. Tick 25 executed at 2026-10-01T19:48:22-0600."
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": {
+     "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+     "sig": "ready",
+     "title": "ember",
+     "label": "ember · done 4m ago",
+     "ask": null,
+     "goal": null,
+     "acts": [
+      "replay",
+      "goal"
+     ],
+     "above": true
+    },
+    "snapshotPhase": "ready",
+    "snapshotFan": null,
+    "trueAgeS": 226,
+    "ageBasis": "registry idle since 2026-10-02T01:48:23.752Z",
+    "shownAgeS": 240,
+    "expected": "looping/scheduled between fires (not done, not waiting on you)",
+    "problems": [
+     "loop shown as done"
+    ],
+    "verdict": "WRONG"
+   }
+  ],
+  "load": [
+   3.51025390625,
+   3.17236328125,
+   2.6953125
+  ],
+  "spend": {
+   "transcriptsUsd": 1.779528,
+   "estimateWithHiddenUsd": 2.6432,
+   "stop": 3.32,
+   "cap": 5
+  }
+ },
+ "rearmAtlas": {
+  "t0": 1790906032993,
+  "t1": 1790906035707,
+  "code": 0
+ },
+ "rearmDelta": {
+  "t0": 1790906285859,
+  "t1": 1790906296465,
+  "code": 0
+ },
+ "tt1-all": {
+  "label": "tt1-all",
+  "at": "2026-10-02T01:58:43.676Z",
+  "fleetAt": "2026-10-02T01:58:43.640Z",
+  "rowsReadAt": "2026-10-02T01:58:43.587Z",
+  "rowsChangedDuringRead": false,
+  "rowsOrder": [
+   "ready:vibepet · done 4m ago",
+   "ready:ember · done 10m ago",
+   "running:atlas · 0s",
+   "running:delta · 33s"
+  ],
+  "aboveFold": 3,
+  "totalRows": 4,
+  "empty": null,
+  "extra": [],
+  "members": [
+   {
+    "member": "kestrel",
+    "state": "approval",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "waiting",
+     "waitingFor": "permission prompt",
+     "since": "2026-10-02T01:54:40.790Z"
+    },
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T01:54:39.186Z",
+     "pending": [],
+     "lastText": ""
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 243,
+    "ageBasis": "registry waiting since 2026-10-02T01:54:40.790Z",
+    "shownAgeS": null,
+    "expected": "needs you: approval, with the command and Approve",
+    "problems": [
+     "no row"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "vibepet",
+    "state": "done",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "idle",
+     "waitingFor": null,
+     "since": "2026-10-02T01:55:03.405Z"
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T01:55:03.362Z",
+     "pending": [],
+     "lastText": "The HTTP server failed to start with exit code 143."
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": {
+     "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+     "sig": "ready",
+     "title": "Read package.json",
+     "label": "vibepet · done 4m ago",
+     "ask": null,
+     "goal": "◎ Read package.json and tell me in one plain sentence what this project is.",
+     "acts": [
+      "replay",
+      "done",
+      "goal"
+     ],
+     "above": true
+    },
+    "snapshotPhase": "ready",
+    "snapshotFan": null,
+    "trueAgeS": 220,
+    "ageBasis": "end_turn at 2026-10-02T01:55:03.362Z",
+    "shownAgeS": 240,
+    "expected": "done, your move (finished turn), age since the turn ended",
+    "problems": [],
+    "verdict": "ok"
+   },
+   {
+    "member": "atlas",
+    "state": "working",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "busy",
+     "waitingFor": null,
+     "since": "2026-10-02T01:53:53.784Z"
+    },
+    "tail": {
+     "kind": "pending_tool_use",
+     "lastTs": "2026-10-02T01:53:55.132Z",
+     "pending": [
+      "Bash {\"command\":\"./build.sh\",\"description\":\"Run build script\",\"timeout\":600000}"
+     ],
+     "lastText": ""
+    },
+    "toolProcs": 3,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": {
+     "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+     "sig": "running",
+     "title": "Run build.sh",
+     "label": "atlas · 0s",
+     "ask": null,
+     "goal": "◎ Run exactly ./build.sh with the Bash tool in the foreground (do not run it in t…",
+     "acts": [
+      "replay",
+      "done",
+      "goal"
+     ],
+     "above": true
+    },
+    "snapshotPhase": "stalled",
+    "snapshotFan": null,
+    "trueAgeS": 290,
+    "ageBasis": "registry busy since 2026-10-02T01:53:53.784Z",
+    "shownAgeS": 0,
+    "expected": "running: the long tool, age since it started",
+    "problems": [
+     "age shown 0s vs true 290s"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "beacon",
+    "state": "question",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "waiting",
+     "waitingFor": "input needed",
+     "since": "2026-10-02T01:54:41.359Z"
+    },
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T01:54:39.786Z",
+     "pending": [],
+     "lastText": ""
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 242,
+    "ageBasis": "registry waiting since 2026-10-02T01:54:41.359Z",
+    "shownAgeS": null,
+    "expected": "needs you: question, with the question text and Reply (pick an option)",
+    "problems": [
+     "no row"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "delta",
+    "state": "fanout",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "busy",
+     "waitingFor": null,
+     "since": "2026-10-02T01:58:09.664Z"
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T01:58:14.584Z",
+     "pending": [],
+     "lastText": "Three shards launched in parallel. Waiting for results."
+    },
+    "toolProcs": 9,
+    "subagentsActive": 0,
+    "subagents": 36,
+    "row": {
+     "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+     "sig": "running",
+     "title": "Reconcile three shards in parallel",
+     "label": "delta · 33s",
+     "ask": null,
+     "goal": "◎ Reconcile the three shards in parallel.",
+     "acts": [
+      "replay",
+      "done",
+      "goal"
+     ],
+     "above": false
+    },
+    "snapshotPhase": "working",
+    "snapshotFan": {
+     "total": 3,
+     "open": 3,
+     "done": 0,
+     "stuck": 0
+    },
+    "trueAgeS": 34,
+    "ageBasis": "registry busy since 2026-10-02T01:58:09.664Z",
+    "shownAgeS": 33,
+    "expected": "running with 3 subagents open (fan-out gauge)",
+    "problems": [
+     "no fan-out gauge in the row (Home rows have none)"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "ember",
+    "state": "loop",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "idle",
+     "waitingFor": null,
+     "since": "2026-10-02T01:57:54.683Z"
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T01:57:54.638Z",
+     "pending": [],
+     "lastText": "Done. Tick 27 executed at 2026-10-01T19:57:53-0600."
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": {
+     "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+     "sig": "ready",
+     "title": "ember",
+     "label": "ember · done 10m ago",
+     "ask": null,
+     "goal": null,
+     "acts": [
+      "replay",
+      "goal"
+     ],
+     "above": true
+    },
+    "snapshotPhase": "ready",
+    "snapshotFan": null,
+    "trueAgeS": 49,
+    "ageBasis": "registry idle since 2026-10-02T01:57:54.683Z",
+    "shownAgeS": 600,
+    "expected": "looping/scheduled between fires (not done, not waiting on you)",
+    "problems": [
+     "age shown 600s vs true 49s",
+     "loop shown as done"
+    ],
+    "verdict": "WRONG"
+   }
+  ],
+  "load": [
+   10.08740234375,
+   5.36865234375,
+   3.69140625
+  ],
+  "spend": {
+   "transcriptsUsd": 2.045772,
+   "estimateWithHiddenUsd": 3.0425,
+   "stop": 3.32,
+   "cap": 5
+  }
+ },
+ "pauseEmber": {
+  "t0": 1790906374347,
+  "t1": 1790906375950,
+  "code": 0
+ },
+ "tt2": {
+  "label": "tt2",
+  "at": "2026-10-02T02:00:52.020Z",
+  "fleetAt": "2026-10-02T02:00:51.978Z",
+  "rowsReadAt": "2026-10-02T02:00:51.835Z",
+  "rowsChangedDuringRead": false,
+  "rowsOrder": [
+   "needs:kestrel · waiting 1m",
+   "ready:delta · done just now",
+   "running:atlas · 0s",
+   "running:ember · 1m 13s"
+  ],
+  "aboveFold": 3,
+  "totalRows": 4,
+  "empty": null,
+  "extra": [],
+  "members": [
+   {
+    "member": "kestrel",
+    "state": "approval",
+    "inState": false,
+    "paused": false,
+    "registry": {
+     "status": "idle",
+     "waitingFor": null,
+     "since": "2026-10-02T02:00:09.659Z"
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T02:00:09.598Z",
+     "pending": [],
+     "lastText": "Should the deploy script have unit tests?"
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": {
+     "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+     "sig": "needs",
+     "title": "Deploy.sh dry run",
+     "label": "kestrel · waiting 1m",
+     "ask": "Should the deploy script have unit tests?",
+     "goal": "◎ Run exactly ./deploy.sh --dry-run with the Bash tool.",
+     "acts": [
+      "reply",
+      "replay",
+      "done",
+      "goal"
+     ],
+     "above": true
+    },
+    "snapshotPhase": "waiting",
+    "snapshotFan": null,
+    "trueAgeS": 42,
+    "ageBasis": "registry idle since 2026-10-02T02:00:09.659Z",
+    "shownAgeS": 60,
+    "expected": "needs you: approval, with the command and Approve",
+    "problems": [
+     "member not in its state (fleet: )",
+     "no approve action (has reply,replay,done,goal)"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "vibepet",
+    "state": "done",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "idle",
+     "waitingFor": null,
+     "since": "2026-10-02T01:55:03.405Z"
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T01:55:03.362Z",
+     "pending": [],
+     "lastText": "The HTTP server failed to start with exit code 143."
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 349,
+    "ageBasis": "end_turn at 2026-10-02T01:55:03.362Z",
+    "shownAgeS": null,
+    "expected": "done, your move (finished turn), age since the turn ended",
+    "problems": [
+     "no row"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "atlas",
+    "state": "working",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "busy",
+     "waitingFor": null,
+     "since": "2026-10-02T01:53:53.784Z"
+    },
+    "tail": {
+     "kind": "pending_tool_use",
+     "lastTs": "2026-10-02T01:53:55.132Z",
+     "pending": [
+      "Bash {\"command\":\"./build.sh\",\"description\":\"Run build script\",\"timeout\":600000}"
+     ],
+     "lastText": ""
+    },
+    "toolProcs": 3,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": {
+     "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+     "sig": "running",
+     "title": "Run build.sh",
+     "label": "atlas · 0s",
+     "ask": null,
+     "goal": "◎ Run exactly ./build.sh with the Bash tool in the foreground (do not run it in t…",
+     "acts": [
+      "replay",
+      "done",
+      "goal"
+     ],
+     "above": true
+    },
+    "snapshotPhase": "working",
+    "snapshotFan": null,
+    "trueAgeS": 418,
+    "ageBasis": "registry busy since 2026-10-02T01:53:53.784Z",
+    "shownAgeS": 0,
+    "expected": "running: the long tool, age since it started",
+    "problems": [
+     "age shown 0s vs true 418s"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "beacon",
+    "state": "question",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "waiting",
+     "waitingFor": "input needed",
+     "since": "2026-10-02T01:54:41.359Z"
+    },
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T01:54:39.786Z",
+     "pending": [],
+     "lastText": ""
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 371,
+    "ageBasis": "registry waiting since 2026-10-02T01:54:41.359Z",
+    "shownAgeS": null,
+    "expected": "needs you: question, with the question text and Reply (pick an option)",
+    "problems": [
+     "no row"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "delta",
+    "state": "fanout",
+    "inState": false,
+    "paused": false,
+    "registry": {
+     "status": "idle",
+     "waitingFor": null,
+     "since": "2026-10-02T02:00:49.089Z"
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T02:00:48.941Z",
+     "pending": [],
+     "lastText": "All shards reconciled:\n- `[shard-1] reconciled`\n- `[shard-2] reconciled`\n- `[shard-3] reconciled`"
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 36,
+    "row": {
+     "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+     "sig": "ready",
+     "title": "Reconcile three shards in parallel",
+     "label": "delta · done just now",
+     "ask": null,
+     "goal": "◎ Reconcile the three shards in parallel.",
+     "acts": [
+      "replay",
+      "done",
+      "goal"
+     ],
+     "above": true
+    },
+    "snapshotPhase": "ready",
+    "snapshotFan": {
+     "total": 3,
+     "open": 0,
+     "done": 3,
+     "stuck": 0
+    },
+    "trueAgeS": 3,
+    "ageBasis": "registry idle since 2026-10-02T02:00:49.089Z",
+    "shownAgeS": 0,
+    "expected": "running with 3 subagents open (fan-out gauge)",
+    "problems": [
+     "member not in its state (fleet: )",
+     "signal ready, want running",
+     "no fan-out gauge in the row (Home rows have none)"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "ember",
+    "state": "loop",
+    "inState": false,
+    "paused": true,
+    "registry": null,
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T01:59:35.255Z",
+     "pending": [],
+     "lastText": "Done. Tick 27 executed at 2026-10-01T19:57:53-0600."
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": {
+     "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+     "sig": "running",
+     "title": "ember",
+     "label": "ember · 1m 13s",
+     "ask": null,
+     "goal": null,
+     "acts": [
+      "replay",
+      "goal"
+     ],
+     "above": false
+    },
+    "snapshotPhase": "working",
+    "snapshotFan": null,
+    "trueAgeS": null,
+    "ageBasis": null,
+    "shownAgeS": 73,
+    "expected": "looping/scheduled between fires (not done, not waiting on you)",
+    "problems": [
+     "member not in its state (paused)"
+    ],
+    "verdict": "WRONG"
+   }
+  ],
+  "load": [
+   5.541015625,
+   5.0986328125,
+   3.8095703125
+  ],
+  "spend": {
+   "transcriptsUsd": 2.113267,
+   "estimateWithHiddenUsd": 3.1398,
+   "stop": 3.32,
+   "cap": 5
+  }
+ },
+ "tt3-empty": {
+  "label": "tt3-empty",
+  "at": "2026-10-02T02:08:29.524Z",
+  "fleetAt": "2026-10-02T02:08:29.505Z",
+  "rowsReadAt": "2026-10-02T02:08:29.276Z",
+  "rowsChangedDuringRead": false,
+  "rowsOrder": [],
+  "aboveFold": 0,
+  "totalRows": 0,
+  "empty": "No live sessions. Start Claude Code anywhere and I’ll pick it up.",
+  "extra": [],
+  "members": [
+   {
+    "member": "kestrel",
+    "state": "approval",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "waiting",
+     "waitingFor": "permission prompt",
+     "since": "2026-10-02T02:03:49.383Z"
+    },
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T02:03:48.056Z",
+     "pending": [],
+     "lastText": "Should the deploy script have unit tests?"
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 280,
+    "ageBasis": "registry waiting since 2026-10-02T02:03:49.383Z",
+    "shownAgeS": null,
+    "expected": "needs you: approval, with the command and Approve",
+    "problems": [
+     "no row"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "vibepet",
+    "state": "done",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "idle",
+     "waitingFor": null,
+     "since": "2026-10-02T01:55:03.405Z"
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T01:55:03.362Z",
+     "pending": [],
+     "lastText": "The HTTP server failed to start with exit code 143."
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 806,
+    "ageBasis": "end_turn at 2026-10-02T01:55:03.362Z",
+    "shownAgeS": null,
+    "expected": "done, your move (finished turn), age since the turn ended",
+    "problems": [
+     "no row"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "atlas",
+    "state": "working",
+    "inState": false,
+    "paused": false,
+    "registry": {
+     "status": "idle",
+     "waitingFor": null,
+     "since": "2026-10-02T02:02:57.054Z"
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T02:02:56.993Z",
+     "pending": [],
+     "lastText": "`[build] atlas build complete`"
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 332,
+    "ageBasis": "registry idle since 2026-10-02T02:02:57.054Z",
+    "shownAgeS": null,
+    "expected": "running: the long tool, age since it started",
+    "problems": [
+     "member not in its state (fleet: )"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "beacon",
+    "state": "question",
+    "inState": true,
+    "paused": false,
+    "registry": {
+     "status": "waiting",
+     "waitingFor": "input needed",
+     "since": "2026-10-02T01:54:41.359Z"
+    },
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T01:54:39.786Z",
+     "pending": [],
+     "lastText": ""
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 828,
+    "ageBasis": "registry waiting since 2026-10-02T01:54:41.359Z",
+    "shownAgeS": null,
+    "expected": "needs you: question, with the question text and Reply (pick an option)",
+    "problems": [
+     "no row"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "delta",
+    "state": "fanout",
+    "inState": false,
+    "paused": false,
+    "registry": {
+     "status": "idle",
+     "waitingFor": null,
+     "since": "2026-10-02T02:00:49.089Z"
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T02:00:48.941Z",
+     "pending": [],
+     "lastText": "All shards reconciled:\n- `[shard-1] reconciled`\n- `[shard-2] reconciled`\n- `[shard-3] reconciled`"
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 36,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": 460,
+    "ageBasis": "registry idle since 2026-10-02T02:00:49.089Z",
+    "shownAgeS": null,
+    "expected": "running with 3 subagents open (fan-out gauge)",
+    "problems": [
+     "member not in its state (fleet: )"
+    ],
+    "verdict": "WRONG"
+   },
+   {
+    "member": "ember",
+    "state": "loop",
+    "inState": false,
+    "paused": true,
+    "registry": null,
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T01:59:35.255Z",
+     "pending": [],
+     "lastText": "Done. Tick 27 executed at 2026-10-01T19:57:53-0600."
+    },
+    "toolProcs": 0,
+    "subagentsActive": 0,
+    "subagents": 0,
+    "row": null,
+    "snapshotPhase": null,
+    "snapshotFan": null,
+    "trueAgeS": null,
+    "ageBasis": null,
+    "shownAgeS": null,
+    "expected": "looping/scheduled between fires (not done, not waiting on you)",
+    "problems": [
+     "member not in its state (paused)"
+    ],
+    "verdict": "WRONG"
+   }
+  ],
+  "load": [
+   3.83447265625,
+   4.87109375,
+   4.32861328125
+  ],
+  "spend": {
+   "transcriptsUsd": 2.119002,
+   "estimateWithHiddenUsd": 3.1484,
+   "stop": 3.32,
+   "cap": 5
+  }
+ },
+ "rearmBeacon": {
+  "t0": 1790907190521,
+  "t1": 1790907190722,
+  "code": 0
+ },
+ "rearmBeacon2": {
+  "t0": 1790907220343,
+  "t1": 1790907222983,
+  "code": 0
+ }
+}

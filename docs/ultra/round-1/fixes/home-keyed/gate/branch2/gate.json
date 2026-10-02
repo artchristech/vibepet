@@ -1,0 +1,902 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-home-keyed",
+  "git": "5e8f472 home: needs-you rows stack only at the top of the list",
+  "startedAt": "2026-10-02T07:41:49.011Z",
+  "loadStart": "779.45 793.52 797.04",
+  "home": {
+    "mode": "now",
+    "ms": 534,
+    "rows": [
+      "kestrel:running"
+    ],
+    "load": "768.36 790.99 796.12"
+  },
+  "liveFoldEmpty": {
+    "rows": 1,
+    "inView": 1,
+    "needs": 0,
+    "needsInView": 0,
+    "footerInView": true,
+    "msgs": 0,
+    "panel": 460,
+    "listViewport": 28,
+    "listScroll": 28,
+    "msgsBox": 0,
+    "needsStack": 0
+  },
+  "presses": [
+    {
+      "id": "13a1427d",
+      "ticksDuringPress": 1,
+      "took": true,
+      "load": "764.25 789.76 795.66"
+    }
+  ],
+  "focus": {
+    "el": "<button data-do=\"replay\" title=\"Replay this sessio",
+    "kept": [
+      true,
+      true,
+      true
+    ]
+  },
+  "keys": {
+    "approvalRow": -1,
+    "afterEsc": "chatInput",
+    "tabFromComposer": "homeMore",
+    "shiftTabBack": "chatInput",
+    "blurs": 0,
+    "homeOpen": "now"
+  },
+  "needs4": {
+    "order": [
+      "extra0:waiting",
+      "extra1:waiting",
+      "extra2:waiting",
+      "extra3:waiting",
+      "extra5:ready",
+      "extra7:ready",
+      "extra9:ready",
+      "extra11:ready",
+      "extra13:ready",
+      "kestrel:working",
+      "extra4:working",
+      "extra6:working",
+      "extra8:working",
+      "extra10:working",
+      "extra12:working"
+    ],
+    "load": "753.87 786.76 794.53",
+    "emptyChat": {
+      "fold": {
+        "rows": 15,
+        "inView": 7,
+        "needs": 4,
+        "needsInView": 4,
+        "footerInView": true,
+        "msgs": 0,
+        "panel": 596,
+        "listViewport": 452,
+        "listScroll": 691,
+        "msgsBox": 0,
+        "needsStack": 355
+      },
+      "reach": {
+        "max": 239,
+        "rows": 15,
+        "neverVisible": [],
+        "partlyOnly": [],
+        "detail": [
+          {
+            "title": "Extra session 1 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 2 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 3 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 4 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 6 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 28
+          },
+          {
+            "title": "Extra session 8 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 28
+          },
+          {
+            "title": "Extra session 10 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 28
+          },
+          {
+            "title": "Extra session 12 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 28
+          },
+          {
+            "title": "Extra session 14 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 28
+          },
+          {
+            "title": "Deploy.sh dry run",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 28
+          },
+          {
+            "title": "Extra session 5 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 28
+          },
+          {
+            "title": "Extra session 7 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 28
+          },
+          {
+            "title": "Extra session 9 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 28
+          },
+          {
+            "title": "Extra session 11 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 28
+          },
+          {
+            "title": "Extra session 13 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 28
+          }
+        ]
+      }
+    },
+    "oneNote": {
+      "fold": {
+        "rows": 15,
+        "inView": 3,
+        "needs": 4,
+        "needsInView": 3,
+        "footerInView": true,
+        "msgs": 1,
+        "panel": 596,
+        "listViewport": 340,
+        "listScroll": 691,
+        "msgsBox": 112,
+        "needsStack": 355
+      },
+      "reach": {
+        "max": 351,
+        "rows": 15,
+        "neverVisible": [
+          "Extra session 6 (gate)",
+          "Extra session 8 (gate)",
+          "Extra session 10 (gate)",
+          "Extra session 12 (gate)",
+          "Extra session 14 (gate)",
+          "Deploy.sh dry run",
+          "Extra session 5 (gate)",
+          "Extra session 7 (gate)",
+          "Extra session 9 (gate)",
+          "Extra session 11 (gate)",
+          "Extra session 13 (gate)"
+        ],
+        "partlyOnly": [],
+        "detail": [
+          {
+            "title": "Extra session 1 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 2 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 3 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 4 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 6 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 8 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 10 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 12 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 14 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Deploy.sh dry run",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 5 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 7 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 9 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 11 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 13 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          }
+        ]
+      }
+    },
+    "slash": {
+      "fold": {
+        "rows": 15,
+        "inView": 1,
+        "needs": 4,
+        "needsInView": 1,
+        "footerInView": true,
+        "msgs": 1,
+        "panel": 596,
+        "listViewport": 145,
+        "listScroll": 691,
+        "msgsBox": 112,
+        "needsStack": 355
+      },
+      "reach": {
+        "max": 546,
+        "rows": 15,
+        "neverVisible": [
+          "Extra session 3 (gate)",
+          "Extra session 6 (gate)",
+          "Extra session 8 (gate)",
+          "Extra session 10 (gate)",
+          "Extra session 12 (gate)",
+          "Extra session 14 (gate)",
+          "Deploy.sh dry run",
+          "Extra session 5 (gate)",
+          "Extra session 7 (gate)",
+          "Extra session 9 (gate)",
+          "Extra session 11 (gate)",
+          "Extra session 13 (gate)"
+        ],
+        "partlyOnly": [
+          "Extra session 2 (gate) (56/89px)"
+        ],
+        "detail": [
+          {
+            "title": "Extra session 1 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 2 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 56
+          },
+          {
+            "title": "Extra session 3 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 4 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 6 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 8 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 10 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 12 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 14 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Deploy.sh dry run",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 5 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 7 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 9 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 11 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 13 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          }
+        ]
+      }
+    }
+  },
+  "needs5": {
+    "order": [
+      "extra0:waiting",
+      "extra1:waiting",
+      "extra2:waiting",
+      "extra3:waiting",
+      "extra4:waiting",
+      "extra5:ready",
+      "extra7:ready",
+      "extra9:ready",
+      "extra11:ready",
+      "extra13:ready",
+      "kestrel:working",
+      "extra6:working",
+      "extra8:working",
+      "extra10:working",
+      "extra12:working"
+    ],
+    "load": "772.34 789.01 795.18",
+    "emptyChat": {
+      "fold": {
+        "rows": 15,
+        "inView": 5,
+        "needs": 5,
+        "needsInView": 5,
+        "footerInView": true,
+        "msgs": 0,
+        "panel": 596,
+        "listViewport": 452,
+        "listScroll": 752,
+        "msgsBox": 0,
+        "needsStack": 444
+      },
+      "reach": {
+        "max": 300,
+        "rows": 15,
+        "neverVisible": [],
+        "partlyOnly": [
+          "Extra session 6 (gate) (8/28px)",
+          "Extra session 8 (gate) (8/28px)",
+          "Extra session 10 (gate) (8/28px)",
+          "Extra session 12 (gate) (8/28px)",
+          "Extra session 14 (gate) (8/28px)",
+          "Deploy.sh dry run (8/28px)",
+          "Extra session 7 (gate) (8/28px)",
+          "Extra session 9 (gate) (8/28px)",
+          "Extra session 11 (gate) (8/28px)",
+          "Extra session 13 (gate) (8/28px)"
+        ],
+        "detail": [
+          {
+            "title": "Extra session 1 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 2 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 3 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 4 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 5 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 6 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 8
+          },
+          {
+            "title": "Extra session 8 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 8
+          },
+          {
+            "title": "Extra session 10 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 8
+          },
+          {
+            "title": "Extra session 12 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 8
+          },
+          {
+            "title": "Extra session 14 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 8
+          },
+          {
+            "title": "Deploy.sh dry run",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 8
+          },
+          {
+            "title": "Extra session 7 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 8
+          },
+          {
+            "title": "Extra session 9 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 8
+          },
+          {
+            "title": "Extra session 11 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 8
+          },
+          {
+            "title": "Extra session 13 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 8
+          }
+        ]
+      }
+    },
+    "oneNote": {
+      "fold": {
+        "rows": 15,
+        "inView": 3,
+        "needs": 5,
+        "needsInView": 3,
+        "footerInView": true,
+        "msgs": 1,
+        "panel": 596,
+        "listViewport": 340,
+        "listScroll": 752,
+        "msgsBox": 112,
+        "needsStack": 444
+      },
+      "reach": {
+        "max": 412,
+        "rows": 15,
+        "neverVisible": [
+          "Extra session 6 (gate)",
+          "Extra session 8 (gate)",
+          "Extra session 10 (gate)",
+          "Extra session 12 (gate)",
+          "Extra session 14 (gate)",
+          "Deploy.sh dry run",
+          "Extra session 7 (gate)",
+          "Extra session 9 (gate)",
+          "Extra session 11 (gate)",
+          "Extra session 13 (gate)"
+        ],
+        "partlyOnly": [
+          "Extra session 4 (gate) (72/89px)"
+        ],
+        "detail": [
+          {
+            "title": "Extra session 1 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 2 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 3 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 4 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 72
+          },
+          {
+            "title": "Extra session 5 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 6 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 8 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 10 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 12 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 14 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Deploy.sh dry run",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 7 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 9 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 11 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 13 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          }
+        ]
+      }
+    },
+    "slash": {
+      "fold": {
+        "rows": 15,
+        "inView": 1,
+        "needs": 5,
+        "needsInView": 1,
+        "footerInView": true,
+        "msgs": 1,
+        "panel": 596,
+        "listViewport": 145,
+        "listScroll": 752,
+        "msgsBox": 112,
+        "needsStack": 444
+      },
+      "reach": {
+        "max": 607,
+        "rows": 15,
+        "neverVisible": [
+          "Extra session 3 (gate)",
+          "Extra session 4 (gate)",
+          "Extra session 6 (gate)",
+          "Extra session 8 (gate)",
+          "Extra session 10 (gate)",
+          "Extra session 12 (gate)",
+          "Extra session 14 (gate)",
+          "Deploy.sh dry run",
+          "Extra session 7 (gate)",
+          "Extra session 9 (gate)",
+          "Extra session 11 (gate)",
+          "Extra session 13 (gate)"
+        ],
+        "partlyOnly": [
+          "Extra session 2 (gate) (56/89px)"
+        ],
+        "detail": [
+          {
+            "title": "Extra session 1 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 2 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 56
+          },
+          {
+            "title": "Extra session 3 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 4 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 5 (gate)",
+            "sig": "needs",
+            "h": 89,
+            "maxVisiblePx": 88
+          },
+          {
+            "title": "Extra session 6 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 8 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 10 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 12 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 14 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Deploy.sh dry run",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 7 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 9 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 11 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Extra session 13 (gate)",
+            "sig": "other",
+            "h": 28,
+            "maxVisiblePx": 0
+          }
+        ]
+      }
+    }
+  },
+  "liveOneNote": {
+    "fold": {
+      "rows": 1,
+      "inView": 1,
+      "needs": 0,
+      "needsInView": 0,
+      "footerInView": true,
+      "msgs": 1,
+      "panel": 460,
+      "listViewport": 28,
+      "listScroll": 28,
+      "msgsBox": 180,
+      "needsStack": 0
+    },
+    "reach": {
+      "max": 0,
+      "rows": 1,
+      "neverVisible": [],
+      "partlyOnly": [],
+      "detail": [
+        {
+          "title": "Deploy.sh dry run",
+          "sig": "other",
+          "h": 28,
+          "maxVisiblePx": 28
+        }
+      ]
+    }
+  },
+  "liveSlash": {
+    "fold": {
+      "rows": 1,
+      "inView": 1,
+      "needs": 0,
+      "needsInView": 0,
+      "footerInView": true,
+      "msgs": 1,
+      "panel": 588,
+      "listViewport": 28,
+      "listScroll": 28,
+      "msgsBox": 112,
+      "needsStack": 0
+    },
+    "reach": {
+      "max": 0,
+      "rows": 1,
+      "neverVisible": [],
+      "partlyOnly": [],
+      "detail": [
+        {
+          "title": "Deploy.sh dry run",
+          "sig": "other",
+          "h": 28,
+          "maxVisiblePx": 28
+        }
+      ]
+    }
+  },
+  "intercepted": [],
+  "close": {
+    "how": "quit",
+    "ms": 1896,
+    "procs": 7,
+    "orphans": []
+  },
+  "loadEnd": "845.12 805.50 800.97",
+  "endedAt": "2026-10-02T07:42:54.083Z"
+}

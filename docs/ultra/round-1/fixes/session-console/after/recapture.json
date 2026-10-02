@@ -1,0 +1,1354 @@
+{
+  "startedAt": "2026-10-02T10:03:23.519Z",
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-session-console",
+  "userData": "/Users/christopherharris/.vibepet-ultra/userdata/r1-session-console",
+  "checks": [
+    {
+      "id": "'/' opens the list: every command, the first highlighted",
+      "ok": true,
+      "detail": [
+        "/jump",
+        "/replay",
+        "/approve",
+        "/always",
+        "/deny",
+        "/answer",
+        "/reply",
+        "/interrupt",
+        "/goal",
+        "/stop",
+        "/new",
+        "/record",
+        "/today",
+        "/setup",
+        "/settings"
+      ]
+    },
+    {
+      "id": "'/' ⏎ keeps the list open (no 'Unknown command /.')",
+      "ok": true,
+      "detail": {
+        "value": "/",
+        "menu": true
+      }
+    },
+    {
+      "id": "'/' ↓ ↓ ⏎ acts on the third command (/approve: it takes a session, so ⏎ completes it and opens its session picker)",
+      "ok": true,
+      "detail": {
+        "highlighted": {
+          "text": "/approve <session> approve its permission prompt",
+          "on": true,
+          "cmd": "/approve"
+        },
+        "after": {
+          "value": "/approve ",
+          "sel": "",
+          "focused": true,
+          "home": true,
+          "menu": {
+            "items": [
+              {
+                "text": "kestrel Deploy.sh dry runneeds approval 6h 51m",
+                "on": true,
+                "cmd": null
+              },
+              {
+                "text": "beacon Beacon database choiceasking 7h 50m",
+                "on": false,
+                "cmd": null
+              },
+              {
+                "text": "delta Reconcile three shards in paralleldone 8h 2m ago",
+                "on": false,
+                "cmd": null
+              },
+              {
+                "text": "atlas Run build.shdone 7h 0m ago",
+                "on": false,
+                "cmd": null
+              },
+              {
+                "text": "vibepet Read package.jsondone 6h 50m ago",
+                "on": false,
+                "cmd": null
+              }
+            ],
+            "foot": "needs approval 6h 51m"
+          }
+        }
+      }
+    },
+    {
+      "id": "'/jump kest' + Tab completes to '/jump kestrel'",
+      "ok": true,
+      "detail": {
+        "value": "/jump kestrel",
+        "sel": "",
+        "focused": true,
+        "home": true,
+        "menu": {
+          "items": [
+            {
+              "text": "kestrel Deploy.sh dry runneeds approval 6h 51m",
+              "on": true,
+              "cmd": null
+            }
+          ],
+          "foot": "needs approval 6h 51m"
+        }
+      }
+    },
+    {
+      "id": "⏎ jumps: the jump IPC carries kestrel's id (no tmux client attached: main says why, the note shows it)",
+      "ok": true,
+      "detail": {
+        "call": {
+          "args": [
+            "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+          ],
+          "result": {
+            "ok": false,
+            "why": "no terminal is attached to tmux session vp-kestrel",
+            "attach": "tmux attach -t vp-kestrel"
+          },
+          "ms": 2664
+        },
+        "note": "Couldn't jump to kestrel: no terminal is attached to tmux session vp-kestrel · tmux attach -t vp-kestrel"
+      }
+    },
+    {
+      "id": "'/rep' + Tab → '/replay ' and a session picker (live + recent)",
+      "ok": true,
+      "detail": {
+        "value": "/replay ",
+        "items": [
+          "beacon Beacon database choiceasking 7h 50m",
+          "kestrel Deploy.sh dry runneeds approval 6h 51m",
+          "delta Reconcile three shards in paralleldone 8h 3m ago",
+          "atlas Run build.shdone 7h 1m ago",
+          "vibepet Read package.jsondone 6h 51m ago",
+          "ember <command-message>loop</command-message> <command-nlast active 1h ago"
+        ]
+      }
+    },
+    {
+      "id": "'@' opens the session picker (live sessions)",
+      "ok": true,
+      "detail": [
+        "beacon Beacon database choiceasking 7h 50m",
+        "kestrel Deploy.sh dry runneeds approval 6h 51m",
+        "delta Reconcile three shards in paralleldone 8h 3m ago",
+        "atlas Run build.shdone 7h 1m ago",
+        "vibepet Read package.jsondone 6h 51m ago"
+      ]
+    },
+    {
+      "id": "'@kestrel ' offers its dialog's choices (approve / always / deny)",
+      "ok": true,
+      "detail": [
+        {
+          "text": "approve Enter on its Yes",
+          "on": true,
+          "cmd": null
+        },
+        {
+          "text": "always yes, and don’t ask again",
+          "on": false,
+          "cmd": null
+        },
+        {
+          "text": "deny Esc: tell it no",
+          "on": false,
+          "cmd": null
+        }
+      ]
+    },
+    {
+      "id": "'/answer beacon ' offers beacon's options",
+      "ok": true,
+      "detail": [
+        {
+          "text": "1 SQLite",
+          "on": true,
+          "cmd": null
+        },
+        {
+          "text": "2 Postgres",
+          "on": false,
+          "cmd": null
+        },
+        {
+          "text": "3 Redis",
+          "on": false,
+          "cmd": null
+        }
+      ]
+    },
+    {
+      "id": "Esc closes only the menu (Home and the draft stay); a second Esc closes Home",
+      "ok": true,
+      "detail": {
+        "first": {
+          "value": "/rep",
+          "sel": "",
+          "focused": true,
+          "home": true,
+          "menu": null
+        },
+        "second": {
+          "home": false
+        }
+      }
+    },
+    {
+      "id": "'/jump a' with 4 matches lists them and does not jump",
+      "ok": true,
+      "detail": {
+        "q": "a",
+        "hits": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "note": "“a” matches 4 sessions: beacon, delta, atlas or vibepet. Pick one.",
+        "menu": [
+          "beacon Beacon database choiceasking 7h 50m",
+          "delta Reconcile three shards in paralleldone 8h 3m ago",
+          "atlas Run build.shdone 7h 1m ago",
+          "vibepet Read package.jsondone 6h 51m ago"
+        ],
+        "jumps": 0,
+        "value": "/jump a",
+        "sel": "a"
+      }
+    },
+    {
+      "id": "the listed matches are a picker: ↓ moves to the second one",
+      "ok": true,
+      "detail": [
+        {
+          "text": "beacon Beacon database choiceasking 7h 50m",
+          "on": false,
+          "cmd": null
+        },
+        {
+          "text": "delta Reconcile three shards in paralleldone 8h 3m ago",
+          "on": true,
+          "cmd": null
+        },
+        {
+          "text": "atlas Run build.shdone 7h 1m ago",
+          "on": false,
+          "cmd": null
+        },
+        {
+          "text": "vibepet Read package.jsondone 6h 51m ago",
+          "on": false,
+          "cmd": null
+        }
+      ]
+    },
+    {
+      "id": "'/replay ember' (exited) opens ember's replay",
+      "ok": true,
+      "detail": {
+        "emberInSnapshot": false,
+        "ipc": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "emberSid": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "note": "Replaying ember in Theater.",
+        "windows": [
+          1,
+          2
+        ],
+        "theater": {
+          "title": "Theater — ember",
+          "text": "\n  THEATER\n  /loop 5m run ./tick.shember · 03:09 PM · 11.8h real → 4:37 replay\n "
+        }
+      }
+    },
+    {
+      "id": "'/goal kestrel: approve the deploy' sets kestrel's goal (set-goal carries kestrel's id)",
+      "ok": true,
+      "detail": {
+        "ipc": {
+          "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+          "text": "approve the deploy"
+        },
+        "kestrel": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "note": "Goal for Deploy.sh dry run: approve the deploy",
+        "rowGoal": true
+      }
+    },
+    {
+      "id": "after '/jump zebra' the bar still holds the text with 'zebra' selected",
+      "ok": true,
+      "detail": {
+        "note": "No session matches “zebra”.",
+        "value": "/jump zebra",
+        "selected": "zebra",
+        "focused": true,
+        "menu": 5
+      }
+    },
+    {
+      "id": "'/stop' gives the needs-a-port copy",
+      "ok": true,
+      "detail": "/stop needs a port, e.g. /stop 3000"
+    },
+    {
+      "id": "'/Today' works (case-insensitive) and clears the bar",
+      "ok": true,
+      "detail": {
+        "note": "Goals set: 8 · hit: 0 · time drifting: 0m\n\n◎ Before anything",
+        "cleared": true
+      }
+    },
+    {
+      "id": "'/tod' ⏎ (one command left) runs /today",
+      "ok": true,
+      "detail": "Goals set: 8 · hit: 0 · time drifting: 0"
+    },
+    {
+      "id": "'tell the vibepet session to run its tests' asks 'Send to vibepet: “run its tests”?' first; Esc cancels, nothing sent",
+      "ok": true,
+      "detail": {
+        "menu": {
+          "items": [
+            {
+              "text": "Send to vibepet: “run its tests”?",
+              "on": true,
+              "cmd": null
+            }
+          ],
+          "foot": "↵ sends · esc cancels"
+        },
+        "value": "tell the vibepet session to run its tests",
+        "sendTo": 0
+      }
+    },
+    {
+      "id": "'/approve vibepet' (no dialog) is refused with send-to's why, and nothing reached its pane",
+      "ok": true,
+      "detail": {
+        "guard": [
+          {
+            "args": [
+              {
+                "action": "approve",
+                "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+              }
+            ],
+            "result": {
+              "ok": false,
+              "why": "vibepet isn't showing an approval prompt"
+            },
+            "ms": 657,
+            "note": "Couldn't approve: vibepet isn't showing an approval prompt",
+            "transcriptBytes": [
+              368986,
+              368986
+            ],
+            "paneSame": true,
+            "box": [
+              {
+                "draft": false
+              },
+              {
+                "draft": false
+              }
+            ],
+            "perm": [
+              false,
+              false
+            ],
+            "kept": "/approve vibepet",
+            "tries": [
+              {
+                "why": "vibepet isn't showing an approval prompt",
+                "ms": 657,
+                "at": "load 34.97 39.76 59.97"
+              }
+            ]
+          },
+          {
+            "args": [
+              {
+                "action": "approve",
+                "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+              }
+            ],
+            "result": {
+              "ok": false,
+              "why": "vibepet isn't showing an approval prompt"
+            },
+            "ms": 1992,
+            "note": "Couldn't approve: vibepet isn't showing an approval prompt",
+            "transcriptBytes": [
+              368986,
+              368986
+            ],
+            "paneSame": true,
+            "box": [
+              {
+                "draft": false
+              },
+              {
+                "draft": false
+              }
+            ],
+            "perm": [
+              false,
+              false
+            ],
+            "kept": "/approve vibepet",
+            "tries": [
+              {
+                "why": "vibepet isn't showing an approval prompt",
+                "ms": 1992,
+                "at": "load 33.53 39.38 59.72"
+              }
+            ]
+          },
+          {
+            "args": [
+              {
+                "action": "approve",
+                "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+              }
+            ],
+            "result": {
+              "ok": false,
+              "why": "vibepet isn't showing an approval prompt"
+            },
+            "ms": 647,
+            "note": "Couldn't approve: vibepet isn't showing an approval prompt",
+            "transcriptBytes": [
+              368986,
+              368986
+            ],
+            "paneSame": true,
+            "box": [
+              {
+                "draft": false
+              },
+              {
+                "draft": false
+              }
+            ],
+            "perm": [
+              false,
+              false
+            ],
+            "kept": "/approve vibepet",
+            "tries": [
+              {
+                "why": "vibepet isn't showing an approval prompt",
+                "ms": 647,
+                "at": "load 34.13 39.41 59.61"
+              }
+            ]
+          }
+        ],
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910787682
+        }
+      }
+    },
+    {
+      "id": "no renderer errors",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "timings": {
+    "slashMenuMs": [
+      {
+        "ms": 118,
+        "at": "load 27.76 40.34 62.03"
+      },
+      {
+        "ms": 74,
+        "at": "load 27.76 40.34 62.03"
+      },
+      {
+        "ms": 82,
+        "at": "load 27.76 40.34 62.03"
+      }
+    ],
+    "tabCompleteMs": [
+      {
+        "ms": 332,
+        "at": "load 26.42 39.86 61.73"
+      },
+      {
+        "ms": 609,
+        "at": "load 30.46 40.06 61.42"
+      },
+      {
+        "ms": 133,
+        "at": "load 30.50 39.91 61.24"
+      }
+    ],
+    "jumpIpcMs": [
+      {
+        "ms": 2664,
+        "at": "load 27.50 39.86 61.60"
+      },
+      {
+        "ms": 2925,
+        "at": "load 30.46 40.06 61.42"
+      },
+      {
+        "ms": 987,
+        "at": "load 30.50 39.91 61.24"
+      }
+    ],
+    "replayIpcMs": [
+      {
+        "ms": 209,
+        "at": "load 31.25 39.48 60.59"
+      }
+    ],
+    "guardSendToMs": [
+      {
+        "ms": 657,
+        "at": "load 34.97 39.76 59.97"
+      },
+      {
+        "ms": 1992,
+        "at": "load 33.53 39.38 59.72"
+      },
+      {
+        "ms": 647,
+        "at": "load 34.13 39.41 59.61"
+      }
+    ],
+    "guardNoteMs": [
+      {
+        "ms": 1069,
+        "at": "load 34.97 39.76 59.97"
+      },
+      {
+        "ms": 3292,
+        "at": "load 33.53 39.38 59.72"
+      },
+      {
+        "ms": 1369,
+        "at": "load 34.13 39.41 59.61"
+      }
+    ]
+  },
+  "uptime": [
+    [
+      "launch",
+      "load 27.78 40.96 62.63"
+    ],
+    [
+      "close",
+      "load 35.87 39.59 59.44"
+    ]
+  ],
+  "skipped": [
+    {
+      "part": "SPEND-GATED: /approve kestrel, @vibepet Reply with exactly: ok, /answer beacon 2",
+      "why": "fleet spend estimate {\"transcriptsUsd\":2.223186,\"estimateWithHiddenUsd\":3.3093,\"stop\":3.32,\"cap\":5} + 0.065 > the $3.32 stop"
+    }
+  ],
+  "fleet": {
+    "at": "2026-10-02T10:03:27.546Z",
+    "allOk": false,
+    "spend": {
+      "transcriptsUsd": 2.223186,
+      "estimateWithHiddenUsd": 3.3093,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "permission prompt",
+          "statusUpdatedAt": 1790910742347
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T03:12:20.929Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910787682
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T03:13:07.635Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910180805
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-02T03:03:00.799Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "input needed",
+          "statusUpdatedAt": 1790907222729
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T02:13:41.070Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790906449089
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T02:00:48.941Z"
+        },
+        "toolProcs": 0,
+        "subagents": 36,
+        "failing": [
+          "registry.status",
+          "child",
+          "subagents"
+        ]
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "registry": null,
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T08:54:24.091Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "claude",
+          "registry.status",
+          "loop",
+          "loopLock"
+        ]
+      }
+    ]
+  },
+  "pageErrors": [],
+  "instrument": {
+    "spied": [
+      "jump",
+      "send-to"
+    ]
+  },
+  "home": {
+    "mode": "now",
+    "ms": 954,
+    "at": "load 29.56 40.91 62.36"
+  },
+  "rows": [
+    {
+      "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+      "title": "Beacon database choice",
+      "label": "beacon · asking 7h 49m"
+    },
+    {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "title": "Deploy.sh dry run",
+      "label": "kestrel · needs approval 6h 51m"
+    },
+    {
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "title": "Reconcile three shards in parallel",
+      "label": "delta · done 8h 2m ago"
+    },
+    {
+      "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "title": "Run build.sh",
+      "label": "atlas · done 7h 0m ago"
+    },
+    {
+      "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+      "title": "Read package.json",
+      "label": "vibepet · done 6h 50m ago"
+    }
+  ],
+  "renderMs": {
+    "/": 0.4,
+    "/replay ": 0.25,
+    "/jump kest": 0.1,
+    "@": 0.2,
+    "/answer beacon ": 0.1,
+    "at": "load 27.76 40.34 62.03"
+  },
+  "slash": {
+    "items": [
+      {
+        "text": "/jump <session> go to its terminal",
+        "on": true,
+        "cmd": "/jump"
+      },
+      {
+        "text": "/replay <session> replay it in Theater",
+        "on": false,
+        "cmd": "/replay"
+      },
+      {
+        "text": "/approve <session> approve its permission prompt",
+        "on": false,
+        "cmd": "/approve"
+      },
+      {
+        "text": "/always <session> approve, and don’t ask again",
+        "on": false,
+        "cmd": "/always"
+      },
+      {
+        "text": "/deny <session> deny its permission prompt",
+        "on": false,
+        "cmd": "/deny"
+      },
+      {
+        "text": "/answer <session> <n|text> answer its question",
+        "on": false,
+        "cmd": "/answer"
+      },
+      {
+        "text": "/reply <session> <text> type a reply into it",
+        "on": false,
+        "cmd": "/reply"
+      },
+      {
+        "text": "/interrupt <session> stop its turn (Esc)",
+        "on": false,
+        "cmd": "/interrupt"
+      },
+      {
+        "text": "/goal <session>: <text> set its goal",
+        "on": false,
+        "cmd": "/goal"
+      },
+      {
+        "text": "/stop <port> stop a localhost server",
+        "on": false,
+        "cmd": "/stop"
+      },
+      {
+        "text": "/new start a new chat",
+        "on": false,
+        "cmd": "/new"
+      },
+      {
+        "text": "/record start or stop a short",
+        "on": false,
+        "cmd": "/record"
+      },
+      {
+        "text": "/today your day book",
+        "on": false,
+        "cmd": "/today"
+      },
+      {
+        "text": "/setup quick setup",
+        "on": false,
+        "cmd": "/setup"
+      },
+      {
+        "text": "/settings all settings",
+        "on": false,
+        "cmd": "/settings"
+      }
+    ],
+    "foot": "↑↓ choose · tab completes · ↵ picks · esc closes"
+  },
+  "downDownEnter": {
+    "highlighted": {
+      "text": "/approve <session> approve its permission prompt",
+      "on": true,
+      "cmd": "/approve"
+    },
+    "after": {
+      "value": "/approve ",
+      "sel": "",
+      "focused": true,
+      "home": true,
+      "menu": {
+        "items": [
+          {
+            "text": "kestrel Deploy.sh dry runneeds approval 6h 51m",
+            "on": true,
+            "cmd": null
+          },
+          {
+            "text": "beacon Beacon database choiceasking 7h 50m",
+            "on": false,
+            "cmd": null
+          },
+          {
+            "text": "delta Reconcile three shards in paralleldone 8h 2m ago",
+            "on": false,
+            "cmd": null
+          },
+          {
+            "text": "atlas Run build.shdone 7h 0m ago",
+            "on": false,
+            "cmd": null
+          },
+          {
+            "text": "vibepet Read package.jsondone 6h 50m ago",
+            "on": false,
+            "cmd": null
+          }
+        ],
+        "foot": "needs approval 6h 51m"
+      }
+    }
+  },
+  "jump": {
+    "call": {
+      "args": [
+        "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      },
+      "ms": 2664
+    },
+    "note": "Couldn't jump to kestrel: no terminal is attached to tmux session vp-kestrel · tmux attach -t vp-kestrel"
+  },
+  "replayPicker": {
+    "items": [
+      {
+        "text": "beacon Beacon database choiceasking 7h 50m",
+        "on": true,
+        "cmd": null
+      },
+      {
+        "text": "kestrel Deploy.sh dry runneeds approval 6h 51m",
+        "on": false,
+        "cmd": null
+      },
+      {
+        "text": "delta Reconcile three shards in paralleldone 8h 3m ago",
+        "on": false,
+        "cmd": null
+      },
+      {
+        "text": "atlas Run build.shdone 7h 1m ago",
+        "on": false,
+        "cmd": null
+      },
+      {
+        "text": "vibepet Read package.jsondone 6h 51m ago",
+        "on": false,
+        "cmd": null
+      },
+      {
+        "text": "ember <command-message>loop</command-message> <command-nlast active 1h ago",
+        "on": false,
+        "cmd": null
+      }
+    ],
+    "foot": "asking 7h 50m"
+  },
+  "atPicker": {
+    "items": [
+      {
+        "text": "beacon Beacon database choiceasking 7h 50m",
+        "on": true,
+        "cmd": null
+      },
+      {
+        "text": "kestrel Deploy.sh dry runneeds approval 6h 51m",
+        "on": false,
+        "cmd": null
+      },
+      {
+        "text": "delta Reconcile three shards in paralleldone 8h 3m ago",
+        "on": false,
+        "cmd": null
+      },
+      {
+        "text": "atlas Run build.shdone 7h 1m ago",
+        "on": false,
+        "cmd": null
+      },
+      {
+        "text": "vibepet Read package.jsondone 6h 51m ago",
+        "on": false,
+        "cmd": null
+      }
+    ],
+    "foot": "asking 7h 50m"
+  },
+  "ambiguous": {
+    "q": "a",
+    "hits": [
+      "beacon",
+      "delta",
+      "atlas",
+      "vibepet"
+    ],
+    "note": "“a” matches 4 sessions: beacon, delta, atlas or vibepet. Pick one.",
+    "menu": [
+      "beacon Beacon database choiceasking 7h 50m",
+      "delta Reconcile three shards in paralleldone 8h 3m ago",
+      "atlas Run build.shdone 7h 1m ago",
+      "vibepet Read package.jsondone 6h 51m ago"
+    ],
+    "jumps": 0,
+    "value": "/jump a",
+    "sel": "a"
+  },
+  "replayEmber": {
+    "emberInSnapshot": false,
+    "ipc": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+    "emberSid": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+    "note": "Replaying ember in Theater.",
+    "windows": [
+      1,
+      2
+    ],
+    "theater": {
+      "title": "Theater — ember",
+      "text": "\n  THEATER\n  /loop 5m run ./tick.shember · 03:09 PM · 11.8h real → 4:37 replay\n "
+    }
+  },
+  "goal": {
+    "ipc": {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "text": "approve the deploy"
+    },
+    "kestrel": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+    "note": "Goal for Deploy.sh dry run: approve the deploy",
+    "rowGoal": true
+  },
+  "zebra": {
+    "note": "No session matches “zebra”.",
+    "value": "/jump zebra",
+    "selected": "zebra",
+    "focused": true,
+    "menu": 5
+  },
+  "stop": {
+    "note": "/stop needs a port, e.g. /stop 3000"
+  },
+  "today": {
+    "note": "Goals set: 8 · hit: 0 · time drifting: 0m\n\n◎ Before anything",
+    "cleared": true
+  },
+  "tell": {
+    "menu": {
+      "items": [
+        {
+          "text": "Send to vibepet: “run its tests”?",
+          "on": true,
+          "cmd": null
+        }
+      ],
+      "foot": "↵ sends · esc cancels"
+    },
+    "value": "tell the vibepet session to run its tests"
+  },
+  "lease": "vibepet: lease taken by r1-session-console for 300s (until 2026-10-02T10:09:57.431Z)",
+  "release": "vibepet: released (was r1-session-console since 2026-10-02T10:04:57.431Z)",
+  "guard": [
+    {
+      "args": [
+        {
+          "action": "approve",
+          "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "vibepet isn't showing an approval prompt"
+      },
+      "ms": 657,
+      "note": "Couldn't approve: vibepet isn't showing an approval prompt",
+      "transcriptBytes": [
+        368986,
+        368986
+      ],
+      "paneSame": true,
+      "box": [
+        {
+          "draft": false
+        },
+        {
+          "draft": false
+        }
+      ],
+      "perm": [
+        false,
+        false
+      ],
+      "kept": "/approve vibepet",
+      "tries": [
+        {
+          "why": "vibepet isn't showing an approval prompt",
+          "ms": 657,
+          "at": "load 34.97 39.76 59.97"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "action": "approve",
+          "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "vibepet isn't showing an approval prompt"
+      },
+      "ms": 1992,
+      "note": "Couldn't approve: vibepet isn't showing an approval prompt",
+      "transcriptBytes": [
+        368986,
+        368986
+      ],
+      "paneSame": true,
+      "box": [
+        {
+          "draft": false
+        },
+        {
+          "draft": false
+        }
+      ],
+      "perm": [
+        false,
+        false
+      ],
+      "kept": "/approve vibepet",
+      "tries": [
+        {
+          "why": "vibepet isn't showing an approval prompt",
+          "ms": 1992,
+          "at": "load 33.53 39.38 59.72"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "action": "approve",
+          "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "vibepet isn't showing an approval prompt"
+      },
+      "ms": 647,
+      "note": "Couldn't approve: vibepet isn't showing an approval prompt",
+      "transcriptBytes": [
+        368986,
+        368986
+      ],
+      "paneSame": true,
+      "box": [
+        {
+          "draft": false
+        },
+        {
+          "draft": false
+        }
+      ],
+      "perm": [
+        false,
+        false
+      ],
+      "kept": "/approve vibepet",
+      "tries": [
+        {
+          "why": "vibepet isn't showing an approval prompt",
+          "ms": 647,
+          "at": "load 34.13 39.41 59.61"
+        }
+      ]
+    }
+  ],
+  "fleetAfterGuard": {
+    "status": "idle",
+    "waitingFor": null,
+    "statusUpdatedAt": 1790910787682
+  },
+  "intercepted": [
+    {
+      "kind": "ipc:jump",
+      "args": [
+        "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      },
+      "ms": 2664
+    },
+    {
+      "kind": "ipc:jump",
+      "args": [
+        "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      },
+      "ms": 2925
+    },
+    {
+      "kind": "ipc:jump",
+      "args": [
+        "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      },
+      "ms": 987
+    },
+    {
+      "kind": "ipc:theater",
+      "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099"
+    },
+    {
+      "kind": "ipc:set-goal",
+      "args": [
+        {
+          "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+          "text": "approve the deploy"
+        }
+      ]
+    },
+    {
+      "kind": "ipc:send-to",
+      "args": [
+        {
+          "action": "approve",
+          "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "vibepet isn't showing an approval prompt"
+      },
+      "ms": 657
+    },
+    {
+      "kind": "ipc:send-to",
+      "args": [
+        {
+          "action": "approve",
+          "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "vibepet isn't showing an approval prompt"
+      },
+      "ms": 1992
+    },
+    {
+      "kind": "ipc:send-to",
+      "args": [
+        {
+          "action": "approve",
+          "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "vibepet isn't showing an approval prompt"
+      },
+      "ms": 647
+    }
+  ],
+  "close": {
+    "how": "quit",
+    "ms": 2087,
+    "procs": 9,
+    "orphans": []
+  },
+  "medians": {
+    "slashMenuMs": {
+      "median": 82,
+      "n": 3,
+      "runs": [
+        {
+          "ms": 118,
+          "at": "load 27.76 40.34 62.03"
+        },
+        {
+          "ms": 74,
+          "at": "load 27.76 40.34 62.03"
+        },
+        {
+          "ms": 82,
+          "at": "load 27.76 40.34 62.03"
+        }
+      ]
+    },
+    "tabCompleteMs": {
+      "median": 332,
+      "n": 3,
+      "runs": [
+        {
+          "ms": 332,
+          "at": "load 26.42 39.86 61.73"
+        },
+        {
+          "ms": 609,
+          "at": "load 30.46 40.06 61.42"
+        },
+        {
+          "ms": 133,
+          "at": "load 30.50 39.91 61.24"
+        }
+      ]
+    },
+    "jumpIpcMs": {
+      "median": 2664,
+      "n": 3,
+      "runs": [
+        {
+          "ms": 2664,
+          "at": "load 27.50 39.86 61.60"
+        },
+        {
+          "ms": 2925,
+          "at": "load 30.46 40.06 61.42"
+        },
+        {
+          "ms": 987,
+          "at": "load 30.50 39.91 61.24"
+        }
+      ]
+    },
+    "replayIpcMs": {
+      "median": 209,
+      "n": 1,
+      "runs": [
+        {
+          "ms": 209,
+          "at": "load 31.25 39.48 60.59"
+        }
+      ]
+    },
+    "guardSendToMs": {
+      "median": 657,
+      "n": 3,
+      "runs": [
+        {
+          "ms": 657,
+          "at": "load 34.97 39.76 59.97"
+        },
+        {
+          "ms": 1992,
+          "at": "load 33.53 39.38 59.72"
+        },
+        {
+          "ms": 647,
+          "at": "load 34.13 39.41 59.61"
+        }
+      ]
+    },
+    "guardNoteMs": {
+      "median": 1369,
+      "n": 3,
+      "runs": [
+        {
+          "ms": 1069,
+          "at": "load 34.97 39.76 59.97"
+        },
+        {
+          "ms": 3292,
+          "at": "load 33.53 39.38 59.72"
+        },
+        {
+          "ms": 1369,
+          "at": "load 34.13 39.41 59.61"
+        }
+      ]
+    }
+  },
+  "finishedAt": "2026-10-02T10:05:20.718Z",
+  "ok": true
+}

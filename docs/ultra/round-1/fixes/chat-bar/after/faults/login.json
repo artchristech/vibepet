@@ -1,0 +1,28 @@
+{
+  "load": {
+    "start": "load 5.63 7.56 31.08",
+    "end": "load 8.04 7.95 29.88"
+  },
+  "errors": [],
+  "close": {
+    "how": "quit",
+    "ms": 280,
+    "procs": 7,
+    "orphans": []
+  },
+  "data": {
+    "ms": 1103,
+    "load": "load 8.48 8.03 30.04",
+    "card": {
+      "cls": "msg pet err",
+      "text": "",
+      "say": "Your Claude Code login has expired. Run claude in a terminal and log in, then try again.",
+      "acts": [
+        "Copy command",
+        "Try again"
+      ],
+      "sees": "What Net sees · ≈192 tokens"
+    },
+    "user": "msg user failed"
+  }
+}

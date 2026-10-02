@@ -1,0 +1,311 @@
+{
+ "phase": "idle",
+ "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-theater-player",
+ "git": "d97a309 theater-player: a re-read redraws only what changed; Approve shows what it did",
+ "dirty": "",
+ "startedAt": "2026-10-02T13:08:08.784Z",
+ "uptimeStart": "7:08  up 6 days, 17:53, 19 users, load averages: 12.58 14.11 24.84",
+ "fleet": {
+  "delta": {
+   "pid": 29074,
+   "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+   "tmux": "vp-delta:@4.%4",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "status": "idle",
+   "waitingFor": null
+  },
+  "vibepet": {
+   "pid": 48221,
+   "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "tmux": "vp-vibepet:@1.%1",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "status": "idle",
+   "waitingFor": null
+  },
+  "atlas": {
+   "pid": 48392,
+   "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+   "tmux": "vp-atlas:@2.%2",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/atlas",
+   "status": "idle",
+   "waitingFor": null
+  },
+  "beacon": {
+   "pid": 48539,
+   "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+   "tmux": "vp-beacon:@3.%3",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/beacon",
+   "status": "waiting",
+   "waitingFor": "input needed"
+  },
+  "kestrel": {
+   "pid": 55946,
+   "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "tmux": "vp-kestrel:@8.%8",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/kestrel",
+   "status": "waiting",
+   "waitingFor": "permission prompt"
+  }
+ },
+ "sizesStart": {
+  "atlas/5c051e84": 343391,
+  "beacon/a9377f08": 363823,
+  "delta/eb59a756": 699689,
+  "ember/5bf06269": 375165,
+  "ember/db0c1ec0": 578019,
+  "kestrel/13a1427d": 465693,
+  "kestrel/6f5c5b6c": 257786,
+  "vibepet/6101876b": 368986
+ },
+ "steps": {
+  "d-none": {
+   "windows": [
+    {
+     "appTotalPct": 3.05,
+     "load": [
+      10.74,
+      13.63,
+      24.48
+     ]
+    },
+    {
+     "appTotalPct": 1.71,
+     "load": [
+      9.78,
+      13.33,
+      24.24
+     ]
+    },
+    {
+     "appTotalPct": 1.84,
+     "load": [
+      9.46,
+      13.14,
+      24.05
+     ]
+    },
+    {
+     "appTotalPct": 1.68,
+     "load": [
+      8.38,
+      12.79,
+      23.79
+     ]
+    },
+    {
+     "appTotalPct": 2.84,
+     "load": [
+      7.62,
+      12.48,
+      23.56
+     ]
+    }
+   ],
+   "median": 1.84,
+   "load": [
+    7.62,
+    12.48,
+    23.56
+   ]
+  },
+  "d-delta": {
+   "pid": 82553,
+   "windows": [
+    {
+     "secs": 10.02,
+     "cpuPctPs": 0,
+     "cpuPctElectron": 0.002,
+     "appTotalPct": 2,
+     "rafPerSec": 0,
+     "mutPerSec": 0,
+     "playing": false,
+     "load": [
+      6.81,
+      12.06,
+      23.21
+     ]
+    },
+    {
+     "secs": 10.02,
+     "cpuPctPs": 0,
+     "cpuPctElectron": 0,
+     "appTotalPct": 0.48,
+     "rafPerSec": 0,
+     "mutPerSec": 0,
+     "playing": false,
+     "load": [
+      5.99,
+      11.71,
+      22.96
+     ]
+    },
+    {
+     "secs": 10.01,
+     "cpuPctPs": 0.3,
+     "cpuPctElectron": 0.037,
+     "appTotalPct": 0.63,
+     "rafPerSec": 0,
+     "mutPerSec": 0,
+     "playing": false,
+     "load": [
+      5.37,
+      11.39,
+      22.71
+     ]
+    },
+    {
+     "secs": 10.01,
+     "cpuPctPs": 0,
+     "cpuPctElectron": 0,
+     "appTotalPct": 0.52,
+     "rafPerSec": 0,
+     "mutPerSec": 0,
+     "playing": false,
+     "load": [
+      5.45,
+      11.21,
+      22.52
+     ]
+    },
+    {
+     "secs": 10.01,
+     "cpuPctPs": 0,
+     "cpuPctElectron": 0,
+     "appTotalPct": 0.42,
+     "rafPerSec": 0,
+     "mutPerSec": 0,
+     "playing": false,
+     "load": [
+      5.81,
+      11.11,
+      22.35
+     ]
+    }
+   ],
+   "median": {
+    "cpuPctPs": 0,
+    "cpuPctElectron": 0,
+    "appTotalPct": 0.52,
+    "mutPerSec": 0,
+    "rafPerSec": 0
+   },
+   "load": [
+    5.82,
+    11.02,
+    22.25
+   ]
+  },
+  "d-kestrel": {
+   "pid": 88158,
+   "windows": [
+    {
+     "secs": 10.01,
+     "cpuPctPs": 0.1,
+     "cpuPctElectron": 0.001,
+     "appTotalPct": 0.43,
+     "rafPerSec": 0,
+     "mutPerSec": 0,
+     "playing": false,
+     "load": [
+      5.75,
+      10.74,
+      21.96
+     ]
+    },
+    {
+     "secs": 10.02,
+     "cpuPctPs": 0,
+     "cpuPctElectron": 0,
+     "appTotalPct": 0.58,
+     "rafPerSec": 0,
+     "mutPerSec": 0,
+     "playing": false,
+     "load": [
+      5.32,
+      10.49,
+      21.73
+     ]
+    },
+    {
+     "secs": 10.02,
+     "cpuPctPs": 0.2,
+     "cpuPctElectron": 0.024,
+     "appTotalPct": 0.63,
+     "rafPerSec": 0,
+     "mutPerSec": 0,
+     "playing": false,
+     "load": [
+      4.81,
+      10.21,
+      21.5
+     ]
+    },
+    {
+     "secs": 10.03,
+     "cpuPctPs": 0,
+     "cpuPctElectron": 0,
+     "appTotalPct": 0.49,
+     "rafPerSec": 0,
+     "mutPerSec": 0,
+     "playing": false,
+     "load": [
+      5.71,
+      10.22,
+      21.37
+     ]
+    },
+    {
+     "secs": 10.02,
+     "cpuPctPs": 0,
+     "cpuPctElectron": 0,
+     "appTotalPct": 0.52,
+     "rafPerSec": 0,
+     "mutPerSec": 0,
+     "playing": false,
+     "load": [
+      6.79,
+      10.31,
+      21.27
+     ]
+    }
+   ],
+   "median": {
+    "cpuPctPs": 0,
+    "cpuPctElectron": 0,
+    "appTotalPct": 0.52,
+    "mutPerSec": 0,
+    "rafPerSec": 0
+   },
+   "load": [
+    6.79,
+    10.31,
+    21.27
+   ]
+  }
+ },
+ "notes": [],
+ "launch": {
+  "pid": 72626,
+  "readyMs": 829
+ },
+ "timelineReads": 2,
+ "clipboard": 0,
+ "close": {
+  "how": "quit",
+  "ms": 303,
+  "procs": 7,
+  "orphans": []
+ },
+ "uptimeEnd": "7:11  up 6 days, 17:56, 19 users, load averages: 6.79 10.31 21.27",
+ "sizesEnd": {
+  "atlas/5c051e84": 343391,
+  "beacon/a9377f08": 363823,
+  "delta/eb59a756": 699689,
+  "ember/5bf06269": 375165,
+  "ember/db0c1ec0": 578019,
+  "kestrel/13a1427d": 465693,
+  "kestrel/6f5c5b6c": 257786,
+  "vibepet/6101876b": 368986
+ },
+ "transcriptsGrew": []
+}

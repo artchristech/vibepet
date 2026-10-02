@@ -1,0 +1,704 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-home-keyed",
+  "fixture": true,
+  "git": "5e8f472 home: needs-you rows stack only at the top of the list",
+  "startedAt": "2026-10-02T06:44:42.062Z",
+  "runs": {
+    "one": {
+      "load": "787.94 533.52 768.00",
+      "readyMs": 6174,
+      "cursor": {
+        "x": 777,
+        "y": 397,
+        "inWindow": true
+      },
+      "home": {
+        "openMs": 576,
+        "rows": [
+          {
+            "id": "00000000",
+            "title": "Beacon database choice (fixture)",
+            "label": "beacon · waiting 198m",
+            "sig": "needs",
+            "acts": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ]
+          },
+          {
+            "id": "00000000",
+            "title": "Deploy.sh dry run (fixture)",
+            "label": "kestrel · stuck 144m",
+            "sig": "stuck",
+            "acts": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ]
+          },
+          {
+            "id": "00000000",
+            "title": "Read package.json (fixture)",
+            "label": "vibepet · done 2h ago",
+            "sig": "ready",
+            "acts": [
+              "replay",
+              "done",
+              "goal"
+            ]
+          },
+          {
+            "id": "00000000",
+            "title": "Run build.sh (fixture)",
+            "label": "atlas · done 3h ago",
+            "sig": "ready",
+            "acts": [
+              "replay",
+              "done",
+              "goal"
+            ]
+          },
+          {
+            "id": "00000000",
+            "title": "Reconcile three shards in parallel (fixture)",
+            "label": "delta · done 4h ago",
+            "sig": "ready",
+            "acts": [
+              "replay",
+              "done",
+              "goal"
+            ]
+          }
+        ],
+        "snapshot": "fixture"
+      },
+      "foldEmpty": {
+        "rows": 5,
+        "inView": 5,
+        "needs": 2,
+        "needsInView": 2,
+        "footer": [
+          "● Record a short",
+          "Today"
+        ],
+        "footerInView": true,
+        "msgs": 0,
+        "fresh": true,
+        "panel": 522,
+        "load": "878.91 556.60 774.77"
+      },
+      "foldOneNote": {
+        "rows": 5,
+        "inView": 5,
+        "needs": 2,
+        "needsInView": 2,
+        "footer": [
+          "● Record a short",
+          "Today"
+        ],
+        "footerInView": true,
+        "msgs": 1,
+        "fresh": true,
+        "panel": 526,
+        "load": "21.55 602.93 788.66"
+      },
+      "presses": [
+        {
+          "kind": "goal",
+          "row": "beacon",
+          "ticksDuringPress": 1,
+          "took": true,
+          "holdMs": 3300,
+          "load": "174.93 625.08 795.39"
+        },
+        {
+          "kind": "goal",
+          "row": "kestrel",
+          "ticksDuringPress": 1,
+          "took": true,
+          "holdMs": 3300,
+          "load": "174.93 625.08 795.39"
+        },
+        {
+          "kind": "goal",
+          "row": "vibepet",
+          "ticksDuringPress": 2,
+          "took": true,
+          "holdMs": 3300,
+          "load": "315.39 646.73 802.03"
+        },
+        {
+          "kind": "goal",
+          "row": "atlas",
+          "ticksDuringPress": 1,
+          "took": true,
+          "holdMs": 3300,
+          "load": "446.21 668.35 808.75"
+        },
+        {
+          "kind": "goal",
+          "row": "delta",
+          "ticksDuringPress": 1,
+          "took": true,
+          "holdMs": 3300,
+          "load": "567.59 689.82 815.51"
+        },
+        {
+          "kind": "replay",
+          "row": "beacon",
+          "ticksDuringPress": 2,
+          "took": true,
+          "theaterOpened": false,
+          "theaterMsAfterRelease": null,
+          "holdMs": 3300,
+          "load": "683.98 711.92 822.57"
+        },
+        {
+          "kind": "replay",
+          "row": "kestrel",
+          "ticksDuringPress": 2,
+          "took": true,
+          "theaterOpened": false,
+          "theaterMsAfterRelease": null,
+          "holdMs": 3300,
+          "load": "788.88 733.21 829.44"
+        },
+        {
+          "kind": "replay",
+          "row": "vibepet",
+          "ticksDuringPress": 1,
+          "took": true,
+          "theaterOpened": false,
+          "theaterMsAfterRelease": null,
+          "holdMs": 3300,
+          "load": "887.55 754.59 836.42"
+        },
+        {
+          "kind": "replay",
+          "row": "atlas",
+          "ticksDuringPress": 1,
+          "took": true,
+          "theaterOpened": false,
+          "theaterMsAfterRelease": null,
+          "holdMs": 3300,
+          "load": "953.65 770.50 841.56"
+        },
+        {
+          "kind": "replay",
+          "row": "delta",
+          "ticksDuringPress": 2,
+          "took": true,
+          "theaterOpened": false,
+          "theaterMsAfterRelease": null,
+          "holdMs": 3300,
+          "load": "1013.41 785.93 846.59"
+        }
+      ],
+      "pressesTook": "10/10",
+      "focus": {
+        "focused": {
+          "el": "<button data-do=\"reply\">Reply</button>",
+          "row": "Beacon database choice (fixture)"
+        },
+        "afterTicks": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "load": "1013.41 785.93 846.59"
+      },
+      "selection": {
+        "row": "kestrel",
+        "text": "Bash: ./deploy.sh --dry-",
+        "ticks": 4,
+        "survivedEachTick": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "jumps": 0,
+        "load": "676.12 882.32 879.29"
+      },
+      "reply": {
+        "row": "beacon",
+        "openedFocus": "the reply box (opened by you)",
+        "typingMs": 8674,
+        "ticksWhileTyping": 2,
+        "chatBar": "what is atlas doing",
+        "replyBox": "",
+        "replyBoxOpen": true,
+        "load": "927.41 926.32 895.15"
+      },
+      "keys": {
+        "load": "976.07 936.42 898.90",
+        "cmd1": {
+          "id": null,
+          "tag": "DIV",
+          "row": 0,
+          "onRow": true,
+          "text": "Beacon database choice ("
+        },
+        "enterTop": {
+          "focus": {
+            "id": null,
+            "tag": "INPUT",
+            "row": 0,
+            "onRow": false,
+            "text": ""
+          },
+          "replyBoxOpen": true,
+          "ipc": []
+        },
+        "escFromReplyBox": {
+          "id": "chatInput",
+          "tag": "INPUT",
+          "row": null,
+          "onRow": false,
+          "text": ""
+        },
+        "cmdN": {
+          "n": 2,
+          "at": {
+            "id": null,
+            "tag": "DIV",
+            "row": 1,
+            "onRow": true,
+            "text": "Deploy.sh dry run (fixtu"
+          }
+        },
+        "enterApproval": [
+          {
+            "args": [
+              {
+                "id": "00000000-f1c5-4000-8000-00000000000a",
+                "text": null
+              }
+            ],
+            "member": "kestrel"
+          }
+        ],
+        "down": {
+          "id": null,
+          "tag": "DIV",
+          "row": 2,
+          "onRow": true,
+          "text": "Read package.json (fixtu"
+        },
+        "up": {
+          "id": null,
+          "tag": "DIV",
+          "row": 1,
+          "onRow": true,
+          "text": "Deploy.sh dry run (fixtu"
+        },
+        "escFromRow": {
+          "id": "chatInput",
+          "tag": "INPUT",
+          "row": null,
+          "onRow": false,
+          "text": ""
+        },
+        "tabFromLast": {
+          "id": "homeMore",
+          "tag": "BUTTON",
+          "row": null,
+          "onRow": false,
+          "text": "⋯"
+        },
+        "shiftTabFromFirst": {
+          "id": "chatInput",
+          "tag": "INPUT",
+          "row": null,
+          "onRow": false,
+          "text": ""
+        },
+        "blurs": 0,
+        "homeOpen": "now",
+        "keysTo": {
+          "topRowFirstAction": 2
+        }
+      },
+      "intercepted": [
+        {
+          "kind": "ipc:theater",
+          "at": 1790922986854
+        },
+        {
+          "kind": "ipc:theater",
+          "at": 1790922993424
+        },
+        {
+          "kind": "ipc:theater",
+          "at": 1790922997228
+        },
+        {
+          "kind": "ipc:theater",
+          "at": 1790923001029
+        },
+        {
+          "kind": "ipc:theater",
+          "at": 1790923008124
+        },
+        {
+          "kind": "ipc:send-to",
+          "args": [
+            {
+              "id": "00000000-f1c5-4000-8000-00000000000a",
+              "text": null
+            }
+          ],
+          "at": 1790923069515
+        }
+      ],
+      "close": {
+        "how": "quit",
+        "ms": 9454,
+        "procs": 9,
+        "orphans": []
+      }
+    },
+    "two": {
+      "load": "172.74 871.31 89.42",
+      "readyMs": 9081,
+      "rest": {
+        "on": "Read package.json (fixture)",
+        "cursorStart": {
+          "x": 777,
+          "y": 397,
+          "inWindow": true
+        },
+        "load": "330.28 882.03 102.37",
+        "held": true,
+        "ms": 180105,
+        "ticks": 59,
+        "samples": 580,
+        "samplesWithAMovedRow": 0,
+        "firstMove": null,
+        "realCursorMovedSamples": 0,
+        "cursorEnd": {
+          "x": 777,
+          "y": 397,
+          "inWindow": true
+        },
+        "loadEnd": "919.02 920.61 268.79",
+        "startBoxes": [
+          [
+            "00000000-f1c5-4000-8000-00000000000b",
+            29,
+            179,
+            594,
+            88.8,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000a",
+            29,
+            269.8,
+            594,
+            88.8,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000e",
+            29,
+            360.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000c",
+            29,
+            390.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000d",
+            29,
+            420.5,
+            594,
+            28,
+            false
+          ]
+        ],
+        "endBoxes": [
+          [
+            "00000000-f1c5-4000-8000-00000000000b",
+            29,
+            179,
+            594,
+            88.8,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000a",
+            29,
+            269.8,
+            594,
+            88.8,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000e",
+            29,
+            360.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000c",
+            29,
+            390.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000d",
+            29,
+            420.5,
+            594,
+            28,
+            false
+          ]
+        ]
+      },
+      "injected": {
+        "samples": 51,
+        "samplesWithAMovedRow": 0,
+        "firstMove": null,
+        "before": [
+          [
+            "00000000-f1c5-4000-8000-00000000000b",
+            29,
+            179,
+            594,
+            88.8,
+            true
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000a",
+            29,
+            269.8,
+            594,
+            88.8,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000e",
+            29,
+            360.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000c",
+            29,
+            390.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000d",
+            29,
+            420.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "00000000-feed-4000-8000-000000000001",
+            29,
+            450.5,
+            594,
+            70.5,
+            false
+          ]
+        ],
+        "during": [
+          [
+            "00000000-f1c5-4000-8000-00000000000b",
+            29,
+            179,
+            594,
+            88.8,
+            true
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000a",
+            29,
+            269.8,
+            594,
+            88.8,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000e",
+            29,
+            360.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000c",
+            29,
+            390.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "00000000-f1c5-4000-8000-00000000000d",
+            29,
+            420.5,
+            594,
+            28,
+            false
+          ],
+          [
+            "00000000-feed-4000-8000-000000000001",
+            29,
+            450.5,
+            594,
+            70.5,
+            false
+          ]
+        ],
+        "cursor": {
+          "x": 777,
+          "y": 397,
+          "inWindow": true
+        },
+        "load": "7.90 946.71 297.06",
+        "release": {
+          "ms": 588,
+          "inQueueOrder": true,
+          "rows": [
+            {
+              "id": "00000000",
+              "title": "Injected session (test hook)",
+              "label": "injected · waiting 1m",
+              "sig": "needs",
+              "acts": [
+                "reply",
+                "replay",
+                "goal"
+              ]
+            },
+            {
+              "id": "00000000",
+              "title": "Deploy.sh dry run (fixture)",
+              "label": "kestrel · stuck 144m",
+              "sig": "stuck",
+              "acts": [
+                "approve",
+                "replay",
+                "done",
+                "goal"
+              ]
+            },
+            {
+              "id": "00000000",
+              "title": "Run build.sh (fixture)",
+              "label": "atlas · done 3h ago",
+              "sig": "ready",
+              "acts": [
+                "replay",
+                "done",
+                "goal"
+              ]
+            },
+            {
+              "id": "00000000",
+              "title": "Reconcile three shards in parallel (fixture)",
+              "label": "delta · done 4h ago",
+              "sig": "ready",
+              "acts": [
+                "replay",
+                "done",
+                "goal"
+              ]
+            },
+            {
+              "id": "00000000",
+              "title": "Read package.json (fixture)",
+              "label": "vibepet · 2h 24m",
+              "sig": "running",
+              "acts": [
+                "replay",
+                "done",
+                "goal"
+              ]
+            }
+          ],
+          "load": "110.57 952.41 302.88"
+        }
+      },
+      "cycles": [
+        {
+          "change": "inject",
+          "samplesWithAMovedRow": 0,
+          "releaseMs": 588,
+          "inQueueOrder": true,
+          "load": "110.57 952.41 302.88"
+        },
+        {
+          "change": "undo",
+          "samplesWithAMovedRow": 0,
+          "releaseMs": 166,
+          "inQueueOrder": true,
+          "load": "208.22 958.68 308.89"
+        },
+        {
+          "change": "inject",
+          "samplesWithAMovedRow": 0,
+          "releaseMs": 142,
+          "inQueueOrder": true,
+          "load": "379.61 970.66 320.74"
+        }
+      ],
+      "releaseMedianMs": 166,
+      "fifteen": {
+        "sent": 15,
+        "rows": 15,
+        "inView": 7,
+        "needs": 4,
+        "needsInView": 4,
+        "footer": [
+          "● Record a short",
+          "Today"
+        ],
+        "footerInView": true,
+        "msgs": 0,
+        "fresh": true,
+        "panel": 596,
+        "load": "456.67 976.82 326.72"
+      },
+      "close": {
+        "how": "quit",
+        "ms": 3869,
+        "procs": 6,
+        "orphans": []
+      }
+    }
+  },
+  "loadStart": "903.58 825.67 36.40",
+  "fleetSpendBefore": "fleet spend: transcripts $2.2232 at Haiku 4.5 prices; estimate incl. hidden calls $3.3093 (cost-state of 14 exited sessions $2.1147 vs their transcripts $1.4268 = +48%; applied +50% to the rest); stop $3.32 (/Users/christopherharris/.vibepet-ultra/fleet/spend-stop), cap $5; 259 responses; models {\"claude-haiku-4-5-20251001\":259}",
+  "loadEnd": "568.82 983.79 336.79",
+  "fleetSpendAfter": "fleet spend: transcripts $2.2232 at Haiku 4.5 prices; estimate incl. hidden calls $3.3093 (cost-state of 14 exited sessions $2.1147 vs their transcripts $1.4268 = +48%; applied +50% to the rest); stop $3.32 (/Users/christopherharris/.vibepet-ultra/fleet/spend-stop), cap $5; 259 responses; models {\"claude-haiku-4-5-20251001\":259}",
+  "endedAt": "2026-10-02T06:49:28.849Z"
+}

@@ -1,0 +1,6 @@
+[09:00:30.405] plan  · spend est $3.3093 · this probe so far $0.0000 of $0.6
+[09:00:32.643] instances A pid 19033 (Home closed), B pid 19031 (Home open) · app 9628925 harness: canon checks the row actions; tta resolves askuser with the option button @ ultra/r1/row-actions · perms {"ax":true,"screen":true}
+[09:00:36.650] smoke A {"led":"needs","face":"waiting","home":false,"bubble":"visible","sounds":4,"agents":["beacon:waiting","kestrel:stalled","delta:ready","atlas:ready","vibepet:ready"],"queue":5}
+[09:00:36.650] smoke B {"home":true,"rows":["needs:replay+goal+diff+option+option+option+other:true","needs:replay+goal+diff+approve+always+deny:true","ready:replay+goal+diff+reply+done:true","ready:replay+goal+diff+reply+done:false","ready:replay+goal+diff+reply+done:false"],"bubble":"occluded"}
+[09:00:36.650] smoke main {"notes":0,"idleSec":1403,"muted":false,"alerts":"done"}
+[09:00:37.894] smoke closed [["quit",0],["quit",0]]

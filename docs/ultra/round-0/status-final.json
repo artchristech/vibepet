@@ -1,0 +1,452 @@
+{
+  "at": "2026-10-01T20:58:30.927Z",
+  "allOk": true,
+  "members": [
+    {
+      "name": "kestrel",
+      "state": "approval",
+      "ok": true,
+      "paused": false,
+      "target": "vp-kestrel:0.0",
+      "tty": "/dev/ttys007",
+      "pid": 55946,
+      "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-kestrel/13a1427d-6cb0-4561-b5a3-22453a34bf93.jsonl",
+      "registry": {
+        "status": "waiting",
+        "waitingFor": "permission prompt",
+        "statusUpdatedAt": 1790888232796,
+        "messagingSocketPath": "/tmp/cc-socks/55946.sock",
+        "name": "kestrel-4d"
+      },
+      "last": {
+        "kind": "pending_tool_use",
+        "pending": [
+          "Bash"
+        ],
+        "stopReason": "tool_use",
+        "lastTs": "2026-10-01T20:57:12.721Z"
+      },
+      "subagents": [],
+      "procs": [],
+      "toolProcs": 0,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-kestrel"
+        },
+        {
+          "name": "claude",
+          "ok": true,
+          "detail": "pid 55946"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": true,
+          "detail": "waiting"
+        },
+        {
+          "name": "registry.waitingFor",
+          "ok": true,
+          "detail": "permission prompt"
+        },
+        {
+          "name": "pane",
+          "ok": true,
+          "detail": "Do you want to proceed\\?"
+        },
+        {
+          "name": "paneAlso",
+          "ok": true,
+          "detail": "deploy\\.sh"
+        },
+        {
+          "name": "noChild",
+          "ok": true,
+          "detail": "no tool process"
+        }
+      ],
+      "spendUsd": 0.0801
+    },
+    {
+      "name": "vibepet",
+      "state": "done",
+      "ok": true,
+      "paused": false,
+      "target": "vp-vibepet:0.0",
+      "tty": "/dev/ttys013",
+      "pid": 48221,
+      "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-vibepet/6101876b-19c6-42a1-824f-6f1c7d4fd83e.jsonl",
+      "registry": {
+        "status": "idle",
+        "statusUpdatedAt": 1790886301409,
+        "messagingSocketPath": "/tmp/cc-socks/48221.sock",
+        "name": "vibepet-d2"
+      },
+      "last": {
+        "kind": "end_turn",
+        "pending": [],
+        "stopReason": "end_turn",
+        "lastTs": "2026-10-01T20:25:01.357Z"
+      },
+      "subagents": [],
+      "procs": [],
+      "toolProcs": 0,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-vibepet"
+        },
+        {
+          "name": "claude",
+          "ok": true,
+          "detail": "pid 48221"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": true,
+          "detail": "idle"
+        },
+        {
+          "name": "noChild",
+          "ok": true,
+          "detail": "no tool process"
+        },
+        {
+          "name": "last",
+          "ok": true,
+          "detail": "end_turn"
+        },
+        {
+          "name": "notQuestion",
+          "ok": true,
+          "detail": "statement"
+        }
+      ],
+      "spendUsd": 0.0276
+    },
+    {
+      "name": "atlas",
+      "state": "working",
+      "ok": true,
+      "paused": false,
+      "target": "vp-atlas:0.0",
+      "tty": "/dev/ttys015",
+      "pid": 48392,
+      "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-atlas/5c051e84-b74f-41b6-845f-bde937a9ef90.jsonl",
+      "registry": {
+        "status": "busy",
+        "statusUpdatedAt": 1790888292133,
+        "messagingSocketPath": "/tmp/cc-socks/48392.sock",
+        "name": "atlas-c4"
+      },
+      "last": {
+        "kind": "pending_tool_use",
+        "pending": [
+          "Bash"
+        ],
+        "stopReason": "tool_use",
+        "lastTs": "2026-10-01T20:58:14.110Z"
+      },
+      "subagents": [],
+      "procs": [
+        "bash /bin/bash -c source /Users/christopherharris/.claude/shell-s",
+        "sh /bin/sh ./build.sh",
+        "sleep sleep 10"
+      ],
+      "toolProcs": 3,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-atlas"
+        },
+        {
+          "name": "claude",
+          "ok": true,
+          "detail": "pid 48392"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": true,
+          "detail": "busy"
+        },
+        {
+          "name": "paneNot",
+          "ok": true,
+          "detail": "Do you want to proceed"
+        },
+        {
+          "name": "child",
+          "ok": true,
+          "detail": "2 × /build\\.sh/"
+        }
+      ],
+      "spendUsd": 0.0313
+    },
+    {
+      "name": "beacon",
+      "state": "question",
+      "ok": true,
+      "paused": false,
+      "target": "vp-beacon:0.0",
+      "tty": "/dev/ttys017",
+      "pid": 48539,
+      "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-beacon/a9377f08-ad27-4bd5-bb77-dbd576eab89e.jsonl",
+      "registry": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790888159026,
+        "messagingSocketPath": "/tmp/cc-socks/48539.sock",
+        "name": "beacon-18"
+      },
+      "last": {
+        "kind": "user_prompt",
+        "pending": [],
+        "stopReason": "tool_use",
+        "lastTs": "2026-10-01T20:55:56.861Z"
+      },
+      "subagents": [],
+      "procs": [],
+      "toolProcs": 0,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-beacon"
+        },
+        {
+          "name": "claude",
+          "ok": true,
+          "detail": "pid 48539"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": true,
+          "detail": "waiting"
+        },
+        {
+          "name": "registry.waitingFor",
+          "ok": true,
+          "detail": "input needed"
+        },
+        {
+          "name": "pane",
+          "ok": true,
+          "detail": "Enter to select"
+        }
+      ],
+      "spendUsd": 0.0543
+    },
+    {
+      "name": "delta",
+      "state": "fanout",
+      "ok": true,
+      "paused": false,
+      "target": "vp-delta:0.0",
+      "tty": "/dev/ttys021",
+      "pid": 48698,
+      "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-delta/eb59a756-0b6f-4a82-8d55-1f0bc2c40358.jsonl",
+      "registry": {
+        "status": "busy",
+        "statusUpdatedAt": 1790888297519,
+        "messagingSocketPath": "/tmp/cc-socks/48698.sock",
+        "name": "delta-60"
+      },
+      "last": {
+        "kind": "end_turn",
+        "pending": [],
+        "stopReason": "end_turn",
+        "lastTs": "2026-10-01T20:58:22.773Z"
+      },
+      "subagents": [
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790887439799.705
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790887440401.745
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790887439793.2415
+        },
+        {
+          "kind": "pending_tool_use",
+          "pending": [
+            "Bash"
+          ],
+          "mtime": 1790888304074.7124
+        },
+        {
+          "kind": "pending_tool_use",
+          "pending": [
+            "Bash"
+          ],
+          "mtime": 1790888302389.3955
+        },
+        {
+          "kind": "pending_tool_use",
+          "pending": [
+            "Bash"
+          ],
+          "mtime": 1790888303167.1724
+        }
+      ],
+      "procs": [
+        "bash /bin/bash -c source /Users/christopherharris/.claude/shell-s",
+        "sh /bin/sh ./slow.sh shard-3",
+        "sleep sleep 10",
+        "bash /bin/bash -c source /Users/christopherharris/.claude/shell-s",
+        "sh /bin/sh ./slow.sh shard-2",
+        "sleep sleep 10",
+        "bash /bin/bash -c source /Users/christopherharris/.claude/shell-s",
+        "sh /bin/sh ./slow.sh shard-1",
+        "sleep sleep 10"
+      ],
+      "toolProcs": 9,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-delta"
+        },
+        {
+          "name": "claude",
+          "ok": true,
+          "detail": "pid 48698"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": true,
+          "detail": "busy"
+        },
+        {
+          "name": "child",
+          "ok": true,
+          "detail": "6 × /slow\\.sh/"
+        },
+        {
+          "name": "subagents",
+          "ok": true,
+          "detail": "3 active of 6"
+        }
+      ],
+      "spendUsd": 0.1527
+    },
+    {
+      "name": "ember",
+      "state": "loop",
+      "ok": true,
+      "paused": false,
+      "target": "vp-ember:0.0",
+      "tty": "/dev/ttys023",
+      "pid": 48815,
+      "sessionId": "5bf06269-5ba2-4ac1-b551-49367a8abfd7",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-ember/5bf06269-5ba2-4ac1-b551-49367a8abfd7.jsonl",
+      "registry": {
+        "status": "idle",
+        "statusUpdatedAt": 1790888266352,
+        "messagingSocketPath": "/tmp/cc-socks/48815.sock",
+        "name": "ember-d8"
+      },
+      "last": {
+        "kind": "end_turn",
+        "pending": [],
+        "stopReason": "end_turn",
+        "lastTs": "2026-10-01T20:57:46.299Z"
+      },
+      "subagents": [],
+      "procs": [],
+      "toolProcs": 0,
+      "loop": {
+        "id": "toolu_01VvsAaNfTsYzByRGUioCGA1",
+        "input": {
+          "cron": "*/5 * * * *",
+          "prompt": "run ./tick.sh",
+          "recurring": true
+        },
+        "ts": "2026-10-01T20:26:07.118Z",
+        "result": {
+          "id": "15ad9959",
+          "humanSchedule": "Every 5 minutes",
+          "recurring": true,
+          "durable": false
+        }
+      },
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-ember"
+        },
+        {
+          "name": "claude",
+          "ok": true,
+          "detail": "pid 48815"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": true,
+          "detail": "idle"
+        },
+        {
+          "name": "loop",
+          "ok": true,
+          "detail": "cron */5 * * * * next 2026-10-01T21:00:00.000Z"
+        },
+        {
+          "name": "loopLock",
+          "ok": true,
+          "detail": "lock pid 48815"
+        }
+      ],
+      "spendUsd": 0.092
+    }
+  ],
+  "spend": {
+    "transcriptsUsd": 0.599752,
+    "estimateWithHiddenUsd": 0.6897,
+    "cap": 5
+  }
+}

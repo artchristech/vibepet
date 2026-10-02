@@ -1,0 +1,468 @@
+{
+  "section": "A2",
+  "startedAt": "2026-10-02T02:33:52.262Z",
+  "steps": [
+    {
+      "id": "rows",
+      "at": "2026-10-02T02:33:54.367Z",
+      "load": [
+        1.54,
+        1.56,
+        2.09
+      ],
+      "rows": [
+        [
+          "Read package.json",
+          "vibepet · done just now",
+          "ready"
+        ]
+      ]
+    },
+    {
+      "id": "01-recheck-kestrel",
+      "at": "2026-10-02T02:33:54.770Z",
+      "load": [
+        1.54,
+        1.56,
+        2.09
+      ],
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "No session matches “kestrel”."
+      },
+      "jumped": 0
+    },
+    {
+      "id": "01-recheck-deploy",
+      "at": "2026-10-02T02:33:55.154Z",
+      "load": [
+        1.54,
+        1.56,
+        2.09
+      ],
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "No session matches “deploy”."
+      },
+      "jumped": 0
+    },
+    {
+      "id": "01-recheck-beacon",
+      "at": "2026-10-02T02:33:55.544Z",
+      "load": [
+        1.54,
+        1.56,
+        2.09
+      ],
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "No session matches “beacon”."
+      },
+      "jumped": 0
+    },
+    {
+      "id": "01-recheck-database",
+      "at": "2026-10-02T02:33:55.950Z",
+      "load": [
+        1.54,
+        1.56,
+        2.09
+      ],
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "No session matches “database”."
+      },
+      "jumped": 0
+    },
+    {
+      "id": "08-slash-down-down-enter",
+      "at": "2026-10-02T02:33:56.762Z",
+      "load": [
+        1.54,
+        1.56,
+        2.09
+      ],
+      "beforeEnter": {
+        "input": "/",
+        "active": "chatInput",
+        "slash": [
+          "/record",
+          "/goal",
+          "/jump",
+          "/replay",
+          "/stop",
+          "/today",
+          "/setup",
+          "/settings"
+        ]
+      },
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "Unknown command /. Type / to see them."
+      }
+    },
+    {
+      "id": "08-unique-prefix-enter",
+      "at": "2026-10-02T02:33:57.174Z",
+      "load": [
+        1.97,
+        1.65,
+        2.12
+      ],
+      "hints": [
+        "/today"
+      ],
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "Unknown command /tod. Type / to see them."
+      }
+    },
+    {
+      "id": "08-tab-on-hint",
+      "at": "2026-10-02T02:33:57.651Z",
+      "load": [
+        1.97,
+        1.65,
+        2.12
+      ],
+      "tab1": "chatSend",
+      "tab2": "BUTTON:/jump <name> go to a session’s",
+      "afterEnter": {
+        "input": "/jump ",
+        "active": "chatInput",
+        "slash": null
+      }
+    },
+    {
+      "id": "08-pickers",
+      "at": {
+        "slash": null,
+        "extra": 0
+      },
+      "load": [
+        1.97,
+        1.65,
+        2.12
+      ],
+      "jumpSpace": {
+        "input": "/jump ",
+        "slash": null
+      }
+    },
+    {
+      "id": "09-history",
+      "at": "2026-10-02T02:33:59.359Z",
+      "load": [
+        1.97,
+        1.65,
+        2.12
+      ],
+      "afterUp1": "",
+      "afterUp2": ""
+    },
+    {
+      "id": "18-esc",
+      "at": "2026-10-02T02:33:59.674Z",
+      "load": [
+        1.97,
+        1.65,
+        2.12
+      ],
+      "before": {
+        "chatOpen": true,
+        "slash": [
+          "/replay"
+        ]
+      },
+      "after": {
+        "chatOpen": false,
+        "slashHidden": false
+      }
+    },
+    {
+      "id": "18-reopen",
+      "at": "2026-10-02T02:34:01.050Z",
+      "load": [
+        1.97,
+        1.65,
+        2.12
+      ],
+      "input": "/rep",
+      "slash": [
+        "/replay"
+      ]
+    },
+    {
+      "id": "21-no-slash",
+      "at": "2026-10-02T02:34:03.696Z",
+      "load": [
+        1.9,
+        1.64,
+        2.11
+      ],
+      "engineCalls": 1,
+      "last3": [
+        {
+          "cls": "msg pet note",
+          "text": "No session matches “zebra”."
+        },
+        {
+          "cls": "msg user ",
+          "text": "jump kestrel"
+        },
+        {
+          "cls": "msg pet ",
+          "text": "S3 critic stub engine reply."
+        }
+      ]
+    },
+    {
+      "id": "23-settings",
+      "at": "2026-10-02T02:34:04.060Z",
+      "load": [
+        1.9,
+        1.64,
+        2.11
+      ],
+      "ms": 112,
+      "count": 12,
+      "items": [
+        "Watching vibepet",
+        "Localhost",
+        "Open Home",
+        "Setup…",
+        "Theater…",
+        "Start content session",
+        "Open shorts folder",
+        "Today…",
+        "Pet",
+        "Settings",
+        "Hide Net",
+        "Quit Net"
+      ],
+      "settingsIndex1": 10,
+      "settingsSub": [
+        "Open at login",
+        "Keep on top",
+        "Mute notifications",
+        "Short length",
+        "Delete raw recording after render",
+        "Size",
+        "Animations",
+        "Game mode",
+        "Jump key",
+        "Gesture",
+        "Chat engine",
+        "Chat model",
+        "Set API key…",
+        "Rename Net…"
+      ]
+    },
+    {
+      "id": "12-menu-accels",
+      "at": "2026-10-02T02:34:04.061Z",
+      "load": [
+        1.9,
+        1.64,
+        2.11
+      ],
+      "withAccel": [
+        [
+          "Start content session",
+          "Control+Alt+Command+R"
+        ]
+      ],
+      "openHome": {
+        "label": "Open Home",
+        "accel": null,
+        "visible": true
+      }
+    },
+    {
+      "id": "12-hotkey-event",
+      "at": "2026-10-02T02:34:04.870Z",
+      "load": [
+        1.9,
+        1.64,
+        2.11
+      ],
+      "homeOpened": false,
+      "jumpCalls": 0,
+      "registered": [
+        [
+          "Control+Alt+Command+J",
+          false
+        ],
+        [
+          "Alt+Command+J",
+          false
+        ],
+        [
+          "Control+Alt+Command+R",
+          false
+        ]
+      ]
+    }
+  ],
+  "truthBefore": {
+    "at": "2026-10-02T02:33:52.541Z",
+    "spend": {
+      "transcriptsUsd": 2.163593,
+      "estimateWithHiddenUsd": 3.2153,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sid": "13a1427d",
+        "reg": "waiting(permission prompt)",
+        "regAgeS": 250,
+        "last": "user_prompt"
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sid": "6101876b",
+        "reg": "idle",
+        "regAgeS": 228,
+        "last": "end_turn"
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sid": "5c051e84",
+        "reg": "idle",
+        "regAgeS": 1855,
+        "last": "end_turn"
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sid": "a9377f08",
+        "reg": "waiting(input needed)",
+        "regAgeS": 1210,
+        "last": "user_prompt"
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sid": "eb59a756",
+        "reg": "idle",
+        "regAgeS": 1983,
+        "last": "end_turn"
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sid": "db0c1ec0",
+        "reg": null,
+        "regAgeS": null,
+        "last": "user_prompt"
+      }
+    ]
+  },
+  "truthAfter": {
+    "at": "2026-10-02T02:34:05.168Z",
+    "spend": {
+      "transcriptsUsd": 2.163593,
+      "estimateWithHiddenUsd": 3.2153,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sid": "13a1427d",
+        "reg": "waiting(permission prompt)",
+        "regAgeS": 262,
+        "last": "user_prompt"
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sid": "6101876b",
+        "reg": "idle",
+        "regAgeS": 241,
+        "last": "end_turn"
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sid": "5c051e84",
+        "reg": "idle",
+        "regAgeS": 1868,
+        "last": "end_turn"
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sid": "a9377f08",
+        "reg": "waiting(input needed)",
+        "regAgeS": 1222,
+        "last": "user_prompt"
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sid": "eb59a756",
+        "reg": "idle",
+        "regAgeS": 1996,
+        "last": "end_turn"
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sid": "db0c1ec0",
+        "reg": null,
+        "regAgeS": null,
+        "last": "user_prompt"
+      }
+    ]
+  },
+  "close": {
+    "how": "quit",
+    "ms": 249,
+    "procs": 7,
+    "orphans": []
+  },
+  "endedAt": "2026-10-02T02:34:05.478Z"
+}

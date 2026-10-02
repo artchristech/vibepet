@@ -1,0 +1,1122 @@
+{
+ "generated_by": "mineB.py (Python stdlib)",
+ "generated_at_utc": "2026-10-01T20:07:41.794776+00:00",
+ "windows": {
+  "all_time": "all records",
+  "last_30d": "records/events with t >= 2026-09-01T00:00:00Z"
+ },
+ "all_time": {
+  "concurrency": {
+   "n": 14017,
+   "median": 1.0,
+   "p75": 2.0,
+   "p90": 4.0,
+   "max": 10,
+   "mean": 1.74,
+   "live_minutes": 14017,
+   "share_ge5": 0.0483,
+   "share_ge10": 0.0001,
+   "share_ge2": 0.3621,
+   "session_minutes": 24416,
+   "per_day_peak": {
+    "days": 72,
+    "median": 3.0,
+    "p90": 7.0,
+    "max": 10,
+    "day_basis": "UTC calendar day"
+   },
+   "histogram_minutes_by_count(16=16+)": {
+    "1": 8941,
+    "2": 2296,
+    "3": 1306,
+    "4": 797,
+    "5": 421,
+    "6": 153,
+    "7": 80,
+    "8": 15,
+    "9": 6,
+    "10": 2
+   }
+  },
+  "tta": {
+   "question": {
+    "raw_seconds": {
+     "n": 314,
+     "median": 176.68,
+     "p75": 922.18,
+     "p90": 13718.77,
+     "p99": 170089.45,
+     "max": 404311.3,
+     "mean": 9355.23
+    },
+    "censored_seconds": {
+     "n": 276,
+     "median": 116.42,
+     "p75": 410.54,
+     "p90": 1504.09,
+     "p99": 5785.57,
+     "max": 6650.46,
+     "mean": 539.61
+    },
+    "away_dropped_gt_2h": 38
+   },
+   "ask": {
+    "raw_seconds": {
+     "n": 78,
+     "median": 311.61,
+     "p75": 2086.22,
+     "p90": 19072.18,
+     "p99": 129304.99,
+     "max": 151913.87,
+     "mean": 9194.08
+    },
+    "censored_seconds": {
+     "n": 64,
+     "median": 217.98,
+     "p75": 783.16,
+     "p90": 1809.46,
+     "p99": 6264.18,
+     "max": 6737.4,
+     "mean": 788.44
+    },
+    "away_dropped_gt_2h": 14
+   },
+   "approval": {
+    "raw_seconds": {
+     "n": 270,
+     "median": 4.09,
+     "p75": 27.46,
+     "p90": 341.75,
+     "p99": 18715.9,
+     "max": 35159.11,
+     "mean": 599.74
+    },
+    "censored_seconds": {
+     "n": 265,
+     "median": 4.0,
+     "p75": 26.06,
+     "p90": 168.57,
+     "p99": 1605.77,
+     "max": 7039.31,
+     "mean": 135.16
+    },
+    "away_dropped_gt_2h": 5,
+    "by_signal": {
+     "denial_marker:user-rejected": 25,
+     "edit_gap": 223,
+     "denial_marker:automode-unavailable": 14,
+     "bash_fast_gap": 8
+    },
+    "by_tool": {
+     "Bash": 40,
+     "Edit": 101,
+     "ExitPlanMode": 20,
+     "mcp": 1,
+     "Write": 102,
+     "SendMessage": 4,
+     "Agent": 2
+    },
+    "edit_gap_with_classifier_context": 108,
+    "by_signal_median_s:bash_fast_gap": 48.88,
+    "by_signal_median_s:denial_marker:automode-unavailable": 953.76,
+    "by_signal_median_s:denial_marker:user-rejected": 42.07,
+    "by_signal_median_s:edit_gap": 3.5
+   },
+   "done_idle": {
+    "raw_seconds": {
+     "n": 2046,
+     "median": 159.58,
+     "p75": 1134.95,
+     "p90": 24595.34,
+     "p99": 292579.24,
+     "max": 2361280.68,
+     "mean": 14714.33
+    },
+    "censored_seconds": {
+     "n": 1740,
+     "median": 101.19,
+     "p75": 392.06,
+     "p90": 1326.33,
+     "p99": 5926.76,
+     "max": 7118.19,
+     "mean": 504.13
+    },
+    "away_dropped_gt_2h": 306
+   },
+   "combined_abc": {
+    "raw_seconds": {
+     "n": 662,
+     "median": 57.63,
+     "p75": 469.16,
+     "p90": 5597.99,
+     "p99": 113306.5,
+     "max": 404311.3,
+     "mean": 5765.28
+    },
+    "censored_seconds": {
+     "n": 605,
+     "median": 40.55,
+     "p75": 233.37,
+     "p90": 984.7,
+     "p99": 5841.21,
+     "max": 7039.31,
+     "mean": 388.78
+    },
+    "away_dropped_gt_2h": 57
+   },
+   "approval_strict": {
+    "raw_seconds": {
+     "n": 77,
+     "median": 82.8,
+     "p75": 929.5,
+     "p90": 1636.15,
+     "p99": 33973.61,
+     "max": 35159.11,
+     "mean": 2089.31
+    },
+    "censored_seconds": {
+     "n": 72,
+     "median": 76.31,
+     "p75": 637.06,
+     "p90": 1014.76,
+     "p99": 5807.89,
+     "max": 7039.31,
+     "mean": 482.84
+    },
+    "away_dropped_gt_2h": 5
+   },
+   "combined_abc_strict": {
+    "raw_seconds": {
+     "n": 469,
+     "median": 177.75,
+     "p75": 991.77,
+     "p90": 12295.02,
+     "p99": 139983.78,
+     "max": 404311.3,
+     "mean": 8135.52
+    },
+    "censored_seconds": {
+     "n": 412,
+     "median": 119.77,
+     "p75": 521.32,
+     "p90": 1493.99,
+     "p99": 6034.65,
+     "max": 7039.31,
+     "mean": 568.35
+    },
+    "away_dropped_gt_2h": 57
+   }
+  },
+  "blocks_per_live_hour": {
+   "pooled": 1.7,
+   "total_blocks": 662,
+   "total_live_hours": 389.43,
+   "per_session_(sessions_with_>=0.5_live_h)": {
+    "n": 174,
+    "median": 1.4,
+    "p75": 2.12,
+    "p90": 3.87,
+    "max": 39.58,
+    "mean": 2.07
+   }
+  },
+  "blocked_at_once": {
+   "basis": "censored a+b+c waits (<=2h); minute counted if wait interval touches it",
+   "over_live_minutes_histogram(6=6+)": {
+    "0": 11244,
+    "1": 2195,
+    "2": 449,
+    "3": 70,
+    "4": 49,
+    "5": 6,
+    "6": 4
+   },
+   "share_live_minutes_ge1_blocked": 0.1978,
+   "share_live_minutes_ge2_blocked": 0.0412,
+   "share_live_minutes_ge3_blocked": 0.0092,
+   "over_minutes_with_ge1_blocked": {
+    "n": 3475,
+    "median": 1.0,
+    "p75": 1.0,
+    "p90": 2.0,
+    "max": 6,
+    "mean": 1.27
+   }
+  },
+  "identical_blocked_calls": {
+   "approval_waits": 270,
+   "exact(tool+normalized command|file path)": {
+    "overlapping_cross_session_pairs": 0,
+    "approval_waits_involved": 0,
+    "distinct_keys_with_collision": 0
+   },
+   "pattern(Bash verb[+subcmd] | edit tool by file extension | tool name)": {
+    "overlapping_cross_session_pairs": 1,
+    "approval_waits_involved": 2,
+    "distinct_keys_with_collision": 1
+   }
+  },
+  "away_gaps": {
+   "definition": "consecutive human prompts (any session) >= 20 min apart; active = >=1 session live during gap",
+   "n_gaps": 334,
+   "n_active_gaps": 306,
+   "active_gap_minutes": {
+    "n": 306,
+    "median": 122.93,
+    "p90": 773.67,
+    "max": 2888.64,
+    "mean": 311.64
+   },
+   "blocks_started_in_active_gaps": {
+    "total": 128,
+    "n": 306,
+    "median": 0.0,
+    "p90": 1.0,
+    "max": 9,
+    "mean": 0.42
+   },
+   "finishes_(done_idle_starts)_in_active_gaps": {
+    "total": 294,
+    "n": 306,
+    "median": 1.0,
+    "p90": 2.0,
+    "max": 4,
+    "mean": 0.96
+   },
+   "share_active_gaps_with_ge1_block": 0.2451,
+   "share_active_gaps_with_ge1_finish": 0.7092
+  },
+  "shared_workspace": {
+   "minutes_with_ge2_live": 5076,
+   "share_of_those_minutes_with_ge2_same_cwd": 0.3625,
+   "share_of_those_minutes_with_ge2_same_worktree": 0.2147,
+   "share_of_those_minutes_with_ge2_same_repo": 0.2214,
+   "session_pairs_live_overlapping": 1154,
+   "session_pairs_overlapping_and_same_cwd": 364,
+   "session_pairs_overlapping_and_same_worktree": 169,
+   "session_pairs_overlapping_and_same_repo": 173,
+   "note": "cwd = record cwd at minute; worktree = git toplevel of cwd; repo = git common dir (worktrees of one repo merged)"
+  },
+  "same_file_edits_30min": {
+   "files_edited": 934,
+   "edit_events": 3168,
+   "files_edited_by_ge2_sessions_within_30min": 9,
+   "file_x_session_pair_collisions": 10,
+   "edit_events_preceded_within_30min_by_other_session_edit": 38
+  },
+  "commit_collisions": {
+   "commits": 542,
+   "prev_commit_from_git_log": 521,
+   "no_previous_commit": 16,
+   "commits_with_other_live_session_newer_edits_same_worktree": 13,
+   "commits_with_other_live_session_newer_edits_same_repo_any_worktree": 13,
+   "commits_repo_unresolved": 21
+  },
+  "tokens": {
+   "messages_priced": 24685,
+   "unpriced_messages_by_model": {
+    "<non-enum>": 222,
+    "deepseek-v4.1-flash": 10,
+    "glm-5.3-flash": 223
+   },
+   "by_model": {
+    "claude-fable-5": {
+     "messages": 3059,
+     "input": 6790,
+     "cache_write_5m": 0,
+     "cache_write_1h": 25785333,
+     "cache_read": 825508142,
+     "output": 1910072,
+     "usd": 1436.79
+    },
+    "claude-fable-5-1": {
+     "messages": 3469,
+     "input": 66097,
+     "cache_write_5m": 0,
+     "cache_write_1h": 24506078,
+     "cache_read": 827403384,
+     "output": 3557457,
+     "usd": 875.51
+    },
+    "claude-haiku-4-5": {
+     "messages": 5,
+     "input": 46,
+     "cache_write_5m": 0,
+     "cache_write_1h": 40696,
+     "cache_read": 200404,
+     "output": 7676,
+     "usd": 0.14
+    },
+    "claude-opus-4-6": {
+     "messages": 72,
+     "input": 17508,
+     "cache_write_5m": 0,
+     "cache_write_1h": 349288,
+     "cache_read": 6576217,
+     "output": 10092,
+     "usd": 7.12
+    },
+    "claude-opus-4-8": {
+     "messages": 128,
+     "input": 295,
+     "cache_write_5m": 0,
+     "cache_write_1h": 779010,
+     "cache_read": 18479940,
+     "output": 277455,
+     "usd": 23.97
+    },
+    "claude-opus-5": {
+     "messages": 11152,
+     "input": 34162,
+     "cache_write_5m": 0,
+     "cache_write_1h": 83701035,
+     "cache_read": 2538209193,
+     "output": 9132987,
+     "usd": 2334.61
+    },
+    "claude-opus-5-5": {
+     "messages": 5899,
+     "input": 13020,
+     "cache_write_5m": 0,
+     "cache_write_1h": 36989685,
+     "cache_read": 988280810,
+     "output": 4984597,
+     "usd": 593.32
+    },
+    "claude-sonnet-5": {
+     "messages": 901,
+     "input": 1903,
+     "cache_write_5m": 0,
+     "cache_write_1h": 4654114,
+     "cache_read": 166294585,
+     "output": 684140,
+     "usd": 58.72
+    },
+    "unpriced": {
+     "messages": 455,
+     "input": 22547636,
+     "cache_write_5m": 0,
+     "cache_write_1h": 0,
+     "cache_read": 20513606,
+     "output": 159631,
+     "usd": 0.0
+    }
+   },
+   "total_usd": 5330.17,
+   "per_session": {
+    "sessions": 348,
+    "input": {
+     "n": 348,
+     "median": 114.0,
+     "p90": 2502.0,
+     "max": 20296626,
+     "mean": 65194.0
+    },
+    "cache_write": {
+     "n": 348,
+     "median": 129388.0,
+     "p90": 1614823.0,
+     "max": 6434271,
+     "mean": 508061.0
+    },
+    "cache_read": {
+     "n": 348,
+     "median": 2808511.0,
+     "p90": 46669215.0,
+     "max": 314885781,
+     "mean": 15492719.0
+    },
+    "output": {
+     "n": 348,
+     "median": 20366.0,
+     "p90": 175212.0,
+     "max": 573245,
+     "mean": 59552.0
+    },
+    "usd": {
+     "n": 348,
+     "median": 2.98,
+     "p90": 42.38,
+     "max": 417.35,
+     "mean": 15.32
+    }
+   }
+  }
+ },
+ "last_30d": {
+  "concurrency": {
+   "n": 7559,
+   "median": 1.0,
+   "p75": 3.0,
+   "p90": 4.0,
+   "max": 10,
+   "mean": 2.06,
+   "live_minutes": 7559,
+   "share_ge5": 0.0787,
+   "share_ge10": 0.0003,
+   "share_ge2": 0.4793,
+   "session_minutes": 15569,
+   "per_day_peak": {
+    "days": 30,
+    "median": 4.0,
+    "p90": 8.0,
+    "max": 10,
+    "day_basis": "UTC calendar day"
+   },
+   "histogram_minutes_by_count(16=16+)": {
+    "1": 3936,
+    "2": 1459,
+    "3": 908,
+    "4": 661,
+    "5": 357,
+    "6": 137,
+    "7": 78,
+    "8": 15,
+    "9": 6,
+    "10": 2
+   }
+  },
+  "tta": {
+   "question": {
+    "raw_seconds": {
+     "n": 185,
+     "median": 201.09,
+     "p75": 1097.27,
+     "p90": 4420.61,
+     "p99": 74162.66,
+     "max": 375365.26,
+     "mean": 5116.73
+    },
+    "censored_seconds": {
+     "n": 170,
+     "median": 176.68,
+     "p75": 652.24,
+     "p90": 2042.77,
+     "p99": 4963.09,
+     "max": 6040.63,
+     "mean": 620.63
+    },
+    "away_dropped_gt_2h": 15
+   },
+   "ask": {
+    "raw_seconds": {
+     "n": 48,
+     "median": 504.45,
+     "p75": 5881.87,
+     "p90": 17938.67,
+     "p99": 58043.73,
+     "max": 75109.69,
+     "mean": 5633.94
+    },
+    "censored_seconds": {
+     "n": 38,
+     "median": 225.51,
+     "p75": 780.75,
+     "p90": 1702.11,
+     "p99": 6459.47,
+     "max": 6737.4,
+     "mean": 859.97
+    },
+    "away_dropped_gt_2h": 10
+   },
+   "approval": {
+    "raw_seconds": {
+     "n": 157,
+     "median": 5.15,
+     "p75": 34.21,
+     "p90": 366.16,
+     "p99": 18725.68,
+     "max": 35159.11,
+     "mean": 599.44
+    },
+    "censored_seconds": {
+     "n": 155,
+     "median": 5.11,
+     "p75": 31.28,
+     "p90": 234.77,
+     "p99": 3159.71,
+     "max": 7039.31,
+     "mean": 163.58
+    },
+    "away_dropped_gt_2h": 2,
+    "by_signal": {
+     "edit_gap": 129,
+     "bash_fast_gap": 6,
+     "denial_marker:user-rejected": 15,
+     "denial_marker:automode-unavailable": 7
+    },
+    "by_tool": {
+     "Write": 82,
+     "Edit": 35,
+     "ExitPlanMode": 12,
+     "Bash": 26,
+     "SendMessage": 2
+    },
+    "edit_gap_with_classifier_context": 108,
+    "by_signal_median_s:bash_fast_gap": 48.88,
+    "by_signal_median_s:denial_marker:automode-unavailable": 929.5,
+    "by_signal_median_s:denial_marker:user-rejected": 101.62,
+    "by_signal_median_s:edit_gap": 4.3
+   },
+   "done_idle": {
+    "raw_seconds": {
+     "n": 1341,
+     "median": 157.02,
+     "p75": 978.31,
+     "p90": 15998.86,
+     "p99": 124953.0,
+     "max": 604087.75,
+     "mean": 7814.96
+    },
+    "censored_seconds": {
+     "n": 1170,
+     "median": 103.15,
+     "p75": 425.01,
+     "p90": 1320.27,
+     "p99": 5592.1,
+     "max": 7058.59,
+     "mean": 505.55
+    },
+    "away_dropped_gt_2h": 171
+   },
+   "combined_abc": {
+    "raw_seconds": {
+     "n": 390,
+     "median": 68.15,
+     "p75": 512.5,
+     "p90": 3484.3,
+     "p99": 57904.09,
+     "max": 375365.26,
+     "mean": 3361.89
+    },
+    "censored_seconds": {
+     "n": 363,
+     "median": 52.36,
+     "p75": 286.56,
+     "p90": 1186.29,
+     "p99": 5899.96,
+     "max": 7039.31,
+     "mean": 450.52
+    },
+    "away_dropped_gt_2h": 27
+   },
+   "approval_strict": {
+    "raw_seconds": {
+     "n": 50,
+     "median": 82.45,
+     "p75": 560.22,
+     "p90": 1048.38,
+     "p99": 34394.78,
+     "max": 35159.11,
+     "mean": 1868.04
+    },
+    "censored_seconds": {
+     "n": 48,
+     "median": 78.64,
+     "p75": 440.74,
+     "p90": 979.4,
+     "p99": 6224.14,
+     "max": 7039.31,
+     "mean": 513.41
+    },
+    "away_dropped_gt_2h": 2
+   },
+   "combined_abc_strict": {
+    "raw_seconds": {
+     "n": 283,
+     "median": 203.03,
+     "p75": 982.93,
+     "p90": 6598.04,
+     "p99": 73059.58,
+     "max": 375365.26,
+     "mean": 4630.48
+    },
+    "censored_seconds": {
+     "n": 256,
+     "median": 145.97,
+     "p75": 667.2,
+     "p90": 1793.25,
+     "p99": 6010.73,
+     "max": 7039.31,
+     "mean": 636.05
+    },
+    "away_dropped_gt_2h": 27
+   }
+  },
+  "blocks_per_live_hour": {
+   "pooled": 1.567,
+   "total_blocks": 390,
+   "total_live_hours": 248.83,
+   "per_session_(sessions_with_>=0.5_live_h)": {
+    "n": 116,
+    "median": 1.33,
+    "p75": 2.01,
+    "p90": 4.23,
+    "max": 39.58,
+    "mean": 1.99
+   }
+  },
+  "blocked_at_once": {
+   "basis": "censored a+b+c waits (<=2h); minute counted if wait interval touches it",
+   "over_live_minutes_histogram(6=6+)": {
+    "0": 5630,
+    "1": 1461,
+    "2": 351,
+    "3": 58,
+    "4": 49,
+    "5": 6,
+    "6": 4
+   },
+   "share_live_minutes_ge1_blocked": 0.2552,
+   "share_live_minutes_ge2_blocked": 0.0619,
+   "share_live_minutes_ge3_blocked": 0.0155,
+   "over_minutes_with_ge1_blocked": {
+    "n": 2292,
+    "median": 1.0,
+    "p75": 1.0,
+    "p90": 2.0,
+    "max": 6,
+    "mean": 1.32
+   }
+  },
+  "identical_blocked_calls": {
+   "approval_waits": 157,
+   "exact(tool+normalized command|file path)": {
+    "overlapping_cross_session_pairs": 0,
+    "approval_waits_involved": 0,
+    "distinct_keys_with_collision": 0
+   },
+   "pattern(Bash verb[+subcmd] | edit tool by file extension | tool name)": {
+    "overlapping_cross_session_pairs": 0,
+    "approval_waits_involved": 0,
+    "distinct_keys_with_collision": 0
+   }
+  },
+  "away_gaps": {
+   "definition": "consecutive human prompts (any session) >= 20 min apart; active = >=1 session live during gap",
+   "n_gaps": 145,
+   "n_active_gaps": 137,
+   "active_gap_minutes": {
+    "n": 137,
+    "median": 108.74,
+    "p90": 682.0,
+    "max": 2529.91,
+    "mean": 267.86
+   },
+   "blocks_started_in_active_gaps": {
+    "total": 62,
+    "n": 137,
+    "median": 0.0,
+    "p90": 1.0,
+    "max": 5,
+    "mean": 0.45
+   },
+   "finishes_(done_idle_starts)_in_active_gaps": {
+    "total": 152,
+    "n": 137,
+    "median": 1.0,
+    "p90": 2.4,
+    "max": 4,
+    "mean": 1.11
+   },
+   "share_active_gaps_with_ge1_block": 0.292,
+   "share_active_gaps_with_ge1_finish": 0.7226
+  },
+  "shared_workspace": {
+   "minutes_with_ge2_live": 3623,
+   "share_of_those_minutes_with_ge2_same_cwd": 0.3665,
+   "share_of_those_minutes_with_ge2_same_worktree": 0.1725,
+   "share_of_those_minutes_with_ge2_same_repo": 0.1725,
+   "session_pairs_live_overlapping": 857,
+   "session_pairs_overlapping_and_same_cwd": 299,
+   "session_pairs_overlapping_and_same_worktree": 103,
+   "session_pairs_overlapping_and_same_repo": 103,
+   "note": "cwd = record cwd at minute; worktree = git toplevel of cwd; repo = git common dir (worktrees of one repo merged)"
+  },
+  "same_file_edits_30min": {
+   "files_edited": 377,
+   "edit_events": 588,
+   "files_edited_by_ge2_sessions_within_30min": 0,
+   "file_x_session_pair_collisions": 0,
+   "edit_events_preceded_within_30min_by_other_session_edit": 0
+  },
+  "commit_collisions": {
+   "commits": 335,
+   "prev_commit_from_git_log": 314,
+   "no_previous_commit": 12,
+   "commits_with_other_live_session_newer_edits_same_worktree": 5,
+   "commits_with_other_live_session_newer_edits_same_repo_any_worktree": 5,
+   "commits_repo_unresolved": 21
+  },
+  "tokens": {
+   "messages_priced": 12234,
+   "unpriced_messages_by_model": {
+    "<non-enum>": 159,
+    "deepseek-v4.1-flash": 10,
+    "glm-5.3-flash": 223
+   },
+   "by_model": {
+    "claude-fable-5": {
+     "messages": 61,
+     "input": 122,
+     "cache_write_5m": 0,
+     "cache_write_1h": 1332890,
+     "cache_read": 26646112,
+     "output": 25678,
+     "usd": 54.59
+    },
+    "claude-fable-5-1": {
+     "messages": 3469,
+     "input": 66097,
+     "cache_write_5m": 0,
+     "cache_write_1h": 24506078,
+     "cache_read": 827403384,
+     "output": 3557457,
+     "usd": 875.51
+    },
+    "claude-opus-5": {
+     "messages": 2509,
+     "input": 12676,
+     "cache_write_5m": 0,
+     "cache_write_1h": 24199067,
+     "cache_read": 659244208,
+     "output": 2354866,
+     "usd": 630.55
+    },
+    "claude-opus-5-5": {
+     "messages": 5899,
+     "input": 13020,
+     "cache_write_5m": 0,
+     "cache_write_1h": 36989685,
+     "cache_read": 988280810,
+     "output": 4984597,
+     "usd": 593.32
+    },
+    "claude-sonnet-5": {
+     "messages": 296,
+     "input": 640,
+     "cache_write_5m": 0,
+     "cache_write_1h": 1210195,
+     "cache_read": 53099735,
+     "output": 160835,
+     "usd": 17.07
+    },
+    "unpriced": {
+     "messages": 392,
+     "input": 22547636,
+     "cache_write_5m": 0,
+     "cache_write_1h": 0,
+     "cache_read": 20513606,
+     "output": 159631,
+     "usd": 0.0
+    }
+   },
+   "total_usd": 2171.03,
+   "per_session": {
+    "sessions": 220,
+    "input": {
+     "n": 220,
+     "median": 130.0,
+     "p90": 37669.0,
+     "max": 20296626,
+     "mean": 102910.0
+    },
+    "cache_write": {
+     "n": 220,
+     "median": 114244.0,
+     "p90": 1081030.0,
+     "max": 6434271,
+     "mean": 401081.0
+    },
+    "cache_read": {
+     "n": 220,
+     "median": 2262955.0,
+     "p90": 34100712.0,
+     "max": 314885781,
+     "mean": 11705399.0
+    },
+    "output": {
+     "n": 220,
+     "median": 14861.0,
+     "p90": 143011.0,
+     "max": 573245,
+     "mean": 51105.0
+    },
+    "usd": {
+     "n": 220,
+     "median": 1.94,
+     "p90": 25.94,
+     "max": 208.59,
+     "mean": 9.87
+    }
+   }
+  }
+ },
+ "scheduling": {
+  "sessions_with_/loop_prompt": 18,
+  "sessions_with_ScheduleWakeup": 13,
+  "ScheduleWakeup_calls": 157,
+  "sessions_with_CronCreate": 0,
+  "CronCreate_calls": 0,
+  "sessions_with_any_of_loop_wakeup_cron": 21,
+  "wakeup_interval_seconds_(non-noop,non-stop; clampedDelaySeconds else delaySeconds)": {
+   "n": 107,
+   "median": 1200.0,
+   "p75": 1500.0,
+   "p90": 1500.0,
+   "max": 2400.0,
+   "mean": 1239.25
+  },
+  "wakeup_interval_histogram": {
+   "<60s": 0,
+   "1-5m": 10,
+   "5-15m": 2,
+   "15-30m": 86,
+   "30-60m": 9,
+   ">=1h": 0
+  }
+ },
+ "methods": {
+  "definitions": {
+   "session": "one top-level file ~/.claude/projects/<dir>/<sessionId>.jsonl (filename stem = session id)",
+   "skipped": "dirs whose name contains private-tmp | scratchpad | -vibepet-ultra-fleet-; <session>/subagents/** never read",
+   "human_prompt": "type=user, !isMeta, !isSidechain, !isCompactSummary, no tool_result block, text (string or text blocks, joined, whitespace-trimmed) non-empty, not starting '[Request interrupted', not starting '<' unless '<command-'",
+   "live": "session live between two of its own records (any type with a timestamp) < 30 min apart; minute m is live if [t_i,t_i+1] touches minute m (UTC epoch minutes)",
+   "question": "assistant message (records grouped by message.id) with stop_reason=end_turn whose last text block across the message's records, trimmed, ends with '?' -> next human prompt in session. Wait starts at the last record of that message. An assistant record of a DIFFERENT message before the next human prompt supersedes (drops, counted) the wait; waits whose prompt timestamp precedes the end_turn (file-order anomaly) are dropped and counted",
+   "ask": "tool_use AskUserQuestion -> its tool_result",
+   "approval": "tool_use -> tool_result where: (1) toolDenialKind in ['automode-unavailable', 'user-rejected'] or result text matches a user-rejection regex (any tool, any gap); (2) Edit/Write/MultiEdit/NotebookEdit/ExitPlanMode gap > 2s; (3) Bash \"fast\" command (all segments from a fixed fast-verb list, no sleep/find/npm/node/python/curl/ssh/xcodebuild/recursive flags, not run_in_background) with gap > 30s. Excluded: mode bypassPermissions at tool_use time; toolDenialKind in ['automode-blocked', 'interrupted', 'permission-rule'] (classifier/rule/interrupt, no human prompt)",
+   "done_idle": "end_turn without question -> next human prompt (reported separately, not TTA)",
+   "censored": "drop waits > 2h, counted as away_dropped_gt_2h",
+   "percentiles": "linear interpolation (type 7)",
+   "last_30d": "event start / minute >= 2026-09-01T00:00:00Z",
+   "blocked_at_once": "censored a+b+c intervals mapped to UTC minutes; distribution over live minutes",
+   "identical_call": "approval waits only; exact = sha256(tool + whitespace-normalized command | absolute file path | sorted-JSON input); pattern = Bash leading verb (+subcommand for git/npm/...), edit tools by file extension, other tools by name; collision = waits from different sessions with same key whose [start,end] overlap",
+   "tokens": "assistant usage deduped by message.id (max per field over records sharing it, cross-file duplicates owned by earliest file); cache_creation split by ephemeral_5m/1h, remainder priced as 5m; prices per MTok in methods.prices; fast speed = 2x on Opus 5/5.5/4.8; subagent transcripts excluded",
+   "away_gap": ">= 20 min between consecutive human prompts across all sessions; blocks/finishes counted by wait start inside gap",
+   "shared_workspace": "per minute with >=2 live sessions, group by cwd / git toplevel / git common dir (resolved on local filesystem; worktrees -> common dir)",
+   "same_file_edits": "successful Edit/Write/MultiEdit/NotebookEdit file_path (absolute, normalized); Bash-made edits not included",
+   "commit_collision": "successful Bash git commit (regex or toolUseResult.gitOperation.commit); repo = -C dir | leading cd dir | record cwd; previous commit = latest `git log --all` commit time < tool_use time - 1s (fallback: previous transcript commit in same worktree); hit if another session live at commit time (span end +60s) had a successful file edit in (previous commit, commit] under the same worktree (and separately same common repo)"
+  },
+  "heuristics": {
+   "approval_bash": "Transcripts carry no execution duration or \"prompt shown/approved\" marker for Bash (verified: toolUseResult keys stdout/stderr/interrupted/isImage/noOutputExpected/...; classifierMetaLines holds only git meta). Approved prompts are therefore inferred only for fast commands with gap>30s (30s is above the classifier-only latency seen on automode-blocked denials, median ~19s). Rejected/fallback prompts are exact via toolDenialKind.",
+   "approval_bash_coverage": {
+    "bash_results": 13427,
+    "bash_fast_results": 2481
+   },
+   "permission_mode_note": "Mode is the last permissionMode seen in the file before the tool_use (records of type user / permission-mode). The fleet of real sessions is overwhelmingly in auto mode, where the classifier decides and human prompts are rare.",
+   "excluded_counts": {
+    "approval_excluded_nonhuman_denial:permission-rule": 9,
+    "approval_excluded_nonhuman_denial:automode-blocked": 32,
+    "approval_excluded_nonhuman_denial:interrupted": 3,
+    "approval_excluded_bypass": 22
+   },
+   "human_prompt_origin_breakdown": {
+    "origin:human": 2828,
+    "promptSource:sdk": 1495,
+    "entrypoint:claude-desktop": 1572,
+    "origin:none": 177,
+    "promptSource:none": 220,
+    "entrypoint:sdk-cli": 14,
+    "promptSource:typed": 1205,
+    "entrypoint:cli": 1419,
+    "promptSource:suggestion_accepted": 47,
+    "promptSource:queued": 38
+   },
+   "queued_prompts_note": "prompts typed while a session is busy are logged as queue-operation/attachment records, not type=user; they are NOT counted as human prompts (per definition)"
+  },
+  "prices_per_mtok(in,out,cw5m,cw1h,cr)": {
+   "claude-fable-5-1": [
+    10.0,
+    50.0,
+    12.5,
+    20.0,
+    0.25
+   ],
+   "claude-fable-5": [
+    10.0,
+    50.0,
+    12.5,
+    20.0,
+    1.0
+   ],
+   "claude-opus-5-5": [
+    4.0,
+    20.0,
+    5.0,
+    8.0,
+    0.2
+   ],
+   "claude-opus-5": [
+    5.0,
+    25.0,
+    6.25,
+    10.0,
+    0.5
+   ],
+   "claude-opus-4-8": [
+    5.0,
+    25.0,
+    6.25,
+    10.0,
+    0.5
+   ],
+   "claude-opus-4-7": [
+    5.0,
+    25.0,
+    6.25,
+    10.0,
+    0.5
+   ],
+   "claude-opus-4-6": [
+    5.0,
+    25.0,
+    6.25,
+    10.0,
+    0.5
+   ],
+   "claude-sonnet-5-5": [
+    2.0,
+    10.0,
+    2.5,
+    4.0,
+    0.2
+   ],
+   "claude-sonnet-5": [
+    2.0,
+    10.0,
+    2.5,
+    4.0,
+    0.2
+   ],
+   "claude-sonnet-4-6": [
+    3.0,
+    15.0,
+    3.75,
+    6.0,
+    0.3
+   ],
+   "claude-haiku-4-5": [
+    1.0,
+    5.0,
+    1.25,
+    2.0,
+    0.1
+   ]
+  },
+  "files": {
+   "parsed": 356,
+   "with_timestamps": 356,
+   "bytes": 1481659483,
+   "skipped": {
+    "dirs:private-tmp": 12,
+    "files:private-tmp": 176
+   },
+   "subagent_files_skipped": 1719
+  },
+  "records": {
+   "lines": 160930,
+   "parse_errors": 0,
+   "non_object_lines": 0,
+   "records_with_timestamp": 114022,
+   "record_types": {
+    "custom-title": 3914,
+    "ai-title": 6793,
+    "mode": 6477,
+    "queue-operation": 7898,
+    "user": 28856,
+    "attachment": 26337,
+    "assistant": 46097,
+    "system": 4070,
+    "last-prompt": 9063,
+    "bridge-session": 1574,
+    "atis-latch": 5951,
+    "agent-name": 1365,
+    "file-history-snapshot": 1856,
+    "frame-link": 199,
+    "cost-state": 188,
+    "permission-mode": 3191,
+    "file-history-delta": 413,
+    "artifact-comment-monitor": 49,
+    "artifact-autoreact-ledger": 124,
+    "pr-link": 152
+   },
+   "stop_reasons": {
+    "tool_use": 40489,
+    "stop_sequence": 183,
+    "end_turn": 5296,
+    "refusal": 1
+   },
+   "end_turn_messages(dedup by message.id)": 3686
+  },
+  "tool_uses_by_name": {
+   "Bash": 13431,
+   "mcp": 3182,
+   "Edit": 2425,
+   "Read": 1835,
+   "Write": 777,
+   "Agent": 665,
+   "ScheduleWakeup": 157,
+   "ToolSearch": 149,
+   "Skill": 102,
+   "SendMessage": 95,
+   "SendUserFile": 86,
+   "TaskUpdate": 83,
+   "AskUserQuestion": 79,
+   "Workflow": 72,
+   "TaskCreate": 54,
+   "WebFetch": 43,
+   "WebSearch": 43,
+   "ListAgents": 32,
+   "Artifact": 27,
+   "TaskStop": 25,
+   "ExitPlanMode": 23,
+   "TaskOutput": 8,
+   "Monitor": 5,
+   "PushNotification": 3,
+   "RemoteTrigger": 2,
+   "ReportFindings": 2,
+   "EnterPlanMode": 1
+  },
+  "sanity": {
+   "cross_file_duplicate_uuids": 5831,
+   "records_skipped_as_cross_file_duplicates": 6363,
+   "cross_file_duplicate_message_ids": 1610,
+   "within_file_duplicate_uuids": 0,
+   "records_with_sessionId_not_matching_file": 6,
+   "files_with_sessionId_mismatch": 1,
+   "out_of_order_timestamps(record earlier than running max of file)": 9184,
+   "max_backward_jump_s": 584724.69,
+   "future_timestamps(>2026-10-02)": 0,
+   "unparseable_timestamps": 0,
+   "negative_tool_gaps": 0,
+   "negative_turn_waits_dropped(prompt timestamp before end_turn, file-order anomaly)": 5,
+   "backward_jumps_gt_1h_between_consecutive_records": 60,
+   "compact_boundaries": 7,
+   "compact_summary_records": 7,
+   "intra_session_gaps_ge_30min(resume points)": 724,
+   "sessions_with_ge1_resume_gap": 188,
+   "superseded_turn_waits": {
+    "done": 995,
+    "question": 17
+   },
+   "unanswered_at_eof": {
+    "done_unanswered_eof": 279,
+    "question_unanswered_eof": 30,
+    "ask_unanswered_eof": 1
+   },
+   "sessions_by_first_month": {
+    "2026-07": 56,
+    "2026-08": 79,
+    "2026-09": 211,
+    "2026-10": 10
+   },
+   "data_span_utc": [
+    "2026-07-17T01:00:24.842000+00:00",
+    "2026-10-01T20:05:52.303000+00:00"
+   ],
+   "cost_state_records_sessions": 155,
+   "cost_state_totalCostUSD_sum(claude-code self-reported, cross-check)": 3475.78
+  },
+  "runtime_seconds": 16.4
+ }
+}

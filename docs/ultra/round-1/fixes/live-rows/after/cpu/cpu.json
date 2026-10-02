@@ -1,0 +1,89 @@
+{
+  "at": "2026-10-02T08:53:10.474Z",
+  "windowSec": 60,
+  "runs": [
+    {
+      "run": 1,
+      "label": "fix",
+      "procs": 4,
+      "cpuSec": 1.35,
+      "secs": 60.1,
+      "cpuPct": 2.25,
+      "ticks": 21,
+      "uptime": [
+        "load 260.07 156.33 117.43",
+        "load 377.98 218.12 143.71"
+      ]
+    },
+    {
+      "run": 1,
+      "label": "base",
+      "procs": 4,
+      "cpuSec": 1.33,
+      "secs": 62.1,
+      "cpuPct": 2.14,
+      "ticks": null,
+      "uptime": [
+        "load 301.30 210.54 142.70",
+        "load 246.66 215.00 149.23"
+      ]
+    },
+    {
+      "run": 2,
+      "label": "base",
+      "procs": 4,
+      "cpuSec": 1.81,
+      "secs": 60.2,
+      "cpuPct": 3.01,
+      "ticks": null,
+      "uptime": [
+        "load 202.98 207.58 148.47",
+        "load 101.20 178.12 141.52"
+      ]
+    },
+    {
+      "run": 2,
+      "label": "fix",
+      "procs": 4,
+      "cpuSec": 1.23,
+      "secs": 60.1,
+      "cpuPct": 2.05,
+      "ticks": 21,
+      "uptime": [
+        "load 78.51 167.98 138.73",
+        "load 34.08 138.85 129.82"
+      ]
+    },
+    {
+      "run": 3,
+      "label": "fix",
+      "procs": 4,
+      "cpuSec": 1.08,
+      "secs": 60.1,
+      "cpuPct": 1.8,
+      "ticks": 20,
+      "uptime": [
+        "load 30.29 132.88 127.85",
+        "load 14.18 109.63 119.49"
+      ]
+    },
+    {
+      "run": 3,
+      "label": "base",
+      "procs": 4,
+      "cpuSec": 0.89,
+      "secs": 60.1,
+      "cpuPct": 1.48,
+      "ticks": null,
+      "uptime": [
+        "load 11.20 102.77 116.80",
+        "load 7.00 84.89 109.15"
+      ]
+    }
+  ],
+  "median": {
+    "fix": 2.05,
+    "base": 2.14
+  },
+  "deltaPoints": -0.09
+}

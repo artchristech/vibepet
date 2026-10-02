@@ -1,0 +1,459 @@
+{
+ "flow": "P3",
+ "startedAt": "2026-10-02T03:33:14.363Z",
+ "load": [
+  [
+   1.14,
+   1.67,
+   2.04
+  ],
+  [
+   2.77,
+   1.98,
+   2.11
+  ]
+ ],
+ "steps": [
+  {
+   "name": "rows-vs-chips",
+   "at": "2026-10-02T03:33:30.886Z",
+   "load": [
+    0.96,
+    1.6,
+    2.01
+   ],
+   "rows": [],
+   "nowText": "No live sessions. Start Claude Code anywhere and I’ll pick it up.\n● Record a short\nToday\n:47441 X app\n✕\n:47442 Directory listing for /\n✕\n:47444 W app\n✕\n:47445 Directory listing for /\n✕",
+   "chips": [
+    {
+     "port": 47441,
+     "pid": 53574,
+     "label": ":47441 X app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47442,
+     "pid": 53584,
+     "label": ":47442 Directory listing for /",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47444,
+     "pid": 53587,
+     "label": ":47444 W app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47445,
+     "pid": 53597,
+     "label": ":47445 Directory listing for /",
+     "disabled": false,
+     "title": "Open"
+    }
+   ],
+   "truth": [
+    "kestrel:approval reg=waiting(permission prompt) last=user_prompt",
+    "vibepet:done reg=idle last=end_turn",
+    "atlas:working(FAIL) reg=idle last=interrupted",
+    "beacon:question reg=waiting(input needed) last=user_prompt",
+    "delta:fanout(FAIL) reg=idle last=end_turn",
+    "ember:loop(FAIL) reg=- last=user_prompt"
+   ],
+   "fold": {
+    "fresh": true,
+    "nowH": 137,
+    "nowScrollH": 137,
+    "rows": 0,
+    "srvsInView": true
+   },
+   "snapAgents": []
+  },
+  {
+   "name": "05-stop-X",
+   "at": "2026-10-02T03:33:31.608Z",
+   "load": [
+    0.96,
+    1.6,
+    2.01
+   ],
+   "dialog": {
+    "message": "Stop node (delta) on :47441?",
+    "detail": "pid 53574",
+    "defaultId": 1
+   },
+   "xDeadMs": 46,
+   "events": [
+    {
+     "ms": 44,
+     "kind": "localhost",
+     "text": "stopped pid 53574"
+    }
+   ],
+   "bubble": {
+    "text": "stopped pid 53574",
+    "visible": true,
+    "rect": [
+     262,
+     601,
+     137,
+     25
+    ],
+    "z": "2",
+    "chatOpen": true,
+    "chatZ": "3",
+    "hits": [
+     "chat:chatInput",
+     "chat:chatInput",
+     "chat:chatInput"
+    ],
+    "occluded": true
+   },
+   "notes": []
+  },
+  {
+   "name": "05-chip-gone",
+   "at": "2026-10-02T03:33:33.084Z",
+   "load": [
+    1.12,
+    1.62,
+    2.02
+   ],
+   "msAfterClick": 1933
+  },
+  {
+   "name": "09-stop-dead",
+   "at": "2026-10-02T03:34:01.696Z",
+   "load": [
+    1.69,
+    1.7,
+    2.03
+   ],
+   "chipStillListedMsAfterExit": 310,
+   "chipStillEnabled": true,
+   "dialog": {
+    "message": "Stop node (delta) on :47443?",
+    "detail": "pid 53702"
+   },
+   "events": [
+    {
+     "ms": 38,
+     "kind": "localhost",
+     "text": "couldn't stop pid 53702: ESRCH"
+    }
+   ],
+   "bubble": {
+    "text": "couldn't stop pid 53702: ESRCH",
+    "visible": true,
+    "rect": [
+     219,
+     601,
+     223,
+     25
+    ],
+    "z": "2",
+    "chatOpen": true,
+    "chatZ": "3",
+    "hits": [
+     "chat:chatInput",
+     "chat:chatInput",
+     "chat:chatInput"
+    ],
+    "occluded": true
+   }
+  },
+  {
+   "name": "09-stale-window",
+   "at": "2026-10-02T03:34:03.111Z",
+   "load": [
+    1.69,
+    1.7,
+    2.03
+   ],
+   "chipGoneMsAfterExit": 2361
+  },
+  {
+   "name": "18-stop-noarg",
+   "at": "2026-10-02T03:34:04.555Z",
+   "load": [
+    1.64,
+    1.69,
+    2.03
+   ],
+   "notes": [
+    "Nothing listening on .",
+    "Nothing listening on 47999."
+   ],
+   "firstNote": "Nothing listening on ."
+  },
+  {
+   "name": "05-stop-cmd",
+   "at": "2026-10-02T03:34:05.247Z",
+   "load": [
+    1.64,
+    1.69,
+    2.03
+   ],
+   "dialog": {
+    "message": "Stop http.server (atlas) on :47442?",
+    "detail": "pid 53584"
+   },
+   "events": [
+    {
+     "ms": 16,
+     "kind": "localhost",
+     "text": "stopped pid 53584"
+    }
+   ],
+   "bubble": {
+    "text": "couldn't stop pid 53702: ESRCH",
+    "visible": true,
+    "rect": [
+     219,
+     601,
+     223,
+     25
+    ],
+    "z": "2",
+    "chatOpen": true,
+    "chatZ": "3",
+    "hits": [
+     "chat:chatInput",
+     "chat:chatInput",
+     "chat:chatInput"
+    ],
+    "occluded": true
+   }
+  },
+  {
+   "name": "10-menu-stop",
+   "at": "2026-10-02T03:34:07.483Z",
+   "load": [
+    1.64,
+    1.69,
+    2.03
+   ],
+   "alerts": "done",
+   "click": {
+    "ok": true,
+    "label": "Stop node (pid 53587)…"
+   },
+   "wDeadMs": 456,
+   "dialogs": [
+    {
+     "ms": 441,
+     "message": "Stop node (ember) on :47444?",
+     "detail": "pid 53587",
+     "defaultId": 1
+    }
+   ],
+   "events": [],
+   "bubble": {
+    "text": "stopped pid 53584",
+    "visible": true,
+    "rect": [
+     262,
+     601,
+     137,
+     25
+    ],
+    "z": "2",
+    "chatOpen": true,
+    "chatZ": "3",
+    "hits": [
+     "chat:chatInput",
+     "chat:chatInput",
+     "chat:chatInput"
+    ],
+    "occluded": true
+   },
+   "notes": [
+    "Nothing listening on .",
+    "Nothing listening on 47999."
+   ]
+  },
+  {
+   "name": "10-exit-default",
+   "at": "2026-10-02T03:34:36.599Z",
+   "load": [
+    1.98,
+    1.77,
+    2.04
+   ],
+   "goneMs": 11999,
+   "events": [],
+   "bubble": {
+    "text": "stopped pid 53584",
+    "visible": false,
+    "rect": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "z": "2",
+    "chatOpen": true,
+    "chatZ": "3",
+    "hits": [],
+    "occluded": false
+   }
+  },
+  {
+   "name": "05-announce-all",
+   "at": "2026-10-02T03:34:57.510Z",
+   "load": [
+    2.67,
+    1.94,
+    2.1
+   ],
+   "alerts": "all",
+   "up": {
+    "ms": 4961,
+    "kind": "localhost",
+    "text": "node (delta) on :47447 is up"
+   },
+   "upMsAfterListen": 4903,
+   "bubbleUp": {
+    "text": "node ",
+    "visible": true,
+    "rect": [
+     305,
+     601,
+     50,
+     25
+    ],
+    "z": "2",
+    "chatOpen": true,
+    "chatZ": "3",
+    "hits": [
+     "chat:chatInput",
+     "chat:chatInput",
+     "chat:chatInput"
+    ],
+    "occluded": true
+   },
+   "down": {
+    "ms": 9543,
+    "kind": "localhost",
+    "text": "node (delta) on :47447 went down"
+   },
+   "downMsAfterExit": 9541,
+   "bubbleDown": {
+    "text": "no",
+    "visible": true,
+    "rect": [
+     311,
+     603,
+     37,
+     25
+    ],
+    "z": "2",
+    "chatOpen": true,
+    "chatZ": "3",
+    "hits": [
+     "chat:chatInput",
+     "chat:chatInput",
+     "chat:chatInput"
+    ],
+    "occluded": true
+   }
+  },
+  {
+   "name": "close",
+   "at": "2026-10-02T03:34:58.997Z",
+   "load": [
+    2.77,
+    1.98,
+    2.11
+   ],
+   "how": "quit",
+   "ms": 323,
+   "procs": 7,
+   "orphans": []
+  }
+ ],
+ "truthStart": [
+  "kestrel:approval reg=waiting(permission prompt) last=user_prompt",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "truthEnd": [
+  "kestrel:approval reg=waiting(permission prompt) last=user_prompt",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "servers": [
+  {
+   "tag": "X",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "pid": 53574,
+   "listenAt": 1790911996199,
+   "exitAt": 1790912011197,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "Y",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/atlas",
+   "pid": 53584,
+   "listenAt": 1790911996235,
+   "exitAt": 1790912044828,
+   "code": null,
+   "sig": "SIGTERM"
+  },
+  {
+   "tag": "W",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/ember",
+   "pid": 53587,
+   "listenAt": 1790911996187,
+   "exitAt": 1790912045954,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "B-beacon",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/beacon",
+   "pid": 53597,
+   "listenAt": 1790911996235,
+   "exitAt": 1790912011156,
+   "code": null,
+   "sig": "SIGTERM"
+  },
+  {
+   "tag": "Z",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "pid": 53702,
+   "listenAt": 1790912013127,
+   "exitAt": 1790912040750,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "V",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "pid": 53853,
+   "listenAt": 1790912047742,
+   "exitAt": 1790912061102,
+   "code": 143,
+   "sig": null
+  },
+  {
+   "tag": "U",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "pid": 53988,
+   "listenAt": 1790912080177,
+   "exitAt": 1790912087540,
+   "code": 143,
+   "sig": null
+  }
+ ],
+ "endedAt": "2026-10-02T03:34:58.997Z"
+}

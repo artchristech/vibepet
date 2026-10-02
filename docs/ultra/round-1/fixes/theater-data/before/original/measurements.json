@@ -1,0 +1,24 @@
+{
+  "app": "vibepet from /Users/christopherharris/.vibepet-ultra/int (ultra/round-1 @ 37ba577), test/ultra/launch.js, root ~/.vibepet-ultra/root/.claude, userData ~/.vibepet-ultra/userdata/r1-S5-critic (fresh), hotkey off; quit cleanly 02:50Z, 12 procs, 0 orphans",
+  "firstFrameMs": {
+    "method": "menu item click stamped in main (Date.now) -> first requestAnimationFrame after #beats .b exist, stamped in the theater page (Date.now); entry = Net -> ... -> Theater... -> session",
+    "delta_eb59a756": { "runs": [166, 151, 165, 150, 165, 146, 165], "median": 165, "n": 7, "load1m": "3.01-3.56" },
+    "kestrel_13a1427d": { "runs": [134, 135, 125], "median": 134, "n": 3, "load1m": "3.01-3.52", "firstOpen": 148 },
+    "beacon_a9377f08": { "runs": [121, 131], "median": 126, "n": 2, "firstOpen": 136 },
+    "singles": { "vibepet_first": 148, "ember_first": 168, "atlas_first": 250, "kestrel_prev_6f5c5b6c_first": 247, "atlas_second": 142, "load1m": "1.6-4.0" },
+    "mainTimelineBuild_delta_ms": [30, 33, 31, 30, 29]
+  },
+  "pausedCpu": {
+    "method": "ps cputime delta over 10 s per process (theater renderer via webContents.getOSProcessId; app total = all processes of this instance)",
+    "fourPausedReplays": { "rendererPct": [7.9, 7.7, 7.8, 8.6], "appTotalPct": 57.0, "load1m": 3.61 },
+    "onePausedReplay": { "rendererPct": [7.1, 6.5, 6.4], "rendererMedian": 6.5, "appTotalPct": [21.9, 23.9, 21.1], "appMedian": 21.9, "load1m": "3.43-3.67" },
+    "noReplay": { "appTotalPct": [9.5, 14.3, 10.2], "appMedian": 10.2, "load1m": "2.55-3.07" },
+    "domMutationsPerSecWhilePaused": 48
+  },
+  "layout": {
+    "kestrel_1280x800": { "top": [0, 1403], "stats": [1120, 1385], "chap": [1165, 1385], "playheadX": 702, "pin": [1017, 1387], "pinCloseX": [1350, 1374] },
+    "kestrel_820x520": { "controls": [0, 1403], "scrub": [182, 1049], "clock": [1063, 1151], "stats": [1120, 1385], "playheadX": 702 },
+    "atlas_diagnostic": { "bodyGridColumn": "1382.38px", "withGridTemplateColumnsMinmax0_1fr": { "top": 1280, "playheadX": 640 } }
+  },
+  "playAtVisibleEnd_atlas": { "durMs": 82741, "afterDragToLastPixel": { "clock": "1:23 / 1:23", "fill": "99.88%" }, "firstPlay": "❚❚ then ▶ again at 1:23 within 100-200 ms", "secondPlay": "restarts, 0:02 after 400 ms" }
+}

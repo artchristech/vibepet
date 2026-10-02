@@ -1,0 +1,94 @@
+{
+ "flow": "P5",
+ "startedAt": "2026-10-02T03:40:29.271Z",
+ "load": [
+  [
+   2.52,
+   2.31,
+   2.22
+  ],
+  [
+   2.78,
+   2.38,
+   2.25
+  ]
+ ],
+ "steps": [
+  {
+   "name": "fresh",
+   "at": "2026-10-02T03:40:48.895Z",
+   "load": [
+    2.38,
+    2.29,
+    2.22
+   ],
+   "rows": [],
+   "geo": {
+    "fresh": true,
+    "chatH": 460,
+    "nowH": 188,
+    "nowScrollH": 188,
+    "scrollTop": 0,
+    "rows": 0,
+    "chipsVisible": 8,
+    "chipsHidden": [],
+    "hint": false
+   }
+  },
+  {
+   "name": "after-message",
+   "at": "2026-10-02T03:40:53.549Z",
+   "load": [
+    2.59,
+    2.33,
+    2.23
+   ],
+   "rename": {
+    "ok": true,
+    "label": "Rename Net…"
+   },
+   "rows": [],
+   "geo": {
+    "fresh": false,
+    "chatH": 460,
+    "nowH": 188,
+    "nowScrollH": 188,
+    "scrollTop": 0,
+    "rows": 0,
+    "chipsVisible": 8,
+    "chipsHidden": [],
+    "hint": false
+   }
+  },
+  {
+   "name": "close",
+   "at": "2026-10-02T03:40:55.270Z",
+   "load": [
+    2.78,
+    2.38,
+    2.25
+   ],
+   "how": "quit",
+   "ms": 312,
+   "procs": 7,
+   "orphans": []
+  }
+ ],
+ "truthStart": [
+  "kestrel:approval reg=waiting(permission prompt) last=user_prompt",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "truthEnd": [
+  "kestrel:approval reg=waiting(permission prompt) last=user_prompt",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "endedAt": "2026-10-02T03:40:55.270Z"
+}

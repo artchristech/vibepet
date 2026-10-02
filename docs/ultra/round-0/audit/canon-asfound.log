@@ -1,0 +1,10 @@
+FAIL 20/22 assertions in 21.0 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-0/audit/canon-asfound
+rows: (none)   fleet: 3/6 in state
+  mismatch kestrel: missing: a permission dialog is open: it needs you, Approve, but Home has no row for it
+  mismatch vibepet: missing: the turn ended with a statement: done, your move, but Home has no row for it
+  mismatch beacon: missing: an AskUserQuestion dialog is open: it needs you, Reply, but Home has no row for it
+  FAIL rows/anyRow: no rows to act on
+  FAIL theater/replayButton: no row offers ▶
+real 21.01
+user 7.72
+sys 2.24

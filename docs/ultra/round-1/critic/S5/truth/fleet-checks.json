@@ -1,0 +1,19 @@
+{
+  "note": "fleet.js status --json summaries taken by the S5 critic (read-only except one atlas rearm + pause, leased). Times UTC.",
+  "checks": [
+    { "at": "2026-10-02T02:30:56Z", "kestrel": "approval: registry waiting (permission prompt) since 02:29:42Z; last record user_prompt 02:29:41Z (tool_use withheld)", "vibepet": "done: idle since 02:30:04Z, last end_turn", "atlas": "paused: idle since 02:02:57Z", "beacon": "question: waiting (input needed) since 02:13:42Z; last record user_prompt 02:13:41Z", "delta": "idle since 02:00:49Z, end_turn", "ember": "exited; last user_prompt 01:59:35Z" },
+    { "at": "2026-10-02T02:35:38Z", "kestrel": "approval (same)", "vibepet": "done (idle since 02:30:04Z, 5 min 34 s)", "atlas": "paused idle", "beacon": "question (same)", "delta": "idle", "ember": "exited" },
+    { "at": "2026-10-02T02:44:58Z", "kestrel": "approval (same, leased r1-S4-critic)", "vibepet": "done, re-armed by another agent: end_turn 02:40:56Z", "atlas": "idle, last interrupted 02:44:39Z (another agent)", "beacon": "question (same, leased r1-S4-critic)", "delta": "idle", "ember": "exited" },
+    { "at": "2026-10-02T02:48:52Z", "atlas": "working after the critic's rearm: registry busy since 02:48:31Z, last record pending Bash tool_use 02:48:33Z, 3 tool processes" },
+    { "at": "2026-10-02T02:49:19Z", "atlas": "paused again by the critic (interrupted 02:49:18Z, idle, 0 tool processes); lease released" },
+    { "at": "2026-10-02T02:51:03Z", "file": "fleet-status-end.json" }
+  ],
+  "transcriptMtimes_02_35_08Z": [
+    { "repo": "beacon", "sid": "a9377f08", "size": 363823, "mtime": "2026-10-02T02:25:20.145Z", "lastRecord": "2026-10-02T02:13:41.070Z", "mtimeAheadMin": 11.7, "tail": "user prompt + attachment at 02:13:41Z, nothing after" },
+    { "repo": "kestrel", "sid": "13a1427d", "size": 443802, "mtime": "2026-10-02T02:29:41.667Z", "lastRecord": "2026-10-02T02:29:41.563Z" },
+    { "repo": "vibepet", "sid": "6101876b", "size": 357437, "mtime": "2026-10-02T02:30:04.645Z", "lastRecord": "2026-10-02T02:30:04.521Z" }
+  ],
+  "vibepetRepo": "~/.vibepet-ultra/fleet/vibepet: 19 commits 483d5e8..c2b5c0a dated 20:24:49Z-22:45:11Z arrived via 'git pull --ff-only /Users/christopherharris/projects/vibepet ultra/round-0' (reflog 22:08, 22:38, 22:45Z); session 6101876b made 2 tool calls in total (Read package.json at 20:24:59Z; Bash 'python3 -m http.server 47120' at 01:53:46Z), no git commit",
+  "beaconTranscript": "14 AskUserQuestion tool_use records, input keys ['questions'], question 'Which database should beacon use to store check results?', options SQLite / Postgres / Redis",
+  "emberTranscript": "db0c1ec0: 21 system/scheduled_task_fire records, 22 isMeta loop prompts, 7 '/exit' commands"
+}

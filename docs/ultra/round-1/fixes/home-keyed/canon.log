@@ -1,0 +1,8 @@
+FAIL 20/22 assertions in 119.2 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/home-keyed/canon
+rows: (none)   fleet: 3/6 in state
+fold: 0/0 rows in view, footer in view (empty chat); 0/0, footer in view (after 3 messages)
+  mismatch kestrel: missing: a permission dialog is open: it needs you, Approve, but Home has no row for it
+  mismatch vibepet: missing: the turn ended with a statement: done, your move, but Home has no row for it
+  mismatch beacon: missing: an AskUserQuestion dialog is open: it needs you, Reply, but Home has no row for it
+  FAIL rows/anyRow: no rows to act on
+  FAIL theater/replayButton: no row offers ▶

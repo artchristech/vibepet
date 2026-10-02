@@ -1,0 +1,82 @@
+{
+ "git": "fd3858f tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane",
+ "worktreeClean": true,
+ "uptime": "23:24  up 6 days, 10:09, 19 users, load averages: 33.42 23.92 34.48",
+ "clients": 0,
+ "jumps": [
+  {
+   "member": "delta",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-delta",
+    "attach": "tmux attach -t vp-delta"
+   },
+   "ms": 174,
+   "load": [
+    33.84,
+    24.55,
+    34.52
+   ]
+  },
+  {
+   "member": "vibepet",
+   "result": {
+    "ok": false
+   },
+   "ms": 2,
+   "load": [
+    33.84,
+    24.55,
+    34.52
+   ]
+  },
+  {
+   "member": "atlas",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-atlas",
+    "attach": "tmux attach -t vp-atlas"
+   },
+   "ms": 459,
+   "load": [
+    33.84,
+    24.55,
+    34.52
+   ]
+  },
+  {
+   "member": "beacon",
+   "result": {
+    "ok": false
+   },
+   "ms": 5,
+   "load": [
+    33.84,
+    24.55,
+    34.52
+   ]
+  },
+  {
+   "member": "kestrel",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-kestrel",
+    "attach": "tmux attach -t vp-kestrel"
+   },
+   "ms": 471,
+   "load": [
+    33.84,
+    24.55,
+    34.52
+   ]
+  }
+ ],
+ "rows": 0,
+ "clipboardWrites": 0,
+ "close": {
+  "how": "quit",
+  "ms": 899,
+  "procs": 6,
+  "orphans": []
+ }
+}

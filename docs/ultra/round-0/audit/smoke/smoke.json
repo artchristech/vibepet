@@ -1,0 +1,164 @@
+{
+  "root": "/Users/christopherharris/.vibepet-ultra/root-empty/.claude",
+  "out": "/Users/christopherharris/projects/vibepet/docs/ultra/round-0/audit/smoke",
+  "startedAt": "2026-10-02T01:03:51.991Z",
+  "runs": [
+    {
+      "name": "run-1",
+      "frontBefore": "bzbmenu",
+      "pid": 32455,
+      "userData": "userdata/run-mx4Xtl",
+      "readyMs": 736,
+      "processes": 4,
+      "recordings": "recordings",
+      "home": {
+        "mode": "now",
+        "at": {
+          "x": 330.5,
+          "y": 732.5
+        },
+        "ms": 406,
+        "stillOpenAfter1s": true
+      },
+      "notes": 0,
+      "frontAfter": "bzbmenu",
+      "close": {
+        "how": "quit",
+        "ms": 321,
+        "procs": 5,
+        "orphans": []
+      }
+    },
+    {
+      "name": "run-2",
+      "frontBefore": "bzbmenu",
+      "pid": 32504,
+      "userData": "userdata/run-azuqam",
+      "readyMs": 312,
+      "processes": 4,
+      "recordings": "recordings",
+      "home": {
+        "mode": "now",
+        "at": {
+          "x": 330.5,
+          "y": 732.5
+        },
+        "ms": 408,
+        "stillOpenAfter1s": true
+      },
+      "notes": 0,
+      "frontAfter": "bzbmenu",
+      "close": {
+        "how": "quit",
+        "ms": 293,
+        "procs": 5,
+        "orphans": []
+      }
+    },
+    {
+      "name": "run-3",
+      "frontBefore": "bzbmenu",
+      "pid": 32537,
+      "userData": "userdata/run-om3L0P",
+      "readyMs": 363,
+      "processes": 4,
+      "recordings": "recordings",
+      "home": {
+        "mode": "now",
+        "at": {
+          "x": 330.5,
+          "y": 732.5
+        },
+        "ms": 395,
+        "stillOpenAfter1s": true
+      },
+      "notes": 0,
+      "frontAfter": "bzbmenu",
+      "close": {
+        "how": "quit",
+        "ms": 293,
+        "procs": 5,
+        "orphans": []
+      }
+    }
+  ],
+  "firstRun": {
+    "name": "first-run",
+    "frontBefore": "bzbmenu",
+    "pid": 32578,
+    "userData": "userdata/run-HEAS80",
+    "readyMs": 323,
+    "processes": 4,
+    "recordings": "recordings",
+    "home": {
+      "mode": "setup",
+      "at": {
+        "x": 330.5,
+        "y": 732.5
+      },
+      "ms": 391,
+      "stillOpenAfter1s": true
+    },
+    "notes": 0,
+    "frontAfter": "bzbmenu",
+    "close": {
+      "how": "quit",
+      "ms": 291,
+      "procs": 5,
+      "orphans": []
+    }
+  },
+  "parallel": {
+    "frontBefore": "bzbmenu",
+    "pids": [
+      32617,
+      32618
+    ],
+    "userData": [
+      "userdata/run-rhUS7b",
+      "userdata/run-9ijty9"
+    ],
+    "readyMs": [
+      418,
+      522
+    ],
+    "bothAlive": true,
+    "home": [
+      {
+        "mode": "now",
+        "at": {
+          "x": 330.5,
+          "y": 732.5
+        },
+        "ms": 396
+      },
+      {
+        "mode": "now",
+        "at": {
+          "x": 330.5,
+          "y": 732.5
+        },
+        "ms": 396
+      }
+    ],
+    "frontAfter": "bzbmenu",
+    "close": [
+      {
+        "how": "quit",
+        "ms": 400,
+        "procs": 5,
+        "orphans": []
+      },
+      {
+        "how": "quit",
+        "ms": 481,
+        "procs": 4,
+        "orphans": []
+      }
+    ]
+  },
+  "failures": [],
+  "harnessProcsBefore": 0,
+  "leftoversAfter": [],
+  "ms": 17456
+}

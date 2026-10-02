@@ -1,0 +1,50 @@
+ ▐▛███▛█   Claude Code v2.1.287
+▝▜██████▀  Haiku 4.5 · Claude Max
+ ▝▝   ▝▝   ~/.vibepet-ultra/fleet/vibepet
+
+
+❯ Read package.json and tell me in one plain sentence what this project is. Answer with a statement, not a question, and do not run any commands.
+
+  Read 1 file (ctrl+o to expand)
+
+⏺ This project is a desktop AI pet application for developers built with Electron.
+
+✻ Cogitated for 4s · done 2:25 PM
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ start it
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  ⏸ manual mode on · ? for shortcuts · ← 1 agent                                                                                get pinged when Claude finishes · enable push notifications in /config
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

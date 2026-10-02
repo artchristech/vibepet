@@ -1,0 +1,97 @@
+{"uptimeStart": "load averages: 358.13 156.56 81.23",
+"scrollEndMid": {"endA":{"top":758,"max":758,"n":12},"endB":{"top":758,"max":758,"n":12},"endKept":true,"midA":{"top":253,"max":758,"n":12},"midB":{"top":253,"max":758,"n":12},"midKept":true},
+"scenarios": 
+{
+ "queued": [
+  "msg user | first question",
+  "msg user queued | second questionqueued"
+ ],
+ "stop": {
+  "ms": 65.30000001192093,
+  "stopped": true,
+  "tag": "(stopped)",
+  "open": true
+ },
+ "after": [
+  "user | first question",
+  "pet stopped | Here is what I see:kestrel waits on approvalbeacon",
+  "user | second question",
+  "pet | Here is what I see:kestrel waits on approvalbeacon"
+ ],
+ "md": {
+  "ul": true,
+  "a": "https://vibepet.net",
+  "lang": "bash",
+  "copy": true
+ },
+ "scroll": {
+  "before": 479,
+  "after": 479,
+  "pill": true
+ },
+ "shiftEnter": {
+  "value": "line one\nline two",
+  "h": 60,
+  "users": 3
+ },
+ "up": "third question",
+ "clip": [
+  "./deploy.sh --dry-run"
+ ],
+ "cmdK": {
+  "value": "/",
+  "slash": true
+ },
+ "link": [
+  "https://vibepet.net"
+ ],
+ "newChat": {
+  "msgs": 0,
+  "fresh": true
+ },
+ "hist": {
+  "items": [
+   "a question in chat twojust now · delta · 1 message",
+   "first question1m ago · delta · 3 messages"
+  ],
+  "keep": "Last 200 chats · stored only on this Mac"
+ },
+ "search": [
+  "first question"
+ ],
+ "reopened": [
+  "first question",
+  "second question",
+  "third question"
+ ],
+ "scrollSaved": 464,
+ "close1": {
+  "how": "quit",
+  "ms": 2454,
+  "procs": 8,
+  "orphans": []
+ },
+ "relaunch": {
+  "msgs": [
+   "user",
+   "pet stopped",
+   "user",
+   "pet",
+   "user",
+   "pet"
+  ],
+  "code": 3,
+  "labels": [
+   "first question",
+   "second question",
+   "third question"
+  ],
+  "scrollTop": 464
+ },
+ "cleared": {
+  "items": 0,
+  "msgs": 0,
+  "none": "No saved chats yet."
+ }
+}
+, "uptimeEnd": "load averages: 372.41 307.89 168.48"}

@@ -1,0 +1,2397 @@
+{
+  "startedAt": "2026-10-02T08:53:38.016Z",
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-row-actions",
+  "userData": "/Users/christopherharris/.vibepet-ultra/userdata/r1-row-actions",
+  "checks": [
+    {
+      "id": "kestrel: Bash: ./deploy.sh --dry-run + Approve, Always: ./deploy.sh *, Deny",
+      "ok": true,
+      "detail": {
+        "member": "kestrel",
+        "cls": "nr needs",
+        "ask": "Bash: ./deploy.sh --dry-run",
+        "buttons": [
+          "replay=Replay",
+          "goal=Goal",
+          "diff=Diff",
+          "approve=Approve",
+          "always=Always: ./deploy.sh *",
+          "deny=Deny"
+        ]
+      }
+    },
+    {
+      "id": "beacon: question + SQLite / Postgres / Redis / Other…",
+      "ok": true,
+      "detail": {
+        "member": "beacon",
+        "cls": "nr needs",
+        "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Redis)",
+        "buttons": [
+          "replay=Replay",
+          "goal=Goal",
+          "diff=Diff",
+          "option:1=SQLite",
+          "option:2=Postgres",
+          "option:3=Redis",
+          "other=Other…"
+        ]
+      }
+    },
+    {
+      "id": "vibepet (done): Reply",
+      "ok": true,
+      "detail": {
+        "member": "vibepet",
+        "cls": "nr ready",
+        "ask": null,
+        "buttons": [
+          "replay=Replay",
+          "goal=Goal",
+          "diff=Diff",
+          "reply=Reply",
+          "done=Mark done"
+        ]
+      }
+    },
+    {
+      "id": "atlas (done): Reply",
+      "ok": true,
+      "detail": {
+        "member": "atlas",
+        "cls": "nr ready",
+        "ask": null,
+        "buttons": [
+          "replay=Replay",
+          "goal=Goal",
+          "diff=Diff",
+          "reply=Reply",
+          "done=Mark done"
+        ]
+      }
+    },
+    {
+      "id": "delta (done): Reply",
+      "ok": true,
+      "detail": {
+        "member": "delta",
+        "cls": "nr ready",
+        "ask": null,
+        "buttons": [
+          "replay=Replay",
+          "goal=Goal",
+          "diff=Diff",
+          "reply=Reply",
+          "done=Mark done"
+        ]
+      }
+    },
+    {
+      "id": "no glyph-only row control",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "id": "blocked rows: no goal control on the decision line",
+      "ok": true,
+      "detail": [
+        [
+          "Replay",
+          "Goal",
+          "Diff",
+          "Approve",
+          "Always: ./deploy.sh *",
+          "Deny"
+        ],
+        [
+          "Replay",
+          "Goal",
+          "Diff",
+          "SQLite",
+          "Postgres",
+          "Redis",
+          "Other…"
+        ]
+      ]
+    },
+    {
+      "id": "inline edit of atlas's auto goal is prefilled with it; Enter = 1 set-goal",
+      "ok": true,
+      "detail": {
+        "member": "atlas",
+        "goal": {
+          "text": "Run exactly ./build.sh with the Bash tool in the foreground (do not run it in t…",
+          "auto": true,
+          "done": false,
+          "verdict": "unknown"
+        },
+        "prefill": "Run exactly ./build.sh with the Bash tool in the foreground (do not run it in t…",
+        "setGoal": [
+          {
+            "same": true,
+            "text": "Run exactly ./build.sh with the Bash tool in the foreground (do not run it in t…"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Mark done #1 on delta: Replay/Goal/Diff boxes identical; Undo inside 5 s restores the goal, drops its row, takes the xp back",
+      "ok": true,
+      "detail": {
+        "i": 0,
+        "noteMs": 97,
+        "undoMs": 493,
+        "undoAfterDoneMs": 1086,
+        "xp": [
+          0,
+          15,
+          0
+        ],
+        "goalDoneRows": [
+          0,
+          1,
+          0
+        ],
+        "slots": {
+          "sameOnScreen": true,
+          "sameInPanel": true,
+          "sameInRow": true,
+          "before": {
+            "bubble": false,
+            "replay": {
+              "view": [
+                469,
+                189.5,
+                58,
+                21.5
+              ],
+              "panel": [
+                449,
+                131.5
+              ],
+              "row": [
+                440,
+                8
+              ]
+            },
+            "goal": {
+              "view": [
+                531,
+                189.5,
+                46,
+                21.5
+              ],
+              "panel": [
+                511,
+                131.5
+              ],
+              "row": [
+                502,
+                8
+              ]
+            },
+            "diff": {
+              "view": [
+                581,
+                189.5,
+                42,
+                21.5
+              ],
+              "panel": [
+                561,
+                131.5
+              ],
+              "row": [
+                552,
+                8
+              ]
+            }
+          },
+          "after": {
+            "bubble": false,
+            "replay": {
+              "view": [
+                469,
+                189.5,
+                58,
+                21.5
+              ],
+              "panel": [
+                449,
+                131.5
+              ],
+              "row": [
+                440,
+                8
+              ]
+            },
+            "goal": {
+              "view": [
+                531,
+                189.5,
+                46,
+                21.5
+              ],
+              "panel": [
+                511,
+                131.5
+              ],
+              "row": [
+                502,
+                8
+              ]
+            },
+            "diff": {
+              "view": [
+                581,
+                189.5,
+                42,
+                21.5
+              ],
+              "panel": [
+                561,
+                131.5
+              ],
+              "row": [
+                552,
+                8
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "Mark done #2 on delta: Replay/Goal/Diff boxes identical; Undo inside 5 s restores the goal, drops its row, takes the xp back",
+      "ok": true,
+      "detail": {
+        "i": 1,
+        "noteMs": 80,
+        "undoMs": 596,
+        "undoAfterDoneMs": 96,
+        "xp": [
+          0,
+          15,
+          0
+        ],
+        "goalDoneRows": [
+          0,
+          1,
+          0
+        ],
+        "slots": {
+          "sameOnScreen": true,
+          "sameInPanel": true,
+          "sameInRow": true,
+          "before": {
+            "bubble": false,
+            "replay": {
+              "view": [
+                469,
+                189.5,
+                58,
+                21.5
+              ],
+              "panel": [
+                449,
+                131.5
+              ],
+              "row": [
+                440,
+                8
+              ]
+            },
+            "goal": {
+              "view": [
+                531,
+                189.5,
+                46,
+                21.5
+              ],
+              "panel": [
+                511,
+                131.5
+              ],
+              "row": [
+                502,
+                8
+              ]
+            },
+            "diff": {
+              "view": [
+                581,
+                189.5,
+                42,
+                21.5
+              ],
+              "panel": [
+                561,
+                131.5
+              ],
+              "row": [
+                552,
+                8
+              ]
+            }
+          },
+          "after": {
+            "bubble": false,
+            "replay": {
+              "view": [
+                469,
+                189.5,
+                58,
+                21.5
+              ],
+              "panel": [
+                449,
+                131.5
+              ],
+              "row": [
+                440,
+                8
+              ]
+            },
+            "goal": {
+              "view": [
+                531,
+                189.5,
+                46,
+                21.5
+              ],
+              "panel": [
+                511,
+                131.5
+              ],
+              "row": [
+                502,
+                8
+              ]
+            },
+            "diff": {
+              "view": [
+                581,
+                189.5,
+                42,
+                21.5
+              ],
+              "panel": [
+                561,
+                131.5
+              ],
+              "row": [
+                552,
+                8
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "Mark done #3 on delta: Replay/Goal/Diff boxes identical; Undo inside 5 s restores the goal, drops its row, takes the xp back",
+      "ok": true,
+      "detail": {
+        "i": 2,
+        "noteMs": 215,
+        "undoMs": 255,
+        "undoAfterDoneMs": 262,
+        "xp": [
+          0,
+          15,
+          0
+        ],
+        "goalDoneRows": [
+          0,
+          1,
+          0
+        ],
+        "slots": {
+          "sameOnScreen": true,
+          "sameInPanel": true,
+          "sameInRow": true,
+          "before": {
+            "bubble": false,
+            "replay": {
+              "view": [
+                469,
+                189.5,
+                58,
+                21.5
+              ],
+              "panel": [
+                449,
+                131.5
+              ],
+              "row": [
+                440,
+                8
+              ]
+            },
+            "goal": {
+              "view": [
+                531,
+                189.5,
+                46,
+                21.5
+              ],
+              "panel": [
+                511,
+                131.5
+              ],
+              "row": [
+                502,
+                8
+              ]
+            },
+            "diff": {
+              "view": [
+                581,
+                189.5,
+                42,
+                21.5
+              ],
+              "panel": [
+                561,
+                131.5
+              ],
+              "row": [
+                552,
+                8
+              ]
+            }
+          },
+          "after": {
+            "bubble": false,
+            "replay": {
+              "view": [
+                469,
+                189.5,
+                58,
+                21.5
+              ],
+              "panel": [
+                449,
+                131.5
+              ],
+              "row": [
+                440,
+                8
+              ]
+            },
+            "goal": {
+              "view": [
+                531,
+                189.5,
+                46,
+                21.5
+              ],
+              "panel": [
+                511,
+                131.5
+              ],
+              "row": [
+                502,
+                8
+              ]
+            },
+            "diff": {
+              "view": [
+                581,
+                189.5,
+                42,
+                21.5
+              ],
+              "panel": [
+                561,
+                131.5
+              ],
+              "row": [
+                552,
+                8
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "reset + Mark done again on delta: Today's hit count and xp unchanged",
+      "ok": true,
+      "detail": {
+        "member": "delta",
+        "reopenedAfterReset": true,
+        "result": {
+          "ok": true,
+          "counted": false
+        },
+        "today": [
+          "Goals set: 5 · hit: 1",
+          "Goals set: 5 · hit: 1"
+        ],
+        "xp": [
+          15,
+          15
+        ]
+      }
+    },
+    {
+      "id": "Diff on vibepet opens ~/.vibepet-ultra/fleet/vibepet in one read-only window (reused)",
+      "ok": true,
+      "detail": {
+        "diff": [
+          {
+            "ok": true,
+            "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+            "files": 1,
+            "add": 3,
+            "del": 1,
+            "untracked": 0,
+            "clean": true,
+            "note": "vibepet: no uncommitted changes · showing the last commit"
+          },
+          {
+            "ok": true,
+            "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+            "files": 1,
+            "add": 3,
+            "del": 1,
+            "untracked": 0,
+            "clean": true,
+            "note": "vibepet: no uncommitted changes · showing the last commit"
+          },
+          {
+            "ok": true,
+            "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+            "files": 1,
+            "add": 3,
+            "del": 1,
+            "untracked": 0,
+            "clean": true,
+            "note": "vibepet: no uncommitted changes · showing the last commit"
+          }
+        ],
+        "window": {
+          "title": "Diff · vibepet",
+          "windows": 1,
+          "javascript": false,
+          "fileLink": {
+            "sameUrl": true,
+            "openPath": [
+              "/Users/christopherharris/.vibepet-ultra/fleet/vibepet/test/ultra/canon.js"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "S on a running row asks in place (\"Stop now\"), a double press sends nothing, S again sends interrupt to that row",
+      "ok": true,
+      "detail": {
+        "asked": "Stop now",
+        "sentOnDoublePress": 0,
+        "sent": {
+          "action": "interrupt",
+          "id": "this row"
+        }
+      }
+    },
+    {
+      "id": "key A on a focused row → send-to with the right action and that row's id (3×)",
+      "ok": true,
+      "detail": [
+        {
+          "key": "a",
+          "member": "kestrel",
+          "ms": 7,
+          "ok": true,
+          "sent": {
+            "action": "approve",
+            "id": "this row"
+          }
+        },
+        {
+          "key": "a",
+          "member": "kestrel",
+          "ms": 3,
+          "ok": true,
+          "sent": {
+            "action": "approve",
+            "id": "this row"
+          }
+        },
+        {
+          "key": "a",
+          "member": "kestrel",
+          "ms": 3,
+          "ok": true,
+          "sent": {
+            "action": "approve",
+            "id": "this row"
+          }
+        }
+      ]
+    },
+    {
+      "id": "key W on a focused row → send-to with the right action and that row's id (3×)",
+      "ok": true,
+      "detail": [
+        {
+          "key": "w",
+          "member": "kestrel",
+          "ms": 2,
+          "ok": true,
+          "sent": {
+            "action": "always",
+            "id": "this row"
+          }
+        },
+        {
+          "key": "w",
+          "member": "kestrel",
+          "ms": 2,
+          "ok": true,
+          "sent": {
+            "action": "always",
+            "id": "this row"
+          }
+        },
+        {
+          "key": "w",
+          "member": "kestrel",
+          "ms": 13,
+          "ok": true,
+          "sent": {
+            "action": "always",
+            "id": "this row"
+          }
+        }
+      ]
+    },
+    {
+      "id": "key D on a focused row → send-to with the right action and that row's id (3×)",
+      "ok": true,
+      "detail": [
+        {
+          "key": "d",
+          "member": "kestrel",
+          "ms": 3,
+          "ok": true,
+          "sent": {
+            "action": "deny",
+            "id": "this row"
+          }
+        },
+        {
+          "key": "d",
+          "member": "kestrel",
+          "ms": 3,
+          "ok": true,
+          "sent": {
+            "action": "deny",
+            "id": "this row"
+          }
+        },
+        {
+          "key": "d",
+          "member": "kestrel",
+          "ms": 3,
+          "ok": true,
+          "sent": {
+            "action": "deny",
+            "id": "this row"
+          }
+        }
+      ]
+    },
+    {
+      "id": "key 2 on a focused row → send-to with the right action and that row's id (3×)",
+      "ok": true,
+      "detail": [
+        {
+          "key": "2",
+          "member": "beacon",
+          "ms": 6,
+          "ok": true,
+          "sent": {
+            "action": "option",
+            "key": "2",
+            "id": "this row"
+          }
+        },
+        {
+          "key": "2",
+          "member": "beacon",
+          "ms": 3,
+          "ok": true,
+          "sent": {
+            "action": "option",
+            "key": "2",
+            "id": "this row"
+          }
+        },
+        {
+          "key": "2",
+          "member": "beacon",
+          "ms": 3,
+          "ok": true,
+          "sent": {
+            "action": "option",
+            "key": "2",
+            "id": "this row"
+          }
+        }
+      ]
+    },
+    {
+      "id": "key R on a focused row → send-to with the right action and that row's id (3×)",
+      "ok": true,
+      "detail": [
+        {
+          "key": "r",
+          "member": "vibepet",
+          "ms": 179,
+          "ok": true,
+          "sent": {
+            "action": "text",
+            "text": "Reply with exactly: ok",
+            "id": "this row"
+          }
+        },
+        {
+          "key": "r",
+          "member": "vibepet",
+          "ms": 325,
+          "ok": true,
+          "sent": {
+            "action": "text",
+            "text": "Reply with exactly: ok",
+            "id": "this row"
+          }
+        },
+        {
+          "key": "r",
+          "member": "vibepet",
+          "ms": 1429,
+          "ok": true,
+          "sent": {
+            "action": "text",
+            "text": "Reply with exactly: ok",
+            "id": "this row"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Approve all (2) when two approvals wait on the identical command → approve to both sessions",
+      "ok": true,
+      "detail": {
+        "label": "Approve all (2)",
+        "sent": [
+          {
+            "action": "approve",
+            "member": "kestrel"
+          },
+          {
+            "action": "approve",
+            "member": "vibepet"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Clear done collapses every finished row into Idle (N), which expands on request",
+      "ok": true,
+      "detail": {
+        "finishedBefore": 4,
+        "afterClear": {
+          "ready": 0,
+          "idle": "4 idle ▸"
+        },
+        "idleRowsExpanded": 4
+      }
+    },
+    {
+      "id": "beacon's Other… → real send-to text, refused on screen before typing; the why shows in beacon's row, beacon still waiting",
+      "ok": true,
+      "detail": {
+        "placeholder": "Answer Beacon database choice in your own words…",
+        "sent": {
+          "action": "text",
+          "text": "MongoDB"
+        },
+        "result": {
+          "ok": false,
+          "why": "beacon is showing a question: pick one of its options"
+        },
+        "ms": 180,
+        "note": {
+          "text": "beacon is showing a question: pick one of its options",
+          "cls": "nnote err"
+        },
+        "beaconAfter": {
+          "inState": true,
+          "registry": {
+            "status": "waiting",
+            "waitingFor": "input needed",
+            "statusUpdatedAt": 1790907222729
+          }
+        }
+      }
+    }
+  ],
+  "timings": {
+    "markDone→note": [
+      {
+        "ms": 97,
+        "at": "load 377.30 189.73 130.31"
+      },
+      {
+        "ms": 80,
+        "at": "load 400.09 197.57 133.42"
+      },
+      {
+        "ms": 215,
+        "at": "load 400.09 197.57 133.42"
+      }
+    ],
+    "undo→reopened": [
+      {
+        "ms": 493,
+        "at": "load 377.30 189.73 130.31"
+      },
+      {
+        "ms": 596,
+        "at": "load 400.09 197.57 133.42"
+      },
+      {
+        "ms": 255,
+        "at": "load 400.09 197.57 133.42"
+      }
+    ],
+    "diff IPC (git + window)": [
+      {
+        "ms": 278,
+        "at": "load 421.39 205.35 136.54"
+      },
+      {
+        "ms": 734,
+        "at": "load 421.39 205.35 136.54"
+      },
+      {
+        "ms": 481,
+        "at": "load 421.39 205.35 136.54"
+      }
+    ],
+    "key→send-to": [
+      {
+        "ms": 7,
+        "at": "load 442.74 213.36 139.77"
+      },
+      {
+        "ms": 2,
+        "at": "load 442.74 213.36 139.77"
+      },
+      {
+        "ms": 3,
+        "at": "load 442.74 213.36 139.77"
+      },
+      {
+        "ms": 6,
+        "at": "load 442.74 213.36 139.77"
+      },
+      {
+        "ms": 179,
+        "at": "load 442.74 213.36 139.77"
+      },
+      {
+        "ms": 3,
+        "at": "load 442.74 213.36 139.77"
+      },
+      {
+        "ms": 2,
+        "at": "load 458.45 220.43 142.70"
+      },
+      {
+        "ms": 3,
+        "at": "load 458.45 220.43 142.70"
+      },
+      {
+        "ms": 3,
+        "at": "load 458.45 220.43 142.70"
+      },
+      {
+        "ms": 325,
+        "at": "load 458.45 220.43 142.70"
+      },
+      {
+        "ms": 3,
+        "at": "load 458.45 220.43 142.70"
+      },
+      {
+        "ms": 13,
+        "at": "load 458.45 220.43 142.70"
+      },
+      {
+        "ms": 3,
+        "at": "load 458.45 220.43 142.70"
+      },
+      {
+        "ms": 3,
+        "at": "load 458.45 220.43 142.70"
+      },
+      {
+        "ms": 1429,
+        "at": "load 455.21 223.71 144.31"
+      }
+    ],
+    "send-to refusal (real, tmux guard)": [
+      {
+        "ms": 180,
+        "at": "load 349.63 214.89 143.01"
+      }
+    ]
+  },
+  "uptime": [
+    [
+      "launch",
+      "load 290.65 164.39 120.50"
+    ],
+    [
+      "part A done",
+      "load 377.98 218.12 143.71"
+    ],
+    [
+      "end",
+      "load 349.63 214.89 143.01"
+    ]
+  ],
+  "fleet": {
+    "at": "2026-10-02T08:53:39.698Z",
+    "allOk": false,
+    "spend": {
+      "transcriptsUsd": 2.223186,
+      "estimateWithHiddenUsd": 3.3093,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "permission prompt",
+          "statusUpdatedAt": 1790910742347
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T03:12:20.929Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910787682
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T03:13:07.635Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910180805
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-02T03:03:00.799Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "input needed",
+          "statusUpdatedAt": 1790907222729
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T02:13:41.070Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790906449089
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T02:00:48.941Z"
+        },
+        "toolProcs": 0,
+        "subagents": 36,
+        "failing": [
+          "registry.status",
+          "child",
+          "subagents"
+        ]
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "registry": null,
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T08:44:13.414Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "claude",
+          "registry.status",
+          "loop",
+          "loopLock"
+        ]
+      }
+    ]
+  },
+  "instrument": {
+    "spied": [
+      "jump",
+      "send-to",
+      "diff",
+      "goal-done",
+      "goal-undo"
+    ],
+    "stubSendTo": true
+  },
+  "rows": [
+    {
+      "member": "beacon",
+      "cls": "nr needs",
+      "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Redis)",
+      "buttons": [
+        "replay=Replay",
+        "goal=Goal",
+        "diff=Diff",
+        "option:1=SQLite",
+        "option:2=Postgres",
+        "option:3=Redis",
+        "other=Other…"
+      ]
+    },
+    {
+      "member": "kestrel",
+      "cls": "nr needs",
+      "ask": "Bash: ./deploy.sh --dry-run",
+      "buttons": [
+        "replay=Replay",
+        "goal=Goal",
+        "diff=Diff",
+        "approve=Approve",
+        "always=Always: ./deploy.sh *",
+        "deny=Deny"
+      ]
+    },
+    {
+      "member": "delta",
+      "cls": "nr ready",
+      "ask": null,
+      "buttons": [
+        "replay=Replay",
+        "goal=Goal",
+        "diff=Diff",
+        "reply=Reply",
+        "done=Mark done"
+      ]
+    },
+    {
+      "member": "atlas",
+      "cls": "nr ready",
+      "ask": null,
+      "buttons": [
+        "replay=Replay",
+        "goal=Goal",
+        "diff=Diff",
+        "reply=Reply",
+        "done=Mark done"
+      ]
+    },
+    {
+      "member": "vibepet",
+      "cls": "nr ready",
+      "ask": null,
+      "buttons": [
+        "replay=Replay",
+        "goal=Goal",
+        "diff=Diff",
+        "reply=Reply",
+        "done=Mark done"
+      ]
+    }
+  ],
+  "goalEdit": {
+    "member": "atlas",
+    "goal": {
+      "text": "Run exactly ./build.sh with the Bash tool in the foreground (do not run it in t…",
+      "auto": true,
+      "done": false,
+      "verdict": "unknown"
+    },
+    "prefill": "Run exactly ./build.sh with the Bash tool in the foreground (do not run it in t…",
+    "setGoal": [
+      {
+        "same": true,
+        "text": "Run exactly ./build.sh with the Bash tool in the foreground (do not run it in t…"
+      }
+    ]
+  },
+  "markDone": [
+    {
+      "i": 0,
+      "noteMs": 97,
+      "undoMs": 493,
+      "undoAfterDoneMs": 1086,
+      "xp": [
+        0,
+        15,
+        0
+      ],
+      "goalDoneRows": [
+        0,
+        1,
+        0
+      ],
+      "slots": {
+        "sameOnScreen": true,
+        "sameInPanel": true,
+        "sameInRow": true,
+        "before": {
+          "bubble": false,
+          "replay": {
+            "view": [
+              469,
+              189.5,
+              58,
+              21.5
+            ],
+            "panel": [
+              449,
+              131.5
+            ],
+            "row": [
+              440,
+              8
+            ]
+          },
+          "goal": {
+            "view": [
+              531,
+              189.5,
+              46,
+              21.5
+            ],
+            "panel": [
+              511,
+              131.5
+            ],
+            "row": [
+              502,
+              8
+            ]
+          },
+          "diff": {
+            "view": [
+              581,
+              189.5,
+              42,
+              21.5
+            ],
+            "panel": [
+              561,
+              131.5
+            ],
+            "row": [
+              552,
+              8
+            ]
+          }
+        },
+        "after": {
+          "bubble": false,
+          "replay": {
+            "view": [
+              469,
+              189.5,
+              58,
+              21.5
+            ],
+            "panel": [
+              449,
+              131.5
+            ],
+            "row": [
+              440,
+              8
+            ]
+          },
+          "goal": {
+            "view": [
+              531,
+              189.5,
+              46,
+              21.5
+            ],
+            "panel": [
+              511,
+              131.5
+            ],
+            "row": [
+              502,
+              8
+            ]
+          },
+          "diff": {
+            "view": [
+              581,
+              189.5,
+              42,
+              21.5
+            ],
+            "panel": [
+              561,
+              131.5
+            ],
+            "row": [
+              552,
+              8
+            ]
+          }
+        }
+      }
+    },
+    {
+      "i": 1,
+      "noteMs": 80,
+      "undoMs": 596,
+      "undoAfterDoneMs": 96,
+      "xp": [
+        0,
+        15,
+        0
+      ],
+      "goalDoneRows": [
+        0,
+        1,
+        0
+      ],
+      "slots": {
+        "sameOnScreen": true,
+        "sameInPanel": true,
+        "sameInRow": true,
+        "before": {
+          "bubble": false,
+          "replay": {
+            "view": [
+              469,
+              189.5,
+              58,
+              21.5
+            ],
+            "panel": [
+              449,
+              131.5
+            ],
+            "row": [
+              440,
+              8
+            ]
+          },
+          "goal": {
+            "view": [
+              531,
+              189.5,
+              46,
+              21.5
+            ],
+            "panel": [
+              511,
+              131.5
+            ],
+            "row": [
+              502,
+              8
+            ]
+          },
+          "diff": {
+            "view": [
+              581,
+              189.5,
+              42,
+              21.5
+            ],
+            "panel": [
+              561,
+              131.5
+            ],
+            "row": [
+              552,
+              8
+            ]
+          }
+        },
+        "after": {
+          "bubble": false,
+          "replay": {
+            "view": [
+              469,
+              189.5,
+              58,
+              21.5
+            ],
+            "panel": [
+              449,
+              131.5
+            ],
+            "row": [
+              440,
+              8
+            ]
+          },
+          "goal": {
+            "view": [
+              531,
+              189.5,
+              46,
+              21.5
+            ],
+            "panel": [
+              511,
+              131.5
+            ],
+            "row": [
+              502,
+              8
+            ]
+          },
+          "diff": {
+            "view": [
+              581,
+              189.5,
+              42,
+              21.5
+            ],
+            "panel": [
+              561,
+              131.5
+            ],
+            "row": [
+              552,
+              8
+            ]
+          }
+        }
+      }
+    },
+    {
+      "i": 2,
+      "noteMs": 215,
+      "undoMs": 255,
+      "undoAfterDoneMs": 262,
+      "xp": [
+        0,
+        15,
+        0
+      ],
+      "goalDoneRows": [
+        0,
+        1,
+        0
+      ],
+      "slots": {
+        "sameOnScreen": true,
+        "sameInPanel": true,
+        "sameInRow": true,
+        "before": {
+          "bubble": false,
+          "replay": {
+            "view": [
+              469,
+              189.5,
+              58,
+              21.5
+            ],
+            "panel": [
+              449,
+              131.5
+            ],
+            "row": [
+              440,
+              8
+            ]
+          },
+          "goal": {
+            "view": [
+              531,
+              189.5,
+              46,
+              21.5
+            ],
+            "panel": [
+              511,
+              131.5
+            ],
+            "row": [
+              502,
+              8
+            ]
+          },
+          "diff": {
+            "view": [
+              581,
+              189.5,
+              42,
+              21.5
+            ],
+            "panel": [
+              561,
+              131.5
+            ],
+            "row": [
+              552,
+              8
+            ]
+          }
+        },
+        "after": {
+          "bubble": false,
+          "replay": {
+            "view": [
+              469,
+              189.5,
+              58,
+              21.5
+            ],
+            "panel": [
+              449,
+              131.5
+            ],
+            "row": [
+              440,
+              8
+            ]
+          },
+          "goal": {
+            "view": [
+              531,
+              189.5,
+              46,
+              21.5
+            ],
+            "panel": [
+              511,
+              131.5
+            ],
+            "row": [
+              502,
+              8
+            ]
+          },
+          "diff": {
+            "view": [
+              581,
+              189.5,
+              42,
+              21.5
+            ],
+            "panel": [
+              561,
+              131.5
+            ],
+            "row": [
+              552,
+              8
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "once": {
+    "member": "delta",
+    "reopenedAfterReset": true,
+    "result": {
+      "ok": true,
+      "counted": false
+    },
+    "today": [
+      "Goals set: 5 · hit: 1",
+      "Goals set: 5 · hit: 1"
+    ],
+    "xp": [
+      15,
+      15
+    ]
+  },
+  "diff": [
+    {
+      "ms": 278,
+      "result": {
+        "ok": true,
+        "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+        "files": 1,
+        "add": 3,
+        "del": 1,
+        "untracked": 0,
+        "clean": true,
+        "note": "vibepet: no uncommitted changes · showing the last commit"
+      }
+    },
+    {
+      "ms": 734,
+      "result": {
+        "ok": true,
+        "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+        "files": 1,
+        "add": 3,
+        "del": 1,
+        "untracked": 0,
+        "clean": true,
+        "note": "vibepet: no uncommitted changes · showing the last commit"
+      }
+    },
+    {
+      "ms": 481,
+      "result": {
+        "ok": true,
+        "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+        "files": 1,
+        "add": 3,
+        "del": 1,
+        "untracked": 0,
+        "clean": true,
+        "note": "vibepet: no uncommitted changes · showing the last commit"
+      }
+    }
+  ],
+  "diffWindow": {
+    "title": "Diff · vibepet",
+    "windows": 1,
+    "javascript": false,
+    "fileLink": {
+      "sameUrl": true,
+      "openPath": [
+        "/Users/christopherharris/.vibepet-ultra/fleet/vibepet/test/ultra/canon.js"
+      ]
+    }
+  },
+  "keys": [
+    {
+      "key": "a",
+      "member": "kestrel",
+      "ms": 7,
+      "ok": true,
+      "sent": {
+        "action": "approve",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "w",
+      "member": "kestrel",
+      "ms": 2,
+      "ok": true,
+      "sent": {
+        "action": "always",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "d",
+      "member": "kestrel",
+      "ms": 3,
+      "ok": true,
+      "sent": {
+        "action": "deny",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "2",
+      "member": "beacon",
+      "ms": 6,
+      "ok": true,
+      "sent": {
+        "action": "option",
+        "key": "2",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "r",
+      "member": "vibepet",
+      "ms": 179,
+      "ok": true,
+      "sent": {
+        "action": "text",
+        "text": "Reply with exactly: ok",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "a",
+      "member": "kestrel",
+      "ms": 3,
+      "ok": true,
+      "sent": {
+        "action": "approve",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "w",
+      "member": "kestrel",
+      "ms": 2,
+      "ok": true,
+      "sent": {
+        "action": "always",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "d",
+      "member": "kestrel",
+      "ms": 3,
+      "ok": true,
+      "sent": {
+        "action": "deny",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "2",
+      "member": "beacon",
+      "ms": 3,
+      "ok": true,
+      "sent": {
+        "action": "option",
+        "key": "2",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "r",
+      "member": "vibepet",
+      "ms": 325,
+      "ok": true,
+      "sent": {
+        "action": "text",
+        "text": "Reply with exactly: ok",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "a",
+      "member": "kestrel",
+      "ms": 3,
+      "ok": true,
+      "sent": {
+        "action": "approve",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "w",
+      "member": "kestrel",
+      "ms": 13,
+      "ok": true,
+      "sent": {
+        "action": "always",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "d",
+      "member": "kestrel",
+      "ms": 3,
+      "ok": true,
+      "sent": {
+        "action": "deny",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "2",
+      "member": "beacon",
+      "ms": 3,
+      "ok": true,
+      "sent": {
+        "action": "option",
+        "key": "2",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "r",
+      "member": "vibepet",
+      "ms": 1429,
+      "ok": true,
+      "sent": {
+        "action": "text",
+        "text": "Reply with exactly: ok",
+        "id": "this row"
+      }
+    },
+    {
+      "key": "s",
+      "member": "atlas (synthetic running)",
+      "ok": true
+    }
+  ],
+  "stop": {
+    "asked": "Stop now",
+    "sentOnDoublePress": 0,
+    "sent": {
+      "action": "interrupt",
+      "id": "this row"
+    }
+  },
+  "approveAll": {
+    "label": "Approve all (2)",
+    "sent": [
+      {
+        "action": "approve",
+        "member": "kestrel"
+      },
+      {
+        "action": "approve",
+        "member": "vibepet"
+      }
+    ]
+  },
+  "clearDone": {
+    "finishedBefore": 4,
+    "afterClear": {
+      "ready": 0,
+      "idle": "4 idle ▸"
+    },
+    "idleRowsExpanded": 4
+  },
+  "intercepted": [
+    {
+      "kind": "ipc:set-goal",
+      "at": 1790931230192
+    },
+    {
+      "kind": "ipc:goal-done",
+      "at": 1790931232504,
+      "result": {
+        "ok": true,
+        "counted": true,
+        "xp": 15
+      }
+    },
+    {
+      "kind": "ipc:goal-undo",
+      "at": 1790931233672,
+      "result": {
+        "ok": true,
+        "xp": 15
+      }
+    },
+    {
+      "kind": "ipc:goal-done",
+      "at": 1790931235647,
+      "result": {
+        "ok": true,
+        "counted": true,
+        "xp": 15
+      }
+    },
+    {
+      "kind": "ipc:goal-undo",
+      "at": 1790931236240,
+      "result": {
+        "ok": true,
+        "xp": 15
+      }
+    },
+    {
+      "kind": "ipc:goal-done",
+      "at": 1790931237006,
+      "result": {
+        "ok": true,
+        "counted": true,
+        "xp": 15
+      }
+    },
+    {
+      "kind": "ipc:goal-undo",
+      "at": 1790931237302,
+      "result": {
+        "ok": true,
+        "xp": 15
+      }
+    },
+    {
+      "kind": "ipc:goal-done",
+      "at": 1790931237698,
+      "result": {
+        "ok": true,
+        "counted": true,
+        "xp": 15
+      }
+    },
+    {
+      "kind": "ipc:set-goal",
+      "at": 1790931238601
+    },
+    {
+      "kind": "ipc:goal-done",
+      "at": 1790931238931,
+      "result": {
+        "ok": true,
+        "counted": false
+      }
+    },
+    {
+      "kind": "ipc:diff",
+      "at": 1790931241979,
+      "result": {
+        "ok": true,
+        "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+        "files": 1,
+        "add": 3,
+        "del": 1,
+        "untracked": 0,
+        "clean": true,
+        "note": "vibepet: no uncommitted changes · showing the last commit"
+      }
+    },
+    {
+      "kind": "ipc:diff",
+      "at": 1790931243483,
+      "result": {
+        "ok": true,
+        "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+        "files": 1,
+        "add": 3,
+        "del": 1,
+        "untracked": 0,
+        "clean": true,
+        "note": "vibepet: no uncommitted changes · showing the last commit"
+      }
+    },
+    {
+      "kind": "ipc:diff",
+      "at": 1790931244731,
+      "result": {
+        "ok": true,
+        "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+        "files": 1,
+        "add": 3,
+        "del": 1,
+        "untracked": 0,
+        "clean": true,
+        "note": "vibepet: no uncommitted changes · showing the last commit"
+      }
+    },
+    {
+      "kind": "openPath",
+      "at": 1790931245678
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931247095,
+      "args": [
+        {
+          "action": "approve",
+          "id": "kestrel"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931247509,
+      "args": [
+        {
+          "action": "always",
+          "id": "kestrel"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931247961,
+      "args": [
+        {
+          "action": "deny",
+          "id": "kestrel"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931248658,
+      "args": [
+        {
+          "action": "option",
+          "key": "2",
+          "id": "beacon"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931249277,
+      "args": [
+        {
+          "action": "text",
+          "text": "Reply with exactly: ok",
+          "id": "vibepet"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931249709,
+      "args": [
+        {
+          "action": "approve",
+          "id": "kestrel"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931250139,
+      "args": [
+        {
+          "action": "always",
+          "id": "kestrel"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931250560,
+      "args": [
+        {
+          "action": "deny",
+          "id": "kestrel"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931251004,
+      "args": [
+        {
+          "action": "option",
+          "key": "2",
+          "id": "beacon"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931251866,
+      "args": [
+        {
+          "action": "text",
+          "text": "Reply with exactly: ok",
+          "id": "vibepet"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931252319,
+      "args": [
+        {
+          "action": "approve",
+          "id": "kestrel"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931252777,
+      "args": [
+        {
+          "action": "always",
+          "id": "kestrel"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931253227,
+      "args": [
+        {
+          "action": "deny",
+          "id": "kestrel"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931253659,
+      "args": [
+        {
+          "action": "option",
+          "key": "2",
+          "id": "beacon"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931255510,
+      "args": [
+        {
+          "action": "text",
+          "text": "Reply with exactly: ok",
+          "id": "vibepet"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931258998,
+      "args": [
+        {
+          "action": "interrupt",
+          "id": "atlas"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931262506,
+      "args": [
+        {
+          "action": "approve",
+          "id": "kestrel"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    },
+    {
+      "kind": "ipc:send-to",
+      "at": 1790931262508,
+      "args": [
+        {
+          "action": "approve",
+          "id": "vibepet"
+        }
+      ],
+      "result": {
+        "ok": false,
+        "why": "canon: send-to intercepted (no --act), nothing typed"
+      }
+    }
+  ],
+  "close": {
+    "how": "quit",
+    "ms": 698,
+    "procs": 7,
+    "orphans": []
+  },
+  "lease": "beacon: lease taken by r1-row-actions for 600s (until 2026-10-02T09:04:30.426Z)",
+  "other": {
+    "placeholder": "Answer Beacon database choice in your own words…",
+    "sent": {
+      "action": "text",
+      "text": "MongoDB"
+    },
+    "result": {
+      "ok": false,
+      "why": "beacon is showing a question: pick one of its options"
+    },
+    "ms": 180,
+    "note": {
+      "text": "beacon is showing a question: pick one of its options",
+      "cls": "nnote err"
+    },
+    "beaconAfter": {
+      "inState": true,
+      "registry": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790907222729
+      }
+    }
+  },
+  "close2": {
+    "how": "quit",
+    "ms": 287,
+    "procs": 7,
+    "orphans": []
+  },
+  "release": "beacon: released (was r1-row-actions since 2026-10-02T08:54:30.426Z)",
+  "medians": {
+    "markDone→note": {
+      "n": 3,
+      "medianMs": 97,
+      "runs": [
+        {
+          "ms": 97,
+          "at": "load 377.30 189.73 130.31"
+        },
+        {
+          "ms": 80,
+          "at": "load 400.09 197.57 133.42"
+        },
+        {
+          "ms": 215,
+          "at": "load 400.09 197.57 133.42"
+        }
+      ]
+    },
+    "undo→reopened": {
+      "n": 3,
+      "medianMs": 493,
+      "runs": [
+        {
+          "ms": 493,
+          "at": "load 377.30 189.73 130.31"
+        },
+        {
+          "ms": 596,
+          "at": "load 400.09 197.57 133.42"
+        },
+        {
+          "ms": 255,
+          "at": "load 400.09 197.57 133.42"
+        }
+      ]
+    },
+    "diff IPC (git + window)": {
+      "n": 3,
+      "medianMs": 481,
+      "runs": [
+        {
+          "ms": 278,
+          "at": "load 421.39 205.35 136.54"
+        },
+        {
+          "ms": 734,
+          "at": "load 421.39 205.35 136.54"
+        },
+        {
+          "ms": 481,
+          "at": "load 421.39 205.35 136.54"
+        }
+      ]
+    },
+    "key→send-to": {
+      "n": 15,
+      "medianMs": 3,
+      "runs": [
+        {
+          "ms": 7,
+          "at": "load 442.74 213.36 139.77"
+        },
+        {
+          "ms": 2,
+          "at": "load 442.74 213.36 139.77"
+        },
+        {
+          "ms": 3,
+          "at": "load 442.74 213.36 139.77"
+        },
+        {
+          "ms": 6,
+          "at": "load 442.74 213.36 139.77"
+        },
+        {
+          "ms": 179,
+          "at": "load 442.74 213.36 139.77"
+        },
+        {
+          "ms": 3,
+          "at": "load 442.74 213.36 139.77"
+        },
+        {
+          "ms": 2,
+          "at": "load 458.45 220.43 142.70"
+        },
+        {
+          "ms": 3,
+          "at": "load 458.45 220.43 142.70"
+        },
+        {
+          "ms": 3,
+          "at": "load 458.45 220.43 142.70"
+        },
+        {
+          "ms": 325,
+          "at": "load 458.45 220.43 142.70"
+        },
+        {
+          "ms": 3,
+          "at": "load 458.45 220.43 142.70"
+        },
+        {
+          "ms": 13,
+          "at": "load 458.45 220.43 142.70"
+        },
+        {
+          "ms": 3,
+          "at": "load 458.45 220.43 142.70"
+        },
+        {
+          "ms": 3,
+          "at": "load 458.45 220.43 142.70"
+        },
+        {
+          "ms": 1429,
+          "at": "load 455.21 223.71 144.31"
+        }
+      ]
+    },
+    "send-to refusal (real, tmux guard)": {
+      "n": 1,
+      "medianMs": 180,
+      "runs": [
+        {
+          "ms": 180,
+          "at": "load 349.63 214.89 143.01"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "ok": true,
+    "checks": "22/22",
+    "orphans": [
+      0,
+      0
+    ]
+  }
+}

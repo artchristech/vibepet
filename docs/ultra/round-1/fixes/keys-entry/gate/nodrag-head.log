@@ -1,0 +1,16 @@
+13:11:46.226 A: click latency
+13:11:51.696  single 0 {"detail":1,"toShown":0.6,"toFrame1":12.3,"toPainted":29,"toVisible":61.4,"toRows":12.3,"toFocus":12.5,"downToPainted":81.7,"load":"4.48 9.13 20.21"}
+13:11:53.426  single 1 {"detail":1,"toShown":0.3,"toFrame1":12,"toPainted":27.8,"toVisible":62,"toRows":12,"toFocus":2.3,"downToPainted":79.7,"load":"4.52 9.07 20.12"}
+13:11:54.199  single 2 {"detail":1,"toShown":0.3,"toFrame1":13.6,"toPainted":29.4,"toVisible":62.7,"toRows":13.6,"toFocus":1.8,"downToPainted":81.2,"load":"4.52 9.07 20.12"}
+13:11:55.010  single 3 {"detail":1,"toShown":0.2,"toFrame1":12.8,"toPainted":28.6,"toVisible":62.8,"toRows":12.8,"toFocus":1.5,"downToPainted":80.8,"load":"4.52 9.07 20.12"}
+13:11:55.828  single 4 {"detail":1,"toShown":0.2,"toFrame1":14.1,"toPainted":30.6,"toVisible":47.4,"toRows":14.1,"toFocus":1.6,"downToPainted":82.1,"load":"4.52 9.07 20.12"}
+13:11:56.668  single 5 {"detail":1,"toShown":0.3,"toFrame1":11,"toPainted":28.3,"toVisible":62.1,"toRows":11,"toFocus":2.1,"downToPainted":81,"load":"4.52 9.07 20.12"}
+13:11:57.483  single 6 {"detail":1,"toShown":0.3,"toFrame1":11.8,"toPainted":28.4,"toVisible":61.8,"toRows":11.8,"toFocus":2,"downToPainted":81.7,"load":"4.52 9.07 20.12"}
+13:11:59.331  double 0 {"detail":1,"toShown":0.4,"toFrame1":13,"toPainted":29.3,"toVisible":63.1,"toRows":13,"toFocus":1.8,"downToPainted":80.4,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.2,"load":"4.56 9.00 20.03"}
+13:12:00.867  double 1 {"detail":1,"toShown":0.2,"toFrame1":12.5,"toPainted":29.1,"toVisible":45.8,"toRows":12.5,"toFocus":1.6,"downToPainted":81.1,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.4,"load":"4.56 9.00 20.03"}
+13:12:02.189  double 2 {"detail":1,"toShown":0.3,"toFrame1":14,"toPainted":30.7,"toVisible":46.4,"toRows":14,"toFocus":2,"downToPainted":82.2,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.3,"load":"4.56 9.00 20.03"}
+13:12:03.509  double 3 {"detail":1,"toShown":0.3,"toFrame1":12.1,"toPainted":28.8,"toVisible":45,"toRows":12.1,"toFocus":1.7,"downToPainted":81.2,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.3,"load":"4.35 8.88 19.93"}
+13:12:04.825  double 4 {"detail":1,"toShown":0.2,"toFrame1":13.1,"toPainted":29.7,"toVisible":46.4,"toRows":13.1,"toFocus":1.5,"downToPainted":82.1,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.2,"load":"4.35 8.88 19.93"}
+13:12:06.154  double 5 {"detail":1,"toShown":0.3,"toFrame1":14.1,"toPainted":30.8,"toVisible":47.4,"toRows":14.1,"toFocus":1.7,"downToPainted":82.3,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.2,"load":"4.35 8.88 19.93"}
+13:12:07.474  double 6 {"detail":1,"toShown":0.4,"toFrame1":12.7,"toPainted":29.3,"toVisible":62.7,"toRows":12.7,"toFocus":2.8,"downToPainted":81.8,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.2,"load":"4.35 8.88 19.93"}
+13:12:07.777 wrote /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/keys-entry/gate/nodrag-head/results.json

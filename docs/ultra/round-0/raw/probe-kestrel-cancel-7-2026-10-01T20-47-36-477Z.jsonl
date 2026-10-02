@@ -1,0 +1,65 @@
+{"t":1,"at":1790887656479,"ev":"start","member":"kestrel","pid":55946,"sessionId":"13a1427d-6cb0-4561-b5a3-22453a34bf93","transcript":"/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-kestrel/13a1427d-6cb0-4561-b5a3-22453a34bf93.jsonl","target":"vp-kestrel"}
+{"t":16,"at":1790887656494,"ev":"reg","status":"waiting","waitingFor":"permission prompt","statusUpdatedAt":1790887653282,"updatedAt":1790887653282,"seenLagMs":3212,"keys":["pid","sessionId","cwd","startedAt","procStart","version","peerProtocol","peerFeatures","kind","entrypoint","pidDomain","tmux","messagingSocketPath","name","nameSource","nameSince","updatedAt","status","statusUpdatedAt","waitingFor"]}
+{"t":70,"at":1790887656548,"ev":"pane-first","cls":"approval"}
+{"t":71,"at":1790887656549,"ev":"pane-first","cls":"prompt"}
+{"t":71,"at":1790887656549,"ev":"pane","cls":"approval+prompt"}
+{"t":71,"at":1790887656549,"ev":"snap","n":1,"cls":"approval+prompt","text":"  ⎿  Interrupted · What should Claude do instead?\n\n✻ Cooked for 1s · done 2:21 PM\n\n❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.\n\n⏺ Bash(./deploy.sh --dry-run)\n  ⎿  Interrupted · What should Claude do instead?\n\n✻ Worked for 3s · done 2:22 PM\n\n❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.\n\n⏺ Bash(./deploy.sh --dry-run)\n  ⎿  Interrupted · What should Claude do instead?\n\n❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.\n\n⏺ Bash(./deploy.sh --dry-run)\n  ⎿  Interrupted · What should Claude do instead?\n\n✻ Cogitated for 1s · done 2:46 PM\n\n❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.\n\n⏺ Bash(./deploy.sh --dry-run)\n  ⎿  Interrupted · What should Claude do instead?\n\n✻ Cogitated for 1s · done 2:47 PM\n\n❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.\n\n⏺ Bash(./deploy.sh --dry-run)\n  ⎿  Waiting…\n\n────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n Bash command\n Run dry-run deploy script\n╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌\n ./deploy.sh --dry-run\n╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌\n This command requires approval\n\n Do you want to proceed?\n ❯ 1. Yes\n   2. Yes, and don’t ask again for: ./deploy.sh *\n   3. No\n\n Esc to cancel · Tab to amend\n\n"}
+{"t":349,"at":1790887656827,"ev":"procs","n":1,"procs":["caffeinate:caffeinate -i -t 300"]}
+{"t":640,"at":1790887657118,"ev":"keys-sent","keys":"Escape"}
+{"t":2512,"at":1790887658990,"ev":"procs","n":2,"procs":["(git):","caffeinate:caffeinate -i -t 300"]}
+{"t":2512,"at":1790887658990,"ev":"stall","step":"procs","ms":1824}
+{"t":2512,"at":1790887658990,"ev":"stall","step":"iteration","ms":1871}
+{"t":2540,"at":1790887659018,"ev":"rec","src":"main","type":"user","role":"user","blocks":["tool_result"],"toolResultFor":["toolu_017dC6GD4CNka51XLHBsFkT5"],"recTs":1790887657051}
+{"t":2540,"at":1790887659018,"ev":"rec","src":"main","type":"user","role":"user","blocks":["text"],"recTs":1790887657056}
+{"t":2540,"at":1790887659018,"ev":"rec","src":"main","type":"system","subtype":"turn_duration","recTs":1790887657088}
+{"t":2540,"at":1790887659018,"ev":"reg","status":"idle","statusUpdatedAt":1790887657198,"updatedAt":1790887657198,"seenLagMs":1820,"keys":["pid","sessionId","cwd","startedAt","procStart","version","peerProtocol","peerFeatures","kind","entrypoint","pidDomain","tmux","messagingSocketPath","name","nameSource","nameSince","updatedAt","status","statusUpdatedAt"]}
+{"t":2587,"at":1790887659065,"ev":"pane","cls":"prompt"}
+{"t":2588,"at":1790887659066,"ev":"snap","n":2,"cls":"prompt","text":"  ⎿  Interrupted · What should Claude do instead?\n\n✻ Cooked for 1s · done 2:21 PM\n\n❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.\n\n⏺ Bash(./deploy.sh --dry-run)\n  ⎿  Interrupted · What should Claude do instead?\n\n✻ Worked for 3s · done 2:22 PM\n\n❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.\n\n⏺ Bash(./deploy.sh --dry-run)\n  ⎿  Interrupted · What should Claude do instead?\n\n❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.\n\n⏺ Bash(./deploy.sh --dry-run)\n  ⎿  Interrupted · What should Claude do instead?\n\n✻ Cogitated for 1s · done 2:46 PM\n\n❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.\n\n⏺ Bash(./deploy.sh --dry-run)\n  ⎿  Interrupted · What should Claude do instead?\n\n✻ Cogitated for 1s · done 2:47 PM\n\n❯ Run exactly ./deploy.sh --dry-run again with the Bash tool, nothing else first.\n\n⏺ Bash(./deploy.sh --dry-run)\n  ⎿  Interrupted · What should Claude do instead?\n\n✻ Churned for 1s · done 2:47 PM\n\n────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯ \n────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n  ⏸ manual mode on · ? for shortcuts · ← 1 agent\n\n\n\n\n\n\n\n\n\n"}
+{"t":3384,"at":1790887659862,"ev":"procs","n":1,"procs":["caffeinate:caffeinate -i -t 300"]}
+{"t":3384,"at":1790887659862,"ev":"stall","step":"procs","ms":330}
+{"t":3384,"at":1790887659862,"ev":"stall","step":"iteration","ms":353}
+{"t":4212,"at":1790887660690,"ev":"stall","step":"procs","ms":281}
+{"t":4212,"at":1790887660690,"ev":"stall","step":"iteration","ms":302}
+{"t":5202,"at":1790887661680,"ev":"stall","step":"procs","ms":391}
+{"t":5202,"at":1790887661680,"ev":"stall","step":"iteration","ms":505}
+{"t":5932,"at":1790887662410,"ev":"stall","step":"procs","ms":258}
+{"t":6756,"at":1790887663234,"ev":"stall","step":"procs","ms":322}
+{"t":6756,"at":1790887663234,"ev":"stall","step":"iteration","ms":351}
+{"t":7308,"at":1790887663786,"ev":"stall","step":"pane","ms":156}
+{"t":8184,"at":1790887664662,"ev":"stall","step":"procs","ms":704}
+{"t":8184,"at":1790887664662,"ev":"stall","step":"iteration","ms":803}
+{"t":9305,"at":1790887665783,"ev":"stall","step":"procs","ms":420}
+{"t":9305,"at":1790887665783,"ev":"stall","step":"iteration","ms":546}
+{"t":10599,"at":1790887667077,"ev":"stall","step":"procs","ms":579}
+{"t":10599,"at":1790887667077,"ev":"stall","step":"iteration","ms":718}
+{"t":11277,"at":1790887667755,"ev":"stall","step":"procs","ms":301}
+{"t":11277,"at":1790887667755,"ev":"stall","step":"iteration","ms":320}
+{"t":12230,"at":1790887668708,"ev":"stall","step":"procs","ms":463}
+{"t":12230,"at":1790887668708,"ev":"stall","step":"iteration","ms":516}
+{"t":12914,"at":1790887669392,"ev":"stall","step":"procs","ms":191}
+{"t":13650,"at":1790887670128,"ev":"stall","step":"procs","ms":237}
+{"t":14905,"at":1790887671383,"ev":"stall","step":"procs","ms":219}
+{"t":15593,"at":1790887672071,"ev":"stall","step":"procs","ms":248}
+{"t":16263,"at":1790887672741,"ev":"stall","step":"procs","ms":201}
+{"t":17011,"at":1790887673489,"ev":"stall","step":"procs","ms":245}
+{"t":17012,"at":1790887673490,"ev":"stall","step":"iteration","ms":327}
+{"t":17539,"at":1790887674017,"ev":"stall","step":"procs","ms":165}
+{"t":18141,"at":1790887674619,"ev":"stall","step":"procs","ms":212}
+{"t":19701,"at":1790887676179,"ev":"stall","step":"procs","ms":183}
+{"t":20265,"at":1790887676743,"ev":"stall","step":"procs","ms":178}
+{"t":21276,"at":1790887677754,"ev":"stall","step":"procs","ms":543}
+{"t":21276,"at":1790887677754,"ev":"stall","step":"iteration","ms":593}
+{"t":21937,"at":1790887678415,"ev":"stall","step":"procs","ms":284}
+{"t":21938,"at":1790887678416,"ev":"stall","step":"iteration","ms":316}
+{"t":22479,"at":1790887678957,"ev":"stall","step":"procs","ms":178}
+{"t":23349,"at":1790887679827,"ev":"stall","step":"procs","ms":412}
+{"t":23351,"at":1790887679829,"ev":"stall","step":"iteration","ms":517}
+{"t":24608,"at":1790887681086,"ev":"stall","step":"procs","ms":353}
+{"t":24608,"at":1790887681086,"ev":"stall","step":"iteration","ms":392}
+{"t":26340,"at":1790887682818,"ev":"stall","step":"procs","ms":341}
+{"t":26340,"at":1790887682818,"ev":"stall","step":"iteration","ms":354}
+{"t":26985,"at":1790887683463,"ev":"procs","n":1,"procs":["(caffeinate):"]}
+{"t":26985,"at":1790887683463,"ev":"stall","step":"procs","ms":214}
+{"t":27394,"at":1790887683872,"ev":"procs","n":0,"procs":[]}
+{"t":30072,"at":1790887686550,"ev":"stall","step":"procs","ms":188}
+{"t":30100,"at":1790887686578,"ev":"end","firstSeen":{"approval":70,"prompt":71}}

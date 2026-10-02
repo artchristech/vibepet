@@ -1,0 +1,208 @@
+{
+  "label": "fix-1",
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-theater-data",
+  "at": "2026-10-02T10:28:23.927Z",
+  "runs": 5,
+  "loadStart": "28.41 28.69 33.72",
+  "opens": {
+    "kestrel": [
+      {
+        "firstFrameMs": 455,
+        "mainBuildMs": 123,
+        "beats": 63,
+        "load": "27.27 28.43 33.57"
+      },
+      {
+        "firstFrameMs": 245,
+        "mainBuildMs": 59,
+        "beats": 63,
+        "load": "27.27 28.43 33.57"
+      },
+      {
+        "firstFrameMs": 197,
+        "mainBuildMs": 61,
+        "beats": 63,
+        "load": "26.05 28.16 33.44"
+      },
+      {
+        "firstFrameMs": 293,
+        "mainBuildMs": 91,
+        "beats": 63,
+        "load": "24.44 27.79 33.28"
+      },
+      {
+        "firstFrameMs": 165,
+        "mainBuildMs": 30,
+        "beats": 63,
+        "load": "24.44 27.79 33.28"
+      }
+    ],
+    "beacon": [
+      {
+        "firstFrameMs": 288,
+        "mainBuildMs": 68,
+        "beats": 30,
+        "load": "27.27 28.43 33.57"
+      },
+      {
+        "firstFrameMs": 206,
+        "mainBuildMs": 31,
+        "beats": 30,
+        "load": "26.05 28.16 33.44"
+      },
+      {
+        "firstFrameMs": 206,
+        "mainBuildMs": 38,
+        "beats": 30,
+        "load": "26.05 28.16 33.44"
+      },
+      {
+        "firstFrameMs": 202,
+        "mainBuildMs": 34,
+        "beats": 30,
+        "load": "24.44 27.79 33.28"
+      },
+      {
+        "firstFrameMs": 219,
+        "mainBuildMs": 51,
+        "beats": 30,
+        "load": "24.44 27.79 33.28"
+      }
+    ],
+    "vibepet": [
+      {
+        "firstFrameMs": 339,
+        "mainBuildMs": 97,
+        "beats": 37,
+        "load": "27.27 28.43 33.57"
+      },
+      {
+        "firstFrameMs": 225,
+        "mainBuildMs": 62,
+        "beats": 37,
+        "load": "26.05 28.16 33.44"
+      },
+      {
+        "firstFrameMs": 176,
+        "mainBuildMs": 31,
+        "beats": 37,
+        "load": "26.05 28.16 33.44"
+      },
+      {
+        "firstFrameMs": 170,
+        "mainBuildMs": 32,
+        "beats": 37,
+        "load": "24.44 27.79 33.28"
+      },
+      {
+        "firstFrameMs": 334,
+        "mainBuildMs": 89,
+        "beats": 37,
+        "load": "24.44 27.79 33.28"
+      }
+    ],
+    "ember": [
+      {
+        "firstFrameMs": 273,
+        "mainBuildMs": 91,
+        "beats": 97,
+        "load": "27.27 28.43 33.57"
+      },
+      {
+        "firstFrameMs": 222,
+        "mainBuildMs": 49,
+        "beats": 97,
+        "load": "26.05 28.16 33.44"
+      },
+      {
+        "firstFrameMs": 140,
+        "mainBuildMs": 27,
+        "beats": 97,
+        "load": "26.05 28.16 33.44"
+      },
+      {
+        "firstFrameMs": 155,
+        "mainBuildMs": 27,
+        "beats": 97,
+        "load": "24.44 27.79 33.28"
+      },
+      {
+        "firstFrameMs": 332,
+        "mainBuildMs": 153,
+        "beats": 97,
+        "load": "23.05 27.45 33.13"
+      }
+    ],
+    "delta": [
+      {
+        "firstFrameMs": 287,
+        "mainBuildMs": 81,
+        "beats": 149,
+        "load": "27.27 28.43 33.57"
+      },
+      {
+        "firstFrameMs": 286,
+        "mainBuildMs": 69,
+        "beats": 149,
+        "load": "26.05 28.16 33.44"
+      },
+      {
+        "firstFrameMs": 208,
+        "mainBuildMs": 46,
+        "beats": 149,
+        "load": "24.44 27.79 33.28"
+      },
+      {
+        "firstFrameMs": 178,
+        "mainBuildMs": 40,
+        "beats": 149,
+        "load": "24.44 27.79 33.28"
+      },
+      {
+        "firstFrameMs": 224,
+        "mainBuildMs": 61,
+        "beats": 149,
+        "load": "23.05 27.45 33.13"
+      }
+    ]
+  },
+  "median": {
+    "kestrel": {
+      "firstFrameMs": 245,
+      "mainBuildMs": 61,
+      "n": 5,
+      "beats": 63
+    },
+    "beacon": {
+      "firstFrameMs": 206,
+      "mainBuildMs": 38,
+      "n": 5,
+      "beats": 30
+    },
+    "vibepet": {
+      "firstFrameMs": 225,
+      "mainBuildMs": 62,
+      "n": 5,
+      "beats": 37
+    },
+    "ember": {
+      "firstFrameMs": 222,
+      "mainBuildMs": 49,
+      "n": 5,
+      "beats": 97
+    },
+    "delta": {
+      "firstFrameMs": 224,
+      "mainBuildMs": 61,
+      "n": 5,
+      "beats": 149
+    }
+  },
+  "close": {
+    "how": "quit",
+    "ms": 489,
+    "procs": 7,
+    "orphans": []
+  },
+  "loadEnd": "23.05 27.45 33.13"
+}

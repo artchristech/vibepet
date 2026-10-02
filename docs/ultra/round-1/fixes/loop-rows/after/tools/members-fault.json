@@ -1,0 +1,160 @@
+{
+  "defaults": {
+    "args": [
+      "--model",
+      "haiku",
+      "--strict-mcp-config",
+      "--mcp-config",
+      "{\"mcpServers\":{}}",
+      "--setting-sources",
+      "project,local",
+      "--permission-mode",
+      "manual",
+      "--no-chrome"
+    ],
+    "env": {
+      "BASH_DEFAULT_TIMEOUT_MS": "900000",
+      "BASH_MAX_TIMEOUT_MS": "900000",
+      "CLAUDE_CODE_SUBAGENT_MODEL": "haiku"
+    },
+    "expectModel": "haiku-4-5"
+  },
+  "repos": {
+    "kestrel": {
+      "seed": "repos/kestrel",
+      "message": "kestrel: health service and dry-run deploy script"
+    },
+    "vibepet": {
+      "clone": "/Users/christopherharris/projects/vibepet",
+      "ref": "main",
+      "dropRemotes": true
+    },
+    "atlas": {
+      "seed": "repos/atlas",
+      "message": "atlas: tile renderer and build script"
+    },
+    "beacon": {
+      "seed": "repos/beacon",
+      "message": "beacon: pinger skeleton"
+    },
+    "delta": {
+      "seed": "repos/delta",
+      "message": "delta: shards and reconciler"
+    },
+    "ember": {
+      "seed": "repos/ember",
+      "message": "ember: heartbeat tick script"
+    }
+  },
+  "members": [
+    {
+      "name": "kestrel",
+      "repo": "kestrel",
+      "state": "approval",
+      "costly": false,
+      "prompt": "Run exactly `./deploy.sh --dry-run` with the Bash tool. Do not read any files or run anything else first. Then report its output in one line.",
+      "rearmPrompt": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+      "verify": {
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "permission prompt"
+        },
+        "pane": "Do you want to proceed\\?",
+        "paneAlso": "deploy\\.sh",
+        "noChild": true
+      },
+      "timeoutSec": 90
+    },
+    {
+      "name": "vibepet",
+      "repo": "vibepet",
+      "state": "done",
+      "costly": false,
+      "prompt": "Read package.json and tell me in one plain sentence what this project is. Answer with a statement, not a question, and do not run any commands.",
+      "rearmPrompt": "In one plain sentence, what is the app's main entry file? Answer with a statement, not a question; do not run commands.",
+      "verify": {
+        "registry": {
+          "status": "idle"
+        },
+        "last": "end_turn",
+        "notQuestion": true,
+        "noChild": true
+      },
+      "timeoutSec": 90
+    },
+    {
+      "name": "atlas",
+      "repo": "atlas",
+      "state": "working",
+      "costly": true,
+      "prompt": "Run exactly `./build.sh` with the Bash tool in the foreground (do not run it in the background; set timeout to 600000). Do not read files first. When it finishes, reply with its last line.",
+      "rearmPrompt": "Run exactly `./build.sh` again with the Bash tool in the foreground (not in the background; timeout 600000). Reply with its last line when it finishes.",
+      "verify": {
+        "registry": {
+          "status": "busy"
+        },
+        "child": "build\\.sh",
+        "paneNot": "Do you want to proceed"
+      },
+      "timeoutSec": 120
+    },
+    {
+      "name": "beacon",
+      "repo": "beacon",
+      "state": "question",
+      "costly": false,
+      "prompt": "Before anything else, use the AskUserQuestion tool to ask me one multiple-choice question: which database should beacon use to store check results (SQLite, Postgres, or Redis)? Do not read files or run commands first.",
+      "rearmPrompt": "Use the AskUserQuestion tool again to ask me which database beacon should use (SQLite, Postgres, or Redis). Nothing else first.",
+      "verify": {
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "input needed"
+        },
+        "pane": "Enter to select"
+      },
+      "timeoutSec": 90
+    },
+    {
+      "name": "delta",
+      "repo": "delta",
+      "state": "fanout",
+      "costly": true,
+      "prompt": "Reconcile the three shards in parallel. In ONE message, start three subagents at once with the Agent tool (subagent_type general-purpose, foreground, not background). Subagent N must run exactly `./slow.sh shard-N` (N = 1, 2, 3) with the Bash tool in the foreground (timeout 600000, not in the background) and report its final line. Do not run anything yourself.",
+      "rearmPrompt": "Do it again: in ONE message start three foreground general-purpose subagents with the Agent tool; subagent N runs exactly `./slow.sh shard-N` (N = 1, 2, 3) in the foreground with timeout 600000 and reports its final line.",
+      "verify": {
+        "registry": {
+          "status": "busy"
+        },
+        "child": "slow\\.sh",
+        "childCount": 3,
+        "subagents": {
+          "count": 3
+        }
+      },
+      "timeoutSec": 240
+    },
+    {
+      "name": "ember",
+      "repo": "ember",
+      "state": "loop",
+      "costly": true,
+      "prompt": "/loop 5m run ./tick.sh",
+      "rearmPrompt": "/loop 5m run ./tick.sh",
+      "verify": {
+        "registry": {
+          "status": "idle"
+        },
+        "loop": true,
+        "loopLock": true
+      },
+      "timeoutSec": 150,
+      "env": {
+        "ANTHROPIC_BASE_URL": "http://127.0.0.1:47431",
+        "HTTPS_PROXY": "http://127.0.0.1:9",
+        "https_proxy": "http://127.0.0.1:9",
+        "NO_PROXY": "127.0.0.1,localhost",
+        "no_proxy": "127.0.0.1,localhost"
+      }
+    }
+  ]
+}

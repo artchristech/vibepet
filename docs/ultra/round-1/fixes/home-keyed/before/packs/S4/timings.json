@@ -1,0 +1,622 @@
+[
+ {
+  "flow": "setup",
+  "step": "app launch → pet ready (readyMs)",
+  "ms": 421,
+  "n": 3,
+  "samples": [
+   405,
+   692,
+   421
+  ],
+  "load": [
+   "1.77 1.61 2.32",
+   "5.42 5.09 3.83",
+   "3.15 3.78 3.96"
+  ],
+  "note": "three launches of the same profile"
+ },
+ {
+  "flow": "setup",
+  "step": "click on the pet → Home open",
+  "ms": 418,
+  "n": 3,
+  "samples": [
+   421,
+   418,
+   406
+  ],
+  "load": [
+   "3.16 2.42 2.31",
+   "5.42 5.09 3.83",
+   "3.15 3.78 3.96"
+  ],
+  "note": "includes the 220 ms double-click wait"
+ },
+ {
+  "flow": "F1",
+  "step": "row click → jump result (kestrel)",
+  "ms": 115,
+  "n": 3,
+  "samples": [
+   160,
+   115,
+   115
+  ],
+  "load": [
+   "3.20 3.06 2.71",
+   "3.27 3.08 2.72"
+  ],
+  "note": "result {ok:false} + resume command copied; terminal not raised, tmux client not switched",
+  "member": "kestrel"
+ },
+ {
+  "flow": "F1",
+  "step": "row click → jump result (beacon)",
+  "ms": 148,
+  "n": 3,
+  "samples": [
+   151,
+   120,
+   148
+  ],
+  "load": [
+   "3.27 3.08 2.72",
+   "3.41 3.11 2.73"
+  ],
+  "note": "result {ok:false} + resume command copied; terminal not raised, tmux client not switched",
+  "member": "beacon"
+ },
+ {
+  "flow": "F1",
+  "step": "row click → jump result (atlas)",
+  "ms": 156,
+  "n": 3,
+  "samples": [
+   253,
+   116,
+   156
+  ],
+  "load": [
+   "5.06 4.97 3.71"
+  ],
+  "note": "result {ok:false} + resume command copied; terminal not raised, tmux client not switched",
+  "member": "atlas"
+ },
+ {
+  "flow": "F1",
+  "step": "row click → jump result (ember)",
+  "ms": 358,
+  "n": 3,
+  "samples": [
+   393,
+   358,
+   264
+  ],
+  "load": [
+   "4.89 4.94 3.71",
+   "5.06 4.97 3.71"
+  ],
+  "note": "result {ok:false} + resume command copied; terminal not raised, tmux client not switched",
+  "member": "ember"
+ },
+ {
+  "flow": "F1",
+  "step": "row click → jump result (delta)",
+  "ms": 228,
+  "n": 3,
+  "samples": [
+   223,
+   250,
+   228
+  ],
+  "load": [
+   "4.89 4.94 3.71",
+   "4.98 4.95 3.72"
+  ],
+  "note": "result {ok:false} + resume command copied; terminal not raised, tmux client not switched",
+  "member": "delta"
+ },
+ {
+  "flow": "F1",
+  "step": "row click → jump result (vibepet)",
+  "ms": 118,
+  "n": 3,
+  "samples": [
+   118,
+   121,
+   102
+  ],
+  "load": [
+   "3.55 3.55 3.82"
+  ],
+  "note": "result {ok:false} + resume command copied; terminal not raised, tmux client not switched",
+  "member": "vibepet"
+ },
+ {
+  "flow": "F1",
+  "step": "row click → jump result (all members)",
+  "ms": 153.5,
+  "n": 18,
+  "samples": [
+   160,
+   115,
+   115,
+   151,
+   120,
+   148,
+   253,
+   116,
+   156,
+   393,
+   358,
+   264,
+   223,
+   250,
+   228,
+   118,
+   121,
+   102
+  ],
+  "load": [
+   "3.20–6.81 (1-min avg range)"
+  ],
+  "note": "18/18 failed; 0/18 changed the frontmost app or the tmux client"
+ },
+ {
+  "flow": "F1",
+  "step": "jump failure → visible in the open panel",
+  "ms": null,
+  "n": 0,
+  "samples": [],
+  "load": [
+   "as above"
+  ],
+  "note": "never: the only feedback is a bubble rendered behind the panel (18/18 occluded); ms = null by definition",
+  "result": "never visible in the panel (bubble behind the panel in 18 of 18)"
+ },
+ {
+  "flow": "F2",
+  "step": "registry waiting(permission prompt) → pet row appears (as running, no Approve)",
+  "ms": 638.0,
+  "n": 2,
+  "samples": [
+   478,
+   798
+  ],
+  "load": [
+   "3.20 3.06 2.71",
+   "5.34 5.47 4.18"
+  ],
+  "member": "kestrel"
+ },
+ {
+  "flow": "F2",
+  "step": "registry waiting(permission prompt) → Approve offered",
+  "ms": null,
+  "n": 0,
+  "samples": [
+   null,
+   null
+  ],
+  "load": [
+   "3.20 3.06 2.71",
+   "5.34 5.47 4.18"
+  ],
+  "note": "never in 2 episodes; the row vanished instead",
+  "member": "kestrel"
+ },
+ {
+  "flow": "F2",
+  "step": "registry waiting(permission prompt) → row removed while still waiting",
+  "ms": 120729.5,
+  "n": 2,
+  "samples": [
+   120593,
+   120866
+  ],
+  "load": [
+   "5.19 3.76 3.05",
+   "5.33 5.39 4.40"
+  ],
+  "member": "kestrel"
+ },
+ {
+  "flow": "F2",
+  "step": "IPC probe (not a UI flow): send-to(kestrel, Enter) → result",
+  "ms": 89,
+  "n": 1,
+  "samples": [
+   89
+  ],
+  "load": [
+   "3.55 3.55 3.82"
+  ],
+  "note": "{ok:false, why:\"couldn't find its tab\"}",
+  "member": "kestrel"
+ },
+ {
+  "flow": "F3",
+  "step": "registry waiting(input needed) → Reply/answer offered",
+  "ms": null,
+  "n": 0,
+  "samples": [
+   null
+  ],
+  "load": [
+   "3.20 3.06 2.71"
+  ],
+  "note": "never",
+  "member": "beacon"
+ },
+ {
+  "flow": "F3",
+  "step": "registry waiting(input needed) → row removed while still waiting",
+  "ms": 120029,
+  "n": 1,
+  "samples": [
+   120029
+  ],
+  "load": [
+   "5.19 3.76 3.05"
+  ],
+  "member": "beacon"
+ },
+ {
+  "flow": "F3",
+  "step": "IPC probe (not a UI flow): send-to(beacon, Enter) → result",
+  "ms": 87,
+  "n": 1,
+  "samples": [
+   87
+  ],
+  "load": [
+   "3.55 3.55 3.82"
+  ],
+  "note": "{ok:false, why:\"couldn't find its tab\"}",
+  "member": "beacon"
+ },
+ {
+  "flow": "F4",
+  "step": "end_turn (\"?\") → needs row with Reply",
+  "ms": 2300,
+  "n": 1,
+  "samples": [
+   2300
+  ],
+  "load": [
+   "5.54 5.05 3.72"
+  ],
+  "member": "kestrel"
+ },
+ {
+  "flow": "F4",
+  "step": "Reply click → reply box open and focused",
+  "ms": 2,
+  "n": 3,
+  "samples": [
+   1,
+   2,
+   2
+  ],
+  "load": [
+   "5.46 5.05 3.76",
+   "5.66 5.10 3.79",
+   "5.66 5.10 3.79"
+  ],
+  "member": "kestrel"
+ },
+ {
+  "flow": "F4",
+  "step": "Enter in reply box → note \"Couldn't send: couldn't find its tab\"",
+  "ms": 136,
+  "n": 3,
+  "samples": [
+   133,
+   211,
+   136
+  ],
+  "load": [
+   "5.46 5.05 3.76",
+   "5.66 5.10 3.79",
+   "5.66 5.10 3.79"
+  ],
+  "note": "0 new transcript records each time",
+  "member": "kestrel"
+ },
+ {
+  "flow": "F4",
+  "step": "Enter → reply delivered to the session",
+  "ms": null,
+  "n": 0,
+  "samples": [
+   null,
+   null,
+   null
+  ],
+  "load": [
+   "5.46 5.05 3.76",
+   "5.66 5.10 3.79",
+   "5.66 5.10 3.79"
+  ],
+  "note": "never (0/3)",
+  "member": "kestrel"
+ },
+ {
+  "flow": "F5",
+  "step": "▶ click → Theater window shown (clean slate)",
+  "ms": 139,
+  "n": 3,
+  "samples": [
+   139,
+   148,
+   138
+  ],
+  "load": [
+   "3.36 3.79 3.96",
+   "3.09 3.72 3.93",
+   "3.09 3.72 3.93"
+  ],
+  "member": "vibepet"
+ },
+ {
+  "flow": "F5",
+  "step": "▶ click → Theater beats rendered",
+  "ms": 176,
+  "n": 3,
+  "samples": [
+   180,
+   176,
+   172
+  ],
+  "load": [
+   "3.36 3.79 3.96",
+   "3.09 3.72 3.93",
+   "3.09 3.72 3.93"
+  ],
+  "note": "50 beats; opens at 0:00 of a 3:35 replay of a 5.8 h session",
+  "member": "vibepet"
+ },
+ {
+  "flow": "F5",
+  "step": "▶ click → Theater window shown (first open in a run)",
+  "ms": 185,
+  "n": 1,
+  "samples": [
+   185
+  ],
+  "load": [
+   "6.72 5.52 4.05"
+  ],
+  "member": "kestrel"
+ },
+ {
+  "flow": "F5",
+  "step": "roster ▶ → Theater window shown",
+  "ms": 119,
+  "n": 1,
+  "samples": [
+   119
+  ],
+  "load": [
+   "3.12 3.69 3.92"
+  ],
+  "member": "vibepet"
+ },
+ {
+  "flow": "F6",
+  "step": "◎ click → chat input prefilled with /goal",
+  "ms": 2.0,
+  "n": 14,
+  "samples": [
+   3,
+   1,
+   1,
+   1,
+   2,
+   1,
+   2,
+   5,
+   3,
+   2,
+   1,
+   1,
+   2,
+   2
+  ],
+  "load": [
+   "5.42 5.09 3.83",
+   "5.50 5.08 3.80",
+   "5.54 5.10 3.81",
+   "6.19 5.26 3.90",
+   "6.75 5.41 3.97",
+   "6.81 5.40 3.95"
+  ],
+  "member": "kestrel"
+ },
+ {
+  "flow": "F6",
+  "step": "Enter on /goal (set / edit / clear) → row shows the new goal",
+  "ms": 352.5,
+  "n": 14,
+  "samples": [
+   414,
+   218,
+   313,
+   232,
+   569,
+   250,
+   477,
+   427,
+   313,
+   385,
+   472,
+   404,
+   247,
+   320
+  ],
+  "load": [
+   "5.42 5.09 3.83",
+   "5.50 5.08 3.80",
+   "5.54 5.10 3.81",
+   "6.19 5.26 3.90",
+   "6.75 5.41 3.97",
+   "6.81 5.40 3.95"
+  ],
+  "member": "kestrel"
+ },
+ {
+  "flow": "F6",
+  "step": "quit + relaunch same profile → goal still shown",
+  "ms": 1301,
+  "n": 1,
+  "samples": [
+   1301
+  ],
+  "load": [
+   "5.42 5.09 3.83"
+  ],
+  "note": "relaunch 883 ms + Home 418 ms; goal persisted",
+  "member": "kestrel"
+ },
+ {
+  "flow": "F6",
+  "step": "roster goal line → inline editor → type 32 chars + Enter → shown",
+  "ms": 731,
+  "n": 1,
+  "samples": [
+   731
+  ],
+  "load": [
+   "3.12 3.69 3.92"
+  ],
+  "note": "includes typing at 15 ms/char",
+  "member": "vibepet"
+ },
+ {
+  "flow": "F6",
+  "step": "Today click → day-book note",
+  "ms": 52,
+  "n": 1,
+  "samples": [
+   52
+  ],
+  "load": [
+   "5.06 5.30 4.42"
+  ]
+ },
+ {
+  "flow": "F7",
+  "step": "✓ click → goal line shows ✓ (done)",
+  "ms": 260,
+  "n": 9,
+  "samples": [
+   249,
+   236,
+   368,
+   389,
+   260,
+   221,
+   222,
+   299,
+   450
+  ],
+  "load": [
+   "5.42 5.09 3.83",
+   "6.19 5.26 3.90",
+   "6.75 5.41 3.97",
+   "6.81 5.40 3.95"
+  ],
+  "note": "9/9 took on the first click (M14 race not reproduced with a stalled-flip session present)",
+  "member": "kestrel"
+ },
+ {
+  "flow": "F7",
+  "step": "roster ⌥-click goal → done",
+  "ms": 45,
+  "n": 1,
+  "samples": [
+   45
+  ],
+  "load": [
+   "3.12 3.69 3.92"
+  ],
+  "member": "vibepet"
+ },
+ {
+  "flow": "F7",
+  "step": "second click 250 / 400 / 600 ms after ✓ on the same spot → opens Theater",
+  "ms": null,
+  "n": 3,
+  "samples": [
+   "opened",
+   "opened",
+   "not opened"
+  ],
+  "load": [
+   "3.06 3.57 3.86",
+   "3.06 3.57 3.86",
+   "2.89 3.53 3.84"
+  ],
+  "note": "values are 1 = Theater opened, 0 = not (2/3)",
+  "member": "vibepet",
+  "result": "2 of 3 second clicks opened Theater (gaps 250 ms and 400 ms yes, 600 ms no)"
+ },
+ {
+  "flow": "X",
+  "step": "click held 3.3 s (spans the 3 s re-render) on ◎ → action taken",
+  "ms": null,
+  "n": 2,
+  "samples": [
+   "dropped",
+   "dropped"
+  ],
+  "load": [
+   "3.13 3.75 3.95"
+  ],
+  "note": "0/2 taken (dropped); 120 ms holds: 2/2 taken",
+  "member": "vibepet",
+  "result": "0 of 2 held clicks took effect (dropped); 2 of 2 normal 120 ms clicks took effect"
+ },
+ {
+  "flow": "X",
+  "step": "keyboard focus on a row button → lost to <body>",
+  "ms": 2977,
+  "n": 1,
+  "samples": [
+   2977
+  ],
+  "load": [
+   "1.71 3.00 3.59"
+  ],
+  "note": "lost at the first re-render after focusing",
+  "member": "vibepet"
+ },
+ {
+  "flow": "X",
+  "step": "hover Net (Home closed) → roster shown",
+  "ms": 2,
+  "n": 1,
+  "samples": [
+   2
+  ],
+  "load": [
+   "3.12 3.69 3.92"
+  ],
+  "member": "vibepet"
+ },
+ {
+  "flow": "X",
+  "step": "row reorders while 4–5 rows were listed",
+  "ms": null,
+  "n": 1,
+  "samples": [
+   6
+  ],
+  "load": [
+   "3.2–6.8"
+  ],
+  "note": "6 order changes in 6.3 min of 2 s samples (count, not ms)",
+  "result": "6 order changes among rows present in consecutive 2 s samples, over 6.3 min"
+ }
+]

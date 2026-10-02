@@ -1,0 +1,32 @@
+{"at":"2026-10-02T09:11:03.619Z","phase":"main","what":"Which of my sessions needs me first, and why?"}
+{"at":"2026-10-02T09:11:05.615Z","phase":"main","what":"What is kestrel waiting for?"}
+{"at":"2026-10-02T09:11:07.625Z","phase":"main","what":"Reply with a short bulleted list naming two of my sessions, "}
+{"at":"2026-10-02T09:11:10.066Z","phase":"main","what":"What did delta finish?"}
+{"at":"2026-10-02T09:11:12.331Z","phase":"main","what":"chip: agent"}
+{"at":"2026-10-02T09:11:14.091Z","phase":"main","what":"Summarize beacon's question in one sentence."}
+{"at":"2026-10-02T09:11:16.011Z","phase":"main","what":"Which repo am I watching, and is anything uncommitted?"}
+{"at":"2026-10-02T09:11:18.708Z","phase":"main","what":"Give me one concrete next step, in two sentences."}
+{"at":"2026-10-02T09:11:20.561Z","phase":"main","what":"How long has kestrel been waiting?"}
+{"at":"2026-10-02T09:11:22.913Z","phase":"main","what":"Should I approve kestrel's command? Two sentences."}
+{"at":"2026-10-02T09:11:24.940Z","phase":"main","what":"What is atlas doing?"}
+{"at":"2026-10-02T09:11:27.225Z","phase":"main","what":"Thanks. Anything else I should know? Two sentences."}
+{"at":"2026-10-02T09:11:30.150Z","phase":"main","what":"stop trial 1"}
+{"at":"2026-10-02T09:11:32.847Z","phase":"main","what":"queued message answered"}
+{"at":"2026-10-02T09:11:33.748Z","phase":"main","what":"stop trial 2"}
+{"at":"2026-10-02T09:11:36.324Z","phase":"main","what":"stop trial 3"}
+{"at":"2026-10-02T09:11:38.992Z","phase":"main","what":"stop trial 4"}
+{"at":"2026-10-02T09:11:41.672Z","phase":"main","what":"stop trial 5"}
+{"at":"2026-10-02T09:11:44.323Z","phase":"main","what":"stop trial 6"}
+{"at":"2026-10-02T09:11:47.014Z","phase":"main","what":"stop trial 7"}
+{"at":"2026-10-02T09:11:49.602Z","phase":"main","what":"stop trial 8"}
+{"at":"2026-10-02T09:11:52.225Z","phase":"main","what":"stop trial 9"}
+{"at":"2026-10-02T09:11:54.871Z","phase":"main","what":"stop trial 10"}
+{"at":"2026-10-02T09:14:04.145Z","phase":"model","what":"Say hi in five words."}
+{"at":"2026-10-02T09:14:07.566Z","phase":"model","what":"And now in three words."}
+{"at":"2026-10-02T09:14:48.960Z","phase":"sonnet","what":"Which of my sessions needs me first?"}
+{"at":"2026-10-02T09:14:52.141Z","phase":"sonnet","what":"What is kestrel waiting for?"}
+{"at":"2026-10-02T09:14:55.084Z","phase":"sonnet","what":"What did delta finish?"}
+{"at":"2026-10-02T09:14:58.234Z","phase":"sonnet","what":"Is anything running right now?"}
+{"at":"2026-10-02T09:15:01.605Z","phase":"sonnet","what":"One concrete next step?"}
+{"at":"2026-10-02T09:16:04.626Z","phase":"faults","what":"offline → recovered"}
+{"at":"2026-10-02T09:18:39.230Z","phase":"faults","what":"offline → recovered"}

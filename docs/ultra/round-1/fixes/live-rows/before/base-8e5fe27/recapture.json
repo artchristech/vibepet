@@ -1,0 +1,437 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-live-rows-base",
+  "git": "8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane",
+  "at": "2026-10-02T08:45:11.338Z",
+  "uptimeStart": "load 56.44 57.74 73.61",
+  "fleet": [
+    {
+      "name": "kestrel",
+      "state": "approval",
+      "inState": true,
+      "paused": false,
+      "registry": {
+        "status": "waiting",
+        "waitingFor": "permission prompt",
+        "statusUpdatedAt": 1790910742347
+      }
+    },
+    {
+      "name": "vibepet",
+      "state": "done",
+      "inState": true,
+      "paused": false,
+      "registry": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910787682
+      }
+    },
+    {
+      "name": "atlas",
+      "state": "working",
+      "inState": false,
+      "paused": true,
+      "registry": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910180805
+      }
+    },
+    {
+      "name": "beacon",
+      "state": "question",
+      "inState": true,
+      "paused": false,
+      "registry": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790907222729
+      }
+    },
+    {
+      "name": "delta",
+      "state": "fanout",
+      "inState": false,
+      "paused": true,
+      "registry": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790906449089
+      }
+    },
+    {
+      "name": "ember",
+      "state": "loop",
+      "inState": false,
+      "paused": true,
+      "registry": null
+    }
+  ],
+  "spend": {
+    "transcriptsUsd": 2.223186,
+    "estimateWithHiddenUsd": 3.3093,
+    "stop": 3.32,
+    "cap": 5
+  },
+  "launch": {
+    "ms": 4688,
+    "readyMs": 2047,
+    "uptime": "load 55.36 57.49 73.43"
+  },
+  "build": {
+    "live": false,
+    "acts": false
+  },
+  "watch": {
+    "uptime": [
+      "load 52.69 56.90 73.13",
+      "load 43.27 54.29 71.62"
+    ],
+    "secs": 30.185,
+    "paths": null,
+    "watching": 0,
+    "idle": {
+      "rendererSnapshots": 10,
+      "rendererPerSec": 0.33,
+      "mainTicks": null,
+      "mainTicksPerSec": null,
+      "liveTicks": null,
+      "watcherEvents": null
+    }
+  },
+  "verdict": {
+    "uptime": [
+      "load 43.27 54.29 71.62",
+      "load 52.30 54.47 70.94"
+    ],
+    "cases": [
+      {
+        "name": "vibepet",
+        "action": "approve",
+        "result": {
+          "ok": false,
+          "why": "vibepet isn't showing an approval prompt"
+        },
+        "ipcMs": 1150,
+        "rowNote": null,
+        "rowNoteMs": null,
+        "shot": "verdict-vibepet-approve.png",
+        "uptime": "load 43.27 54.29 71.62"
+      },
+      {
+        "name": "vibepet",
+        "action": "interrupt",
+        "result": {
+          "ok": false,
+          "why": "vibepet isn't busy"
+        },
+        "ipcMs": 402,
+        "rowNote": null,
+        "rowNoteMs": null,
+        "shot": "verdict-vibepet-interrupt.png",
+        "uptime": "load 41.65 53.77 71.34"
+      },
+      {
+        "name": "atlas",
+        "action": "approve",
+        "result": {
+          "ok": false,
+          "why": "atlas isn't showing an approval prompt"
+        },
+        "ipcMs": 201,
+        "rowNote": null,
+        "rowNoteMs": null,
+        "shot": "verdict-atlas-approve.png",
+        "uptime": "load 40.15 53.26 71.06"
+      },
+      {
+        "name": "beacon",
+        "action": "deny",
+        "result": {
+          "ok": false,
+          "why": "beacon isn't showing an approval prompt"
+        },
+        "ipcMs": 395,
+        "rowNote": null,
+        "rowNoteMs": null,
+        "shot": "verdict-beacon-deny.png",
+        "uptime": "load 37.98 52.59 70.72"
+      },
+      {
+        "name": "beacon",
+        "action": "option",
+        "key": "9",
+        "result": {
+          "ok": false,
+          "why": "beacon's question has no option 9"
+        },
+        "ipcMs": 418,
+        "rowNote": null,
+        "rowNoteMs": null,
+        "shot": "verdict-beacon-option-9.png",
+        "uptime": "load 37.98 52.59 70.72"
+      },
+      {
+        "name": "kestrel",
+        "action": "option",
+        "key": "2",
+        "result": {
+          "ok": false,
+          "why": "kestrel isn't showing a question"
+        },
+        "ipcMs": 650,
+        "rowNote": null,
+        "rowNoteMs": null,
+        "shot": "verdict-kestrel-option-2.png",
+        "uptime": "load 35.74 51.88 70.36"
+      },
+      {
+        "name": "kestrel",
+        "action": "text",
+        "text": "hello from the recapture",
+        "result": {
+          "ok": false,
+          "why": "kestrel is showing an approval prompt, not its input box"
+        },
+        "ipcMs": 768,
+        "rowNote": null,
+        "rowNoteMs": null,
+        "shot": "verdict-kestrel-text.png",
+        "uptime": "load 34.40 51.34 70.06"
+      },
+      {
+        "name": "kestrel",
+        "action": "interrupt",
+        "result": {
+          "ok": false,
+          "why": "kestrel isn't busy"
+        },
+        "ipcMs": 716,
+        "rowNote": null,
+        "rowNoteMs": null,
+        "shot": "verdict-kestrel-interrupt.png",
+        "uptime": "load 33.08 50.78 69.75"
+      }
+    ],
+    "fleetBefore": {
+      "kestrel": {
+        "status": "waiting",
+        "waitingFor": "permission prompt",
+        "statusUpdatedAt": 1790910742347,
+        "pane": "29a87e353655",
+        "dialog": true,
+        "select": false
+      },
+      "vibepet": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910787682,
+        "pane": "40e7070aac86",
+        "dialog": false,
+        "select": false
+      },
+      "atlas": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910180805,
+        "pane": "13117da7a5ce",
+        "dialog": false,
+        "select": false
+      },
+      "beacon": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790907222729,
+        "pane": "b1e459769523",
+        "dialog": false,
+        "select": true
+      },
+      "delta": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790906449089,
+        "pane": "71a346500cf2",
+        "dialog": false,
+        "select": false
+      }
+    },
+    "fleetAfter": {
+      "kestrel": {
+        "status": "waiting",
+        "waitingFor": "permission prompt",
+        "statusUpdatedAt": 1790910742347,
+        "pane": "29a87e353655",
+        "dialog": true,
+        "select": false
+      },
+      "vibepet": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910787682,
+        "pane": "40e7070aac86",
+        "dialog": false,
+        "select": false
+      },
+      "atlas": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910180805,
+        "pane": "13117da7a5ce",
+        "dialog": false,
+        "select": false
+      },
+      "beacon": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790907222729,
+        "pane": "b1e459769523",
+        "dialog": false,
+        "select": true
+      },
+      "delta": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790906449089,
+        "pane": "71a346500cf2",
+        "dialog": false,
+        "select": false
+      }
+    },
+    "fleetUnchanged": true,
+    "acts": null,
+    "ipc": [
+      {
+        "args": [
+          {
+            "action": "approve",
+            "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "vibepet isn't showing an approval prompt"
+        },
+        "ms": 1148,
+        "member": "vibepet"
+      },
+      {
+        "args": [
+          {
+            "action": "interrupt",
+            "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "vibepet isn't busy"
+        },
+        "ms": 401,
+        "member": "vibepet"
+      },
+      {
+        "args": [
+          {
+            "action": "approve",
+            "id": "5c051e84-b74f-41b6-845f-bde937a9ef90"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "atlas isn't showing an approval prompt"
+        },
+        "ms": 201,
+        "member": "atlas"
+      },
+      {
+        "args": [
+          {
+            "action": "deny",
+            "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "beacon isn't showing an approval prompt"
+        },
+        "ms": 395,
+        "member": "beacon"
+      },
+      {
+        "args": [
+          {
+            "action": "option",
+            "key": "9",
+            "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "beacon's question has no option 9"
+        },
+        "ms": 417,
+        "member": "beacon"
+      },
+      {
+        "args": [
+          {
+            "action": "option",
+            "key": "2",
+            "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "kestrel isn't showing a question"
+        },
+        "ms": 649,
+        "member": "kestrel"
+      },
+      {
+        "args": [
+          {
+            "action": "text",
+            "text": "hello from the recapture",
+            "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "kestrel is showing an approval prompt, not its input box"
+        },
+        "ms": 768,
+        "member": "kestrel"
+      },
+      {
+        "args": [
+          {
+            "action": "interrupt",
+            "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "kestrel isn't busy"
+        },
+        "ms": 716,
+        "member": "kestrel"
+      }
+    ],
+    "rendererResults": [],
+    "summary": {
+      "calls": 8,
+      "logged": 0,
+      "unverifiedSuccesses": 0,
+      "okResults": 0,
+      "rowNoteMedianMs": null,
+      "rowNotesShown": 0,
+      "ipcMedianMs": 534,
+      "fleetUnchanged": true
+    }
+  },
+  "close": {
+    "how": "quit",
+    "ms": 14654,
+    "orphans": 0
+  },
+  "uptimeEnd": "load 103.84 65.92 74.75"
+}

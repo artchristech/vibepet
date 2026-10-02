@@ -1,0 +1,701 @@
+{
+ "phase": "detached",
+ "startedAt": "2026-10-02T05:37:36.664Z",
+ "uptimeStart": "23:37  up 6 days, 10:22, 19 users, load averages: 14.46 19.06 28.81",
+ "fleet": {
+  "delta": {
+   "pid": 29074,
+   "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+   "tmux": "vp-delta:@4.%4",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790906449089
+  },
+  "vibepet": {
+   "pid": 48221,
+   "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "tmux": "vp-vibepet:@1.%1",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790910787682
+  },
+  "atlas": {
+   "pid": 48392,
+   "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+   "tmux": "vp-atlas:@2.%2",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790910180805
+  },
+  "beacon": {
+   "pid": 48539,
+   "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+   "tmux": "vp-beacon:@3.%3",
+   "status": "waiting",
+   "waitingFor": "input needed",
+   "statusUpdatedAt": 1790907222729
+  },
+  "kestrel": {
+   "pid": 55946,
+   "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "tmux": "vp-kestrel:@8.%8",
+   "status": "waiting",
+   "waitingFor": "permission prompt",
+   "statusUpdatedAt": 1790910742347
+  }
+ },
+ "clientsAtStart": [],
+ "terminalWindows": 0,
+ "trials": [
+  {
+   "how": "/jump",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-kestrel",
+    "attach": "tmux attach -t vp-kestrel"
+   },
+   "handlerMs": 2787,
+   "clickToResultMs": 3439,
+   "load": [
+    26.38,
+    21.41,
+    29.53
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "/jump",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": false,
+    "why": "couldn't list processes"
+   },
+   "handlerMs": 3018,
+   "clickToResultMs": 4887,
+   "load": [
+    49.17,
+    26.22,
+    31.18
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "/jump",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": false,
+    "why": "couldn't list processes"
+   },
+   "handlerMs": 3014,
+   "clickToResultMs": 4489,
+   "load": [
+    101.3,
+    38.09,
+    35.33
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "/jump",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-atlas",
+    "attach": "tmux attach -t vp-atlas"
+   },
+   "handlerMs": 2761,
+   "clickToResultMs": 3213,
+   "load": [
+    134.99,
+    46.13,
+    38.18
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "/jump",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": false,
+    "why": "couldn't list processes"
+   },
+   "handlerMs": 3029,
+   "clickToResultMs": 3519,
+   "load": [
+    158.38,
+    52.45,
+    40.46
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-kestrel",
+    "attach": "tmux attach -t vp-kestrel"
+   },
+   "handlerMs": 2548,
+   "clickToResultMs": 3404,
+   "load": [
+    186.45,
+    60.03,
+    43.21
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-beacon",
+    "attach": "tmux attach -t vp-beacon"
+   },
+   "handlerMs": 1319,
+   "clickToResultMs": 1438,
+   "load": [
+    212.2,
+    67.47,
+    45.93
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-vibepet",
+    "attach": "tmux attach -t vp-vibepet"
+   },
+   "handlerMs": 408,
+   "clickToResultMs": 452,
+   "load": [
+    234.45,
+    74.48,
+    48.53
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-atlas",
+    "attach": "tmux attach -t vp-atlas"
+   },
+   "handlerMs": 230,
+   "clickToResultMs": 442,
+   "load": [
+    234.45,
+    74.48,
+    48.53
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-delta",
+    "attach": "tmux attach -t vp-delta"
+   },
+   "handlerMs": 516,
+   "clickToResultMs": 567,
+   "load": [
+    254.67,
+    81.33,
+    51.1
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-kestrel",
+    "attach": "tmux attach -t vp-kestrel"
+   },
+   "handlerMs": 333,
+   "clickToResultMs": 364,
+   "load": [
+    254.67,
+    81.33,
+    51.1
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-beacon",
+    "attach": "tmux attach -t vp-beacon"
+   },
+   "handlerMs": 155,
+   "clickToResultMs": 185,
+   "load": [
+    254.67,
+    81.33,
+    51.1
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-vibepet",
+    "attach": "tmux attach -t vp-vibepet"
+   },
+   "handlerMs": 217,
+   "clickToResultMs": 249,
+   "load": [
+    276.8,
+    88.79,
+    53.91
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-atlas",
+    "attach": "tmux attach -t vp-atlas"
+   },
+   "handlerMs": 183,
+   "clickToResultMs": 218,
+   "load": [
+    276.8,
+    88.79,
+    53.91
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-delta",
+    "attach": "tmux attach -t vp-delta"
+   },
+   "handlerMs": 139,
+   "clickToResultMs": 175,
+   "load": [
+    276.8,
+    88.79,
+    53.91
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-kestrel",
+    "attach": "tmux attach -t vp-kestrel"
+   },
+   "handlerMs": 193,
+   "clickToResultMs": 215,
+   "load": [
+    276.8,
+    88.79,
+    53.91
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-beacon",
+    "attach": "tmux attach -t vp-beacon"
+   },
+   "handlerMs": 126,
+   "clickToResultMs": 164,
+   "load": [
+    276.8,
+    88.79,
+    53.91
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-vibepet",
+    "attach": "tmux attach -t vp-vibepet"
+   },
+   "handlerMs": 176,
+   "clickToResultMs": 213,
+   "load": [
+    298.68,
+    96.45,
+    56.82
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-atlas",
+    "attach": "tmux attach -t vp-atlas"
+   },
+   "handlerMs": 398,
+   "clickToResultMs": 450,
+   "load": [
+    298.68,
+    96.45,
+    56.82
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-delta",
+    "attach": "tmux attach -t vp-delta"
+   },
+   "handlerMs": 143,
+   "clickToResultMs": 178,
+   "load": [
+    298.68,
+    96.45,
+    56.82
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "hotkey",
+   "asked": null,
+   "jumped": "beacon",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-beacon",
+    "attach": "tmux attach -t vp-beacon"
+   },
+   "handlerMs": 120,
+   "clickToResultMs": 123,
+   "load": [
+    298.68,
+    96.45,
+    56.82
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [],
+   "front": "com.apple.Safari",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  }
+ ],
+ "notes": [],
+ "git": "d7af2cb tmux-reach: press Enter after a typed reply only when the input box holds it",
+ "worktreeDiff": "agents.js | 7 +++++--\n 1 file changed, 5 insertions(+), 2 deletions(-)",
+ "launch": {
+  "pid": 63400,
+  "readyMs": 1075
+ },
+ "aeTerminal": "-600",
+ "rows": [
+  {
+   "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+   "cls": "nr needs",
+   "title": "Beacon database choice",
+   "label": "beacon · waiting 1m",
+   "actions": [
+    "reply",
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "beacon"
+  },
+  {
+   "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "cls": "nr stuck",
+   "title": "Deploy.sh dry run",
+   "label": "kestrel · stuck 1m",
+   "actions": [
+    "approve",
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "kestrel"
+  },
+  {
+   "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "cls": "nr ready",
+   "title": "Read package.json",
+   "label": "vibepet · done just now",
+   "actions": [
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "vibepet"
+  },
+  {
+   "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+   "cls": "nr ready",
+   "title": "Reconcile three shards in parallel",
+   "label": "delta · done just now",
+   "actions": [
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "delta"
+  },
+  {
+   "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+   "cls": "nr ready",
+   "title": "Run build.sh",
+   "label": "atlas · done just now",
+   "actions": [
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "atlas"
+  }
+ ],
+ "clipboard": 0,
+ "openExternal": [],
+ "close": {
+  "how": "quit",
+  "ms": 528,
+  "procs": 7,
+  "orphans": []
+ },
+ "uptimeEnd": "23:38  up 6 days, 10:24, 19 users, load averages: 298.68 96.45 56.82",
+ "summary": {
+  "hotkey": {
+   "n": 1,
+   "ok": 0,
+   "levels": [
+    "no terminal is attached to tmux session vp-beacon"
+   ],
+   "medianClickToResultMs": 123,
+   "maxClickToResultMs": 123,
+   "paneMatches": 0,
+   "terminalFront": 0,
+   "clipboardWrites": 0,
+   "perMember": {
+    "kestrel": {
+     "n": 0,
+     "medianMs": null
+    },
+    "beacon": {
+     "n": 1,
+     "medianMs": 123
+    },
+    "vibepet": {
+     "n": 0,
+     "medianMs": null
+    },
+    "atlas": {
+     "n": 0,
+     "medianMs": null
+    },
+    "delta": {
+     "n": 0,
+     "medianMs": null
+    }
+   }
+  },
+  "/jump": {
+   "n": 5,
+   "ok": 0,
+   "levels": [
+    "no terminal is attached to tmux session vp-kestrel",
+    "couldn't list processes",
+    "no terminal is attached to tmux session vp-atlas"
+   ],
+   "medianClickToResultMs": 3519,
+   "maxClickToResultMs": 4887,
+   "paneMatches": 0,
+   "terminalFront": 0,
+   "clipboardWrites": 0,
+   "perMember": {
+    "kestrel": {
+     "n": 1,
+     "medianMs": 3439
+    },
+    "beacon": {
+     "n": 1,
+     "medianMs": 4887
+    },
+    "vibepet": {
+     "n": 1,
+     "medianMs": 4489
+    },
+    "atlas": {
+     "n": 1,
+     "medianMs": 3213
+    },
+    "delta": {
+     "n": 1,
+     "medianMs": 3519
+    }
+   }
+  },
+  "row": {
+   "n": 15,
+   "ok": 0,
+   "levels": [
+    "no terminal is attached to tmux session vp-kestrel",
+    "no terminal is attached to tmux session vp-beacon",
+    "no terminal is attached to tmux session vp-vibepet",
+    "no terminal is attached to tmux session vp-atlas",
+    "no terminal is attached to tmux session vp-delta"
+   ],
+   "medianClickToResultMs": 249,
+   "maxClickToResultMs": 3404,
+   "paneMatches": 0,
+   "terminalFront": 0,
+   "clipboardWrites": 0,
+   "perMember": {
+    "kestrel": {
+     "n": 3,
+     "medianMs": 364
+    },
+    "beacon": {
+     "n": 3,
+     "medianMs": 185
+    },
+    "vibepet": {
+     "n": 3,
+     "medianMs": 249
+    },
+    "atlas": {
+     "n": 3,
+     "medianMs": 442
+    },
+    "delta": {
+     "n": 3,
+     "medianMs": 178
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,179 @@
+{
+  "truth": {
+    "at": "2026-10-02T02:47:22.029Z",
+    "spend": {
+      "transcriptsUsd": 2.182557,
+      "estimateWithHiddenUsd": 3.2437,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": false,
+        "paused": false,
+        "pid": 55946,
+        "sid": "13a1427d",
+        "reg": "idle",
+        "regAgeS": 63,
+        "last": "end_turn"
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sid": "6101876b",
+        "reg": "idle",
+        "regAgeS": 386,
+        "last": "end_turn"
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sid": "5c051e84",
+        "reg": "idle",
+        "regAgeS": 162,
+        "last": "interrupted"
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sid": "a9377f08",
+        "reg": "waiting(input needed)",
+        "regAgeS": 2019,
+        "last": "user_prompt"
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sid": "eb59a756",
+        "reg": "idle",
+        "regAgeS": 2793,
+        "last": "end_turn"
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sid": "db0c1ec0",
+        "reg": null,
+        "regAgeS": null,
+        "last": "user_prompt"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "sig": "needs",
+      "title": "Deploy.sh dry run",
+      "label": "kestrel · waiting 1m",
+      "goal": "◎ Run exactly ./deploy.sh --dry-run with the Bash tool.",
+      "actions": [
+        "reply",
+        "replay",
+        "done",
+        "goal"
+      ]
+    }
+  ],
+  "walk": [
+    {
+      "id": null,
+      "do": null,
+      "text": "Vibe check",
+      "row": null
+    },
+    {
+      "id": null,
+      "do": null,
+      "text": "What should I do next?",
+      "row": null
+    },
+    {
+      "id": null,
+      "do": null,
+      "text": "Am I on track?",
+      "row": null
+    },
+    {
+      "id": null,
+      "do": null,
+      "text": "Write a commit message",
+      "row": null
+    },
+    {
+      "id": null,
+      "do": null,
+      "text": "What's my agent doing?",
+      "row": null
+    },
+    {
+      "id": null,
+      "do": "today",
+      "text": "Today",
+      "row": null
+    },
+    {
+      "id": null,
+      "do": "rec",
+      "text": "● Record a short",
+      "row": null
+    },
+    {
+      "id": null,
+      "do": "goal",
+      "text": "◎",
+      "row": "kestrel · waiting 1m"
+    },
+    {
+      "id": null,
+      "do": "done",
+      "text": "✓",
+      "row": "kestrel · waiting 1m"
+    },
+    {
+      "id": null,
+      "do": "replay",
+      "text": "▶",
+      "row": "kestrel · waiting 1m"
+    },
+    {
+      "id": null,
+      "do": "reply",
+      "text": "Reply",
+      "row": "kestrel · waiting 1m"
+    }
+  ],
+  "presses": 11,
+  "reachedReply": true,
+  "load": [
+    7.76,
+    4.42,
+    3.14
+  ],
+  "at": "2026-10-02T02:47:24.199Z",
+  "rowTabIndex": [
+    -1
+  ],
+  "close": {
+    "how": "quit",
+    "ms": 286,
+    "procs": 7,
+    "orphans": []
+  }
+}

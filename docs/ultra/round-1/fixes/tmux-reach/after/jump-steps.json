@@ -1,0 +1,176 @@
+{
+ "uptime": "23:37  up 6 days, 10:22, 20 users, load averages: 8.26 18.54 29.04",
+ "median": {
+  "ps": 101,
+  "locate": 0,
+  "tmuxJump": 19,
+  "osascriptNoop": 129
+ },
+ "rows": [
+  {
+   "m": "kestrel",
+   "ps": 102,
+   "locate": 1,
+   "tmuxJump": 21,
+   "osascriptNoop": 189,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.36,
+   "procs": 661
+  },
+  {
+   "m": "beacon",
+   "ps": 125,
+   "locate": 1,
+   "tmuxJump": 26,
+   "osascriptNoop": 129,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.36,
+   "procs": 662
+  },
+  {
+   "m": "vibepet",
+   "ps": 97,
+   "locate": 0,
+   "tmuxJump": 17,
+   "osascriptNoop": 162,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.36,
+   "procs": 662
+  },
+  {
+   "m": "atlas",
+   "ps": 102,
+   "locate": 1,
+   "tmuxJump": 32,
+   "osascriptNoop": 182,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.36,
+   "procs": 661
+  },
+  {
+   "m": "delta",
+   "ps": 136,
+   "locate": 1,
+   "tmuxJump": 22,
+   "osascriptNoop": 113,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.36,
+   "procs": 661
+  },
+  {
+   "m": "kestrel",
+   "ps": 99,
+   "locate": 0,
+   "tmuxJump": 18,
+   "osascriptNoop": 128,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.36,
+   "procs": 661
+  },
+  {
+   "m": "beacon",
+   "ps": 101,
+   "locate": 0,
+   "tmuxJump": 19,
+   "osascriptNoop": 190,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.36,
+   "procs": 662
+  },
+  {
+   "m": "vibepet",
+   "ps": 152,
+   "locate": 0,
+   "tmuxJump": 34,
+   "osascriptNoop": 121,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.36,
+   "procs": 663
+  },
+  {
+   "m": "atlas",
+   "ps": 96,
+   "locate": 0,
+   "tmuxJump": 19,
+   "osascriptNoop": 118,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.26,
+   "procs": 663
+  },
+  {
+   "m": "delta",
+   "ps": 97,
+   "locate": 0,
+   "tmuxJump": 49,
+   "osascriptNoop": 119,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.26,
+   "procs": 664
+  },
+  {
+   "m": "kestrel",
+   "ps": 99,
+   "locate": 0,
+   "tmuxJump": 21,
+   "osascriptNoop": 117,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.26,
+   "procs": 662
+  },
+  {
+   "m": "beacon",
+   "ps": 116,
+   "locate": 0,
+   "tmuxJump": 19,
+   "osascriptNoop": 141,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.26,
+   "procs": 663
+  },
+  {
+   "m": "vibepet",
+   "ps": 101,
+   "locate": 0,
+   "tmuxJump": 16,
+   "osascriptNoop": 100,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.26,
+   "procs": 664
+  },
+  {
+   "m": "atlas",
+   "ps": 115,
+   "locate": 0,
+   "tmuxJump": 19,
+   "osascriptNoop": 154,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.26,
+   "procs": 665
+  },
+  {
+   "m": "delta",
+   "ps": 101,
+   "locate": 0,
+   "tmuxJump": 19,
+   "osascriptNoop": 400,
+   "ok": true,
+   "host": "Terminal.app",
+   "load": 8.26,
+   "procs": 664
+  }
+ ]
+}

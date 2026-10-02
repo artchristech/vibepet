@@ -1,0 +1,50 @@
+   ├ Run shard 2 reconciliation
+   └ Run shard 3 reconciliation
+
+⏺ Three shards launched in parallel. Waiting for results.
+
+✻ Sautéed for 5s · done 3:01 PM
+
+❯ /exit
+
+❯ /exit
+
+❯ /exit
+  ⎿  See ya!
+
+⏺ 3 background agents didn't finish before the previous session ended: "Run shard 1 reconciliation" (af4cb08c94e0b3c02), "Run shard 2 reconciliation" (a8eb08a81ccb5b122), "Run shard 3 reconciliation"
+(a2d10d25ad0789eaf).
+
+❯ Do it again: in ONE message start three foreground general-purpose subagents with the Agent tool; subagent N runs exactly ./slow.sh shard-N (N = 1, 2, 3) in the foreground with timeout 600000 and
+  reports its final line.
+
+⏺ 2 background agents launched (↓ to manage)
+   ├ Run shard 1 reconciliation
+   └ Run shard 2 reconciliation
+
+⏺ Three shards launched in parallel. Waiting for results.
+
+✻ Waiting for 3 background agents to finish
+
+⏺ Agent "Run shard 2 reconciliation" finished · 2m 39s
+
+⏺ Agent "Run shard 1 reconciliation" finished · 2m 40s
+
+⏺ Shards 1 and 2 done. Awaiting shard 3.
+
+✻ Waiting for 1 background agent to finish
+
+⏺ Agent "Run shard 3 reconciliation" finished · 2m 40s
+
+⏺ All shards reconciled:
+  - [shard-1] reconciled
+  - [shard-2] reconciled
+  - [shard-3] reconciled
+
+✻ Crunched for 2m 57s · done 3:57 PM
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  ⏸ manual mode on · ? for shortcuts · ← 1 agent
+

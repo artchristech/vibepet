@@ -1,0 +1,282 @@
+{
+ "flow": "P2",
+ "run": "b",
+ "startedAt": "2026-10-02T03:25:30.356Z",
+ "load": [
+  [
+   1.8,
+   2.71,
+   2.48
+  ],
+  [
+   1.26,
+   1.9,
+   2.17
+  ]
+ ],
+ "trials": [
+  {
+   "i": 0,
+   "port": 47430,
+   "kind": "node",
+   "repo": "delta",
+   "listenAt": 1790911543543,
+   "startMs": 14609,
+   "exitAt": 1790911569127,
+   "stopMs": 13050,
+   "homeOpenAtShow": true,
+   "homeOpenAtGone": true,
+   "tickStartMs": 14597,
+   "tickStopMs": 13022,
+   "load": [
+    2.15,
+    2.62,
+    2.46
+   ]
+  },
+  {
+   "i": 1,
+   "port": 47431,
+   "kind": "python",
+   "repo": "atlas",
+   "listenAt": 1790911582880,
+   "startMs": 11310,
+   "exitAt": 1790911601875,
+   "stopMs": 4308,
+   "homeOpenAtShow": true,
+   "homeOpenAtGone": true,
+   "tickStartMs": 11276,
+   "tickStopMs": 4284,
+   "load": [
+    1.94,
+    2.54,
+    2.43
+   ]
+  },
+  {
+   "i": 2,
+   "port": 47432,
+   "kind": "node",
+   "repo": "delta",
+   "listenAt": 1790911609979,
+   "startMs": 8216,
+   "exitAt": 1790911627172,
+   "stopMs": 3015,
+   "homeOpenAtShow": true,
+   "homeOpenAtGone": true,
+   "tickStartMs": 8182,
+   "tickStopMs": 2990,
+   "load": [
+    2.2,
+    2.57,
+    2.44
+   ]
+  },
+  {
+   "i": 3,
+   "port": 47433,
+   "kind": "python",
+   "repo": "atlas",
+   "listenAt": 1790911638243,
+   "startMs": 3955,
+   "exitAt": 1790911653456,
+   "stopMs": 12728,
+   "homeOpenAtShow": true,
+   "homeOpenAtGone": true,
+   "tickStartMs": 3924,
+   "tickStopMs": 12719,
+   "load": [
+    1.82,
+    2.42,
+    2.4
+   ]
+  },
+  {
+   "i": 4,
+   "port": 47434,
+   "kind": "node",
+   "repo": "delta",
+   "listenAt": 1790911671946,
+   "startMs": 6248,
+   "exitAt": 1790911687536,
+   "stopMs": 14672,
+   "homeOpenAtShow": true,
+   "homeOpenAtGone": true,
+   "tickStartMs": 6236,
+   "tickStopMs": 14661,
+   "load": [
+    1.38,
+    2.23,
+    2.32
+   ]
+  },
+  {
+   "i": 5,
+   "port": 47435,
+   "kind": "python",
+   "repo": "atlas",
+   "listenAt": 1790911712344,
+   "startMs": 13906,
+   "exitAt": 1790911727524,
+   "stopMs": 10719,
+   "homeOpenAtShow": true,
+   "homeOpenAtGone": true,
+   "tickStartMs": 13863,
+   "tickStopMs": 10691,
+   "load": [
+    1.09,
+    2.07,
+    2.26
+   ]
+  },
+  {
+   "i": 6,
+   "port": 47436,
+   "kind": "node",
+   "repo": "delta",
+   "listenAt": 1790911741915,
+   "startMs": 8320,
+   "exitAt": 1790911755968,
+   "stopMs": 6262,
+   "homeOpenAtShow": true,
+   "homeOpenAtGone": true,
+   "tickStartMs": 8305,
+   "tickStopMs": 6258,
+   "load": [
+    1.78,
+    2.16,
+    2.29
+   ]
+  },
+  {
+   "i": 7,
+   "port": 47437,
+   "kind": "python",
+   "repo": "atlas",
+   "listenAt": 1790911774286,
+   "startMs": 11967,
+   "exitAt": 1790911789385,
+   "stopMs": 8912,
+   "homeOpenAtShow": true,
+   "homeOpenAtGone": true,
+   "tickStartMs": 11958,
+   "tickStopMs": 8869,
+   "load": [
+    2.33,
+    2.24,
+    2.31
+   ]
+  },
+  {
+   "i": 8,
+   "port": 47438,
+   "kind": "node",
+   "repo": "delta",
+   "listenAt": 1790911808478,
+   "startMs": 13800,
+   "exitAt": 1790911831927,
+   "stopMs": 14388,
+   "homeOpenAtShow": true,
+   "homeOpenAtGone": true,
+   "tickStartMs": 13799,
+   "tickStopMs": 14361,
+   "load": [
+    1.49,
+    2.03,
+    2.23
+   ]
+  },
+  {
+   "i": 9,
+   "port": 47439,
+   "kind": "python",
+   "repo": "atlas",
+   "listenAt": 1790911858144,
+   "startMs": 12173,
+   "exitAt": 1790911880803,
+   "stopMs": 13556,
+   "homeOpenAtShow": true,
+   "homeOpenAtGone": true,
+   "tickStartMs": 12152,
+   "tickStopMs": 13513,
+   "load": [
+    1.26,
+    1.9,
+    2.17
+   ]
+  }
+ ],
+ "refresh": [
+  1790911531349,
+  1790911543257,
+  1790911555249,
+  1790911567256,
+  1790911579253,
+  1790911591265,
+  1790911603262,
+  1790911615272,
+  1790911627273,
+  1790911639289,
+  1790911651274,
+  1790911663276,
+  1790911675285,
+  1790911687294,
+  1790911699299,
+  1790911711304,
+  1790911723311,
+  1790911735328,
+  1790911747328,
+  1790911759337,
+  1790911771341,
+  1790911783357,
+  1790911795362,
+  1790911807377,
+  1790911819381,
+  1790911831379,
+  1790911843389,
+  1790911855403,
+  1790911867393,
+  1790911879401,
+  1790911891409
+ ],
+ "truthStart": [
+  "kestrel:approval reg=waiting(permission prompt) last=user_prompt",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "summary": {
+  "n": 10,
+  "invalid": 0,
+  "startMedian": 11638.5,
+  "startMin": 3955,
+  "startMax": 14609,
+  "stopMedian": 11723.5,
+  "stopMin": 3015,
+  "stopMax": 14672,
+  "tickStartMedian": 11617,
+  "tickStopMedian": 11705,
+  "homeReopened": 0,
+  "refreshMedian": 12006,
+  "refreshMin": 11908,
+  "refreshMax": 12017,
+  "refreshN": 30
+ },
+ "truthEnd": [
+  "kestrel:approval reg=waiting(permission prompt) last=user_prompt",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 269,
+  "procs": 7,
+  "orphans": []
+ },
+ "endedAt": "2026-10-02T03:31:36.010Z"
+}

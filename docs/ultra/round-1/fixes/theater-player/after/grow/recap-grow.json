@@ -1,0 +1,215 @@
+{
+ "phase": "grow",
+ "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-theater-player",
+ "git": "d97a309 theater-player: a re-read redraws only what changed; Approve shows what it did",
+ "dirty": "",
+ "startedAt": "2026-10-02T13:12:17.383Z",
+ "uptimeStart": "7:12  up 6 days, 17:57, 19 users, load averages: 4.14 8.69 19.73",
+ "fleet": {
+  "delta": {
+   "pid": 29074,
+   "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+   "tmux": "vp-delta:@4.%4",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "status": "idle",
+   "waitingFor": null
+  },
+  "vibepet": {
+   "pid": 48221,
+   "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "tmux": "vp-vibepet:@1.%1",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "status": "idle",
+   "waitingFor": null
+  },
+  "atlas": {
+   "pid": 48392,
+   "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+   "tmux": "vp-atlas:@2.%2",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/atlas",
+   "status": "idle",
+   "waitingFor": null
+  },
+  "beacon": {
+   "pid": 48539,
+   "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+   "tmux": "vp-beacon:@3.%3",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/beacon",
+   "status": "waiting",
+   "waitingFor": "input needed"
+  },
+  "kestrel": {
+   "pid": 55946,
+   "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "tmux": "vp-kestrel:@8.%8",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/kestrel",
+   "status": "waiting",
+   "waitingFor": "permission prompt"
+  }
+ },
+ "sizesStart": {
+  "atlas/5c051e84": 343391,
+  "beacon/a9377f08": 363823,
+  "delta/eb59a756": 699689,
+  "ember/5bf06269": 375165,
+  "ember/db0c1ec0": 578019,
+  "kestrel/13a1427d": 465693,
+  "kestrel/6f5c5b6c": 257786,
+  "vibepet/6101876b": 368986
+ },
+ "steps": {
+  "c-grow": {
+   "atOpen": {
+    "now": 229988,
+    "playing": false,
+    "active": 60,
+    "dur": 229988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 61,
+    "drawn": 61,
+    "card": false,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "3:50 / 3:50",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": null
+   },
+   "t1": 1790910740929,
+   "commit1": "339dc158",
+   "reopenUntouched": {
+    "reads": 1,
+    "now": 227488,
+    "playing": true,
+    "active": 60,
+    "dur": 235988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 62,
+    "drawn": 62,
+    "card": true,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "3:47 / 3:56",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": "+1 new beat"
+   },
+   "reopenUntouchedSettled": {
+    "now": 235988,
+    "playing": false,
+    "active": 61,
+    "dur": 235988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 62,
+    "drawn": 62,
+    "card": false,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "3:56 / 3:56",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": null
+   },
+   "commit2": "e2d9db76",
+   "reopenAtEnd": {
+    "reads": 1,
+    "now": 241988,
+    "playing": false,
+    "active": 62,
+    "dur": 241988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 63,
+    "drawn": 63,
+    "card": false,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "4:02 / 4:02",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": "+1 new beat"
+   },
+   "commit3": "e2cf1385",
+   "reload": {
+    "reads": 1,
+    "now": 247988,
+    "playing": false,
+    "active": 63,
+    "dur": 247988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 64,
+    "drawn": 64,
+    "card": false,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "4:08 / 4:08",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": "+1 new beat"
+   },
+   "reloadSame": {
+    "reads": 1,
+    "now": 247988,
+    "playing": false,
+    "active": 63,
+    "dur": 247988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 64,
+    "drawn": 64,
+    "card": false,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "4:08 / 4:08",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": "up to date"
+   },
+   "load": [
+    4.09,
+    8.31,
+    19.27
+   ]
+  }
+ },
+ "notes": [],
+ "launch": {
+  "pid": 99597,
+  "readyMs": 731
+ },
+ "repoBefore": {
+  "head": "f7a28d05ca7c850a4d07a6e0ba64b8c69eb2ebf3",
+  "status": "",
+  "refs": "refs/heads/main"
+ },
+ "repoAfter": {
+  "head": "f7a28d05ca7c850a4d07a6e0ba64b8c69eb2ebf3",
+  "status": "",
+  "refs": "refs/heads/main"
+ },
+ "repoRestored": true,
+ "timelineReads": 5,
+ "clipboard": 0,
+ "close": {
+  "how": "quit",
+  "ms": 290,
+  "procs": 7,
+  "orphans": []
+ },
+ "uptimeEnd": "7:12  up 6 days, 17:57, 19 users, load averages: 4.09 8.31 19.27",
+ "sizesEnd": {
+  "atlas/5c051e84": 343391,
+  "beacon/a9377f08": 363823,
+  "delta/eb59a756": 699689,
+  "ember/5bf06269": 375165,
+  "ember/db0c1ec0": 578019,
+  "kestrel/13a1427d": 465693,
+  "kestrel/6f5c5b6c": 257786,
+  "vibepet/6101876b": 368986
+ },
+ "transcriptsGrew": []
+}

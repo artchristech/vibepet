@@ -1,0 +1,25 @@
+--- a/agents.js
++++ b/agents.js
+@@ -258,6 +258,8 @@
+ function scan(root, sessions, onChange) {
+   let dirs; try { dirs = fs.readdirSync(root); } catch { return []; }
+   const now = Date.now(), seen = new Set(), out = [];
++  // RECAPTURE SHIM (tmux-reach evidence only, never committed): a stand-in for queue-state - a session whose registry entry is live stays listed, phased by the registry
++  const live = new Map(); try { for (const n of fs.readdirSync(SESS_DIR)) { try { const r = JSON.parse(fs.readFileSync(path.join(SESS_DIR, n), 'utf8')); process.kill(r.pid, 0); live.set(r.sessionId, r); } catch {} } } catch {}
+   for (const dname of dirs) {
+     if (dname.includes('private-tmp') || dname.includes('scratchpad')) continue; // throwaway worker sessions
+     const dir = path.join(root, dname);
+@@ -267,10 +269,11 @@
+       const fp = path.join(dir, f);
+       let st; try { st = fs.statSync(fp); } catch { continue; }
+       const age = now - st.mtimeMs;
+-      if (age > 45 * 60e3 && (age > 12 * 3600e3 || !(now - (fanout(fp)?.newestAt || 0) <= 45 * 60e3))) continue;   // silent parent, but children may still run
++      const lr = live.get(f.slice(0, -6));
++      if (!lr && age > 45 * 60e3 && (age > 12 * 3600e3 || !(now - (fanout(fp)?.newestAt || 0) <= 45 * 60e3))) continue;   // silent parent, but children may still run
+       let c; try { c = classify(fp, st.mtimeMs); } catch { continue; }
+       if (!c) continue;
+-      const fo = fanout(fp, c.turnAt, c.receipt), phase = settle(c, fo), receipt = fo ? fo.receipt : c.receipt;
++      const fo = fanout(fp, c.turnAt, c.receipt), phase = lr ? (lr.status === 'waiting' ? (lr.waitingFor === 'input needed' ? 'waiting' : 'stalled') : lr.status === 'busy' ? 'working' : 'ready') : settle(c, fo), receipt = fo ? fo.receipt : c.receipt;
+       if (fo) delete fo.receipt;
+       const id = f.slice(0, -6);
+       seen.add(id);

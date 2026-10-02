@@ -1,0 +1,347 @@
+{
+ "definition": "presence.py - Round-0 'detection vs away' split of time-to-attention waits (Python 3 stdlib).\n\nInput: an event dump written by `mineA.js --dump` or `mineB.py --dump` (hashed session ids, ms timestamps, enum\nclasses only), plus the transcripts root, which is read ONLY for the timestamps of system/away_summary records and\nthe per-session entrypoint enum. PRIVACY: prints and writes numbers only.\n\nWait decomposition (censored waits <= 2 h). Inside each wait [start, end], cut at every human prompt in ANY session\n(and at end). A stretch >= G minutes with no human prompt anywhere is AWAY time (G = 20 min, the spec's away-gap\nthreshold; 10 and 30 min reported as sensitivity). The rest is PRESENT time, split into\n  busy_elsewhere: present time before the user's last prompt to ANOTHER session inside the wait\n                  (the user was demonstrably at the keyboard, working elsewhere, while this block waited);\n  last_stretch:   the remaining present time (from the last input elsewhere, or the block start, to the answer:\n                  noticing + reading + deciding, the user's whereabouts unobserved).\nCorroboration: Claude Code CLI writes system/away_summary when the terminal has been unfocused ~3 min after a turn\nends (focus-subscribed recap; skipped while a draft, background work or a loop wakeup is pending), so its presence\ninside a question/done wait is a lower-bound 'terminal not looked at' signal (CLI sessions only).",
+ "cutoff": "2026-10-01T20:00:00Z",
+ "dump": "mineA.js --dump (cutoff 2026-10-01T20:00:00Z); identical output from the mineB.py dump",
+ "tta_abc": {
+  "all_time": {
+   "waits_censored": 380,
+   "waits_dropped_gt_2h": 57,
+   "wait_hours_censored": 62.0,
+   "G10min": {
+    "away_pct_of_wait_time": 52.6,
+    "present_pct_of_wait_time": 47.4,
+    "present_busy_elsewhere_pct": 32.2,
+    "present_last_stretch_pct": 15.3,
+    "waits_with_an_away_stretch_pct": 15.5
+   },
+   "G20min": {
+    "away_pct_of_wait_time": 39.6,
+    "present_pct_of_wait_time": 60.4,
+    "present_busy_elsewhere_pct": 38.5,
+    "present_last_stretch_pct": 21.9,
+    "waits_with_an_away_stretch_pct": 7.6
+   },
+   "G30min": {
+    "away_pct_of_wait_time": 33.2,
+    "present_pct_of_wait_time": 66.8,
+    "present_busy_elsewhere_pct": 40.5,
+    "present_last_stretch_pct": 26.4,
+    "waits_with_an_away_stretch_pct": 5.3
+   },
+   "waits_with_input_to_another_session_during_wait_pct": 31.8,
+   "answered_within_10s_pct": 7.6,
+   "answered_within_30s_pct": 20.8,
+   "answered_within_60s_pct": 33.7,
+   "answered_within_300s_pct": 68.2
+  },
+  "last_30d": {
+   "waits_censored": 232,
+   "waits_dropped_gt_2h": 26,
+   "wait_hours_censored": 43.57,
+   "G10min": {
+    "away_pct_of_wait_time": 48.5,
+    "present_pct_of_wait_time": 51.5,
+    "present_busy_elsewhere_pct": 38.0,
+    "present_last_stretch_pct": 13.5,
+    "waits_with_an_away_stretch_pct": 16.8
+   },
+   "G20min": {
+    "away_pct_of_wait_time": 34.7,
+    "present_pct_of_wait_time": 65.3,
+    "present_busy_elsewhere_pct": 46.0,
+    "present_last_stretch_pct": 19.4,
+    "waits_with_an_away_stretch_pct": 7.8
+   },
+   "G30min": {
+    "away_pct_of_wait_time": 30.1,
+    "present_pct_of_wait_time": 69.9,
+    "present_busy_elsewhere_pct": 47.9,
+    "present_last_stretch_pct": 22.0,
+    "waits_with_an_away_stretch_pct": 5.6
+   },
+   "waits_with_input_to_another_session_during_wait_pct": 37.1,
+   "answered_within_10s_pct": 6.9,
+   "answered_within_30s_pct": 19.4,
+   "answered_within_60s_pct": 30.2,
+   "answered_within_300s_pct": 64.7
+  }
+ },
+ "question": {
+  "all_time": {
+   "waits_censored": 276,
+   "waits_dropped_gt_2h": 38,
+   "wait_hours_censored": 41.37,
+   "G10min": {
+    "away_pct_of_wait_time": 48.8,
+    "present_pct_of_wait_time": 51.2,
+    "present_busy_elsewhere_pct": 34.4,
+    "present_last_stretch_pct": 16.7,
+    "waits_with_an_away_stretch_pct": 13.4
+   },
+   "G20min": {
+    "away_pct_of_wait_time": 36.1,
+    "present_pct_of_wait_time": 63.9,
+    "present_busy_elsewhere_pct": 41.8,
+    "present_last_stretch_pct": 22.1,
+    "waits_with_an_away_stretch_pct": 6.5
+   },
+   "G30min": {
+    "away_pct_of_wait_time": 30.4,
+    "present_pct_of_wait_time": 69.6,
+    "present_busy_elsewhere_pct": 44.7,
+    "present_last_stretch_pct": 24.9,
+    "waits_with_an_away_stretch_pct": 4.7
+   },
+   "waits_with_input_to_another_session_during_wait_pct": 32.6,
+   "answered_within_10s_pct": 6.2,
+   "answered_within_30s_pct": 19.9,
+   "answered_within_60s_pct": 34.4,
+   "answered_within_300s_pct": 70.3
+  },
+  "last_30d": {
+   "waits_censored": 169,
+   "waits_dropped_gt_2h": 15,
+   "wait_hours_censored": 29.24,
+   "G10min": {
+    "away_pct_of_wait_time": 44.9,
+    "present_pct_of_wait_time": 55.1,
+    "present_busy_elsewhere_pct": 41.0,
+    "present_last_stretch_pct": 14.1,
+    "waits_with_an_away_stretch_pct": 15.4
+   },
+   "G20min": {
+    "away_pct_of_wait_time": 30.6,
+    "present_pct_of_wait_time": 69.4,
+    "present_busy_elsewhere_pct": 50.8,
+    "present_last_stretch_pct": 18.6,
+    "waits_with_an_away_stretch_pct": 7.1
+   },
+   "G30min": {
+    "away_pct_of_wait_time": 26.5,
+    "present_pct_of_wait_time": 73.5,
+    "present_busy_elsewhere_pct": 53.6,
+    "present_last_stretch_pct": 19.9,
+    "waits_with_an_away_stretch_pct": 5.3
+   },
+   "waits_with_input_to_another_session_during_wait_pct": 39.1,
+   "answered_within_10s_pct": 5.9,
+   "answered_within_30s_pct": 18.3,
+   "answered_within_60s_pct": 31.4,
+   "answered_within_300s_pct": 66.9
+  }
+ },
+ "ask": {
+  "all_time": {
+   "waits_censored": 64,
+   "waits_dropped_gt_2h": 14,
+   "wait_hours_censored": 14.02,
+   "G10min": {
+    "away_pct_of_wait_time": 59.9,
+    "present_pct_of_wait_time": 40.1,
+    "present_busy_elsewhere_pct": 29.6,
+    "present_last_stretch_pct": 10.5,
+    "waits_with_an_away_stretch_pct": 25.0
+   },
+   "G20min": {
+    "away_pct_of_wait_time": 43.2,
+    "present_pct_of_wait_time": 56.8,
+    "present_busy_elsewhere_pct": 34.7,
+    "present_last_stretch_pct": 22.1,
+    "waits_with_an_away_stretch_pct": 9.4
+   },
+   "G30min": {
+    "away_pct_of_wait_time": 36.8,
+    "present_pct_of_wait_time": 63.2,
+    "present_busy_elsewhere_pct": 34.7,
+    "present_last_stretch_pct": 28.5,
+    "waits_with_an_away_stretch_pct": 6.2
+   },
+   "waits_with_input_to_another_session_during_wait_pct": 31.2,
+   "answered_within_10s_pct": 6.2,
+   "answered_within_30s_pct": 18.8,
+   "answered_within_60s_pct": 28.1,
+   "answered_within_300s_pct": 59.4
+  },
+  "last_30d": {
+   "waits_censored": 38,
+   "waits_dropped_gt_2h": 9,
+   "wait_hours_censored": 9.08,
+   "G10min": {
+    "away_pct_of_wait_time": 54.1,
+    "present_pct_of_wait_time": 45.9,
+    "present_busy_elsewhere_pct": 35.8,
+    "present_last_stretch_pct": 10.1,
+    "waits_with_an_away_stretch_pct": 23.7
+   },
+   "G20min": {
+    "away_pct_of_wait_time": 38.9,
+    "present_pct_of_wait_time": 61.1,
+    "present_busy_elsewhere_pct": 40.5,
+    "present_last_stretch_pct": 20.5,
+    "waits_with_an_away_stretch_pct": 7.9
+   },
+   "G30min": {
+    "away_pct_of_wait_time": 34.3,
+    "present_pct_of_wait_time": 65.7,
+    "present_busy_elsewhere_pct": 40.5,
+    "present_last_stretch_pct": 25.1,
+    "waits_with_an_away_stretch_pct": 5.3
+   },
+   "waits_with_input_to_another_session_during_wait_pct": 31.6,
+   "answered_within_10s_pct": 5.3,
+   "answered_within_30s_pct": 18.4,
+   "answered_within_60s_pct": 26.3,
+   "answered_within_300s_pct": 57.9
+  }
+ },
+ "approval": {
+  "all_time": {
+   "waits_censored": 40,
+   "waits_dropped_gt_2h": 5,
+   "wait_hours_censored": 6.61,
+   "G10min": {
+    "away_pct_of_wait_time": 60.5,
+    "present_pct_of_wait_time": 39.5,
+    "present_busy_elsewhere_pct": 23.3,
+    "present_last_stretch_pct": 16.1,
+    "waits_with_an_away_stretch_pct": 15.0
+   },
+   "G20min": {
+    "away_pct_of_wait_time": 53.8,
+    "present_pct_of_wait_time": 46.2,
+    "present_busy_elsewhere_pct": 26.0,
+    "present_last_stretch_pct": 20.2,
+    "waits_with_an_away_stretch_pct": 12.5
+   },
+   "G30min": {
+    "away_pct_of_wait_time": 42.8,
+    "present_pct_of_wait_time": 57.2,
+    "present_busy_elsewhere_pct": 26.0,
+    "present_last_stretch_pct": 31.1,
+    "waits_with_an_away_stretch_pct": 7.5
+   },
+   "waits_with_input_to_another_session_during_wait_pct": 27.5,
+   "answered_within_10s_pct": 20.0,
+   "answered_within_30s_pct": 30.0,
+   "answered_within_60s_pct": 37.5,
+   "answered_within_300s_pct": 67.5
+  },
+  "last_30d": {
+   "waits_censored": 25,
+   "waits_dropped_gt_2h": 2,
+   "wait_hours_censored": 5.25,
+   "G10min": {
+    "away_pct_of_wait_time": 58.6,
+    "present_pct_of_wait_time": 41.4,
+    "present_busy_elsewhere_pct": 25.2,
+    "present_last_stretch_pct": 16.2,
+    "waits_with_an_away_stretch_pct": 16.0
+   },
+   "G20min": {
+    "away_pct_of_wait_time": 50.1,
+    "present_pct_of_wait_time": 49.9,
+    "present_busy_elsewhere_pct": 28.6,
+    "present_last_stretch_pct": 21.4,
+    "waits_with_an_away_stretch_pct": 12.0
+   },
+   "G30min": {
+    "away_pct_of_wait_time": 43.0,
+    "present_pct_of_wait_time": 57.0,
+    "present_busy_elsewhere_pct": 28.6,
+    "present_last_stretch_pct": 28.4,
+    "waits_with_an_away_stretch_pct": 8.0
+   },
+   "waits_with_input_to_another_session_during_wait_pct": 32.0,
+   "answered_within_10s_pct": 16.0,
+   "answered_within_30s_pct": 28.0,
+   "answered_within_60s_pct": 28.0,
+   "answered_within_300s_pct": 60.0
+  }
+ },
+ "done_idle_not_tta": {
+  "all_time": {
+   "waits_censored": 1735,
+   "waits_dropped_gt_2h": 306,
+   "wait_hours_censored": 243.38,
+   "G10min": {
+    "away_pct_of_wait_time": 56.7,
+    "present_pct_of_wait_time": 43.3,
+    "present_busy_elsewhere_pct": 25.9,
+    "present_last_stretch_pct": 17.4,
+    "waits_with_an_away_stretch_pct": 13.0
+   },
+   "G20min": {
+    "away_pct_of_wait_time": 43.1,
+    "present_pct_of_wait_time": 56.9,
+    "present_busy_elsewhere_pct": 33.5,
+    "present_last_stretch_pct": 23.4,
+    "waits_with_an_away_stretch_pct": 7.0
+   },
+   "G30min": {
+    "away_pct_of_wait_time": 37.8,
+    "present_pct_of_wait_time": 62.2,
+    "present_busy_elsewhere_pct": 35.8,
+    "present_last_stretch_pct": 26.5,
+    "waits_with_an_away_stretch_pct": 5.2
+   },
+   "waits_with_input_to_another_session_during_wait_pct": 28.3,
+   "answered_within_10s_pct": 8.6,
+   "answered_within_30s_pct": 23.3,
+   "answered_within_60s_pct": 37.0,
+   "answered_within_300s_pct": 71.1
+  },
+  "last_30d": {
+   "waits_censored": 1150,
+   "waits_dropped_gt_2h": 167,
+   "wait_hours_censored": 163.02,
+   "G10min": {
+    "away_pct_of_wait_time": 50.2,
+    "present_pct_of_wait_time": 49.8,
+    "present_busy_elsewhere_pct": 32.1,
+    "present_last_stretch_pct": 17.7,
+    "waits_with_an_away_stretch_pct": 12.3
+   },
+   "G20min": {
+    "away_pct_of_wait_time": 35.6,
+    "present_pct_of_wait_time": 64.4,
+    "present_busy_elsewhere_pct": 41.3,
+    "present_last_stretch_pct": 23.1,
+    "waits_with_an_away_stretch_pct": 5.9
+   },
+   "G30min": {
+    "away_pct_of_wait_time": 31.4,
+    "present_pct_of_wait_time": 68.6,
+    "present_busy_elsewhere_pct": 44.5,
+    "present_last_stretch_pct": 24.1,
+    "waits_with_an_away_stretch_pct": 4.5
+   },
+   "waits_with_input_to_another_session_during_wait_pct": 31.8,
+   "answered_within_10s_pct": 8.1,
+   "answered_within_30s_pct": 23.6,
+   "answered_within_60s_pct": 37.6,
+   "answered_within_300s_pct": 70.3
+  }
+ },
+ "away_summary_corroboration": {
+  "away_summary_records": 348,
+  "feature_first_seen_utc": "2026-08-15T12:38:00.394000Z",
+  "cli": {
+   "question_or_done_waits_190s_to_2h_after_onset": 388,
+   "with_away_summary_pct": 44.6,
+   "with_input_elsewhere": 274,
+   "of_those_with_away_summary_pct": 45.3
+  },
+  "claude-desktop": {
+   "question_or_done_waits_190s_to_2h_after_onset": 221,
+   "with_away_summary_pct": 0.0,
+   "with_input_elsewhere": 94,
+   "of_those_with_away_summary_pct": 0.0
+  }
+ },
+ "sdk_cli_sessions": {
+  "sessions": 14,
+  "waits": 0,
+  "live_hours": 0.31
+ },
+ "crosscheck_mineB_dump_identical": true
+}

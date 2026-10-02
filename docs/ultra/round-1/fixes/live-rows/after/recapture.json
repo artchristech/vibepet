@@ -1,0 +1,1108 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-live-rows",
+  "git": "8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane",
+  "at": "2026-10-02T09:09:30.124Z",
+  "uptimeStart": "load 4.51 22.54 64.93",
+  "fleet": [
+    {
+      "name": "kestrel",
+      "state": "approval",
+      "inState": true,
+      "paused": false,
+      "registry": {
+        "status": "waiting",
+        "waitingFor": "permission prompt",
+        "statusUpdatedAt": 1790910742347
+      }
+    },
+    {
+      "name": "vibepet",
+      "state": "done",
+      "inState": true,
+      "paused": false,
+      "registry": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910787682
+      }
+    },
+    {
+      "name": "atlas",
+      "state": "working",
+      "inState": false,
+      "paused": true,
+      "registry": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910180805
+      }
+    },
+    {
+      "name": "beacon",
+      "state": "question",
+      "inState": true,
+      "paused": false,
+      "registry": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790907222729
+      }
+    },
+    {
+      "name": "delta",
+      "state": "fanout",
+      "inState": false,
+      "paused": true,
+      "registry": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790906449089
+      }
+    },
+    {
+      "name": "ember",
+      "state": "loop",
+      "inState": false,
+      "paused": true,
+      "registry": null
+    }
+  ],
+  "spend": {
+    "transcriptsUsd": 2.223186,
+    "estimateWithHiddenUsd": 3.3093,
+    "stop": 3.32,
+    "cap": 5
+  },
+  "launch": {
+    "ms": 997,
+    "readyMs": 758,
+    "uptime": "load 4.51 22.54 64.93"
+  },
+  "build": {
+    "live": true,
+    "acts": true
+  },
+  "watch": {
+    "uptime": [
+      "load 4.39 22.21 64.56",
+      "load 3.64 20.33 62.41"
+    ],
+    "secs": 30.013,
+    "paths": [
+      "~/.vibepet-ultra/root/.claude/sessions",
+      "~/.claude/sessions/29074.json",
+      "~/.claude/sessions/48221.json",
+      "~/.claude/sessions/48392.json",
+      "~/.claude/sessions/48539.json",
+      "~/.claude/sessions/55946.json",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-beacon/a9377f08-ad27-4bd5-bb77-dbd576eab89e.jsonl",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-kestrel/13a1427d-6cb0-4561-b5a3-22453a34bf93.jsonl",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-delta/eb59a756-0b6f-4a82-8d55-1f0bc2c40358.jsonl",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-delta/eb59a756-0b6f-4a82-8d55-1f0bc2c40358/subagents",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-atlas/5c051e84-b74f-41b6-845f-bde937a9ef90.jsonl",
+      "~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-vibepet/6101876b-19c6-42a1-824f-6f1c7d4fd83e.jsonl"
+    ],
+    "watching": 12,
+    "idle": {
+      "rendererSnapshots": 10,
+      "rendererPerSec": 0.33,
+      "mainTicks": 10,
+      "mainTicksPerSec": 0.33,
+      "liveTicks": 0,
+      "watcherEvents": 0
+    }
+  },
+  "pipe": {
+    "uptime": [
+      "load 3.64 20.33 62.41",
+      "load 4.37 19.42 61.11"
+    ],
+    "pokeToTickDoneMs": [
+      166,
+      165,
+      163,
+      162,
+      165,
+      178,
+      169,
+      166,
+      175,
+      170,
+      170,
+      172,
+      224,
+      166,
+      167,
+      180,
+      167,
+      163,
+      165,
+      164
+    ],
+    "medianMs": 166.5,
+    "liveTickMs": [
+      15,
+      15,
+      12,
+      11,
+      14,
+      28,
+      18,
+      15,
+      25,
+      17,
+      18,
+      22,
+      19,
+      16,
+      16,
+      28,
+      16,
+      13,
+      14,
+      14
+    ],
+    "liveTickMedianMs": 16,
+    "renderHomeMs": [
+      0.3,
+      0.5,
+      0.3,
+      0.4,
+      0.6,
+      0.4,
+      0.4,
+      0.8,
+      0.3,
+      0.3
+    ],
+    "renderHomeMedianMs": 0.4
+  },
+  "verdict": {
+    "uptime": [
+      "load 5.46 19.39 60.85",
+      "load 4.92 18.82 60.17"
+    ],
+    "cases": [
+      {
+        "name": "vibepet",
+        "action": "approve",
+        "result": {
+          "ok": false,
+          "why": "Didn't land - vibepet isn't waiting on an approval (it's idle)"
+        },
+        "ipcMs": 102,
+        "rowNote": "Didn't land - vibepet isn't waiting on an approval (it's idle)",
+        "rowNoteMs": 102,
+        "shot": "verdict-vibepet-approve.png",
+        "uptime": "load 5.46 19.39 60.85"
+      },
+      {
+        "name": "vibepet",
+        "action": "interrupt",
+        "result": {
+          "ok": false,
+          "why": "Didn't land - vibepet isn't running (it's idle)"
+        },
+        "ipcMs": 93,
+        "rowNote": "Didn't land - vibepet isn't running (it's idle)",
+        "rowNoteMs": 93,
+        "shot": "verdict-vibepet-interrupt.png",
+        "uptime": "load 5.46 19.39 60.85"
+      },
+      {
+        "name": "atlas",
+        "action": "approve",
+        "result": {
+          "ok": false,
+          "why": "Didn't land - atlas isn't waiting on an approval (it's idle)"
+        },
+        "ipcMs": 101,
+        "rowNote": "Didn't land - atlas isn't waiting on an approval (it's idle)",
+        "rowNoteMs": 101,
+        "shot": "verdict-atlas-approve.png",
+        "uptime": "load 5.46 19.39 60.85"
+      },
+      {
+        "name": "beacon",
+        "action": "deny",
+        "result": {
+          "ok": false,
+          "why": "Didn't land - beacon isn't waiting on an approval (it's asking a question)"
+        },
+        "ipcMs": 113,
+        "rowNote": "Didn't land - beacon isn't waiting on an approval (it's asking a question)",
+        "rowNoteMs": 113,
+        "shot": "verdict-beacon-deny.png",
+        "uptime": "load 5.46 19.39 60.85"
+      },
+      {
+        "name": "beacon",
+        "action": "option",
+        "key": "9",
+        "result": {
+          "ok": false,
+          "why": "beacon's question has no option 9"
+        },
+        "ipcMs": 117,
+        "rowNote": "beacon's question has no option 9",
+        "rowNoteMs": 117,
+        "shot": "verdict-beacon-option-9.png",
+        "uptime": "load 5.46 19.39 60.85"
+      },
+      {
+        "name": "kestrel",
+        "action": "option",
+        "key": "2",
+        "result": {
+          "ok": false,
+          "why": "Didn't land - kestrel isn't asking a question (it's waiting on an approval)"
+        },
+        "ipcMs": 113,
+        "rowNote": "Didn't land - kestrel isn't asking a question (it's waiting on an approval)",
+        "rowNoteMs": 113,
+        "shot": "verdict-kestrel-option-2.png",
+        "uptime": "load 5.27 19.12 60.51"
+      },
+      {
+        "name": "kestrel",
+        "action": "text",
+        "text": "hello from the recapture",
+        "result": {
+          "ok": false,
+          "why": "kestrel is showing an approval prompt, not its input box"
+        },
+        "ipcMs": 130,
+        "rowNote": "kestrel is showing an approval prompt, not its input box",
+        "rowNoteMs": 130,
+        "shot": "verdict-kestrel-text.png",
+        "uptime": "load 5.27 19.12 60.51"
+      },
+      {
+        "name": "kestrel",
+        "action": "interrupt",
+        "result": {
+          "ok": false,
+          "why": "Didn't land - kestrel isn't running (it's waiting on an approval)"
+        },
+        "ipcMs": 107,
+        "rowNote": "Didn't land - kestrel isn't running (it's waiting on an approval)",
+        "rowNoteMs": 107,
+        "shot": "verdict-kestrel-interrupt.png",
+        "uptime": "load 5.27 19.12 60.51"
+      }
+    ],
+    "ticks": {
+      "n": 5,
+      "live": 2,
+      "secs": 7.9,
+      "perSec": 0.63
+    },
+    "fleetBefore": {
+      "kestrel": {
+        "status": "waiting",
+        "waitingFor": "permission prompt",
+        "statusUpdatedAt": 1790910742347,
+        "pane": "29a87e353655",
+        "dialog": true,
+        "select": false
+      },
+      "vibepet": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910787682,
+        "pane": "40e7070aac86",
+        "dialog": false,
+        "select": false
+      },
+      "atlas": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910180805,
+        "pane": "13117da7a5ce",
+        "dialog": false,
+        "select": false
+      },
+      "beacon": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790907222729,
+        "pane": "b1e459769523",
+        "dialog": false,
+        "select": true
+      },
+      "delta": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790906449089,
+        "pane": "71a346500cf2",
+        "dialog": false,
+        "select": false
+      }
+    },
+    "fleetAfter": {
+      "kestrel": {
+        "status": "waiting",
+        "waitingFor": "permission prompt",
+        "statusUpdatedAt": 1790910742347,
+        "pane": "29a87e353655",
+        "dialog": true,
+        "select": false
+      },
+      "vibepet": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910787682,
+        "pane": "40e7070aac86",
+        "dialog": false,
+        "select": false
+      },
+      "atlas": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790910180805,
+        "pane": "13117da7a5ce",
+        "dialog": false,
+        "select": false
+      },
+      "beacon": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790907222729,
+        "pane": "b1e459769523",
+        "dialog": false,
+        "select": true
+      },
+      "delta": {
+        "status": "idle",
+        "waitingFor": null,
+        "statusUpdatedAt": 1790906449089,
+        "pane": "71a346500cf2",
+        "dialog": false,
+        "select": false
+      }
+    },
+    "fleetUnchanged": true,
+    "acts": [
+      {
+        "at": 1790932227553,
+        "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "name": "vibepet",
+        "action": "approve",
+        "ok": false,
+        "verdict": "refused",
+        "text": "Didn't land - vibepet isn't waiting on an approval (it's idle)",
+        "ms": 99
+      },
+      {
+        "at": 1790932228591,
+        "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "name": "vibepet",
+        "action": "interrupt",
+        "ok": false,
+        "verdict": "refused",
+        "text": "Didn't land - vibepet isn't running (it's idle)",
+        "ms": 91
+      },
+      {
+        "at": 1790932229561,
+        "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "name": "atlas",
+        "action": "approve",
+        "ok": false,
+        "verdict": "refused",
+        "text": "Didn't land - atlas isn't waiting on an approval (it's idle)",
+        "ms": 100
+      },
+      {
+        "at": 1790932230545,
+        "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "name": "beacon",
+        "action": "deny",
+        "ok": false,
+        "verdict": "refused",
+        "text": "Didn't land - beacon isn't waiting on an approval (it's asking a question)",
+        "ms": 112
+      },
+      {
+        "at": 1790932231549,
+        "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "name": "beacon",
+        "action": "option",
+        "ok": false,
+        "verdict": "refused",
+        "text": "beacon's question has no option 9",
+        "ms": 116
+      },
+      {
+        "at": 1790932232524,
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "name": "kestrel",
+        "action": "option",
+        "ok": false,
+        "verdict": "refused",
+        "text": "Didn't land - kestrel isn't asking a question (it's waiting on an approval)",
+        "ms": 112
+      },
+      {
+        "at": 1790932233506,
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "name": "kestrel",
+        "action": "text",
+        "ok": false,
+        "verdict": "refused",
+        "text": "kestrel is showing an approval prompt, not its input box",
+        "ms": 130
+      },
+      {
+        "at": 1790932234498,
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "name": "kestrel",
+        "action": "interrupt",
+        "ok": false,
+        "verdict": "refused",
+        "text": "Didn't land - kestrel isn't running (it's waiting on an approval)",
+        "ms": 106
+      }
+    ],
+    "ipc": [
+      {
+        "args": [
+          {
+            "action": "approve",
+            "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "Didn't land - vibepet isn't waiting on an approval (it's idle)"
+        },
+        "ms": 100,
+        "member": "vibepet"
+      },
+      {
+        "args": [
+          {
+            "action": "interrupt",
+            "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "Didn't land - vibepet isn't running (it's idle)"
+        },
+        "ms": 91,
+        "member": "vibepet"
+      },
+      {
+        "args": [
+          {
+            "action": "approve",
+            "id": "5c051e84-b74f-41b6-845f-bde937a9ef90"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "Didn't land - atlas isn't waiting on an approval (it's idle)"
+        },
+        "ms": 100,
+        "member": "atlas"
+      },
+      {
+        "args": [
+          {
+            "action": "deny",
+            "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "Didn't land - beacon isn't waiting on an approval (it's asking a question)"
+        },
+        "ms": 112,
+        "member": "beacon"
+      },
+      {
+        "args": [
+          {
+            "action": "option",
+            "key": "9",
+            "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "beacon's question has no option 9"
+        },
+        "ms": 116,
+        "member": "beacon"
+      },
+      {
+        "args": [
+          {
+            "action": "option",
+            "key": "2",
+            "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "Didn't land - kestrel isn't asking a question (it's waiting on an approval)"
+        },
+        "ms": 113,
+        "member": "kestrel"
+      },
+      {
+        "args": [
+          {
+            "action": "text",
+            "text": "hello from the recapture",
+            "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "kestrel is showing an approval prompt, not its input box"
+        },
+        "ms": 130,
+        "member": "kestrel"
+      },
+      {
+        "args": [
+          {
+            "action": "interrupt",
+            "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+          }
+        ],
+        "result": {
+          "ok": false,
+          "why": "Didn't land - kestrel isn't running (it's waiting on an approval)"
+        },
+        "ms": 107,
+        "member": "kestrel"
+      }
+    ],
+    "rendererResults": [
+      {
+        "t": 1790932227653,
+        "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "text": "Didn't land - vibepet isn't waiting on an approval (it's idle)",
+        "kind": "err",
+        "phase": "verdict"
+      },
+      {
+        "t": 1790932228683,
+        "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "text": "Didn't land - vibepet isn't running (it's idle)",
+        "kind": "err",
+        "phase": "verdict"
+      },
+      {
+        "t": 1790932229662,
+        "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "text": "Didn't land - atlas isn't waiting on an approval (it's idle)",
+        "kind": "err",
+        "phase": "verdict"
+      },
+      {
+        "t": 1790932230657,
+        "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "text": "Didn't land - beacon isn't waiting on an approval (it's asking a question)",
+        "kind": "err",
+        "phase": "verdict"
+      },
+      {
+        "t": 1790932231640,
+        "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "text": "Answering…",
+        "kind": "",
+        "phase": "pending"
+      },
+      {
+        "t": 1790932231654,
+        "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "text": "beacon's question has no option 9",
+        "kind": "err",
+        "phase": "verdict"
+      },
+      {
+        "t": 1790932232637,
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "text": "Didn't land - kestrel isn't asking a question (it's waiting on an approval)",
+        "kind": "err",
+        "phase": "verdict"
+      },
+      {
+        "t": 1790932233610,
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "text": "Sending…",
+        "kind": "",
+        "phase": "pending"
+      },
+      {
+        "t": 1790932233624,
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "text": "kestrel is showing an approval prompt, not its input box",
+        "kind": "err",
+        "phase": "verdict"
+      },
+      {
+        "t": 1790932234604,
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "text": "Didn't land - kestrel isn't running (it's waiting on an approval)",
+        "kind": "err",
+        "phase": "verdict"
+      }
+    ],
+    "summary": {
+      "calls": 8,
+      "logged": 8,
+      "unverifiedSuccesses": 0,
+      "okResults": 0,
+      "rowNoteMedianMs": 110,
+      "rowNotesShown": 8,
+      "ipcMedianMs": 110,
+      "fleetUnchanged": true
+    }
+  },
+  "hold": {
+    "uptime": [
+      "load 4.92 18.82 60.17",
+      "load 4.77 18.56 59.83"
+    ],
+    "synthetic": "renderer only: a copy of the real snapshot with kestrel set to running, sent through the test hook while main's own tick sends were paused",
+    "slotBefore": 1,
+    "heldFor": 5575,
+    "movedAfterVerdictMs": 5833,
+    "samples": [
+      {
+        "t": 9,
+        "label": "before",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "Didn't land - kestrel isn't running (it's waiting on an approval)"
+      },
+      {
+        "t": 14,
+        "label": "pending",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "Approving…"
+      },
+      {
+        "t": 20,
+        "label": "snapshot: kestrel running",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "Approving…"
+      },
+      {
+        "t": 23,
+        "label": "verdict",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "Approved · kestrel running"
+      },
+      {
+        "t": 545,
+        "label": "+0.52 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "Approved · kestrel running"
+      },
+      {
+        "t": 797,
+        "label": "+0.78 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "Approved · kestrel running"
+      },
+      {
+        "t": 1054,
+        "label": "+1.03 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "Approved · kestrel running"
+      },
+      {
+        "t": 1308,
+        "label": "+1.28 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "Approved · kestrel running"
+      },
+      {
+        "t": 1577,
+        "label": "+1.55 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "Approved · kestrel running"
+      },
+      {
+        "t": 2742,
+        "label": "+2.72 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 2996,
+        "label": "+2.97 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 3249,
+        "label": "+3.23 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 3810,
+        "label": "+3.79 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 4064,
+        "label": "+4.04 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 4317,
+        "label": "+4.29 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 4571,
+        "label": "+4.55 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 4834,
+        "label": "+4.81 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 5086,
+        "label": "+5.06 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 5342,
+        "label": "+5.32 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 5596,
+        "label": "+5.57 s",
+        "order": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "kestrel": 1,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 5854,
+        "label": "+5.83 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 6110,
+        "label": "+6.08 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 6365,
+        "label": "+6.34 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 6622,
+        "label": "+6.60 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 6881,
+        "label": "+6.86 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 7135,
+        "label": "+7.11 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 7390,
+        "label": "+7.37 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 7647,
+        "label": "+7.62 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 7908,
+        "label": "+7.88 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 8161,
+        "label": "+8.14 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 8416,
+        "label": "+8.39 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      },
+      {
+        "t": 8678,
+        "label": "+8.65 s",
+        "order": [
+          "beacon",
+          "delta",
+          "atlas",
+          "vibepet",
+          "kestrel"
+        ],
+        "kestrel": 4,
+        "note": "./deploy.sh --dry-run ran · exit 0 · 3 lines"
+      }
+    ],
+    "restored": [
+      "beacon:needs",
+      "kestrel:needs",
+      "delta:ready",
+      "atlas:ready",
+      "vibepet:ready"
+    ]
+  },
+  "close": {
+    "how": "quit",
+    "ms": 266,
+    "orphans": 0
+  },
+  "uptimeEnd": "load 5.03 18.38 59.53"
+}

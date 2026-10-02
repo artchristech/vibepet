@@ -1,0 +1,167 @@
+{
+  "fix": "loop-rows (r1-S1-04, r1-S1-07)",
+  "branch": "ultra/r1/loop-rows",
+  "commits": [
+    "21e6526",
+    "06b74f4"
+  ],
+  "recaptureMode": "fault-injected live fleet: ember resumed (fleet.js up ember --no-prompt, VP_MEMBERS=tools/members-fault.json) with ANTHROPIC_BASE_URL -> a local server answering 400 to every request (tools/fault-api.js; logs method+path only) and HTTPS_PROXY -> a closed port. The scheduler, registry, lock and transcript are real Claude Code 2.1.287; each fire's model call ends in an API error record instead of Bash + end_turn. $0.",
+  "whyNotRealFires": "spend gate: fleet.js spend estimate $3.3093 + $0.04 = $3.3493 > stop $3.32",
+  "spend": {
+    "before": {
+      "transcripts": 2.2232,
+      "estimate": 3.3093
+    },
+    "after": {
+      "transcripts": 2.2232,
+      "estimate": 3.3093
+    },
+    "faultApiRequests": [
+      18,
+      9
+    ]
+  },
+  "lease": "ember leased by r1-loop-rows 08:33:58Z-08:45Z and 08:54:19Z-08:55Z; released; ember paused again (as before)",
+  "sleep": "no Sleep/Wake in pmset log since 2026-10-01 22:36 local; AC power, sleep prevented by caffeinate",
+  "watch": {
+    "dir": "watch/",
+    "from": "2026-10-02T08:34:12.759Z",
+    "to": "2026-10-02T08:47:30.339Z",
+    "samples": 392,
+    "every": "2 s (app tick 3 s)",
+    "uptime": [
+      "2:34 load 25.82 27.88 96.18",
+      "2:47 load 101.55 73.19 76.80"
+    ]
+  },
+  "fires": [
+    {
+      "fire": "2026-10-02T08:34:36.276Z",
+      "idleFlip": "2026-10-02T08:34:43.914Z",
+      "durMs": 7638,
+      "busySeenByWatch": false,
+      "resetShownAt": "2026-10-02T08:34:45.097Z",
+      "resetAfterIdleMs": 1183,
+      "resetLabel": "ember \u00b7 looping \u00b7 every 5m \u00b7 fired 7s ago \u00b7 next \u22484m 36s",
+      "errorS": null,
+      "snapshotErrorS": null
+    },
+    {
+      "fire": "2026-10-02T08:39:21.990Z",
+      "idleFlip": "2026-10-02T08:39:22.148Z",
+      "durMs": 158,
+      "busySeenByWatch": false,
+      "resetShownAt": "2026-10-02T08:39:25.293Z",
+      "resetAfterIdleMs": 3145,
+      "resetLabel": "ember \u00b7 looping \u00b7 every 5m \u00b7 fired 2s ago \u00b7 next \u22484m 43s",
+      "errorS": -0.7,
+      "snapshotErrorS": -0.7
+    },
+    {
+      "fire": "2026-10-02T08:44:08.189Z",
+      "idleFlip": "2026-10-02T08:44:13.535Z",
+      "durMs": 5346,
+      "busySeenByWatch": true,
+      "resetShownAt": "2026-10-02T08:44:16.874Z",
+      "resetAfterIdleMs": 3339,
+      "resetLabel": "ember \u00b7 looping \u00b7 every 5m \u00b7 fired 4s ago \u00b7 next \u22484m 37s",
+      "errorS": 1.6,
+      "snapshotErrorS": -1.2
+    }
+  ],
+  "firesSeen": "3/3 (catch-up 7.6 s, 0.16 s, 5.3 s); the 0.16 s fire fell between two samples and two ticks and still reset 'fired'",
+  "resetAfterIdleMs": {
+    "values": [
+      1183,
+      3145,
+      3339
+    ],
+    "median": 3145,
+    "note": "first 2 s sample after the app's next 3 s tick"
+  },
+  "nextErrorS": {
+    "label": [
+      -0.7,
+      1.6
+    ],
+    "snapshot": [
+      -0.7,
+      -1.2
+    ],
+    "bound": "+-30 s"
+  },
+  "betweenFires": {
+    "idleSamples": 293,
+    "sigs": {
+      "loop": 293
+    },
+    "labels": [
+      "ember \u00b7 looping \u00b7 every Nm \u00b7 fired Ns ago \u00b7 next \u2248Nm Ns",
+      "ember \u00b7 looping \u00b7 every Nm \u00b7 fired Nm ago \u00b7 next \u2248Nm Ns",
+      "ember \u00b7 looping \u00b7 every Nm \u00b7 fired Nm ago \u00b7 next \u2248Ns",
+      "ember \u00b7 looping \u00b7 every Nm \u00b7 fired Nm ago \u00b7 next \u2248now"
+    ],
+    "inPending": 0,
+    "inHeld": 0,
+    "yellow": 0
+  },
+  "emberEvents": {},
+  "banners": 0,
+  "afterPause": {
+    "watchingPet": {
+      "samples": 79,
+      "firstAt": "2026-10-02T08:44:53.905Z",
+      "sigs": [
+        "loop",
+        "exited"
+      ],
+      "labels": [
+        "ember \u00b7 looping \u00b7 every Nm \u00b7 fired Ns ago \u00b7 next \u2248Nm Ns",
+        "ember \u00b7 exited Ns ago",
+        "ember \u00b7 exited Nm ago"
+      ],
+      "everDone": 0
+    },
+    "freshPet": "canon-after-exit: 'ember \u00b7 exited 16s ago' (sig exited) 16 s after the dialog exit"
+  },
+  "pauseFinding": "both pauses went through Claude Code's 'Background work is running -> 1. Exit and stop tasks' dialog: registry waiting/waitingFor 'dialog open' for ~1 s, and NO /exit record is written (tail ends in cost-state). A fresh pet read that tail as done (canon-pre-exit-rule: ember:ready) until agents.js got the 'loop with no live lock -> exited' rule.",
+  "screens": {
+    "01-ember-looping-after-catch-up-fire.png": "fired 7s ago \u00b7 next \u22484m 36s",
+    "02-ember-looping-next-36s.png": "fired 4m ago \u00b7 next \u224836s",
+    "03-ember-looping-after-158ms-fire.png": "fired 23s ago \u00b7 next \u22484m 22s",
+    "04-ember-exited-after-pause.png": "ember \u00b7 exited 0s ago"
+  },
+  "canon": {
+    "canon": "final build, fleet as at canon-merged-w1 (ember paused): 29/29, 26.3 s, load 88.93->63.28; rows + ember:exited (its dialog exit 3 min earlier)",
+    "canon-loop-live": "ember looping: 29/29, 35.9 s, load 22.63->33.69; ember row sig loop, EXPECT.loop met, no problems",
+    "canon-after-exit": "fresh pet 16 s after a dialog exit: 29/29, 31.1 s, load 301->321; ember:exited",
+    "canon-pre-exit-rule": "build before the exited rule, 5 min after a dialog exit: 29/29, 36.4 s, load 343->300; ember:ready (the gap that rule closes)",
+    "durationsS": [
+      35.9,
+      36.4,
+      31.1,
+      26.3
+    ],
+    "medianS": 33.5
+  },
+  "npmTest": {
+    "result": "58/58",
+    "runs": [
+      {
+        "s": 41.9,
+        "load": "24.8-34.9",
+        "note": "1 fail: overrides path guard (fixed)"
+      },
+      {
+        "s": 7.58,
+        "load": "27.6"
+      },
+      {
+        "s": 6.78,
+        "load": "421-443"
+      }
+    ],
+    "medianS": 7.58
+  },
+  "unit": "test/loop.test.js: 7 tests on ember's record structure (placeholders for every text): 0/7 on ultra/round-1, 7/7 on the fix"
+}

@@ -1,0 +1,164 @@
+{
+  "root": "/Users/christopherharris/.vibepet-ultra/root-empty/.claude",
+  "out": "/Users/christopherharris/projects/vibepet/docs/ultra/round-0/harness",
+  "startedAt": "2026-10-01T21:59:39.492Z",
+  "runs": [
+    {
+      "name": "run-1",
+      "frontBefore": "Ghostty",
+      "pid": 98209,
+      "userData": "userdata/run-KBLYlq",
+      "readyMs": 2414,
+      "processes": 4,
+      "recordings": "recordings",
+      "home": {
+        "mode": "now",
+        "at": {
+          "x": 330.5,
+          "y": 732.5
+        },
+        "ms": 742,
+        "stillOpenAfter1s": true
+      },
+      "notes": 0,
+      "frontAfter": "Ghostty",
+      "close": {
+        "how": "quit",
+        "ms": 4073,
+        "procs": 5,
+        "orphans": []
+      }
+    },
+    {
+      "name": "run-2",
+      "frontBefore": "Ghostty",
+      "pid": 98359,
+      "userData": "userdata/run-h3bSzQ",
+      "readyMs": 2345,
+      "processes": 4,
+      "recordings": "recordings",
+      "home": {
+        "mode": "now",
+        "at": {
+          "x": 330.5,
+          "y": 732.5
+        },
+        "ms": 586,
+        "stillOpenAfter1s": true
+      },
+      "notes": 0,
+      "frontAfter": "Ghostty",
+      "close": {
+        "how": "quit",
+        "ms": 4912,
+        "procs": 5,
+        "orphans": []
+      }
+    },
+    {
+      "name": "run-3",
+      "frontBefore": "Ghostty",
+      "pid": 98625,
+      "userData": "userdata/run-xCwcbB",
+      "readyMs": 5895,
+      "processes": 4,
+      "recordings": "recordings",
+      "home": {
+        "mode": "now",
+        "at": {
+          "x": 330.5,
+          "y": 732.5
+        },
+        "ms": 594,
+        "stillOpenAfter1s": true
+      },
+      "notes": 0,
+      "frontAfter": "Ghostty",
+      "close": {
+        "how": "quit",
+        "ms": 1243,
+        "procs": 6,
+        "orphans": []
+      }
+    }
+  ],
+  "firstRun": {
+    "name": "first-run",
+    "frontBefore": "Ghostty",
+    "pid": 98862,
+    "userData": "userdata/run-DZiF0A",
+    "readyMs": 1256,
+    "processes": 4,
+    "recordings": "recordings",
+    "home": {
+      "mode": "setup",
+      "at": {
+        "x": 330.5,
+        "y": 732.5
+      },
+      "ms": 383,
+      "stillOpenAfter1s": true
+    },
+    "notes": 0,
+    "frontAfter": "Ghostty",
+    "close": {
+      "how": "quit",
+      "ms": 755,
+      "procs": 5,
+      "orphans": []
+    }
+  },
+  "parallel": {
+    "frontBefore": "Ghostty",
+    "pids": [
+      98953,
+      98952
+    ],
+    "userData": [
+      "userdata/run-WwjPRh",
+      "userdata/run-xxYY2g"
+    ],
+    "readyMs": [
+      855,
+      1522
+    ],
+    "bothAlive": true,
+    "home": [
+      {
+        "mode": "now",
+        "at": {
+          "x": 330.5,
+          "y": 732.5
+        },
+        "ms": 467
+      },
+      {
+        "mode": "now",
+        "at": {
+          "x": 330.5,
+          "y": 732.5
+        },
+        "ms": 466
+      }
+    ],
+    "frontAfter": "Ghostty",
+    "close": [
+      {
+        "how": "quit",
+        "ms": 984,
+        "procs": 5,
+        "orphans": []
+      },
+      {
+        "how": "quit",
+        "ms": 942,
+        "procs": 4,
+        "orphans": []
+      }
+    ]
+  },
+  "failures": [],
+  "harnessProcsBefore": 0,
+  "leftoversAfter": [],
+  "ms": 61838
+}

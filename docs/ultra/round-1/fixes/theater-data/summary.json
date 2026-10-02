@@ -1,0 +1,540 @@
+{
+ "task": "theater-data",
+ "bugs": [
+  "r1-S5-05",
+  "r1-S5-06",
+  "r1-S5-09",
+  "r1-S5-11",
+  "r1-S5-12",
+  "r1-S5-13",
+  "r1-S5-17"
+ ],
+ "branch": "ultra/r1/theater-data",
+ "base": "8e5fe27 (ultra/round-1)",
+ "head": "849156a",
+ "commits": [
+  "849156a theater: an /exit beat's text goes through redaction like every other",
+  "5b4f689 theater: Theater\u2026 lists sessions by their last record, titled as typed or by their ai-title",
+  "b477a74 theater: /loop fires are beats; a resumed session opens 'Resumed', not more of '/exit'",
+  "0247ab2 theater: a live session's replay ends on what it is doing now",
+  "df90491 theater: AskUserQuestion replays as a question, with its choices and the answer",
+  "e2aeb11 theater: subagent branches are numbered in spawn order",
+  "ed54783 theater: a replay keeps only the session's own commits; chapter 0 reads its first prompt"
+ ],
+ "unit": {
+  "npm_test": "51 tests, 0 failed, 11949 ms",
+  "uptime": "4:33  up 6 days, 15:18, 19 users, load averages: 23.09 26.31 30.84",
+  "new_blocks_fail_on_base_pass_on_fix": "after/unit-blocks-old-vs-new.txt (8/8 new blocks fail on 8e5fe27, pass on the fix)"
+ },
+ "acceptance": {
+  "a_vibepet": {
+   "before": {
+    "commits": 19,
+    "chapter1": "Session start"
+   },
+   "after": {
+    "commits": 0,
+    "chapter1": "Read package.json and tell me in one plain sentence what this project is. Answer with a statement, not a ques\u2026",
+    "header": "Read package.json and tell me in one plain sentence what this project is. Answer with a statement, not a ques\u2026vibepet \u00b7 02:24 PM \u00b7 6.8h real \u2192 2:17 replay"
+   },
+   "firstPrompt_truth": "Read package.json and tell me in one plain sentence what this project is. Answer with a statement, not a question, and do not run any commands.",
+   "own_commits_unit_fixture": "test/theater.test.js keeps exactly ['abcdef1' (printed by its git commit), 'c0ffee1' (quiet commit during the turn that wrote .env)], drops a sibling's (inside its turn, other files) and a pull's (its file, between turns)",
+   "shots": [
+    "after/now/vibepet-open.png",
+    "after/now/vibepet-chapter1.png"
+   ]
+  },
+  "b_kestrel": {
+   "before_last": [
+    "prompt",
+    "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first."
+   ],
+   "after_last": [
+    "now",
+    "Waiting for your approval: Bash ./deploy.sh --dry-run"
+   ],
+   "after_since": "2026-10-02T03:12:22.347Z",
+   "registry_since": "2026-10-02T03:12:22.347Z",
+   "stage": "NOW\n09:12 PM \u00b7 +6:52:58\nWaiting for your approval: Bash ./deploy.sh --dry-run\nsince 09:12 PM \u00b7 as of 04:36 AM",
+   "shot": "after/now/kestrel-end.png"
+  },
+  "b_beacon": {
+   "before_last": [
+    "prompt",
+    "Use the AskUserQuestion tool again to ask me which database beacon should use (SQLite, Postgres, or Redis). N\u2026"
+   ],
+   "after_last": [
+    "now",
+    "Asking: Which database should beacon use to store check results? SQLite / Postgres / Redis"
+   ],
+   "options": [
+    "SQLite",
+    "Postgres",
+    "Redis"
+   ],
+   "after_since": "2026-10-02T02:13:42.729Z",
+   "registry_since": "2026-10-02T02:13:42.729Z",
+   "shot": "after/now/beacon-end.png",
+   "running_case": "unit only (atlas is paused; a rearm would cross the $3.32 spend stop): 'Running ./build.sh \u00b7 2m', 'Waiting on 3 subagents \u00b7 30s'"
+  },
+  "c_beacon_questions": {
+   "before": {
+    "question_beats": 0,
+    "look_beats": 14
+   },
+   "after": {
+    "question_beats": 14,
+    "look_beats": 0,
+    "sample": [
+     {
+      "title": "Which database should beacon use to store check results?",
+      "options": [
+       "SQLite",
+       "Postgres",
+       "Redis"
+      ],
+      "answer": "dismissed"
+     }
+    ]
+   },
+   "asks_in_transcript": 14,
+   "shots": [
+    "after/now/beacon-question.png",
+    "after/now/beacon-question-pinned.png"
+   ],
+   "answered_case": "unit only (every fleet question was dismissed): Claude Code answers keyed by question (44/44 answered AskUserQuestion results in this machine's transcripts have that shape, counted without printing text), a multi-select list, or \"q\"=\"a\" pairs"
+  },
+  "c_ember": {
+   "before": {
+    "fire_beats": 0,
+    "exit_chapters_with_ticks": 7,
+    "chapters": [
+     "/loop 5m run ./tick.sh",
+     "/exit",
+     "/exit",
+     "/exit",
+     "/exit",
+     "/exit",
+     "/exit",
+     "/exit",
+     "/exit"
+    ]
+   },
+   "after": {
+    "fire_beats": 27,
+    "resumed_chapters": 9,
+    "exit_chapters_with_ticks": 0,
+    "chapters": [
+     "/loop 5m run ./tick.sh (6 ticks)",
+     "Resumed (3 ticks)",
+     "Resumed (1 ticks)",
+     "Resumed (2 ticks)",
+     "Resumed (4 ticks)",
+     "Resumed (2 ticks)",
+     "Resumed (3 ticks)",
+     "Resumed (2 ticks)",
+     "Resumed (0 ticks)",
+     "Resumed (0 ticks)"
+    ]
+   },
+   "fires_in_db0c1ec0_now": 27,
+   "note": "21 when the critic counted; ember was resumed since (27 now; 8 /exit, 2 closes without /exit)",
+   "shots": [
+    "after/now/ember-fire.png",
+    "after/now/ember-resumed.png"
+   ]
+  },
+  "d_menu": {
+   "before_ember": "<command-message>loop</command-message> <command-n  \u00b7 ember \u00b7 1h",
+   "after_ember": "/loop 5m run ./tick.sh \u00b7 ember \u00b7 2h",
+   "after_ember_24h": [
+    "/loop 5m run ./tick.sh \u00b7 ember \u00b7 2h",
+    "/loop 5m run ./tick.sh \u00b7 ember \u00b7 14h"
+   ],
+   "before_ember_24h": [
+    "<command-message>loop</command-message> <command-n \u00b7 ember \u00b7 1h",
+    "<command-message>loop</command-message> <command-n \u00b7 ember \u00b7 13h"
+   ],
+   "raw_markup_before_after": [
+    1,
+    0
+   ],
+   "order_by_last_record_before_after": [
+    false,
+    true
+   ],
+   "after_at_minus_last_record_ms": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "labels_after": [
+    "/loop 5m run ./tick.sh \u00b7 ember \u00b7 2h",
+    "Read package.json \u00b7 vibepet \u00b7 7h",
+    "Deploy.sh dry run \u00b7 kestrel \u00b7 7h",
+    "Run build.sh \u00b7 atlas \u00b7 8h",
+    "Beacon database choice \u00b7 beacon \u00b7 8h",
+    "Reconcile three shards in parallel \u00b7 delta \u00b7 9h"
+   ],
+   "labels_before": [
+    "Reconcile the three shards in parallel. In ONE mes  \u00b7 delta \u00b7 23m",
+    "Deploy.sh dry run  \u00b7 kestrel \u00b7 40m",
+    "Run exactly `./build.sh` with the Bash tool in the  \u00b7 atlas \u00b7 40m",
+    "Read package.json and tell me in one plain sentenc  \u00b7 vibepet \u00b7 44m",
+    "Beacon database choice  \u00b7 beacon \u00b7 44m",
+    "<command-message>loop</command-message> <command-n  \u00b7 ember \u00b7 1h"
+   ],
+   "ages_after_vs_truth": [
+    [
+     "ember",
+     "2h",
+     100.97
+    ],
+    [
+     "vibepet",
+     "7h",
+     442.25
+    ],
+    [
+     "kestrel",
+     "7h",
+     443.03
+    ],
+    [
+     "atlas",
+     "8h",
+     452.36
+    ],
+    [
+     "beacon",
+     "8h",
+     501.69
+    ],
+    [
+     "delta",
+     "9h",
+     514.56
+    ]
+   ],
+   "ages_before_vs_truth": [
+    [
+     "delta",
+     "23m",
+     500.52
+    ],
+    [
+     "kestrel",
+     "40m",
+     428.99
+    ],
+    [
+     "atlas",
+     "40m",
+     438.32
+    ],
+    [
+     "vibepet",
+     "44m",
+     428.21
+    ],
+    [
+     "beacon",
+     "44m",
+     487.65
+    ],
+    [
+     "ember",
+     "1h",
+     86.94
+    ]
+   ],
+   "note": "recent()'s at equals each transcript's last record to the ms; the label rounds it (agoS: minutes under 1 h, then hours). The 12 h menu holds one ember session; the earlier one's last record is 14 h old (the 24 h listing, labelled as main labels the menu, shows both, distinct by age)"
+  },
+  "e_delta": {
+   "before": {
+    "firstFanout": [
+     15,
+     7,
+     8
+    ],
+    "next": [
+     30,
+     31,
+     28
+    ]
+   },
+   "after": {
+    "firstFanout": [
+     1,
+     2,
+     3
+    ],
+    "next": [
+     4,
+     5,
+     6
+    ]
+   },
+   "shots": [
+    "after/now/delta-first-agent.png",
+    "after/now/delta-second-agent.png",
+    "after/now/delta-third-agent.png"
+   ]
+  }
+ },
+ "canon": {
+  "path": "canon/",
+  "assertions": "29/29",
+  "git": "849156a theater: an /exit beat's text goes through redaction like every other @ ultra/r1/theater-data",
+  "vs_merged_w1": "every assertion passing in canon-merged-w1 passes here (29/29 vs 29/29; canon --compare: same; canon-vs-merged-w1.json)",
+  "uptime": [
+   "4:33  up 6 days, 15:19, 19 users, load averages: 24.31 26.47 30.85",
+   " 4:34  up 6 days, 15:19, 19 users, load averages: 15.46 23.81 29.64"
+  ],
+  "canon_js_changed": false
+ },
+ "timing": {
+  "recapture_after_now": {
+   "vibepet": {
+    "firstFrameMedian": 633,
+    "mainBuildMedian": 126,
+    "load": [
+     "37.86 28.03 30.83",
+     "56.09 33.32 32.67",
+     "56.09 33.32 32.67",
+     "52.96 33.05 32.58",
+     "52.96 33.05 32.58"
+    ]
+   },
+   "kestrel": {
+    "firstFrameMedian": 362,
+    "mainBuildMedian": 79,
+    "load": [
+     "51.60 33.10 32.60",
+     "50.47 33.50 32.75",
+     "49.31 33.54 32.77",
+     "49.31 33.54 32.77",
+     "49.31 33.54 32.77"
+    ]
+   },
+   "beacon": {
+    "firstFrameMedian": 284,
+    "mainBuildMedian": 57,
+    "load": [
+     "59.38 35.89 33.60",
+     "71.59 39.79 35.03",
+     "71.59 39.79 35.03",
+     "70.74 40.14 35.18",
+     "70.74 40.14 35.18"
+    ]
+   },
+   "ember": {
+    "firstFrameMedian": 673,
+    "mainBuildMedian": 50,
+    "load": [
+     "70.74 40.14 35.18",
+     "107.29 51.74 39.55",
+     "107.29 51.74 39.55",
+     "104.62 52.11 39.75",
+     "104.62 52.11 39.75"
+    ]
+   },
+   "delta": {
+    "firstFrameMedian": 363,
+    "mainBuildMedian": 101,
+    "load": [
+     "104.62 52.11 39.75",
+     "110.93 61.80 44.07",
+     "110.93 61.80 44.07",
+     "110.93 61.80 44.07",
+     "104.85 61.35 44.02"
+    ]
+   },
+   "atlas": {
+    "firstFrameMedian": 258,
+    "mainBuildMedian": 72,
+    "load": [
+     "104.85 61.35 44.02",
+     "98.10 61.37 44.23",
+     "98.10 61.37 44.23",
+     "98.10 61.37 44.23",
+     "93.36 61.00 44.20"
+    ]
+   }
+  },
+  "abab": {
+   "what": "Theater\u2026 \u2192 session: first frame after the rail has beats, and main's timeline build (ms); medians of 5 opens per member; base = 8e5fe27, fix = 5b4f689 (849156a only redacts an /exit beat's text)",
+   "runs": {
+    "base-1": {
+     "median": {
+      "kestrel": {
+       "firstFrameMs": 187,
+       "mainBuildMs": 29,
+       "n": 5,
+       "beats": 61
+      },
+      "beacon": {
+       "firstFrameMs": 157,
+       "mainBuildMs": 20,
+       "n": 5,
+       "beats": 29
+      },
+      "vibepet": {
+       "firstFrameMs": 168,
+       "mainBuildMs": 39,
+       "n": 5,
+       "beats": 56
+      },
+      "ember": {
+       "firstFrameMs": 176,
+       "mainBuildMs": 30,
+       "n": 5,
+       "beats": 61
+      },
+      "delta": {
+       "firstFrameMs": 214,
+       "mainBuildMs": 49,
+       "n": 5,
+       "beats": 149
+      }
+     },
+     "load": [
+      "18.13 26.05 32.50",
+      "15.19 24.85 31.92"
+     ]
+    },
+    "base-2": {
+     "median": {
+      "kestrel": {
+       "firstFrameMs": 475,
+       "mainBuildMs": 94,
+       "n": 5,
+       "beats": 61
+      },
+      "beacon": {
+       "firstFrameMs": 405,
+       "mainBuildMs": 59,
+       "n": 5,
+       "beats": 29
+      },
+      "vibepet": {
+       "firstFrameMs": 340,
+       "mainBuildMs": 98,
+       "n": 5,
+       "beats": 56
+      },
+      "ember": {
+       "firstFrameMs": 576,
+       "mainBuildMs": 114,
+       "n": 5,
+       "beats": 61
+      },
+      "delta": {
+       "firstFrameMs": 480,
+       "mainBuildMs": 164,
+       "n": 5,
+       "beats": 149
+      }
+     },
+     "load": [
+      "15.12 22.96 30.72",
+      "38.71 28.37 32.33"
+     ]
+    },
+    "fix-1": {
+     "median": {
+      "kestrel": {
+       "firstFrameMs": 245,
+       "mainBuildMs": 61,
+       "n": 5,
+       "beats": 63
+      },
+      "beacon": {
+       "firstFrameMs": 206,
+       "mainBuildMs": 38,
+       "n": 5,
+       "beats": 30
+      },
+      "vibepet": {
+       "firstFrameMs": 225,
+       "mainBuildMs": 62,
+       "n": 5,
+       "beats": 37
+      },
+      "ember": {
+       "firstFrameMs": 222,
+       "mainBuildMs": 49,
+       "n": 5,
+       "beats": 97
+      },
+      "delta": {
+       "firstFrameMs": 224,
+       "mainBuildMs": 61,
+       "n": 5,
+       "beats": 149
+      }
+     },
+     "load": [
+      "28.41 28.69 33.72",
+      "23.05 27.45 33.13"
+     ]
+    },
+    "fix-2": {
+     "median": {
+      "kestrel": {
+       "firstFrameMs": 156,
+       "mainBuildMs": 31,
+       "n": 5,
+       "beats": 63
+      },
+      "beacon": {
+       "firstFrameMs": 156,
+       "mainBuildMs": 18,
+       "n": 5,
+       "beats": 30
+      },
+      "vibepet": {
+       "firstFrameMs": 173,
+       "mainBuildMs": 34,
+       "n": 5,
+       "beats": 37
+      },
+      "ember": {
+       "firstFrameMs": 150,
+       "mainBuildMs": 23,
+       "n": 5,
+       "beats": 97
+      },
+      "delta": {
+       "firstFrameMs": 188,
+       "mainBuildMs": 53,
+       "n": 5,
+       "beats": 149
+      }
+     },
+     "load": [
+      "13.81 23.93 31.42",
+      "14.31 23.44 31.07"
+     ]
+    }
+   },
+   "read": "load-dominated (load 14-39 across runs); at similar load (fix-2 vs base-1) the fix is equal or faster"
+  },
+  "node_bench": "after/bench.json: timeline build unchanged (interleaved, 30 runs), Theater\u2026 list 18 -> 8 ms on the fleet root and 202 -> 38 ms on a 15-entry real root (timing only)"
+ },
+ "spend": {
+  "before": "fleet spend: transcripts $2.2232 at Haiku 4.5 prices; estima",
+  "after": "fleet spend: transcripts $2.2232 at Haiku 4.5 prices; estima",
+  "fleet_turns": 0,
+  "rearms_used": 0
+ },
+ "before_now": "before/now/ (the base build, same fleet state, same script)",
+ "original_evidence": "before/original/ (S5 bug + verdict rows, their screenshots, pack log, critic measurements)",
+ "scripts": [
+  "recapture.js",
+  "timing.js"
+ ]
+}

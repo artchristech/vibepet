@@ -1,0 +1,20 @@
+06:24:52.035 fold {"rows":5,"inView":5,"needs":2,"needsInView":2,"footer":["● Record a short","Today"],"footerInView":true,"msgs":0,"fresh":true,"panel":539,"load":"708.35 438.30 981.04"} {"rows":5,"inView":5,"needs":2,"needsInView":2,"footer":["● Record a short","Today"],"footerInView":true,"msgs":1,"fresh":true,"panel":582,"load":"729.46 447.16 980.99"}
+06:24:55.851 press goal Beacon database choice ticks 1 took true
+06:24:59.872 press goal Deploy.sh dry run ticks 2 took true
+06:25:03.876 press goal Reconcile three shards in parallel ticks 1 took true
+06:25:08.090 press goal Run build.sh ticks 1 took true
+06:25:12.815 press goal Read package.json ticks 1 took true
+06:25:27.321 press replay Beacon database choice ticks 2 took true
+06:25:39.921 press replay Deploy.sh dry run ticks 2 took true
+06:25:46.721 press replay Reconcile three shards in parallel ticks 2 took true
+06:25:53.246 press replay Run build.sh ticks 2 took true
+06:26:08.644 press replay Read package.json ticks 2 took false
+06:28:00.648 focus {"focused":{"el":"<button data-do=\"reply\">Reply</button>","row":"Beacon database choice"},"afterTicks":[true,true,true,true,true,true,true],"load":"131.88 632.67 996.04"}
+06:28:45.553 selection {"row":"kestrel","text":"Bash: ./deploy.sh --dry-","ticks":4,"survivedEachTick":[true,true,true,true],"jumps":0,"load":"695.86 40.13 186.87"}
+06:29:07.980 reply {"row":"beacon","openedFocus":"the reply box (opened by you)","typingMs":6616,"ticksWhileTyping":2,"chatBar":"what is atlas doing","replyBox":"","replyBoxOpen":true,"load":"154.75 187.46 235.77"}
+06:29:12.756 keys {"load":"286.73 214.28 244.95","cmd1":{"id":null,"tag":"DIV","row":0,"onRow":true,"text":"Beacon database choicebe"},"enterTop":{"focus":{"id":null,"tag":"INPUT","row":0,"onRow":false,"text":""},"replyBoxOpen":true,"ipc":[]},"escFromReplyBox":{"id":"chatInput","tag":"INPUT","row":null,"onRow":false,"text":""},"cmdN":{"n":2,"at":{"id":null,"tag":"DIV","row":1,"onRow":true,"text":"Deploy.sh dry runkestrel"}},"enterApproval":[{"args":[{"id":"13a1427d-6cb0-4561-b5a3-22453a34bf93","text":null}],"member":"kestrel"}],"down":{"id":null,"tag":"DIV","row":2,"onRow":true,"text":"Reconcile three shards i"},"up":{"id":null,"tag":"DIV","row":1,"onRow":true,"text":"Deploy.sh dry runkestrel"},"escFromRow":{"id":"chatInput","tag":"INPUT","row":null,"onRow":false,"text":""},"tabFromLast":{"id":"homeMore","tag":"BUTTON","row":null,"onRow":false,"text":"⋯"},"shiftTabFromFirst":{"id":"chatInput","tag":"INPUT","row":null,"onRow":false,"text":""},"blurs":0,"homeOpen":"now","keysTo":{"topRowFirstAction":2}}
+06:33:10.643 rest {"samples":646,"moved":0,"ticks":61,"cursorMoved":0}
+06:33:27.466 injected {"samples":57,"moved":0,"release":149,"ok":true}
+06:33:37.412 cycles [{"change":"inject","samplesWithAMovedRow":0,"releaseMs":149,"inQueueOrder":true,"load":"976.53 938.88 575.27"},{"change":"undo","samplesWithAMovedRow":0,"releaseMs":192,"inQueueOrder":true,"load":"997.47 943.85 579.15"},{"change":"inject","samplesWithAMovedRow":0,"releaseMs":121,"inQueueOrder":true,"load":"1015.61 948.50 582.93"}]
+06:33:43.792 fifteen {"sent":15,"rows":15,"inView":6,"needs":4,"needsInView":4,"footer":["● Record a short","Today"],"footerInView":true,"msgs":0,"fresh":true,"panel":596,"load":"127.26 962.05 592.00"}
+06:33:48.439 done → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/home-keyed/after/live-merged

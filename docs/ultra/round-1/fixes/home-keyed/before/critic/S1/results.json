@@ -1,0 +1,38 @@
+{
+  "run": {
+    "app": "/Users/christopherharris/.vibepet-ultra/int @ 37ba577 (ultra/round-1)",
+    "launch": "test/ultra/launch.js, root ~/.vibepet-ultra/root/.claude, userData ~/.vibepet-ultra/userdata/r1-S1-critic (fresh), hotkey off, state {setupDone:true, alerts:'done'}, sounds stubbed then unmuted, canon.instrument() (clipboard/dialogs/openExternal recorded only)",
+    "window": "2026-10-02T02:53:46.9Z .. 03:05:59.8Z, close: {how:'quit', orphans:[]}",
+    "poll": "poll.jsonl: Home DOM + snapshot + registry truth every 250 ms, changes only + 10 s heartbeat (278 lines)",
+    "fleetActions": [
+      {"at": "02:54:38Z", "do": "lease ember, atlas (r1-S1-critic)"},
+      {"at": "02:55:10-16Z", "do": "rearm ember atlas", "result": "ember resumed pid 67598, loop restored (catch-up fire 02:55:11.4Z, end_turn 02:55:13.758Z); atlas build.sh started (tool_use 02:55:16.095Z, registry busy since 02:55:14.738Z)"},
+      {"at": "03:01:03-05Z", "do": "pause ember (/exit)", "result": "claude exited, /exit records at 03:01:04.741Z"},
+      {"at": "03:03:00-01Z", "do": "pause atlas (Esc)", "result": "interrupted, idle"},
+      {"at": "03:03:01Z", "do": "release atlas, ember"}
+    ],
+    "spend": {"before": 3.2588, "after": 3.3031, "stop": 3.32, "note": "estimate incl. hidden calls; no further rearms possible within the stop"}
+  },
+  "asFound_02:54:21Z": {
+    "rows": ["kestrel · stuck 1m (Approve, ask 'Bash: ./deploy.sh --dry-run')"],
+    "truth": {"kestrel": "waiting(permission prompt) since 02:50:26.005Z, last=pending_tool_use[Bash]", "beacon": "waiting(input needed) since 02:13:42.729Z, last=user_prompt (tool_use withheld)", "vibepet": "idle since 02:40:56.241Z, alive", "atlas": "idle (interrupted), paused", "delta": "idle since 02:00:49Z", "ember": "not running"},
+    "snapshotSince": {"kestrel": "02:53:46.905Z (= launch)"}
+  },
+  "jumpCommands_03:00:55Z": {"/jump vibepet": "No session matches “vibepet”.", "/jump beacon": "No session matches “beacon”."},
+  "geometry": {
+    "fresh_02:56:01Z": {"chat": 470, "nowMaxHeight": "62%", "now": 264, "scrollH": 263, "rows": {"kestrel": 89, "ember": 53, "atlas": 71}, "footerVisible": true},
+    "reopenedNonFresh_02:56:30Z": {"chat": 460, "nowMaxHeight": "46%", "now": 211, "scrollH": 263, "clientH": 210, "atlasVisiblePx": 56.9, "atlasPx": 71.25, "footerVisible": false, "msgs": 152}
+  },
+  "atlasZeroSeconds": {"toolUseAt": "02:55:16.095Z", "firstZeroRow": "02:56:50.697Z (+94.6 s)", "lastZeroRow": "03:03:00.877Z", "registry": "busy, 3 tool procs (02:57:10Z)", "snapshotFlipsEachTick": "stalled(0s) -> working(0s)", "load1": 1.44},
+  "rowJump_02:57:30.551Z": {"ipcJump": {"ok": false, "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/atlas && claude --resume <sid>", "ms": 91}, "clipboardWrites": 1, "rowNote": "none", "bubble": {"text": "atlas: couldn't find its terminal — resume command copied", "rect": [209, 601, 243, 25], "elementAtCentre": "#chatInput", "zIndex": {"bubble": "2", "chat": "3"}}, "tmuxServerPpid": 1},
+  "focusWipe_02:57:56Z": {"path": "chatInput -S-Tab-> Today -S-Tab-> Record -S-Tab-> atlas ◎", "after253ms": "BODY", "rowTabIndex": -1},
+  "tabOut_02:58:15Z": {"tabFromComposer": {"active": "BODY", "hasFocus": false, "windowBlurs": 1, "homeOpen": false}, "shiftTabFromMore": {"active": "BODY", "hasFocus": false, "homeOpen": false}, "caveat": "test instance never holds the OS focus"},
+  "openLatency_02:58:47-53Z": {"n": 6, "shownMs": [220.3, 221.2, 221.1, 222.7, 221.2, 221.2], "paintMs": [252.2, 253.9, 250.8, 245.2, 252.1, 251.1], "medianShownMs": 221.2, "medianPaintMs": 251.6, "load1": [1.30, 1.30, 1.30, 1.27, 1.27, 1.27]},
+  "emberLoopFire": {"scheduledFire": "02:59:56.869Z", "promptRecord": "02:59:56.909Z isMeta", "endTurn": "02:59:58.918Z", "registry": "busy 02:59:56.96Z -> idle 02:59:58.98Z", "snapshot": "ready, since 02:55:14.050Z throughout", "row": "ember · done 5m ago (unchanged)", "bubble": null, "soundsBeforeAfter": [18, 18], "load1": 1.21},
+  "emberExit": {"exitRecords": "03:01:04.741Z", "registryDead": "03:01:04.97Z", "firstRunningRow": "03:01:06.48Z (ember · 0s)", "lastRunningRow": "03:03:03.90Z (ember · 1m 57s)", "removed": "03:03:06.92Z (+122 s)", "note": "none", "load1": [1.01, 1.38]},
+  "deltaParked": {"transcriptMtime": "02:58:09Z (3 metadata records: mode, permission-mode, atis-latch; no turn)", "appeared": "02:58:11.95Z as 'delta · done just now' (last end_turn 02:00:48.941Z)", "removed": "03:03:09.94Z", "registry": "idle, pid 29074 alive", "snapshotFanout": {"total": 3, "open": 0, "done": 3}, "load1": 1.35},
+  "sameRankOrder_03:00:55Z": ["kestrel · stuck", "delta · done 3m ago (since 02:58:11Z)", "ember · done 6m ago (since 02:55:14Z)", "atlas · 0s"],
+  "runtimeStyles_03:04:27Z": {"TL": {"needs": "#ffcf3f", "ready": "#ffcf3f", "stuck": "#ff5c6c", "running": "#3fe08f"}, "LED": {"needs": "#ffcf3f", "ready": "#9ff5d6"}, "headerDot": "rgb(31, 165, 119) while the only row is stuck", "stateLabel": {"fontSize": "11px", "color": "rgb(100, 108, 122)", "onPanel": "rgba(250, 251, 252, 0.96)", "approxContrast": 5.1}, "title": {"fontSize": "13px", "fontWeight": "650"}, "rowButtons": [{"text": "Approve", "title": "Press Enter in its tab (the highlighted Yes)"}, {"text": "▶", "title": "Replay this session"}, {"text": "✓", "title": "Mark goal done"}, {"text": "◎", "title": "Set goal"}]},
+  "blurEmulated_03:04:27Z": {"before": "now", "after": null, "draftAfterReopen": "draft kept?"},
+  "headerMetaSeen": ["kestrel/main · claude code (whole run)"]
+}

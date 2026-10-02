@@ -1,0 +1,169 @@
+{
+  "load": {
+    "start": "load 5.63 7.56 31.08",
+    "end": "load 4.94 7.32 30.59"
+  },
+  "stat": {
+    "n": 10,
+    "p50": 36,
+    "p95": 199,
+    "min": 35,
+    "max": 199
+  },
+  "errors": [],
+  "close": {
+    "how": "quit",
+    "ms": 5392,
+    "procs": 15,
+    "orphans": [
+      {
+        "pid": 58812,
+        "name": "git"
+      },
+      {
+        "pid": 58815,
+        "name": "git"
+      },
+      {
+        "pid": 58861,
+        "name": "git"
+      },
+      {
+        "pid": 58816,
+        "name": "git-remote-https"
+      }
+    ]
+  },
+  "data": [
+    {
+      "ms": 199,
+      "load": "load 5.58 7.52 30.93",
+      "say": "You're offline. I'll send this when you're back.",
+      "acts": [
+        "Cancel"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "are you there? (1)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 100,
+      "load": "load 5.58 7.52 30.93",
+      "say": "You're offline. I'll send this when you're back.",
+      "acts": [
+        "Cancel"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "are you there? (2)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 89,
+      "load": "load 5.58 7.52 30.93",
+      "say": "You're offline. I'll send this when you're back.",
+      "acts": [
+        "Cancel"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "are you there? (3)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 40,
+      "load": "load 5.58 7.52 30.93",
+      "say": "You're offline. I'll send this when you're back.",
+      "acts": [
+        "Cancel"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "are you there? (4)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 36,
+      "load": "load 5.38 7.44 30.77",
+      "say": "You're offline. I'll send this when you're back.",
+      "acts": [
+        "Cancel"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "are you there? (5)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 36,
+      "load": "load 5.38 7.44 30.77",
+      "say": "You're offline. I'll send this when you're back.",
+      "acts": [
+        "Cancel"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "are you there? (6)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 36,
+      "load": "load 5.38 7.44 30.77",
+      "say": "You're offline. I'll send this when you're back.",
+      "acts": [
+        "Cancel"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "are you there? (7)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 35,
+      "load": "load 5.38 7.44 30.77",
+      "say": "You're offline. I'll send this when you're back.",
+      "acts": [
+        "Cancel"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "are you there? (8)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 35,
+      "load": "load 5.38 7.44 30.77",
+      "say": "You're offline. I'll send this when you're back.",
+      "acts": [
+        "Cancel"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "are you there? (9)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 37,
+      "load": "load 5.38 7.44 30.77",
+      "say": "You're offline. I'll send this when you're back.",
+      "acts": [
+        "Cancel"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "are you there? (10)",
+        "retry": true
+      }
+    }
+  ]
+}

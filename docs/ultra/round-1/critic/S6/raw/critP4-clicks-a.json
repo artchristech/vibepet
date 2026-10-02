@@ -1,0 +1,718 @@
+{
+ "flow": "P4",
+ "run": "a",
+ "startedAt": "2026-10-02T03:37:03.498Z",
+ "load": [
+  [
+   2.66,
+   2.24,
+   2.2
+  ],
+  [
+   2.74,
+   2.33,
+   2.23
+  ]
+ ],
+ "clicks": [
+  {
+   "i": 0,
+   "opened": true,
+   "downToUp": 161,
+   "tickDuringPress": [],
+   "load": [
+    2.32,
+    2.19,
+    2.18
+   ]
+  },
+  {
+   "i": 1,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.32,
+    2.19,
+    2.18
+   ]
+  },
+  {
+   "i": 2,
+   "opened": true,
+   "downToUp": 158,
+   "tickDuringPress": [],
+   "load": [
+    2.32,
+    2.19,
+    2.18
+   ]
+  },
+  {
+   "i": 3,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.29,
+    2.19,
+    2.18
+   ]
+  },
+  {
+   "i": 4,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.29,
+    2.19,
+    2.18
+   ]
+  },
+  {
+   "i": 5,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.29,
+    2.19,
+    2.18
+   ]
+  },
+  {
+   "i": 6,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.29,
+    2.19,
+    2.18
+   ]
+  },
+  {
+   "i": 7,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.29,
+    2.19,
+    2.18
+   ]
+  },
+  {
+   "i": 8,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.29,
+    2.19,
+    2.18
+   ]
+  },
+  {
+   "i": 9,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.19,
+    2.17,
+    2.17
+   ]
+  },
+  {
+   "i": 10,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.19,
+    2.17,
+    2.17
+   ]
+  },
+  {
+   "i": 11,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.19,
+    2.17,
+    2.17
+   ]
+  },
+  {
+   "i": 12,
+   "opened": true,
+   "downToUp": 154,
+   "tickDuringPress": [],
+   "load": [
+    2.19,
+    2.17,
+    2.17
+   ]
+  },
+  {
+   "i": 13,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.33,
+    2.2,
+    2.18
+   ]
+  },
+  {
+   "i": 14,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.33,
+    2.2,
+    2.18
+   ]
+  },
+  {
+   "i": 15,
+   "opened": true,
+   "downToUp": 158,
+   "tickDuringPress": [],
+   "load": [
+    2.33,
+    2.2,
+    2.18
+   ]
+  },
+  {
+   "i": 16,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.33,
+    2.2,
+    2.18
+   ]
+  },
+  {
+   "i": 17,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.33,
+    2.2,
+    2.18
+   ]
+  },
+  {
+   "i": 18,
+   "opened": true,
+   "downToUp": 158,
+   "tickDuringPress": [],
+   "load": [
+    2.39,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 19,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.39,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 20,
+   "opened": true,
+   "downToUp": 158,
+   "tickDuringPress": [],
+   "load": [
+    2.39,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 21,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.39,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 22,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.39,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 23,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.36,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 24,
+   "opened": true,
+   "downToUp": 158,
+   "tickDuringPress": [],
+   "load": [
+    2.36,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 25,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.36,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 26,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.36,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 27,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.33,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 28,
+   "opened": false,
+   "downToUp": 156,
+   "tickDuringPress": [
+    139
+   ],
+   "load": [
+    2.33,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 29,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.33,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 30,
+   "opened": true,
+   "downToUp": 154,
+   "tickDuringPress": [],
+   "load": [
+    2.33,
+    2.21,
+    2.18
+   ]
+  },
+  {
+   "i": 31,
+   "opened": true,
+   "downToUp": 158,
+   "tickDuringPress": [],
+   "load": [
+    2.78,
+    2.3,
+    2.22
+   ]
+  },
+  {
+   "i": 32,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.78,
+    2.3,
+    2.22
+   ]
+  },
+  {
+   "i": 33,
+   "opened": true,
+   "downToUp": 158,
+   "tickDuringPress": [],
+   "load": [
+    2.78,
+    2.3,
+    2.22
+   ]
+  },
+  {
+   "i": 34,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.78,
+    2.3,
+    2.22
+   ]
+  },
+  {
+   "i": 35,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.56,
+    2.26,
+    2.2
+   ]
+  },
+  {
+   "i": 36,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.56,
+    2.26,
+    2.2
+   ]
+  },
+  {
+   "i": 37,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.56,
+    2.26,
+    2.2
+   ]
+  },
+  {
+   "i": 38,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.56,
+    2.26,
+    2.2
+   ]
+  },
+  {
+   "i": 39,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.43,
+    2.24,
+    2.19
+   ]
+  },
+  {
+   "i": 40,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.43,
+    2.24,
+    2.19
+   ]
+  },
+  {
+   "i": 41,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.43,
+    2.24,
+    2.19
+   ]
+  },
+  {
+   "i": 42,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.43,
+    2.24,
+    2.19
+   ]
+  },
+  {
+   "i": 43,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.32,
+    2.22,
+    2.19
+   ]
+  },
+  {
+   "i": 44,
+   "opened": false,
+   "downToUp": 153,
+   "tickDuringPress": [
+    47
+   ],
+   "load": [
+    2.32,
+    2.22,
+    2.19
+   ]
+  },
+  {
+   "i": 45,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.32,
+    2.22,
+    2.19
+   ]
+  },
+  {
+   "i": 46,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.37,
+    2.23,
+    2.19
+   ]
+  },
+  {
+   "i": 47,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.37,
+    2.23,
+    2.19
+   ]
+  },
+  {
+   "i": 48,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.37,
+    2.23,
+    2.19
+   ]
+  },
+  {
+   "i": 49,
+   "opened": true,
+   "downToUp": 158,
+   "tickDuringPress": [],
+   "load": [
+    2.58,
+    2.28,
+    2.21
+   ]
+  },
+  {
+   "i": 50,
+   "opened": false,
+   "downToUp": 152,
+   "tickDuringPress": [
+    66
+   ],
+   "load": [
+    2.58,
+    2.28,
+    2.21
+   ]
+  },
+  {
+   "i": 51,
+   "opened": false,
+   "downToUp": 154,
+   "tickDuringPress": [
+    99
+   ],
+   "load": [
+    2.62,
+    2.29,
+    2.21
+   ]
+  },
+  {
+   "i": 52,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.62,
+    2.29,
+    2.21
+   ]
+  },
+  {
+   "i": 53,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.62,
+    2.29,
+    2.21
+   ]
+  },
+  {
+   "i": 54,
+   "opened": true,
+   "downToUp": 156,
+   "tickDuringPress": [],
+   "load": [
+    2.62,
+    2.29,
+    2.21
+   ]
+  },
+  {
+   "i": 55,
+   "opened": true,
+   "downToUp": 158,
+   "tickDuringPress": [],
+   "load": [
+    2.81,
+    2.34,
+    2.23
+   ]
+  },
+  {
+   "i": 56,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.81,
+    2.34,
+    2.23
+   ]
+  },
+  {
+   "i": 57,
+   "opened": true,
+   "downToUp": 157,
+   "tickDuringPress": [],
+   "load": [
+    2.81,
+    2.34,
+    2.23
+   ]
+  },
+  {
+   "i": 58,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.81,
+    2.34,
+    2.23
+   ]
+  },
+  {
+   "i": 59,
+   "opened": true,
+   "downToUp": 155,
+   "tickDuringPress": [],
+   "load": [
+    2.74,
+    2.33,
+    2.23
+   ]
+  }
+ ],
+ "truthStart": [
+  "kestrel:approval reg=waiting(permission prompt) last=user_prompt",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "summary": {
+  "n": 60,
+  "opened": 56,
+  "lost": 4,
+  "lostWithTickDuringPress": 4,
+  "openedWithTickDuringPress": 0,
+  "homeReopened": 0
+ },
+ "truthEnd": [
+  "kestrel:approval reg=waiting(permission prompt) last=user_prompt",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 317,
+  "procs": 7,
+  "orphans": []
+ },
+ "endedAt": "2026-10-02T03:38:36.235Z"
+}

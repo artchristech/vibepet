@@ -1,0 +1,5 @@
+ok 29/29 assertions in 22.7 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/live-rows/gate-verify/canon
+rows: beacon:needs kestrel:needs delta:ready atlas:ready vibepet:ready   fleet: 3/6 in state
+real 22.68
+user 15.45
+sys 4.22

@@ -1,0 +1,11 @@
+launch→needs (kestrel+beacon) ms after launch call: [ 1433, 620, 604 ] after ready: [ 43, 9, 12 ] first snapshot: [{"member":"beacon","kind":"question","phase":"waiting"},{"member":"kestrel","kind":"approval","phase":"stalled"},{"member":"delta","kind":"done","phase":"ready"},{"member":"atlas","kind":"done","phase":"ready"},{"member":"vibepet","kind":"done","phase":"ready"}]
+  beacon   nr needs   question  beacon · asking 3h 19m       since-reg 0 | Which database should beacon use to store check results? (SQLite / Postgres / Redis) ["SQLite","Postgres","Redis"] reply,replay,done,goal
+  kestrel  nr needs   approval  kestrel · needs approval 2h 21m since-reg 0 | Bash: ./deploy.sh --dry-run ["Yes","Yes, and don’t ask again for: ./deploy.sh *","No"] approve,replay,done,goal
+  delta    nr ready   done      delta · done 3h 32m ago      since-reg 0 |   replay,done,goal
+  atlas    nr ready   done      atlas · done 2h 30m ago      since-reg 0 |   replay,done,goal
+  vibepet  nr ready   done      vibepet · done 2h 20m ago    since-reg 0 |   replay,done,goal
+order {"snapshot":["beacon","kestrel","delta","atlas","vibepet"],"home":["beacon","kestrel","delta","atlas","vibepet"],"pending":["beacon","kestrel"]} pending before hover ["beacon","kestrel","delta","atlas","vibepet"]
+commands [{"cmd":"/jump vibepet","ipc":"ipc:jump","arg":"6101876b-19c6-42a1-824f-6f1c7d4fd83e","member":"vibepet","expect":"vibepet","ok":true},{"cmd":"/jump beacon","ipc":"ipc:jump","arg":"a9377f08-ad27-4bd5-bb77-dbd576eab89e","member":"beacon","expect":"beacon","ok":true},{"cmd":"/replay kestrel","ipc":"ipc:theater","arg":"13a1427d-6cb0-4561-b5a3-22453a34bf93","member":"kestrel","expect":"kestrel","ok":true}]
+hotkey {"queue":["beacon","kestrel"],"presses":["beacon","kestrel"],"gapMs":214}
+relaunch spread ms {"beacon":0,"kestrel":0,"delta":0,"atlas":0,"vibepet":0}
+closes [{"how":"quit","orphans":0},{"how":"quit","orphans":0},{"how":"quit","orphans":0}]

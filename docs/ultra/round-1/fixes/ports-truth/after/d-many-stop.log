@@ -1,0 +1,141 @@
+{
+ "folded": {
+  "chips": [
+   ":47765 vibepet · vibepet page 6",
+   ":47760 delta · delta page 1",
+   ":47761 kestrel · kestrel page 2",
+   ":47762 beacon · beacon page 3",
+   ":47763 atlas · atlas page 4",
+   ":47756 vibepet · Prefork app"
+  ],
+  "more": "+4 more"
+ },
+ "expanded": {
+  "chips": [
+   ":47765 vibepet · vibepet page 6",
+   ":47760 delta · delta page 1",
+   ":47761 kestrel · kestrel page 2",
+   ":47762 beacon · beacon page 3",
+   ":47763 atlas · atlas page 4",
+   ":47756 vibepet · Prefork app",
+   ":47757 vibepet · Inspected app",
+   ":47758 vibepet · debugger [inactive: 127.0.0.1:47758 is node's debugger: open it from chrome://inspect · press to ask again]",
+   ":47759 kestrel · node [inactive: No answer yet from [::1]:47759 (still starting?) · press to ask again]",
+   ":47764 ember · ember page 5"
+  ],
+  "allReachable": true,
+  "more": "fewer"
+ },
+ "prefork": {
+  "chips": [
+   ":47756 vibepet · Prefork app"
+  ],
+  "pgid": 79303,
+  "groupBefore": 4,
+  "dialog": {
+   "kind": "dialog",
+   "at": 1790946531675,
+   "message": "Stop Python (vibepet) on :47756?",
+   "detail": "Ends pid 79303 and the 3 processes under it · :47756 goes down",
+   "answered": 0
+  },
+  "note": "Stopped Python (vibepet) on :47756",
+  "noteMs": 168,
+  "after": {
+   "portListeners": 0,
+   "groupLeft": [],
+   "respawnLines": 0,
+   "chipStill": false
+  }
+ },
+ "debugger": {
+  "chip": ":47758 vibepet · debugger",
+  "appChip": ":47757 vibepet · Inspected app",
+  "dialog": {
+   "kind": "dialog",
+   "at": 1790946533911,
+   "message": "Stop node (vibepet) on :47758?",
+   "detail": "Ends pid 79306 · :47757 and :47758 go down",
+   "answered": 0
+  },
+  "note": "Stopped node (vibepet) on :47757 and :47758",
+  "after": {
+   "chips": [],
+   "listeners": 0
+  }
+ },
+ "stale": [
+  {
+   "port": 47766,
+   "killAt": 1790946536891,
+   "clickAt": 1790946536931,
+   "landedStale": true,
+   "note": "That server had already stopped",
+   "dialog": false,
+   "chipGoneMsAfterKill": 200
+  },
+  {
+   "port": 47767,
+   "killAt": 1790946539906,
+   "clickAt": 1790946539939,
+   "landedStale": true,
+   "note": "That server had already stopped",
+   "dialog": false,
+   "chipGoneMsAfterKill": 83
+  },
+  {
+   "port": 47768,
+   "killAt": 1790946541648,
+   "clickAt": 1790946541681,
+   "landedStale": true,
+   "note": "That server had already stopped",
+   "dialog": false,
+   "chipGoneMsAfterKill": 92
+  }
+ ],
+ "menuStop": {
+  "alerts": "done",
+  "clicked": {
+   "ok": true,
+   "label": "Stop node (pid 82077)…"
+  },
+  "menuEntry": [
+   [
+    "Open http://localhost:47769",
+    true
+   ],
+   [
+    "node (beacon) — ~/.vibepet-ultra/fleet/beacon",
+    false
+   ],
+   [
+    "",
+    true
+   ],
+   [
+    "Stop node (pid 82077)…",
+    true
+   ]
+  ],
+  "dialog": {
+   "kind": "dialog",
+   "at": 1790946542566,
+   "message": "Stop node (beacon) on :47769?",
+   "detail": "Ends pid 82077 · :47769 goes down",
+   "answered": 0
+  },
+  "event": {
+   "kind": "localhost",
+   "text": "Stopped node (beacon) on :47769"
+  },
+  "exited": true
+ },
+ "externalKill": {
+  "alerts": "done",
+  "event": {
+   "kind": "localhost",
+   "text": "node (kestrel) on :47770 went down"
+  },
+  "msAfterKill": 781
+ }
+}

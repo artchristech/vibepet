@@ -1,0 +1,22 @@
+<live_context>
+Local time: 10/1/2026, 8:42:14 PM.
+
+Agents: kestrel=working for 40s, atlas=working for 40s, vibepet=ready for 40s.
+
+Repo: kestrel (branch main): 0 uncommitted lines across 0 files, 0 untracked files. Last commit 398 min ago: "kestrel: initial service + dry-run deploy".
+
+Recent commits:
+f7a28d0 kestrel: initial service + dry-run deploy
+
+Diff stat:
+(clean)
+
+Latest agent transcript:
+[kestrel · working]
+HUMAN: Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.
+AGENT TOOL: Bash {"command":"./deploy.sh --dry-run","description":"Run dry-run deploy script"}
+HUMAN: [Request interrupted by user for tool use]
+HUMAN: Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.
+</live_context>
+
+User: What is my coding agent doing right now / what did it last say? Summarize in 2–3 lines and tell me whether it needs me.

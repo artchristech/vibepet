@@ -1,0 +1,25 @@
+<live_context>
+Local time: 10/2/2026, 2:50:24 AM.
+
+Agents: beacon=waiting for an answer for 6h 36m - Which database should beacon use to store check results? (SQLite / Postgres / Redis); kestrel=needs approval for 5h 38m - Bash: ./deploy.sh --dry-run; delta=done for 6h 49m - All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled; atlas=done for 5h 47m - interrupted; vibepet=done for 5h 37m - The app's main entry file is main.js.
+
+Sessions, in the order they need you (needs you first, then done, running, exited; longest-waiting first). Ages are on Claude Code's own clock; "edited this turn" = files the session changed since its last prompt:
+- beacon · "Beacon database choice" · folder ~/.vibepet-ultra/fleet/beacon · repo beacon/main · waiting for an answer for 6h 36m · asks: Which database should beacon use to store check results? (SQLite / Postgres / Redis) · edited this turn: nothing
+- kestrel · "Deploy.sh dry run" · folder ~/.vibepet-ultra/fleet/kestrel · repo kestrel/main · needs approval for 5h 38m · asks: Bash: ./deploy.sh --dry-run · edited this turn: nothing
+- delta · "Reconcile three shards in parallel" · folder ~/.vibepet-ultra/fleet/delta · repo delta/main · done for 6h 49m · last said: All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled · edited this turn: nothing · fan-out 3/3 subagents done
+- atlas · "Run build.sh" · folder ~/.vibepet-ultra/fleet/atlas · repo atlas/main · done for 5h 47m · its turn was interrupted · edited this turn: nothing
+- vibepet · "Read package.json" · folder ~/.vibepet-ultra/fleet/vibepet · repo vibepet/main · done for 5h 37m · last said: The app's main entry file is main.js. · edited this turn: nothing
+Needs you now: beacon first: answer "Which database should beacon use to store check results? (SQLite / Postgres / Redis)". Next: kestrel: approve the Bash command `./deploy.sh --dry-run`. Asked who needs the user first, give the first and its ask, then who's next and theirs. Give commands verbatim in backticks.
+
+Overlaps: none. No two sessions share a repo (5 sessions in 5 repos).
+
+Watched repo: kestrel (branch main; sessions in it: kestrel): 0 uncommitted lines across 0 files, 0 untracked files. Last commit 766 min ago: "kestrel: initial service + dry-run deploy".
+
+Recent commits:
+f7a28d0 kestrel: initial service + dry-run deploy
+
+Diff stat:
+(clean)
+</live_context>
+
+User: what's running?

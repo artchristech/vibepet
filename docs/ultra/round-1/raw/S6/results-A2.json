@@ -1,0 +1,1133 @@
+{
+ "phase": "A2",
+ "startedAt": "2026-10-02T01:57:52.876Z",
+ "load0": [
+  5.19,
+  3.76,
+  3.05
+ ],
+ "shots": [],
+ "timings": [
+  {
+   "flow": "home",
+   "step": "open (click on Net → panel shown)",
+   "ms": 407,
+   "load": [
+    5.49,
+    3.84,
+    3.09
+   ],
+   "at": "01:57:57.964Z",
+   "n": 1
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (vibepet, node)",
+   "ms": 4432,
+   "load": [
+    5.43,
+    3.88,
+    3.11
+   ],
+   "at": "01:58:09.154Z",
+   "trial": 0,
+   "port": 47131
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (vibepet)",
+   "ms": 15413,
+   "load": [
+    10.48,
+    5.28,
+    3.64
+   ],
+   "at": "01:58:34.250Z",
+   "trial": 0,
+   "port": 47131
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (vibepet, python http.server)",
+   "ms": 11465,
+   "load": [
+    8.5,
+    5.25,
+    3.68
+   ],
+   "at": "01:58:57.637Z",
+   "trial": 1,
+   "port": 47132
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (vibepet)",
+   "ms": 10387,
+   "load": [
+    8.21,
+    5.29,
+    3.71
+   ],
+   "at": "01:59:09.259Z",
+   "trial": 1,
+   "port": 47132
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (vibepet, node)",
+   "ms": 15009,
+   "load": [
+    7.15,
+    5.27,
+    3.75
+   ],
+   "at": "01:59:33.189Z",
+   "trial": 2,
+   "port": 47133
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (vibepet)",
+   "ms": 7257,
+   "load": [
+    6.17,
+    5.14,
+    3.73
+   ],
+   "at": "01:59:45.280Z",
+   "trial": 2,
+   "port": 47133
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (vibepet, python http.server)",
+   "ms": 9795,
+   "load": [
+    5.67,
+    5.07,
+    3.72
+   ],
+   "at": "01:59:57.323Z",
+   "trial": 3,
+   "port": 47134
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (vibepet)",
+   "ms": 11409,
+   "load": [
+    5.34,
+    5.02,
+    3.72
+   ],
+   "at": "02:00:09.375Z",
+   "trial": 3,
+   "port": 47134
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (vibepet, node)",
+   "ms": 7699,
+   "load": [
+    4.89,
+    4.94,
+    3.71
+   ],
+   "at": "02:00:21.386Z",
+   "trial": 4,
+   "port": 47135
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (vibepet)",
+   "ms": 11607,
+   "load": [
+    5.46,
+    5.05,
+    3.76
+   ],
+   "at": "02:00:33.520Z",
+   "trial": 4,
+   "port": 47135
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (vibepet, python http.server)",
+   "ms": 4999,
+   "load": [
+    5.5,
+    5.08,
+    3.8
+   ],
+   "at": "02:00:45.559Z",
+   "trial": 5,
+   "port": 47136
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (vibepet)",
+   "ms": 4482,
+   "load": [
+    5.42,
+    5.08,
+    3.81
+   ],
+   "at": "02:00:57.493Z",
+   "trial": 5,
+   "port": 47136
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (vibepet, node)",
+   "ms": 13588,
+   "load": [
+    6.75,
+    5.41,
+    3.97
+   ],
+   "at": "02:01:21.530Z",
+   "trial": 6,
+   "port": 47137
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (vibepet)",
+   "ms": 10522,
+   "load": [
+    6.87,
+    5.48,
+    4.01
+   ],
+   "at": "02:01:33.541Z",
+   "trial": 6,
+   "port": 47137
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (vibepet, python http.server)",
+   "ms": 3755,
+   "load": [
+    6.08,
+    5.37,
+    3.99
+   ],
+   "at": "02:01:45.596Z",
+   "trial": 7,
+   "port": 47138
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (vibepet)",
+   "ms": 13350,
+   "load": [
+    6.48,
+    5.52,
+    4.08
+   ],
+   "at": "02:02:09.548Z",
+   "trial": 7,
+   "port": 47138
+  }
+ ],
+ "notes": [
+  {
+   "at": 1790906277964,
+   "openHome": {
+    "mode": "now",
+    "at": {
+     "x": 330.5,
+     "y": 732.5
+    },
+    "ms": 407
+   }
+  }
+ ],
+ "readyMs": 984,
+ "truth0": {
+  "at": "2026-10-02T01:57:52.875Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "r1-S6"
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": true,
+    "paused": false,
+    "pid": 48392,
+    "reg": "busy",
+    "last": "pending_tool_use",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": false,
+    "pid": 51022,
+    "reg": "busy",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   }
+  ]
+ },
+ "pmset0": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "trials": [
+  {
+   "i": 0,
+   "member": "vibepet",
+   "port": 47131,
+   "kind": "node",
+   "listener": 28700,
+   "listenAt": 1790906284709,
+   "shownAt": 1790906289141,
+   "f1ms": 4432,
+   "label": {
+    "port": 47131,
+    "pid": 28700,
+    "label": ":47131 node (vibepet)",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790906298811,
+   "killMs": 18,
+   "goneAt": 1790906314224,
+   "f4ms": 15413
+  },
+  {
+   "i": 1,
+   "member": "vibepet",
+   "port": 47132,
+   "kind": "python http.server",
+   "listener": 36091,
+   "listenAt": 1790906326065,
+   "shownAt": 1790906337530,
+   "f1ms": 11465,
+   "label": {
+    "port": 47132,
+    "pid": 36091,
+    "label": ":47132 Directory listing for /",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790906338857,
+   "killMs": 33,
+   "goneAt": 1790906349244,
+   "f4ms": 10387
+  },
+  {
+   "i": 2,
+   "member": "vibepet",
+   "port": 47133,
+   "kind": "node",
+   "listener": 41699,
+   "listenAt": 1790906358177,
+   "shownAt": 1790906373186,
+   "f1ms": 15009,
+   "label": {
+    "port": 47133,
+    "pid": 41699,
+    "label": ":47133 node (vibepet)",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790906377980,
+   "killMs": 16,
+   "goneAt": 1790906385237,
+   "f4ms": 7257
+  },
+  {
+   "i": 3,
+   "member": "vibepet",
+   "port": 47134,
+   "kind": "python http.server",
+   "listener": 46548,
+   "listenAt": 1790906387524,
+   "shownAt": 1790906397319,
+   "f1ms": 9795,
+   "label": {
+    "port": 47134,
+    "pid": 46548,
+    "label": ":47134 Directory listing for /",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790906397915,
+   "killMs": 15,
+   "goneAt": 1790906409324,
+   "f4ms": 11409
+  },
+  {
+   "i": 4,
+   "member": "vibepet",
+   "port": 47135,
+   "kind": "node",
+   "listener": 51260,
+   "listenAt": 1790906413615,
+   "shownAt": 1790906421314,
+   "f1ms": 7699,
+   "label": {
+    "port": 47135,
+    "pid": 51260,
+    "label": ":47135 node (vibepet)",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790906421831,
+   "killMs": 17,
+   "goneAt": 1790906433438,
+   "f4ms": 11607
+  },
+  {
+   "i": 5,
+   "member": "vibepet",
+   "port": 47136,
+   "kind": "python http.server",
+   "listener": 56164,
+   "listenAt": 1790906440478,
+   "shownAt": 1790906445477,
+   "f1ms": 4999,
+   "label": {
+    "port": 47136,
+    "pid": 56164,
+    "label": ":47136 Directory listing for /",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790906452941,
+   "killMs": 15,
+   "goneAt": 1790906457423,
+   "f4ms": 4482
+  },
+  {
+   "i": 6,
+   "member": "vibepet",
+   "port": 47137,
+   "kind": "node",
+   "listener": 61338,
+   "listenAt": 1790906467857,
+   "shownAt": 1790906481445,
+   "f1ms": 13588,
+   "label": {
+    "port": 47137,
+    "pid": 61338,
+    "label": ":47137 node (vibepet)",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790906483013,
+   "killMs": 16,
+   "goneAt": 1790906493535,
+   "f4ms": 10522
+  },
+  {
+   "i": 7,
+   "member": "vibepet",
+   "port": 47138,
+   "kind": "python http.server",
+   "listener": 68560,
+   "listenAt": 1790906501787,
+   "shownAt": 1790906505542,
+   "f1ms": 3755,
+   "label": {
+    "port": 47138,
+    "pid": 68560,
+    "label": ":47138 Directory listing for /",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790906516175,
+   "killMs": 17,
+   "goneAt": 1790906529525,
+   "f4ms": 13350
+  }
+ ],
+ "summary": {
+  "f1": {
+   "median": 8747,
+   "min": 3755,
+   "max": 15009,
+   "n": 8,
+   "all": [
+    4432,
+    11465,
+    15009,
+    9795,
+    7699,
+    4999,
+    13588,
+    3755
+   ]
+  },
+  "f4": {
+   "median": 10966,
+   "min": 4482,
+   "max": 15413,
+   "n": 8,
+   "all": [
+    15413,
+    10387,
+    7257,
+    11409,
+    11607,
+    4482,
+    10522,
+    13350
+   ]
+  }
+ },
+ "pollGaps": {
+  "median": 12019,
+  "min": 11583,
+  "max": 12419,
+  "n": 21
+ },
+ "truth1": {
+  "at": "2026-10-02T02:02:11.672Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": false,
+    "paused": false,
+    "pid": 55946,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "r1-S6"
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": true,
+    "paused": false,
+    "pid": 48392,
+    "reg": "busy",
+    "last": "pending_tool_use",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": false,
+    "pid": 29074,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   }
+  ]
+ },
+ "pmset1": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "load1": [
+  6.12,
+  5.47,
+  4.07
+ ],
+ "endedAt": "2026-10-02T02:02:14.207Z",
+ "polls": [
+  {
+   "at": 1790906274349,
+   "seen": 1790906274408,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906286202,
+   "seen": 1790906286295,
+   "servers": [
+    "28700:47131",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906298322,
+   "seen": 1790906298385,
+   "servers": [
+    "28700:47131",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906310741,
+   "seen": 1790906310818,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906322324,
+   "seen": 1790906322367,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906334269,
+   "seen": 1790906334277,
+   "servers": [
+    "36091:47132",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906346288,
+   "seen": 1790906346323,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906358293,
+   "seen": 1790906358330,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906370257,
+   "seen": 1790906370335,
+   "servers": [
+    "41699:47133",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906382299,
+   "seen": 1790906382341,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906394350,
+   "seen": 1790906394450,
+   "servers": [
+    "46548:47134",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906406498,
+   "seen": 1790906406541,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906418645,
+   "seen": 1790906418674,
+   "servers": [
+    "51260:47135",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906430590,
+   "seen": 1790906430611,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906442709,
+   "seen": 1790906442747,
+   "servers": [
+    "56164:47136",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906454625,
+   "seen": 1790906454694,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906466782,
+   "seen": 1790906466853,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906478950,
+   "seen": 1790906479005,
+   "servers": [
+    "61338:47137",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906490801,
+   "seen": 1790906490818,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906502785,
+   "seen": 1790906502846,
+   "servers": [
+    "68560:47138",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906514880,
+   "seen": 1790906514975,
+   "servers": [
+    "68560:47138",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906526798,
+   "seen": 1790906526885,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  }
+ ],
+ "allCalls": [
+  {
+   "kind": "event",
+   "at": 1790906276695,
+   "data": {
+    "kind": "agentDone",
+    "text": "ember is done",
+    "agent": "ember",
+    "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099"
+   }
+  },
+  {
+   "kind": "event",
+   "at": 1790906412076,
+   "data": {
+    "kind": "agentNeeds",
+    "text": "kestrel has a question",
+    "agent": "kestrel",
+    "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+   }
+  },
+  {
+   "kind": "event",
+   "at": 1790906451159,
+   "data": {
+    "kind": "agentDone",
+    "text": "delta is done",
+    "agent": "delta",
+    "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358"
+   }
+  }
+ ],
+ "footerLog": [
+  {
+   "at": 1790906274309,
+   "srv": []
+  },
+  {
+   "at": 1790906277425,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906289141,
+   "srv": [
+    {
+     "port": 47131,
+     "pid": 28700,
+     "label": ":47131 node (vibepet)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906314224,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906337530,
+   "srv": [
+    {
+     "port": 47132,
+     "pid": 36091,
+     "label": ":47132 Directory listing for /",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906349244,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906373186,
+   "srv": [
+    {
+     "port": 47133,
+     "pid": 41699,
+     "label": ":47133 node (vibepet)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906385237,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906397319,
+   "srv": [
+    {
+     "port": 47134,
+     "pid": 46548,
+     "label": ":47134 Directory listing for /",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906409324,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906421314,
+   "srv": [
+    {
+     "port": 47135,
+     "pid": 51260,
+     "label": ":47135 node (vibepet)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906433438,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906445477,
+   "srv": [
+    {
+     "port": 47136,
+     "pid": 56164,
+     "label": ":47136 Directory listing for /",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906457423,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906481445,
+   "srv": [
+    {
+     "port": 47137,
+     "pid": 61338,
+     "label": ":47137 node (vibepet)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906493535,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906505542,
+   "srv": [
+    {
+     "port": 47138,
+     "pid": 68560,
+     "label": ":47138 Directory listing for /",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906529525,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  }
+ ],
+ "rendererEvents": [
+  {
+   "at": 1790906276695,
+   "kind": "agentDone",
+   "text": "ember is done"
+  },
+  {
+   "at": 1790906412077,
+   "kind": "agentNeeds",
+   "text": "kestrel has a question"
+  },
+  {
+   "at": 1790906451159,
+   "kind": "agentDone",
+   "text": "delta is done"
+  }
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 328,
+  "procs": 7,
+  "orphans": []
+ }
+}

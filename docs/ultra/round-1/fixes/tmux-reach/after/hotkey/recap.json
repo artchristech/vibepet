@@ -1,0 +1,255 @@
+{
+ "phase": "hotkey",
+ "startedAt": "2026-10-02T05:48:53.675Z",
+ "uptimeStart": "23:48  up 6 days, 10:34, 20 users, load averages: 10.32 30.02 40.98",
+ "fleet": {
+  "delta": {
+   "pid": 29074,
+   "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+   "tmux": "vp-delta:@4.%4",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790906449089
+  },
+  "vibepet": {
+   "pid": 48221,
+   "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "tmux": "vp-vibepet:@1.%1",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790910787682
+  },
+  "atlas": {
+   "pid": 48392,
+   "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+   "tmux": "vp-atlas:@2.%2",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790910180805
+  },
+  "beacon": {
+   "pid": 48539,
+   "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+   "tmux": "vp-beacon:@3.%3",
+   "status": "waiting",
+   "waitingFor": "input needed",
+   "statusUpdatedAt": 1790907222729
+  },
+  "kestrel": {
+   "pid": 55946,
+   "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "tmux": "vp-kestrel:@8.%8",
+   "status": "waiting",
+   "waitingFor": "permission prompt",
+   "statusUpdatedAt": 1790910742347
+  }
+ },
+ "clientsAtStart": [
+  {
+   "tty": "/dev/ttys011",
+   "pid": 16322,
+   "flags": "attached,focused,ignore-size,read-only,UTF-8",
+   "session": "vp-vibepet"
+  }
+ ],
+ "terminalWindows": 1,
+ "trials": [
+  {
+   "how": "hotkey",
+   "asked": null,
+   "jumped": "beacon",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 259,
+   "clickToResultMs": 261,
+   "load": [
+    9.89,
+    29.6,
+    40.77
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [
+    {
+     "tty": "/dev/ttys011",
+     "shows": "vp-beacon @3 %3"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "hotkey",
+   "asked": null,
+   "jumped": "kestrel",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 207,
+   "clickToResultMs": 208,
+   "load": [
+    9.89,
+    29.6,
+    40.77
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [
+    {
+     "tty": "/dev/ttys011",
+     "shows": "vp-kestrel @8 %8"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "hotkey",
+   "asked": null,
+   "jumped": "atlas",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 234,
+   "clickToResultMs": 235,
+   "load": [
+    9.58,
+    29.21,
+    40.57
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [
+    {
+     "tty": "/dev/ttys011",
+     "shows": "vp-atlas @2 %2"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "hotkey",
+   "asked": null,
+   "jumped": "vibepet",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 233,
+   "clickToResultMs": 234,
+   "load": [
+    9.58,
+    29.21,
+    40.57
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [
+    {
+     "tty": "/dev/ttys011",
+     "shows": "vp-vibepet @1 %1"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "hotkey",
+   "asked": null,
+   "jumped": "delta",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 252,
+   "clickToResultMs": 253,
+   "load": [
+    9.58,
+    29.21,
+    40.57
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [
+    {
+     "tty": "/dev/ttys011",
+     "shows": "vp-delta @4 %4"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  }
+ ],
+ "notes": [],
+ "git": "dadb52f tmux-reach: the GUI path refuses Approve too while an AskUserQuestion list is up",
+ "worktreeDiff": "agents.js | 7 +++++--\n 1 file changed, 5 insertions(+), 2 deletions(-)",
+ "launch": {
+  "pid": 16819,
+  "readyMs": 511
+ },
+ "aeTerminal": "0",
+ "rows": [],
+ "pendingAtStart": [
+  "beacon",
+  "kestrel",
+  "atlas",
+  "vibepet",
+  "delta"
+ ],
+ "aeDenied": 0,
+ "clipboard": 0,
+ "openExternal": [],
+ "close": {
+  "how": "quit",
+  "ms": 317,
+  "procs": 7,
+  "orphans": []
+ },
+ "uptimeEnd": "23:49  up 6 days, 10:34, 20 users, load averages: 9.58 29.21 40.57",
+ "summary": {
+  "hotkey": {
+   "n": 5,
+   "ok": 5,
+   "levels": [
+    "pane"
+   ],
+   "medianClickToResultMs": 235,
+   "maxClickToResultMs": 261,
+   "paneMatches": 5,
+   "terminalFront": 5,
+   "clipboardWrites": 0,
+   "perMember": {
+    "kestrel": {
+     "n": 1,
+     "medianMs": 208
+    },
+    "beacon": {
+     "n": 1,
+     "medianMs": 261
+    },
+    "vibepet": {
+     "n": 1,
+     "medianMs": 234
+    },
+    "atlas": {
+     "n": 1,
+     "medianMs": 235
+    },
+    "delta": {
+     "n": 1,
+     "medianMs": 253
+    }
+   }
+  }
+ }
+}

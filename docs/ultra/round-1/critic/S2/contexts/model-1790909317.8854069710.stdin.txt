@@ -1,0 +1,15 @@
+<live_context>
+Local time: 10/1/2026, 8:48:37 PM.
+
+Agents: atlas=working for 2s, kestrel=waiting for 2s.
+
+Repo: atlas (branch main): 0 uncommitted lines across 0 files, 0 untracked files. Last commit 390 min ago: "atlas: tile renderer and build script".
+
+Recent commits:
+61815a9 atlas: tile renderer and build script
+
+Diff stat:
+(clean)
+</live_context>
+
+User: say hi in five words

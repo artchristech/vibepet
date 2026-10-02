@@ -1,0 +1,14 @@
+[13:02:43.107] idle {"uptime":["load 4.64 7.48 28.77","load 4.94 7.29 27.96"],"secs":30.029,"watching":12,"paths":["~/.vibepet-ultra/root/.claude/sessions","~/.claude/sessions/29074.json","~/.claude/sessions/48221.json","~/.claude/sessions/48392.json","~/.claude/sessions/48539.json","~/.claude/sessions/55946.json","~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-beacon/a9377f08-ad27-4bd5-bb77-dbd576eab89e.jsonl","~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-kestrel/13a1427d-6cb0-4561-b5a3-22453a34bf93.jsonl","~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-delta/eb59a756-0b6f-4a82-8d55-1f0bc2c40358.jsonl","~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-delta/eb59a756-0b6f-4a82-8d55-1f0bc2c40358/subagents","~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-atlas/5c051e84-b74f-41b6-845f-bde937a9ef90.jsonl","~/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-vibepet/6101876b-19c6-42a1-824f-6f1c7d4fd83e.jsonl"],"realTranscriptsWatched":0,"mainTicksPerSec":0.33,"liveTicks":0,"watcherEvents":0,"rendererSnapshotsPerSec":0.33}
+[13:02:56.204] pipe median 162 ms (tick 10 ms) load 4.94 7.29 27.96 -> load 5.92 7.41 27.76
+[13:02:59.072] probe kestrel option 9: {"ok":false,"why":"Didn't land - kestrel isn't asking a question (it's waiting on an approval)"} ipc 140 ms, row note 140 ms
+[13:03:00.142] probe vibepet option 9: {"ok":false,"why":"Didn't land - vibepet isn't asking a question (it's idle)"} ipc 137 ms, row note 137 ms
+[13:03:01.132] probe beacon option 9: {"ok":false,"why":"beacon's question has no option 9"} ipc 129 ms, row note 129 ms
+[13:03:03.267] probe acts [["kestrel","option","refused",137],["vibepet","option","refused",135],["beacon","option","refused",128]] · ticks {"n":2,"live":1,"secs":3.3,"perSec":0.6} · fleet unchanged true
+[13:03:03.646] closed quit, 0 orphans
+[13:04:59.069] cpu base #1: 2.24% (1.35 s / 60.3 s, 4 procs, ticks null, live null, events null) · load 9.26 7.99 26.47 -> load 24.12 12.41 26.85
+[13:06:19.550] cpu fix #1: 2.89% (1.75 s / 60.5 s, 4 procs, ticks 20, live 0, events 0) · load 25.36 13.52 26.92 -> load 20.51 14.32 26.31
+[13:07:39.474] cpu fix #2: 2.11% (1.27 s / 60.1 s, 4 procs, ticks 20, live 0, events 0) · load 22.72 15.34 26.40 -> load 14.89 14.66 25.41
+[13:08:56.329] cpu base #2: 2.06% (1.24 s / 60.1 s, 4 procs, ticks null, live null, events null) · load 13.52 14.37 25.12 -> load 8.38 12.79 23.79
+[13:10:12.988] cpu base #3: 1.55% (0.93 s / 60.1 s, 4 procs, ticks null, live null, events null) · load 7.49 12.37 23.45 -> load 5.52 10.87 22.13
+[13:11:29.408] cpu fix #3: 1.37% (0.82 s / 60.1 s, 4 procs, ticks 20, live 0, events 0) · load 5.32 10.49 21.73 -> load 5.15 9.58 20.63
+[13:11:29.758] cpu medians fix 2.11% base 2.06% delta 0.05 points

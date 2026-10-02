@@ -1,0 +1,6 @@
+run 1: ready 7058 ms, home 'now' in 585 ms, close quit in 4408 ms, 5 procs, orphans 0
+run 2: ready 2802 ms, home 'now' in 484 ms, close quit in 1434 ms, 5 procs, orphans 0
+run 3: ready 1299 ms, home 'now' in 207 ms, close quit in 606 ms, 5 procs, orphans 0
+first run: home 'setup', orphans 0
+parallel: pids 17810,17809, both alive true, homes now,now, orphans 0,0
+ok in 67.5 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/keys-entry/after/smoke

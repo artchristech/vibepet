@@ -1,0 +1,842 @@
+{
+ "phase": "attached",
+ "startedAt": "2026-10-02T05:35:26.389Z",
+ "uptimeStart": "23:35  up 6 days, 10:20, 20 users, load averages: 6.30 21.82 31.30",
+ "fleet": {
+  "delta": {
+   "pid": 29074,
+   "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+   "tmux": "vp-delta:@4.%4",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790906449089
+  },
+  "vibepet": {
+   "pid": 48221,
+   "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "tmux": "vp-vibepet:@1.%1",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790910787682
+  },
+  "atlas": {
+   "pid": 48392,
+   "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+   "tmux": "vp-atlas:@2.%2",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790910180805
+  },
+  "beacon": {
+   "pid": 48539,
+   "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+   "tmux": "vp-beacon:@3.%3",
+   "status": "waiting",
+   "waitingFor": "input needed",
+   "statusUpdatedAt": 1790907222729
+  },
+  "kestrel": {
+   "pid": 55946,
+   "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "tmux": "vp-kestrel:@8.%8",
+   "status": "waiting",
+   "waitingFor": "permission prompt",
+   "statusUpdatedAt": 1790910742347
+  }
+ },
+ "clientsAtStart": [
+  {
+   "tty": "/dev/ttys012",
+   "pid": 29812,
+   "flags": "attached,focused,ignore-size,read-only,UTF-8",
+   "session": "vp-beacon"
+  }
+ ],
+ "terminalWindows": 1,
+ "trials": [
+  {
+   "how": "hotkey",
+   "asked": null,
+   "jumped": "beacon",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 233,
+   "clickToResultMs": 234,
+   "load": [
+    5.87,
+    21.48,
+    31.12
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-beacon @3 %3"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "hotkey",
+   "asked": null,
+   "jumped": "kestrel",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 1167,
+   "clickToResultMs": 1168,
+   "load": [
+    5.87,
+    21.48,
+    31.12
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-kestrel @8 %8"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "/jump",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 1248,
+   "clickToResultMs": 1358,
+   "load": [
+    8.37,
+    21.73,
+    31.15
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-kestrel @8 %8"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "/jump",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 832,
+   "clickToResultMs": 859,
+   "load": [
+    8.37,
+    21.73,
+    31.15
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-beacon @3 %3"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "/jump",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 234,
+   "clickToResultMs": 243,
+   "load": [
+    7.94,
+    21.42,
+    30.99
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-vibepet @1 %1"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "/jump",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 258,
+   "clickToResultMs": 269,
+   "load": [
+    7.94,
+    21.42,
+    30.99
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-atlas @2 %2"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "/jump",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 501,
+   "clickToResultMs": 518,
+   "load": [
+    7.94,
+    21.42,
+    30.99
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-delta @4 %4"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 328,
+   "clickToResultMs": 364,
+   "load": [
+    7.94,
+    21.42,
+    30.99
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-kestrel @8 %8"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 523,
+   "clickToResultMs": 562,
+   "load": [
+    9.94,
+    21.62,
+    31
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-beacon @3 %3"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 398,
+   "clickToResultMs": 452,
+   "load": [
+    9.94,
+    21.62,
+    31
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-vibepet @1 %1"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 353,
+   "clickToResultMs": 391,
+   "load": [
+    9.94,
+    21.62,
+    31
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-atlas @2 %2"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 294,
+   "clickToResultMs": 332,
+   "load": [
+    9.31,
+    21.29,
+    30.83
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-delta @4 %4"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 249,
+   "clickToResultMs": 286,
+   "load": [
+    9.31,
+    21.29,
+    30.83
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-kestrel @8 %8"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 251,
+   "clickToResultMs": 286,
+   "load": [
+    9.31,
+    21.29,
+    30.83
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-beacon @3 %3"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 299,
+   "clickToResultMs": 334,
+   "load": [
+    9.31,
+    21.29,
+    30.83
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-vibepet @1 %1"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 261,
+   "clickToResultMs": 296,
+   "load": [
+    9.31,
+    21.29,
+    30.83
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-atlas @2 %2"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 257,
+   "clickToResultMs": 292,
+   "load": [
+    8.64,
+    20.95,
+    30.66
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-delta @4 %4"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 294,
+   "clickToResultMs": 332,
+   "load": [
+    8.64,
+    20.95,
+    30.66
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-kestrel @8 %8"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 259,
+   "clickToResultMs": 295,
+   "load": [
+    8.64,
+    20.95,
+    30.66
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-beacon @3 %3"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 314,
+   "clickToResultMs": 350,
+   "load": [
+    8.64,
+    20.95,
+    30.66
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-vibepet @1 %1"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 234,
+   "clickToResultMs": 333,
+   "load": [
+    8.27,
+    20.67,
+    30.5
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-atlas @2 %2"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  },
+  {
+   "how": "row",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": true,
+    "level": "pane",
+    "raised": "tab"
+   },
+   "handlerMs": 306,
+   "clickToResultMs": 343,
+   "load": [
+    8.27,
+    20.67,
+    30.5
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [
+    {
+     "tty": "/dev/ttys012",
+     "shows": "vp-delta @4 %4"
+    }
+   ],
+   "front": "com.apple.Terminal",
+   "clipboardWrites": 0,
+   "paneMatches": true
+  }
+ ],
+ "notes": [],
+ "git": "d7af2cb tmux-reach: press Enter after a typed reply only when the input box holds it",
+ "worktreeDiff": "agents.js | 7 +++++--\n 1 file changed, 5 insertions(+), 2 deletions(-)",
+ "launch": {
+  "pid": 56631,
+  "readyMs": 449
+ },
+ "aeTerminal": "0",
+ "rows": [
+  {
+   "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+   "cls": "nr needs",
+   "title": "Beacon database choice",
+   "label": "beacon · waiting 1m",
+   "actions": [
+    "reply",
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "beacon"
+  },
+  {
+   "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "cls": "nr stuck",
+   "title": "Deploy.sh dry run",
+   "label": "kestrel · stuck 1m",
+   "actions": [
+    "approve",
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "kestrel"
+  },
+  {
+   "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+   "cls": "nr ready",
+   "title": "Reconcile three shards in parallel",
+   "label": "delta · done just now",
+   "actions": [
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "delta"
+  },
+  {
+   "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+   "cls": "nr ready",
+   "title": "Run build.sh",
+   "label": "atlas · done just now",
+   "actions": [
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "atlas"
+  },
+  {
+   "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "cls": "nr ready",
+   "title": "Read package.json",
+   "label": "vibepet · done just now",
+   "actions": [
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "vibepet"
+  }
+ ],
+ "pendingAtStart": [
+  "beacon",
+  "kestrel"
+ ],
+ "aeDenied": 0,
+ "clipboard": 0,
+ "openExternal": [],
+ "close": {
+  "how": "quit",
+  "ms": 273,
+  "procs": 7,
+  "orphans": []
+ },
+ "uptimeEnd": "23:36  up 6 days, 10:21, 20 users, load averages: 8.27 20.67 30.50",
+ "summary": {
+  "hotkey": {
+   "n": 2,
+   "ok": 2,
+   "levels": [
+    "pane"
+   ],
+   "medianClickToResultMs": 234,
+   "maxClickToResultMs": 1168,
+   "paneMatches": 2,
+   "terminalFront": 2,
+   "clipboardWrites": 0,
+   "perMember": {
+    "kestrel": {
+     "n": 1,
+     "medianMs": 1168
+    },
+    "beacon": {
+     "n": 1,
+     "medianMs": 234
+    },
+    "vibepet": {
+     "n": 0,
+     "medianMs": null
+    },
+    "atlas": {
+     "n": 0,
+     "medianMs": null
+    },
+    "delta": {
+     "n": 0,
+     "medianMs": null
+    }
+   }
+  },
+  "/jump": {
+   "n": 5,
+   "ok": 5,
+   "levels": [
+    "pane"
+   ],
+   "medianClickToResultMs": 518,
+   "maxClickToResultMs": 1358,
+   "paneMatches": 5,
+   "terminalFront": 5,
+   "clipboardWrites": 0,
+   "perMember": {
+    "kestrel": {
+     "n": 1,
+     "medianMs": 1358
+    },
+    "beacon": {
+     "n": 1,
+     "medianMs": 859
+    },
+    "vibepet": {
+     "n": 1,
+     "medianMs": 243
+    },
+    "atlas": {
+     "n": 1,
+     "medianMs": 269
+    },
+    "delta": {
+     "n": 1,
+     "medianMs": 518
+    }
+   }
+  },
+  "row": {
+   "n": 15,
+   "ok": 15,
+   "levels": [
+    "pane"
+   ],
+   "medianClickToResultMs": 333,
+   "maxClickToResultMs": 562,
+   "paneMatches": 15,
+   "terminalFront": 15,
+   "clipboardWrites": 0,
+   "perMember": {
+    "kestrel": {
+     "n": 3,
+     "medianMs": 332
+    },
+    "beacon": {
+     "n": 3,
+     "medianMs": 295
+    },
+    "vibepet": {
+     "n": 3,
+     "medianMs": 350
+    },
+    "atlas": {
+     "n": 3,
+     "medianMs": 333
+    },
+    "delta": {
+     "n": 3,
+     "medianMs": 332
+    }
+   }
+  }
+ }
+}

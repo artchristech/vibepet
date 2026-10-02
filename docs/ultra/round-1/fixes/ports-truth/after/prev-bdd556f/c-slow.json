@@ -1,0 +1,164 @@
+{
+ "what": "slow.js PORT title 20000: every request waits until 20 s after start; ready = its READY_AT; active = Open no longer aria-disabled",
+ "startedAt": "2026-10-02T10:49:47.948Z",
+ "uptimeStart": "4:49  up 6 days, 15:35, 19 users, load averages: 59.24 54.51 46.03",
+ "trials": [
+  {
+   "port": 47763,
+   "listenAt": 1790938190613,
+   "readyAt": 1790938210601,
+   "firstShownInactive": true,
+   "activeAt": 1790938210717,
+   "msAfterReady": 116
+  },
+  {
+   "port": 47764,
+   "listenAt": 1790938190968,
+   "readyAt": 1790938210961,
+   "firstShownInactive": true,
+   "activeAt": 1790938211030,
+   "msAfterReady": 69
+  },
+  {
+   "port": 47765,
+   "listenAt": 1790938192072,
+   "readyAt": 1790938211910,
+   "firstShownInactive": true,
+   "activeAt": 1790938211928,
+   "msAfterReady": 18
+  },
+  {
+   "port": 47766,
+   "listenAt": 1790938192710,
+   "readyAt": 1790938212706,
+   "firstShownInactive": true,
+   "activeAt": 1790938212934,
+   "msAfterReady": 228
+  },
+  {
+   "port": 47767,
+   "listenAt": 1790938193836,
+   "readyAt": 1790938213804,
+   "firstShownInactive": true,
+   "activeAt": 1790938213830,
+   "msAfterReady": 26
+  },
+  {
+   "port": 47768,
+   "listenAt": 1790938195574,
+   "readyAt": 1790938215306,
+   "firstShownInactive": true,
+   "activeAt": 1790938215353,
+   "msAfterReady": 47
+  },
+  {
+   "port": 47769,
+   "listenAt": 1790938196394,
+   "readyAt": 1790938216357,
+   "firstShownInactive": true,
+   "activeAt": 1790938216382,
+   "msAfterReady": 25
+  },
+  {
+   "port": 47770,
+   "listenAt": 1790938196707,
+   "readyAt": 1790938216701,
+   "firstShownInactive": true,
+   "activeAt": 1790938216792,
+   "msAfterReady": 91
+  },
+  {
+   "port": 47771,
+   "listenAt": 1790938197195,
+   "readyAt": 1790938217177,
+   "firstShownInactive": true,
+   "activeAt": 1790938217262,
+   "msAfterReady": 85
+  },
+  {
+   "port": 47772,
+   "listenAt": 1790938198864,
+   "readyAt": 1790938218855,
+   "firstShownInactive": true,
+   "activeAt": 1790938218911,
+   "msAfterReady": 56
+  }
+ ],
+ "chips": [
+  ":47772 atlas · Compiled app 10",
+  ":47771 beacon · Compiled app 9",
+  ":47769 delta · Compiled app 7",
+  ":47770 kestrel · Compiled app 8",
+  ":47768 vibepet · Compiled app 6",
+  ":47767 atlas · Compiled app 5",
+  ":47766 beacon · Compiled app 4",
+  ":47765 kestrel · Compiled app 3",
+  ":47763 vibepet · Compiled app 1",
+  ":47764 delta · Compiled app 2"
+ ],
+ "afterReady": {
+  "n": 10,
+  "median": 62.5,
+  "min": 18,
+  "max": 228
+ },
+ "uptimeEnd": "4:50  up 6 days, 15:35, 19 users, load averages: 51.95 53.11 45.81",
+ "fixtures": [
+  {
+   "tag": "slow0",
+   "pid": 50309,
+   "exited": true
+  },
+  {
+   "tag": "slow1",
+   "pid": 50417,
+   "exited": true
+  },
+  {
+   "tag": "slow2",
+   "pid": 50442,
+   "exited": true
+  },
+  {
+   "tag": "slow3",
+   "pid": 50572,
+   "exited": true
+  },
+  {
+   "tag": "slow4",
+   "pid": 50677,
+   "exited": true
+  },
+  {
+   "tag": "slow5",
+   "pid": 50701,
+   "exited": true
+  },
+  {
+   "tag": "slow6",
+   "pid": 50823,
+   "exited": true
+  },
+  {
+   "tag": "slow7",
+   "pid": 50930,
+   "exited": true
+  },
+  {
+   "tag": "slow8",
+   "pid": 51026,
+   "exited": true
+  },
+  {
+   "tag": "slow9",
+   "pid": 51228,
+   "exited": true
+  }
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 4871,
+  "procs": 8,
+  "orphans": []
+ }
+}

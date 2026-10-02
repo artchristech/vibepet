@@ -1,0 +1,2924 @@
+{
+  "dir": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/tta-after",
+  "trials": 3,
+  "kinds": {
+    "approval": {
+      "label": "approval (Bash permission prompt)",
+      "member": "kestrel",
+      "trials": 2,
+      "valid": 2,
+      "windowSec": 240,
+      "excluded": [],
+      "transcriptWithheld": 1,
+      "detected": 2,
+      "detectS": [
+        1.1,
+        0.3
+      ],
+      "detectMedianS": 0.7,
+      "detectMedianSeenS": 0.7,
+      "detectNotWithinWindow": false,
+      "detectRegS": [
+        0.8,
+        0.3
+      ],
+      "bubbleS": [
+        1.1,
+        0.6
+      ],
+      "bubbleText": [
+        "kestrel needs approval"
+      ],
+      "ledS": [
+        null,
+        null
+      ],
+      "bannerS": [
+        null,
+        null
+      ],
+      "rowS": [
+        1.1,
+        0.3
+      ],
+      "rowMedianS": 0.7,
+      "rowSig": [
+        "needs"
+      ],
+      "rowLabel": [
+        "needs approval 1s",
+        "needs approval 0s"
+      ],
+      "offerS": [
+        1.1,
+        0.3
+      ],
+      "offerMedianS": 0.7,
+      "offerAction": [
+        "approve"
+      ],
+      "actionWorks": [
+        true,
+        true
+      ],
+      "works": 2,
+      "actionableMedianS": 0.7,
+      "actionClicks": [
+        2,
+        2
+      ],
+      "keys": [
+        0,
+        0
+      ],
+      "attempts": [
+        {
+          "n": 1,
+          "action": "approve",
+          "result": {
+            "ok": true
+          },
+          "note": null,
+          "sessionAfter": {
+            "status": "idle",
+            "waitingFor": null,
+            "toolResult": true,
+            "newUserPrompt": false
+          },
+          "jump": null,
+          "theater": null
+        },
+        {
+          "n": 2,
+          "action": "approve",
+          "result": {
+            "ok": true
+          },
+          "note": null,
+          "sessionAfter": {
+            "status": "idle",
+            "waitingFor": null,
+            "toolResult": false,
+            "newUserPrompt": false
+          },
+          "jump": null,
+          "theater": null
+        }
+      ],
+      "wrong": [],
+      "goneS": [
+        null,
+        null
+      ],
+      "spentUsdEst": 0.1498
+    },
+    "askuser": {
+      "label": "AskUserQuestion (multiple choice)",
+      "member": "beacon",
+      "trials": 1,
+      "valid": 1,
+      "windowSec": 240,
+      "excluded": [],
+      "transcriptWithheld": 1,
+      "detected": 1,
+      "detectS": [
+        2.8
+      ],
+      "detectMedianS": 2.8,
+      "detectMedianSeenS": 2.8,
+      "detectNotWithinWindow": false,
+      "detectRegS": [
+        2.8
+      ],
+      "bubbleS": [
+        3.1
+      ],
+      "bubbleText": [
+        "beacon has a question"
+      ],
+      "ledS": [
+        2.8
+      ],
+      "bannerS": [
+        null
+      ],
+      "rowS": [
+        2.8
+      ],
+      "rowMedianS": 2.8,
+      "rowSig": [
+        "needs"
+      ],
+      "rowLabel": [
+        "asking 3s"
+      ],
+      "offerS": [
+        2.8
+      ],
+      "offerMedianS": 2.8,
+      "offerAction": [
+        "reply"
+      ],
+      "actionWorks": [
+        false
+      ],
+      "works": 0,
+      "actionableMedianS": null,
+      "actionClicks": [
+        2
+      ],
+      "keys": [
+        7
+      ],
+      "attempts": [
+        {
+          "n": 1,
+          "action": "reply",
+          "result": {
+            "ok": false,
+            "why": "beacon is showing a question: pick one of its options"
+          },
+          "note": "Couldn't send: beacon is showing a question: pick one of its options",
+          "sessionAfter": {
+            "status": "waiting",
+            "waitingFor": "input needed",
+            "toolResult": false,
+            "newUserPrompt": false
+          },
+          "jump": {
+            "ok": false,
+            "why": "no terminal is attached to tmux session vp-beacon",
+            "attach": "tmux attach -t vp-beacon"
+          },
+          "theater": null
+        }
+      ],
+      "wrong": [],
+      "goneS": [
+        null
+      ],
+      "spentUsdEst": 0.0496
+    }
+  },
+  "meta": [
+    {
+      "app": "/Users/christopherharris/.vibepet-ultra/int",
+      "git": "3488d20 Merge ultra/r1/chat-context (gate green) @ ultra/round-1",
+      "root": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+      "startedAt": "2026-10-02T13:17:32.779Z",
+      "pollMs": 250,
+      "setup": {
+        "A": {
+          "pid": 12697,
+          "readyMs": 1706,
+          "instrument": {
+            "spied": [
+              "jump",
+              "send-to"
+            ]
+          },
+          "audio": {
+            "realContext": false
+          },
+          "prefs": {
+            "muted": false,
+            "alerts": "done",
+            "feel": "calm",
+            "animations": false
+          }
+        },
+        "B": {
+          "pid": 12698,
+          "readyMs": 1484,
+          "instrument": {
+            "spied": [
+              "jump",
+              "send-to"
+            ]
+          },
+          "audio": {
+            "realContext": false
+          },
+          "prefs": {
+            "muted": false,
+            "alerts": "done",
+            "feel": "calm",
+            "animations": false
+          }
+        }
+      },
+      "perms": {
+        "ax": true,
+        "screen": true
+      },
+      "prefs": {
+        "muted": false,
+        "alerts": "done",
+        "feel": "calm",
+        "animations": false
+      },
+      "plan": [
+        {
+          "kind": "approval",
+          "n": 1
+        },
+        {
+          "kind": "approval",
+          "n": 2
+        },
+        {
+          "kind": "askuser",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "app": "/Users/christopherharris/.vibepet-ultra/int",
+      "git": "3488d20 Merge ultra/r1/chat-context (gate green) @ ultra/round-1",
+      "root": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+      "startedAt": "2026-10-02T13:19:30.190Z",
+      "pollMs": 250,
+      "setup": {
+        "A": {
+          "pid": 14568,
+          "readyMs": 2294,
+          "instrument": {
+            "spied": [
+              "jump",
+              "send-to"
+            ]
+          },
+          "audio": {
+            "realContext": false
+          },
+          "prefs": {
+            "muted": false,
+            "alerts": "done",
+            "feel": "calm",
+            "animations": false
+          }
+        },
+        "B": {
+          "pid": 14569,
+          "readyMs": 2643,
+          "instrument": {
+            "spied": [
+              "jump",
+              "send-to"
+            ]
+          },
+          "audio": {
+            "realContext": false
+          },
+          "prefs": {
+            "muted": false,
+            "alerts": "done",
+            "feel": "calm",
+            "animations": false
+          }
+        }
+      },
+      "perms": {
+        "ax": true,
+        "screen": true
+      },
+      "prefs": {
+        "muted": false,
+        "alerts": "done",
+        "feel": "calm",
+        "animations": false
+      },
+      "plan": [
+        {
+          "kind": "approval",
+          "n": 1
+        },
+        {
+          "kind": "approval",
+          "n": 2
+        },
+        {
+          "kind": "askuser",
+          "n": 1
+        }
+      ]
+    }
+  ],
+  "budget": {
+    "startEst": 3.3093,
+    "startAt": "2026-10-02T13:17:29.675Z",
+    "budget": 0.6
+  },
+  "trialsRaw": [
+    {
+      "kind": "approval",
+      "label": "approval (Bash permission prompt)",
+      "n": 1,
+      "member": "kestrel",
+      "name": "kestrel",
+      "sid": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "pid": 55946,
+      "trigger": 1790947182647,
+      "bub": {
+        "A": {
+          "key": "hit|kestre",
+          "start": 1790947197790
+        },
+        "B": {
+          "key": "hit|kestre",
+          "start": 1790947197790
+        }
+      },
+      "first": {
+        "soundA": {
+          "t": 1790947185878,
+          "sounds": 5
+        },
+        "bubbleA": {
+          "t": 1790947186099,
+          "text": "kestrel needs approval",
+          "cls": "hit alert",
+          "start": 1790947186099,
+          "judgedAt": 1790947186099
+        },
+        "faceA": {
+          "t": 1790947186099,
+          "face": "alert"
+        },
+        "phaseA": {
+          "t": 1790947186099,
+          "phase": "stalled",
+          "ask": "Bash: ./deploy.sh --dry-run"
+        },
+        "offerA": {
+          "t": 1790947186099,
+          "action": "approve",
+          "phase": "stalled"
+        },
+        "rowB": {
+          "t": 1790947186099,
+          "sig": "needs",
+          "label": "needs approval 1s",
+          "actions": [
+            "approve",
+            "replay",
+            "done",
+            "goal"
+          ],
+          "aboveFold": true,
+          "ask": "Bash: ./deploy.sh --dry-run"
+        },
+        "offerB": {
+          "t": 1790947186099,
+          "actions": [
+            "approve",
+            "replay",
+            "done",
+            "goal"
+          ]
+        },
+        "bubbleB": {
+          "t": 1790947186099,
+          "state": "visible",
+          "text": "kestrel needs approval",
+          "start": 1790947186099
+        },
+        "queueHeadA": {
+          "t": 1790947186099
+        }
+      },
+      "phases": [
+        {
+          "phase": "ready",
+          "from": -5.7,
+          "to": 0.9
+        },
+        {
+          "phase": "stalled",
+          "from": 1.1,
+          "to": 9.7
+        },
+        {
+          "phase": "working",
+          "from": 9.9,
+          "to": 12.5
+        },
+        {
+          "phase": "ready",
+          "from": 12.8,
+          "to": 12.8
+        }
+      ],
+      "timeline": [
+        {
+          "t": 1790947179335,
+          "A": {
+            "phase": "ready",
+            "since": 1790947171322,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert hidden",
+            "home": false,
+            "queuePos": 3,
+            "notes": 0,
+            "sounds": 0,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "interrupted",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947171322,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 5s ago",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947179849,
+          "A": {
+            "phase": "ready",
+            "since": 1790947171322,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert hidden",
+            "home": false,
+            "queuePos": 3,
+            "notes": 0,
+            "sounds": 0,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "interrupted",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947171322,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 9s ago",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947182909,
+          "A": {
+            "phase": "ready",
+            "since": 1790947171322,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert hidden",
+            "home": false,
+            "queuePos": 3,
+            "notes": 0,
+            "sounds": 0,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "interrupted",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947171322,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 11s ago",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947185878,
+          "A": {
+            "phase": "ready",
+            "since": 1790947171322,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "visible",
+            "bubbleText": "kestrel nee",
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 3,
+            "notes": 0,
+            "sounds": 5,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "interrupted",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947171322,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 11s ago",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947186099,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947185260,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "kestrel needs approval",
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 9,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947185260,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 1s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947189023,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947185260,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "kestrel needs approval",
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 9,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947185260,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 3s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947190918,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947185260,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 9,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": true
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947185260,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 3s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947191208,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947185260,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 9,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947185260,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 3s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947191466,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947185260,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "kestrel needs approval",
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 9,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947185260,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 3s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947191947,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947185260,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "kestrel needs approval",
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 9,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947185260,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 7s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947193439,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947185260,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "visible",
+            "bubbleText": "kestrel needs approval",
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 9,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947185260,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 7s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947194219,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947185260,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert hidden",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 9,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947185260,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 7s",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947194955,
+          "A": {
+            "phase": "working",
+            "since": 1790947193182,
+            "sig": "running",
+            "led": "running",
+            "face": "working",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert hidden",
+            "home": true,
+            "queuePos": -1,
+            "notes": 0,
+            "sounds": 9,
+            "idleSec": 0,
+            "fan": null,
+            "ask": null,
+            "hovering": false
+          },
+          "B": {
+            "sig": "running",
+            "since": 1790947193182,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "running 2s",
+            "aboveFold": false,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947197540,
+          "A": {
+            "phase": "working",
+            "since": 1790947193182,
+            "sig": "running",
+            "led": "running",
+            "face": "working",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert hidden",
+            "home": false,
+            "queuePos": -1,
+            "notes": 0,
+            "sounds": 9,
+            "idleSec": 3,
+            "fan": null,
+            "ask": null,
+            "hovering": false
+          },
+          "B": {
+            "sig": "running",
+            "since": 1790947193182,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "running 2s",
+            "aboveFold": false,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947197790,
+          "A": {
+            "phase": "ready",
+            "since": 1790947195037,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "visible",
+            "bubbleText": null,
+            "bubbleCls": "hit",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 11,
+            "idleSec": 3,
+            "fan": null,
+            "ask": "Dry-run would build kestrel f7a28d0, upload to staging.kestrel.invalid, with no ",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947195037,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 3s ago",
+            "aboveFold": false,
+            "bubble": "visible",
+            "bubbleSays": false,
+            "home": true
+          }
+        }
+      ],
+      "shots": [
+        {
+          "file": "shots/approval-1/003.5s-A-bubble.png",
+          "at": 1790947187513,
+          "label": "bubble"
+        },
+        {
+          "file": "shots/approval-1/003.5s-B-row-needs.png",
+          "at": 1790947187846,
+          "label": "row-needs"
+        },
+        {
+          "file": "shots/approval-1/003.5s-B-offer-approve.png",
+          "at": 1790947188220,
+          "label": "offer-approve"
+        },
+        {
+          "file": "shots/approval-1/008.9s-A-attempt-home.png",
+          "at": 1790947192681,
+          "label": "attempt-home"
+        },
+        {
+          "file": "shots/approval-1/011.3s-A-attempt-approve.png",
+          "at": 1790947194446,
+          "label": "attempt-approve"
+        }
+      ],
+      "app": "3488d20 Merge ultra/r1/chat-context (gate green) @ ultra/round-1",
+      "spendBefore": {
+        "usd": 2.234032,
+        "est": 3.3256,
+        "at": "2026-10-02T13:19:39.332Z"
+      },
+      "notes0": 0,
+      "sounds0": 0,
+      "ledVal": "ready",
+      "faceVal": "ready",
+      "faceChangedAt": 1790947197790,
+      "ledChangedAt": 1790947197790,
+      "baseline": {
+        "led": "ready",
+        "face": "ready",
+        "agents": [
+          "delta:ready",
+          "atlas:ready",
+          "vibepet:ready",
+          "kestrel:ready",
+          "beacon:ready"
+        ]
+      },
+      "seenAgent": true,
+      "lastPhase": "stalled",
+      "triggerAt": "2026-10-02T13:19:42.647Z",
+      "block": {
+        "regStatus": "waiting",
+        "waitingFor": "permission prompt",
+        "regAt": 1790947185260,
+        "pid": 55946,
+        "sid": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "pendingId": "toolu_01JeaGGXVFYPgX2bUdEqvHLY",
+        "pendingTool": "Bash",
+        "recordAt": 1790947185018,
+        "dialog": true,
+        "select": false
+      },
+      "t0reg": 1790947185260,
+      "t0rec": 1790947185018,
+      "t0": 1790947185018,
+      "windowEnd": 1790947190665,
+      "attemptAt": 1790947190666,
+      "attempt": {
+        "clicks": 2,
+        "keys": 0,
+        "steps": [
+          {
+            "step": "click Net",
+            "homeMs": 420,
+            "mode": "now"
+          },
+          {
+            "step": "click Approve"
+          }
+        ],
+        "row": {
+          "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+          "sig": "needs",
+          "label": "needs approval 7s",
+          "ask": "Bash: ./deploy.sh --dry-run",
+          "actions": [
+            "approve",
+            "replay",
+            "done",
+            "goal"
+          ]
+        },
+        "rowsShown": 5,
+        "rowIndex": 0,
+        "offered": [
+          "approve"
+        ],
+        "action": "approve",
+        "wanted": "approve",
+        "sendTo": {
+          "result": {
+            "ok": true
+          },
+          "ms": 374
+        },
+        "note": null,
+        "fleetAfter": {
+          "status": "idle",
+          "waitingFor": null,
+          "dialog": false,
+          "select": false,
+          "toolResult": {
+            "at": "2026-10-02T13:19:53.338Z",
+            "isError": false,
+            "interrupted": false
+          },
+          "subToolResult": null,
+          "newUserPrompt": false
+        },
+        "resolved": true
+      },
+      "teardown": {
+        "esc": false
+      },
+      "spendAfter": {
+        "usd": 2.324015,
+        "est": 3.4606,
+        "at": "2026-10-02T13:19:58.388Z"
+      },
+      "spentUsdEst": 0.135,
+      "preT0": {},
+      "result": {
+        "t0": "2026-10-02T13:19:45.018Z",
+        "t0From": "transcript",
+        "detectAmbientS": 1.1,
+        "detectAmbientRegS": 0.8,
+        "bubbleS": 1.1,
+        "ledS": null,
+        "faceS": 1.1,
+        "rowS": 1.1,
+        "rowRegS": 0.8,
+        "offerS": 1.1,
+        "offerAction": "approve",
+        "bannerS": null,
+        "soundS": 0.9,
+        "goneS": null,
+        "phaseS": 1.1,
+        "queueHeadS": 1.1,
+        "wrong": null,
+        "otherBubble": null,
+        "actionWorks": true,
+        "clicks": 2,
+        "keys": 0
+      }
+    },
+    {
+      "kind": "approval",
+      "label": "approval (Bash permission prompt)",
+      "n": 2,
+      "member": "kestrel",
+      "name": "kestrel",
+      "sid": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "pid": 55946,
+      "trigger": 1790947201715,
+      "bub": {
+        "A": {
+          "key": "hit|kestrel is d",
+          "start": 1790947213133
+        },
+        "B": {
+          "key": "hit|kestrel is d",
+          "start": 1790947213133
+        }
+      },
+      "first": {
+        "faceA": {
+          "t": 1790947203796,
+          "face": "alert"
+        },
+        "phaseA": {
+          "t": 1790947203796,
+          "phase": "stalled",
+          "ask": "Bash: ./deploy.sh --dry-run"
+        },
+        "offerA": {
+          "t": 1790947203796,
+          "action": "approve",
+          "phase": "stalled"
+        },
+        "rowB": {
+          "t": 1790947203796,
+          "sig": "needs",
+          "label": "needs approval 0s",
+          "actions": [
+            "approve",
+            "replay",
+            "done",
+            "goal"
+          ],
+          "aboveFold": true,
+          "ask": "Bash: ./deploy.sh --dry-run"
+        },
+        "offerB": {
+          "t": 1790947203796,
+          "actions": [
+            "approve",
+            "replay",
+            "done",
+            "goal"
+          ]
+        },
+        "soundA": {
+          "t": 1790947203796,
+          "sounds": 18
+        },
+        "queueHeadA": {
+          "t": 1790947203796
+        },
+        "bubbleA": {
+          "t": 1790947204047,
+          "text": "kestrel needs approval",
+          "cls": "hit alert",
+          "start": 1790947204047,
+          "judgedAt": 1790947204313
+        },
+        "bubbleB": {
+          "t": 1790947204313,
+          "state": "visible",
+          "text": "kestrel needs approval",
+          "start": 1790947204047
+        }
+      },
+      "phases": [
+        {
+          "phase": "ready",
+          "from": -5,
+          "to": 0.1
+        },
+        {
+          "phase": "stalled",
+          "from": 0.3,
+          "to": 9.4
+        },
+        {
+          "phase": "ready",
+          "from": 9.7,
+          "to": 11.6
+        }
+      ],
+      "timeline": [
+        {
+          "t": 1790947198486,
+          "A": {
+            "phase": "ready",
+            "since": 1790947195037,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "visible",
+            "bubbleText": "kestrel is done",
+            "bubbleCls": "hit",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 14,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Dry-run would build kestrel f7a28d0, upload to staging.kestrel.invalid, with no ",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947195037,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 3s ago",
+            "aboveFold": false,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947200995,
+          "A": {
+            "phase": "ready",
+            "since": 1790947195037,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "visible",
+            "bubbleText": "kestrel is done",
+            "bubbleCls": "hit",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 14,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Dry-run would build kestrel f7a28d0, upload to staging.kestrel.invalid, with no ",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947195037,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 6s ago",
+            "aboveFold": false,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947201999,
+          "A": {
+            "phase": "ready",
+            "since": 1790947195037,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit hidden",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 14,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Dry-run would build kestrel f7a28d0, upload to staging.kestrel.invalid, with no ",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947195037,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 6s ago",
+            "aboveFold": false,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947203796,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947203480,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": null,
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 18,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947203480,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 0s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947204047,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947203480,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "kestrel needs approv",
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 22,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947203480,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 0s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947204313,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947203480,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "kestrel needs approval",
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 23,
+            "idleSec": 1,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947203480,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 0s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947206919,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947203480,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "kestrel needs approval",
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 23,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947203480,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 3s",
+            "aboveFold": false,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947208831,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947203480,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 23,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": true
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947203480,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 3s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947209083,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947203480,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 23,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947203480,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 3s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947209331,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947203480,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "kestrel needs approval",
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 23,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947203480,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 3s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947209832,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947203480,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "kestrel needs approval",
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 23,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947203480,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 6s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947211609,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947203480,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "visible",
+            "bubbleText": "kestrel needs approval",
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 23,
+            "idleSec": 1,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947203480,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 6s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947212113,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947203480,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert hidden",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 23,
+            "idleSec": 1,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947203480,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 6s",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947212867,
+          "A": {
+            "phase": "stalled",
+            "since": 1790947203480,
+            "sig": "stuck",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "visible",
+            "bubbleText": "kestrel is",
+            "bubbleCls": "hit",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 26,
+            "idleSec": 2,
+            "fan": null,
+            "ask": "Bash: ./deploy.sh --dry-run",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947203480,
+            "actions": [
+              "approve",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "needs approval 6s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947213133,
+          "A": {
+            "phase": "ready",
+            "since": 1790947211472,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "visible",
+            "bubbleText": "kestrel is done",
+            "bubbleCls": "hit",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 28,
+            "idleSec": 2,
+            "fan": null,
+            "ask": "Dry-run would build kestrel f7a28d0, upload to staging.kestrel.invalid, with no ",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947211472,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 1s ago",
+            "aboveFold": false,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947214875,
+          "A": {
+            "phase": "ready",
+            "since": 1790947211472,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "visible",
+            "bubbleText": "kestrel is done",
+            "bubbleCls": "hit",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 28,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Dry-run would build kestrel f7a28d0, upload to staging.kestrel.invalid, with no ",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947211472,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 1s ago",
+            "aboveFold": false,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        }
+      ],
+      "shots": [
+        {
+          "file": "shots/approval-2/002.1s-B-row-needs.png",
+          "at": 1790947204312,
+          "label": "row-needs"
+        },
+        {
+          "file": "shots/approval-2/002.1s-B-offer-approve.png",
+          "at": 1790947204662,
+          "label": "offer-approve"
+        },
+        {
+          "file": "shots/approval-2/002.6s-A-bubble.png",
+          "at": 1790947205505,
+          "label": "bubble"
+        },
+        {
+          "file": "shots/approval-2/007.8s-A-attempt-home.png",
+          "at": 1790947209948,
+          "label": "attempt-home"
+        },
+        {
+          "file": "shots/approval-2/009.5s-A-attempt-approve.png",
+          "at": 1790947211473,
+          "label": "attempt-approve"
+        }
+      ],
+      "app": "3488d20 Merge ultra/r1/chat-context (gate green) @ ultra/round-1",
+      "spendBefore": {
+        "usd": 2.324015,
+        "est": 3.4606,
+        "at": "2026-10-02T13:19:58.485Z"
+      },
+      "notes0": 0,
+      "sounds0": 14,
+      "ledVal": "ready",
+      "faceVal": "ready",
+      "faceChangedAt": 1790947213133,
+      "ledChangedAt": 1790947213133,
+      "baseline": {
+        "led": "ready",
+        "face": "ready",
+        "agents": [
+          "delta:ready",
+          "atlas:ready",
+          "vibepet:ready",
+          "beacon:ready",
+          "kestrel:ready"
+        ]
+      },
+      "seenAgent": true,
+      "lastPhase": "stalled",
+      "triggerAt": "2026-10-02T13:20:01.715Z",
+      "block": {
+        "regStatus": "waiting",
+        "waitingFor": "permission prompt",
+        "regAt": 1790947203480,
+        "pid": 55946,
+        "sid": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "withheld": true,
+        "dialog": true,
+        "select": false
+      },
+      "t0reg": 1790947203480,
+      "t0rec": null,
+      "t0": 1790947203480,
+      "windowEnd": 1790947208580,
+      "attemptAt": 1790947208580,
+      "attempt": {
+        "clicks": 2,
+        "keys": 0,
+        "steps": [
+          {
+            "step": "click Net",
+            "homeMs": 397,
+            "mode": "now"
+          },
+          {
+            "step": "click Approve"
+          }
+        ],
+        "row": {
+          "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+          "sig": "needs",
+          "label": "needs approval 6s",
+          "ask": "Bash: ./deploy.sh --dry-run",
+          "actions": [
+            "approve",
+            "replay",
+            "done",
+            "goal"
+          ]
+        },
+        "rowsShown": 5,
+        "rowIndex": 0,
+        "offered": [
+          "approve"
+        ],
+        "action": "approve",
+        "wanted": "approve",
+        "sendTo": {
+          "result": {
+            "ok": true
+          },
+          "ms": 266
+        },
+        "note": null,
+        "fleetAfter": {
+          "status": "idle",
+          "waitingFor": null,
+          "dialog": false,
+          "select": false,
+          "toolResult": null,
+          "subToolResult": null,
+          "newUserPrompt": false
+        },
+        "resolved": true
+      },
+      "teardown": {
+        "esc": false
+      },
+      "spendAfter": {
+        "usd": 2.333884,
+        "est": 3.4754,
+        "at": "2026-10-02T13:20:15.650Z"
+      },
+      "spentUsdEst": 0.0148,
+      "preT0": {},
+      "result": {
+        "t0": "2026-10-02T13:20:03.480Z",
+        "t0From": "registry",
+        "detectAmbientS": 0.3,
+        "detectAmbientRegS": 0.3,
+        "bubbleS": 0.6,
+        "ledS": null,
+        "faceS": 0.3,
+        "rowS": 0.3,
+        "rowRegS": 0.3,
+        "offerS": 0.3,
+        "offerAction": "approve",
+        "bannerS": null,
+        "soundS": 0.3,
+        "goneS": null,
+        "phaseS": 0.3,
+        "queueHeadS": 0.3,
+        "wrong": null,
+        "otherBubble": null,
+        "actionWorks": true,
+        "clicks": 2,
+        "keys": 0
+      }
+    },
+    {
+      "kind": "askuser",
+      "label": "AskUserQuestion (multiple choice)",
+      "n": 1,
+      "member": "beacon",
+      "name": "beacon",
+      "sid": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+      "pid": 48539,
+      "trigger": 1790947219139,
+      "bub": {
+        "A": {
+          "key": "hit|Beacon datab",
+          "start": 1790947234849
+        },
+        "B": {
+          "key": "",
+          "start": 1790947233091
+        }
+      },
+      "first": {
+        "ledA": {
+          "t": 1790947224876,
+          "led": "needs"
+        },
+        "faceA": {
+          "t": 1790947224876,
+          "face": "alert"
+        },
+        "phaseA": {
+          "t": 1790947224876,
+          "phase": "waiting",
+          "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re"
+        },
+        "offerA": {
+          "t": 1790947224876,
+          "action": "reply",
+          "phase": "waiting"
+        },
+        "rowB": {
+          "t": 1790947224876,
+          "sig": "needs",
+          "label": "asking 3s",
+          "actions": [
+            "reply",
+            "replay",
+            "done",
+            "goal"
+          ],
+          "aboveFold": true,
+          "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re"
+        },
+        "offerB": {
+          "t": 1790947224876,
+          "actions": [
+            "reply",
+            "replay",
+            "done",
+            "goal"
+          ]
+        },
+        "soundA": {
+          "t": 1790947224876,
+          "sounds": 33
+        },
+        "queueHeadA": {
+          "t": 1790947224876
+        },
+        "bubbleA": {
+          "t": 1790947225206,
+          "text": "beacon has a question",
+          "cls": "hit alert",
+          "start": 1790947225206,
+          "judgedAt": 1790947225206
+        },
+        "bubbleB": {
+          "t": 1790947225206,
+          "state": "visible",
+          "text": "beacon has a question",
+          "start": 1790947225206
+        }
+      },
+      "phases": [
+        {
+          "phase": "ready",
+          "from": -6.3,
+          "to": -0.4
+        },
+        {
+          "phase": "working",
+          "from": -0.1,
+          "to": 2.5
+        },
+        {
+          "phase": "waiting",
+          "from": 2.8,
+          "to": 14.3
+        }
+      ],
+      "timeline": [
+        {
+          "t": 1790947215835,
+          "A": {
+            "phase": "ready",
+            "since": 1790947172172,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "visible",
+            "bubbleText": null,
+            "bubbleCls": "hit",
+            "home": false,
+            "queuePos": -1,
+            "notes": 0,
+            "sounds": 28,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "interrupted",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947172172,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 44s ago",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947217188,
+          "A": {
+            "phase": "ready",
+            "since": 1790947172172,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit hidden",
+            "home": false,
+            "queuePos": -1,
+            "notes": 0,
+            "sounds": 28,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "interrupted",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947172172,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 44s ago",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947218936,
+          "A": {
+            "phase": "ready",
+            "since": 1790947172172,
+            "sig": "ready",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit hidden",
+            "home": false,
+            "queuePos": -1,
+            "notes": 0,
+            "sounds": 28,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "interrupted",
+            "hovering": false
+          },
+          "B": {
+            "sig": "ready",
+            "since": 1790947172172,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "done 47s ago",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947222017,
+          "A": {
+            "phase": "working",
+            "since": 1790947219748,
+            "sig": "running",
+            "led": "ready",
+            "face": "ready",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit hidden",
+            "home": false,
+            "queuePos": -1,
+            "notes": 0,
+            "sounds": 28,
+            "idleSec": 0,
+            "fan": null,
+            "ask": null,
+            "hovering": false
+          },
+          "B": {
+            "sig": "running",
+            "since": 1790947219748,
+            "actions": [
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "running 2s",
+            "aboveFold": false,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947224876,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "beacon has",
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 33,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 3s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947225206,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "beacon has a question",
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 3s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947228163,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "beacon has a question",
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 6s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947228920,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": true
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 6s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947229171,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 6s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947229425,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "alert",
+            "bubble": "visible",
+            "bubbleText": "beacon has a question",
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 6s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947230258,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "visible",
+            "bubbleText": "beacon has a question",
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 6s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947231011,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "visible",
+            "bubbleText": "beacon has a question",
+            "bubbleCls": "hit alert",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 9s",
+            "aboveFold": true,
+            "bubble": "visible",
+            "bubbleSays": true,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947233091,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert hidden",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 9s",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947233836,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "hidden",
+            "bubbleText": null,
+            "bubbleCls": "hit alert hidden",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 12s",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947234849,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "visible",
+            "bubbleText": null,
+            "bubbleCls": "hit",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 12s",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947235098,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "visible",
+            "bubbleText": "Beacon database choice · beacon",
+            "bubbleCls": "hit",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 12s",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947235349,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "visible",
+            "bubbleText": "Beacon database choice · beacon: no terminal",
+            "bubbleCls": "hit",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 12s",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947235599,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "visible",
+            "bubbleText": "Beacon database choice · beacon: no terminal is attached ",
+            "bubbleCls": "hit",
+            "home": true,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 12s",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        },
+        {
+          "t": 1790947235851,
+          "A": {
+            "phase": "waiting",
+            "since": 1790947222098,
+            "sig": "needs",
+            "led": "needs",
+            "face": "waiting",
+            "bubble": "visible",
+            "bubbleText": "Beacon database choice · beacon: no terminal is attached to tmux sessio",
+            "bubbleCls": "hit",
+            "home": false,
+            "queuePos": 0,
+            "notes": 0,
+            "sounds": 37,
+            "idleSec": 0,
+            "fan": null,
+            "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+            "hovering": false
+          },
+          "B": {
+            "sig": "needs",
+            "since": 1790947222098,
+            "actions": [
+              "reply",
+              "replay",
+              "done",
+              "goal"
+            ],
+            "label": "asking 12s",
+            "aboveFold": true,
+            "bubble": "hidden",
+            "bubbleSays": false,
+            "home": true
+          }
+        }
+      ],
+      "shots": [
+        {
+          "file": "shots/askuser-1/005.7s-A-led-needs.png",
+          "at": 1790947225090,
+          "label": "led-needs"
+        },
+        {
+          "file": "shots/askuser-1/005.7s-B-row-needs.png",
+          "at": 1790947225654,
+          "label": "row-needs"
+        },
+        {
+          "file": "shots/askuser-1/005.7s-B-offer-reply.png",
+          "at": 1790947225985,
+          "label": "offer-reply"
+        },
+        {
+          "file": "shots/askuser-1/006.1s-A-bubble.png",
+          "at": 1790947226875,
+          "label": "bubble"
+        },
+        {
+          "file": "shots/askuser-1/010.4s-A-attempt-home.png",
+          "at": 1790947230004,
+          "label": "attempt-home"
+        },
+        {
+          "file": "shots/askuser-1/012.1s-A-attempt-reply.png",
+          "at": 1790947231582,
+          "label": "attempt-reply"
+        },
+        {
+          "file": "shots/askuser-1/016.1s-A-attempt-jump.png",
+          "at": 1790947235552,
+          "label": "attempt-jump"
+        }
+      ],
+      "app": "3488d20 Merge ultra/r1/chat-context (gate green) @ ultra/round-1",
+      "spendBefore": {
+        "usd": 2.333884,
+        "est": 3.4754,
+        "at": "2026-10-02T13:20:15.832Z"
+      },
+      "notes0": 0,
+      "sounds0": 28,
+      "ledVal": "needs",
+      "faceVal": "waiting",
+      "faceChangedAt": 1790947230258,
+      "ledChangedAt": 1790947224876,
+      "baseline": {
+        "led": "ready",
+        "face": "ready",
+        "agents": [
+          "delta:ready",
+          "atlas:ready",
+          "vibepet:ready",
+          "beacon:ready",
+          "kestrel:ready"
+        ]
+      },
+      "seenAgent": true,
+      "lastPhase": "waiting",
+      "triggerAt": "2026-10-02T13:20:19.139Z",
+      "block": {
+        "regStatus": "waiting",
+        "waitingFor": "input needed",
+        "regAt": 1790947222098,
+        "pid": 48539,
+        "sid": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "withheld": true,
+        "dialog": false,
+        "select": true
+      },
+      "t0reg": 1790947222098,
+      "t0rec": null,
+      "t0": 1790947222098,
+      "windowEnd": 1790947228663,
+      "attemptAt": 1790947228663,
+      "attempt": {
+        "clicks": 3,
+        "keys": 7,
+        "steps": [
+          {
+            "step": "click Net",
+            "homeMs": 413,
+            "mode": "now"
+          },
+          {
+            "step": "click Reply"
+          },
+          {
+            "step": "reply form",
+            "open": true
+          },
+          {
+            "step": "typed \"SQLite\" + Enter"
+          }
+        ],
+        "row": {
+          "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+          "sig": "needs",
+          "label": "asking 7s",
+          "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Re",
+          "actions": [
+            "reply",
+            "replay",
+            "done",
+            "goal"
+          ]
+        },
+        "rowsShown": 5,
+        "rowIndex": 0,
+        "offered": [
+          "reply"
+        ],
+        "action": "reply",
+        "wanted": "reply",
+        "sendTo": {
+          "result": {
+            "ok": false,
+            "why": "beacon is showing a question: pick one of its options"
+          },
+          "ms": 176
+        },
+        "note": "Couldn't send: beacon is showing a question: pick one of its options",
+        "fleetAfter": {
+          "status": "waiting",
+          "waitingFor": "input needed",
+          "dialog": false,
+          "select": true,
+          "toolResult": null,
+          "subToolResult": null,
+          "newUserPrompt": false
+        },
+        "resolved": false,
+        "jump": {
+          "result": {
+            "ok": false,
+            "why": "no terminal is attached to tmux session vp-beacon",
+            "attach": "tmux attach -t vp-beacon"
+          },
+          "ms": 137,
+          "clipboardWrites": 0
+        }
+      },
+      "teardown": {
+        "esc": true
+      },
+      "spendAfter": {
+        "usd": 2.366986,
+        "est": 3.525,
+        "at": "2026-10-02T13:20:36.961Z"
+      },
+      "spentUsdEst": 0.0496,
+      "preT0": {},
+      "result": {
+        "t0": "2026-10-02T13:20:22.098Z",
+        "t0From": "registry",
+        "detectAmbientS": 2.8,
+        "detectAmbientRegS": 2.8,
+        "bubbleS": 3.1,
+        "ledS": 2.8,
+        "faceS": 2.8,
+        "rowS": 2.8,
+        "rowRegS": 2.8,
+        "offerS": 2.8,
+        "offerAction": "reply",
+        "bannerS": null,
+        "soundS": 2.8,
+        "goneS": null,
+        "phaseS": 2.8,
+        "queueHeadS": 2.8,
+        "wrong": null,
+        "otherBubble": null,
+        "actionWorks": false,
+        "clicks": 3,
+        "keys": 7
+      }
+    }
+  ]
+}

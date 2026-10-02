@@ -1,0 +1,25 @@
+06:36:04.548 fold {"rows":5,"inView":5,"needs":2,"needsInView":2,"footer":["● Record a short","Today"],"footerInView":true,"msgs":0,"fresh":true,"panel":522,"load":"878.91 556.60 774.77"} {"rows":5,"inView":5,"needs":2,"needsInView":2,"footer":["● Record a short","Today"],"footerInView":true,"msgs":1,"fresh":true,"panel":526,"load":"21.55 602.93 788.66"}
+06:36:08.357 press goal Beacon database choice (fixture) ticks 1 took true
+06:36:12.066 press goal Deploy.sh dry run (fixture) ticks 1 took true
+06:36:15.819 press goal Read package.json (fixture) ticks 2 took true
+06:36:19.622 press goal Run build.sh (fixture) ticks 1 took true
+06:36:23.402 press goal Reconcile three shards in parallel (fixture) ticks 1 took true
+06:36:28.758 press replay Beacon database choice (fixture) ticks 2 took true
+06:36:33.696 press replay Deploy.sh dry run (fixture) ticks 2 took true
+06:36:37.538 press replay Read package.json (fixture) ticks 1 took true
+06:36:43.064 press replay Run build.sh (fixture) ticks 1 took true
+06:36:49.663 press replay Reconcile three shards in parallel (fixture) ticks 2 took true
+06:37:12.626 focus {"focused":{"el":"<button data-do=\"reply\">Reply</button>","row":"Beacon database choice (fixture)"},"afterTicks":[true,true,true,true,true,true,true],"load":"1013.41 785.93 846.59"}
+06:37:25.324 selection {"row":"kestrel","text":"Bash: ./deploy.sh --dry-","ticks":4,"survivedEachTick":[true,true,true,true],"jumps":0,"load":"676.12 882.32 879.29"}
+06:37:47.109 reply {"row":"beacon","openedFocus":"the reply box (opened by you)","typingMs":8674,"ticksWhileTyping":2,"chatBar":"what is atlas doing","replyBox":"","replyBoxOpen":true,"load":"927.41 926.32 895.15"}
+06:37:56.338 keys {"load":"976.07 936.42 898.90","cmd1":{"id":null,"tag":"DIV","row":0,"onRow":true,"text":"Beacon database choice ("},"enterTop":{"focus":{"id":null,"tag":"INPUT","row":0,"onRow":false,"text":""},"replyBoxOpen":true,"ipc":[]},"escFromReplyBox":{"id":"chatInput","tag":"INPUT","row":null,"onRow":false,"text":""},"cmdN":{"n":2,"at":{"id":null,"tag":"DIV","row":1,"onRow":true,"text":"Deploy.sh dry run (fixtu"}},"enterApproval":[{"args":[{"id":"00000000-f1c5-4000-8000-00000000000a","text":null}],"member":"kestrel"}],"down":{"id":null,"tag":"DIV","row":2,"onRow":true,"text":"Read package.json (fixtu"},"up":{"id":null,"tag":"DIV","row":1,"onRow":true,"text":"Deploy.sh dry run (fixtu"},"escFromRow":{"id":"chatInput","tag":"INPUT","row":null,"onRow":false,"text":""},"tabFromLast":{"id":"homeMore","tag":"BUTTON","row":null,"onRow":false,"text":"⋯"},"shiftTabFromFirst":{"id":"chatInput","tag":"INPUT","row":null,"onRow":false,"text":""},"blurs":0,"homeOpen":"now","keysTo":{"topRowFirstAction":2}}
+06:41:54.265 rest {"samples":443,"moved":443,"ticks":57,"cursorMoved":0}
+06:42:18.056 injected {"samples":51,"moved":51,"release":246,"ok":true}
+06:42:32.469 cycles [{"change":"inject","samplesWithAMovedRow":51,"releaseMs":246,"inQueueOrder":true,"load":"631.13 576.35 994.78"},{"change":"undo","samplesWithAMovedRow":14,"releaseMs":770,"inQueueOrder":true,"load":"721.23 597.45 997.37"},{"change":"inject","samplesWithAMovedRow":14,"releaseMs":188,"inQueueOrder":true,"load":"760.77 607.70 998.65"}]
+06:42:40.978 fifteen {"sent":15,"rows":15,"inView":7,"needs":4,"needsInView":4,"footer":["● Record a short","Today"],"footerInView":true,"msgs":0,"fresh":true,"panel":596,"load":"829.36 627.46 1001.09"}
+06:42:57.529 done → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/home-keyed/after/branch-fixture
+06:48:37.379 rest {"samples":580,"moved":0,"ticks":59,"cursorMoved":0}
+06:49:01.860 injected {"samples":51,"moved":0,"release":588,"ok":true}
+06:49:12.807 cycles [{"change":"inject","samplesWithAMovedRow":0,"releaseMs":588,"inQueueOrder":true,"load":"110.57 952.41 302.88"},{"change":"undo","samplesWithAMovedRow":0,"releaseMs":166,"inQueueOrder":true,"load":"208.22 958.68 308.89"},{"change":"inject","samplesWithAMovedRow":0,"releaseMs":142,"inQueueOrder":true,"load":"379.61 970.66 320.74"}]
+06:49:20.891 fifteen {"sent":15,"rows":15,"inView":7,"needs":4,"needsInView":4,"footer":["● Record a short","Today"],"footerInView":true,"msgs":0,"fresh":true,"panel":596,"load":"456.67 976.82 326.72"}
+06:49:28.850 done → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/home-keyed/after/branch-fixture

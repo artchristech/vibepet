@@ -1,0 +1,25 @@
+<live_context>
+Local time: 10/2/2026, 2:24:13 AM.
+
+Agents: beacon=waiting for an answer for 6h 10m - Which database should beacon use to store check results? (SQLite / Postgres / Redis); kestrel=needs approval for 5h 11m - Bash: ./deploy.sh --dry-run; delta=done for 6h 23m - All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled; atlas=done for 5h 21m - interrupted; vibepet=done for 5h 11m - The app's main entry file is main.js.
+
+Repo: delta (branch main): 0 uncommitted lines across 0 files, 0 untracked files. Last commit 726 min ago: "delta: shards and reconciler".
+
+Recent commits:
+4dcf8f9 delta: shards and reconciler
+
+Diff stat:
+(clean)
+</live_context>
+
+User: what's running?
+
+Net: You've got five agents running. Two are waiting on you: **beacon** has been stuck on a database choice question for 6 hours, and **kestrel** is ready for approval on a dry-run deploy. The other three—**delta**, **atlas**, and **vibepet**—are done; delta just finished reconciling all shards.
+
+Want to pick a database for beacon, or approve kestrel's deployment?
+
+User: which session needs me first?
+
+Net: **Beacon** has been waiting the longest—6+ hours on the database choice. Start there.
+
+User: what did atlas change?

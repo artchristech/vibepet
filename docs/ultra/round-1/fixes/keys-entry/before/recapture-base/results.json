@@ -1,0 +1,440 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-keys-entry-base",
+  "git": "8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane",
+  "startedAt": "2026-10-02T09:28:53.605Z",
+  "n": 7,
+  "parts": [
+    "a",
+    "b",
+    "d"
+  ],
+  "a": {
+    "load0": "18.42 17.87 26.52",
+    "single": [
+      {
+        "detail": 1,
+        "toShown": 222.1,
+        "toFrame1": 221.8,
+        "toPainted": 239.5,
+        "toVisible": 271.4,
+        "toRows": 239.5,
+        "toFocus": 234.2,
+        "downToPainted": 295.9,
+        "load": "18.42 17.87 26.52"
+      },
+      {
+        "detail": 1,
+        "toShown": 223,
+        "toFrame1": 225.1,
+        "toPainted": 241.7,
+        "toVisible": 257.9,
+        "toRows": 225.1,
+        "toFocus": 224.5,
+        "downToPainted": 297.9,
+        "load": "17.18 17.62 26.38"
+      },
+      {
+        "detail": 1,
+        "toShown": 221.3,
+        "toFrame1": 228.8,
+        "toPainted": 245.5,
+        "toVisible": 278.8,
+        "toRows": 228.8,
+        "toFocus": 222.7,
+        "downToPainted": 298.6,
+        "load": "17.18 17.62 26.38"
+      },
+      {
+        "detail": 1,
+        "toShown": 222.4,
+        "toFrame1": 230.2,
+        "toPainted": 247.3,
+        "toVisible": 280.7,
+        "toRows": 230.2,
+        "toFocus": 226.9,
+        "downToPainted": 298.5,
+        "load": "17.18 17.62 26.38"
+      },
+      {
+        "detail": 1,
+        "toShown": 221.6,
+        "toFrame1": 230.2,
+        "toPainted": 246.8,
+        "toVisible": 280.2,
+        "toRows": 230.2,
+        "toFocus": 223.7,
+        "downToPainted": 298.4,
+        "load": "16.29 17.43 26.26"
+      },
+      {
+        "detail": 1,
+        "toShown": 222.4,
+        "toFrame1": 228.4,
+        "toPainted": 245.1,
+        "toVisible": 278.4,
+        "toRows": 228.4,
+        "toFocus": 224.7,
+        "downToPainted": 298.4,
+        "load": "16.29 17.43 26.26"
+      },
+      {
+        "detail": 1,
+        "toShown": 221.4,
+        "toFrame1": 226.5,
+        "toPainted": 243.1,
+        "toVisible": 276.5,
+        "toRows": 226.5,
+        "toFocus": 223.2,
+        "downToPainted": 297,
+        "load": "16.29 17.43 26.26"
+      }
+    ],
+    "double": [
+      {
+        "detail": 1,
+        "toShown": 127.9,
+        "toFrame1": 142.2,
+        "toPainted": 158.9,
+        "toVisible": 192.2,
+        "toRows": 142.2,
+        "toFocus": 129.6,
+        "downToPainted": 213.5,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 223.3,
+        "load": "16.29 17.43 26.26"
+      },
+      {
+        "detail": 1,
+        "toShown": 127.7,
+        "toFrame1": 127.6,
+        "toPainted": 144.2,
+        "toVisible": 160.3,
+        "toRows": 127.6,
+        "toFocus": 130.2,
+        "downToPainted": 198.3,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 220.9,
+        "load": "15.54 17.26 26.14"
+      },
+      {
+        "detail": 1,
+        "toShown": 140.5,
+        "toFrame1": 145.6,
+        "toPainted": 162.3,
+        "toVisible": 178.9,
+        "toRows": 145.6,
+        "toFocus": 142.7,
+        "downToPainted": 228.7,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 222.2,
+        "load": "15.54 17.26 26.14"
+      },
+      {
+        "detail": 1,
+        "toShown": 201.2,
+        "toFrame1": 210.8,
+        "toPainted": 227.5,
+        "toVisible": 244.2,
+        "toRows": 210.8,
+        "toFocus": 203.1,
+        "downToPainted": 325,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 220.5,
+        "load": "15.54 17.26 26.14"
+      },
+      {
+        "detail": 1,
+        "toShown": 133.4,
+        "toFrame1": 141.6,
+        "toPainted": 159.9,
+        "toVisible": 193.2,
+        "toRows": 141.6,
+        "toFocus": 135.8,
+        "downToPainted": 214.3,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 222,
+        "load": "17.74 17.68 26.24"
+      },
+      {
+        "detail": 1,
+        "toShown": 137.1,
+        "toFrame1": 151.1,
+        "toPainted": 167.8,
+        "toVisible": 201.1,
+        "toRows": 151.1,
+        "toFocus": 138.7,
+        "downToPainted": 227,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 222.9,
+        "load": "17.74 17.68 26.24"
+      },
+      {
+        "detail": 1,
+        "toShown": 129,
+        "toFrame1": 140.4,
+        "toPainted": 157.6,
+        "toVisible": 190.8,
+        "toRows": 140.4,
+        "toFocus": 130.6,
+        "downToPainted": 214.5,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 223.4,
+        "load": "17.74 17.68 26.24"
+      }
+    ],
+    "close": {
+      "how": "quit",
+      "ms": 424,
+      "procs": 7,
+      "orphans": []
+    },
+    "singleMedian": {
+      "toShown": 222.1,
+      "toFrame1": 228.4,
+      "toPainted": 245.1,
+      "toVisible": 278.4,
+      "toRows": 228.8,
+      "toFocus": 224.5,
+      "downToPainted": 298.4
+    },
+    "doubleMedian": {
+      "toShown": 133.4,
+      "toPainted": 159.9,
+      "toVisible": 192.2,
+      "nextClickToHidden": 222.2
+    },
+    "doubleOk": true,
+    "load1": "17.74 17.68 26.24"
+  },
+  "b": {
+    "load0": "18.00 17.74 26.21",
+    "trials": [],
+    "hasPress": false,
+    "keys": null,
+    "note": "no Open Home key in this build: __vibepet.press is missing (main binds only the jump key and ⌃⌥⌘R)",
+    "close": {
+      "how": "quit",
+      "ms": 567,
+      "procs": 7,
+      "orphans": []
+    }
+  },
+  "d": {
+    "load0": "18.32 17.81 26.19",
+    "steps": {
+      "open": {
+        "active": {
+          "tag": "INPUT",
+          "id": "chatInput",
+          "k": null,
+          "v": null,
+          "perm": null,
+          "done": false,
+          "text": "",
+          "inSetup": false,
+          "bar": true
+        }
+      },
+      "afterSetup": {
+        "setupShown": true,
+        "barShown": false,
+        "active": {
+          "tag": "BODY",
+          "id": null,
+          "k": null,
+          "v": null,
+          "perm": null,
+          "done": false,
+          "text": "Netdelta/main · claude code⋯esc\n    Quic",
+          "inSetup": false,
+          "bar": false
+        }
+      },
+      "tab": {
+        "controls": 19,
+        "walk": [
+          "OUTSIDE:BUTTON#homeMore",
+          "OUTSIDE:BUTTON#chatClose",
+          "pet:net",
+          "pet:slime",
+          "pet:cat",
+          "pet:sprout",
+          "pet:shroom",
+          "pet:star",
+          "pet:koi",
+          "size:s",
+          "size:m",
+          "size:l",
+          "feel:calm",
+          "feel:lively",
+          "feel:still",
+          "alerts:blocked",
+          "alerts:done",
+          "alerts:all",
+          "perm:ax",
+          "perm:screen"
+        ],
+        "allReached": false,
+        "outside": [
+          "OUTSIDE:BUTTON#homeMore",
+          "OUTSIDE:BUTTON#chatClose"
+        ],
+        "barAt": -1,
+        "shiftTabFromBar": "walk did not end on the bar"
+      },
+      "ticks": {
+        "waited": 3,
+        "kept": false,
+        "active": {
+          "tag": "BODY",
+          "id": null,
+          "k": null,
+          "v": null,
+          "perm": null,
+          "done": false,
+          "text": "Netdelta/main · claude code⋯esc\n    Quic",
+          "inSetup": false,
+          "bar": false
+        },
+        "nextTab": null
+      },
+      "choice": {
+        "pressed": {
+          "tag": "BODY",
+          "id": null,
+          "k": null,
+          "v": null,
+          "perm": null,
+          "done": false,
+          "text": "Netdelta/main · claude code⋯esc\n    Quic",
+          "inSetup": false,
+          "bar": false
+        },
+        "on": false,
+        "alerts": "all",
+        "back": {
+          "active": {
+            "tag": "BODY",
+            "id": null,
+            "k": null,
+            "v": null,
+            "perm": null,
+            "done": false,
+            "text": "Netdelta/main · claude code⋯esc\n    Quic",
+            "inSetup": false,
+            "bar": false
+          },
+          "alerts": "all",
+          "alerts0": "all"
+        }
+      },
+      "typedOnSprout": {
+        "focusWas": null,
+        "pet0": "net",
+        "pet": "net",
+        "notesAdded": 0,
+        "lastNote": null,
+        "active": {
+          "tag": "BODY",
+          "id": null,
+          "k": null,
+          "v": null,
+          "perm": null,
+          "done": false,
+          "text": "Netdelta/main · claude code⋯esc\n    Quic",
+          "inSetup": false,
+          "bar": false
+        },
+        "setupShown": true
+      },
+      "typedInBar": {
+        "pet": "net",
+        "notesAdded": 0,
+        "active": {
+          "tag": "BODY",
+          "id": null,
+          "k": null,
+          "v": null,
+          "perm": null,
+          "done": false,
+          "text": "Netdelta/main · claude code⋯esc\n    Quic",
+          "inSetup": false,
+          "bar": false
+        },
+        "setupShown": true
+      },
+      "esc": {
+        "closed": true,
+        "reopen": {
+          "setupShown": true,
+          "nowShown": false,
+          "active": null
+        }
+      },
+      "done": {
+        "onDone": true,
+        "setupShown": false,
+        "nowShown": true,
+        "active": null,
+        "setupDone": true
+      }
+    },
+    "load1": "18.81 17.95 26.04",
+    "close": {
+      "how": "quit",
+      "ms": 355,
+      "procs": 7,
+      "orphans": []
+    }
+  },
+  "endedAt": "2026-10-02T09:29:48.398Z"
+}

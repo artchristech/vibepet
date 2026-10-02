@@ -1,0 +1,938 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-keys-entry",
+  "git": "fb276cd keys-entry: say what VIBEPET_HOTKEY=<accelerator> binds",
+  "startedAt": "2026-10-02T13:07:10.534Z",
+  "n": 7,
+  "parts": [
+    "a",
+    "b",
+    "c",
+    "d"
+  ],
+  "a": {
+    "load0": "20.55 15.58 26.11",
+    "single": [
+      {
+        "detail": 1,
+        "toShown": 0.5,
+        "toFrame1": 6.6,
+        "toPainted": 23.2,
+        "toVisible": 56.6,
+        "toRows": 23.2,
+        "toFocus": 11.9,
+        "downToPainted": 79.2,
+        "load": "19.15 15.37 25.97"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.2,
+        "toFrame1": 12,
+        "toPainted": 28.7,
+        "toVisible": 45.4,
+        "toRows": 12,
+        "toFocus": 2.3,
+        "downToPainted": 81.7,
+        "load": "19.15 15.37 25.97"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.3,
+        "toFrame1": 13.1,
+        "toPainted": 29.7,
+        "toVisible": 63.1,
+        "toRows": 13.1,
+        "toFocus": 1.7,
+        "downToPainted": 81.8,
+        "load": "17.85 15.16 25.84"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.3,
+        "toFrame1": 13.9,
+        "toPainted": 30.7,
+        "toVisible": 64,
+        "toRows": 13.9,
+        "toFocus": 1.8,
+        "downToPainted": 82.1,
+        "load": "17.85 15.16 25.84"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.2,
+        "toFrame1": 14,
+        "toPainted": 29.9,
+        "toVisible": 64,
+        "toRows": 14,
+        "toFocus": 1.8,
+        "downToPainted": 81.2,
+        "load": "17.85 15.16 25.84"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.3,
+        "toFrame1": 12.7,
+        "toPainted": 29.3,
+        "toVisible": 62.7,
+        "toRows": 12.7,
+        "toFocus": 1.9,
+        "downToPainted": 81.7,
+        "load": "17.85 15.16 25.84"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.2,
+        "toFrame1": 13.2,
+        "toPainted": 29.9,
+        "toVisible": 62.5,
+        "toRows": 13.2,
+        "toFocus": 1.6,
+        "downToPainted": 82,
+        "load": "17.85 15.16 25.84"
+      }
+    ],
+    "double": [
+      {
+        "detail": 1,
+        "toShown": 0.3,
+        "toFrame1": 13.4,
+        "toPainted": 29.4,
+        "toVisible": 63.4,
+        "toRows": 13.4,
+        "toFocus": 1.7,
+        "downToPainted": 81.4,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": false,
+        "nextClickToHidden": null,
+        "load": "17.30 15.09 25.75"
+      },
+      {
+        "detail": 1,
+        "shows": 0,
+        "hides": 0,
+        "openAfter": false,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": null,
+        "load": "16.08 14.88 25.61"
+      },
+      {
+        "detail": 1,
+        "shows": 0,
+        "hides": 0,
+        "openAfter": false,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": null,
+        "load": "15.75 14.83 25.53"
+      },
+      {
+        "detail": 1,
+        "shows": 0,
+        "hides": 0,
+        "openAfter": false,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": null,
+        "load": "14.89 14.66 25.41"
+      },
+      {
+        "detail": 1,
+        "shows": 0,
+        "hides": 0,
+        "openAfter": false,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": null,
+        "load": "13.86 14.45 25.27"
+      },
+      {
+        "detail": 1,
+        "shows": 0,
+        "hides": 0,
+        "openAfter": false,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": null,
+        "load": "14.35 14.55 25.24"
+      },
+      {
+        "detail": 1,
+        "shows": 0,
+        "hides": 0,
+        "openAfter": false,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": null,
+        "load": "14.35 14.55 25.24"
+      }
+    ],
+    "close": {
+      "how": "quit",
+      "ms": 353,
+      "procs": 7,
+      "orphans": []
+    },
+    "singleMedian": {
+      "toShown": 0.3,
+      "toFrame1": 13.1,
+      "toPainted": 29.7,
+      "toVisible": 62.7,
+      "toRows": 13.2,
+      "toFocus": 1.8,
+      "downToPainted": 81.7
+    },
+    "doubleMedian": {
+      "toShown": 0.3,
+      "toPainted": 29.4,
+      "toVisible": 63.4,
+      "nextClickToHidden": null
+    },
+    "doubleOk": false,
+    "load1": "14.35 14.55 25.24"
+  },
+  "b": {
+    "load0": "13.52 14.37 25.12",
+    "trials": [
+      {
+        "toShown": 15.3,
+        "toFrame1": 13.8,
+        "toPainted": 13.8,
+        "toVisible": 47.1,
+        "toRows": 13.8,
+        "toFocus": 15,
+        "active": "chatInput",
+        "open": true,
+        "load": "12.68 14.18 24.99",
+        "secondPressCloses": true
+      },
+      {
+        "toShown": 2.1,
+        "toFrame1": -1.4,
+        "toPainted": 15.2,
+        "toVisible": 31.4,
+        "toRows": -1.4,
+        "toFocus": 2,
+        "active": "chatInput",
+        "open": true,
+        "load": "12.68 14.18 24.99",
+        "secondPressCloses": true
+      },
+      {
+        "toShown": 1.8,
+        "toFrame1": 0.1,
+        "toPainted": 16.1,
+        "toVisible": 49,
+        "toRows": 0.1,
+        "toFocus": 1.8,
+        "active": "chatInput",
+        "open": true,
+        "load": "12.68 14.18 24.99",
+        "secondPressCloses": true
+      },
+      {
+        "toShown": 1.5,
+        "toFrame1": -14.4,
+        "toPainted": 2.2,
+        "toVisible": 35.5,
+        "toRows": -14.4,
+        "toFocus": 1.5,
+        "active": "chatInput",
+        "open": true,
+        "load": "12.68 14.18 24.99",
+        "secondPressCloses": true
+      },
+      {
+        "toShown": 2.3,
+        "toFrame1": -0.5,
+        "toPainted": 16.2,
+        "toVisible": 49.4,
+        "toRows": -0.5,
+        "toFocus": 2.2,
+        "active": "chatInput",
+        "open": true,
+        "load": "12.68 14.18 24.99",
+        "secondPressCloses": true
+      },
+      {
+        "toShown": 4.2,
+        "toFrame1": 0.5,
+        "toPainted": 17,
+        "toVisible": 50.5,
+        "toRows": 0.5,
+        "toFocus": 4.1,
+        "active": "chatInput",
+        "open": true,
+        "load": "12.68 14.18 24.99",
+        "secondPressCloses": true
+      },
+      {
+        "toShown": 1.6,
+        "toFrame1": -4.2,
+        "toPainted": 12.3,
+        "toVisible": 45.7,
+        "toRows": -4.2,
+        "toFocus": 1.5,
+        "active": "chatInput",
+        "open": true,
+        "load": "12.54 14.13 24.91",
+        "secondPressCloses": true
+      }
+    ],
+    "hasPress": true,
+    "keys": {
+      "home": {
+        "key": null,
+        "label": "Off",
+        "on": false,
+        "taken": false,
+        "alt": null
+      },
+      "jump": {
+        "key": null,
+        "label": "Off",
+        "on": false,
+        "taken": false,
+        "alt": null
+      },
+      "rec": {
+        "key": null,
+        "label": "Off",
+        "on": false,
+        "taken": false,
+        "alt": null
+      }
+    },
+    "median": {
+      "toShown": 2.1,
+      "toFrame1": -0.5,
+      "toPainted": 15.2,
+      "toVisible": 47.1,
+      "toRows": -0.5,
+      "toFocus": 2
+    },
+    "allCaretInBar": true,
+    "load1": "12.54 14.13 24.91",
+    "close": {
+      "how": "quit",
+      "ms": 356,
+      "procs": 7,
+      "orphans": []
+    }
+  },
+  "c": {
+    "load0": "12.54 14.13 24.91",
+    "accelerators": {
+      "jump": "Control+Alt+Command+F19",
+      "home": "Control+Alt+Command+F18"
+    },
+    "A": {
+      "pid": 71690,
+      "keys": {
+        "home": {
+          "key": "Control+Alt+Command+F18",
+          "label": "⌃⌥⌘F18",
+          "on": true,
+          "taken": false,
+          "alt": null
+        },
+        "jump": {
+          "key": "Control+Alt+Command+F19",
+          "label": "⌃⌥⌘F19",
+          "on": true,
+          "taken": false,
+          "alt": null
+        },
+        "rec": {
+          "key": null,
+          "label": "Off",
+          "on": false,
+          "taken": false,
+          "alt": null
+        }
+      },
+      "registered": [
+        [
+          "Control+Alt+Command+F19",
+          true
+        ],
+        [
+          "Control+Alt+Command+F18",
+          true
+        ],
+        [
+          "Control+Alt+Command+R",
+          false
+        ],
+        [
+          "Control+Alt+Command+J",
+          false
+        ]
+      ],
+      "menu": {
+        "top": [
+          "Watching kestrel",
+          "Localhost",
+          "Open Home",
+          "Setup…",
+          "Theater…",
+          "Start content session",
+          "Finish last session",
+          "Open shorts folder",
+          "Today…",
+          "Pet",
+          "Toss a snack",
+          "Settings",
+          "Hide Net",
+          "Quit Net"
+        ],
+        "settings": [
+          {
+            "label": "Open at login"
+          },
+          {
+            "label": "Keep on top"
+          },
+          {
+            "label": "Mute notifications"
+          },
+          {
+            "label": "Short length",
+            "sub": [
+              "○ 30s",
+              "● 45s",
+              "○ 60s"
+            ]
+          },
+          {
+            "label": "Delete raw recording after render"
+          },
+          {
+            "label": "Size",
+            "sub": [
+              "○ Small",
+              "● Medium",
+              "○ Large"
+            ]
+          },
+          {
+            "label": "Animations"
+          },
+          {
+            "label": "Game mode"
+          },
+          {
+            "label": "Jump key",
+            "sub": [
+              "○ ⌃⌥⌘J",
+              "○ ⌥⌘J",
+              "○ Off"
+            ]
+          },
+          {
+            "label": "Open Home key",
+            "sub": [
+              "○ ⌃⌥⌘H",
+              "○ ⌃⌥⌘Space",
+              "○ Off"
+            ]
+          },
+          {
+            "label": "Gesture",
+            "sub": [
+              "○ On",
+              "● Off",
+              "○ ",
+              "○ Record gesture…",
+              "○ Sensitivity"
+            ]
+          },
+          {
+            "label": "Chat engine",
+            "sub": [
+              "● Claude Code login (recommended)",
+              "○ Anthropic API key…"
+            ]
+          },
+          {
+            "label": "Chat model",
+            "sub": [
+              "○ claude-sonnet-5",
+              "○ claude-opus-5-5",
+              "● claude-haiku-4-5-20251001"
+            ]
+          },
+          {
+            "label": "Set API key…"
+          },
+          {
+            "label": "Rename Net…"
+          }
+        ]
+      },
+      "setupMenu": {
+        "ok": true,
+        "label": "Setup…"
+      },
+      "setupKeys": "⌃⌥⌘F18 open Home\n⌃⌥⌘F19 jump to who needs you\nrecord a short: off",
+      "close": {
+        "how": "quit",
+        "ms": 326,
+        "procs": 7,
+        "orphans": []
+      }
+    },
+    "B": {
+      "pid": 71998,
+      "keys": {
+        "home": {
+          "key": "Control+Alt+Command+F18",
+          "label": "⌃⌥⌘F18",
+          "on": false,
+          "taken": true,
+          "alt": "⌃⌥⌘H"
+        },
+        "jump": {
+          "key": "Control+Alt+Command+F19",
+          "label": "⌃⌥⌘F19",
+          "on": false,
+          "taken": true,
+          "alt": "⌃⌥⌘J"
+        },
+        "rec": {
+          "key": null,
+          "label": "Off",
+          "on": false,
+          "taken": false,
+          "alt": null
+        }
+      },
+      "registered": [
+        [
+          "Control+Alt+Command+F19",
+          false
+        ],
+        [
+          "Control+Alt+Command+F18",
+          false
+        ],
+        [
+          "Control+Alt+Command+R",
+          false
+        ],
+        [
+          "Control+Alt+Command+J",
+          false
+        ]
+      ],
+      "menu": {
+        "top": [
+          "Watching kestrel",
+          "Localhost",
+          "Open Home",
+          "Setup…",
+          "Theater…",
+          "Start content session",
+          "Finish last session",
+          "Open shorts folder",
+          "Today…",
+          "Pet",
+          "Toss a snack",
+          "Settings",
+          "Hide Net",
+          "Quit Net"
+        ],
+        "settings": [
+          {
+            "label": "Open at login"
+          },
+          {
+            "label": "Keep on top"
+          },
+          {
+            "label": "Mute notifications"
+          },
+          {
+            "label": "Short length",
+            "sub": [
+              "○ 30s",
+              "● 45s",
+              "○ 60s"
+            ]
+          },
+          {
+            "label": "Delete raw recording after render"
+          },
+          {
+            "label": "Size",
+            "sub": [
+              "○ Small",
+              "● Medium",
+              "○ Large"
+            ]
+          },
+          {
+            "label": "Animations"
+          },
+          {
+            "label": "Game mode"
+          },
+          {
+            "label": "Jump key (taken by another vibepet · try ⌃⌥⌘J)",
+            "sub": [
+              "○ ⌃⌥⌘J",
+              "○ ⌥⌘J",
+              "○ Off"
+            ]
+          },
+          {
+            "label": "Open Home key (taken by another vibepet · try ⌃⌥⌘H)",
+            "sub": [
+              "○ ⌃⌥⌘H",
+              "○ ⌃⌥⌘Space",
+              "○ Off"
+            ]
+          },
+          {
+            "label": "Gesture",
+            "sub": [
+              "○ On",
+              "● Off",
+              "○ ",
+              "○ Record gesture…",
+              "○ Sensitivity"
+            ]
+          },
+          {
+            "label": "Chat engine",
+            "sub": [
+              "● Claude Code login (recommended)",
+              "○ Anthropic API key…"
+            ]
+          },
+          {
+            "label": "Chat model",
+            "sub": [
+              "○ claude-sonnet-5",
+              "○ claude-opus-5-5",
+              "● claude-haiku-4-5-20251001"
+            ]
+          },
+          {
+            "label": "Set API key…"
+          },
+          {
+            "label": "Rename Net…"
+          }
+        ]
+      },
+      "setupMenu": {
+        "ok": true,
+        "label": "Setup…"
+      },
+      "setupKeys": "⌃⌥⌘F18 open Home: taken by another vibepet, try ⌃⌥⌘H (⋯ → Settings → Open Home key)\n⌃⌥⌘F19 jump to who needs you: taken by another vibepet, try ⌃⌥⌘J (⋯ → Settings → Jump key)\nrecord a short: off",
+      "stub": {
+        "replaced": true,
+        "recorded": [
+          "Control+Alt+Command+F17"
+        ],
+        "osRegistered": false
+      },
+      "⌥⌘J": {
+        "menuClick": {
+          "ok": true,
+          "label": "⌥⌘J"
+        },
+        "setupKeys": "⌃⌥⌘F18 open Home: taken by another vibepet, try ⌃⌥⌘H (⋯ → Settings → Open Home key)\n⌥⌘J jump to who needs you\nrecord a short: off",
+        "jump": {
+          "key": "Alt+Command+J",
+          "label": "⌥⌘J",
+          "on": true,
+          "taken": false,
+          "alt": null
+        },
+        "setupStillOpen": true
+      },
+      "Off": {
+        "menuClick": {
+          "ok": true,
+          "label": "Off"
+        },
+        "setupKeys": "⌃⌥⌘F18 open Home: taken by another vibepet, try ⌃⌥⌘H (⋯ → Settings → Open Home key)\njump to who needs you: off\nrecord a short: off",
+        "jump": {
+          "key": null,
+          "label": "Off",
+          "on": false,
+          "taken": false,
+          "alt": null
+        },
+        "setupStillOpen": true
+      },
+      "menuAfter": [
+        {
+          "label": "Jump key",
+          "sub": [
+            "○ ⌃⌥⌘J",
+            "○ ⌥⌘J",
+            "● Off"
+          ]
+        },
+        {
+          "label": "Open Home key (taken by another vibepet · try ⌃⌥⌘H)",
+          "sub": [
+            "○ ⌃⌥⌘H",
+            "○ ⌃⌥⌘Space",
+            "○ Off"
+          ]
+        },
+        {
+          "label": "Set API key…"
+        }
+      ],
+      "registerCalls": [
+        "Control+Alt+Command+F17",
+        "Alt+Command+J"
+      ],
+      "takeover": {
+        "homeOn": true,
+        "ms": 4502,
+        "keys": {
+          "home": {
+            "key": "Control+Alt+Command+F18",
+            "label": "⌃⌥⌘F18",
+            "on": true,
+            "taken": false,
+            "alt": null
+          },
+          "jump": {
+            "key": null,
+            "label": "Off",
+            "on": false,
+            "taken": false,
+            "alt": null
+          },
+          "rec": {
+            "key": null,
+            "label": "Off",
+            "on": false,
+            "taken": false,
+            "alt": null
+          }
+        },
+        "setupKeys": "⌃⌥⌘F18 open Home\njump to who needs you: off\nrecord a short: off"
+      },
+      "close": {
+        "how": "quit",
+        "ms": 280,
+        "procs": 7,
+        "orphans": []
+      }
+    },
+    "locksBoth": [
+      {
+        "f": "Control+Alt+Command+F18.lock",
+        "pid": 71690,
+        "userData": "/Users/christopherharris/.vibepet-ultra/userdata/r1-keys-entry-recap-r1-c-A",
+        "accel": "Control+Alt+Command+F18"
+      },
+      {
+        "f": "Control+Alt+Command+F19.lock",
+        "pid": 71690,
+        "userData": "/Users/christopherharris/.vibepet-ultra/userdata/r1-keys-entry-recap-r1-c-A",
+        "accel": "Control+Alt+Command+F19"
+      }
+    ],
+    "locksAfterAQuit": [],
+    "locksAfter": [],
+    "load1": "11.41 13.81 24.60"
+  },
+  "d": {
+    "load0": "11.41 13.81 24.60",
+    "steps": {
+      "open": {
+        "active": {
+          "tag": "INPUT",
+          "id": "chatInput",
+          "k": null,
+          "v": null,
+          "perm": null,
+          "done": false,
+          "text": "",
+          "inSetup": false,
+          "bar": true
+        }
+      },
+      "afterSetup": {
+        "setupShown": true,
+        "barShown": true,
+        "active": {
+          "tag": "INPUT",
+          "id": "chatInput",
+          "k": null,
+          "v": null,
+          "perm": null,
+          "done": false,
+          "text": "",
+          "inSetup": false,
+          "bar": true
+        }
+      },
+      "tab": {
+        "controls": 19,
+        "walk": [
+          "pet:net",
+          "pet:slime",
+          "pet:cat",
+          "pet:sprout",
+          "pet:shroom",
+          "pet:star",
+          "pet:koi",
+          "size:s",
+          "size:m",
+          "size:l",
+          "feel:calm",
+          "feel:lively",
+          "feel:still",
+          "alerts:blocked",
+          "alerts:done",
+          "alerts:all",
+          "perm:ax",
+          "perm:screen",
+          "done",
+          "BAR"
+        ],
+        "allReached": true,
+        "outside": [],
+        "barAt": 19,
+        "shiftTabFromBar": "done"
+      },
+      "ticks": {
+        "waited": 3,
+        "kept": true,
+        "active": {
+          "tag": "BUTTON",
+          "id": null,
+          "k": "size",
+          "v": "m",
+          "perm": null,
+          "done": false,
+          "text": "Medium",
+          "inSetup": true,
+          "bar": false
+        },
+        "nextTab": "l"
+      },
+      "choice": {
+        "pressed": {
+          "tag": "BUTTON",
+          "id": null,
+          "k": "alerts",
+          "v": "done",
+          "perm": null,
+          "done": false,
+          "text": "+ Finished",
+          "inSetup": true,
+          "bar": false
+        },
+        "on": true,
+        "alerts": "done",
+        "back": {
+          "active": {
+            "tag": "BUTTON",
+            "id": null,
+            "k": "alerts",
+            "v": "all",
+            "perm": null,
+            "done": false,
+            "text": "Everything",
+            "inSetup": true,
+            "bar": false
+          },
+          "alerts": "all",
+          "alerts0": "all"
+        }
+      },
+      "typedOnSprout": {
+        "focusWas": "sprout",
+        "pet0": "net",
+        "pet": "net",
+        "notesAdded": 1,
+        "lastNote": "Goals set: 0 · hit: 0 · time drifting: 0m\n\n◎ Before anything",
+        "active": {
+          "tag": "INPUT",
+          "id": "chatInput",
+          "k": null,
+          "v": null,
+          "perm": null,
+          "done": false,
+          "text": "",
+          "inSetup": false,
+          "bar": true
+        },
+        "setupShown": true
+      },
+      "typedInBar": {
+        "pet": "net",
+        "notesAdded": 1,
+        "active": {
+          "tag": "INPUT",
+          "id": "chatInput",
+          "k": null,
+          "v": null,
+          "perm": null,
+          "done": false,
+          "text": "",
+          "inSetup": false,
+          "bar": true
+        },
+        "setupShown": true
+      },
+      "esc": {
+        "closed": true,
+        "reopen": {
+          "setupShown": false,
+          "nowShown": true,
+          "active": "chatInput"
+        }
+      },
+      "done": {
+        "onDone": true,
+        "setupShown": false,
+        "nowShown": true,
+        "active": "chatInput",
+        "setupDone": true
+      }
+    },
+    "load1": "9.78 13.33 24.24",
+    "close": {
+      "how": "quit",
+      "ms": 280,
+      "procs": 7,
+      "orphans": []
+    }
+  },
+  "endedAt": "2026-10-02T13:08:36.846Z"
+}

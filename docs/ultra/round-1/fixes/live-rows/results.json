@@ -1,0 +1,188 @@
+{
+ "branch": "ultra/r1/live-rows",
+ "commit": "45de66e",
+ "base": "8e5fe27 (ultra/round-1)",
+ "spendGated": {
+  "run": false,
+  "why": "fleet.js spend estimate $3.3093 + $0.09 > stop $3.32 (checked 03:10 local); no member took a turn for this task"
+ },
+ "detectionOnRealFlips": {
+  "source": "after/observe/observe.json",
+  "what": "ember's own /loop (lease r1-loop-rows, read-only here): row change minus Claude Code's statusUpdatedAt",
+  "flips": [
+   {
+    "to": "busy",
+    "fixMs": 894,
+    "baseMs": null,
+    "uptime": "load 60.83 57.04 74.46"
+   },
+   {
+    "to": "idle",
+    "fixMs": 1655,
+    "baseMs": null,
+    "uptime": "load 60.83 57.04 74.46"
+   },
+   {
+    "to": "waiting",
+    "fixMs": 146,
+    "baseMs": null,
+    "uptime": "load 72.51 60.66 74.99"
+   }
+  ],
+  "medianFixMs": 894,
+  "baseSeen": 0,
+  "n": 3
+ },
+ "pipeline": {
+  "pokeToTickDoneMedianMs": 166.5,
+  "liveTickMedianMs": 16,
+  "renderHomeMedianMs": 0.4,
+  "n": 20,
+  "uptime": [
+   "load 3.64 20.33 62.41",
+   "load 4.37 19.42 61.11"
+  ]
+ },
+ "verdicts": {
+  "fix": {
+   "calls": 8,
+   "logged": 8,
+   "unverifiedSuccesses": 0,
+   "okResults": 0,
+   "rowNoteMedianMs": 110,
+   "rowNotesShown": 8,
+   "ipcMedianMs": 110,
+   "fleetUnchanged": true
+  },
+  "base": {
+   "calls": 8,
+   "logged": 0,
+   "unverifiedSuccesses": 0,
+   "okResults": 0,
+   "rowNoteMedianMs": null,
+   "rowNotesShown": 0,
+   "ipcMedianMs": 534,
+   "fleetUnchanged": true
+  },
+  "ticksDuringFix": {
+   "n": 5,
+   "live": 2,
+   "secs": 7.9,
+   "perSec": 0.63
+  },
+  "uptime": [
+   "load 5.46 19.39 60.85",
+   "load 4.92 18.82 60.17"
+  ]
+ },
+ "hold": {
+  "slot": 1,
+  "heldForMs": 5575,
+  "movedAfterVerdictMs": 5833,
+  "synthetic": "renderer only: a copy of the real snapshot with kestrel set to running, sent through the test hook while main's own tick sends were paused",
+  "uptime": [
+   "load 4.92 18.82 60.17",
+   "load 4.77 18.56 59.83"
+  ]
+ },
+ "idle": {
+  "fix": {
+   "rendererSnapshots": 10,
+   "rendererPerSec": 0.33,
+   "mainTicks": 10,
+   "mainTicksPerSec": 0.33,
+   "liveTicks": 0,
+   "watcherEvents": 0
+  },
+  "base": {
+   "rendererSnapshots": 10,
+   "rendererPerSec": 0.33,
+   "mainTicks": null,
+   "mainTicksPerSec": null,
+   "liveTicks": null,
+   "watcherEvents": null
+  },
+  "watchedPaths": 12,
+  "uptime": [
+   "load 4.39 22.21 64.56",
+   "load 3.64 20.33 62.41"
+  ]
+ },
+ "cpu": {
+  "medianPct": {
+   "fix": 2.05,
+   "base": 2.14
+  },
+  "deltaPoints": -0.09,
+  "runs": [
+   {
+    "label": "fix",
+    "run": 1,
+    "cpuPct": 2.25,
+    "ticks": 21,
+    "uptime": [
+     "load 260.07 156.33 117.43",
+     "load 377.98 218.12 143.71"
+    ]
+   },
+   {
+    "label": "base",
+    "run": 1,
+    "cpuPct": 2.14,
+    "ticks": null,
+    "uptime": [
+     "load 301.30 210.54 142.70",
+     "load 246.66 215.00 149.23"
+    ]
+   },
+   {
+    "label": "base",
+    "run": 2,
+    "cpuPct": 3.01,
+    "ticks": null,
+    "uptime": [
+     "load 202.98 207.58 148.47",
+     "load 101.20 178.12 141.52"
+    ]
+   },
+   {
+    "label": "fix",
+    "run": 2,
+    "cpuPct": 2.05,
+    "ticks": 21,
+    "uptime": [
+     "load 78.51 167.98 138.73",
+     "load 34.08 138.85 129.82"
+    ]
+   },
+   {
+    "label": "fix",
+    "run": 3,
+    "cpuPct": 1.8,
+    "ticks": 20,
+    "uptime": [
+     "load 30.29 132.88 127.85",
+     "load 14.18 109.63 119.49"
+    ]
+   },
+   {
+    "label": "base",
+    "run": 3,
+    "cpuPct": 1.48,
+    "ticks": null,
+    "uptime": [
+     "load 11.20 102.77 116.80",
+     "load 7.00 84.89 109.15"
+    ]
+   }
+  ]
+ },
+ "canon": {
+  "fix": [
+   "canon (29/29, 29.4 s)",
+   "canon-r2 (29/29, 33.8 s)"
+  ],
+  "baseNow": "canon-base-now (29/29, 22.3 s)",
+  "vsMergedW1": "canon-vs-merged-w1.json: same 29/29, same rows"
+ }
+}

@@ -1,0 +1,122 @@
+{
+  "loadStart": "load 10.61 12.96 49.08",
+  "t1": {
+    "q": "Say hi in five words.",
+    "load": "load 10.08 12.81 48.81",
+    "bubbleMs": 3.099999964237213,
+    "firstMs": 2313.099999964237,
+    "streamMs": 657.8000000119209,
+    "muts": 2,
+    "mutPerSec": 3,
+    "reply": {
+      "cls": "msg pet",
+      "text": "Hi there, late night coding?",
+      "say": null,
+      "acts": [],
+      "sees": "What Net sees · ≈192 tokens · sent 1.7k in, 98 out"
+    }
+  },
+  "note1": [
+    "claude-unavailable-model-x isn't available on this login. Using claude-opus-5-5 instead.Change model"
+  ],
+  "t2": {
+    "q": "And now in three words.",
+    "load": "load 9.44 12.63 48.54",
+    "bubbleMs": 1.4000000357627869,
+    "firstMs": 696,
+    "streamMs": 639.3000000119209,
+    "muts": 3,
+    "mutPerSec": 4.7,
+    "reply": {
+      "cls": "msg pet",
+      "text": "Hey, still up?",
+      "say": null,
+      "acts": [],
+      "sees": "What Net sees · ≈192 tokens · sent 2.2k in (1.7k cached), 9 out"
+    }
+  },
+  "notesAfter2": [
+    "claude-unavailable-model-x isn't available on this login. Using claude-opus-5-5 instead.Change model"
+  ],
+  "writes": [
+    {
+      "at": 1790932441200,
+      "pid": 43143,
+      "type": "user",
+      "chars": 789
+    },
+    {
+      "at": 1790932441536,
+      "pid": 43143,
+      "type": "control_request",
+      "sub": "set_model",
+      "model": "default"
+    },
+    {
+      "at": 1790932441702,
+      "pid": 43143,
+      "type": "user",
+      "chars": 789
+    },
+    {
+      "at": 1790932446228,
+      "pid": 43143,
+      "type": "user",
+      "chars": 791
+    }
+  ],
+  "chatTurns": [
+    {
+      "at": 1790932444134,
+      "engine": "claude",
+      "model": "claude-opus-5-5",
+      "ms": {
+        "first": 2246,
+        "total": 2934
+      },
+      "usage": {
+        "input": 1729,
+        "read": 0,
+        "write": 1727,
+        "out": 98
+      },
+      "turns": 1
+    },
+    {
+      "at": 1790932447530,
+      "engine": "claude",
+      "model": "claude-opus-5-5",
+      "ms": {
+        "first": 643,
+        "total": 1303
+      },
+      "usage": {
+        "input": 2202,
+        "read": 1727,
+        "write": 473,
+        "out": 9
+      },
+      "turns": 2
+    }
+  ],
+  "verdict": {
+    "seq": [
+      "user",
+      "set_model",
+      "user",
+      "user"
+    ],
+    "pids": [
+      43143
+    ]
+  },
+  "errors": [],
+  "close": {
+    "how": "quit",
+    "ms": 289,
+    "procs": 8,
+    "orphans": []
+  },
+  "loadEnd": "load 8.84 12.45 48.26",
+  "sends": 25
+}

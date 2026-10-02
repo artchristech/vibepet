@@ -1,0 +1,137 @@
+{
+  "a": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/canon-merged-w1",
+  "b": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/chat-context/canon",
+  "gitA": "8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane @ ultra/round-1",
+  "gitB": "8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane @ ultra/r1/chat-context",
+  "msA": 101338,
+  "msB": 28994,
+  "assertions": {
+    "a": "29/29",
+    "b": "31/31",
+    "differ": [
+      {
+        "id": "chat/contextSessions",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "chat/stubEchoesEverySession",
+        "a": null,
+        "b": true
+      }
+    ]
+  },
+  "rows": {
+    "a": {
+      "beacon": "needs",
+      "kestrel": "needs",
+      "delta": "ready",
+      "atlas": "ready",
+      "vibepet": "ready"
+    },
+    "b": {
+      "beacon": "needs",
+      "kestrel": "needs",
+      "delta": "ready",
+      "atlas": "ready",
+      "vibepet": "ready",
+      "ember": "ready"
+    },
+    "differ": [
+      "ember"
+    ]
+  },
+  "mismatches": {
+    "a": [],
+    "b": [],
+    "differ": []
+  },
+  "fleet": {
+    "a": "3/6",
+    "b": "3/6",
+    "changedDuring": [
+      [],
+      []
+    ]
+  },
+  "notes": {
+    "goalFirstClickDropped": [
+      false,
+      false
+    ],
+    "aboveFold": [
+      4,
+      4
+    ]
+  },
+  "shots": [
+    {
+      "file": "1-home/panel.png",
+      "changedPct": 0.23
+    },
+    {
+      "file": "1-home/pet.png",
+      "changedPct": 0.48
+    },
+    {
+      "file": "2-chat/reply.png",
+      "changedPct": 7.38
+    },
+    {
+      "file": "2-chat/sending.png",
+      "changedPct": 0.2
+    },
+    {
+      "file": "3-command/slash.png",
+      "changedPct": 0.52
+    },
+    {
+      "file": "3-command/today.png",
+      "changedPct": 5.91
+    },
+    {
+      "file": "4-rows/goal.png",
+      "changedPct": 0.78
+    },
+    {
+      "file": "4-rows/jump.png",
+      "changedPct": 4.14
+    },
+    {
+      "file": "4-rows/list.png",
+      "changedPct": 0.52
+    },
+    {
+      "file": "4-rows/reply.png",
+      "changedPct": 0.17
+    },
+    {
+      "file": "5-theater/open.png",
+      "changedPct": 1.27
+    },
+    {
+      "file": "5-theater/seek-mid.png",
+      "changedPct": 0
+    },
+    {
+      "file": "6-ports/footer.png",
+      "changedPct": 26.39
+    },
+    {
+      "file": "6-ports/stopped.png",
+      "changedPct": 6.62
+    },
+    {
+      "file": "7-keys/gesture-pad.png",
+      "changedPct": 18.78
+    },
+    {
+      "file": "7-keys/gesture-saved.png",
+      "changedPct": 0
+    },
+    {
+      "file": "7-keys/hotkey.png",
+      "changedPct": 6.88
+    }
+  ]
+}

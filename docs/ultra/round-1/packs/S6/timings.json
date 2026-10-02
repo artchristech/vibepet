@@ -1,0 +1,265 @@
+[
+ {
+  "flow": "F1",
+  "step": "server starts listening in a session repo → its chip renders in Home (start at a random moment; node + python http.server)",
+  "ms": 8747,
+  "n": 8,
+  "min": 3755,
+  "max": 15009,
+  "all": [
+   4432,
+   11465,
+   15009,
+   9795,
+   7699,
+   4999,
+   13588,
+   3755
+  ],
+  "load1m": [
+   4.89,
+   8.5
+  ],
+  "window": "01:58–02:02Z"
+ },
+ {
+  "flow": "F1",
+  "step": "same, each server started right after the previous chip change (kestrel npm start / beacon python http.server)",
+  "ms": 9763,
+  "n": 6,
+  "min": 8794,
+  "max": 11012,
+  "all": [
+   10334,
+   10310,
+   8794,
+   9133,
+   11012,
+   9216
+  ],
+  "load1m": [
+   3.2,
+   3.99
+  ],
+  "window": "01:49–01:51Z"
+ },
+ {
+  "flow": "F1",
+  "step": "server started by the vibepet session itself (Bash, background) → its chip renders",
+  "ms": 3323,
+  "n": 1,
+  "load1m": [
+   3.53
+  ],
+  "window": "01:53Z"
+ },
+ {
+  "flow": "F1",
+  "step": "all F1 trials pooled",
+  "ms": 9216,
+  "n": 15,
+  "min": 3323,
+  "max": 15009,
+  "all": [
+   4432,
+   11465,
+   15009,
+   9795,
+   7699,
+   4999,
+   13588,
+   3755,
+   10334,
+   10310,
+   8794,
+   9133,
+   11012,
+   9216,
+   3323
+  ]
+ },
+ {
+  "flow": "F4",
+  "step": "server exits (Ctrl-C / SIGTERM) → its chip is gone from Home (random moment)",
+  "ms": 10966,
+  "n": 8,
+  "min": 4482,
+  "max": 15413,
+  "all": [
+   15413,
+   10387,
+   7257,
+   11409,
+   11607,
+   4482,
+   10522,
+   13350
+  ],
+  "load1m": [
+   5.34,
+   10.48
+  ],
+  "window": "01:58–02:02Z"
+ },
+ {
+  "flow": "F4",
+  "step": "same, exits soon after the chip appeared",
+  "ms": 9239,
+  "n": 6,
+  "min": 8128,
+  "max": 10792,
+  "all": [
+   9279,
+   10638,
+   9198,
+   10792,
+   8128,
+   8505
+  ],
+  "load1m": [
+   3.09,
+   3.9
+  ],
+  "window": "01:49–01:51Z"
+ },
+ {
+  "flow": "F4",
+  "step": "all F4 trials pooled",
+  "ms": 10455,
+  "n": 14,
+  "min": 4482,
+  "max": 15413,
+  "all": [
+   15413,
+   10387,
+   7257,
+   11409,
+   11607,
+   4482,
+   10522,
+   13350,
+   9279,
+   10638,
+   9198,
+   10792,
+   8128,
+   8505
+  ]
+ },
+ {
+  "flow": "F4",
+  "step": "stale window: server already dead, chip still offered (one sample, ends at the next refresh)",
+  "ms": 3813,
+  "n": 1,
+  "load1m": [
+   6.11
+  ]
+ },
+ {
+  "flow": "F1/F4",
+  "step": "localhost list refresh interval inside the app (consecutive refreshes)",
+  "ms": 12019,
+  "n": 33,
+  "min": 11583,
+  "max": 12419
+ },
+ {
+  "flow": "F2",
+  "step": "click a chip (Open) → browser-open call made",
+  "ms": 40,
+  "n": 2,
+  "min": 26,
+  "max": 53,
+  "all": [
+   53,
+   26
+  ]
+ },
+ {
+  "flow": "F2",
+  "step": "click ✕, confirm Stop → that server process is dead",
+  "ms": 43,
+  "n": 3,
+  "min": 19,
+  "max": 53,
+  "all": [
+   53,
+   43,
+   19
+  ],
+  "note": "Home ✕ ×2, ⋯ → Localhost menu ×1"
+ },
+ {
+  "flow": "F2",
+  "step": "type /stop <port> + Enter, confirm Stop → server process dead",
+  "ms": 281,
+  "n": 1
+ },
+ {
+  "flow": "F2",
+  "step": "click ✕, confirm Stop → chip gone from Home (the only visible confirmation)",
+  "ms": 2833,
+  "n": 4,
+  "min": 1965,
+  "max": 3539,
+  "all": [
+   2506,
+   3160,
+   3539,
+   1965
+  ],
+  "note": "✕ ×2, /stop ×1, menu ×1"
+ },
+ {
+  "flow": "F2",
+  "step": "chip clicks that reached the app (150 ms press at random moments)",
+  "ms": null,
+  "n": 60,
+  "delivered": 58,
+  "dropped": 2,
+  "load1m": [
+   1.59,
+   1.66
+  ]
+ },
+ {
+  "flow": "F5",
+  "step": "alerts set to Everything: server listening → \"is up\" announcement",
+  "ms": 5120,
+  "n": 1
+ },
+ {
+  "flow": "F5",
+  "step": "alerts set to Everything: server exit → \"went down\" announcement",
+  "ms": 3459,
+  "n": 1
+ },
+ {
+  "flow": "F5x",
+  "step": "server still compiling when first seen → chip renders (Open disabled from then on)",
+  "ms": 12999,
+  "n": 1
+ },
+ {
+  "flow": "home",
+  "step": "click on Net → Home panel shown (includes the 220 ms double-click wait)",
+  "ms": 411,
+  "n": 12,
+  "min": 399,
+  "max": 418,
+  "all": [
+   402,
+   407,
+   418,
+   412,
+   408,
+   411,
+   417,
+   405,
+   412,
+   410,
+   411,
+   399
+  ]
+ }
+]

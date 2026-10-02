@@ -1,0 +1,9 @@
+[13:04:59.069] cpu base #1: 2.24% (1.35 s / 60.3 s, 4 procs, ticks null, live null, events null) · load 9.26 7.99 26.47 -> load 24.12 12.41 26.85
+[13:06:19.550] cpu fix #1: 2.89% (1.75 s / 60.5 s, 4 procs, ticks 20, live 0, events 0) · load 25.36 13.52 26.92 -> load 20.51 14.32 26.31
+[13:07:39.474] cpu fix #2: 2.11% (1.27 s / 60.1 s, 4 procs, ticks 20, live 0, events 0) · load 22.72 15.34 26.40 -> load 14.89 14.66 25.41
+[13:08:56.329] cpu base #2: 2.06% (1.24 s / 60.1 s, 4 procs, ticks null, live null, events null) · load 13.52 14.37 25.12 -> load 8.38 12.79 23.79
+[13:10:12.988] cpu base #3: 1.55% (0.93 s / 60.1 s, 4 procs, ticks null, live null, events null) · load 7.49 12.37 23.45 -> load 5.52 10.87 22.13
+[13:11:29.408] cpu fix #3: 1.37% (0.82 s / 60.1 s, 4 procs, ticks 20, live 0, events 0) · load 5.32 10.49 21.73 -> load 5.15 9.58 20.63
+[13:11:29.758] cpu medians fix 2.11% base 2.06% delta 0.05 points
+exit=0
+ 7:11  up 6 days, 17:56, 19 users, load averages: 5.15 9.58 20.63

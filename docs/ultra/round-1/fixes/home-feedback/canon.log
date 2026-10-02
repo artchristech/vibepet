@@ -1,0 +1,2 @@
+ok 29/29 assertions in 71.0 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/home-feedback/canon
+rows: beacon:needs kestrel:needs delta:ready atlas:ready vibepet:ready ember:ready   fleet: 4/6 in state, changed during the run: ember

@@ -1,0 +1,87 @@
+{
+ "chips": [
+  ":47706 vibepet · Directory listing",
+  ":47707 vibepet · Vite + React + TS",
+  ":47708 delta · Vite + React + TS",
+  ":47709 vibepet · Vite on [::1]",
+  ":47710 vibepet · Secure dev app",
+  ":47711 kestrel · Kestrel dashboard",
+  ":47711 beacon · Beacon status",
+  ":47712 vibepet · Next.js app"
+ ],
+ "opens": [
+  {
+   "port": 47706,
+   "chip": ":47706 vibepet · Directory listing",
+   "url": "http://localhost:47706",
+   "servesTitle": "Directory listing for /"
+  },
+  {
+   "port": 47707,
+   "chip": ":47707 vibepet · Vite + React + TS",
+   "url": "http://localhost:47707",
+   "servesTitle": "Vite + React + TS"
+  },
+  {
+   "port": 47708,
+   "chip": ":47708 delta · Vite + React + TS",
+   "url": "http://localhost:47708",
+   "servesTitle": "Vite + React + TS"
+  },
+  {
+   "port": 47709,
+   "chip": ":47709 vibepet · Vite on [::1]",
+   "url": "http://localhost:47709",
+   "servesTitle": "Vite on [::1]"
+  },
+  {
+   "port": 47710,
+   "chip": ":47710 vibepet · Secure dev app",
+   "url": "https://localhost:47710",
+   "servesTitle": "Secure dev app"
+  },
+  {
+   "port": 47711,
+   "chip": ":47711 kestrel · Kestrel dashboard",
+   "url": "http://[::1]:47711",
+   "servesTitle": "Kestrel dashboard"
+  },
+  {
+   "port": 47711,
+   "chip": ":47711 beacon · Beacon status",
+   "url": "http://127.0.0.1:47711",
+   "servesTitle": "Beacon status"
+  },
+  {
+   "port": 47712,
+   "chip": ":47712 vibepet · Next.js app",
+   "url": "http://localhost:47712",
+   "servesTitle": "Next.js app"
+  }
+ ],
+ "slow": {
+  "listenAt": 1790946367136,
+  "readyAt": 1790946386882,
+  "activeAt": 1790946386908,
+  "msAfterReady": 26,
+  "load": [
+   26.08,
+   15.58,
+   26.68
+  ]
+ },
+ "slowFirst": {
+  "snapshot": {
+   "key": "47712/61349",
+   "port": 47712,
+   "pid": 61349,
+   "sid": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "name": "vibepet · node",
+   "http": null,
+   "url": "http://localhost:47712",
+   "why": "No answer yet from [::1]:47712 (still starting?)"
+  },
+  "chip": "folded",
+  "msAfterListen": null
+ }
+}

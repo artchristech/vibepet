@@ -1,0 +1,191 @@
+{
+ "what": "slow.js PORT title 20000: every request waits until 20 s after start; ready = its READY_AT; active = Open no longer aria-disabled",
+ "startedAt": "2026-10-02T13:07:48.880Z",
+ "uptimeStart": "7:07  up 6 days, 17:53, 19 users, load averages: 14.35 14.55 25.24",
+ "trials": [
+  {
+   "port": 47742,
+   "listenAt": 1790946470291,
+   "readyAt": 1790946490289,
+   "firstShownInactive": true,
+   "activeAt": 1790946490303,
+   "msAfterReady": 14,
+   "mainHttpAt": 1790946490380,
+   "mainMsAfterReady": 91
+  },
+  {
+   "port": 47743,
+   "listenAt": 1790946470631,
+   "readyAt": 1790946490629,
+   "firstShownInactive": true,
+   "activeAt": 1790946490638,
+   "msAfterReady": 9,
+   "mainHttpAt": 1790946490748,
+   "mainMsAfterReady": 119
+  },
+  {
+   "port": 47744,
+   "listenAt": 1790946471085,
+   "readyAt": 1790946491084,
+   "firstShownInactive": true,
+   "activeAt": 1790946491088,
+   "msAfterReady": 4,
+   "mainHttpAt": 1790946491103,
+   "mainMsAfterReady": 19
+  },
+  {
+   "port": 47745,
+   "listenAt": 1790946471588,
+   "readyAt": 1790946491587,
+   "firstShownInactive": true,
+   "activeAt": 1790946491592,
+   "msAfterReady": 5,
+   "mainHttpAt": 1790946491678,
+   "mainMsAfterReady": 91
+  },
+  {
+   "port": 47746,
+   "listenAt": 1790946471787,
+   "readyAt": 1790946491786,
+   "firstShownInactive": true,
+   "activeAt": 1790946491792,
+   "msAfterReady": 6,
+   "mainHttpAt": 1790946491905,
+   "mainMsAfterReady": 119
+  },
+  {
+   "port": 47747,
+   "listenAt": 1790946472045,
+   "readyAt": 1790946492044,
+   "firstShownInactive": true,
+   "activeAt": 1790946492051,
+   "msAfterReady": 7,
+   "mainHttpAt": 1790946492134,
+   "mainMsAfterReady": 90
+  },
+  {
+   "port": 47748,
+   "listenAt": 1790946472595,
+   "readyAt": 1790946492593,
+   "firstShownInactive": true,
+   "activeAt": 1790946492597,
+   "msAfterReady": 4,
+   "mainHttpAt": 1790946492618,
+   "mainMsAfterReady": 25
+  },
+  {
+   "port": 47749,
+   "listenAt": 1790946473046,
+   "readyAt": 1790946493044,
+   "firstShownInactive": true,
+   "activeAt": 1790946493049,
+   "msAfterReady": 5,
+   "mainHttpAt": 1790946493067,
+   "mainMsAfterReady": 23
+  },
+  {
+   "port": 47750,
+   "listenAt": 1790946473743,
+   "readyAt": 1790946493740,
+   "firstShownInactive": true,
+   "activeAt": 1790946493749,
+   "msAfterReady": 9,
+   "mainHttpAt": 1790946493867,
+   "mainMsAfterReady": 127
+  },
+  {
+   "port": 47751,
+   "listenAt": 1790946474090,
+   "readyAt": 1790946494088,
+   "firstShownInactive": true,
+   "activeAt": 1790946494098,
+   "msAfterReady": 10,
+   "mainHttpAt": null,
+   "mainMsAfterReady": null
+  }
+ ],
+ "reopened": [],
+ "chips": [
+  ":47751 atlas · Compiled app 10",
+  ":47750 beacon · Compiled app 9",
+  ":47749 kestrel · Compiled app 8",
+  ":47748 delta · Compiled app 7",
+  ":47747 vibepet · Compiled app 6",
+  ":47745 beacon · Compiled app 4",
+  ":47746 atlas · Compiled app 5",
+  ":47744 kestrel · Compiled app 3",
+  ":47743 delta · Compiled app 2",
+  ":47742 vibepet · Compiled app 1"
+ ],
+ "afterReady": {
+  "n": 10,
+  "median": 6.5,
+  "min": 4,
+  "max": 14
+ },
+ "mainAfterReady": {
+  "n": 9,
+  "median": 91,
+  "min": 19,
+  "max": 127
+ },
+ "uptimeEnd": "7:08  up 6 days, 17:53, 19 users, load averages: 11.97 13.96 24.72",
+ "fixtures": [
+  {
+   "tag": "slow0",
+   "pid": 70091,
+   "exited": true
+  },
+  {
+   "tag": "slow1",
+   "pid": 70108,
+   "exited": true
+  },
+  {
+   "tag": "slow2",
+   "pid": 70122,
+   "exited": true
+  },
+  {
+   "tag": "slow3",
+   "pid": 70237,
+   "exited": true
+  },
+  {
+   "tag": "slow4",
+   "pid": 70242,
+   "exited": true
+  },
+  {
+   "tag": "slow5",
+   "pid": 70247,
+   "exited": true
+  },
+  {
+   "tag": "slow6",
+   "pid": 70369,
+   "exited": true
+  },
+  {
+   "tag": "slow7",
+   "pid": 70378,
+   "exited": true
+  },
+  {
+   "tag": "slow8",
+   "pid": 70438,
+   "exited": true
+  },
+  {
+   "tag": "slow9",
+   "pid": 70540,
+   "exited": true
+  }
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 307,
+  "procs": 4,
+  "orphans": []
+ }
+}

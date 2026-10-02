@@ -1,0 +1,1125 @@
+{
+ "phase": "D",
+ "startedAt": "2026-10-02T02:05:05.241Z",
+ "load0": [
+  4.92,
+  5.42,
+  4.32
+ ],
+ "shots": [
+  {
+   "name": "16-F3-same-port-two-servers.png",
+   "at": 1790906721859,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "sig": "ready",
+      "title": "Run build.sh",
+      "small": "atlas · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "sig": "ready",
+      "title": "Reconcile three shards in parallel",
+      "small": "delta · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "sig": "running",
+      "title": "Deploy.sh dry run",
+      "small": "kestrel · 15s",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47151,
+      "pid": 98348,
+      "label": ":47151 Beacon status",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47151,
+      "pid": 98358,
+      "label": ":47151 Beacon status",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 291,
+     "full": 291
+    },
+    "bubble": {
+     "text": "",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 3 servers"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "17-F3-port-taken-second-fails.png",
+   "at": 1790906733643,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "sig": "ready",
+      "title": "Run build.sh",
+      "small": "atlas · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "sig": "ready",
+      "title": "Reconcile three shards in parallel",
+      "small": "delta · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "sig": "running",
+      "title": "Deploy.sh dry run",
+      "small": "kestrel · 27s",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47152,
+      "pid": 758,
+      "label": ":47152 node (kestrel)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 291,
+     "full": 291
+    },
+    "bubble": {
+     "text": "",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 2 servers"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "18-F3-next-port-same-title.png",
+   "at": 1790906745628,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "sig": "ready",
+      "title": "Run build.sh",
+      "small": "atlas · done 1m ago",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "sig": "ready",
+      "title": "Reconcile three shards in parallel",
+      "small": "delta · done 1m ago",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "sig": "running",
+      "title": "Deploy.sh dry run",
+      "small": "kestrel · 39s",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47153,
+      "pid": 2554,
+      "label": ":47153 Vite + React + TS",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47154,
+      "pid": 2557,
+      "label": ":47154 Vite + React + TS",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 291,
+     "full": 291
+    },
+    "bubble": {
+     "text": "",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 3 servers"
+    },
+    "msgs": []
+   }
+  }
+ ],
+ "timings": [],
+ "notes": [
+  {
+   "at": 1790906709016,
+   "openHome": {
+    "mode": "now",
+    "at": {
+     "x": 330.5,
+     "y": 732.5
+    },
+    "ms": 408
+   }
+  },
+  {
+   "at": 1790906709774,
+   "step": "D1 started",
+   "kestrel": {
+    "pid": 98348,
+    "address": "::"
+   },
+   "beacon": {
+    "pid": 98358,
+    "error": null
+   },
+   "lsof": [
+    {
+     "pid": 98348,
+     "addr": "*:47151"
+    },
+    {
+     "pid": 98358,
+     "addr": "127.0.0.1:47151"
+    }
+   ]
+  },
+  {
+   "at": 1790906722729,
+   "step": "D1 chips + opens",
+   "chips": [
+    [
+     ":47151 Beacon status",
+     "kestrel (node, *:47151)"
+    ],
+    [
+     ":47151 Beacon status",
+     "beacon (python, 127.0.0.1:47151)"
+    ]
+   ],
+   "opens": [
+    {
+     "chip": ":47151 Beacon status",
+     "owner": "kestrel (node, *:47151)",
+     "url": "http://localhost:47151",
+     "reached": "Kestrel dashboard",
+     "remote": null
+    },
+    {
+     "chip": ":47151 Beacon status",
+     "owner": "beacon (python, 127.0.0.1:47151)",
+     "url": "http://localhost:47151",
+     "reached": "Kestrel dashboard",
+     "remote": null
+    }
+   ],
+   "direct": {
+    "v4": "Beacon status",
+    "v6": "Kestrel dashboard"
+   }
+  },
+  {
+   "at": 1790906733643,
+   "step": "D2",
+   "kestrel": {
+    "pid": 758,
+    "address": "::"
+   },
+   "beacon": {
+    "error": "EADDRINUSE",
+    "alive": true
+   },
+   "chips": [
+    {
+     "port": 47152,
+     "pid": 758,
+     "label": ":47152 node (kestrel)",
+     "disabled": false,
+     "visibleInScrollBox": true,
+     "clipped": false
+    }
+   ]
+  },
+  {
+   "at": 1790906746064,
+   "step": "D3",
+   "chips": [
+    {
+     "label": ":47153 Vite + React + TS",
+     "owner": "kestrel"
+    },
+    {
+     "label": ":47154 Vite + React + TS",
+     "owner": "beacon"
+    }
+   ],
+   "menu": {
+    "label": "Localhost (3)",
+    "items": [
+     {
+      "label": ":47153  Vite + React + TS  · 0m",
+      "enabled": true,
+      "sub": [
+       {
+        "label": "Open http://localhost:47153",
+        "enabled": true
+       },
+       {
+        "label": "node (kestrel) — ~/.vibepet-ultra/fleet/kestrel",
+        "enabled": false
+       },
+       {
+        "label": "—",
+        "enabled": true
+       },
+       {
+        "label": "Stop node (pid 2554)…",
+        "enabled": true
+       }
+      ]
+     },
+     {
+      "label": ":47154  Vite + React + TS  · 0m",
+      "enabled": true,
+      "sub": [
+       {
+        "label": "Open http://localhost:47154",
+        "enabled": true
+       },
+       {
+        "label": "node (beacon) — ~/.vibepet-ultra/fleet/beacon",
+        "enabled": false
+       },
+       {
+        "label": "—",
+        "enabled": true
+       },
+       {
+        "label": "Stop node (pid 2557)…",
+        "enabled": true
+       }
+      ]
+     },
+     {
+      "label": ":58308  ember preview  · 16m",
+      "enabled": true,
+      "sub": [
+       {
+        "label": "Open http://localhost:58308",
+        "enabled": true
+       },
+       {
+        "label": "node (ember) — ~/.vibepet-ultra/fleet/ember",
+        "enabled": false
+       },
+       {
+        "label": "—",
+        "enabled": true
+       },
+       {
+        "label": "Stop node (pid 56038)…",
+        "enabled": true
+       }
+      ]
+     },
+     {
+      "label": "—",
+      "enabled": true
+     },
+     {
+      "label": "Background tasks",
+      "enabled": false
+     },
+     {
+      "label": "✓ Run shard 1 reconciliation · delta · 5m",
+      "enabled": true
+     },
+     {
+      "label": "✓ Run shard 3 reconciliation · delta · 5m",
+      "enabled": true
+     },
+     {
+      "label": "✓ Run shard 2 reconciliation · delta · 5m",
+      "enabled": true
+     },
+     {
+      "label": "✗ Start HTTP server on port 47120 · vibepet · 11m",
+      "enabled": true
+     },
+     {
+      "label": "✓ Run probe command · delta · 2h",
+      "enabled": true
+     },
+     {
+      "label": "✓ Run probe command · delta · 2h",
+      "enabled": true
+     }
+    ]
+   }
+  }
+ ],
+ "readyMs": 547,
+ "truth0": {
+  "at": "2026-10-02T02:05:05.240Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "r1-S6"
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": false,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": false,
+    "pid": 29074,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   }
+  ]
+ },
+ "pmset0": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "d1": {
+  "kestrel": {
+   "pid": 98348,
+   "address": "::"
+  },
+  "beacon": {
+   "pid": 98358,
+   "error": null
+  },
+  "lsof": [
+   {
+    "pid": 98348,
+    "addr": "*:47151"
+   },
+   {
+    "pid": 98358,
+    "addr": "127.0.0.1:47151"
+   }
+  ],
+  "chips": [
+   {
+    "port": 47151,
+    "pid": 98348,
+    "label": ":47151 Beacon status",
+    "disabled": false,
+    "title": "Open",
+    "owner": "kestrel (node, *:47151)"
+   },
+   {
+    "port": 47151,
+    "pid": 98358,
+    "label": ":47151 Beacon status",
+    "disabled": false,
+    "title": "Open",
+    "owner": "beacon (python, 127.0.0.1:47151)"
+   }
+  ],
+  "opens": [
+   {
+    "chip": ":47151 Beacon status",
+    "owner": "kestrel (node, *:47151)",
+    "url": "http://localhost:47151",
+    "reached": "Kestrel dashboard",
+    "remote": null
+   },
+   {
+    "chip": ":47151 Beacon status",
+    "owner": "beacon (python, 127.0.0.1:47151)",
+    "url": "http://localhost:47151",
+    "reached": "Kestrel dashboard",
+    "remote": null
+   }
+  ],
+  "direct": {
+   "v4": "Beacon status",
+   "v6": "Kestrel dashboard"
+  },
+  "menu": {
+   "label": "Localhost (3)",
+   "items": [
+    {
+     "label": ":47151  Beacon status  · 0m",
+     "enabled": true,
+     "sub": [
+      {
+       "label": "Open http://localhost:47151",
+       "enabled": true
+      },
+      {
+       "label": "node (kestrel) — ~/.vibepet-ultra/fleet/kestrel",
+       "enabled": false
+      },
+      {
+       "label": "—",
+       "enabled": true
+      },
+      {
+       "label": "Stop node (pid 98348)…",
+       "enabled": true
+      }
+     ]
+    },
+    {
+     "label": ":47151  Beacon status  · 0m",
+     "enabled": true,
+     "sub": [
+      {
+       "label": "Open http://localhost:47151",
+       "enabled": true
+      },
+      {
+       "label": "http.server (beacon) — ~/.vibepet-ultra/fleet/beacon",
+       "enabled": false
+      },
+      {
+       "label": "—",
+       "enabled": true
+      },
+      {
+       "label": "Stop http.server (pid 98358)…",
+       "enabled": true
+      }
+     ]
+    },
+    {
+     "label": ":58308  ember preview  · 16m",
+     "enabled": true,
+     "sub": [
+      {
+       "label": "Open http://localhost:58308",
+       "enabled": true
+      },
+      {
+       "label": "node (ember) — ~/.vibepet-ultra/fleet/ember",
+       "enabled": false
+      },
+      {
+       "label": "—",
+       "enabled": true
+      },
+      {
+       "label": "Stop node (pid 56038)…",
+       "enabled": true
+      }
+     ]
+    },
+    {
+     "label": "—",
+     "enabled": true
+    },
+    {
+     "label": "Background tasks",
+     "enabled": false
+    },
+    {
+     "label": "✓ Run shard 1 reconciliation · delta · 5m",
+     "enabled": true
+    },
+    {
+     "label": "✓ Run shard 3 reconciliation · delta · 5m",
+     "enabled": true
+    },
+    {
+     "label": "✓ Run shard 2 reconciliation · delta · 5m",
+     "enabled": true
+    },
+    {
+     "label": "✗ Start HTTP server on port 47120 · vibepet · 10m",
+     "enabled": true
+    },
+    {
+     "label": "✓ Run probe command · delta · 2h",
+     "enabled": true
+    },
+    {
+     "label": "✓ Run probe command · delta · 2h",
+     "enabled": true
+    }
+   ]
+  }
+ },
+ "d2": {
+  "kestrel": {
+   "pid": 758,
+   "address": "::"
+  },
+  "beacon": {
+   "error": "EADDRINUSE",
+   "alive": true
+  },
+  "chips": [
+   {
+    "port": 47152,
+    "pid": 758,
+    "label": ":47152 node (kestrel)",
+    "disabled": false,
+    "visibleInScrollBox": true,
+    "clipped": false
+   }
+  ]
+ },
+ "d3": {
+  "chips": [
+   {
+    "label": ":47153 Vite + React + TS",
+    "owner": "kestrel"
+   },
+   {
+    "label": ":47154 Vite + React + TS",
+    "owner": "beacon"
+   }
+  ],
+  "menu": {
+   "label": "Localhost (3)",
+   "items": [
+    {
+     "label": ":47153  Vite + React + TS  · 0m",
+     "enabled": true,
+     "sub": [
+      {
+       "label": "Open http://localhost:47153",
+       "enabled": true
+      },
+      {
+       "label": "node (kestrel) — ~/.vibepet-ultra/fleet/kestrel",
+       "enabled": false
+      },
+      {
+       "label": "—",
+       "enabled": true
+      },
+      {
+       "label": "Stop node (pid 2554)…",
+       "enabled": true
+      }
+     ]
+    },
+    {
+     "label": ":47154  Vite + React + TS  · 0m",
+     "enabled": true,
+     "sub": [
+      {
+       "label": "Open http://localhost:47154",
+       "enabled": true
+      },
+      {
+       "label": "node (beacon) — ~/.vibepet-ultra/fleet/beacon",
+       "enabled": false
+      },
+      {
+       "label": "—",
+       "enabled": true
+      },
+      {
+       "label": "Stop node (pid 2557)…",
+       "enabled": true
+      }
+     ]
+    },
+    {
+     "label": ":58308  ember preview  · 16m",
+     "enabled": true,
+     "sub": [
+      {
+       "label": "Open http://localhost:58308",
+       "enabled": true
+      },
+      {
+       "label": "node (ember) — ~/.vibepet-ultra/fleet/ember",
+       "enabled": false
+      },
+      {
+       "label": "—",
+       "enabled": true
+      },
+      {
+       "label": "Stop node (pid 56038)…",
+       "enabled": true
+      }
+     ]
+    },
+    {
+     "label": "—",
+     "enabled": true
+    },
+    {
+     "label": "Background tasks",
+     "enabled": false
+    },
+    {
+     "label": "✓ Run shard 1 reconciliation · delta · 5m",
+     "enabled": true
+    },
+    {
+     "label": "✓ Run shard 3 reconciliation · delta · 5m",
+     "enabled": true
+    },
+    {
+     "label": "✓ Run shard 2 reconciliation · delta · 5m",
+     "enabled": true
+    },
+    {
+     "label": "✗ Start HTTP server on port 47120 · vibepet · 11m",
+     "enabled": true
+    },
+    {
+     "label": "✓ Run probe command · delta · 2h",
+     "enabled": true
+    },
+    {
+     "label": "✓ Run probe command · delta · 2h",
+     "enabled": true
+    }
+   ]
+  }
+ },
+ "leftovers": [
+  [
+   47151,
+   []
+  ],
+  [
+   47152,
+   []
+  ],
+  [
+   47153,
+   []
+  ],
+  [
+   47154,
+   []
+  ]
+ ],
+ "truth1": {
+  "at": "2026-10-02T02:05:47.280Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "r1-S6"
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": false,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": false,
+    "pid": 29074,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   }
+  ]
+ },
+ "pmset1": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "load1": [
+  4.82,
+  5.33,
+  4.34
+ ],
+ "endedAt": "2026-10-02T02:05:49.779Z",
+ "polls": [
+  {
+   "at": 1790906706138,
+   "seen": 1790906706174,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906717896,
+   "seen": 1790906717962,
+   "servers": [
+    "98348:47151",
+    "98358:47151",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906729946,
+   "seen": 1790906729982,
+   "servers": [
+    "758:47152",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906741973,
+   "seen": 1790906741976,
+   "servers": [
+    "2554:47153",
+    "2557:47154",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  }
+ ],
+ "allCalls": [
+  {
+   "kind": "openExternal",
+   "at": 1790906721892,
+   "url": "http://localhost:47151"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790906722321,
+   "url": "http://localhost:47151"
+  },
+  {
+   "kind": "menuPopup",
+   "at": 1790906722771,
+   "items": [
+    "Watching kestrel",
+    "Localhost (3)",
+    "Open Home",
+    "Setup…",
+    "Theater…",
+    "Start content session",
+    "Finish last session",
+    "Open shorts folder",
+    "Today…",
+    "Pet",
+    "Toss a snack",
+    "Settings",
+    "Hide Net",
+    "Quit Net"
+   ]
+  },
+  {
+   "kind": "menuPopup",
+   "at": 1790906745657,
+   "items": [
+    "Watching kestrel",
+    "Localhost (3)",
+    "Open Home",
+    "Setup…",
+    "Theater…",
+    "Start content session",
+    "Finish last session",
+    "Open shorts folder",
+    "Today…",
+    "Pet",
+    "Toss a snack",
+    "Settings",
+    "Hide Net",
+    "Quit Net"
+   ]
+  }
+ ],
+ "footerLog": [
+  {
+   "at": 1790906706075,
+   "srv": []
+  },
+  {
+   "at": 1790906708777,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906720809,
+   "srv": [
+    {
+     "port": 47151,
+     "pid": 98348,
+     "label": ":47151 Beacon status",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47151,
+     "pid": 98358,
+     "label": ":47151 Beacon status",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906732802,
+   "srv": [
+    {
+     "port": 47152,
+     "pid": 758,
+     "label": ":47152 node (kestrel)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906744807,
+   "srv": [
+    {
+     "port": 47153,
+     "pid": 2554,
+     "label": ":47153 Vite + React + TS",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47154,
+     "pid": 2557,
+     "label": ":47154 Vite + React + TS",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  }
+ ],
+ "rendererEvents": [],
+ "close": {
+  "how": "quit",
+  "ms": 444,
+  "procs": 7,
+  "orphans": []
+ }
+}

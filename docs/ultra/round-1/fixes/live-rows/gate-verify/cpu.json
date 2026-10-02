@@ -1,0 +1,103 @@
+{
+  "at": "2026-10-02T13:03:42.350Z",
+  "windowSec": 60,
+  "fix": "/Users/christopherharris/.vibepet-ultra/wt/r1-live-rows",
+  "base": "/Users/christopherharris/.vibepet-ultra/int",
+  "runs": [
+    {
+      "run": 1,
+      "label": "base",
+      "procs": 4,
+      "cpuSec": 1.35,
+      "secs": 60.3,
+      "cpuPct": 2.24,
+      "ticks": null,
+      "liveTicks": null,
+      "watcherEvents": null,
+      "uptime": [
+        "load 9.26 7.99 26.47",
+        "load 24.12 12.41 26.85"
+      ]
+    },
+    {
+      "run": 1,
+      "label": "fix",
+      "procs": 4,
+      "cpuSec": 1.75,
+      "secs": 60.5,
+      "cpuPct": 2.89,
+      "ticks": 20,
+      "liveTicks": 0,
+      "watcherEvents": 0,
+      "uptime": [
+        "load 25.36 13.52 26.92",
+        "load 20.51 14.32 26.31"
+      ]
+    },
+    {
+      "run": 2,
+      "label": "fix",
+      "procs": 4,
+      "cpuSec": 1.27,
+      "secs": 60.1,
+      "cpuPct": 2.11,
+      "ticks": 20,
+      "liveTicks": 0,
+      "watcherEvents": 0,
+      "uptime": [
+        "load 22.72 15.34 26.40",
+        "load 14.89 14.66 25.41"
+      ]
+    },
+    {
+      "run": 2,
+      "label": "base",
+      "procs": 4,
+      "cpuSec": 1.24,
+      "secs": 60.1,
+      "cpuPct": 2.06,
+      "ticks": null,
+      "liveTicks": null,
+      "watcherEvents": null,
+      "uptime": [
+        "load 13.52 14.37 25.12",
+        "load 8.38 12.79 23.79"
+      ]
+    },
+    {
+      "run": 3,
+      "label": "base",
+      "procs": 4,
+      "cpuSec": 0.93,
+      "secs": 60.1,
+      "cpuPct": 1.55,
+      "ticks": null,
+      "liveTicks": null,
+      "watcherEvents": null,
+      "uptime": [
+        "load 7.49 12.37 23.45",
+        "load 5.52 10.87 22.13"
+      ]
+    },
+    {
+      "run": 3,
+      "label": "fix",
+      "procs": 4,
+      "cpuSec": 0.82,
+      "secs": 60.1,
+      "cpuPct": 1.37,
+      "ticks": 20,
+      "liveTicks": 0,
+      "watcherEvents": 0,
+      "uptime": [
+        "load 5.32 10.49 21.73",
+        "load 5.15 9.58 20.63"
+      ]
+    }
+  ],
+  "median": {
+    "fix": 2.11,
+    "base": 2.06
+  },
+  "deltaPoints": 0.05
+}

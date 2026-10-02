@@ -1,0 +1,494 @@
+{
+ "phase": "G",
+ "startedAt": "2026-10-02T02:17:45.485Z",
+ "load0": [
+  1.59,
+  2.57,
+  3.35
+ ],
+ "shots": [],
+ "timings": [],
+ "notes": [
+  {
+   "at": 1790907467240,
+   "openHome": {
+    "mode": "now",
+    "at": {
+     "x": 330.5,
+     "y": 732.5
+    },
+    "ms": 411
+   }
+  },
+  {
+   "at": 1790907547069,
+   "step": "clicks",
+   "n": 60,
+   "delivered": 58,
+   "dropped": 2,
+   "droppedWithRerender": 2,
+   "rerenderOverlaps": 11
+  }
+ ],
+ "readyMs": 342,
+ "truth0": {
+  "at": "2026-10-02T02:17:46.324Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": null
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": null
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": true,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": null
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": null
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": true,
+    "pid": 29074,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": null
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   }
+  ]
+ },
+ "clicks": {
+  "n": 60,
+  "delivered": 58,
+  "dropped": 2,
+  "droppedWithRerender": 2,
+  "rerenderOverlaps": 11
+ },
+ "leftovers": [],
+ "load1": [
+  1.66,
+  2.35,
+  3.19
+ ],
+ "endedAt": "2026-10-02T02:19:07.641Z",
+ "polls": [
+  {
+   "at": 1790907466042,
+   "seen": 1790907466137,
+   "servers": [],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907477977,
+   "seen": 1790907478042,
+   "servers": [
+    "62627:47191"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907489992,
+   "seen": 1790907490063,
+   "servers": [
+    "62627:47191"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907502025,
+   "seen": 1790907502073,
+   "servers": [
+    "62627:47191"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907514025,
+   "seen": 1790907514120,
+   "servers": [
+    "62627:47191"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907526036,
+   "seen": 1790907526088,
+   "servers": [
+    "62627:47191"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907538015,
+   "seen": 1790907538038,
+   "servers": [
+    "62627:47191"
+   ],
+   "procs": 0,
+   "tasks": 20
+  }
+ ],
+ "allCalls": [
+  {
+   "kind": "openExternal",
+   "at": 1790907482181,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907483254,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907484299,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907485678,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907487840,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907488964,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907489854,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907490968,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907492028,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907493390,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907494240,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907495583,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907496530,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907497725,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907499989,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907501284,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907502283,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907503255,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907504660,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907506005,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907507265,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907508265,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907509529,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907510324,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907511485,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907512689,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907513531,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907514582,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907515696,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907516662,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907517484,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907518442,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907519849,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907520581,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907521542,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907522731,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907523717,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907524829,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907526131,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907526864,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907528050,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907529200,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907530332,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907531693,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907532434,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907533685,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907534497,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907535342,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907536704,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907537760,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907538861,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907540166,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907541477,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907542434,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907543348,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907544714,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907545573,
+   "url": "http://localhost:47191"
+  },
+  {
+   "kind": "openExternal",
+   "at": 1790907546713,
+   "url": "http://localhost:47191"
+  }
+ ],
+ "footerLog": [
+  {
+   "at": 1790907466043,
+   "srv": []
+  },
+  {
+   "at": 1790907480891,
+   "srv": [
+    {
+     "port": 47191,
+     "pid": 62627,
+     "label": ":47191 click target",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  }
+ ],
+ "rendererEvents": [],
+ "close": {
+  "how": "quit",
+  "ms": 252,
+  "procs": 7,
+  "orphans": []
+ }
+}

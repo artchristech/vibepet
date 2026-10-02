@@ -1,0 +1,923 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/int",
+  "out": "/Users/christopherharris/projects/vibepet/docs/ultra/round-0/audit/canon-tip",
+  "root": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+  "startedAt": "2026-10-02T01:01:13.341Z",
+  "flags": {
+    "allRows": false,
+    "act": false,
+    "liveChat": false
+  },
+  "git": "315952c harness(guard): a registry under sessions/ must name a fleet session @ ultra/round-0",
+  "fleet": {
+    "at": "2026-10-02T01:01:13.711Z",
+    "allOk": false,
+    "spend": {
+      "transcriptsUsd": 1.731016,
+      "estimateWithHiddenUsd": 2.5704,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "permission prompt",
+          "statusUpdatedAt": 1790901173271
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T00:32:51.904Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790902861894
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T01:01:01.846Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790894712119
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-01T22:45:12.111Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "input needed",
+          "statusUpdatedAt": 1790901176447
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T00:32:54.386Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "registry": null,
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T00:39:32.524Z"
+        },
+        "toolProcs": 0,
+        "subagents": 33,
+        "failing": [
+          "claude",
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "registry": null,
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T00:31:59.879Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "claude",
+          "registry.status",
+          "loop",
+          "loopLock"
+        ]
+      }
+    ]
+  },
+  "surfaces": {
+    "home": {
+      "mode": "now",
+      "ms": 416,
+      "readAt": 1790902879693,
+      "aboveFold": 1,
+      "rows": 1,
+      "snapshotAgents": 1
+    },
+    "chat": {
+      "input": true,
+      "chips": [
+        "agent",
+        "commit",
+        "goal",
+        "next",
+        "vibe"
+      ],
+      "fresh": true,
+      "meta": "vibepet/main · claude code",
+      "note": "Via Claude Code · sends message + repo context",
+      "reply": {
+        "err": false,
+        "text": "Canon stub engine. Live agents in my context: vibepet=ready."
+      },
+      "engine": {
+        "kind": "stub",
+        "calls": [
+          {
+            "at": 1790902879977,
+            "model": "claude-haiku-4-5-20251001",
+            "print": true,
+            "noPersist": true,
+            "bytes": 1119,
+            "agents": 1
+          }
+        ]
+      }
+    },
+    "command": {
+      "cmds": [
+        "/record",
+        "/goal",
+        "/jump",
+        "/replay",
+        "/stop",
+        "/today",
+        "/setup",
+        "/settings"
+      ],
+      "today": true
+    },
+    "rows": {
+      "actions": {
+        "goal": {
+          "member": "vibepet",
+          "prefill": "/goal ",
+          "set": true,
+          "done": true,
+          "clicks": 1,
+          "firstClickDropped": false
+        },
+        "reply": {
+          "none": "no row offers Reply"
+        },
+        "approve": {
+          "none": "no row offers Approve"
+        },
+        "jump": [
+          {
+            "member": "vibepet",
+            "result": {
+              "ok": false,
+              "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+            },
+            "ms": 110,
+            "clipboardWrites": 1
+          }
+        ]
+      }
+    },
+    "theater": {
+      "member": "vibepet",
+      "beats": 44,
+      "title": "Session startvibepet · 02:24 PM · 4.6h real → 3:10 replay",
+      "midBeat": 22
+    },
+    "ports": {
+      "fixture": {
+        "port": 56325,
+        "repo": "delta"
+      },
+      "footer": {
+        "servers": [
+          {
+            "port": 56325,
+            "text": ":56325 canon fixture✕"
+          }
+        ]
+      },
+      "open": "http://localhost:56325",
+      "stop": {
+        "confirm": "Stop node (delta) on :56325?",
+        "killed": true
+      }
+    },
+    "keys": {
+      "jumpKey": {
+        "key": null,
+        "taken": false
+      },
+      "queue": [],
+      "hotkey": {
+        "jumped": null,
+        "expected": null,
+        "result": null
+      },
+      "gesture": {
+        "menu": {
+          "ok": true,
+          "label": "Record gesture…"
+        },
+        "padOpen": true,
+        "message": "Saved. Hide Net, then move the mouse in that shape to bring him back.",
+        "templates": 3
+      }
+    }
+  },
+  "assertions": [
+    {
+      "surface": "home",
+      "id": "panelOpens",
+      "ok": true,
+      "detail": "mode now in 416 ms"
+    },
+    {
+      "surface": "home",
+      "id": "rowsRender",
+      "ok": true,
+      "detail": "1 rows, 1 agents in the snapshot"
+    },
+    {
+      "surface": "home",
+      "id": "rowsMatchSnapshot",
+      "ok": true,
+      "detail": "1 rows vs 1 snapshot agents (Home caps at 8)"
+    },
+    {
+      "surface": "chat",
+      "id": "inputVisible",
+      "ok": true,
+      "detail": {
+        "input": true,
+        "chips": [
+          "agent",
+          "commit",
+          "goal",
+          "next",
+          "vibe"
+        ],
+        "fresh": true,
+        "meta": "vibepet/main · claude code",
+        "note": "Via Claude Code · sends message + repo context"
+      }
+    },
+    {
+      "surface": "chat",
+      "id": "chipsVisible",
+      "ok": true,
+      "detail": [
+        "agent",
+        "commit",
+        "goal",
+        "next",
+        "vibe"
+      ]
+    },
+    {
+      "surface": "chat",
+      "id": "userMessage",
+      "ok": true,
+      "detail": "the typed message shows"
+    },
+    {
+      "surface": "chat",
+      "id": "reply",
+      "ok": true,
+      "detail": {
+        "err": false,
+        "text": "Canon stub engine. Live agents in my context: vibepet=ready."
+      }
+    },
+    {
+      "surface": "chat",
+      "id": "engineCalled",
+      "ok": true,
+      "detail": [
+        {
+          "at": 1790902879977,
+          "model": "claude-haiku-4-5-20251001",
+          "print": true,
+          "noPersist": true,
+          "bytes": 1119,
+          "agents": 1
+        }
+      ]
+    },
+    {
+      "surface": "command",
+      "id": "barOpens",
+      "ok": true,
+      "detail": [
+        "/record",
+        "/goal",
+        "/jump",
+        "/replay",
+        "/stop",
+        "/today",
+        "/setup",
+        "/settings"
+      ]
+    },
+    {
+      "surface": "command",
+      "id": "todayRuns",
+      "ok": true,
+      "detail": "/today posts its note"
+    },
+    {
+      "surface": "rows",
+      "id": "goalPrefill",
+      "ok": true,
+      "detail": "/goal "
+    },
+    {
+      "surface": "rows",
+      "id": "goalSet",
+      "ok": true,
+      "detail": "◎ then /goal on vibepet"
+    },
+    {
+      "surface": "rows",
+      "id": "goalDone",
+      "ok": true,
+      "detail": "✓ on vibepet"
+    },
+    {
+      "surface": "rows",
+      "id": "jumpRuns:vibepet",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+      }
+    },
+    {
+      "surface": "theater",
+      "id": "opens",
+      "ok": true,
+      "detail": "▶ on vibepet"
+    },
+    {
+      "surface": "theater",
+      "id": "hasBeats",
+      "ok": true,
+      "detail": {
+        "beats": 44,
+        "title": "Session startvibepet · 02:24 PM · 4.6h real → 3:10 replay"
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "sectionRenders",
+      "ok": true,
+      "detail": {
+        "servers": [
+          {
+            "port": 56325,
+            "text": ":56325 canon fixture✕"
+          }
+        ]
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "fixtureListed",
+      "ok": true,
+      "detail": ":56325 (cwd delta)"
+    },
+    {
+      "surface": "ports",
+      "id": "openButton",
+      "ok": true,
+      "detail": {
+        "kind": "openExternal",
+        "at": 1790902889222,
+        "url": "http://localhost:56325"
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "stopConfirms",
+      "ok": true,
+      "detail": {
+        "kind": "dialog",
+        "at": 1790902889259,
+        "message": "Stop node (delta) on :56325?",
+        "buttons": [
+          "Stop",
+          "Cancel"
+        ]
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "stopKills",
+      "ok": true,
+      "detail": "fixture pid 30214"
+    },
+    {
+      "surface": "keys",
+      "id": "hotkeyJumps",
+      "ok": true,
+      "detail": "nothing in line: no jump"
+    },
+    {
+      "surface": "keys",
+      "id": "menuOpens",
+      "ok": true,
+      "detail": "14 items"
+    },
+    {
+      "surface": "keys",
+      "id": "gesturePadOpens",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "label": "Record gesture…"
+      }
+    },
+    {
+      "surface": "keys",
+      "id": "gestureSaved",
+      "ok": true,
+      "detail": "Saved. Hide Net, then move the mouse in that shape to bring him back."
+    },
+    {
+      "surface": "run",
+      "id": "cleanClose",
+      "ok": true,
+      "detail": {
+        "how": "quit",
+        "ms": 524,
+        "procs": 7,
+        "orphans": []
+      }
+    }
+  ],
+  "rows": [
+    {
+      "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+      "sig": "ready",
+      "title": "Read package.json",
+      "label": "vibepet · done just now",
+      "goal": "◎ Read package.json and tell me in one plain sentence what this project is.",
+      "goalDone": false,
+      "ask": null,
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "member": "vibepet",
+      "name": "vibepet",
+      "phase": "ready",
+      "fanout": null
+    }
+  ],
+  "compare": [
+    {
+      "member": "kestrel",
+      "state": "approval",
+      "inState": true,
+      "truth": "waiting (permission prompt)",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "phase": null,
+      "actions": [],
+      "expected": [
+        "stuck",
+        "needs"
+      ],
+      "problems": [
+        "missing: a permission dialog is open: it needs you, Approve, but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "vibepet",
+      "state": "done",
+      "inState": true,
+      "truth": "idle",
+      "shown": true,
+      "sig": "ready",
+      "label": "vibepet · done just now",
+      "phase": "ready",
+      "actions": [
+        "replay",
+        "done",
+        "goal"
+      ],
+      "expected": [
+        "ready"
+      ],
+      "problems": [],
+      "age": {
+        "trueMs": 17799,
+        "shownMs": 0
+      },
+      "ok": true
+    },
+    {
+      "member": "atlas",
+      "state": "working",
+      "inState": false,
+      "truth": "idle",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "phase": null,
+      "actions": [],
+      "expected": [
+        "running"
+      ],
+      "problems": [
+        "not in its fixture state (paused): not scored"
+      ],
+      "ok": null
+    },
+    {
+      "member": "beacon",
+      "state": "question",
+      "inState": true,
+      "truth": "waiting (input needed)",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "phase": null,
+      "actions": [],
+      "expected": [
+        "needs"
+      ],
+      "problems": [
+        "missing: an AskUserQuestion dialog is open: it needs you, Reply, but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "delta",
+      "state": "fanout",
+      "inState": false,
+      "truth": "no claude",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "phase": null,
+      "actions": [],
+      "expected": [
+        "running"
+      ],
+      "problems": [
+        "not in its fixture state (paused): not scored"
+      ],
+      "ok": null
+    },
+    {
+      "member": "ember",
+      "state": "loop",
+      "inState": false,
+      "truth": "no claude",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "phase": null,
+      "actions": [],
+      "expected": [
+        "running",
+        "ready"
+      ],
+      "problems": [
+        "not in its fixture state (paused): not scored"
+      ],
+      "ok": null
+    }
+  ],
+  "intercepted": [
+    {
+      "kind": "clipboard",
+      "at": 9621,
+      "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+    },
+    {
+      "kind": "ipc:jump",
+      "at": 9621,
+      "args": [
+        "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+      ],
+      "result": {
+        "ok": false,
+        "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+      },
+      "ms": 110
+    },
+    {
+      "kind": "ipc:theater",
+      "at": 10503,
+      "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+    },
+    {
+      "kind": "openExternal",
+      "at": 15881,
+      "url": "http://localhost:56325"
+    },
+    {
+      "kind": "ipc:local-open",
+      "at": 15881,
+      "port": 56325
+    },
+    {
+      "kind": "dialog",
+      "at": 15918,
+      "message": "Stop node (delta) on :56325?",
+      "buttons": [
+        "Stop",
+        "Cancel"
+      ]
+    },
+    {
+      "kind": "ipc:local-stop",
+      "at": 15918,
+      "pid": 30214
+    },
+    {
+      "kind": "menuPopup",
+      "at": 24068,
+      "items": [
+        "Watching vibepet",
+        "Localhost",
+        "Open Home",
+        "Setup…",
+        "Theater…",
+        "Start content session",
+        "Finish last session",
+        "Open shorts folder",
+        "Today…",
+        "Pet",
+        "Toss a snack",
+        "Settings",
+        "Hide Net",
+        "Quit Net"
+      ]
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 24995,
+      "points": 37
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 26415,
+      "points": 37
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 27770,
+      "points": 37
+    }
+  ],
+  "timings": {
+    "home": 4761,
+    "chat": 1157,
+    "command": 885,
+    "rows": 2079,
+    "theater": 4968,
+    "ports": 1664,
+    "keys": 11308
+  },
+  "failures": [],
+  "launch": {
+    "pid": 30216,
+    "readyMs": 895,
+    "paths": {
+      "claude": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+      "userData": "userdata/run-2YrwNx"
+    },
+    "perms": {
+      "ax": true,
+      "screen": true
+    }
+  },
+  "instrument": {
+    "spied": [
+      "jump",
+      "send-to"
+    ]
+  },
+  "notes": 0,
+  "close": {
+    "how": "quit",
+    "ms": 524,
+    "procs": 7,
+    "orphans": []
+  },
+  "fleetAfter": {
+    "at": "2026-10-02T01:01:42.804Z",
+    "allOk": false,
+    "spend": {
+      "transcriptsUsd": 1.731016,
+      "estimateWithHiddenUsd": 2.5704,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "permission prompt",
+          "statusUpdatedAt": 1790901173271
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T00:32:51.904Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790902861894
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T01:01:01.846Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790894712119
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-01T22:45:12.111Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "input needed",
+          "statusUpdatedAt": 1790901176447
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T00:32:54.386Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "registry": null,
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T00:39:32.524Z"
+        },
+        "toolProcs": 0,
+        "subagents": 33,
+        "failing": [
+          "claude",
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "registry": null,
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T00:31:59.879Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "claude",
+          "registry.status",
+          "loop",
+          "loopLock"
+        ]
+      }
+    ]
+  },
+  "fleetChanged": [],
+  "ms": 29470,
+  "summary": {
+    "ok": true,
+    "assertions": "26/26",
+    "rows": [
+      "vibepet:ready"
+    ],
+    "fleetMembers": 6,
+    "inState": 3,
+    "mismatches": [
+      "kestrel: missing: a permission dialog is open: it needs you, Approve, but Home has no row for it",
+      "beacon: missing: an AskUserQuestion dialog is open: it needs you, Reply, but Home has no row for it"
+    ]
+  }
+}

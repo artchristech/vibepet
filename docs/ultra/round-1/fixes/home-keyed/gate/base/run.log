@@ -1,0 +1,16 @@
+uptime-start:  1:44  up 6 days, 12:29, 19 users, load averages: 687.49 774.39 790.08
+07:44:11.804 home {"mode":"now","ms":463,"rows":[],"load":"668.15 768.94 788.07"}
+07:44:11.809 liveFoldEmpty {"rows":0,"inView":0,"needs":0,"needsInView":0,"footerInView":true,"msgs":0,"panel":460,"listViewport":38,"listScroll":38,"msgsBox":0,"needsStack":0}
+07:44:12.497 presses []
+07:44:21.529 focus {"el":"<body>\n<div id=\"stage\">\n  <div id=\"chat\" class=\"hi","kept":[true,true,true]}
+07:44:21.631 keys {"approvalRow":-1,"afterEsc":"BODY","tabFromComposer":"BODY","shiftTabBack":"BODY","blurs":0,"homeOpen":null}
+07:44:27.594 needs4 empty {"rows":8,"inView":4,"needs":4,"needsInView":4,"footerInView":false,"msgs":0,"panel":596,"listViewport":654,"listScroll":654,"msgsBox":0,"needsStack":355} never: 0 partly: 0
+07:44:32.368 needs4 oneNote {"rows":8,"inView":4,"needs":4,"needsInView":0,"footerInView":true,"msgs":1,"panel":596,"listViewport":654,"listScroll":654,"msgsBox":22,"needsStack":355} never: [] partly: []
+07:44:36.374 needs4 slash {"rows":8,"inView":4,"needs":4,"needsInView":4,"footerInView":false,"msgs":1,"panel":596,"listViewport":654,"listScroll":654,"msgsBox":20,"needsStack":355} never: 0
+07:44:44.061 needs5 empty {"rows":8,"inView":4,"needs":5,"needsInView":4,"footerInView":false,"msgs":0,"panel":596,"listViewport":672,"listScroll":672,"msgsBox":0,"needsStack":444} never: 0 partly: 0
+07:44:49.899 needs5 oneNote {"rows":8,"inView":4,"needs":5,"needsInView":1,"footerInView":true,"msgs":1,"panel":596,"listViewport":672,"listScroll":672,"msgsBox":22,"needsStack":444} never: [] partly: []
+07:44:53.759 needs5 slash {"rows":8,"inView":4,"needs":5,"needsInView":4,"footerInView":false,"msgs":1,"panel":596,"listViewport":672,"listScroll":672,"msgsBox":20,"needsStack":444} never: 0
+07:44:59.484 live {"rows":0,"inView":0,"needs":0,"needsInView":0,"footerInView":true,"msgs":1,"panel":460,"listViewport":38,"listScroll":38,"msgsBox":170,"needsStack":0} {"rows":0,"inView":0,"needs":0,"needsInView":0,"footerInView":true,"msgs":1,"panel":522,"listViewport":38,"listScroll":38,"msgsBox":37,"needsStack":0} slash never: [] partly: []
+07:45:02.735 done {"how":"quit","ms":2407,"procs":7,"orphans":[]}
+exit=0
+uptime-end:  1:45  up 6 days, 12:30, 19 users, load averages: 552.24 711.92 764.95

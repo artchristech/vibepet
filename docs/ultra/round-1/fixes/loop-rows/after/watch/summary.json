@@ -1,0 +1,204 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-loop-rows",
+  "root": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+  "startedAt": "2026-10-02T08:34:11.674Z",
+  "secs": 800,
+  "every": 2,
+  "samples": 392,
+  "homeOpens": 1,
+  "close": {
+    "how": "quit",
+    "ms": 2135,
+    "procs": 7,
+    "orphans": []
+  },
+  "drops": {
+    "delta": 0,
+    "vibepet": 0,
+    "atlas": 0,
+    "beacon": 0,
+    "kestrel": 0,
+    "ember": 0
+  },
+  "order": {
+    "samples": 392,
+    "mismatches": 0,
+    "firstMismatch": null,
+    "last": {
+      "snapshot": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet",
+        "ember"
+      ],
+      "home": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet",
+        "ember"
+      ],
+      "pending": [
+        "beacon",
+        "kestrel"
+      ],
+      "held": [
+        "beacon",
+        "kestrel"
+      ]
+    }
+  },
+  "events": {
+    "?": {
+      "localhost": 23
+    }
+  },
+  "banners": 0,
+  "members": {
+    "delta": {
+      "segments": [
+        {
+          "from": 1085,
+          "to": 798665,
+          "truth": "idle",
+          "ui": "ready",
+          "label": "delta · done 6h 46m ago",
+          "fan": [
+            0,
+            3,
+            0
+          ]
+        }
+      ],
+      "changes": []
+    },
+    "vibepet": {
+      "segments": [
+        {
+          "from": 1085,
+          "to": 798665,
+          "truth": "idle",
+          "ui": "ready",
+          "label": "vibepet · done 5h 34m ago",
+          "fan": null
+        }
+      ],
+      "changes": []
+    },
+    "atlas": {
+      "segments": [
+        {
+          "from": 1085,
+          "to": 798665,
+          "truth": "idle",
+          "ui": "ready",
+          "label": "atlas · done 5h 44m ago",
+          "fan": null
+        }
+      ],
+      "changes": []
+    },
+    "beacon": {
+      "segments": [
+        {
+          "from": 1085,
+          "to": 798665,
+          "truth": "question",
+          "ui": "needs",
+          "label": "beacon · asking 6h 33m",
+          "fan": null
+        }
+      ],
+      "changes": []
+    },
+    "kestrel": {
+      "segments": [
+        {
+          "from": 1085,
+          "to": 798665,
+          "truth": "approval",
+          "ui": "needs",
+          "label": "kestrel · needs approval 5h 35m",
+          "fan": null
+        }
+      ],
+      "changes": []
+    },
+    "extra:ember": {
+      "segments": [
+        {
+          "from": 33423,
+          "to": 642231,
+          "truth": "not a live fleet session",
+          "ui": "loop",
+          "label": "ember · looping · every 5m · fired 7s ago · next ≈4m 36s"
+        },
+        {
+          "from": 644233,
+          "to": 798665,
+          "truth": "not a live fleet session",
+          "ui": "exited",
+          "label": "ember · exited 0s ago"
+        }
+      ]
+    },
+    "ember": {
+      "segments": [
+        {
+          "from": 39190,
+          "to": 597017,
+          "truth": "idle",
+          "ui": "loop",
+          "label": "ember · looping · every 5m · fired 4m ago · next ≈3s",
+          "fan": null
+        },
+        {
+          "from": 600686,
+          "to": 600686,
+          "truth": "busy",
+          "ui": "loop",
+          "label": "ember · looping · every 5m · fired 4m ago · next ≈now",
+          "fan": null
+        },
+        {
+          "from": 602689,
+          "to": 636402,
+          "truth": "idle",
+          "ui": "loop",
+          "label": "ember · looping · every 5m · fired 35s ago · next ≈4m 5s",
+          "fan": null
+        },
+        {
+          "from": 640228,
+          "to": 640228,
+          "truth": "waiting",
+          "ui": "loop",
+          "label": "ember · looping · every 5m · fired 39s ago · next ≈4m 1s",
+          "fan": null
+        }
+      ],
+      "changes": [
+        {
+          "at": 600686,
+          "to": "busy",
+          "shownAs": null,
+          "afterMs": null
+        },
+        {
+          "at": 602689,
+          "to": "idle",
+          "shownAs": "loop",
+          "afterMs": 0
+        },
+        {
+          "at": 640228,
+          "to": "waiting",
+          "afterMs": null
+        }
+      ]
+    }
+  }
+}

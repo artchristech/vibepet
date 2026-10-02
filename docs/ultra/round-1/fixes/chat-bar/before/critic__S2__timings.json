@@ -1,0 +1,343 @@
+[
+ {
+  "flow": "first visible model text (Enter -> reply in #msgs), real engine claude-sonnet-5 via pass-through wrapper",
+  "n": 9,
+  "samples": [
+   {
+    "ms": 3305,
+    "load1": "1.50"
+   },
+   {
+    "ms": 3365,
+    "load1": "2.42"
+   },
+   {
+    "ms": 3420,
+    "load1": "1.67"
+   },
+   {
+    "ms": 2038,
+    "load1": "1.56"
+   },
+   {
+    "ms": 2099,
+    "load1": "1.38"
+   },
+   {
+    "ms": 2034,
+    "load1": "1.67"
+   },
+   {
+    "ms": 2094,
+    "load1": "2.10"
+   },
+   {
+    "ms": 3501,
+    "load1": "2.99"
+   },
+   {
+    "ms": 3570,
+    "load1": "3.67"
+   }
+  ],
+  "median_ms": 3305,
+  "max_ms": 3570,
+  "note": "incl. the Quick-ask chip (click -> reply, 3570 ms). The wrapper adds ~5-10 ms (zsh -f + cat)."
+ },
+ {
+  "flow": "process overhead outside the CLI duration_ms (spawn -> stdout closed minus duration_ms)",
+  "n": 7,
+  "samples": [
+   {
+    "ms": 1115,
+    "load1": "1.50"
+   },
+   {
+    "ms": 913,
+    "load1": "2.42"
+   },
+   {
+    "ms": 989,
+    "load1": "1.67"
+   },
+   {
+    "ms": 1007,
+    "load1": "1.56"
+   },
+   {
+    "ms": 954,
+    "load1": "1.38"
+   },
+   {
+    "ms": 990,
+    "load1": "1.67"
+   },
+   {
+    "ms": 1105,
+    "load1": "2.99"
+   }
+  ],
+  "median_ms": 990
+ },
+ {
+  "flow": "DOM updates after the reply node was inserted (1.5 s window)",
+  "n": 10,
+  "samples": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "median": 0
+ },
+ {
+  "flow": "thinking ticker steps (pending bubble text)",
+  "samples": [
+   {
+    "ms": 6,
+    "text": "reading the repo"
+   },
+   {
+    "ms": 1854,
+    "text": "checking your agents"
+   }
+  ],
+  "load1": "2.10",
+  "note": "offline/429: \"thinking\" at 6 s"
+ },
+ {
+  "flow": "Enter -> claude process spawned (B1.4)",
+  "n": 21,
+  "samples": [
+   {
+    "ms": 175,
+    "load1": "1.50",
+    "note": "first send, fresh instance, right after a fleet.js status run"
+   },
+   {
+    "ms": 28,
+    "load1": "2.42",
+    "note": ""
+   },
+   {
+    "ms": 29,
+    "load1": "1.67",
+    "note": ""
+   },
+   {
+    "ms": 24,
+    "load1": "1.56",
+    "note": ""
+   },
+   {
+    "ms": 30,
+    "load1": "1.38",
+    "note": ""
+   },
+   {
+    "ms": 29,
+    "load1": "1.67",
+    "note": ""
+   },
+   {
+    "ms": 49,
+    "load1": "2.99",
+    "note": ""
+   },
+   {
+    "ms": 41,
+    "load1": "3.88",
+    "note": "first send, fresh instance (model fallback run)"
+   },
+   {
+    "ms": 30,
+    "load1": "3.73",
+    "note": ""
+   },
+   {
+    "ms": 27,
+    "load1": "2.75",
+    "note": "first send, fresh instance (stub engine)"
+   },
+   {
+    "ms": 20,
+    "load1": "2.69",
+    "note": ""
+   },
+   {
+    "ms": 20,
+    "load1": "2.69",
+    "note": ""
+   },
+   {
+    "ms": 29,
+    "load1": "2.58",
+    "note": "first send, fresh instance (stub engine)"
+   },
+   {
+    "ms": 21,
+    "load1": "2.58",
+    "note": ""
+   },
+   {
+    "ms": 21,
+    "load1": "2.58",
+    "note": ""
+   },
+   {
+    "ms": 37,
+    "load1": "2.70",
+    "note": "first send, fresh instance (stub engine)"
+   },
+   {
+    "ms": 21,
+    "load1": "2.70",
+    "note": ""
+   },
+   {
+    "ms": 27,
+    "load1": "2.49",
+    "note": ""
+   },
+   {
+    "ms": 38,
+    "load1": "2.29",
+    "note": "first send, fresh instance (stub engine)"
+   },
+   {
+    "ms": 22,
+    "load1": "2.58",
+    "note": ""
+   },
+   {
+    "ms": 23,
+    "load1": "2.58",
+    "note": ""
+   }
+  ],
+  "median_ms": 28,
+  "p95_nearest_rank_ms": 49,
+  "max_ms": 175
+ },
+ {
+  "flow": "click on Net -> #chat shown (mouseup -> class change)",
+  "n": 5,
+  "samples": [
+   221,
+   222,
+   222,
+   222,
+   222
+  ],
+  "median_ms": 222,
+  "load1": "3.16"
+ },
+ {
+  "flow": "offline (ANTHROPIC_BASE_URL=http://127.0.0.1:9): Enter -> error",
+  "n": 1,
+  "ms": 90107,
+  "load1": "8.09",
+  "result": "That didn't work: claude timed out"
+ },
+ {
+  "flow": "429 (local server, retry-after 23): Enter -> error",
+  "n": 1,
+  "ms": 90063,
+  "load1": "8.09",
+  "result": "That didn't work: claude timed out",
+  "server_hits_after_spawn_s": [
+   0.84,
+   23.85,
+   46.86,
+   69.86
+  ]
+ },
+ {
+  "flow": "invalid key (question saved as key): Enter -> error",
+  "n": 1,
+  "ms": 162,
+  "load1": "4.64",
+  "result": "That didn't work: invalid x-api-key"
+ },
+ {
+  "flow": "unavailable model: failed first spawn (wall) per send",
+  "n": 2,
+  "samples": [
+   {
+    "ms": 1449,
+    "load1": "3.88"
+   },
+   {
+    "ms": 1299,
+    "load1": "3.73"
+   }
+  ],
+  "first_text_ms": [
+   6023,
+   4849
+  ],
+  "answer_model": "claude-opus-5-5",
+  "note": "no note shown; second send repeats the failed spawn"
+ },
+ {
+  "flow": "prompt cache on the login path (14 sonnet sends, turns 1-11 of one conversation + 3 more)",
+  "cache_read_input_tokens": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "cache_creation_1h_tokens": [
+   1303,
+   1358,
+   1422,
+   1478,
+   1507,
+   1566,
+   1609,
+   1651,
+   1662,
+   1771,
+   1864,
+   1225,
+   1135,
+   1183
+  ],
+  "cost_usd": [
+   0.005616,
+   0.005986,
+   0.006082,
+   0.006086,
+   0.006412,
+   0.006578,
+   0.0067,
+   0.007038,
+   0.008222,
+   0.007678,
+   0.0082,
+   0.005784,
+   0.004854,
+   0.005226
+  ],
+  "implied_prices_per_mtok": {
+   "cache_write_1h": 4.0,
+   "output": 10.0
+  }
+ }
+]

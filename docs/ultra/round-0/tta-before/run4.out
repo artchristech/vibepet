@@ -1,0 +1,19 @@
+[23:48:21.823] plan loop#4 loop#5 loop#6 · spend est $2.2040 · this probe so far $0.1565 of $0.6
+[23:48:25.248] instances A pid 78206 (Home closed), B pid 78207 (Home open) · app c2b5c0a canon --compare: compare the kind of each truth mismatch, not its clock; report dropped first clicks and the fold @ ultra/round-0 · perms {"ax":true,"screen":true}
+[23:48:25.324] == loop #4 (ember) · status idle
+[23:48:25.374]   ember: ask rule for ./tick.sh written to .claude/settings.local.json (restored after the loop trials)
+[23:51:36.439]   block: reg waiting/permission prompt at +189.1 s · record withheld
+[23:55:00.781]   attempt: {"clicks":2,"keys":0,"action":null,"result":"no Approve on its row (actions: replay goal)","resolved":false,"jump":false}
+[23:55:02.887]   result {"t0":"2026-10-01T23:51:34.566Z","t0From":"registry","detectAmbientS":null,"detectAmbientRegS":null,"bubbleS":null,"ledS":null,"faceS":null,"rowS":null,"rowRegS":null,"offerS":null,"offerAction":null,"bannerS":null,"soundS":150.8,"goneS":null,"phaseS":null,"queueHeadS":null,"wrong":null,"otherBubble":null,"actionWorks":false,"clicks":2,"keys":0} · spent ~$0.0149
+[23:55:02.981] == loop #5 (ember) · status idle
+[23:56:23.670]   block: reg waiting/permission prompt at +77.9 s · record +77.4 s Bash
+[23:57:45.604] poll error: poll: no answer in 4000 ms
+[23:58:27.813]   attempt: {"clicks":0,"keys":0}
+[23:58:30.051]   result {"t0":"2026-10-01T23:56:20.590Z","t0From":"transcript","detectAmbientS":100.9,"detectAmbientRegS":100.4,"bubbleS":100.9,"ledS":100.9,"faceS":100.9,"rowS":100.9,"rowRegS":100.4,"offerS":100.9,"offerAction":"approve","bannerS":-75.3,"soundS":-75.3,"goneS":null,"phaseS":100.9,"queueHeadS":-75.3,"wrong":{"s":-75.3,"phase":"ready"},"otherBubble":{"s":-73.2,"text":"ember is done"},"actionWorks":false,"clicks":0,"keys":0} · spent ~$0.0153
+[23:58:30.106] == loop #6 (ember) · status idle
+[00:01:06.865]   block: reg waiting/permission prompt at +154.9 s · record +154.9 s Bash
+[00:03:21.454]   attempt: {"clicks":1,"keys":0,"action":"approve"}
+[00:04:07.747]   result {"t0":"2026-10-02T00:01:05.195Z","t0From":"transcript","detectAmbientS":91.3,"detectAmbientRegS":91.2,"bubbleS":93.3,"ledS":91.3,"faceS":91.3,"rowS":91.3,"rowRegS":91.2,"offerS":91.3,"offerAction":"approve","bannerS":91.3,"soundS":-154.8,"goneS":null,"phaseS":91.3,"queueHeadS":91.3,"wrong":null,"otherBubble":{"s":-152.2,"text":"ember is done"},"actionWorks":false,"clicks":1,"keys":0} · spent ~$0.0151
+[00:04:07.822]   ember: settings.local.json restored
+[00:04:09.470]   ember: fleet.js pause → exit 0
+[00:04:10.182] closed quit/0 orphans, quit/0 orphans · B reopened 2× · poll errors 3 · spend est $2.2598 · this probe $0.2123 of $0.6

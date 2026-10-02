@@ -1,0 +1,3620 @@
+{
+ "at": "2026-10-02T13:31:39.606Z",
+ "K": 7,
+ "MIN_TOKENS": 10,
+ "evidFiles": 1093,
+ "segments": 128785,
+ "flagged": 258,
+ "perFile": {
+  "canon-base/canon.json": {
+   "segs": 59,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-base/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-base-r2/canon.json": {
+   "segs": 60,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-base-r2/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-final/canon.json": {
+   "segs": 87,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-final/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-final/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-merged-w1/canon.json": {
+   "segs": 97,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-merged-w1/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-merged-w1-bisect-m1/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-merged-w1-r2/canon.json": {
+   "segs": 97,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-merged-w1-r2/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-merged-w1-r3/canon.json": {
+   "segs": 97,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "canon-merged-w1-r3/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "critic/S2/contexts/model-1790909317.8854069710.result.json": {
+   "segs": 1,
+   "flagged": 1,
+   "maxRatio": 0.64
+  },
+  "critic/S2/contexts/model-1790909325.7713940144.result.json": {
+   "segs": 1,
+   "flagged": 1,
+   "maxRatio": 0.64
+  },
+  "critic/S2/timings.json": {
+   "segs": 23,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "critic/S6/scripts/critP1-shapes.js": {
+   "segs": 94,
+   "flagged": 1,
+   "maxRatio": 0.3333333333333333
+  },
+  "critic/S6/scripts/critP6-tasks.js": {
+   "segs": 28,
+   "flagged": 1,
+   "maxRatio": 0.3
+  },
+  "critic/S6/scripts/critT-transcript.js": {
+   "segs": 19,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "critic/S6/scripts/fx/page.py": {
+   "segs": 8,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "critic/S6/scripts/fx/prefork.py": {
+   "segs": 15,
+   "flagged": 1,
+   "maxRatio": 0.26666666666666666
+  },
+  "fixes/chat-bar/after/final-stub/drive-dev2.js": {
+   "segs": 98,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "fixes/chat-bar/after/model/model.json": {
+   "segs": 11,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-bar/after/recapture.js": {
+   "segs": 313,
+   "flagged": 7,
+   "maxRatio": 1
+  },
+  "fixes/chat-bar/after/sends.jsonl": {
+   "segs": 46,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-bar/before/critic__S2__contexts__model-1790909317.8854069710.result.json": {
+   "segs": 1,
+   "flagged": 1,
+   "maxRatio": 0.64
+  },
+  "fixes/chat-bar/before/critic__S2__timings.json": {
+   "segs": 23,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-bar/canon/stub-claude.js": {
+   "segs": 31,
+   "flagged": 6,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-1/canon.json": {
+   "segs": 125,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-1/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-2/canon.json": {
+   "segs": 125,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-2/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-3/canon.json": {
+   "segs": 125,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-3/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-4/canon.json": {
+   "segs": 125,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-4/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-5/canon.json": {
+   "segs": 127,
+   "flagged": 2,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-5/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-6/canon.json": {
+   "segs": 127,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-6/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-6.log": {
+   "segs": 4,
+   "flagged": 1,
+   "maxRatio": 0.2727272727272727
+  },
+  "fixes/chat-context/after/iterations/live-7/canon.json": {
+   "segs": 127,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-7/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-8/canon.json": {
+   "segs": 127,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/iterations/live-8/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/live-a/canon.json": {
+   "segs": 128,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/live-a/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/live-b/canon.json": {
+   "segs": 125,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/live-b/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/live-c/canon.json": {
+   "segs": 125,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/live-c/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/quick-agent/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/quick-agent/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/after/recapture.json": {
+   "segs": 107,
+   "flagged": 2,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/before/canon-base-now/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/before/canon-base-now/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/before/canon-base-now.log": {
+   "segs": 6,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/before/live-base/canon.json": {
+   "segs": 117,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/before/live-base/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/before/live-base.log": {
+   "segs": 6,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/canon/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/gate/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/gate/canon/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/gate/canon-asks/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/gate/canon-asks/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/gate/head-1/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/chat-context/gate/head-1/tee-claude.js": {
+   "segs": 7,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/gesture/after/repeat/results.json": {
+   "segs": 83,
+   "flagged": 5,
+   "maxRatio": 1
+  },
+  "fixes/gesture/after/results.json": {
+   "segs": 83,
+   "flagged": 4,
+   "maxRatio": 0.42857142857142855
+  },
+  "fixes/gesture/canon/canon.json": {
+   "segs": 96,
+   "flagged": 2,
+   "maxRatio": 0.42857142857142855
+  },
+  "fixes/gesture/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/gesture/canon-r2/canon.json": {
+   "segs": 96,
+   "flagged": 2,
+   "maxRatio": 0.42857142857142855
+  },
+  "fixes/gesture/canon-r2/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/gesture/npm-test.txt": {
+   "segs": 131,
+   "flagged": 8,
+   "maxRatio": 1
+  },
+  "fixes/gesture/recapture.js": {
+   "segs": 225,
+   "flagged": 1,
+   "maxRatio": 0.3333333333333333
+  },
+  "fixes/gesture/summary.json": {
+   "segs": 162,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "fixes/home-feedback/after/results.json": {
+   "segs": 112,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/home-feedback/after/timing-2/results.json": {
+   "segs": 50,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/home-feedback/before/rerun/results.json": {
+   "segs": 99,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/home-feedback/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/home-feedback/recapture.js": {
+   "segs": 219,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/home-feedback/summary.json": {
+   "segs": 60,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/home-keyed/after/live-merged/results.json": {
+   "segs": 69,
+   "flagged": 10,
+   "maxRatio": 1
+  },
+  "fixes/home-keyed/after/live-merged-try1/recapture-v1.js": {
+   "segs": 171,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/home-keyed/after/live-merged-try3/results.json": {
+   "segs": 48,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/home-keyed/canon/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/home-keyed/canon-merged/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/home-keyed/gate/base/gate.json": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/home-keyed/gate/branch/run.log": {
+   "segs": 23,
+   "flagged": 1,
+   "maxRatio": 0.38461538461538464
+  },
+  "fixes/home-keyed/recapture.js": {
+   "segs": 206,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/keys-entry/after/run1/results.json": {
+   "segs": 50,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "fixes/keys-entry/before/critic/S2/timings.json": {
+   "segs": 23,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/keys-entry/before/recapture-base/results.json": {
+   "segs": 31,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/keys-entry/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/keys-entry/canon-base-now/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/keys-entry/canon-r2/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/keys-entry/gate/nodrag-base/results.json": {
+   "segs": 20,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/keys-entry/gate/recap-r1/results.json": {
+   "segs": 50,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/live-rows/before/round0-tta-before.json": {
+   "segs": 608,
+   "flagged": 11,
+   "maxRatio": 1
+  },
+  "fixes/live-rows/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/live-rows/canon-base-now/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/live-rows/canon-r2/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/live-rows/gate-verify/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/live-rows/gate-verify/cpu.json": {
+   "segs": 15,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/live-rows/observe.js": {
+   "segs": 68,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/live-rows/recapture.js": {
+   "segs": 158,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/loop-rows/after/tools/analyze.js": {
+   "segs": 42,
+   "flagged": 2,
+   "maxRatio": 1
+  },
+  "fixes/loop-rows/after/tools/members-fault.json": {
+   "segs": 21,
+   "flagged": 2,
+   "maxRatio": 1
+  },
+  "fixes/loop-rows/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/loop-rows/canon-after-exit/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/loop-rows/canon-loop-live/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/loop-rows/canon-pre-exit-rule/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/ports-truth/after/merge-home-keyed/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/ports-truth/after/scripts/fx/page.py": {
+   "segs": 8,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "fixes/ports-truth/after/scripts/fx/prefork.py": {
+   "segs": 15,
+   "flagged": 1,
+   "maxRatio": 0.26666666666666666
+  },
+  "fixes/ports-truth/before/raw/critic__S6__scripts__critT-transcript.js": {
+   "segs": 19,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/ports-truth/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/ports-truth/canon-prev-bdd556f/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/queue-state/before/canon-base/canon.json": {
+   "segs": 59,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/queue-state/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/queue-state/gate/canon1/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/queue-state/gate/canon2/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/row-actions/before/canon-merged-w1.canon.json": {
+   "segs": 97,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/row-actions/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/row-actions/canon-r2/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/row-actions/gate-verify/canon-head/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/row-actions/gate-verify/canon-head-2/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/row-actions/gate-verify/canon-head-3/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/row-actions/gate-verify/groups-probe.js": {
+   "segs": 16,
+   "flagged": 1,
+   "maxRatio": 0.55
+  },
+  "fixes/row-actions/gate-verify/npmtest1.log": {
+   "segs": 160,
+   "flagged": 8,
+   "maxRatio": 1
+  },
+  "fixes/row-actions/gate-verify/npmtest2.log": {
+   "segs": 124,
+   "flagged": 8,
+   "maxRatio": 1
+  },
+  "fixes/row-actions/gate-verify/npmtest3.log": {
+   "segs": 124,
+   "flagged": 8,
+   "maxRatio": 1
+  },
+  "fixes/row-actions/gate-verify/slots-probe.js": {
+   "segs": 53,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/session-console/after/recapture.json": {
+   "segs": 228,
+   "flagged": 2,
+   "maxRatio": 1
+  },
+  "fixes/session-console/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/theater-data/after/npm-test.txt": {
+   "segs": 119,
+   "flagged": 8,
+   "maxRatio": 1
+  },
+  "fixes/theater-data/after/timing/fix-1.json": {
+   "segs": 29,
+   "flagged": 8,
+   "maxRatio": 1
+  },
+  "fixes/theater-data/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/theater-player/canon/stub-claude.js": {
+   "segs": 10,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/tmux-reach/after/canon-all-rows/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/tmux-reach/after/canon-standin/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/tmux-reach/after/early/canon-all-rows/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "fixes/tmux-reach/after/method/recap.js": {
+   "segs": 135,
+   "flagged": 1,
+   "maxRatio": 0.3333333333333333
+  },
+  "fixes/tmux-reach/canon/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "raw/S1/stub-claude.js": {
+   "segs": 2,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "raw/S6/fx/prefork.py": {
+   "segs": 21,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "raw/S6/lib.js": {
+   "segs": 157,
+   "flagged": 1,
+   "maxRatio": 0.5909090909090909
+  },
+  "raw/S6/phaseD.js": {
+   "segs": 52,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "tta-after/meta-1790947052791.json": {
+   "segs": 4,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "tta-after/meta-1790947170217.json": {
+   "segs": 4,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "tta-after.json": {
+   "segs": 112,
+   "flagged": 2,
+   "maxRatio": 1
+  },
+  "tta-after.report.json": {
+   "segs": 112,
+   "flagged": 2,
+   "maxRatio": 1
+  }
+ },
+ "items": [
+  {
+   "short": true,
+   "codeness": null,
+   "file": "canon-base/canon.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "canon-base/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "canon-base-r2/canon.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "canon-base-r2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "canon-final/canon.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "canon-final/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "canon-final/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "canon-merged-w1/canon.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "canon-merged-w1/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "canon-merged-w1-bisect-m1/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "canon-merged-w1-r2/canon.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "canon-merged-w1-r2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "canon-merged-w1-r3/canon.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "canon-merged-w1-r3/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "critic/S2/contexts/model-1790909317.8854069710.result.json",
+   "loc": "$.result",
+   "shingles": 25,
+   "unexplained": 16,
+   "ratio": 0.64,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:55:50.674Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "critic/S2/contexts/model-1790909325.7713940144.result.json",
+   "loc": "$.result",
+   "shingles": 25,
+   "unexplained": 16,
+   "ratio": 0.64,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:55:50.674Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "critic/S2/timings.json",
+   "loc": "$[8].result",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-26T01:09:52.369Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.15,
+   "file": "critic/S6/scripts/critP1-shapes.js",
+   "loc": "L4",
+   "shingles": 9,
+   "unexplained": 3,
+   "ratio": 0.33,
+   "sourceFiles": 2,
+   "firstSource": "dir#2 js "
+  },
+  {
+   "short": false,
+   "codeness": 0.22,
+   "file": "critic/S6/scripts/critP6-tasks.js",
+   "loc": "L2",
+   "shingles": 10,
+   "unexplained": 3,
+   "ratio": 0.3,
+   "sourceFiles": 2,
+   "firstSource": "dir#3 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-08-14T01:10:47.258Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.21,
+   "file": "critic/S6/scripts/critT-transcript.js",
+   "loc": "L20",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-25T12:55:24.070Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.26,
+   "file": "critic/S6/scripts/fx/page.py",
+   "loc": "L3",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 1,
+   "firstSource": "dir#4 subagent type=assistant role=assistant blocks=tool_use:Bash ts=2026-08-03T14:15:42.848Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.25,
+   "file": "critic/S6/scripts/fx/page.py",
+   "loc": "L6",
+   "shingles": 27,
+   "unexplained": 13,
+   "ratio": 0.48,
+   "sourceFiles": 3,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T09:15:45.085Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.17,
+   "file": "critic/S6/scripts/fx/page.py",
+   "loc": "L7",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T09:15:45.085Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.24,
+   "file": "critic/S6/scripts/fx/prefork.py",
+   "loc": "L3",
+   "shingles": 15,
+   "unexplained": 4,
+   "ratio": 0.27,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-26T04:48:41.282Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.2,
+   "file": "fixes/chat-bar/after/final-stub/drive-dev2.js",
+   "loc": "L15",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-26T18:42:51.524Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.31,
+   "file": "fixes/chat-bar/after/final-stub/drive-dev2.js",
+   "loc": "L20",
+   "shingles": 21,
+   "unexplained": 7,
+   "ratio": 0.33,
+   "sourceFiles": 5,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-26T13:19:15.688Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.2,
+   "file": "fixes/chat-bar/after/final-stub/drive-dev2.js",
+   "loc": "L104",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-24T02:10:27.079Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-bar/after/model/model.json",
+   "loc": "$.t1.q",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-23T00:47:06.956Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.28,
+   "file": "fixes/chat-bar/after/recapture.js",
+   "loc": "L15",
+   "shingles": 23,
+   "unexplained": 9,
+   "ratio": 0.39,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Bash ts=2026-10-02T09:09:45.571Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.22,
+   "file": "fixes/chat-bar/after/recapture.js",
+   "loc": "L71",
+   "shingles": 15,
+   "unexplained": 4,
+   "ratio": 0.27,
+   "sourceFiles": 3,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Write ts=2026-09-24T18:35:47.678Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.26,
+   "file": "fixes/chat-bar/after/recapture.js",
+   "loc": "L140",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-26T13:07:06.528Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.31,
+   "file": "fixes/chat-bar/after/recapture.js",
+   "loc": "L269",
+   "shingles": 19,
+   "unexplained": 12,
+   "ratio": 0.63,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-30T02:21:54.125Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.26,
+   "file": "fixes/chat-bar/after/recapture.js",
+   "loc": "L280",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-26T13:07:06.528Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.26,
+   "file": "fixes/chat-bar/after/recapture.js",
+   "loc": "L322",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-26T13:07:06.528Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.26,
+   "file": "fixes/chat-bar/after/recapture.js",
+   "loc": "L353",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-26T13:07:06.528Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-bar/after/sends.jsonl",
+   "loc": "L24.what",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-23T00:47:06.956Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/chat-bar/before/critic__S2__contexts__model-1790909317.8854069710.result.json",
+   "loc": "$.result",
+   "shingles": 25,
+   "unexplained": 16,
+   "ratio": 0.64,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:55:50.674Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-bar/before/critic__S2__timings.json",
+   "loc": "$[8].result",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-26T01:09:52.369Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-bar/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.24,
+   "file": "fixes/chat-bar/canon/stub-claude.js",
+   "loc": "L7",
+   "shingles": 7,
+   "unexplained": 4,
+   "ratio": 0.57,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-23T02:01:21.348Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.26,
+   "file": "fixes/chat-bar/canon/stub-claude.js",
+   "loc": "L19",
+   "shingles": 6,
+   "unexplained": 5,
+   "ratio": 0.83,
+   "sourceFiles": 1,
+   "firstSource": "dir#4 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-08-02T18:38:17.065Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.23,
+   "file": "fixes/chat-bar/canon/stub-claude.js",
+   "loc": "L25",
+   "shingles": 11,
+   "unexplained": 5,
+   "ratio": 0.45,
+   "sourceFiles": 1,
+   "firstSource": "dir#5 subagent type=user role=user blocks=text ts=2026-08-02T18:31:31.869Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.35,
+   "file": "fixes/chat-bar/canon/stub-claude.js",
+   "loc": "L34",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#3 subagent type=user role=user blocks=tool_result ts=2026-08-14T01:01:08.802Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.21,
+   "file": "fixes/chat-bar/canon/stub-claude.js",
+   "loc": "L35",
+   "shingles": 5,
+   "unexplained": 3,
+   "ratio": 0.6,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-24T03:21:04.471Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/iterations/live-1/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/iterations/live-1/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/iterations/live-2/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/iterations/live-2/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/iterations/live-3/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/iterations/live-3/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/iterations/live-4/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/iterations/live-4/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/iterations/live-5/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/iterations/live-5/canon.json",
+   "loc": "$.surfaces.chat.asks[2].load.after",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T08:37:38.922Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/iterations/live-5/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/iterations/live-6/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/iterations/live-6/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.13,
+   "file": "fixes/chat-context/after/iterations/live-6.log",
+   "loc": "L1",
+   "shingles": 11,
+   "unexplained": 3,
+   "ratio": 0.27,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T08:40:57.511Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/iterations/live-7/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/iterations/live-7/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/iterations/live-8/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/iterations/live-8/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/live-a/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/live-a/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/live-b/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/live-b/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/live-c/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/live-c/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/quick-agent/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/after/quick-agent/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/recapture.json",
+   "loc": "$.before.asks[1].load.after",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T08:24:28.846Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/after/recapture.json",
+   "loc": "$.before.asks[2].load.before",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T08:24:28.846Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/before/canon-base-now/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/before/canon-base-now/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.14,
+   "file": "fixes/chat-context/before/canon-base-now.log",
+   "loc": "L1",
+   "shingles": 11,
+   "unexplained": 6,
+   "ratio": 0.55,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T08:40:57.511Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.07,
+   "file": "fixes/chat-context/before/canon-base-now.log",
+   "loc": "L2",
+   "shingles": 6,
+   "unexplained": 6,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:08:10.475Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.13,
+   "file": "fixes/chat-context/before/canon-base-now.log",
+   "loc": "L7",
+   "shingles": 11,
+   "unexplained": 3,
+   "ratio": 0.27,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T08:40:57.511Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/before/live-base/canon.json",
+   "loc": "$.surfaces.chat.engine.bin",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-29T16:11:40.047Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/before/live-base/canon.json",
+   "loc": "$.surfaces.chat.asks[1].load.after",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T08:24:28.846Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/chat-context/before/live-base/canon.json",
+   "loc": "$.surfaces.chat.asks[2].load.before",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T08:24:28.846Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/before/live-base/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.07,
+   "file": "fixes/chat-context/before/live-base.log",
+   "loc": "L2",
+   "shingles": 6,
+   "unexplained": 6,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:08:10.475Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/canon/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/gate/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/gate/canon/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/gate/canon-asks/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/gate/canon-asks/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/gate/head-1/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/chat-context/gate/head-1/tee-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/gesture/after/repeat/results.json",
+   "loc": "$.trials[18].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:38:57.704Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/after/repeat/results.json",
+   "loc": "$.copy.saved",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/after/repeat/results.json",
+   "loc": "$.train[0].saved",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/after/repeat/results.json",
+   "loc": "$.train[1].saved",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/after/repeat/results.json",
+   "loc": "$.train[2].saved",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/after/results.json",
+   "loc": "$.copy.saved",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/after/results.json",
+   "loc": "$.train[0].saved",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/after/results.json",
+   "loc": "$.train[1].saved",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/after/results.json",
+   "loc": "$.train[2].saved",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/canon/canon.json",
+   "loc": "$.surfaces.keys.gesture.message",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/canon/canon.json",
+   "loc": "$.assertions[27].detail",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/gesture/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/canon-r2/canon.json",
+   "loc": "$.surfaces.keys.gesture.message",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/canon-r2/canon.json",
+   "loc": "$.assertions[27].detail",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/gesture/canon-r2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.1,
+   "file": "fixes/gesture/npm-test.txt",
+   "loc": "L12",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:13:48.918Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.02,
+   "file": "fixes/gesture/npm-test.txt",
+   "loc": "L43",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:26:53.400Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.07,
+   "file": "fixes/gesture/npm-test.txt",
+   "loc": "L44",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-30T10:50:40.434Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/gesture/npm-test.txt",
+   "loc": "L98",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/gesture/npm-test.txt",
+   "loc": "L99",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/gesture/npm-test.txt",
+   "loc": "L100",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.09,
+   "file": "fixes/gesture/npm-test.txt",
+   "loc": "L101",
+   "shingles": 8,
+   "unexplained": 8,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:26:28.371Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.13,
+   "file": "fixes/gesture/npm-test.txt",
+   "loc": "L214",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-30T02:25:31.908Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.37,
+   "file": "fixes/gesture/recapture.js",
+   "loc": "L41",
+   "shingles": 15,
+   "unexplained": 5,
+   "ratio": 0.33,
+   "sourceFiles": 2,
+   "firstSource": "dir#6 jsonl type=assistant role=assistant blocks=tool_use:Write ts=2026-07-29T12:49:05.125Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/summary.json",
+   "loc": "$.after.copy.saved",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": false,
+   "codeness": null,
+   "file": "fixes/gesture/summary.json",
+   "loc": "$.afterRepeat.copy.saved",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 2,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T04:03:11.556Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/gesture/summary.json",
+   "loc": "$.afterRepeat.load.perTrial[18]",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:38:57.704Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-feedback/after/results.json",
+   "loc": "$.loadAtLaunch",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T08:41:28.212Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-feedback/after/timing-2/results.json",
+   "loc": "$.rowJump[1].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T08:52:26.686Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-feedback/before/rerun/results.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/home-feedback/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.22,
+   "file": "fixes/home-feedback/recapture.js",
+   "loc": "L186",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-25T12:05:49.538Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-feedback/summary.json",
+   "loc": "$.a_rowJumpNote.after.runs[2].jumps[1].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T08:52:26.686Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/after/live-merged/results.json",
+   "loc": "$.runs.one.presses[6].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T07:00:24.926Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/after/live-merged/results.json",
+   "loc": "$.runs.one.presses[9].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T07:00:26.430Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/after/live-merged/results.json",
+   "loc": "$.runs.one.reply.load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T07:01:18.350Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/after/live-merged/results.json",
+   "loc": "$.runs.one.keys.load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T07:01:18.350Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/after/live-merged/results.json",
+   "loc": "$.runs.two.injected.load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T07:04:55.745Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/after/live-merged/results.json",
+   "loc": "$.runs.two.injected.release.load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T07:04:55.745Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/after/live-merged/results.json",
+   "loc": "$.runs.two.cycles[0].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T07:04:55.745Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/after/live-merged/results.json",
+   "loc": "$.runs.two.cycles[1].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T07:05:05.289Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/after/live-merged/results.json",
+   "loc": "$.runs.two.cycles[2].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T07:06:05.892Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/after/live-merged/results.json",
+   "loc": "$.loadEnd",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T07:06:05.892Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.17,
+   "file": "fixes/home-keyed/after/live-merged-try1/recapture-v1.js",
+   "loc": "L61",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Write ts=2026-09-28T20:44:58.587Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/after/live-merged-try3/results.json",
+   "loc": "$.runs.one.presses[1].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:25:01.688Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/home-keyed/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/home-keyed/canon-merged/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/home-keyed/gate/base/gate.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.13,
+   "file": "fixes/home-keyed/gate/branch/run.log",
+   "loc": "L1",
+   "shingles": 13,
+   "unexplained": 5,
+   "ratio": 0.38,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T07:36:46.381Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.17,
+   "file": "fixes/home-keyed/recapture.js",
+   "loc": "L85",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Write ts=2026-09-28T20:44:58.587Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/keys-entry/after/run1/results.json",
+   "loc": "$.a.double[0].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T09:30:45.552Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/keys-entry/after/run1/results.json",
+   "loc": "$.a.double[1].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T09:30:45.552Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/keys-entry/after/run1/results.json",
+   "loc": "$.a.double[2].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T09:30:45.552Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/keys-entry/before/critic/S2/timings.json",
+   "loc": "$[8].result",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-26T01:09:52.369Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/keys-entry/before/recapture-base/results.json",
+   "loc": "$.d.load0",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T09:29:24.677Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/keys-entry/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/keys-entry/canon-base-now/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/keys-entry/canon-r2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/keys-entry/gate/nodrag-base/results.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/keys-entry/gate/recap-r1/results.json",
+   "loc": "$.a.load0",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T13:09:00.819Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/before/round0-tta-before.json",
+   "loc": "$.build.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/before/round0-tta-before.json",
+   "loc": "$.meta[0].app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/before/round0-tta-before.json",
+   "loc": "$.meta[1].app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/before/round0-tta-before.json",
+   "loc": "$.meta[2].app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/before/round0-tta-before.json",
+   "loc": "$.meta[3].app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/before/round0-tta-before.json",
+   "loc": "$.meta[4].app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/before/round0-tta-before.json",
+   "loc": "$.meta[5].app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/before/round0-tta-before.json",
+   "loc": "$.meta[6].app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/before/round0-tta-before.json",
+   "loc": "$.trials[17].shots[0].error",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:40:46.751Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/before/round0-tta-before.json",
+   "loc": "$.trials[17].shots[3].error",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:40:46.751Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/before/round0-tta-before.json",
+   "loc": "$.trials[17].shots[4].error",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:40:46.751Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/live-rows/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/live-rows/canon-base-now/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/live-rows/canon-r2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/live-rows/gate-verify/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/live-rows/gate-verify/cpu.json",
+   "loc": "$.base",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.19,
+   "file": "fixes/live-rows/observe.js",
+   "loc": "L45",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-30T17:05:23.163Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.25,
+   "file": "fixes/live-rows/recapture.js",
+   "loc": "L171",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#7 jsonl type=user role=user blocks=tool_result ts=2026-08-05T00:26:52.496Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.29,
+   "file": "fixes/loop-rows/after/tools/analyze.js",
+   "loc": "L5",
+   "shingles": 10,
+   "unexplained": 4,
+   "ratio": 0.4,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Bash ts=2026-10-01T19:59:23.975Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.21,
+   "file": "fixes/loop-rows/after/tools/analyze.js",
+   "loc": "L45",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-28T02:35:32.971Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/loop-rows/after/tools/members-fault.json",
+   "loc": "$.members[5].env.HTTPS_PROXY",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-30T01:49:34.369Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/loop-rows/after/tools/members-fault.json",
+   "loc": "$.members[5].env.https_proxy",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-30T01:49:34.369Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/loop-rows/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/loop-rows/canon-after-exit/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/loop-rows/canon-loop-live/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/loop-rows/canon-pre-exit-rule/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/ports-truth/after/merge-home-keyed/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.26,
+   "file": "fixes/ports-truth/after/scripts/fx/page.py",
+   "loc": "L3",
+   "shingles": 7,
+   "unexplained": 3,
+   "ratio": 0.43,
+   "sourceFiles": 1,
+   "firstSource": "dir#4 subagent type=assistant role=assistant blocks=tool_use:Bash ts=2026-08-03T14:15:42.848Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.25,
+   "file": "fixes/ports-truth/after/scripts/fx/page.py",
+   "loc": "L6",
+   "shingles": 27,
+   "unexplained": 13,
+   "ratio": 0.48,
+   "sourceFiles": 3,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T09:15:45.085Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.17,
+   "file": "fixes/ports-truth/after/scripts/fx/page.py",
+   "loc": "L7",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T09:15:45.085Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.24,
+   "file": "fixes/ports-truth/after/scripts/fx/prefork.py",
+   "loc": "L3",
+   "shingles": 15,
+   "unexplained": 4,
+   "ratio": 0.27,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-26T04:48:41.282Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.21,
+   "file": "fixes/ports-truth/before/raw/critic__S6__scripts__critT-transcript.js",
+   "loc": "L20",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-25T12:55:24.070Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/ports-truth/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/ports-truth/canon-prev-bdd556f/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/queue-state/before/canon-base/canon.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/queue-state/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/queue-state/gate/canon1/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/queue-state/gate/canon2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/row-actions/before/canon-merged-w1.canon.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/row-actions/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/row-actions/canon-r2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/row-actions/gate-verify/canon-head/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/row-actions/gate-verify/canon-head-2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/row-actions/gate-verify/canon-head-3/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.27,
+   "file": "fixes/row-actions/gate-verify/groups-probe.js",
+   "loc": "L4",
+   "shingles": 20,
+   "unexplained": 11,
+   "ratio": 0.55,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:35:18.554Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.1,
+   "file": "fixes/row-actions/gate-verify/npmtest1.log",
+   "loc": "L10",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:13:48.918Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.02,
+   "file": "fixes/row-actions/gate-verify/npmtest1.log",
+   "loc": "L41",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:26:53.400Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.07,
+   "file": "fixes/row-actions/gate-verify/npmtest1.log",
+   "loc": "L42",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-30T10:50:40.434Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/row-actions/gate-verify/npmtest1.log",
+   "loc": "L85",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/row-actions/gate-verify/npmtest1.log",
+   "loc": "L86",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/row-actions/gate-verify/npmtest1.log",
+   "loc": "L87",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.09,
+   "file": "fixes/row-actions/gate-verify/npmtest1.log",
+   "loc": "L88",
+   "shingles": 8,
+   "unexplained": 8,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:26:28.371Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.13,
+   "file": "fixes/row-actions/gate-verify/npmtest1.log",
+   "loc": "L261",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-30T02:25:31.908Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.1,
+   "file": "fixes/row-actions/gate-verify/npmtest2.log",
+   "loc": "L34",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:13:48.918Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.02,
+   "file": "fixes/row-actions/gate-verify/npmtest2.log",
+   "loc": "L65",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:26:53.400Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.07,
+   "file": "fixes/row-actions/gate-verify/npmtest2.log",
+   "loc": "L66",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-30T10:50:40.434Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/row-actions/gate-verify/npmtest2.log",
+   "loc": "L109",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/row-actions/gate-verify/npmtest2.log",
+   "loc": "L110",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/row-actions/gate-verify/npmtest2.log",
+   "loc": "L111",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.09,
+   "file": "fixes/row-actions/gate-verify/npmtest2.log",
+   "loc": "L112",
+   "shingles": 8,
+   "unexplained": 8,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:26:28.371Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.13,
+   "file": "fixes/row-actions/gate-verify/npmtest2.log",
+   "loc": "L225",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-30T02:25:31.908Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.1,
+   "file": "fixes/row-actions/gate-verify/npmtest3.log",
+   "loc": "L34",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:13:48.918Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.02,
+   "file": "fixes/row-actions/gate-verify/npmtest3.log",
+   "loc": "L65",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:26:53.400Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.07,
+   "file": "fixes/row-actions/gate-verify/npmtest3.log",
+   "loc": "L66",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-30T10:50:40.434Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/row-actions/gate-verify/npmtest3.log",
+   "loc": "L109",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/row-actions/gate-verify/npmtest3.log",
+   "loc": "L110",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/row-actions/gate-verify/npmtest3.log",
+   "loc": "L111",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.09,
+   "file": "fixes/row-actions/gate-verify/npmtest3.log",
+   "loc": "L112",
+   "shingles": 8,
+   "unexplained": 8,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:26:28.371Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.13,
+   "file": "fixes/row-actions/gate-verify/npmtest3.log",
+   "loc": "L225",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-30T02:25:31.908Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.18,
+   "file": "fixes/row-actions/gate-verify/slots-probe.js",
+   "loc": "L8",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-25T11:59:15.524Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/session-console/after/recapture.json",
+   "loc": "$.checks[18].detail.value",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=text ts=2026-10-01T19:27:53.175Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/session-console/after/recapture.json",
+   "loc": "$.tell.value",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=text ts=2026-10-01T19:27:53.175Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/session-console/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.1,
+   "file": "fixes/theater-data/after/npm-test.txt",
+   "loc": "L12",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:13:48.918Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.02,
+   "file": "fixes/theater-data/after/npm-test.txt",
+   "loc": "L43",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-27T21:26:53.400Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.07,
+   "file": "fixes/theater-data/after/npm-test.txt",
+   "loc": "L44",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-30T10:50:40.434Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/theater-data/after/npm-test.txt",
+   "loc": "L87",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/theater-data/after/npm-test.txt",
+   "loc": "L88",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.11,
+   "file": "fixes/theater-data/after/npm-test.txt",
+   "loc": "L89",
+   "shingles": 7,
+   "unexplained": 7,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:27:39.785Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.09,
+   "file": "fixes/theater-data/after/npm-test.txt",
+   "loc": "L90",
+   "shingles": 8,
+   "unexplained": 8,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-28T00:26:28.371Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.13,
+   "file": "fixes/theater-data/after/npm-test.txt",
+   "loc": "L203",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-30T02:25:31.908Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/theater-data/after/timing/fix-1.json",
+   "loc": "$.opens.kestrel[2].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:28:44.277Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/theater-data/after/timing/fix-1.json",
+   "loc": "$.opens.beacon[1].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:28:44.277Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/theater-data/after/timing/fix-1.json",
+   "loc": "$.opens.beacon[2].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:28:44.277Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/theater-data/after/timing/fix-1.json",
+   "loc": "$.opens.vibepet[1].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:28:44.277Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/theater-data/after/timing/fix-1.json",
+   "loc": "$.opens.vibepet[2].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:28:44.277Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/theater-data/after/timing/fix-1.json",
+   "loc": "$.opens.ember[1].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:28:44.277Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/theater-data/after/timing/fix-1.json",
+   "loc": "$.opens.ember[2].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:28:44.277Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "fixes/theater-data/after/timing/fix-1.json",
+   "loc": "$.opens.delta[1].load",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T10:28:44.277Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/theater-data/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/theater-player/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/tmux-reach/after/canon-all-rows/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/tmux-reach/after/canon-standin/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/tmux-reach/after/early/canon-all-rows/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.15,
+   "file": "fixes/tmux-reach/after/method/recap.js",
+   "loc": "L14",
+   "shingles": 9,
+   "unexplained": 3,
+   "ratio": 0.33,
+   "sourceFiles": 2,
+   "firstSource": "dir#2 js "
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "fixes/tmux-reach/canon/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "raw/S1/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:20:43.608Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.18,
+   "file": "raw/S6/fx/prefork.py",
+   "loc": "L6",
+   "shingles": 6,
+   "unexplained": 4,
+   "ratio": 0.67,
+   "sourceFiles": 2,
+   "firstSource": "dir#7 subagent type=assistant role=assistant blocks=tool_use:Bash ts=2026-08-04T06:23:54.489Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.23,
+   "file": "raw/S6/fx/prefork.py",
+   "loc": "L10",
+   "shingles": 20,
+   "unexplained": 12,
+   "ratio": 0.6,
+   "sourceFiles": 3,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-26T12:46:57.951Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.17,
+   "file": "raw/S6/fx/prefork.py",
+   "loc": "L11",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T09:15:45.085Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.31,
+   "file": "raw/S6/lib.js",
+   "loc": "L31",
+   "shingles": 22,
+   "unexplained": 13,
+   "ratio": 0.59,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-30T03:11:40.893Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.11,
+   "file": "raw/S6/phaseD.js",
+   "loc": "L32",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#6 jsonl type=assistant role=assistant blocks=tool_use:mcp__Claude_Browser__javascript_tool ts=2026-07-29T12:40:40.524Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "tta-after/meta-1790947052791.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "tta-after/meta-1790947170217.json",
+   "loc": "$.app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "tta-after.json",
+   "loc": "$.meta[0].app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "tta-after.json",
+   "loc": "$.meta[1].app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "tta-after.report.json",
+   "loc": "$.meta[0].app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "tta-after.report.json",
+   "loc": "$.meta[1].app",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-02T06:14:47.000Z"
+  }
+ ]
+}

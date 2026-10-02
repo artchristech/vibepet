@@ -1,0 +1,38 @@
+{"label":"cw-circle r110 600ms (sanity, Net visible)","vis0":true,"vis1":false,"toggled":"hide","msAfterEnd":191,"end":1790911176863,"load":"3.49 2.84 2.33"}
+{"label":"cw-circle r110 600ms (Net hidden)","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":194,"end":1790911181114,"load":"3.37 2.83 2.33"}
+{"label":"ccw-circle r110 600ms #1 (Net visible)","vis0":true,"vis1":true,"toggled":null,"msAfterEnd":null,"end":1790911195435,"load":"2.76 2.72 2.30"}
+{"label":"ccw-circle r110 600ms #2 (Net visible)","vis0":true,"vis1":true,"toggled":null,"msAfterEnd":null,"end":1790911198489,"load":"2.76 2.72 2.30"}
+{"label":"ccw-circle r110 600ms #3 (Net visible)","vis0":true,"vis1":true,"toggled":null,"msAfterEnd":null,"end":1790911201540,"load":"2.78 2.72 2.31"}
+{"label":"square 180px cw 800ms #1 (Medium)","vis0":true,"vis1":false,"toggled":"hide","msAfterEnd":195,"end":1790911206417,"load":"2.72 2.71 2.30"}
+{"label":"cw-circle (summon back)","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":193,"end":1790911210793,"load":"2.58 2.68 2.30"}
+{"label":"square 180px cw 800ms #2 (Medium)","vis0":true,"vis1":false,"toggled":"hide","msAfterEnd":192,"end":1790911215244,"load":"2.69 2.70 2.31"}
+{"label":"cw-circle (summon back)","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":203,"end":1790911219494,"load":"2.48 2.66 2.29"}
+{"label":"square 180px cw 800ms #3 (Medium)","vis0":true,"vis1":false,"toggled":"hide","msAfterEnd":206,"end":1790911223945,"load":"2.48 2.66 2.29"}
+{"label":"cw-circle (summon back)","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":192,"end":1790911228192,"load":"2.28 2.61 2.28"}
+{"label":"square 180px cw 800ms #1 (Low)","vis0":true,"vis1":false,"toggled":"hide","msAfterEnd":190,"end":1790911247873,"load":"2.10 2.56 2.27"}
+{"label":"square 180px cw 800ms #2 (Low)","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":196,"end":1790911252328,"load":"2.17 2.56 2.27"}
+{"label":"cw-circle r110 600ms #1 (Low)","vis0":true,"vis1":false,"toggled":"hide","msAfterEnd":189,"end":1790911256577,"load":"2.00 2.52 2.26"}
+{"label":"cw-circle r110 600ms #2 (Low)","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":208,"end":1790911260829,"load":"1.92 2.50 2.25"}
+{"label":"lockout trial: hide","vis0":true,"vis1":true,"toggled":null,"msAfterEnd":null,"end":1790911302031,"load":"4.62 2.99 2.43"}
+{"label":"lockout trial: summon stroke ending ~1400 ms after the hide","vis0":false,"vis1":false,"toggled":null,"msAfterEnd":null,"end":1790911303655,"load":"4.62 2.99 2.43"}
+{"label":"cw-circle (summon back)","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":204,"end":1790911308015,"load":"7.29 3.57 2.64"}
+{"label":"lockout trial: hide","vis0":true,"vis1":true,"toggled":null,"msAfterEnd":null,"end":1790911312458,"load":"7.19 3.61 2.66"}
+{"label":"lockout trial: summon stroke ending ~1700 ms after the hide","vis0":false,"vis1":false,"toggled":null,"msAfterEnd":null,"end":1790911314354,"load":"7.19 3.61 2.66"}
+{"label":"cw-circle (summon back)","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":197,"end":1790911318698,"load":"6.77 3.59 2.66"}
+{"label":"lockout trial: hide","vis0":true,"vis1":true,"toggled":null,"msAfterEnd":null,"end":1790911323044,"load":"6.39 3.56 2.65"}
+{"label":"lockout trial: summon stroke ending ~2000 ms after the hide","vis0":false,"vis1":false,"toggled":null,"msAfterEnd":null,"end":1790911325255,"load":"5.88 3.50 2.64"}
+{"label":"cw-circle (summon back)","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":199,"end":1790911329606,"load":"5.48 3.46 2.63"}
+{"label":"lockout trial: hide","vis0":true,"vis1":true,"toggled":null,"msAfterEnd":null,"end":1790911333956,"load":"5.48 3.46 2.63"}
+{"label":"lockout trial: summon stroke ending ~2800 ms after the hide","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":210,"end":1790911336959,"load":"5.13 3.42 2.62"}
+{"label":"loop drag of Net: closed loop r110 900ms (button held)","toggled":"hide","msAfterRelease":71,"msAfterPathEnd":207,"vis1":false,"drag":{"x":570,"y":252,"width":660,"height":589},"load":"3.54 3.27 2.61"}
+{"label":"cw-circle (summon back)","vis0":false,"vis1":false,"toggled":null,"msAfterEnd":null,"end":1790911387589,"load":"3.54 3.27 2.61"}
+{"label":"loop drag of Net: closed loop r110 900ms (button held)","toggled":"summon","msAfterRelease":169,"msAfterPathEnd":193,"vis1":true,"drag":{"x":571,"y":289,"width":660,"height":552},"load":"3.23 3.21 2.59"}
+{"label":"loop drag of Net: 0.85-turn r110 800ms (button held)","toggled":"hide","msAfterRelease":170,"msAfterPathEnd":192,"vis1":false,"drag":{"x":482,"y":25,"width":660,"height":517},"load":"3.21 3.21 2.60"}
+{"label":"cw-circle (summon back)","vis0":false,"vis1":false,"toggled":null,"msAfterEnd":null,"end":1790911405149,"load":"3.19 3.20 2.60"}
+{"label":"cw-circle (summon back)","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":202,"end":1790911428813,"load":"2.77 3.11 2.58"}
+{"label":"loop drag of Net #3: closed loop r110 900ms (button held)","visBefore":true,"start":[900.5,376.5],"first":{"x":900.5,"y":376.5,"t":0},"toggled":"hide","msAfterRelease":179,"msAfterPathEnd":201,"vis1":false,"load":"2.65 3.07 2.57"}
+{"label":"cw-circle (summon back)","vis0":false,"vis1":false,"toggled":null,"msAfterEnd":null,"end":1790911439116,"load":"2.65 3.07 2.57"}
+{"label":"loop drag of Net #4: 0.8-turn r110 760ms (button held)","visBefore":false,"start":[900.5,376.5],"first":{"x":900.5,"y":376.5,"t":0},"toggled":null,"msAfterRelease":null,"msAfterPathEnd":null,"vis1":false,"load":"2.69 3.07 2.57"}
+{"label":"cw-circle (summon back)","vis0":false,"vis1":true,"toggled":"summon","msAfterEnd":195,"end":1790911449278,"load":"2.69 3.07 2.57"}
+{"label":"loop drag of Net #5: 0.8-turn r110 760ms (button held)","visBefore":true,"toggled":null,"msAfterRelease":null,"msAfterPathEnd":null,"vis1":true,"load":"2.23 2.92 2.54"}
+{"label":"control: drag of Net with a closed loop then a straight 140 px run (button held)","visBefore":true,"toggled":null,"msAfterRelease":null,"msAfterPathEnd":null,"vis1":true,"load":"2.42 2.93 2.55"}

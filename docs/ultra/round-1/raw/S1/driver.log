@@ -1,0 +1,47 @@
+[2026-10-02T01:43:55.619Z] launch /Users/christopherharris/.vibepet-ultra/userdata/r1-S1 {"muted":true}
+[2026-10-02T01:43:56.247Z] ready 361 ms pid 47258
+[2026-10-02T01:43:56.265Z] instrumented {"inst":{"spied":["jump","send-to"]},"audio":{"realContext":false},"probe":{"ok":true},"prefs":{"muted":false,"alerts":"done","setupDone":false,"feel":null,"size":"m"},"disp":{"bounds":{"x":0,"y":0,"width":1440,"height":900},"workArea":{"x":0,"y":25,"width":1440,"height":816},"scale":2,"win":{"x":756,"y":25,"width":660,"height":816},"displays":1}}
+[2026-10-02T01:43:56.266Z] listening /private/tmp/claude-501/-Users-christopherharris-projects/2aec191f-bd46-4d22-b2da-e8c859fd18a3/scratchpad/s1.sock
+[2026-10-02T01:45:07.160Z] closed {"how":"quit","ms":162,"procs":7,"orphans":[]}
+[2026-10-02T01:45:24.224Z] launch /Users/christopherharris/.vibepet-ultra/userdata/r1-S1 {"muted":true}
+[2026-10-02T01:45:24.866Z] ready 382 ms pid 48156
+[2026-10-02T01:45:24.892Z] instrumented {"inst":{"spied":["jump","send-to"]},"audio":{"realContext":false},"probe":{"ok":true},"prefs":{"muted":false,"alerts":"done","setupDone":false,"feel":null,"size":"m"},"disp":{"bounds":{"x":0,"y":0,"width":1440,"height":900},"workArea":{"x":0,"y":25,"width":1440,"height":816},"scale":2,"win":{"x":756,"y":25,"width":660,"height":816},"displays":1}}
+[2026-10-02T01:45:24.893Z] listening s1.sock
+[2026-10-02T01:45:33.339Z] shot 01-F6-pet-closed-asfound.png
+[2026-10-02T01:45:50.488Z] shot 02-F6-setup-firstrun.png
+[2026-10-02T01:45:50.686Z] shot 03-F6-setup-firstrun-panel.png
+[2026-10-02T01:46:21.423Z] shot 04-F2-asfound-now-empty.png
+[2026-10-02T01:46:21.613Z] shot 05-F2-asfound-now-empty-panel.png
+[2026-10-02T01:48:19.895Z] rearm ember start
+[2026-10-02T01:48:23.987Z] rearm ember done 0
+[2026-10-02T01:49:37.284Z] shot 06-F6-footer-localhost-ember-row.png
+[2026-10-02T01:49:37.493Z] shot 07-F6-footer-localhost-ember-row-panel.png
+[2026-10-02T01:50:12.621Z] shot 08-F7-dark-ember-row-localhost-panel.png
+[2026-10-02T01:50:12.907Z] shot 09-F7-dark-ember-row-localhost.png
+[2026-10-02T01:51:06.154Z] shot 10-F5-jump-vibepet-no-match-panel.png
+[2026-10-02T01:51:16.327Z] shot 11-F2-jump-kestrel-beacon-no-match-panel.png
+[2026-10-02T01:53:41.847Z] shot 12-F6-today-note-panel.png
+[2026-10-02T01:53:52.993Z] rearm atlas start
+[2026-10-02T01:53:55.707Z] rearm atlas done 0
+[2026-10-02T01:58:05.859Z] rearm delta start
+[2026-10-02T01:58:16.465Z] rearm delta done 0
+[2026-10-02T01:58:44.113Z] shot 13-F2-truthtable-full.png
+[2026-10-02T01:58:44.477Z] shot 14-F2-truthtable-panel.png
+[2026-10-02T01:59:04.048Z] shot 15-F2-truthtable-panel-scrolled.png
+[2026-10-02T01:59:34.347Z] pause ember start
+[2026-10-02T01:59:35.949Z] pause ember done 0
+[2026-10-02T02:02:59.629Z] shot 16-F3-bubble-while-home-open.png
+[2026-10-02T02:03:53.621Z] shot 17-F3-row-click-jump-fails-panel.png
+[2026-10-02T02:08:29.718Z] shot 18-F5-all-parked-empty-panel.png
+[2026-10-02T02:08:29.932Z] shot 19-F5-all-parked-empty-full.png
+[2026-10-02T02:09:00.851Z] shot 20-F7-size-large-setup.png
+[2026-10-02T02:13:10.521Z] rearm beacon start
+[2026-10-02T02:13:10.722Z] rearm beacon done 0
+[2026-10-02T02:13:37.085Z] beacon Esc
+[2026-10-02T02:13:40.343Z] rearm beacon (fresh) start
+[2026-10-02T02:13:42.983Z] rearm beacon (fresh) done 0
+[2026-10-02T02:14:45.940Z] shot 21-F4-beacon-question-shown-running-panel.png
+[2026-10-02T02:16:47.076Z] shot 22-F7-light-panel.png
+[2026-10-02T02:16:47.551Z] shot 23-F7-dark-panel.png
+[2026-10-02T02:17:41.504Z] shot 24-F5-pet-closed-calm-while-blocked.png
+[2026-10-02T02:17:57.273Z] closed {"how":"quit","ms":116,"procs":7,"orphans":[]}

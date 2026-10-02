@@ -1,0 +1,60 @@
+{
+ "type": "result",
+ "subtype": "success",
+ "is_error": false,
+ "result": "None of them \u2014 there are no active agents right now, just vibepet sitting idle.",
+ "duration_ms": 977,
+ "duration_api_ms": 929,
+ "total_cost_usd": 0.0067,
+ "usage": {
+  "input_tokens": 2,
+  "cache_creation_input_tokens": 1609,
+  "cache_read_input_tokens": 0,
+  "output_tokens": 26,
+  "output_tokens_details": {
+   "thinking_tokens": 0
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 1609,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 26,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 1609,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1609
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "modelUsage": {
+  "claude-sonnet-5": {
+   "inputTokens": 2,
+   "outputTokens": 26,
+   "cacheReadInputTokens": 0,
+   "cacheCreationInputTokens": 1609,
+   "webSearchRequests": 0,
+   "costUSD": 0.0067,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 64000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "api_error_status": null
+}

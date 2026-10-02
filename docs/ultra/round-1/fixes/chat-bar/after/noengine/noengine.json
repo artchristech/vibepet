@@ -1,0 +1,65 @@
+{
+  "loadStart": "load 3.64 20.33 62.41",
+  "open": {
+    "composerVisible": true,
+    "focus": "chatInput",
+    "keyFormShown": false,
+    "header": "delta/main · no engine",
+    "card": "I need a way to think. Paste an Anthropic API key, or install Claude Code and log in.",
+    "acts": [
+      "Paste key",
+      "How to install"
+    ]
+  },
+  "today": true,
+  "jump": [
+    {
+      "args": [
+        "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      }
+    }
+  ],
+  "question": {
+    "card": {
+      "cls": "msg pet err",
+      "text": "",
+      "say": "I need a way to think. Paste an Anthropic API key, or install Claude Code and log in.",
+      "acts": [
+        "Paste key",
+        "How to install"
+      ],
+      "sees": null
+    },
+    "user": {
+      "cls": "msg user failed",
+      "text": "what does kestrel need?",
+      "retry": true
+    }
+  },
+  "pasteKey": "keyInput",
+  "keyField": {
+    "note": "That isn't an API key (keys start with sk-ant-), so I didn't save it. Your text is back in the chat box.",
+    "composer": "what's my agent doing?",
+    "keyFormShown": false
+  },
+  "keySaved": {
+    "keyEnc": false,
+    "engine": "claude"
+  },
+  "install": [
+    "https://docs.anthropic.com/en/docs/claude-code/setup"
+  ],
+  "errors": [],
+  "close": {
+    "how": "quit",
+    "ms": 373,
+    "procs": 7,
+    "orphans": []
+  },
+  "loadEnd": "load 4.14 19.63 61.43"
+}

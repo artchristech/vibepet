@@ -1,0 +1,33 @@
+10:37:26.991 trained circle Saved. Draw it to hide Net; draw it again to bring him back. 3
+10:37:31.359 sanity: cw circle r110 600 ms (visible)      vis true→false toggled hide +260 ms PASS
+10:37:37.365 sanity: cw circle r110 600 ms (hidden)       vis false→true toggled summon +263 ms PASS
+10:37:49.138 loop drag of Net #1: closed r110 900 ms, button held vis true→true toggled null PASS
+10:37:53.671 loop drag of Net #2: closed r110 900 ms, button held vis true→true toggled null PASS
+10:38:01.314 loop drag of Net #3: closed r110 900 ms, button held vis true→true toggled null PASS
+10:38:07.265 loop drag of Net #4: closed r110 900 ms, button held vis true→true toggled null PASS
+10:38:11.700 loop drag of Net: 0.85 turn r110 900 ms, button held vis true→true toggled null PASS
+10:38:14.964 loop drag of Net: 0.8 turn r110 900 ms, button held vis true→true toggled null PASS
+10:38:18.183 control: same closed loop, no button         vis true→false toggled hide +206 ms PASS
+10:38:22.338 restore → visible                            vis false→true toggled summon +215 ms 
+10:38:26.682 square 180 px cw 800 ms #1 (Medium)          vis true→true toggled null PASS
+10:38:29.640 square 180 px cw 800 ms #2 (Medium)          vis true→true toggled null PASS
+10:38:34.087 square 180 px cw 800 ms #3 (Medium)          vis true→true toggled null PASS
+10:38:39.599 square 180 px cw 800 ms #1 (Low)             vis true→true toggled null PASS
+10:38:42.872 square 180 px cw 800 ms #2 (Low)             vis true→true toggled null PASS
+10:38:46.367 control: cw circle (Low)                     vis true→false toggled hide +206 ms PASS
+10:38:50.749 restore → visible                            vis false→true toggled summon +213 ms 
+10:38:56.001 ccw circle r110 600 ms #1                    vis true→false toggled hide +205 ms PASS
+10:39:01.030 ccw circle r110 600 ms #2                    vis false→true toggled summon +208 ms PASS
+10:39:04.314 ccw circle r110 600 ms #3                    vis true→false toggled hide +199 ms PASS
+10:39:08.663 restore → visible                            vis false→true toggled summon +201 ms 
+10:39:13.772 re-summon ending 550 ms after the hide       summoned true +209 ms PASS
+10:39:19.412 re-summon ending 1200 ms after the hide      summoned true +196 ms PASS
+10:39:25.694 re-summon ending 1900 ms after the hide      summoned true +199 ms PASS
+10:39:35.438 trained zigzag Saved. Draw it to hide Net; draw it again to bring him back. 3
+10:39:38.337 zigzag 700 ms #1 (trained zigzag, Medium)    vis true→false toggled hide +184 ms PASS
+10:39:42.553 zigzag 700 ms #2 (trained zigzag, Medium)    vis false→true toggled summon +204 ms PASS
+10:39:53.968 trained Z Saved. Draw it to hide Net; draw it again to bring him back. 3
+10:39:56.794 Z 700 ms #1 (trained Z, Medium)              vis true→false toggled hide +201 ms PASS
+10:40:00.956 Z 700 ms #2 (trained Z, Medium)              vis false→true toggled summon +185 ms PASS
+10:40:03.723 summary {"drag":{"n":4,"toggled":0,"pass":4,"medianMsAfterEnd":null},"dragPartial":{"n":2,"toggled":0,"pass":2,"medianMsAfterEnd":null},"dragControl":{"n":1,"toggled":1,"pass":1,"medianMsAfterEnd":206},"squareMed":{"n":3,"toggled":0,"pass":3,"medianMsAfterEnd":null},"squareLow":{"n":2,"toggled":0,"pass":2,"medianMsAfterEnd":null},"lowControl":{"n":1,"toggled":1,"pass":1,"medianMsAfterEnd":206},"ccw":{"n":3,"toggled":3,"pass":3,"medianMsAfterEnd":205},"sanity":{"n":2,"toggled":2,"pass":2,"medianMsAfterEnd":261.5},"zigzag":{"n":2,"toggled":2,"pass":2,"medianMsAfterEnd":194},"Z":{"n":2,"toggled":2,"pass":2,"medianMsAfterEnd":193},"resummon":{"n":3,"pass":3,"endAfterHide":[550,1200,1900],"medianMsAfterEnd":199},"toggleLatencyMs":{"median":205.5,"n":14}}
+10:40:03.723 close {"how":"quit","ms":886,"procs":8,"orphans":[]}

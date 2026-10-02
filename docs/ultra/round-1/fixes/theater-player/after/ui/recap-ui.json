@@ -1,0 +1,896 @@
+{
+ "phase": "ui",
+ "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-theater-player",
+ "git": "d97a309 theater-player: a re-read redraws only what changed; Approve shows what it did",
+ "dirty": "",
+ "startedAt": "2026-10-02T13:05:43.892Z",
+ "uptimeStart": "7:05  up 6 days, 17:51, 19 users, load averages: 23.81 14.12 26.75",
+ "fleet": {
+  "delta": {
+   "pid": 29074,
+   "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+   "tmux": "vp-delta:@4.%4",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/delta",
+   "status": "idle",
+   "waitingFor": null
+  },
+  "vibepet": {
+   "pid": 48221,
+   "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "tmux": "vp-vibepet:@1.%1",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+   "status": "idle",
+   "waitingFor": null
+  },
+  "atlas": {
+   "pid": 48392,
+   "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+   "tmux": "vp-atlas:@2.%2",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/atlas",
+   "status": "idle",
+   "waitingFor": null
+  },
+  "beacon": {
+   "pid": 48539,
+   "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+   "tmux": "vp-beacon:@3.%3",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/beacon",
+   "status": "waiting",
+   "waitingFor": "input needed"
+  },
+  "kestrel": {
+   "pid": 55946,
+   "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "tmux": "vp-kestrel:@8.%8",
+   "cwd": "/Users/christopherharris/.vibepet-ultra/fleet/kestrel",
+   "status": "waiting",
+   "waitingFor": "permission prompt"
+  }
+ },
+ "sizesStart": {
+  "atlas/5c051e84": 343391,
+  "beacon/a9377f08": 363823,
+  "delta/eb59a756": 699689,
+  "ember/5bf06269": 375165,
+  "ember/db0c1ec0": 578019,
+  "kestrel/13a1427d": 465693,
+  "kestrel/6f5c5b6c": 257786,
+  "vibepet/6101876b": 368986
+ },
+ "steps": {
+  "a-kestrel": {
+   "1280x800": {
+    "vw": 1280,
+    "vh": 800,
+    "scrollW": 1280,
+    "bodyScrollW": 1280,
+    "title": {
+     "x": 194,
+     "y": 12,
+     "r": 979,
+     "b": 31
+    },
+    "stats": {
+     "x": 997,
+     "y": 10,
+     "r": 1262,
+     "b": 33
+    },
+    "pills": [
+     {
+      "text": "30 prompts",
+      "x": 997,
+      "r": 1082,
+      "shown": true
+     },
+     {
+      "text": "0 edits +0 −0",
+      "x": 1088,
+      "r": 1192,
+      "shown": true
+     },
+     {
+      "text": "27 cmds",
+      "x": 1198,
+      "r": 1262,
+      "shown": true
+     }
+    ],
+    "chap": {
+     "x": 1042,
+     "y": 769,
+     "r": 1262,
+     "b": 780
+    },
+    "clock": {
+     "x": 840,
+     "y": 769,
+     "r": 928,
+     "b": 780
+    },
+    "scrub": {
+     "x": 182,
+     "y": 762,
+     "r": 826,
+     "b": 788
+    },
+    "toNow": {
+     "x": 942,
+     "y": 765,
+     "r": 988,
+     "b": 785
+    },
+    "reload": {
+     "x": 1002,
+     "y": 762,
+     "r": 1028,
+     "b": 788
+    },
+    "play": {
+     "x": 18,
+     "y": 758,
+     "r": 52,
+     "b": 792
+    },
+    "pinX": {
+     "x": 1227,
+     "y": 71,
+     "r": 1251,
+     "b": 96
+    },
+    "pin": {
+     "x": 894,
+     "y": 60,
+     "r": 1264,
+     "b": 582
+    },
+    "act": {
+     "x": 16,
+     "y": 56,
+     "r": 591,
+     "b": 93
+    },
+    "actButtons": [
+     {
+      "a": "jump",
+      "x": 448,
+      "r": 501
+     },
+     {
+      "a": "approve",
+      "x": 509,
+      "r": 576
+     }
+    ],
+    "head": {
+     "x": 640,
+     "y": 599,
+     "r": 641,
+     "b": 748
+    },
+    "chapText": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "clockText": "3:40 / 3:50",
+    "ok": {
+     "noPageOverflow": true,
+     "stats": true,
+     "chap": true,
+     "clock": true,
+     "scrub": true,
+     "pinClose": true,
+     "toNow": true,
+     "reload": true,
+     "act": true,
+     "playheadCentred": true
+    }
+   },
+   "820x520": {
+    "vw": 820,
+    "vh": 520,
+    "scrollW": 820,
+    "bodyScrollW": 820,
+    "title": {
+     "x": 194,
+     "y": 12,
+     "r": 519,
+     "b": 31
+    },
+    "stats": {
+     "x": 537,
+     "y": 10,
+     "r": 802,
+     "b": 33
+    },
+    "pills": [
+     {
+      "text": "30 prompts",
+      "x": 537,
+      "r": 622,
+      "shown": true
+     },
+     {
+      "text": "0 edits +0 −0",
+      "x": 628,
+      "r": 732,
+      "shown": true
+     },
+     {
+      "text": "27 cmds",
+      "x": 738,
+      "r": 802,
+      "shown": true
+     }
+    ],
+    "chap": {
+     "x": 582,
+     "y": 489,
+     "r": 802,
+     "b": 500
+    },
+    "clock": {
+     "x": 380,
+     "y": 489,
+     "r": 468,
+     "b": 500
+    },
+    "scrub": {
+     "x": 182,
+     "y": 482,
+     "r": 366,
+     "b": 508
+    },
+    "toNow": {
+     "x": 482,
+     "y": 485,
+     "r": 528,
+     "b": 505
+    },
+    "reload": {
+     "x": 542,
+     "y": 482,
+     "r": 568,
+     "b": 508
+    },
+    "play": {
+     "x": 18,
+     "y": 478,
+     "r": 52,
+     "b": 512
+    },
+    "pinX": {
+     "x": 767,
+     "y": 71,
+     "r": 791,
+     "b": 96
+    },
+    "pin": {
+     "x": 434,
+     "y": 60,
+     "r": 804,
+     "b": 302
+    },
+    "act": {
+     "x": 16,
+     "y": 56,
+     "r": 418,
+     "b": 93
+    },
+    "actButtons": [
+     {
+      "a": "jump",
+      "x": 275,
+      "r": 327
+     },
+     {
+      "a": "approve",
+      "x": 335,
+      "r": 403
+     }
+    ],
+    "head": {
+     "x": 410,
+     "y": 319,
+     "r": 411,
+     "b": 468
+    },
+    "chapText": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "clockText": "3:40 / 3:50",
+    "ok": {
+     "noPageOverflow": true,
+     "stats": true,
+     "chap": true,
+     "clock": true,
+     "scrub": true,
+     "pinClose": true,
+     "toNow": true,
+     "reload": true,
+     "act": true,
+     "playheadCentred": true
+    }
+   },
+   "load": [
+    21.45,
+    14.07,
+    26.51
+   ]
+  },
+  "a-ember": {
+   "menuLabel": "<command-message>loop</command-message> … · ember · 4h",
+   "1280x800": {
+    "vw": 1280,
+    "vh": 800,
+    "scrollW": 1280,
+    "bodyScrollW": 1280,
+    "title": {
+     "x": 194,
+     "y": 12,
+     "r": 986,
+     "b": 31
+    },
+    "stats": {
+     "x": 1004,
+     "y": 10,
+     "r": 1262,
+     "b": 33
+    },
+    "pills": [
+     {
+      "text": "9 prompts",
+      "x": 1004,
+      "r": 1082,
+      "shown": true
+     },
+     {
+      "text": "0 edits +0 −0",
+      "x": 1088,
+      "r": 1192,
+      "shown": true
+     },
+     {
+      "text": "23 cmds",
+      "x": 1198,
+      "r": 1262,
+      "shown": true
+     }
+    ],
+    "chap": {
+     "x": 1240,
+     "y": 769,
+     "r": 1262,
+     "b": 780
+    },
+    "clock": {
+     "x": 1037,
+     "y": 769,
+     "r": 1125,
+     "b": 780
+    },
+    "scrub": {
+     "x": 182,
+     "y": 762,
+     "r": 1023,
+     "b": 788
+    },
+    "toNow": {
+     "x": 1139,
+     "y": 765,
+     "r": 1186,
+     "b": 785
+    },
+    "reload": {
+     "x": 1200,
+     "y": 762,
+     "r": 1226,
+     "b": 788
+    },
+    "play": {
+     "x": 18,
+     "y": 758,
+     "r": 52,
+     "b": 792
+    },
+    "pinX": {
+     "x": 1227,
+     "y": 71,
+     "r": 1251,
+     "b": 96
+    },
+    "pin": {
+     "x": 894,
+     "y": 60,
+     "r": 1264,
+     "b": 582
+    },
+    "act": null,
+    "actButtons": [],
+    "head": {
+     "x": 640,
+     "y": 599,
+     "r": 641,
+     "b": 748
+    },
+    "chapText": "/exit",
+    "clockText": "4:23 / 4:37",
+    "ok": {
+     "noPageOverflow": true,
+     "stats": true,
+     "chap": true,
+     "clock": true,
+     "scrub": true,
+     "pinClose": true,
+     "toNow": true,
+     "reload": true,
+     "act": null,
+     "playheadCentred": true
+    }
+   },
+   "820x520": {
+    "vw": 820,
+    "vh": 520,
+    "scrollW": 820,
+    "bodyScrollW": 820,
+    "title": {
+     "x": 194,
+     "y": 12,
+     "r": 526,
+     "b": 31
+    },
+    "stats": {
+     "x": 544,
+     "y": 10,
+     "r": 802,
+     "b": 33
+    },
+    "pills": [
+     {
+      "text": "9 prompts",
+      "x": 544,
+      "r": 622,
+      "shown": true
+     },
+     {
+      "text": "0 edits +0 −0",
+      "x": 628,
+      "r": 732,
+      "shown": true
+     },
+     {
+      "text": "23 cmds",
+      "x": 738,
+      "r": 802,
+      "shown": true
+     }
+    ],
+    "chap": {
+     "x": 780,
+     "y": 489,
+     "r": 802,
+     "b": 500
+    },
+    "clock": {
+     "x": 577,
+     "y": 489,
+     "r": 665,
+     "b": 500
+    },
+    "scrub": {
+     "x": 182,
+     "y": 482,
+     "r": 563,
+     "b": 508
+    },
+    "toNow": {
+     "x": 679,
+     "y": 485,
+     "r": 726,
+     "b": 505
+    },
+    "reload": {
+     "x": 740,
+     "y": 482,
+     "r": 766,
+     "b": 508
+    },
+    "play": {
+     "x": 18,
+     "y": 478,
+     "r": 52,
+     "b": 512
+    },
+    "pinX": {
+     "x": 767,
+     "y": 71,
+     "r": 791,
+     "b": 96
+    },
+    "pin": {
+     "x": 434,
+     "y": 60,
+     "r": 804,
+     "b": 302
+    },
+    "act": null,
+    "actButtons": [],
+    "head": {
+     "x": 410,
+     "y": 319,
+     "r": 411,
+     "b": 468
+    },
+    "chapText": "/exit",
+    "clockText": "4:23 / 4:37",
+    "ok": {
+     "noPageOverflow": true,
+     "stats": true,
+     "chap": true,
+     "clock": true,
+     "scrub": true,
+     "pinClose": true,
+     "toNow": true,
+     "reload": true,
+     "act": null,
+     "playheadCentred": true
+    }
+   },
+   "load": [
+    20.74,
+    14.16,
+    26.4
+   ]
+  },
+  "b-open-at-now": {
+   "firstCardFrame": {
+    "at": 1790946370420,
+    "ms": 37,
+    "now": 227488,
+    "dur": 229988,
+    "cardNo": "Chapter 30 of 30",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "clock": "3:47 / 3:50",
+    "focusText": 0
+   },
+   "cardShotsMsAfterCard": [
+    [
+     104,
+     398
+    ],
+    [
+     409,
+     756
+    ]
+   ],
+   "atOpen": {
+    "now": 227488,
+    "playing": true,
+    "active": 60,
+    "dur": 229988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 61,
+    "drawn": 52,
+    "card": true,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "3:47 / 3:50",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": null
+   },
+   "afterCard": {
+    "now": 229988,
+    "playing": false,
+    "active": 60,
+    "dur": 229988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 61,
+    "drawn": 61,
+    "card": false,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "3:50 / 3:50",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": null
+   },
+   "opensAtLatestChapter": true,
+   "probeOnOpen": {
+    "frames": 165,
+    "cardFrames": 74,
+    "overlapFrames": 0,
+    "overlapAtMs": []
+   },
+   "home": {
+    "now": 0,
+    "playing": false,
+    "active": 0,
+    "dur": 229988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 61,
+    "drawn": 61,
+    "card": false,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "0:00 / 3:50",
+    "chap": "Run exactly `./deploy.sh --dry-run` with the Bash tool. Do not read any files or run anything else first. The…",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": null
+   },
+   "end": {
+    "now": 229988,
+    "playing": false,
+    "active": 60,
+    "dur": 229988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 61,
+    "drawn": 61,
+    "card": false,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "3:50 / 3:50",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": null
+   },
+   "endIsDur": true,
+   "drag": {
+    "now": 229988,
+    "playing": false,
+    "active": 60,
+    "dur": 229988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 61,
+    "drawn": 61,
+    "card": false,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "3:50 / 3:50",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": null
+   },
+   "dragReachesEnd": true,
+   "playAfterDrag": {
+    "now": 3266.399999999994,
+    "playing": true,
+    "active": 1,
+    "dur": 229988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 61,
+    "drawn": 61,
+    "card": false,
+    "cardNo": "Chapter 30 of 30",
+    "clock": "0:03 / 3:50",
+    "chap": "Run exactly `./deploy.sh --dry-run` with the Bash tool. Do not read any files or run anything else first. The…",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": null
+   },
+   "restartedFromTop": true,
+   "load": [
+    26.08,
+    15.58,
+    26.68
+   ]
+  },
+  "e-chapter": {
+   "chapter": 29,
+   "firstCardFrame": {
+    "at": 1790946391289,
+    "ms": 943,
+    "now": 220327.20000000024,
+    "dur": 229988,
+    "cardNo": "Chapter 29 of 30",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "clock": "3:40 / 3:50",
+    "focusText": 0
+   },
+   "cardShotsMsAfterCard": [
+    [
+     107,
+     374
+    ],
+    [
+     396,
+     713
+    ]
+   ],
+   "cardFrames": 145,
+   "overlapFrames": 0,
+   "overlapAtMs": [],
+   "after": {
+    "now": 221493.70000000056,
+    "playing": true,
+    "active": 59,
+    "dur": 229988,
+    "chapters": 30,
+    "lastChapterV": 227488,
+    "lastChapterTitle": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "beats": 61,
+    "drawn": 61,
+    "card": false,
+    "cardNo": "Chapter 29 of 30",
+    "clock": "3:41 / 3:50",
+    "chap": "Run exactly `./deploy.sh --dry-run` again with the Bash tool, nothing else first.",
+    "title": "Theater — Deploy.sh dry run · kestrel",
+    "toast": null
+   },
+   "load": [
+    23.04,
+    15.28,
+    26.45
+   ]
+  },
+  "f-rejected": {
+   "denied": 25,
+   "deniedKinds": [
+    "command"
+   ],
+   "idx": [
+    1,
+    3,
+    5,
+    7,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26,
+    28,
+    30,
+    32,
+    34,
+    36,
+    38,
+    40,
+    45,
+    47,
+    49,
+    53,
+    55,
+    59
+   ],
+   "failed": 26,
+   "beat": 28,
+   "verdict": "✗ Rejected by you",
+   "hasExit": false,
+   "railBad": 26,
+   "railBadDenied": 25,
+   "railBadColor": "rgb(255, 93, 108)",
+   "ticksF": 26,
+   "tickColor": "rgb(255, 93, 108)",
+   "drawn": 61,
+   "beats": 61,
+   "title": "Command: Run dry-run deploy script · rejected by you",
+   "pinMeta": [
+    "output · rejected by you"
+   ],
+   "load": [
+    22.72,
+    15.34,
+    26.4
+   ]
+  },
+  "h-actbar": {
+   "bar": {
+    "shown": true,
+    "text": "Waiting for your approval · Bash: ./deploy.sh --dry-run · since 09:12 PM",
+    "buttons": [
+     "Jump",
+     "Approve"
+    ]
+   },
+   "jumpNoClient": {
+    "res": "no terminal is attached to tmux session vp-kestrel · tmux attach -t vp-kestrel",
+    "ms": 270,
+    "calls": [
+     {
+      "kind": "ipc:jump",
+      "args": [
+       "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+      ],
+      "result": {
+       "ok": false,
+       "why": "no terminal is attached to tmux session vp-kestrel",
+       "attach": "tmux attach -t vp-kestrel"
+      }
+     }
+    ],
+    "clipboardWrites": 0
+   },
+   "load": [
+    22.26,
+    15.37,
+    26.35
+   ]
+  },
+  "c-cascade": {
+   "windows": [
+    {
+     "id": 8,
+     "file": "13a1427d",
+     "title": "Theater — Deploy.sh dry run · kestrel",
+     "bounds": {
+      "x": 80,
+      "y": 25,
+      "width": 1280,
+      "height": 800
+     },
+     "pid": 65431
+    },
+    {
+     "id": 9,
+     "file": "a9377f08",
+     "title": "Theater — Beacon database choice · beacon",
+     "bounds": {
+      "x": 108,
+      "y": 53,
+      "width": 1280,
+      "height": 788
+     },
+     "pid": 65551
+    },
+    {
+     "id": 10,
+     "file": "6101876b",
+     "title": "Theater — Read package.json · vibepet",
+     "bounds": {
+      "x": 136,
+      "y": 81,
+      "width": 1280,
+      "height": 760
+     },
+     "pid": 65702
+    }
+   ],
+   "distinctTitles": true,
+   "cascaded": true,
+   "reopen": {
+    "sameWindowCount": true,
+    "timelineReads": 1,
+    "beatsBefore": 61,
+    "beatsAfter": 61,
+    "toast": null,
+    "nowBefore": 229988,
+    "nowAfter": 228821.19999999995,
+    "ms": 3932
+   },
+   "load": [
+    22.79,
+    15.7,
+    26.34
+   ]
+  }
+ },
+ "notes": [],
+ "launch": {
+  "pid": 59208,
+  "readyMs": 727
+ },
+ "timelineReads": 10,
+ "clipboard": 0,
+ "close": {
+  "how": "quit",
+  "ms": 339,
+  "procs": 8,
+  "orphans": []
+ },
+ "uptimeEnd": "7:06  up 6 days, 17:52, 19 users, load averages: 22.79 15.70 26.34",
+ "sizesEnd": {
+  "atlas/5c051e84": 343391,
+  "beacon/a9377f08": 363823,
+  "delta/eb59a756": 699689,
+  "ember/5bf06269": 375165,
+  "ember/db0c1ec0": 578019,
+  "kestrel/13a1427d": 465693,
+  "kestrel/6f5c5b6c": 257786,
+  "vibepet/6101876b": 368986
+ },
+ "transcriptsGrew": []
+}

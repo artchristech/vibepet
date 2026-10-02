@@ -1,0 +1,6 @@
+[2026-10-02T02:53:20.594Z] launch /Users/christopherharris/.vibepet-ultra/userdata/r1-S1-critic
+[2026-10-02T02:53:21.341Z] ready 496 ms pid 62328 {"inst":{"spied":["jump","send-to"]},"audio":{"realContext":false},"prefs":{"muted":false,"alerts":"done","setupDone":true},"paths":{"claude":"/Users/christopherharris/.vibepet-ultra/root/.claude","projects":"/Users/christopherharris/.vibepet-ultra/root/.claude/projects","sessions":"/Users/christopherharris/.vibepet-ultra/root/.claude/sessions","userData":"/Users/christopherharris/.vibepet-ultra/userdata/r1-S1-critic"}}
+[2026-10-02T02:53:46.472Z] launch /Users/christopherharris/.vibepet-ultra/userdata/r1-S1-critic
+[2026-10-02T02:53:47.149Z] ready 421 ms pid 63215 {"inst":{"spied":["jump","send-to"]},"audio":{"realContext":false},"prefs":{"muted":false,"alerts":"done","setupDone":true},"paths":{"claude":"/Users/christopherharris/.vibepet-ultra/root/.claude","projects":"/Users/christopherharris/.vibepet-ultra/root/.claude/projects","sessions":"/Users/christopherharris/.vibepet-ultra/root/.claude/sessions","userData":"/Users/christopherharris/.vibepet-ultra/userdata/r1-S1-critic"}}
+[2026-10-02T02:53:47.151Z] listening ctl.sock
+[2026-10-02T03:05:59.794Z] closed {"how":"quit","ms":252,"procs":7,"orphans":[]}

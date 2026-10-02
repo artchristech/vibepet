@@ -1,0 +1,700 @@
+[
+ {
+  "flow": "F1",
+  "step": "menu ⋯ → Theater… → item: first frame — kestrel",
+  "ms": 150,
+  "n": 3,
+  "samples": [
+   171,
+   128,
+   150
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "menu ⋯ → Theater… → item: first frame — atlas",
+  "ms": 116,
+  "n": 3,
+  "samples": [
+   115,
+   152,
+   116
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "menu ⋯ → Theater… → item: first frame — beacon",
+  "ms": 132,
+  "n": 3,
+  "samples": [
+   132,
+   132,
+   150
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "menu ⋯ → Theater… → item: first frame — vibepet",
+  "ms": 163,
+  "n": 3,
+  "samples": [
+   163,
+   179,
+   133
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "menu ⋯ → Theater… → item: first frame — delta",
+  "ms": 200,
+  "n": 3,
+  "samples": [
+   200,
+   266,
+   175
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "menu ⋯ → Theater… → item: first frame — ember",
+  "ms": 135,
+  "n": 3,
+  "samples": [
+   174,
+   131,
+   135
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "menu ⋯ → Theater… → item: first frame — ember-prev",
+  "ms": 131,
+  "n": 3,
+  "samples": [
+   131,
+   117,
+   135
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "menu ⋯ → Theater… → item: first frame — kestrel-prev",
+  "ms": 114,
+  "n": 3,
+  "samples": [
+   114,
+   102,
+   120
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "menu ⋯ → Theater… → item: first frame — all 8 sessions",
+  "ms": 134.0,
+  "n": 24,
+  "samples": [
+   171,
+   115,
+   132,
+   163,
+   200,
+   174,
+   131,
+   114,
+   128,
+   152,
+   132,
+   179,
+   266,
+   131,
+   117,
+   102,
+   150,
+   116,
+   150,
+   133,
+   175,
+   135,
+   135,
+   120
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "menu path: window created after item click",
+  "ms": 7.0,
+  "n": 24,
+  "samples": [
+   10,
+   6,
+   6,
+   11,
+   7,
+   10,
+   6,
+   7,
+   8,
+   5,
+   6,
+   7,
+   7,
+   6,
+   6,
+   6,
+   7,
+   7,
+   7,
+   7,
+   8,
+   7,
+   7,
+   6
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "menu path: header + beats rendered after item click",
+  "ms": 129.0,
+  "n": 24,
+  "samples": [
+   168,
+   107,
+   124,
+   160,
+   199,
+   160,
+   124,
+   112,
+   126,
+   135,
+   129,
+   168,
+   265,
+   122,
+   108,
+   92,
+   136,
+   112,
+   143,
+   129,
+   167,
+   124,
+   132,
+   109
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "first frame — delta (136 beats, 33 subagent files), every menu open",
+  "ms": 192.0,
+  "n": 8,
+  "samples": [
+   200,
+   266,
+   175,
+   188,
+   196,
+   313,
+   151,
+   151
+  ],
+  "load": "2.79–5.94",
+  "note": "includes a first open after ~2 min idle at load 5.9 (313 ms)"
+ },
+ {
+  "flow": "F1",
+  "step": "row ▶ (Home) → first frame — ember",
+  "ms": 130,
+  "n": 5,
+  "samples": [
+   245,
+   131,
+   127,
+   130,
+   114
+  ],
+  "load": "3.42",
+  "note": "first value = first replay opened after a pause"
+ },
+ {
+  "flow": "F1",
+  "step": "roster ▶ (hover list) → first frame — ember, vibepet, beacon, kestrel, atlas ×3",
+  "ms": 147,
+  "n": 15,
+  "samples": [
+   147,
+   130,
+   129,
+   130,
+   166,
+   148,
+   147,
+   146,
+   191,
+   114,
+   129,
+   164,
+   129,
+   214,
+   212
+  ],
+  "load": "3.04–3.41"
+ },
+ {
+  "flow": "F1",
+  "step": "/replay vibepet + Enter → first frame",
+  "ms": 135,
+  "n": 3,
+  "samples": [
+   151,
+   111,
+   135
+  ],
+  "load": "3.47–3.51"
+ },
+ {
+  "flow": "F1",
+  "step": "click ⋯ → native menu shown (incl. building Theater… list)",
+  "ms": 11,
+  "n": 5,
+  "samples": [
+   17,
+   11,
+   9,
+   9,
+   13
+  ],
+  "load": "2.59",
+  "note": "upper bound: click stamped by the pet page clock"
+ },
+ {
+  "flow": "F1",
+  "step": "right-click Net → native menu shown",
+  "ms": 16,
+  "n": 1,
+  "samples": [
+   16
+  ],
+  "load": "2.56"
+ },
+ {
+  "flow": "F1",
+  "step": "Theater… list build in main (8 sessions, 0.26–0.66 MB each)",
+  "ms": 8.8,
+  "n": 7,
+  "samples": [
+   16.9,
+   12.0,
+   10.2,
+   8.8,
+   7.7,
+   6.9,
+   6.2
+  ],
+  "load": "2.59"
+ },
+ {
+  "flow": "F1",
+  "step": "click Net → Home panel open (needed before row ▶ / ⋯)",
+  "ms": 424,
+  "n": 1,
+  "samples": [
+   424
+  ],
+  "load": "2.29"
+ },
+ {
+  "flow": "F1",
+  "step": "timeline read+build in main — kestrel",
+  "ms": 20,
+  "n": 3,
+  "samples": [
+   21,
+   12,
+   20
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "timeline read+build in main — atlas",
+  "ms": 14,
+  "n": 3,
+  "samples": [
+   14,
+   22,
+   12
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "timeline read+build in main — beacon",
+  "ms": 17,
+  "n": 3,
+  "samples": [
+   12,
+   17,
+   18
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "timeline read+build in main — vibepet",
+  "ms": 31,
+  "n": 3,
+  "samples": [
+   31,
+   36,
+   23
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "timeline read+build in main — ember",
+  "ms": 22,
+  "n": 3,
+  "samples": [
+   28,
+   15,
+   22
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "timeline read+build in main — ember-prev",
+  "ms": 14,
+  "n": 3,
+  "samples": [
+   14,
+   10,
+   16
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "timeline read+build in main — kestrel-prev",
+  "ms": 16,
+  "n": 3,
+  "samples": [
+   16,
+   9,
+   16
+  ],
+  "load": "2.79–4.60"
+ },
+ {
+  "flow": "F1",
+  "step": "timeline read+build in main — delta",
+  "ms": 58,
+  "n": 7,
+  "samples": [
+   70,
+   125,
+   57,
+   58,
+   71,
+   41,
+   35
+  ],
+  "load": "2.79–5.94"
+ },
+ {
+  "flow": "F3",
+  "step": "▶/❚❚ click → button + clock update",
+  "ms": 3.2,
+  "n": 2,
+  "samples": [
+   0.4,
+   6.1
+  ],
+  "load": "9.63"
+ },
+ {
+  "flow": "F3",
+  "step": "Space → play/pause",
+  "ms": 3.4,
+  "n": 1,
+  "samples": [
+   3.4
+  ],
+  "load": "9.63"
+ },
+ {
+  "flow": "F3",
+  "step": "1/2/3 keys or 1×/4×/16× click → speed shown",
+  "ms": 0.1,
+  "n": 3,
+  "samples": [
+   0.1,
+   0.0,
+   0.7
+  ],
+  "load": "9.63"
+ },
+ {
+  "flow": "F3",
+  "step": "← / → → stage shows previous/next beat",
+  "ms": 1.6,
+  "n": 4,
+  "samples": [
+   1.8,
+   1.3,
+   2.4,
+   1.2
+  ],
+  "load": "9.63"
+ },
+ {
+  "flow": "F3",
+  "step": "[ / ] → chapter jump",
+  "ms": 1.2,
+  "n": 3,
+  "samples": [
+   1.6,
+   1.2,
+   1.0
+  ],
+  "load": "9.63"
+ },
+ {
+  "flow": "F3",
+  "step": "click a beat on the rail → seek + detail panel",
+  "ms": 1.3,
+  "n": 1,
+  "samples": [
+   1.3
+  ],
+  "load": "5.34"
+ },
+ {
+  "flow": "F3",
+  "step": "Esc → detail panel closed",
+  "ms": 0.1,
+  "n": 1,
+  "samples": [
+   0.1
+  ],
+  "load": "5.34"
+ },
+ {
+  "flow": "F3",
+  "step": "16× from 90% → playback stops at the end",
+  "ms": 3020,
+  "n": 1,
+  "samples": [
+   3020
+  ],
+  "load": "5.34",
+  "note": "plus 1582 ms from 85% (n=1)"
+ },
+ {
+  "flow": "F3",
+  "step": "playback rate at 1× (virtual ms per real ms)",
+  "ms": null,
+  "n": 1,
+  "samples": [
+   1.0
+  ],
+  "load": "5.34",
+  "value": 1.0,
+  "unit": "x"
+ },
+ {
+  "flow": "F3",
+  "step": "playback rate at 4× (no chapter card in window)",
+  "ms": null,
+  "n": 1,
+  "samples": [
+   4.03
+  ],
+  "load": "9.63",
+  "value": 4.0,
+  "unit": "x"
+ },
+ {
+  "flow": "F4",
+  "step": "frame interval p95 while playing 4× — delta",
+  "ms": 32.0,
+  "n": 3,
+  "samples": [
+   31.4,
+   33.1,
+   32.0
+  ],
+  "load": "3.0–6.4"
+ },
+ {
+  "flow": "F4",
+  "step": "frame interval max while playing 4× — delta",
+  "ms": 50.9,
+  "n": 3,
+  "samples": [
+   50.9,
+   50.1,
+   64.6
+  ],
+  "load": "3.0–6.4"
+ },
+ {
+  "flow": "F4",
+  "step": "frames per second while playing 4× — delta",
+  "ms": null,
+  "n": 3,
+  "samples": [
+   56.2,
+   56.1,
+   56.0
+  ],
+  "load": "3.0–6.4",
+  "value": 56.1,
+  "unit": "fps"
+ },
+ {
+  "flow": "F4",
+  "step": "frame interval p95 while playing 16× — delta",
+  "ms": 32.8,
+  "n": 3,
+  "samples": [
+   33.4,
+   18.7,
+   32.8
+  ],
+  "load": "3.0–6.4"
+ },
+ {
+  "flow": "F4",
+  "step": "frames per second while playing 4× — kestrel",
+  "ms": null,
+  "n": 2,
+  "samples": [
+   58.5,
+   58.5
+  ],
+  "load": "2.95–3.06",
+  "value": 58.5,
+  "unit": "fps"
+ },
+ {
+  "flow": "F4",
+  "step": "frames per second while PAUSED (nothing moves)",
+  "ms": null,
+  "n": 5,
+  "samples": [
+   59.4,
+   59.0,
+   59.7,
+   59.7,
+   59.7
+  ],
+  "load": "2.95–6.4",
+  "value": 59.7,
+  "unit": "fps"
+ },
+ {
+  "flow": "F4",
+  "step": "theater renderer CPU while PAUSED",
+  "ms": null,
+  "n": 5,
+  "samples": [
+   6.6,
+   3.7,
+   7.0,
+   4.0,
+   6.5
+  ],
+  "load": "2.95–6.4",
+  "value": 6.5,
+  "unit": "% of a core"
+ },
+ {
+  "flow": "F4",
+  "step": "whole app CPU with a paused replay open (vs 3.0 % with it closed)",
+  "ms": null,
+  "n": 1,
+  "samples": [
+   14.7
+  ],
+  "load": "4.92",
+  "value": 14.7,
+  "unit": "% of a core"
+ },
+ {
+  "flow": "F4",
+  "step": "theater window memory 3 s after open (working set), all sessions",
+  "ms": null,
+  "n": 24,
+  "samples": [
+   192,
+   188,
+   169,
+   183,
+   200,
+   154,
+   168,
+   203,
+   188,
+   194,
+   152,
+   162,
+   182,
+   149,
+   160,
+   192,
+   180,
+   189,
+   176,
+   161,
+   176,
+   150,
+   174,
+   188
+  ],
+  "load": "2.79–4.60",
+  "value": 178.0,
+  "unit": "MB"
+ },
+ {
+  "flow": "F4",
+  "step": "theater window memory after 4 full plays of delta at 16× (working set)",
+  "ms": null,
+  "n": 4,
+  "samples": [
+   374,
+   377,
+   350,
+   363
+  ],
+  "load": "4.27–5.08",
+  "value": 368.5,
+  "unit": "MB",
+  "note": "peak 385 MB"
+ },
+ {
+  "flow": "F4",
+  "step": "pet window memory (for comparison)",
+  "ms": null,
+  "n": 1,
+  "samples": [
+   104
+  ],
+  "load": "2.27",
+  "value": 104,
+  "unit": "MB"
+ }
+]

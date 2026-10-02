@@ -1,0 +1,7 @@
+[08:54:33.683] cpu fix #1: 2.25% of a core (1.35 s CPU / 60.1 s, 4 procs, ticks 21) · load 260.07 156.33 117.43 → load 377.98 218.12 143.71
+[08:55:52.616] cpu base #1: 2.14% of a core (1.33 s CPU / 62.1 s, 4 procs, ticks null) · load 301.30 210.54 142.70 → load 246.66 215.00 149.23
+[08:57:18.674] cpu base #2: 3.01% of a core (1.81 s CPU / 60.2 s, 4 procs, ticks null) · load 202.98 207.58 148.47 → load 101.20 178.12 141.52
+[08:58:36.549] cpu fix #2: 2.05% of a core (1.23 s CPU / 60.1 s, 4 procs, ticks 21) · load 78.51 167.98 138.73 → load 34.08 138.85 129.82
+[08:59:54.609] cpu fix #3: 1.8% of a core (1.08 s CPU / 60.1 s, 4 procs, ticks 20) · load 30.29 132.88 127.85 → load 14.18 109.63 119.49
+[09:01:11.071] cpu base #3: 1.48% of a core (0.89 s CPU / 60.1 s, 4 procs, ticks null) · load 11.20 102.77 116.80 → load 7.00 84.89 109.15
+[09:01:11.559] cpu medians: fix 2.05% · base 2.14% · delta -0.09 points

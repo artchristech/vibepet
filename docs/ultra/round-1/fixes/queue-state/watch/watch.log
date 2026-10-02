@@ -1,0 +1,14 @@
+delta
+     1–420 s  truth idle       ui ready    delta · done 3h 31m ago fan 0/3/0
+vibepet
+     1–420 s  truth idle       ui ready    vibepet · done 2h 19m ago
+atlas
+     1–420 s  truth idle       ui ready    atlas · done 2h 29m ago
+beacon
+     1–420 s  truth question   ui needs    beacon · asking 3h 18m
+kestrel
+     1–420 s  truth approval   ui needs    kestrel · needs approval 2h 19m
+drops (samples with no row while the registry entry exists): {"delta":0,"vibepet":0,"atlas":0,"beacon":0,"kestrel":0}
+order: 0 of 210 samples off (Home = snapshot, pending() ⊆ snapshot in order); last {"snapshot":["beacon","kestrel","delta","atlas","vibepet"],"home":["beacon","kestrel","delta","atlas","vibepet"],"pending":["beacon","kestrel"],"held":["beacon","kestrel"]}
+210 samples → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/queue-state/watch  (close quit, orphans 0)
+exit=0

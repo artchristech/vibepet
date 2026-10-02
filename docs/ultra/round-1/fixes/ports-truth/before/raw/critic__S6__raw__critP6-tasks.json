@@ -1,0 +1,261 @@
+{
+ "flow": "P6",
+ "startedAt": "2026-10-02T03:09:56.612Z",
+ "load": [
+  [
+   1.45,
+   1.62,
+   1.94
+  ],
+  [
+   1.41,
+   1.61,
+   1.93
+  ]
+ ],
+ "steps": [
+  {
+   "name": "menu",
+   "at": "2026-10-02T03:10:02.474Z",
+   "load": [
+    1.41,
+    1.61,
+    1.93
+   ],
+   "localhost": {
+    "label": "Localhost",
+    "enabled": true,
+    "type": "submenu",
+    "sub": [
+     {
+      "label": "nothing listening",
+      "enabled": false,
+      "type": "normal"
+     },
+     {
+      "label": "",
+      "enabled": true,
+      "type": "separator"
+     },
+     {
+      "label": "Background tasks",
+      "enabled": false,
+      "type": "normal"
+     },
+     {
+      "label": "✓ Run shard 1 reconciliation · delta · 1h",
+      "enabled": true,
+      "type": "normal"
+     },
+     {
+      "label": "✓ Run shard 3 reconciliation · delta · 1h",
+      "enabled": true,
+      "type": "normal"
+     },
+     {
+      "label": "✓ Run shard 2 reconciliation · delta · 1h",
+      "enabled": true,
+      "type": "normal"
+     },
+     {
+      "label": "✗ Start HTTP server on port 47120 · vibepet · 1h",
+      "enabled": true,
+      "type": "normal"
+     },
+     {
+      "label": "✓ Run probe command · delta · 3h",
+      "enabled": true,
+      "type": "normal"
+     },
+     {
+      "label": "✓ Run probe command · delta · 3h",
+      "enabled": true,
+      "type": "normal"
+     }
+    ]
+   },
+   "tasks": [
+    {
+     "id": "a5a519f5d2606b7bf",
+     "name": "Run shard 1 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "a9da67293fac106de",
+     "name": "Run shard 3 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "a7603eeed1987259f",
+     "name": "Run shard 2 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "bhl322btn",
+     "name": "Start HTTP server on port 47120",
+     "project": "vibepet",
+     "running": false,
+     "status": "failed"
+    },
+    {
+     "id": "a77a80a1ab94a8a5d",
+     "name": "Run probe command",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "aa6a3be50b9ef2adc",
+     "name": "Run probe command",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "a325cd97ba3743351",
+     "name": "Run probe command",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "a3e5fa6572b44a0d4",
+     "name": "Run shard 3 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "stopped"
+    },
+    {
+     "id": "afd470a6b7ebabf46",
+     "name": "Run shard 2 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "stopped"
+    },
+    {
+     "id": "a594ccc0c25813eff",
+     "name": "Run shard 1 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "stopped"
+    },
+    {
+     "id": "a7bc34ae1d826d99a",
+     "name": "Run shard 2 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "a08554d86e0ae7f19",
+     "name": "Run shard 3 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "acdb8afc887196d4d",
+     "name": "Run shard 1 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "a20bbb5d963ca0fc8",
+     "name": "Run shard 3 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "stopped"
+    },
+    {
+     "id": "aed58acc8cbc2c460",
+     "name": "Run shard 2 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "stopped"
+    },
+    {
+     "id": "afd94c71f0aa3eaa5",
+     "name": "Run shard 1 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "stopped"
+    },
+    {
+     "id": "aa7838d6558b70788",
+     "name": "Run shard 3 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "a6591e80d2d6ad0a0",
+     "name": "Run shard 1 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "ab6e78e46062c28cc",
+     "name": "Run shard 2 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    },
+    {
+     "id": "aacdce6477edbce08",
+     "name": "Run shard 3 reconciliation",
+     "project": "delta",
+     "running": false,
+     "status": "completed"
+    }
+   ]
+  },
+  {
+   "name": "taskInfo-vs-transcript",
+   "at": "2026-10-02T03:10:02.477Z",
+   "load": [
+    1.41,
+    1.61,
+    1.93
+   ],
+   "out": []
+  },
+  {
+   "name": "close",
+   "at": "2026-10-02T03:10:03.336Z",
+   "load": [
+    1.41,
+    1.61,
+    1.93
+   ],
+   "how": "quit",
+   "ms": 253,
+   "procs": 7,
+   "orphans": []
+  }
+ ],
+ "truthStart": [
+  "kestrel:approval reg=waiting(permission prompt) last=pending_tool_use",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "truthEnd": [
+  "kestrel:approval reg=waiting(permission prompt) last=pending_tool_use",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "endedAt": "2026-10-02T03:10:03.336Z"
+}

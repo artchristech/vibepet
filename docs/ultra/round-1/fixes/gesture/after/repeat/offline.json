@@ -1,0 +1,646 @@
+{
+  "note": "samples = what the watcher polled (screen.getCursorScreenPoint called from gesture.js); held = inside a drag-start..drag-end of main; best = top recognize() score of the strokes cut from the samples with no button info; fires = a stroke cut with the button info fires at that level; scores against the templates trained in this run",
+  "gesture": {
+    "this": "/Users/christopherharris/.vibepet-ultra/wt/r1-gesture/gesture.js",
+    "other": "/private/tmp/claude-501/-Users-christopherharris-projects/2aec191f-bd46-4d22-b2da-e8c859fd18a3/scratchpad/base-app/gesture.js"
+  },
+  "thresholds": {
+    "this": {
+      "low": 0.88,
+      "med": 0.85,
+      "high": 0.825
+    },
+    "other": {
+      "low": 0.88,
+      "med": 0.85,
+      "high": 0.825
+    }
+  },
+  "trials": [
+    {
+      "label": "sanity: cw circle r110 600 ms (visible)",
+      "group": "sanity",
+      "samples": 44,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.963,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.963,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "sanity: cw circle r110 600 ms (hidden)",
+      "group": "sanity",
+      "samples": 47,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.955,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.955,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "loop drag of Net #1: closed r110 900 ms, button held",
+      "group": "drag",
+      "samples": 55,
+      "this": {
+        "strokes": 0,
+        "strokesIgnoringButton": 1,
+        "best": 0.955,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.955,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "loop drag of Net #2: closed r110 900 ms, button held",
+      "group": "drag",
+      "samples": 36,
+      "this": {
+        "strokes": 0,
+        "strokesIgnoringButton": 1,
+        "best": 0.967,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.967,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "loop drag of Net #3: closed r110 900 ms, button held",
+      "group": "drag",
+      "samples": 70,
+      "this": {
+        "strokes": 0,
+        "strokesIgnoringButton": 1,
+        "best": 0.955,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.955,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "loop drag of Net #4: closed r110 900 ms, button held",
+      "group": "drag",
+      "samples": 27,
+      "this": {
+        "strokes": 0,
+        "strokesIgnoringButton": 1,
+        "best": 0.818,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.933,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "loop drag of Net: 0.85 turn r110 900 ms, button held",
+      "group": "drag-partial",
+      "samples": 64,
+      "this": {
+        "strokes": 0,
+        "strokesIgnoringButton": 1,
+        "best": 0.912,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.912,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "loop drag of Net: 0.8 turn r110 900 ms, button held",
+      "group": "drag-partial",
+      "samples": 81,
+      "this": {
+        "strokes": 0,
+        "strokesIgnoringButton": 1,
+        "best": 0.872,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.872,
+        "fires": {
+          "low": false,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "control: same closed loop, no button",
+      "group": "drag-control",
+      "samples": 76,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.955,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.955,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "restore → visible",
+      "group": "restore",
+      "samples": 61,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.955,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.955,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "square 180 px cw 800 ms #1 (Medium)",
+      "group": "square-med",
+      "samples": 86,
+      "this": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.203,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      },
+      "other": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.872,
+        "fires": {
+          "low": false,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "square 180 px cw 800 ms #2 (Medium)",
+      "group": "square-med",
+      "samples": 77,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.197,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.865,
+        "fires": {
+          "low": false,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "square 180 px cw 800 ms #3 (Medium)",
+      "group": "square-med",
+      "samples": 76,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.204,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.873,
+        "fires": {
+          "low": false,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "square 180 px cw 800 ms #1 (Low)",
+      "group": "square-low",
+      "samples": 70,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.201,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.869,
+        "fires": {
+          "low": false,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "square 180 px cw 800 ms #2 (Low)",
+      "group": "square-low",
+      "samples": 66,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.203,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.871,
+        "fires": {
+          "low": false,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "control: cw circle (Low)",
+      "group": "low-control",
+      "samples": 62,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.966,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.966,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "restore → visible",
+      "group": "restore",
+      "samples": 67,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.954,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.954,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "ccw circle r110 600 ms #1",
+      "group": "ccw",
+      "samples": 59,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.955,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.097,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      }
+    },
+    {
+      "label": "ccw circle r110 600 ms #2",
+      "group": "ccw",
+      "samples": 69,
+      "this": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.968,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.094,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      }
+    },
+    {
+      "label": "ccw circle r110 600 ms #3",
+      "group": "ccw",
+      "samples": 68,
+      "this": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.956,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 1,
+        "strokesIgnoringButton": 1,
+        "best": 0.096,
+        "fires": {
+          "low": false,
+          "med": false,
+          "high": false
+        }
+      }
+    },
+    {
+      "label": "restore → visible",
+      "group": "restore",
+      "samples": 81,
+      "this": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.958,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.958,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "zigzag 700 ms #1 (trained zigzag, Medium)",
+      "group": "tp-zigzag",
+      "samples": 81,
+      "this": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.989,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.989,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "zigzag 700 ms #2 (trained zigzag, Medium)",
+      "group": "tp-zigzag",
+      "samples": 81,
+      "this": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.986,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.986,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "Z 700 ms #1 (trained Z, Medium)",
+      "group": "tp-Z",
+      "samples": 79,
+      "this": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.984,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.984,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    },
+    {
+      "label": "Z 700 ms #2 (trained Z, Medium)",
+      "group": "tp-Z",
+      "samples": 81,
+      "this": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.989,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      },
+      "other": {
+        "strokes": 2,
+        "strokesIgnoringButton": 2,
+        "best": 0.989,
+        "fires": {
+          "low": true,
+          "med": true,
+          "high": true
+        }
+      }
+    }
+  ]
+}

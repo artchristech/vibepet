@@ -1,0 +1,14 @@
+[00:12:25.531] plan subagent#2 subagent#3 · spend est $2.4433 · this probe so far $0.3958 of $0.6
+[00:12:28.234] instances A pid 51660 (Home closed), B pid 51661 (Home open) · app c2b5c0a canon --compare: compare the kind of each truth mismatch, not its clock; report dropped first clicks and the fold @ ultra/round-0 · perms {"ax":true,"screen":true}
+[00:12:28.294] == subagent #2 (delta) · status idle
+[00:12:37.475]   block: reg waiting/permission prompt at +4.1 s · record +4.1 s (subagent Bash)
+[00:17:42.412]   attempt: {"clicks":2,"keys":0,"action":null,"result":"no Approve on its row (actions: replay done goal)","resolved":false,"jump":false}
+[00:17:42.483]   delta: Esc (end of trial)
+[00:17:45.419]   result {"t0":"2026-10-02T00:12:35.759Z","t0From":"transcript","detectAmbientS":null,"detectAmbientRegS":null,"bubbleS":null,"ledS":null,"faceS":null,"rowS":null,"rowRegS":null,"offerS":null,"offerAction":null,"bannerS":null,"soundS":null,"goneS":null,"phaseS":null,"queueHeadS":null,"wrong":null,"otherBubble":null,"actionWorks":false,"clicks":2,"keys":0} · spent ~$0.0432
+[00:17:45.471] == subagent #3 (delta) · status idle
+[00:17:55.024]   block: reg waiting/permission prompt at +4.3 s · record +4.3 s (subagent Bash)
+[00:22:59.820]   attempt: {"clicks":2,"keys":0,"action":null,"result":"no Approve on its row (actions: replay done goal)","resolved":false,"jump":false}
+[00:22:59.926]   delta: Esc (end of trial)
+[00:23:03.023]   result {"t0":"2026-10-02T00:17:52.988Z","t0From":"transcript","detectAmbientS":null,"detectAmbientRegS":null,"bubbleS":null,"ledS":null,"faceS":null,"rowS":null,"rowRegS":null,"offerS":null,"offerAction":null,"bannerS":null,"soundS":null,"goneS":null,"phaseS":null,"queueHeadS":null,"wrong":null,"otherBubble":null,"actionWorks":false,"clicks":2,"keys":0} · spent ~$0.0511
+[00:23:03.650]   delta: fleet.js pause → exit 0
+[00:23:04.765] closed quit/0 orphans, quit/0 orphans · B reopened 0× · poll errors 0 · spend est $2.5376 · this probe $0.4901 of $0.6

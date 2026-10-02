@@ -1,0 +1,84 @@
+{
+ "git": "dadb52f tmux-reach: the GUI path refuses Approve too while an AskUserQuestion list is up",
+ "worktreeClean": true,
+ "uptime": "23:52  up 6 days, 10:37, 19 users, load averages: 15.22 20.58 34.17",
+ "clients": 0,
+ "jumps": [
+  {
+   "member": "delta",
+   "result": {
+    "ok": false
+   },
+   "ms": 3,
+   "load": [
+    14.48,
+    20.34,
+    34.01
+   ]
+  },
+  {
+   "member": "vibepet",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-vibepet",
+    "attach": "tmux attach -t vp-vibepet"
+   },
+   "ms": 118,
+   "load": [
+    14.48,
+    20.34,
+    34.01
+   ]
+  },
+  {
+   "member": "atlas",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-atlas",
+    "attach": "tmux attach -t vp-atlas"
+   },
+   "ms": 111,
+   "load": [
+    14.48,
+    20.34,
+    34.01
+   ]
+  },
+  {
+   "member": "beacon",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-beacon",
+    "attach": "tmux attach -t vp-beacon"
+   },
+   "ms": 117,
+   "load": [
+    14.48,
+    20.34,
+    34.01
+   ]
+  },
+  {
+   "member": "kestrel",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-kestrel",
+    "attach": "tmux attach -t vp-kestrel"
+   },
+   "ms": 111,
+   "load": [
+    14.48,
+    20.34,
+    34.01
+   ]
+  }
+ ],
+ "rows": 0,
+ "clipboardWrites": 0,
+ "close": {
+  "how": "quit",
+  "ms": 285,
+  "procs": 7,
+  "orphans": []
+ }
+}

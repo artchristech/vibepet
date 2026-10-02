@@ -1,0 +1,140 @@
+{
+  "section": "A3",
+  "startedAt": "2026-10-02T02:35:01.043Z",
+  "steps": [
+    {
+      "id": "10-after-setup",
+      "at": "2026-10-02T02:35:03.269Z",
+      "load": [
+        1.71,
+        1.67,
+        2.1
+      ],
+      "setupShown": true,
+      "chatFormDisplay": "none",
+      "active": "BODY",
+      "petBefore": "net"
+    },
+    {
+      "id": "10-tab6",
+      "at": "2026-10-02T02:35:03.897Z",
+      "load": [
+        1.71,
+        1.67,
+        2.1
+      ],
+      "walk": [
+        "homeMore:⋯",
+        "chatClose:esc",
+        "BUTTON[pet=net]:Net",
+        "BUTTON[pet=slime]:Slime",
+        "BUTTON[pet=cat]:Cat",
+        "BUTTON[pet=sprout]:Sprout"
+      ]
+    },
+    {
+      "id": "10-typed-today",
+      "at": "2026-10-02T02:35:04.396Z",
+      "load": [
+        1.71,
+        1.67,
+        2.1
+      ],
+      "setPrefs": [
+        {
+          "pet": "sprout"
+        }
+      ],
+      "petAfter": "sprout",
+      "active": "BODY",
+      "msgs": 0
+    },
+    {
+      "id": "10-choice-focus",
+      "at": "2026-10-02T02:35:05.040Z",
+      "load": [
+        1.71,
+        1.67,
+        2.1
+      ],
+      "focusedBefore": "BUTTON[size=m]:Medium",
+      "activeAfter": "BODY"
+    },
+    {
+      "id": "10-esc-reopen",
+      "at": "2026-10-02T02:35:06.550Z",
+      "load": [
+        1.71,
+        1.67,
+        2.1
+      ],
+      "closedByEsc": true,
+      "setupShown": true,
+      "chatFormDisplay": "none",
+      "active": "BODY"
+    },
+    {
+      "id": "10-done",
+      "at": "2026-10-02T02:35:08.835Z",
+      "load": [
+        1.81,
+        1.69,
+        2.1
+      ],
+      "tabsToDone": 36,
+      "walk2": [
+        "homeMore:⋯",
+        "chatClose:esc",
+        "BUTTON[pet=net]:Net",
+        "BUTTON[pet=slime]:Slime",
+        "BUTTON[pet=cat]:Cat",
+        "BUTTON[pet=sprout]:Sprout",
+        "BUTTON[pet=shroom]:Shroom",
+        "BUTTON[pet=star]:Star",
+        "BUTTON[pet=koi]:Koi",
+        "BUTTON[size=s]:Small",
+        "BUTTON[size=m]:Medium",
+        "BUTTON[size=l]:Large",
+        "BUTTON[feel=calm]:Calm",
+        "BUTTON[feel=lively]:Lively",
+        "BUTTON[feel=still]:Still",
+        "BUTTON[alerts=blocked]:Only when blocked",
+        "BODY",
+        "BUTTON[pet=net]:Net",
+        "BUTTON[pet=slime]:Slime",
+        "BUTTON[pet=cat]:Cat",
+        "BUTTON[pet=sprout]:Sprout",
+        "BUTTON[pet=shroom]:Shroom",
+        "BUTTON[pet=star]:Star",
+        "BUTTON[pet=koi]:Koi",
+        "BUTTON[size=s]:Small",
+        "BUTTON[size=m]:Medium",
+        "BUTTON[size=l]:Large",
+        "BUTTON[feel=calm]:Calm",
+        "BUTTON[feel=lively]:Lively",
+        "BUTTON[feel=still]:Still",
+        "BUTTON[alerts=blocked]:Only when blocked",
+        "BUTTON[alerts=done]:+ Finished",
+        "BUTTON[alerts=all]:Everything",
+        "BUTTON[perm=ax]:✓ Accessibility exac",
+        "BUTTON[perm=screen]:✓ Screen Recording s",
+        "BUTTON[done]:Done"
+      ],
+      "setPrefs": [
+        {
+          "setupDone": true
+        }
+      ],
+      "setupShown": false,
+      "chatFormDisplay": "flex",
+      "activeAfterDone": "BODY"
+    }
+  ],
+  "close": {
+    "how": "quit",
+    "ms": 254,
+    "procs": 7,
+    "orphans": []
+  },
+  "endedAt": "2026-10-02T02:35:09.382Z"
+}

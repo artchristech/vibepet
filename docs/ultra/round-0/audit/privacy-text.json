@@ -1,0 +1,668 @@
+{
+ "at": "2026-10-02T01:06:41.882Z",
+ "K": 7,
+ "MIN_TOKENS": 10,
+ "evidFiles": 175,
+ "segments": 11636,
+ "flagged": 46,
+ "perFile": {
+  "round-0/audit/canon-asfound/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/audit/canon-tip/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/baseline/attempt-1/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/baseline/attempt-2/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/baseline/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/canon/attempt-1/run-1/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/canon/attempt-1/run-2/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/canon/attempt-2/run-1/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/canon/attempt-2/run-1-final-pre-age/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/canon/attempt-2/run-2/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/canon/attempt-2/run-2-final-pre-age/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/canon/from-fresh-worktree/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/canon/run-1/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/canon/run-2/stub-claude.js": {
+   "segs": 9,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/ground-truth.md": {
+   "segs": 63,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "round-0/reconcile/pre/mineA.js": {
+   "segs": 394,
+   "flagged": 4,
+   "maxRatio": 1
+  },
+  "round-0/reconcile/pre/mineB.py": {
+   "segs": 613,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "round-0/tta-before/trials.jsonl": {
+   "segs": 488,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "round-0/tta-before.json": {
+   "segs": 608,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "rubric.md": {
+   "segs": 41,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "tools/feature_loops.py": {
+   "segs": 111,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "tools/feature_rank.py": {
+   "segs": 214,
+   "flagged": 2,
+   "maxRatio": 1
+  },
+  "tools/feature_selfresume.py": {
+   "segs": 74,
+   "flagged": 2,
+   "maxRatio": 1
+  },
+  "tools/mineA-schema.js": {
+   "segs": 45,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "tools/mineA.js": {
+   "segs": 450,
+   "flagged": 2,
+   "maxRatio": 1
+  },
+  "tools/mineB.py": {
+   "segs": 664,
+   "flagged": 3,
+   "maxRatio": 1
+  },
+  "tools/presence.py": {
+   "segs": 99,
+   "flagged": 2,
+   "maxRatio": 1
+  },
+  "tools/privacy/ocr.swift": {
+   "segs": 11,
+   "flagged": 1,
+   "maxRatio": 1
+  },
+  "tools/privacy/ocrcheck.js": {
+   "segs": 42,
+   "flagged": 1,
+   "maxRatio": 0.4
+  },
+  "tools/privacy/run.sh": {
+   "segs": 11,
+   "flagged": 2,
+   "maxRatio": 1
+  }
+ },
+ "items": [
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/audit/canon-asfound/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/audit/canon-tip/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/baseline/attempt-1/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/baseline/attempt-2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/baseline/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/canon/attempt-1/run-1/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/canon/attempt-1/run-2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/canon/attempt-2/run-1/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/canon/attempt-2/run-1-final-pre-age/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/canon/attempt-2/run-2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/canon/attempt-2/run-2-final-pre-age/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/canon/from-fresh-worktree/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/canon/run-1/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.15,
+   "file": "round-0/canon/run-2/stub-claude.js",
+   "loc": "L1",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-09-25T16:53:28.952Z"
+  },
+  {
+   "short": true,
+   "codeness": 0,
+   "file": "round-0/ground-truth.md",
+   "loc": "L7",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=text ts=2026-10-01T19:27:53.175Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.28,
+   "file": "round-0/reconcile/pre/mineA.js",
+   "loc": "L198",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#2 jsonl type=user role=user blocks=text ts=2026-07-27T21:46:55.322Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.42,
+   "file": "round-0/reconcile/pre/mineA.js",
+   "loc": "L277",
+   "shingles": 6,
+   "unexplained": 3,
+   "ratio": 0.5,
+   "sourceFiles": 3,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-28T02:39:28.247Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.17,
+   "file": "round-0/reconcile/pre/mineA.js",
+   "loc": "L291",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#2 jsonl type=user role=user blocks=text ts=2026-07-27T21:46:55.322Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.2,
+   "file": "round-0/reconcile/pre/mineA.js",
+   "loc": "L539",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-10-01T19:06:13.821Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.22,
+   "file": "round-0/reconcile/pre/mineB.py",
+   "loc": "L143",
+   "shingles": 13,
+   "unexplained": 8,
+   "ratio": 0.62,
+   "sourceFiles": 3,
+   "firstSource": "dir#3 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-21T13:49:34.439Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.12,
+   "file": "round-0/reconcile/pre/mineB.py",
+   "loc": "L356",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#4 jsonl type=attachment role=undefined blocks=undefined ts=2026-08-03T01:14:22.355Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.16,
+   "file": "round-0/reconcile/pre/mineB.py",
+   "loc": "L697",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T02:58:32.578Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "round-0/tta-before/trials.jsonl",
+   "loc": "L18.shots[0].error",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-01T19:47:59.297Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "round-0/tta-before/trials.jsonl",
+   "loc": "L18.shots[3].error",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-01T19:47:59.297Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "round-0/tta-before/trials.jsonl",
+   "loc": "L18.shots[4].error",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-01T19:47:59.297Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "round-0/tta-before.json",
+   "loc": "$.trials[17].shots[0].error",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-01T19:47:59.297Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "round-0/tta-before.json",
+   "loc": "$.trials[17].shots[3].error",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-01T19:47:59.297Z"
+  },
+  {
+   "short": true,
+   "codeness": null,
+   "file": "round-0/tta-before.json",
+   "loc": "$.trials[17].shots[4].error",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-01T19:47:59.297Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.11,
+   "file": "rubric.md",
+   "loc": "L42",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=text ts=2026-10-01T19:27:53.175Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.18,
+   "file": "tools/feature_loops.py",
+   "loc": "L71",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T02:58:32.578Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.26,
+   "file": "tools/feature_rank.py",
+   "loc": "L25",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-26T11:57:22.354Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.16,
+   "file": "tools/feature_rank.py",
+   "loc": "L28",
+   "shingles": 6,
+   "unexplained": 4,
+   "ratio": 0.67,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-10-01T19:53:38.865Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.18,
+   "file": "tools/feature_selfresume.py",
+   "loc": "L69",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T02:58:32.578Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.4,
+   "file": "tools/feature_selfresume.py",
+   "loc": "L129",
+   "shingles": 12,
+   "unexplained": 4,
+   "ratio": 0.33,
+   "sourceFiles": 1,
+   "firstSource": "dir#5 subagent type=assistant role=assistant blocks=tool_use:Bash ts=2026-08-03T06:26:10.480Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.17,
+   "file": "tools/mineA-schema.js",
+   "loc": "L40",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 tool-results "
+  },
+  {
+   "short": true,
+   "codeness": 0.28,
+   "file": "tools/mineA.js",
+   "loc": "L250",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#2 jsonl type=user role=user blocks=text ts=2026-07-27T21:46:55.322Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.2,
+   "file": "tools/mineA.js",
+   "loc": "L591",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-10-01T19:06:13.821Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.22,
+   "file": "tools/mineB.py",
+   "loc": "L148",
+   "shingles": 13,
+   "unexplained": 8,
+   "ratio": 0.62,
+   "sourceFiles": 3,
+   "firstSource": "dir#3 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-21T13:49:34.439Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.12,
+   "file": "tools/mineB.py",
+   "loc": "L367",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#4 jsonl type=attachment role=undefined blocks=undefined ts=2026-08-03T01:14:22.355Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.16,
+   "file": "tools/mineB.py",
+   "loc": "L715",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T02:58:32.578Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.16,
+   "file": "tools/presence.py",
+   "loc": "L51",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-28T02:58:32.578Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.24,
+   "file": "tools/presence.py",
+   "loc": "L158",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=user role=user blocks=tool_result ts=2026-08-30T18:39:16.516Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.17,
+   "file": "tools/privacy/ocr.swift",
+   "loc": "L17",
+   "shingles": 4,
+   "unexplained": 4,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=assistant role=assistant blocks=tool_use:Write ts=2026-09-25T11:47:26.512Z"
+  },
+  {
+   "short": false,
+   "codeness": 0.26,
+   "file": "tools/privacy/ocrcheck.js",
+   "loc": "L24",
+   "shingles": 11,
+   "unexplained": 3,
+   "ratio": 0.27,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Write ts=2026-09-28T01:27:00.414Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.3,
+   "file": "tools/privacy/run.sh",
+   "loc": "L7",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 subagent type=assistant role=assistant blocks=tool_use:Bash ts=2026-09-25T12:34:56.689Z"
+  },
+  {
+   "short": true,
+   "codeness": 0.27,
+   "file": "tools/privacy/run.sh",
+   "loc": "L10",
+   "shingles": 1,
+   "unexplained": 1,
+   "ratio": 1,
+   "sourceFiles": 1,
+   "firstSource": "dir#1 jsonl type=user role=user blocks=tool_result ts=2026-09-28T20:59:22.211Z"
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+{
+ "what": "live-chat runs made while tuning the context format on ultra/r1/chat-context (intermediate code, superseded by ../live-a..c (final code)). Each ran canon.js --live-chat with the 3 acceptance questions on the user's login, Haiku.",
+ "live-1": "session lines + Overlaps + About <named> (repo with commits split at the session's start + transcript tail); header guidance: say exact asks, asked who needs the user name each (an earlier run without the split, deleted, answered 'Atlas added a tile renderer and a build script' from the seed commit)",
+ "live-2": "+ guidance 'exact ask, word for word ... even who first'",
+ "live-3": "+ 'Needs you now, in this order: 1. ... 2. ...' line with asks verbatim",
+ "live-4": "+ needs line phrased 'X first (...), then Y (...)'; registry name shown only when the user gave it. ember came alive mid-run (another agent's lease): canon's check then raced (fixed: scored on sessions live before and after the send)",
+ "live-5": "+ needs line as a to-do ('X first: answer \"...\"; then Y: approve \"...\"')",
+ "live-6..8": "needs line 'X first: answer \"...\". Next: Y: approve \"Bash: ...\". Asked who needs the user first, give the first and its ask, then who's next and theirs.' 3 runs: Q2 and Q3 right 3/3; Q1 named beacon first with its question and options 3/3, kestrel 1/3 and never its command",
+ "exp.js / exp-1.jsonl": "Q1 only, n=3 per phrasing (todo / queue / next), the app's exact claude -p call on a captured stdin: kestrel named 1/3, 1/3, 2/3; its command 0/9",
+ "exp2.js / exp-2.jsonl": "n=4 per prompt: v1 (approve \"Bash: ./deploy.sh --dry-run\") vs v2 (approve the Bash command `./deploy.sh --dry-run` + 'Give commands verbatim in backticks'). first ask: kestrel 4/4 both, its command 0/4 vs 4/4; Q1: kestrel 1/4 vs 4/4, command 0/4 vs 4/4, beacon's options 3/4 vs 4/4. v2 shipped",
+ "exp3.js / exp-3.jsonl": "Q1 on final live-a's stdin (the first reply had already given both asks), n=5 each: shipped needs line vs + 'even if you said so before': kestrel with `./deploy.sh --dry-run` 3/5 vs 3/5, beacon's options 5/5 both. Not adopted (no effect)"
+}

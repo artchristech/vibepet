@@ -1,0 +1,12 @@
+[08:45:16.076] app 8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane · live hook false · 4688 ms to ready · load 55.36 57.49 73.43
+[08:45:50.656] watch: 0 paths · idle 30 s: {"rendererSnapshots":10,"rendererPerSec":0.33,"mainTicks":null,"mainTicksPerSec":null,"liveTicks":null,"watcherEvents":null}
+[08:45:57.180] verdict vibepet approve: {"ok":false,"why":"vibepet isn't showing an approval prompt"} · 1150 ms · row note NONE · load 43.27 54.29 71.62
+[08:46:00.750] verdict vibepet interrupt: {"ok":false,"why":"vibepet isn't busy"} · 402 ms · row note NONE · load 41.65 53.77 71.34
+[08:46:04.241] verdict atlas approve: {"ok":false,"why":"atlas isn't showing an approval prompt"} · 201 ms · row note NONE · load 40.15 53.26 71.06
+[08:46:08.302] verdict beacon deny: {"ok":false,"why":"beacon isn't showing an approval prompt"} · 395 ms · row note NONE · load 37.98 52.59 70.72
+[08:46:11.911] verdict beacon option 9: {"ok":false,"why":"beacon's question has no option 9"} · 418 ms · row note NONE · load 37.98 52.59 70.72
+[08:46:15.932] verdict kestrel option 2: {"ok":false,"why":"kestrel isn't showing a question"} · 650 ms · row note NONE · load 35.74 51.88 70.36
+[08:46:20.238] verdict kestrel text: {"ok":false,"why":"kestrel is showing an approval prompt, not its input box"} · 768 ms · row note NONE · load 34.40 51.34 70.06
+[08:46:25.360] verdict kestrel interrupt: {"ok":false,"why":"kestrel isn't busy"} · 716 ms · row note NONE · load 33.08 50.78 69.75
+[08:46:28.102] verdict summary {"calls":8,"logged":0,"unverifiedSuccesses":0,"okResults":0,"rowNoteMedianMs":null,"rowNotesShown":0,"ipcMedianMs":534,"fleetUnchanged":true}
+[08:46:44.481] closed quit 14654 ms, 0 orphans · load 103.84 65.92 74.75

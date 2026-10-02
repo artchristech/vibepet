@@ -1,0 +1,248 @@
+{
+ "what": "/stop <port> typed in the command bar (dialog answered Stop by the harness): exit → chip gone, exit → note",
+ "startedAt": "2026-10-02T10:12:24.737Z",
+ "uptimeStart": "4:12  up 6 days, 14:57, 19 users, load averages: 17.65 27.48 45.94",
+ "trials": [
+  {
+   "i": 1,
+   "port": 47628,
+   "enterAt": 1790935947962,
+   "exitAt": 1790935948337,
+   "goneAt": 1790935948356,
+   "noteAt": 1790935948360,
+   "note": "Stopped node (vibepet) on :47628",
+   "load": [
+    18.08,
+    27.4,
+    45.8
+   ],
+   "goneAfterExitMs": 19,
+   "noteAfterExitMs": 23,
+   "exitAfterEnterMs": 375
+  },
+  {
+   "i": 2,
+   "port": 47629,
+   "enterAt": 1790935951909,
+   "exitAt": 1790935952507,
+   "goneAt": 1790935952527,
+   "noteAt": 1790935952530,
+   "note": "Stopped node (delta) on :47629",
+   "load": [
+    17.59,
+    27.15,
+    45.61
+   ],
+   "goneAfterExitMs": 20,
+   "noteAfterExitMs": 23,
+   "exitAfterEnterMs": 598
+  },
+  {
+   "i": 3,
+   "port": 47630,
+   "enterAt": 1790935954899,
+   "exitAt": 1790935955279,
+   "goneAt": 1790935955309,
+   "noteAt": 1790935955311,
+   "note": "Stopped node (kestrel) on :47630",
+   "load": [
+    16.58,
+    26.78,
+    45.37
+   ],
+   "goneAfterExitMs": 30,
+   "noteAfterExitMs": 32,
+   "exitAfterEnterMs": 380
+  },
+  {
+   "i": 4,
+   "port": 47631,
+   "enterAt": 1790935957989,
+   "exitAt": 1790935958937,
+   "goneAt": 1790935958960,
+   "noteAt": 1790935958964,
+   "note": "Stopped node (beacon) on :47631",
+   "load": [
+    16.58,
+    26.78,
+    45.37
+   ],
+   "goneAfterExitMs": 23,
+   "noteAfterExitMs": 27,
+   "exitAfterEnterMs": 948
+  },
+  {
+   "i": 5,
+   "port": 47632,
+   "enterAt": 1790935961652,
+   "exitAt": 1790935962427,
+   "goneAt": 1790935962449,
+   "noteAt": 1790935962456,
+   "note": "Stopped node (atlas) on :47632",
+   "load": [
+    15.89,
+    26.47,
+    45.15
+   ],
+   "goneAfterExitMs": 22,
+   "noteAfterExitMs": 29,
+   "exitAfterEnterMs": 775
+  },
+  {
+   "i": 6,
+   "port": 47633,
+   "enterAt": 1790935964820,
+   "exitAt": 1790935965499,
+   "goneAt": 1790935965515,
+   "noteAt": 1790935965518,
+   "note": "Stopped node (vibepet) on :47633",
+   "load": [
+    15.58,
+    26.23,
+    44.95
+   ],
+   "goneAfterExitMs": 16,
+   "noteAfterExitMs": 19,
+   "exitAfterEnterMs": 679
+  },
+  {
+   "i": 7,
+   "port": 47634,
+   "enterAt": 1790935967643,
+   "exitAt": 1790935968235,
+   "goneAt": 1790935968256,
+   "noteAt": 1790935968259,
+   "note": "Stopped node (delta) on :47634",
+   "load": [
+    15.58,
+    26.23,
+    44.95
+   ],
+   "goneAfterExitMs": 21,
+   "noteAfterExitMs": 24,
+   "exitAfterEnterMs": 592
+  },
+  {
+   "i": 8,
+   "port": 47635,
+   "enterAt": 1790935970974,
+   "exitAt": 1790935971223,
+   "goneAt": 1790935971249,
+   "noteAt": 1790935971253,
+   "note": "Stopped node (kestrel) on :47635",
+   "load": [
+    16.58,
+    26.26,
+    44.85
+   ],
+   "goneAfterExitMs": 26,
+   "noteAfterExitMs": 30,
+   "exitAfterEnterMs": 249
+  },
+  {
+   "i": 9,
+   "port": 47636,
+   "enterAt": 1790935972076,
+   "exitAt": 1790935972280,
+   "goneAt": 1790935972305,
+   "noteAt": 1790935972309,
+   "note": "Stopped node (beacon) on :47636",
+   "load": [
+    16.58,
+    26.26,
+    44.85
+   ],
+   "goneAfterExitMs": 25,
+   "noteAfterExitMs": 29,
+   "exitAfterEnterMs": 204
+  },
+  {
+   "i": 10,
+   "port": 47637,
+   "enterAt": 1790935974665,
+   "exitAt": 1790935975044,
+   "goneAt": 1790935975069,
+   "noteAt": 1790935975072,
+   "note": "Stopped node (atlas) on :47637",
+   "load": [
+    16.58,
+    26.26,
+    44.85
+   ],
+   "goneAfterExitMs": 25,
+   "noteAfterExitMs": 28,
+   "exitAfterEnterMs": 379
+  }
+ ],
+ "chipGone": {
+  "n": 10,
+  "median": 22.5,
+  "min": 16,
+  "max": 30
+ },
+ "note": {
+  "n": 10,
+  "median": 27.5,
+  "min": 19,
+  "max": 32
+ },
+ "uptimeEnd": "4:12  up 6 days, 14:58, 19 users, load averages: 16.58 26.26 44.85",
+ "fixtures": [
+  {
+   "tag": "e0",
+   "pid": 70339,
+   "exited": true
+  },
+  {
+   "tag": "e1",
+   "pid": 70629,
+   "exited": true
+  },
+  {
+   "tag": "e2",
+   "pid": 70933,
+   "exited": true
+  },
+  {
+   "tag": "e3",
+   "pid": 71133,
+   "exited": true
+  },
+  {
+   "tag": "e4",
+   "pid": 71584,
+   "exited": true
+  },
+  {
+   "tag": "e5",
+   "pid": 71851,
+   "exited": true
+  },
+  {
+   "tag": "e6",
+   "pid": 72128,
+   "exited": true
+  },
+  {
+   "tag": "e7",
+   "pid": 72381,
+   "exited": true
+  },
+  {
+   "tag": "e8",
+   "pid": 72542,
+   "exited": true
+  },
+  {
+   "tag": "e9",
+   "pid": 72573,
+   "exited": true
+  }
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 577,
+  "procs": 4,
+  "orphans": []
+ }
+}

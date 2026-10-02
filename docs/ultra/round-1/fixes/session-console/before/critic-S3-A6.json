@@ -1,0 +1,139 @@
+{
+  "section": "A6",
+  "steps": [
+    {
+      "id": "rows",
+      "at": "2026-10-02T02:46:32.176Z",
+      "load": [
+        3.81,
+        3.1,
+        2.62
+      ],
+      "rows": [
+        "kestrel · waiting 1m"
+      ]
+    },
+    {
+      "id": "01-M7-jump-vibepet",
+      "at": "2026-10-02T02:46:32.749Z",
+      "load": [
+        3.81,
+        3.1,
+        2.62
+      ],
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "No session matches “vibepet”."
+      },
+      "jumped": 0
+    },
+    {
+      "id": "01-M7-jump-entry",
+      "at": "2026-10-02T02:46:33.255Z",
+      "load": [
+        3.81,
+        3.1,
+        2.62
+      ],
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "No session matches “entry”."
+      },
+      "jumped": 0
+    },
+    {
+      "id": "06-goal-no-rows",
+      "at": "2026-10-02T02:46:34.069Z",
+      "load": [
+        6.07,
+        3.58,
+        2.79
+      ],
+      "setGoal": 1,
+      "newMsgs": 1
+    }
+  ],
+  "truth": {
+    "at": "2026-10-02T02:46:29.682Z",
+    "spend": {
+      "transcriptsUsd": 2.182557,
+      "estimateWithHiddenUsd": 3.2437,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": false,
+        "paused": false,
+        "pid": 55946,
+        "sid": "13a1427d",
+        "reg": "idle",
+        "regAgeS": 11,
+        "last": "end_turn"
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sid": "6101876b",
+        "reg": "idle",
+        "regAgeS": 333,
+        "last": "end_turn"
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sid": "5c051e84",
+        "reg": "idle",
+        "regAgeS": 110,
+        "last": "interrupted"
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sid": "a9377f08",
+        "reg": "waiting(input needed)",
+        "regAgeS": 1967,
+        "last": "user_prompt"
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sid": "eb59a756",
+        "reg": "idle",
+        "regAgeS": 2741,
+        "last": "end_turn"
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sid": "db0c1ec0",
+        "reg": null,
+        "regAgeS": null,
+        "last": "user_prompt"
+      }
+    ]
+  },
+  "close": {
+    "how": "quit",
+    "ms": 394,
+    "procs": 7,
+    "orphans": []
+  }
+}

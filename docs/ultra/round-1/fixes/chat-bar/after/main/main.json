@@ -1,0 +1,816 @@
+{
+  "startedAt": "2026-10-02T09:10:57.187Z",
+  "loadStart": "load 5.03 18.16 59.21",
+  "turns": [
+    {
+      "q": "Which of my sessions needs me first, and why?",
+      "load": "load 5.10 17.96 58.90",
+      "bubbleMs": 3.099999964237213,
+      "firstMs": 541.3999999761581,
+      "streamMs": 765.3000000119209,
+      "muts": 13,
+      "mutPerSec": 17,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Beacon needs you first—it's been waiting almost 7 hours for a decision on which database to use for check results (SQLite, Postgres, or Redis). That's blocking its progress.After that, Kestrel is waiting for approval to run a deployment dry-run, also nearly 6 hours in.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 961 in, 73 out"
+      },
+      "turn": 1
+    },
+    {
+      "q": "What is kestrel waiting for?",
+      "load": "load 5.09 17.74 58.58",
+      "bubbleMs": 1.600000023841858,
+      "firstMs": 399.60000002384186,
+      "streamMs": 366.19999998807907,
+      "muts": 7,
+      "mutPerSec": 19.1,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Kestrel needs you to approve running ./deploy.sh --dry-run—a test deployment to see what would change without actually deploying it.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 1.3k in, 37 out"
+      },
+      "turn": 2
+    },
+    {
+      "q": "Reply with a short bulleted list naming two of my sessions, one markdown link to https://vibepet.net, and a ```bash code block containing ./deploy.sh --dry-run.",
+      "load": "load 5.09 17.74 58.58",
+      "bubbleMs": 1.300000011920929,
+      "firstMs": 399.69999998807907,
+      "streamMs": 317.39999997615814,
+      "muts": 5,
+      "mutPerSec": 15.8,
+      "reply": {
+        "cls": "msg pet",
+        "text": "beaconkestrelvibepet.netbashcopy./deploy.sh --dry-run",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 1.7k in, 40 out"
+      },
+      "turn": 3
+    },
+    {
+      "q": "What did delta finish?",
+      "load": "load 5.33 17.58 58.28",
+      "bubbleMs": 2.199999988079071,
+      "firstMs": 473.5,
+      "streamMs": 241.19999998807907,
+      "muts": 5,
+      "mutPerSec": 20.7,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Delta finished reconciling all three shards (shard-1, shard-2, and shard-3) about 7 hours ago.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 2.1k in, 35 out"
+      },
+      "turn": 4
+    },
+    {
+      "q": "[chip] What's my agent doing?",
+      "load": "load 5.33 17.58 58.28",
+      "bubbleMs": 32.80000001192093,
+      "firstMs": 439.19999998807907,
+      "streamMs": 600.3000000119209,
+      "muts": 11,
+      "mutPerSec": 18.3,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Beacon is stuck in a loop: it's trying to ask you which database to use (SQLite, Postgres, or Redis), but the question keeps getting interrupted before it completes. Yes, it needs you—either answer the question or tell it to proceed differently so it can move forward.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈334 tokens · sent 2.6k in, 64 out"
+      },
+      "turn": 5
+    },
+    {
+      "q": "Summarize beacon's question in one sentence.",
+      "load": "load 5.06 17.32 57.95",
+      "bubbleMs": 1.600000023841858,
+      "firstMs": 361.60000002384186,
+      "streamMs": 159.5,
+      "muts": 4,
+      "mutPerSec": 25.1,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Beacon is asking which database it should use to store check results: SQLite, Postgres, or Redis.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 3.0k in, 26 out"
+      },
+      "turn": 6
+    },
+    {
+      "q": "Which repo am I watching, and is anything uncommitted?",
+      "load": "load 5.06 17.32 57.95",
+      "bubbleMs": 1.9000000357627869,
+      "firstMs": 397,
+      "streamMs": 254.4000000357628,
+      "muts": 6,
+      "mutPerSec": 23.6,
+      "reply": {
+        "cls": "msg pet",
+        "text": "You're watching the delta repo on the main branch. Nothing is uncommitted—the working directory is clean.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 3.3k in, 25 out"
+      },
+      "turn": 7
+    },
+    {
+      "q": "Give me one concrete next step, in two sentences.",
+      "load": "load 4.66 17.03 57.61",
+      "bubbleMs": 1.5999999642372131,
+      "firstMs": 392.89999997615814,
+      "streamMs": 410.19999998807907,
+      "muts": 7,
+      "mutPerSec": 17.1,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Answer beacon's database question—pick SQLite, Postgres, or Redis so it can move forward. After that, decide whether to approve kestrel's dry-run deployment.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 3.7k in, 40 out"
+      },
+      "turn": 8
+    },
+    {
+      "q": "How long has kestrel been waiting?",
+      "load": "load 4.66 17.03 57.61",
+      "bubbleMs": 2.299999952316284,
+      "firstMs": 403.39999997615814,
+      "streamMs": 190.80000001192093,
+      "muts": 3,
+      "mutPerSec": 15.7,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Kestrel has been waiting almost 6 hours for approval to run the dry-run deployment.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 4.0k in, 25 out"
+      },
+      "turn": 9
+    },
+    {
+      "q": "Should I approve kestrel's command? Two sentences.",
+      "load": "load 4.66 17.03 57.61",
+      "bubbleMs": 1.5,
+      "firstMs": 431.39999997615814,
+      "streamMs": 682.7000000476837,
+      "muts": 14,
+      "mutPerSec": 20.5,
+      "reply": {
+        "cls": "msg pet",
+        "text": "I can't say—that depends on your deployment readiness and whether you want to test the changes. A dry-run is safe, so if you're uncertain about what would change, running it first makes sense.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 4.4k in, 47 out"
+      },
+      "turn": 10
+    },
+    {
+      "q": "What is atlas doing?",
+      "load": "load 4.44 16.78 57.29",
+      "bubbleMs": 2.800000011920929,
+      "firstMs": 460.7000000476837,
+      "streamMs": 279.39999997615814,
+      "muts": 7,
+      "mutPerSec": 25.1,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Atlas is done but was interrupted about 6 hours ago. I don't have details on what it was working on before the interruption.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 4.7k in (4.4k cached), 32 out"
+      },
+      "turn": 11
+    },
+    {
+      "q": "Thanks. Anything else I should know? Two sentences.",
+      "load": "load 4.44 16.78 57.29",
+      "bubbleMs": 2.199999988079071,
+      "firstMs": 478.5999999642372,
+      "streamMs": 551.6000000238419,
+      "muts": 10,
+      "mutPerSec": 18.1,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Beacon and kestrel have both been waiting nearly 7 hours, so those are your priorities. The repo is clean with no uncommitted changes, so you're free to make decisions without worrying about unsaved work.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 5.1k in (4.7k cached), 50 out"
+      },
+      "turn": 12
+    }
+  ],
+  "stops": [
+    {
+      "uiMs": 2.799999952316284,
+      "ackMs": 7.5,
+      "charsAtStop": 168,
+      "mutationsAfterStop": 0,
+      "tag": "(stopped)",
+      "open": true,
+      "pidBefore": 38600,
+      "pidAfter": 38600,
+      "load": "load 4.33 16.55 56.97"
+    },
+    {
+      "uiMs": 1.5,
+      "ackMs": 4.199999988079071,
+      "charsAtStop": 1,
+      "mutationsAfterStop": 0,
+      "tag": "(stopped)",
+      "open": true,
+      "pidBefore": 38600,
+      "pidAfter": 38600,
+      "load": "load 4.22 16.33 56.65"
+    },
+    {
+      "uiMs": 1.800000011920929,
+      "ackMs": 6.199999988079071,
+      "charsAtStop": 1,
+      "mutationsAfterStop": 0,
+      "tag": "(stopped)",
+      "open": true,
+      "pidBefore": 38600,
+      "pidAfter": 38600,
+      "load": "load 4.22 16.33 56.65"
+    },
+    {
+      "uiMs": 1.5,
+      "ackMs": 3.800000011920929,
+      "charsAtStop": 1,
+      "mutationsAfterStop": 0,
+      "tag": "(stopped)",
+      "open": true,
+      "pidBefore": 38600,
+      "pidAfter": 38600,
+      "load": "load 3.96 16.07 56.33"
+    },
+    {
+      "uiMs": 1.399999976158142,
+      "ackMs": 3.699999988079071,
+      "charsAtStop": 1,
+      "mutationsAfterStop": 0,
+      "tag": "(stopped)",
+      "open": true,
+      "pidBefore": 38600,
+      "pidAfter": 38600,
+      "load": "load 3.96 16.07 56.33"
+    },
+    {
+      "uiMs": 1.600000023841858,
+      "ackMs": 3.900000035762787,
+      "charsAtStop": 1,
+      "mutationsAfterStop": 0,
+      "tag": "(stopped)",
+      "open": true,
+      "pidBefore": 38600,
+      "pidAfter": 38600,
+      "load": "load 3.80 15.84 56.01"
+    },
+    {
+      "uiMs": 1.699999988079071,
+      "ackMs": 3.800000011920929,
+      "charsAtStop": 1,
+      "mutationsAfterStop": 0,
+      "tag": "(stopped)",
+      "open": true,
+      "pidBefore": 38600,
+      "pidAfter": 38600,
+      "load": "load 3.80 15.84 56.01"
+    },
+    {
+      "uiMs": 1.699999988079071,
+      "ackMs": 3.800000011920929,
+      "charsAtStop": 1,
+      "mutationsAfterStop": 0,
+      "tag": "(stopped)",
+      "open": true,
+      "pidBefore": 38600,
+      "pidAfter": 38600,
+      "load": "load 3.66 15.61 55.69"
+    },
+    {
+      "uiMs": 1.699999988079071,
+      "ackMs": 4,
+      "charsAtStop": 1,
+      "mutationsAfterStop": 0,
+      "tag": "(stopped)",
+      "open": true,
+      "pidBefore": 38600,
+      "pidAfter": 38600,
+      "load": "load 3.66 15.61 55.69"
+    },
+    {
+      "uiMs": 1.899999976158142,
+      "ackMs": 3.899999976158142,
+      "charsAtStop": 1,
+      "mutationsAfterStop": 0,
+      "tag": "(stopped)",
+      "open": true,
+      "pidBefore": 38600,
+      "pidAfter": 38600,
+      "load": "load 3.45 15.37 55.37"
+    }
+  ],
+  "warmPid": 38600,
+  "markdown": {
+    "ul": true,
+    "li": 2,
+    "a": "https://vibepet.net",
+    "lang": "bash",
+    "copy": true,
+    "html": "<ul><li>beacon</li><li>kestrel</li></ul><p><a data-href=\"https://vibepet.net\" title=\"https://vibepet.net\">vibepet.net</a></p><pre data-lang=\"bash\"><span class=\"lang\">bash</span><button class=\"copy\" type=\"button\">copy</button><code>./deploy.sh --dry-run</code></pre>"
+  },
+  "scroll": {
+    "top": 769,
+    "max": 969,
+    "after": 769,
+    "pill": true
+  },
+  "chatTurns": [
+    {
+      "at": 1790932263574,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 435,
+        "total": 1278
+      },
+      "usage": {
+        "input": 961,
+        "read": 0,
+        "write": 0,
+        "out": 73
+      },
+      "turns": 1
+    },
+    {
+      "at": 1790932265611,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 373,
+        "total": 756
+      },
+      "usage": {
+        "input": 1347,
+        "read": 0,
+        "write": 0,
+        "out": 37
+      },
+      "turns": 2
+    },
+    {
+      "at": 1790932267560,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 355,
+        "total": 707
+      },
+      "usage": {
+        "input": 1730,
+        "read": 0,
+        "write": 0,
+        "out": 40
+      },
+      "turns": 3
+    },
+    {
+      "at": 1790932269999,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 388,
+        "total": 698
+      },
+      "usage": {
+        "input": 2080,
+        "read": 0,
+        "write": 0,
+        "out": 35
+      },
+      "turns": 4
+    },
+    {
+      "at": 1790932272316,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 396,
+        "total": 997
+      },
+      "usage": {
+        "input": 2595,
+        "read": 0,
+        "write": 0,
+        "out": 64
+      },
+      "turns": 5
+    },
+    {
+      "at": 1790932274076,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 349,
+        "total": 510
+      },
+      "usage": {
+        "input": 2974,
+        "read": 0,
+        "write": 0,
+        "out": 26
+      },
+      "turns": 6
+    },
+    {
+      "at": 1790932275977,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 362,
+        "total": 634
+      },
+      "usage": {
+        "input": 3317,
+        "read": 0,
+        "write": 0,
+        "out": 25
+      },
+      "turns": 7
+    },
+    {
+      "at": 1790932278681,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 351,
+        "total": 792
+      },
+      "usage": {
+        "input": 3658,
+        "read": 0,
+        "write": 0,
+        "out": 40
+      },
+      "turns": 8
+    },
+    {
+      "at": 1790932280538,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 385,
+        "total": 580
+      },
+      "usage": {
+        "input": 4012,
+        "read": 0,
+        "write": 0,
+        "out": 25
+      },
+      "turns": 9
+    },
+    {
+      "at": 1790932282899,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 399,
+        "total": 1101
+      },
+      "usage": {
+        "input": 4354,
+        "read": 0,
+        "write": 4351,
+        "out": 47
+      },
+      "turns": 10
+    },
+    {
+      "at": 1790932284891,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 372,
+        "total": 722
+      },
+      "usage": {
+        "input": 4711,
+        "read": 4351,
+        "write": 357,
+        "out": 32
+      },
+      "turns": 11
+    },
+    {
+      "at": 1790932287203,
+      "engine": "claude",
+      "model": "claude-haiku-4-5",
+      "ms": {
+        "first": 403,
+        "total": 1016
+      },
+      "usage": {
+        "input": 5060,
+        "read": 4708,
+        "write": 349,
+        "out": 50
+      },
+      "turns": 12
+    }
+  ],
+  "pidsUsed": [
+    38600
+  ],
+  "sees": {
+    "summary": "What Net sees · ≈192 tokens · sent 5.1k in (4.7k cached), 50 out",
+    "exact": true,
+    "ctxChars": 768,
+    "stdinChars": 821,
+    "ctx": "<live_context time=\"3:11:26 AM\" note=\"current: replaces every earlier live_context\">\nLocal time: 10/2/2026, 3:11:26 AM.\n\nAgents: beacon=waiting for an answer for 6h 57m - Which database should beacon use to store check results? (SQLite / Postgres / Redis); kestrel=needs approval for 5h 59m - Bash: ./deploy.sh --dry-run; delta=done for 7h 10m - All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled; atlas=done for 6h 8m - interrupted; vibepet=done for 5h 58m - The app's main entry file is main.js.\n\nRepo: delta (branch main): 0 uncommitted lines across 0 files, 0 untracked files. Last commit 773 min ago: \"delta: shards and reconciler\".\n\nRecent commits:\n4dcf8f9 delta: shards and reconciler\n\nDiff stat:\n(clean)\n</live_context>"
+  },
+  "keys": {
+    "shiftEnter": {
+      "value": "first line\nsecond line",
+      "height": 60,
+      "users": 12
+    },
+    "up": "Thanks. Anything else I should know? Two sentences.",
+    "copyLast": [
+      "./deploy.sh --dry-run"
+    ],
+    "cmdK": {
+      "value": "/",
+      "slashMenu": true,
+      "items": 8
+    }
+  },
+  "queued": {
+    "cls": "msg user queued",
+    "tag": "queued"
+  },
+  "queuedAnswer": {
+    "cls": "msg pet",
+    "text": "I don't have enough context to say which file is most at risk—I'd need to know what each agent is working on or see the repo structure.",
+    "say": null,
+    "acts": [],
+    "sees": "What Net sees · ≈192 tokens · sent 5.8k in (5.4k cached), 35 out"
+  },
+  "beforeQuit": {
+    "top": 1373,
+    "msgs": 46,
+    "users": [
+      "Which of my sessions needs me first, and",
+      "What is kestrel waiting for?",
+      "Reply with a short bulleted list naming ",
+      "What did delta finish?",
+      "what's my agent doing?",
+      "Summarize beacon's question in one sente",
+      "Which repo am I watching, and is anythin",
+      "Give me one concrete next step, in two s",
+      "How long has kestrel been waiting?",
+      "Should I approve kestrel's command? Two ",
+      "What is atlas doing?",
+      "Thanks. Anything else I should know? Two",
+      "Write about 250 words on keeping five co",
+      "And in one sentence: which file is most ",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co"
+    ],
+    "code": 1
+  },
+  "close1": {
+    "how": "quit",
+    "ms": 286,
+    "procs": 8,
+    "orphans": []
+  },
+  "afterRelaunch": {
+    "top": 1373,
+    "msgs": 46,
+    "users": [
+      "Which of my sessions needs me first, and",
+      "What is kestrel waiting for?",
+      "Reply with a short bulleted list naming ",
+      "What did delta finish?",
+      "what's my agent doing?",
+      "Summarize beacon's question in one sente",
+      "Which repo am I watching, and is anythin",
+      "Give me one concrete next step, in two s",
+      "How long has kestrel been waiting?",
+      "Should I approve kestrel's command? Two ",
+      "What is atlas doing?",
+      "Thanks. Anything else I should know? Two",
+      "Write about 250 words on keeping five co",
+      "And in one sentence: which file is most ",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co",
+      "Write about 250 words on keeping five co"
+    ],
+    "code": 1,
+    "label": "what's my agent doing?"
+  },
+  "newChat": {
+    "msgs": 0,
+    "fresh": true,
+    "chips": 5
+  },
+  "history": {
+    "items": [
+      "Which of my sessions needs me first, and why?just now · delta · 23 messages"
+    ],
+    "keep": "Last 200 chats · stored only on this Mac"
+  },
+  "search": {
+    "q": "deploy.sh",
+    "ms": 9,
+    "items": [
+      "Which of my sessions needs me first, and why?"
+    ]
+  },
+  "searchMiss": "No chat mentions that.",
+  "cleared": {
+    "items": 0,
+    "text": "No saved chats yet."
+  },
+  "clearedOnDisk": 0,
+  "errors": [],
+  "close": {
+    "how": "quit",
+    "ms": 288,
+    "procs": 8,
+    "orphans": []
+  },
+  "loadEnd": "load 3.52 14.99 54.77",
+  "sends": 23,
+  "summary": {
+    "firstTokenMs": {
+      "n": 12,
+      "p50": 403.39999997615814,
+      "p95": 541.3999999761581,
+      "min": 361.60000002384186,
+      "max": 541.3999999761581
+    },
+    "bubbleMs": {
+      "n": 12,
+      "p50": 1.9000000357627869,
+      "p95": 32.80000001192093,
+      "min": 1.300000011920929,
+      "max": 32.80000001192093
+    },
+    "mutationsPerSec": {
+      "n": 12,
+      "p50": 18.3,
+      "p95": 25.1,
+      "min": 15.7,
+      "max": 25.1
+    },
+    "stopUiMs": {
+      "n": 10,
+      "p50": 1.699999988079071,
+      "p95": 2.799999952316284,
+      "min": 1.399999976158142,
+      "max": 2.799999952316284
+    },
+    "stopEngineAckMs": {
+      "n": 10,
+      "p50": 3.899999976158142,
+      "p95": 7.5,
+      "min": 3.699999988079071,
+      "max": 7.5
+    },
+    "stopReusedProcess": "10/10",
+    "cache": [
+      {
+        "turn": 1,
+        "input": 961,
+        "read": 0,
+        "write": 0,
+        "readPct": 0,
+        "first": 435,
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "turn": 2,
+        "input": 1347,
+        "read": 0,
+        "write": 0,
+        "readPct": 0,
+        "first": 373,
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "turn": 3,
+        "input": 1730,
+        "read": 0,
+        "write": 0,
+        "readPct": 0,
+        "first": 355,
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "turn": 4,
+        "input": 2080,
+        "read": 0,
+        "write": 0,
+        "readPct": 0,
+        "first": 388,
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "turn": 5,
+        "input": 2595,
+        "read": 0,
+        "write": 0,
+        "readPct": 0,
+        "first": 396,
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "turn": 6,
+        "input": 2974,
+        "read": 0,
+        "write": 0,
+        "readPct": 0,
+        "first": 349,
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "turn": 7,
+        "input": 3317,
+        "read": 0,
+        "write": 0,
+        "readPct": 0,
+        "first": 362,
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "turn": 8,
+        "input": 3658,
+        "read": 0,
+        "write": 0,
+        "readPct": 0,
+        "first": 351,
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "turn": 9,
+        "input": 4012,
+        "read": 0,
+        "write": 0,
+        "readPct": 0,
+        "first": 385,
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "turn": 10,
+        "input": 4354,
+        "read": 0,
+        "write": 4351,
+        "readPct": 0,
+        "first": 399,
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "turn": 11,
+        "input": 4711,
+        "read": 4351,
+        "write": 357,
+        "readPct": 92,
+        "first": 372,
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "turn": 12,
+        "input": 5060,
+        "read": 4708,
+        "write": 349,
+        "readPct": 93,
+        "first": 403,
+        "model": "claude-haiku-4-5"
+      }
+    ]
+  }
+}

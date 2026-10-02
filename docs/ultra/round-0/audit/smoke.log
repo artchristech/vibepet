@@ -1,0 +1,9 @@
+run 1: ready 736 ms, home 'now' in 406 ms, close quit in 321 ms, 5 procs, orphans 0
+run 2: ready 312 ms, home 'now' in 408 ms, close quit in 293 ms, 5 procs, orphans 0
+run 3: ready 363 ms, home 'now' in 395 ms, close quit in 293 ms, 5 procs, orphans 0
+first run: home 'setup', orphans 0
+parallel: pids 32617,32618, both alive true, homes now,now, orphans 0,0
+ok in 17.5 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-0/audit/smoke
+real 17.49
+user 9.66
+sys 4.67

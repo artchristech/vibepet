@@ -1,0 +1,4 @@
+ok 29/29 assertions in 74.1 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/ports-truth/canon
+rows: beacon:needs kestrel:needs delta:ready atlas:ready vibepet:ready   fleet: 3/6 in state
+node test/ultra/canon.js --app  --out $E/canon --userdata   51.55s user 19.47s system 94% cpu 1:15.00 total
+exit=0

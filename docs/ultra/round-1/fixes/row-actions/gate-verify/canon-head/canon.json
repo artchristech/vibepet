@@ -1,0 +1,1568 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-row-actions",
+  "out": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/row-actions/gate-verify/canon-head",
+  "root": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+  "startedAt": "2026-10-02T12:53:31.769Z",
+  "flags": {
+    "allRows": false,
+    "act": false,
+    "liveChat": false
+  },
+  "git": "9628925 harness: canon checks the row actions; tta resolves askuser with the option button @ ultra/r1/row-actions",
+  "fleet": {
+    "at": "2026-10-02T12:53:32.205Z",
+    "allOk": false,
+    "spend": {
+      "transcriptsUsd": 2.223186,
+      "estimateWithHiddenUsd": 3.3093,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "permission prompt",
+          "statusUpdatedAt": 1790910742347
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T03:12:20.929Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910787682
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T03:13:07.635Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910180805
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-02T03:03:00.799Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "input needed",
+          "statusUpdatedAt": 1790907222729
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T02:13:41.070Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790906449089
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T02:00:48.941Z"
+        },
+        "toolProcs": 0,
+        "subagents": 36,
+        "failing": [
+          "registry.status",
+          "child",
+          "subagents"
+        ]
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "registry": null,
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T08:54:24.091Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "claude",
+          "registry.status",
+          "loop",
+          "loopLock"
+        ]
+      }
+    ]
+  },
+  "surfaces": {
+    "command": {
+      "cmds": [
+        "/record",
+        "/goal",
+        "/jump",
+        "/replay",
+        "/stop",
+        "/today",
+        "/setup",
+        "/settings"
+      ],
+      "today": true
+    },
+    "rows": {
+      "actions": {
+        "goal": {
+          "member": "delta",
+          "goal": {
+            "text": "Reconcile the three shards in parallel.",
+            "auto": true,
+            "done": false,
+            "verdict": "on"
+          },
+          "prefill": "Reconcile the three shards in parallel.",
+          "set": true,
+          "setGoalIpc": [
+            {
+              "id": "this row",
+              "text": "canon goal"
+            }
+          ],
+          "done": {
+            "done": true,
+            "clicks": 1,
+            "firstClickDropped": false,
+            "results": [
+              {
+                "ok": true,
+                "counted": true,
+                "xp": 15
+              }
+            ],
+            "xp": [
+              0,
+              15
+            ],
+            "hitRows": [
+              0,
+              1
+            ],
+            "before": {
+              "bubble": false,
+              "replay": {
+                "view": [
+                  469,
+                  386,
+                  58,
+                  21.5
+                ],
+                "panel": [
+                  449,
+                  328
+                ]
+              },
+              "goal": {
+                "view": [
+                  531,
+                  386,
+                  46,
+                  21.5
+                ],
+                "panel": [
+                  511,
+                  328
+                ]
+              },
+              "diff": {
+                "view": [
+                  581,
+                  386,
+                  42,
+                  21.5
+                ],
+                "panel": [
+                  561,
+                  328
+                ]
+              }
+            },
+            "after": {
+              "bubble": false,
+              "replay": {
+                "view": [
+                  469,
+                  393,
+                  58,
+                  21.5
+                ],
+                "panel": [
+                  449,
+                  335
+                ]
+              },
+              "goal": {
+                "view": [
+                  531,
+                  393,
+                  46,
+                  21.5
+                ],
+                "panel": [
+                  511,
+                  335
+                ]
+              },
+              "diff": {
+                "view": [
+                  581,
+                  393,
+                  42,
+                  21.5
+                ],
+                "panel": [
+                  561,
+                  335
+                ]
+              }
+            }
+          },
+          "undo": {
+            "clicked": true,
+            "msAfterDone": 311,
+            "reopened": true,
+            "results": [
+              {
+                "ok": true,
+                "xp": 15
+              }
+            ],
+            "xp": 0,
+            "hitRows": 0
+          },
+          "once": {
+            "firstPrompt": "Reconcile the three shards in parallel.",
+            "markedAfterReset": [
+              true,
+              true
+            ],
+            "results": [
+              {
+                "ok": true,
+                "counted": false
+              }
+            ],
+            "todayHit": [
+              1,
+              1
+            ],
+            "xp": [
+              15,
+              15
+            ]
+          }
+        },
+        "diff": {
+          "member": "vibepet",
+          "result": {
+            "ok": true,
+            "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+            "files": 1,
+            "add": 3,
+            "del": 1,
+            "untracked": 0,
+            "clean": true,
+            "note": "vibepet: no uncommitted changes · showing the last commit"
+          },
+          "ms": 344,
+          "window": {
+            "title": "Diff · vibepet",
+            "url": "data:text/html;charset=utf-8;base64,PCFk",
+            "visible": true,
+            "focused": false
+          }
+        },
+        "keys": [
+          {
+            "key": "a",
+            "skipped": "no approve row in the fleet now"
+          },
+          {
+            "key": "w",
+            "skipped": "no always row in the fleet now"
+          },
+          {
+            "key": "d",
+            "skipped": "no deny row in the fleet now"
+          },
+          {
+            "key": "2",
+            "skipped": "no option row in the fleet now"
+          },
+          {
+            "key": "r",
+            "skipped": "no text row in the fleet now"
+          },
+          {
+            "key": "s",
+            "skipped": "no running row in the fleet now"
+          }
+        ],
+        "reply": {
+          "member": "vibepet",
+          "form": true
+        },
+        "approve": {
+          "member": "kestrel",
+          "button": true
+        },
+        "jump": [
+          {
+            "member": "delta",
+            "result": {
+              "ok": false,
+              "why": "no terminal is attached to tmux session vp-delta",
+              "attach": "tmux attach -t vp-delta"
+            },
+            "ms": 182,
+            "clipboardWrites": 0
+          }
+        ]
+      },
+      "decisions": [
+        {
+          "member": "beacon",
+          "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Redis)",
+          "buttons": [
+            "replay=Replay",
+            "goal=Goal",
+            "diff=Diff",
+            "option:1=SQLite",
+            "option:2=Postgres",
+            "option:3=Redis",
+            "other=Other…"
+          ]
+        },
+        {
+          "member": "kestrel",
+          "ask": "Bash: ./deploy.sh --dry-run",
+          "buttons": [
+            "replay=Replay",
+            "goal=Goal",
+            "diff=Diff",
+            "approve=Approve",
+            "always=Always: ./deploy.sh *",
+            "deny=Deny"
+          ]
+        },
+        {
+          "member": "delta",
+          "ask": null,
+          "buttons": [
+            "replay=Replay",
+            "goal=Goal",
+            "diff=Diff",
+            "reply=Reply",
+            "done=Mark done"
+          ]
+        },
+        {
+          "member": "atlas",
+          "ask": null,
+          "buttons": [
+            "replay=Replay",
+            "goal=Goal",
+            "diff=Diff",
+            "reply=Reply",
+            "done=Mark done"
+          ]
+        },
+        {
+          "member": "vibepet",
+          "ask": null,
+          "buttons": [
+            "replay=Replay",
+            "goal=Goal",
+            "diff=Diff",
+            "reply=Reply",
+            "done=Mark done"
+          ]
+        }
+      ]
+    },
+    "theater": {
+      "member": "delta",
+      "beats": 149,
+      "title": "Reconcile the three shards in parallel. In ONE message, start three subagents at",
+      "midBeat": 74
+    },
+    "ports": {
+      "fixture": {
+        "port": 55179,
+        "repo": "delta"
+      },
+      "footer": {
+        "servers": [
+          {
+            "port": 55179,
+            "text": ":55179 canon fixture✕"
+          }
+        ]
+      },
+      "open": "http://localhost:55179",
+      "stop": {
+        "confirm": "Stop node (delta) on :55179?",
+        "killed": true
+      }
+    },
+    "keys": {
+      "jumpKey": {
+        "key": null,
+        "taken": false
+      },
+      "queue": [
+        {
+          "member": "beacon",
+          "phase": "waiting"
+        },
+        {
+          "member": "kestrel",
+          "phase": "stalled"
+        }
+      ],
+      "hotkey": {
+        "jumped": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "expected": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "result": {
+          "ok": false,
+          "why": "no terminal is attached to tmux session vp-beacon",
+          "attach": "tmux attach -t vp-beacon"
+        }
+      },
+      "hotkey2": {
+        "jumped": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "member": "kestrel",
+        "expected": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "gapMs": 209
+      },
+      "gesture": {
+        "menu": {
+          "ok": true,
+          "label": "Record gesture…"
+        },
+        "padOpen": true,
+        "message": "Saved. Hide Net, then move the mouse in that shape to bring him back.",
+        "templates": 3
+      }
+    }
+  },
+  "assertions": [
+    {
+      "surface": "home",
+      "id": "ran",
+      "ok": false,
+      "detail": "openHome: no Home panel after the click"
+    },
+    {
+      "surface": "chat",
+      "id": "ran",
+      "ok": false,
+      "detail": "openHome: no Home panel after the click"
+    },
+    {
+      "surface": "command",
+      "id": "barOpens",
+      "ok": true,
+      "detail": [
+        "/record",
+        "/goal",
+        "/jump",
+        "/replay",
+        "/stop",
+        "/today",
+        "/setup",
+        "/settings"
+      ]
+    },
+    {
+      "surface": "command",
+      "id": "todayRuns",
+      "ok": true,
+      "detail": "/today posts its note"
+    },
+    {
+      "surface": "rows",
+      "id": "approvalActs:kestrel",
+      "ok": true,
+      "detail": {
+        "ask": "Bash: ./deploy.sh --dry-run",
+        "buttons": [
+          "Replay",
+          "Goal",
+          "Diff",
+          "Approve",
+          "Always: ./deploy.sh *",
+          "Deny"
+        ]
+      }
+    },
+    {
+      "surface": "rows",
+      "id": "questionOptions:beacon",
+      "ok": true,
+      "detail": {
+        "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Redis)",
+        "buttons": [
+          "SQLite",
+          "Postgres",
+          "Redis",
+          "Other…"
+        ]
+      }
+    },
+    {
+      "surface": "rows",
+      "id": "replyOnDone",
+      "ok": false,
+      "detail": []
+    },
+    {
+      "surface": "rows",
+      "id": "noGlyphOnly",
+      "ok": true,
+      "detail": "28 row buttons, each with a word"
+    },
+    {
+      "surface": "rows",
+      "id": "goalRow",
+      "ok": true,
+      "detail": "delta"
+    },
+    {
+      "surface": "rows",
+      "id": "goalPrefill",
+      "ok": true,
+      "detail": {
+        "prefill": "Reconcile the three shards in parallel.",
+        "goal": {
+          "text": "Reconcile the three shards in parallel.",
+          "auto": true,
+          "done": false,
+          "verdict": "on"
+        }
+      }
+    },
+    {
+      "surface": "rows",
+      "id": "goalSet",
+      "ok": true,
+      "detail": [
+        {
+          "id": "this row",
+          "text": "canon goal"
+        }
+      ]
+    },
+    {
+      "surface": "rows",
+      "id": "goalDone",
+      "ok": true,
+      "detail": {
+        "done": true,
+        "clicks": 1,
+        "firstClickDropped": false,
+        "results": [
+          {
+            "ok": true,
+            "counted": true,
+            "xp": 15
+          }
+        ],
+        "xp": [
+          0,
+          15
+        ],
+        "hitRows": [
+          0,
+          1
+        ],
+        "before": {
+          "bubble": false,
+          "replay": {
+            "view": [
+              469,
+              386,
+              58,
+              21.5
+            ],
+            "panel": [
+              449,
+              328
+            ]
+          },
+          "goal": {
+            "view": [
+              531,
+              386,
+              46,
+              21.5
+            ],
+            "panel": [
+              511,
+              328
+            ]
+          },
+          "diff": {
+            "view": [
+              581,
+              386,
+              42,
+              21.5
+            ],
+            "panel": [
+              561,
+              328
+            ]
+          }
+        },
+        "after": {
+          "bubble": false,
+          "replay": {
+            "view": [
+              469,
+              393,
+              58,
+              21.5
+            ],
+            "panel": [
+              449,
+              335
+            ]
+          },
+          "goal": {
+            "view": [
+              531,
+              393,
+              46,
+              21.5
+            ],
+            "panel": [
+              511,
+              335
+            ]
+          },
+          "diff": {
+            "view": [
+              581,
+              393,
+              42,
+              21.5
+            ],
+            "panel": [
+              561,
+              335
+            ]
+          }
+        }
+      }
+    },
+    {
+      "surface": "rows",
+      "id": "slotsFixed",
+      "ok": false,
+      "detail": {
+        "sameView": false,
+        "samePanel": false,
+        "before": {
+          "bubble": false,
+          "replay": {
+            "view": [
+              469,
+              386,
+              58,
+              21.5
+            ],
+            "panel": [
+              449,
+              328
+            ]
+          },
+          "goal": {
+            "view": [
+              531,
+              386,
+              46,
+              21.5
+            ],
+            "panel": [
+              511,
+              328
+            ]
+          },
+          "diff": {
+            "view": [
+              581,
+              386,
+              42,
+              21.5
+            ],
+            "panel": [
+              561,
+              328
+            ]
+          }
+        },
+        "after": {
+          "bubble": false,
+          "replay": {
+            "view": [
+              469,
+              393,
+              58,
+              21.5
+            ],
+            "panel": [
+              449,
+              335
+            ]
+          },
+          "goal": {
+            "view": [
+              531,
+              393,
+              46,
+              21.5
+            ],
+            "panel": [
+              511,
+              335
+            ]
+          },
+          "diff": {
+            "view": [
+              581,
+              393,
+              42,
+              21.5
+            ],
+            "panel": [
+              561,
+              335
+            ]
+          }
+        }
+      }
+    },
+    {
+      "surface": "rows",
+      "id": "goalUndo",
+      "ok": true,
+      "detail": {
+        "clicked": true,
+        "msAfterDone": 311,
+        "reopened": true,
+        "results": [
+          {
+            "ok": true,
+            "xp": 15
+          }
+        ],
+        "xp": 0,
+        "hitRows": 0
+      }
+    },
+    {
+      "surface": "rows",
+      "id": "goalOnce",
+      "ok": true,
+      "detail": {
+        "firstPrompt": "Reconcile the three shards in parallel.",
+        "markedAfterReset": [
+          true,
+          true
+        ],
+        "results": [
+          {
+            "ok": true,
+            "counted": false
+          }
+        ],
+        "todayHit": [
+          1,
+          1
+        ],
+        "xp": [
+          15,
+          15
+        ]
+      }
+    },
+    {
+      "surface": "rows",
+      "id": "diffOpens",
+      "ok": true,
+      "detail": {
+        "member": "vibepet",
+        "result": {
+          "ok": true,
+          "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+          "files": 1,
+          "add": 3,
+          "del": 1,
+          "untracked": 0,
+          "clean": true,
+          "note": "vibepet: no uncommitted changes · showing the last commit"
+        },
+        "ms": 344,
+        "window": {
+          "title": "Diff · vibepet",
+          "url": "data:text/html;charset=utf-8;base64,PCFk",
+          "visible": true,
+          "focused": false
+        }
+      }
+    },
+    {
+      "surface": "rows",
+      "id": "replyForm",
+      "ok": true,
+      "detail": "vibepet"
+    },
+    {
+      "surface": "rows",
+      "id": "jumpRuns:delta",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-delta",
+        "attach": "tmux attach -t vp-delta"
+      }
+    },
+    {
+      "surface": "theater",
+      "id": "opens",
+      "ok": true,
+      "detail": "▶ on delta"
+    },
+    {
+      "surface": "theater",
+      "id": "hasBeats",
+      "ok": true,
+      "detail": {
+        "beats": 149,
+        "title": "Reconcile the three shards in parallel. In ONE message, start three subagents at"
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "sectionRenders",
+      "ok": true,
+      "detail": {
+        "servers": [
+          {
+            "port": 55179,
+            "text": ":55179 canon fixture✕"
+          }
+        ]
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "fixtureListed",
+      "ok": true,
+      "detail": ":55179 (cwd delta)"
+    },
+    {
+      "surface": "ports",
+      "id": "openButton",
+      "ok": true,
+      "detail": {
+        "kind": "openExternal",
+        "at": 1790945659256,
+        "url": "http://localhost:55179"
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "stopConfirms",
+      "ok": true,
+      "detail": {
+        "kind": "dialog",
+        "at": 1790945659307,
+        "message": "Stop node (delta) on :55179?",
+        "buttons": [
+          "Stop",
+          "Cancel"
+        ]
+      }
+    },
+    {
+      "surface": "ports",
+      "id": "stopKills",
+      "ok": true,
+      "detail": "fixture pid 28323"
+    },
+    {
+      "surface": "keys",
+      "id": "hotkeyJumps",
+      "ok": true,
+      "detail": "beacon first in line"
+    },
+    {
+      "surface": "keys",
+      "id": "hotkeyWalks",
+      "ok": true,
+      "detail": "then kestrel"
+    },
+    {
+      "surface": "keys",
+      "id": "menuOpens",
+      "ok": true,
+      "detail": "14 items"
+    },
+    {
+      "surface": "keys",
+      "id": "gesturePadOpens",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "label": "Record gesture…"
+      }
+    },
+    {
+      "surface": "keys",
+      "id": "gestureSaved",
+      "ok": true,
+      "detail": "Saved. Hide Net, then move the mouse in that shape to bring him back."
+    },
+    {
+      "surface": "run",
+      "id": "cleanClose",
+      "ok": true,
+      "detail": {
+        "how": "quit",
+        "ms": 404,
+        "procs": 7,
+        "orphans": []
+      }
+    }
+  ],
+  "rows": [],
+  "compare": [
+    {
+      "member": "kestrel",
+      "state": "approval",
+      "inState": true,
+      "truth": "waiting (permission prompt)",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": [
+        "needs"
+      ],
+      "problems": [
+        "missing: a permission dialog is open: it needs you, Approve, but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "vibepet",
+      "state": "done",
+      "inState": true,
+      "truth": "idle",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": [
+        "ready"
+      ],
+      "problems": [
+        "missing: the turn ended with a statement: done, your move (Reply), but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "atlas",
+      "state": "working",
+      "inState": false,
+      "truth": "idle",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": [
+        "ready",
+        "needs"
+      ],
+      "problems": [
+        "missing: idle at its prompt (registry): done, or asking, but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "beacon",
+      "state": "question",
+      "inState": true,
+      "truth": "waiting (input needed)",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": [
+        "needs"
+      ],
+      "problems": [
+        "missing: an AskUserQuestion dialog is open: it needs you, an option button, but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "delta",
+      "state": "fanout",
+      "inState": false,
+      "truth": "idle",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": [
+        "ready",
+        "needs"
+      ],
+      "problems": [
+        "missing: idle at its prompt (registry): done, or asking, but Home has no row for it"
+      ],
+      "ok": false
+    },
+    {
+      "member": "ember",
+      "state": "loop",
+      "inState": false,
+      "truth": "no claude",
+      "shown": false,
+      "sig": null,
+      "label": null,
+      "ask": null,
+      "phase": null,
+      "kind": null,
+      "actions": [],
+      "expected": null,
+      "problems": [
+        "not in its fixture state (paused): not scored"
+      ],
+      "ok": null
+    }
+  ],
+  "intercepted": [
+    {
+      "kind": "ipc:set-goal",
+      "at": 35866,
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "text": "canon goal"
+    },
+    {
+      "kind": "ipc:goal-done",
+      "at": 36961,
+      "args": [
+        "eb59a756-0b6f-4a82-8d55-1f0bc2c40358"
+      ],
+      "result": {
+        "ok": true,
+        "counted": true,
+        "xp": 15
+      },
+      "ms": 1
+    },
+    {
+      "kind": "ipc:goal-undo",
+      "at": 37641,
+      "args": [
+        "eb59a756-0b6f-4a82-8d55-1f0bc2c40358"
+      ],
+      "result": {
+        "ok": true,
+        "xp": 15
+      },
+      "ms": 1
+    },
+    {
+      "kind": "ipc:set-goal",
+      "at": 38103,
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "text": ""
+    },
+    {
+      "kind": "ipc:goal-done",
+      "at": 38173,
+      "args": [
+        "eb59a756-0b6f-4a82-8d55-1f0bc2c40358"
+      ],
+      "result": {
+        "ok": true,
+        "counted": true,
+        "xp": 15
+      },
+      "ms": 0
+    },
+    {
+      "kind": "ipc:set-goal",
+      "at": 38315,
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "text": ""
+    },
+    {
+      "kind": "ipc:goal-done",
+      "at": 38507,
+      "args": [
+        "eb59a756-0b6f-4a82-8d55-1f0bc2c40358"
+      ],
+      "result": {
+        "ok": true,
+        "counted": false
+      },
+      "ms": 0
+    },
+    {
+      "kind": "ipc:diff",
+      "at": 39177,
+      "args": [
+        "6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+      ],
+      "result": {
+        "ok": true,
+        "root": "/Users/christopherharris/.vibepet-ultra/fleet/vibepet",
+        "files": 1,
+        "add": 3,
+        "del": 1,
+        "untracked": 0,
+        "clean": true,
+        "note": "vibepet: no uncommitted changes · showing the last commit"
+      },
+      "ms": 344
+    },
+    {
+      "kind": "ipc:jump",
+      "at": 41317,
+      "args": [
+        "eb59a756-0b6f-4a82-8d55-1f0bc2c40358"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-delta",
+        "attach": "tmux attach -t vp-delta"
+      },
+      "ms": 182
+    },
+    {
+      "kind": "ipc:theater",
+      "at": 42211,
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358"
+    },
+    {
+      "kind": "openExternal",
+      "at": 47487,
+      "url": "http://localhost:55179"
+    },
+    {
+      "kind": "ipc:local-open",
+      "at": 47487,
+      "port": 55179
+    },
+    {
+      "kind": "dialog",
+      "at": 47538,
+      "message": "Stop node (delta) on :55179?",
+      "buttons": [
+        "Stop",
+        "Cancel"
+      ]
+    },
+    {
+      "kind": "ipc:local-stop",
+      "at": 47538,
+      "pid": 28323
+    },
+    {
+      "kind": "ipc:jump",
+      "at": 48968,
+      "args": [
+        "a9377f08-ad27-4bd5-bb77-dbd576eab89e"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-beacon",
+        "attach": "tmux attach -t vp-beacon"
+      },
+      "ms": 125
+    },
+    {
+      "kind": "ipc:jump",
+      "at": 49176,
+      "args": [
+        "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+      ],
+      "result": {
+        "ok": false,
+        "why": "no terminal is attached to tmux session vp-kestrel",
+        "attach": "tmux attach -t vp-kestrel"
+      },
+      "ms": 124
+    },
+    {
+      "kind": "menuPopup",
+      "at": 50246,
+      "items": [
+        "Watching kestrel",
+        "Localhost",
+        "Open Home",
+        "Setup…",
+        "Theater…",
+        "Start content session",
+        "Finish last session",
+        "Open shorts folder",
+        "Today…",
+        "Pet",
+        "Toss a snack",
+        "Settings",
+        "Hide Net",
+        "Quit Net"
+      ]
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 51151,
+      "points": 37
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 52353,
+      "points": 37
+    },
+    {
+      "kind": "ipc:gesture-sample",
+      "at": 53572,
+      "points": 37
+    }
+  ],
+  "timings": {
+    "home": 15367,
+    "chat": 15033,
+    "command": 2367,
+    "rows": 7014,
+    "theater": 4968,
+    "ports": 1689,
+    "keys": 5382
+  },
+  "failures": [
+    "home/ran: openHome: no Home panel after the click",
+    "chat/ran: openHome: no Home panel after the click",
+    "rows/replyOnDone: []",
+    "rows/slotsFixed: {\"sameView\":false,\"samePanel\":false,\"before\":{\"bubble\":false,\"replay\":{\"view\":[469,386,58,21.5],\"panel\":[449,328]},\"goal\":{\"view\":[531,386,46,21.5],\"panel\":[511,328]},\"diff\":{\"view\":[581,386,42,21.5],\"panel\":[561,328]}},\"after\":{\"bubble\":false,\"replay\":{\"view\":[469,393,58,21.5],\"panel\":[449,335]},\"goal\":{\"view\":[531,393,46,21.5],\"panel\":[511,335]},\"diff\":{\"view\":[581,393,42,21.5],\"panel\":[561,335]}}}"
+  ],
+  "launch": {
+    "pid": 28329,
+    "readyMs": 1216,
+    "paths": {
+      "claude": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+      "userData": "userdata/gate-r1-row-actions"
+    },
+    "perms": {
+      "ax": true,
+      "screen": true
+    },
+    "first": {
+      "msAfterLaunchCall": 1902,
+      "agents": [
+        {
+          "member": "beacon",
+          "name": "beacon",
+          "kind": "question",
+          "phase": "waiting",
+          "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Redis)"
+        },
+        {
+          "member": "kestrel",
+          "name": "kestrel",
+          "kind": "approval",
+          "phase": "stalled",
+          "ask": "Bash: ./deploy.sh --dry-run"
+        },
+        {
+          "member": "delta",
+          "name": "delta",
+          "kind": "done",
+          "phase": "ready",
+          "ask": "All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled"
+        },
+        {
+          "member": "atlas",
+          "name": "atlas",
+          "kind": "done",
+          "phase": "ready",
+          "ask": "interrupted"
+        },
+        {
+          "member": "vibepet",
+          "name": "vibepet",
+          "kind": "done",
+          "phase": "ready",
+          "ask": "The app's main entry file is main.js."
+        }
+      ]
+    }
+  },
+  "instrument": {
+    "spied": [
+      "jump",
+      "send-to",
+      "diff",
+      "goal-done",
+      "goal-undo"
+    ],
+    "stubSendTo": true
+  },
+  "notes": 0,
+  "close": {
+    "how": "quit",
+    "ms": 404,
+    "procs": 7,
+    "orphans": []
+  },
+  "fleetAfter": {
+    "at": "2026-10-02T12:54:27.032Z",
+    "allOk": false,
+    "spend": {
+      "transcriptsUsd": 2.223186,
+      "estimateWithHiddenUsd": 3.3093,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "permission prompt",
+          "statusUpdatedAt": 1790910742347
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T03:12:20.929Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910787682
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T03:13:07.635Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910180805
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-02T03:03:00.799Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "input needed",
+          "statusUpdatedAt": 1790907222729
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T02:13:41.070Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790906449089
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T02:00:48.941Z"
+        },
+        "toolProcs": 0,
+        "subagents": 36,
+        "failing": [
+          "registry.status",
+          "child",
+          "subagents"
+        ]
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "registry": null,
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T08:54:24.091Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "claude",
+          "registry.status",
+          "loop",
+          "loopLock"
+        ]
+      }
+    ]
+  },
+  "fleetChanged": [],
+  "ms": 55274,
+  "summary": {
+    "ok": false,
+    "assertions": "27/31",
+    "rows": [],
+    "fleetMembers": 6,
+    "inState": 3,
+    "mismatches": [
+      "kestrel: missing: a permission dialog is open: it needs you, Approve, but Home has no row for it",
+      "vibepet: missing: the turn ended with a statement: done, your move (Reply), but Home has no row for it",
+      "atlas: missing: idle at its prompt (registry): done, or asking, but Home has no row for it",
+      "beacon: missing: an AskUserQuestion dialog is open: it needs you, an option button, but Home has no row for it",
+      "delta: missing: idle at its prompt (registry): done, or asking, but Home has no row for it"
+    ]
+  }
+}

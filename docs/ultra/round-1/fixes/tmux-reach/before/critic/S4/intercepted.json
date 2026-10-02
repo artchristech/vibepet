@@ -1,0 +1,293 @@
+[
+ {
+  "kind": "ipc:send-to",
+  "at": 1790909054770,
+  "args": [
+   {
+    "id": "13a1427d",
+    "text": null
+   }
+  ],
+  "result": {
+   "ok": false,
+   "why": "couldn't find its tab"
+  },
+  "ms": 83
+ },
+ {
+  "kind": "ipc:send-to",
+  "at": 1790909055175,
+  "args": [
+   {
+    "id": "a9377f08",
+    "text": null
+   }
+  ],
+  "result": {
+   "ok": false,
+   "why": "couldn't find its tab"
+  },
+  "ms": 103
+ },
+ {
+  "kind": "ipc:send-to",
+  "at": 1790909055571,
+  "args": [
+   {
+    "id": "13a1427d",
+    "text": null
+   }
+  ],
+  "result": {
+   "ok": false,
+   "why": "couldn't find its tab"
+  },
+  "ms": 93
+ },
+ {
+  "kind": "ipc:send-to",
+  "at": 1790909055963,
+  "args": [
+   {
+    "id": "a9377f08",
+    "text": null
+   }
+  ],
+  "result": {
+   "ok": false,
+   "why": "couldn't find its tab"
+  },
+  "ms": 91
+ },
+ {
+  "kind": "clipboard",
+  "at": 1790909073640,
+  "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume <sid>"
+ },
+ {
+  "kind": "ipc:jump",
+  "at": 1790909073640,
+  "args": [
+   "6101876b"
+  ],
+  "result": {
+   "ok": false,
+   "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+  },
+  "ms": 88
+ },
+ {
+  "kind": "clipboard",
+  "at": 1790909074450,
+  "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/atlas && claude --resume <sid>"
+ },
+ {
+  "kind": "ipc:jump",
+  "at": 1790909074450,
+  "args": [
+   "5c051e84"
+  ],
+  "result": {
+   "ok": false,
+   "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/atlas && claude --resume 5c051e84-b74f-41b6-845f-bde937a9ef90"
+  },
+  "ms": 91
+ },
+ {
+  "kind": "clipboard",
+  "at": 1790909074979,
+  "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume <sid>"
+ },
+ {
+  "kind": "ipc:jump",
+  "at": 1790909074979,
+  "args": [
+   "6101876b"
+  ],
+  "result": {
+   "ok": false,
+   "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+  },
+  "ms": 84
+ },
+ {
+  "kind": "clipboard",
+  "at": 1790909075494,
+  "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/atlas && claude --resume <sid>"
+ },
+ {
+  "kind": "ipc:jump",
+  "at": 1790909075494,
+  "args": [
+   "5c051e84"
+  ],
+  "result": {
+   "ok": false,
+   "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/atlas && claude --resume 5c051e84-b74f-41b6-845f-bde937a9ef90"
+  },
+  "ms": 93
+ },
+ {
+  "kind": "clipboard",
+  "at": 1790909076024,
+  "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume <sid>"
+ },
+ {
+  "kind": "ipc:jump",
+  "at": 1790909076024,
+  "args": [
+   "6101876b"
+  ],
+  "result": {
+   "ok": false,
+   "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+  },
+  "ms": 85
+ },
+ {
+  "kind": "clipboard",
+  "at": 1790909076586,
+  "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/atlas && claude --resume <sid>"
+ },
+ {
+  "kind": "ipc:jump",
+  "at": 1790909076586,
+  "args": [
+   "5c051e84"
+  ],
+  "result": {
+   "ok": false,
+   "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/atlas && claude --resume 5c051e84-b74f-41b6-845f-bde937a9ef90"
+  },
+  "ms": 90
+ },
+ {
+  "kind": "ipc:send-to",
+  "at": 1790909201699,
+  "args": [
+   {
+    "id": "13a1427d",
+    "text": "yes"
+   }
+  ],
+  "result": {
+   "ok": false,
+   "why": "couldn't find its tab"
+  },
+  "ms": 166
+ },
+ {
+  "kind": "ipc:send-to",
+  "at": 1790909203585,
+  "args": [
+   {
+    "id": "13a1427d",
+    "text": "yes"
+   }
+  ],
+  "result": {
+   "ok": false,
+   "why": "couldn't find its tab"
+  },
+  "ms": 158
+ },
+ {
+  "kind": "ipc:send-to",
+  "at": 1790909205179,
+  "args": [
+   {
+    "id": "13a1427d",
+    "text": "yes"
+   }
+  ],
+  "result": {
+   "ok": false,
+   "why": "couldn't find its tab"
+  },
+  "ms": 207
+ },
+ {
+  "kind": "clipboard",
+  "at": 1790909247147,
+  "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume <sid>"
+ },
+ {
+  "kind": "ipc:jump",
+  "at": 1790909247147,
+  "args": [
+   "13a1427d"
+  ],
+  "result": {
+   "ok": false,
+   "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume 13a1427d-6cb0-4561-b5a3-22453a34bf93"
+  },
+  "ms": 85
+ },
+ {
+  "kind": "ipc:theater",
+  "at": 1790909300141,
+  "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+ },
+ {
+  "kind": "ipc:theater",
+  "at": 1790909302972,
+  "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+ },
+ {
+  "kind": "ipc:theater",
+  "at": 1790909335566,
+  "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+ },
+ {
+  "kind": "clipboard",
+  "at": 1790909437739,
+  "text": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume <sid>"
+ },
+ {
+  "kind": "ipc:jump",
+  "at": 1790909437739,
+  "args": [
+   "13a1427d"
+  ],
+  "result": {
+   "ok": false,
+   "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/kestrel && claude --resume 13a1427d-6cb0-4561-b5a3-22453a34bf93"
+  },
+  "ms": 85
+ },
+ {
+  "kind": "ipc:send-to",
+  "at": 1790909656228,
+  "args": [
+   {
+    "id": "13a1427d",
+    "text": null
+   }
+  ],
+  "result": {
+   "ok": false,
+   "why": "couldn't find its tab"
+  },
+  "ms": 87
+ },
+ {
+  "kind": "ipc:send-to",
+  "at": 1790909658133,
+  "args": [
+   {
+    "id": "13a1427d",
+    "text": null
+   }
+  ],
+  "result": {
+   "ok": false,
+   "why": "couldn't find its tab"
+  },
+  "ms": 108
+ },
+ {
+  "kind": "ipc:theater",
+  "at": 1790909857266,
+  "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93"
+ }
+]

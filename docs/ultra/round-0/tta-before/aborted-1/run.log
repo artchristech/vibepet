@@ -1,0 +1,15 @@
+[23:07:32.697] plan approval#1 approval#2 approval#3 askuser#1 askuser#2 askuser#3 · spend est $2.0475 · this probe so far $0.0000 of $0.6
+[23:07:35.873] instances A pid 68399 (Home closed), B pid 68398 (Home open) · app c2b5c0a canon --compare: compare the kind of each truth mismatch, not its clock; report dropped first clicks and the fold @ ultra/round-0 · perms {"ax":true,"screen":true}
+[23:07:35.979]   kestrel: Esc (quiet the fleet before the trials)
+[23:07:36.543]   beacon: Esc (quiet the fleet before the trials)
+[23:07:43.163] == approval #1 (kestrel) · status idle
+[23:07:50.430]   ERROR K is not defined
+[23:07:50.805]   result {"t0":null,"t0From":null,"detectAmbientS":null,"detectAmbientRegS":null,"bubbleS":null,"ledS":null,"faceS":null,"rowS":null,"rowRegS":null,"offerS":null,"offerAction":null,"bannerS":null,"soundS":null,"goneS":null,"phaseS":null,"queueHeadS":null,"wrong":null,"otherBubble":null,"actionWorks":null,"clicks":null,"keys":null} · spent ~$0.0073
+[23:07:50.922] == approval #2 (kestrel) · status waiting/permission prompt
+[23:07:51.052]   kestrel: Esc (clear the previous dialog first)
+[23:07:58.141]   ERROR K is not defined
+[23:07:58.494]   result {"t0":null,"t0From":null,"detectAmbientS":null,"detectAmbientRegS":null,"bubbleS":null,"ledS":null,"faceS":null,"rowS":null,"rowRegS":null,"offerS":null,"offerAction":null,"bannerS":null,"soundS":null,"goneS":null,"phaseS":null,"queueHeadS":null,"wrong":null,"otherBubble":null,"actionWorks":null,"clicks":null,"keys":null} · spent ~$0
+[23:07:58.585] == approval #3 (kestrel) · status waiting/permission prompt
+[23:07:58.735]   kestrel: Esc (clear the previous dialog first)
+[23:08:04.589] poll error: page.evaluate: Target page, context or browser has been closed
+[23:08:05.769]   ERROR K is not defined

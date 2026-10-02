@@ -1,0 +1,95 @@
+{
+  "a": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/canon-base",
+  "b": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/canon-base-r2",
+  "gitA": "37ba577 fleet: the spend stop can be lowered to the round's budget (ULTRA/fleet/spend-stop) @ ultra/round-1",
+  "gitB": "37ba577 fleet: the spend stop can be lowered to the round's budget (ULTRA/fleet/spend-stop) @ ultra/round-1",
+  "msA": 21139,
+  "msB": 21076,
+  "assertions": {
+    "a": "20/22",
+    "b": "20/22",
+    "differ": []
+  },
+  "rows": {
+    "a": {},
+    "b": {},
+    "differ": []
+  },
+  "mismatches": {
+    "a": [
+      "kestrel: missing: a permission dialog is open: it needs you, Approve, but Home has no row for it",
+      "vibepet: missing: the turn ended with a statement: done, your move, but Home has no row for it",
+      "beacon: missing: an AskUserQuestion dialog is open: it needs you, Reply, but Home has no row for it"
+    ],
+    "b": [
+      "kestrel: missing: a permission dialog is open: it needs you, Approve, but Home has no row for it",
+      "vibepet: missing: the turn ended with a statement: done, your move, but Home has no row for it",
+      "beacon: missing: an AskUserQuestion dialog is open: it needs you, Reply, but Home has no row for it"
+    ],
+    "differ": []
+  },
+  "fleet": {
+    "a": "3/6",
+    "b": "3/6",
+    "changedDuring": [
+      [],
+      []
+    ]
+  },
+  "notes": {
+    "goalFirstClickDropped": [
+      false,
+      false
+    ],
+    "aboveFold": [
+      0,
+      0
+    ]
+  },
+  "shots": [
+    {
+      "file": "1-home/panel.png",
+      "changedPct": 0.11
+    },
+    {
+      "file": "1-home/pet.png",
+      "changedPct": 0.02
+    },
+    {
+      "file": "2-chat/reply.png",
+      "changedPct": 0.11
+    },
+    {
+      "file": "2-chat/sending.png",
+      "changedPct": 0.33
+    },
+    {
+      "file": "3-command/slash.png",
+      "changedPct": 0.24
+    },
+    {
+      "file": "3-command/today.png",
+      "changedPct": 0.11
+    },
+    {
+      "file": "6-ports/footer.png",
+      "changedPct": 1.39
+    },
+    {
+      "file": "6-ports/stopped.png",
+      "changedPct": 0.13
+    },
+    {
+      "file": "7-keys/gesture-pad.png",
+      "changedPct": 0.02
+    },
+    {
+      "file": "7-keys/gesture-saved.png",
+      "changedPct": 0.03
+    },
+    {
+      "file": "7-keys/hotkey.png",
+      "changedPct": 0
+    }
+  ]
+}

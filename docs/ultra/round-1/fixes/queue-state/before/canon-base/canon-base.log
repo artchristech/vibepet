@@ -1,0 +1,8 @@
+FAIL 20/22 assertions in 21.1 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/canon-base
+rows: (none)   fleet: 3/6 in state
+  mismatch kestrel: missing: a permission dialog is open: it needs you, Approve, but Home has no row for it
+  mismatch vibepet: missing: the turn ended with a statement: done, your move, but Home has no row for it
+  mismatch beacon: missing: an AskUserQuestion dialog is open: it needs you, Reply, but Home has no row for it
+  FAIL rows/anyRow: no rows to act on
+  FAIL theater/replayButton: no row offers ▶
+node test/ultra/canon.js --app /Users/christopherharris/.vibepet-ultra/int     8.22s user 2.46s system 50% cpu 21.182 total

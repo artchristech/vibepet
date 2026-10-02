@@ -1,0 +1,31 @@
+<live_context>
+Local time: 10/2/2026, 2:32:48 AM.
+
+Agents: beacon=waiting for an answer for 6h 19m - Which database should beacon use to store check results? (SQLite / Postgres / Redis); kestrel=needs approval for 5h 20m - Bash: ./deploy.sh --dry-run; delta=done for 6h 32m - All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled; atlas=done for 5h 29m - interrupted; vibepet=done for 5h 19m - The app's main entry file is main.js.
+
+Sessions, in the order they need you (needs you first, then done, running, exited; longest-waiting first). Ages are on Claude Code's own clock; "edited this turn" = files the session changed since its last prompt:
+- beacon (@beacon-18) · "Beacon database choice" · folder ~/.vibepet-ultra/fleet/beacon · repo beacon/main · waiting for an answer for 6h 19m · asks: Which database should beacon use to store check results? (SQLite / Postgres / Redis) · edited this turn: nothing
+- kestrel (@kestrel-4d) · "Deploy.sh dry run" · folder ~/.vibepet-ultra/fleet/kestrel · repo kestrel/main · needs approval for 5h 20m · asks: Bash: ./deploy.sh --dry-run · edited this turn: nothing
+- delta (@delta-7a) · "Reconcile three shards in parallel" · folder ~/.vibepet-ultra/fleet/delta · repo delta/main · done for 6h 32m · last said: All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled · edited this turn: nothing · fan-out 3/3 subagents done
+- atlas (@atlas-c4) · "Run build.sh" · folder ~/.vibepet-ultra/fleet/atlas · repo atlas/main · done for 5h 29m · its turn was interrupted · edited this turn: nothing
+- vibepet (@vibepet-d2) · "Read package.json" · folder ~/.vibepet-ultra/fleet/vibepet · repo vibepet/main · done for 5h 19m · last said: The app's main entry file is main.js. · edited this turn: nothing
+Needs you now, in this order: 1. beacon: "Which database should beacon use to store check results? (SQLite / Postgres / Redis)" 2. kestrel: "Bash: ./deploy.sh --dry-run". Asked who needs the user (even who first), name each of these in this order with its ask quoted exactly.
+
+Overlaps: none. No two sessions share a repo (5 sessions in 5 repos).
+
+Watched repo: delta (branch main; sessions in it: delta): 0 uncommitted lines across 0 files, 0 untracked files. Last commit 734 min ago: "delta: shards and reconciler".
+
+Recent commits:
+4dcf8f9 delta: shards and reconciler
+
+Diff stat:
+(clean)
+</live_context>
+
+User: what's running?
+
+Net: Nothing is actively running. Two agents are waiting on you: **beacon** needs you to pick a database for check results (SQLite / Postgres / Redis), and **kestrel** needs approval to run `./deploy.sh --dry-run`. The other three (delta, atlas, vibepet) finished their tasks hours ago.
+
+Want to tackle one of those decisions, or check what they've done?
+
+User: which session needs me first?

@@ -1,0 +1,8 @@
+# test/theater-player.test.js, each assertion soft-reported, run on 8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane
+FAIL live: opens at the latest chapter | live: opens at the latest chapter
+FAIL no stage scene under the chapter card | no stage scene under the chapter card
+FAIL the window's title tells replays apart | the window's title tells replays apart
+FAIL Jump and Approve offered | Jump and Approve offered
+FAIL match | The input did not match the regular expression /Rejected by you/. Input:
+FAIL doesNotMatch | The input was expected to not match the regular expression /EXIT/. Input:
+CRASH els is not defined

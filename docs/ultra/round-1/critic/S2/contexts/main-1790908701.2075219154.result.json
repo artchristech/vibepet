@@ -1,0 +1,60 @@
+{
+ "type": "result",
+ "subtype": "success",
+ "is_error": false,
+ "result": "The recent work has centered on building a test harness, canon.js, that captures all seven surfaces against a live fleet of agent sessions for comparison. Alongside that, a fixture fleet of real Claude Code sessions running in tmux was merged in to give the harness something realistic to test against. The latest commits refined canon's compare logic, making it flag age mismatches against the registry and judge truth mismatches by kind rather than timing, including tracking dropped first clicks and fold behavior.",
+ "duration_ms": 3317,
+ "duration_api_ms": 3292,
+ "total_cost_usd": 0.008222,
+ "usage": {
+  "input_tokens": 2,
+  "cache_creation_input_tokens": 1662,
+  "cache_read_input_tokens": 0,
+  "output_tokens": 157,
+  "output_tokens_details": {
+   "thinking_tokens": 0
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 1662,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 157,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 1662,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1662
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "modelUsage": {
+  "claude-sonnet-5": {
+   "inputTokens": 2,
+   "outputTokens": 157,
+   "cacheReadInputTokens": 0,
+   "cacheCreationInputTokens": 1662,
+   "webSearchRequests": 0,
+   "costUSD": 0.008222,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 64000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "api_error_status": null
+}

@@ -1,0 +1,115 @@
+{
+  "a": "/Users/christopherharris/projects/vibepet/docs/ultra/round-0/canon/run-1",
+  "b": "/Users/christopherharris/projects/vibepet/docs/ultra/round-0/canon/run-2",
+  "gitA": "0c5fd29 Merge ultra/r0-fleet: fixture fleet of real Claude Code sessions in tmux @ ultra/round-0",
+  "gitB": "0c5fd29 Merge ultra/r0-fleet: fixture fleet of real Claude Code sessions in tmux @ ultra/round-0",
+  "msA": 25401,
+  "msB": 25333,
+  "assertions": {
+    "a": "26/26",
+    "b": "26/26",
+    "differ": []
+  },
+  "rows": {
+    "a": {
+      "beacon": "stuck",
+      "kestrel": "stuck",
+      "vibepet": "ready",
+      "ember": "ready",
+      "atlas": "running",
+      "delta": "running"
+    },
+    "b": {
+      "beacon": "stuck",
+      "kestrel": "stuck",
+      "vibepet": "ready",
+      "ember": "ready",
+      "atlas": "running",
+      "delta": "running"
+    },
+    "differ": []
+  },
+  "mismatches": {
+    "a": [
+      "beacon: shows 'stuck' (beacon · stuck 1m); truth: an AskUserQuestion dialog is open: it needs you, Reply; no reply action"
+    ],
+    "b": [
+      "beacon: shows 'stuck' (beacon · stuck 1m); truth: an AskUserQuestion dialog is open: it needs you, Reply; no reply action"
+    ],
+    "differ": []
+  },
+  "fleet": {
+    "a": "6/6",
+    "b": "6/6",
+    "changedDuring": [
+      [],
+      []
+    ]
+  },
+  "shots": [
+    {
+      "file": "1-home/panel.png",
+      "changedPct": 0
+    },
+    {
+      "file": "1-home/pet.png",
+      "changedPct": 0
+    },
+    {
+      "file": "2-chat/reply.png",
+      "changedPct": 0
+    },
+    {
+      "file": "2-chat/sending.png",
+      "changedPct": 0.99
+    },
+    {
+      "file": "3-command/slash.png",
+      "changedPct": 0.13
+    },
+    {
+      "file": "3-command/today.png",
+      "changedPct": 0
+    },
+    {
+      "file": "4-rows/goal.png",
+      "changedPct": 0
+    },
+    {
+      "file": "4-rows/jump.png",
+      "changedPct": 0.1
+    },
+    {
+      "file": "4-rows/list.png",
+      "changedPct": 0
+    },
+    {
+      "file": "5-theater/open.png",
+      "changedPct": 0.21
+    },
+    {
+      "file": "5-theater/seek-mid.png",
+      "changedPct": 0
+    },
+    {
+      "file": "6-ports/footer.png",
+      "changedPct": 1.1
+    },
+    {
+      "file": "6-ports/stopped.png",
+      "changedPct": 0.1
+    },
+    {
+      "file": "7-keys/gesture-pad.png",
+      "changedPct": 0.25
+    },
+    {
+      "file": "7-keys/gesture-saved.png",
+      "changedPct": 0
+    },
+    {
+      "file": "7-keys/hotkey.png",
+      "changedPct": 17.5
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+09:33:30.026 A: click latency
+09:33:38.215  single 0 {"detail":1,"toShown":0.8,"toFrame1":15.6,"toPainted":34.2,"toVisible":117.5,"toRows":34.2,"toFocus":27.5,"downToPainted":100.6,"load":"245.46 113.39 63.46"}
+09:33:46.397  single 1 {"detail":1,"toShown":0.5,"toFrame1":-9.9,"toPainted":7.7,"toVisible":56.7,"toRows":-9.9,"toFocus":4.2,"downToPainted":62.8,"load":"289.49 127.12 68.91"}
+09:33:48.212  single 2 {"detail":1,"toShown":0.7,"toFrame1":10.7,"toPainted":27.4,"toVisible":59.3,"toRows":10.7,"toFocus":3.1,"downToPainted":200.9,"load":"289.49 127.12 68.91"}
+09:33:49.733  single 3 {"detail":1,"toShown":0.6,"toFrame1":11.1,"toPainted":25.9,"toVisible":75.8,"toRows":11.1,"toFocus":4,"downToPainted":99.9,"load":"311.32 134.34 71.80"}
+09:33:51.080  single 4 {"detail":1,"toShown":0.5,"toFrame1":8.1,"toPainted":23.2,"toVisible":56.1,"toRows":8.1,"toFocus":2.9,"downToPainted":101.4,"load":"311.32 134.34 71.80"}
+09:33:52.562  single 5 {"detail":1,"toShown":0.4,"toFrame1":15.9,"toPainted":30.6,"toVisible":64.4,"toRows":15.9,"toFocus":2.3,"downToPainted":164.3,"load":"311.32 134.34 71.80"}
+09:33:53.969  single 6 {"detail":1,"toShown":0.5,"toFrame1":10.2,"toPainted":27,"toVisible":60.4,"toRows":10.2,"toFocus":8.1,"downToPainted":91.6,"load":"311.32 134.34 71.80"}
+09:33:58.486  double 0 {"detail":1,"toShown":0.3,"toFrame1":1.2,"toPainted":18.2,"toVisible":51.2,"toRows":1.2,"toFocus":3.1,"downToPainted":137,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.9,"load":"324.98 140.11 74.20"}
+09:34:01.216  double 1 {"detail":1,"toShown":0.4,"toFrame1":-3.1,"toPainted":12.7,"toVisible":62.6,"toRows":-3.1,"toFocus":4.3,"downToPainted":75.4,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.4,"load":"339.56 146.20 76.74"}
+09:34:02.938  double 2 {"detail":1,"toShown":0.6,"toFrame1":8.6,"toPainted":25.6,"toVisible":60.5,"toRows":8.6,"toFocus":2.5,"downToPainted":103.5,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.6,"load":"339.56 146.20 76.74"}
+09:34:04.395  double 3 {"detail":1,"toShown":0.5,"toFrame1":10.2,"toPainted":25.3,"toVisible":58.8,"toRows":10.2,"toFocus":3,"downToPainted":80,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.5,"load":"339.56 146.20 76.74"}
+09:34:06.134  double 4 {"detail":1,"toShown":0.6,"toFrame1":6.2,"toPainted":23,"toVisible":56.5,"toRows":6.2,"toFocus":3.3,"downToPainted":100.2,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.8,"load":"350.48 151.68 79.08"}
+09:34:08.066  double 5 {"detail":1,"toShown":0.4,"toFrame1":-0.3,"toPainted":16,"toVisible":50.1,"toRows":-0.3,"toFocus":3.8,"downToPainted":71.8,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.5,"load":"350.48 151.68 79.08"}
+09:34:09.492  double 6 {"detail":1,"toShown":0.8,"toFrame1":-8.3,"toPainted":6.4,"toVisible":41.7,"toRows":-8.3,"toFocus":4.8,"downToPainted":69.5,"shows":1,"hides":0,"openAfter":true,"ups":[1,2],"nextClickCloses":true,"nextClickToHidden":0.8,"load":"358.13 156.56 81.23"}
+09:34:39.814 B: Open Home key handler, run in main
+09:34:46.493  key 0 {"toShown":17,"toFrame1":0.7,"toPainted":17.3,"toVisible":83.9,"toRows":17.3,"toFocus":16.7,"active":"chatInput","open":true,"load":"409.49 191.89 97.15","secondPressCloses":true}
+09:34:47.264  key 1 {"toShown":3.2,"toFrame1":2.6,"toPainted":2.6,"toVisible":52.6,"toRows":2.6,"toFocus":3.2,"active":"chatInput","open":true,"load":"409.49 191.89 97.15","secondPressCloses":true}
+09:34:48.291  key 2 {"toShown":2.3,"toFrame1":-11.3,"toPainted":5.3,"toVisible":54.1,"toRows":-11.3,"toFocus":2.2,"active":"chatInput","open":true,"load":"409.49 191.89 97.15","secondPressCloses":true}
+09:34:49.359  key 3 {"toShown":2,"toFrame1":-13,"toPainted":1.9,"toVisible":68.8,"toRows":-13,"toFocus":1.9,"active":"chatInput","open":true,"load":"409.49 191.89 97.15","secondPressCloses":true}
+09:34:50.199  key 4 {"toShown":3.1,"toFrame1":-3.9,"toPainted":12.7,"toVisible":46.1,"toRows":-3.9,"toFocus":2.9,"active":"chatInput","open":true,"load":"403.53 194.27 98.54","secondPressCloses":true}
+09:34:51.057  key 5 {"toShown":1.6,"toFrame1":-0.8,"toPainted":15.9,"toVisible":48.3,"toRows":-0.8,"toFocus":1.6,"active":"chatInput","open":true,"load":"403.53 194.27 98.54","secondPressCloses":true}
+09:34:52.014  key 6 {"toShown":1.8,"toFrame1":-4.4,"toPainted":11.2,"toVisible":44,"toRows":-4.4,"toFocus":1.7,"active":"chatInput","open":true,"load":"403.53 194.27 98.54","secondPressCloses":true}
+09:35:12.337 wrote /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/keys-entry/after/run2/results.json

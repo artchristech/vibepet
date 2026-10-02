@@ -1,0 +1,40 @@
+{
+  "npmTest": {
+    "cmd": "npm test (node --test test/*.test.js)",
+    "head": "9628925",
+    "runs": [
+      {
+        "s": 30.29,
+        "load": "150.22 147.18 109.96",
+        "result": "55/55 pass"
+      },
+      {
+        "s": 21.9,
+        "load": "120.78 140.35 108.77",
+        "result": "55/55 pass"
+      },
+      {
+        "s": 2.95,
+        "load": "102.36 134.88 107.54",
+        "result": "55/55 pass"
+      },
+      {
+        "s": 2.82,
+        "load": "8.32 89.14 111.06",
+        "result": "# tests 55 # pass 55 # fail 0",
+        "note": "after the last commit"
+      }
+    ],
+    "medianS": 12.42
+  },
+  "failsBefore": {
+    "test/goal.test.js": "TypeError: tally is not a function (exit 1) on ultra/round-1 + the new test",
+    "test/acts.test.js": "Cannot find module ../renderer/acts (fail 1) before renderer/acts.js existed"
+  },
+  "spendGate": {
+    "status": "fleet spend: $2.2232 in transcripts, ~$3.3093 incl. hidden calls (stop $3.32, cap $5)  NOT ALL GREEN",
+    "rule": "spend-gated part (~$0.12) runs only if estimate + 0.12 <= stop",
+    "verdict": "skipped: $3.3093 + $0.12 = $3.4293 > $3.32",
+    "turnsTaken": 0
+  }
+}

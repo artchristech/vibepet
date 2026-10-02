@@ -1,0 +1,60 @@
+{
+ "type": "result",
+ "subtype": "success",
+ "is_error": false,
+ "result": "I can't send commands to agent sessions myself \u2014 I can only see state. You'd need to send that through the agent's own interface.",
+ "duration_ms": 2402,
+ "duration_api_ms": 2374,
+ "total_cost_usd": 0.006082000000000001,
+ "usage": {
+  "input_tokens": 2,
+  "cache_creation_input_tokens": 1422,
+  "cache_read_input_tokens": 0,
+  "output_tokens": 39,
+  "output_tokens_details": {
+   "thinking_tokens": 0
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 1422,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 39,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 1422,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1422
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "modelUsage": {
+  "claude-sonnet-5": {
+   "inputTokens": 2,
+   "outputTokens": 39,
+   "cacheReadInputTokens": 0,
+   "cacheCreationInputTokens": 1422,
+   "webSearchRequests": 0,
+   "costUSD": 0.006082000000000001,
+   "contextWindow": 1000000,
+   "maxOutputTokens": 64000,
+   "thinkingTokens": 0,
+   "canonicalModel": "claude-sonnet-5",
+   "provider": "firstParty",
+   "costBasis": "list"
+  }
+ },
+ "api_error_status": null
+}

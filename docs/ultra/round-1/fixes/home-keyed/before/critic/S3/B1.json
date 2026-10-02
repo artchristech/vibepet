@@ -1,0 +1,556 @@
+{
+  "section": "B1",
+  "startedAt": "2026-10-02T02:32:01.131Z",
+  "steps": [
+    {
+      "id": "rows",
+      "at": "2026-10-02T02:32:03.355Z",
+      "load": [
+        1.33,
+        1.56,
+        2.17
+      ],
+      "rows": [
+        [
+          "Read package.json",
+          "vibepet · done just now",
+          "ready"
+        ]
+      ]
+    },
+    {
+      "id": "05-skip",
+      "at": "2026-10-02T02:32:03.654Z",
+      "load": [
+        1.33,
+        1.56,
+        2.17
+      ],
+      "why": "fewer than 2 rows share a letter",
+      "rows": [
+        "Read package.json"
+      ]
+    },
+    {
+      "id": "01-jump-noname",
+      "at": "2026-10-02T02:32:03.848Z",
+      "load": [
+        1.33,
+        1.56,
+        2.17
+      ],
+      "jumpedTo": [
+        "vibepet",
+        "Read package.json",
+        "ready"
+      ],
+      "result": {
+        "ok": false,
+        "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+      },
+      "truthBlocked": [
+        "kestrel waiting(permission prompt) 139s",
+        "beacon waiting(input needed) 1099s"
+      ]
+    },
+    {
+      "id": "03-jump-feedback",
+      "at": "2026-10-02T02:32:06.350Z",
+      "load": [
+        1.33,
+        1.56,
+        2.17
+      ],
+      "member": "vibepet",
+      "at04": {
+        "bubble": {
+          "hidden": false,
+          "display": "block",
+          "text": "vibepet: ",
+          "z": "2",
+          "rect": [
+            292,
+            601,
+            77,
+            25
+          ],
+          "coveredBy": "chat-panel"
+        },
+        "newMsgs": 0
+      },
+      "at2s": {
+        "bubble": {
+          "hidden": false,
+          "display": "block",
+          "text": "vibepet: couldn't find its terminal — resume command copied",
+          "z": "2",
+          "rect": [
+            180,
+            585,
+            300,
+            41
+          ],
+          "coveredBy": "chat-panel"
+        },
+        "newMsgs": 0,
+        "chatZ": "3"
+      }
+    },
+    {
+      "id": "02-jump-tmux",
+      "at": "2026-10-02T02:32:07.795Z",
+      "load": [
+        1.23,
+        1.54,
+        2.16
+      ],
+      "member": "vibepet",
+      "runs": [
+        {
+          "result": {
+            "ok": false,
+            "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+          },
+          "ms": 84,
+          "clipboard": [
+            "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+          ]
+        },
+        {
+          "result": {
+            "ok": false,
+            "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+          },
+          "ms": 84,
+          "clipboard": [
+            "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+          ]
+        },
+        {
+          "result": {
+            "ok": false,
+            "cmd": "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+          },
+          "ms": 83,
+          "clipboard": [
+            "cd /Users/christopherharris/.vibepet-ultra/fleet/vibepet && claude --resume 6101876b-19c6-42a1-824f-6f1c7d4fd83e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-goal-named",
+      "at": "2026-10-02T02:32:11.764Z",
+      "load": [
+        1.29,
+        1.54,
+        2.16
+      ],
+      "setGoalOn": [
+        "vibepet",
+        "Read package.json"
+      ],
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "Goal for Read package.json: kestrel: approve the deploy"
+      },
+      "rows": [
+        [
+          "vibepet · done just now",
+          "◎ kestrel: approve the deploy"
+        ]
+      ],
+      "kestrelVisible": false
+    },
+    {
+      "id": "22-goal-reset",
+      "at": "2026-10-02T02:32:15.368Z",
+      "load": [
+        1.29,
+        1.54,
+        2.16
+      ],
+      "on": [
+        "6101876b"
+      ],
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "Goal for Read package.json reset to its first prompt."
+      },
+      "rows": [
+        [
+          "vibepet · done just now",
+          "◎ Read package.json and tell me in one plain sentence what this project is."
+        ]
+      ]
+    },
+    {
+      "id": "07-prefill-enter",
+      "at": "2026-10-02T02:32:18.671Z",
+      "load": [
+        1.35,
+        1.55,
+        2.16
+      ],
+      "runs": [
+        {
+          "row": "vibepet · done just now",
+          "prefill": "/goal ",
+          "sendBefore": "disabled",
+          "active": "chatInput",
+          "afterEnter": {
+            "input": "/goal ",
+            "newMsgs": 0,
+            "setGoal": 0
+          }
+        },
+        {
+          "row": "vibepet · done just now",
+          "prefill": "/goal ",
+          "sendBefore": "disabled",
+          "active": "chatInput",
+          "afterEnter": {
+            "input": "/goal ",
+            "newMsgs": 0,
+            "setGoal": 0
+          }
+        },
+        {
+          "row": "vibepet · done just now",
+          "prefill": "/goal ",
+          "sendBefore": "disabled",
+          "active": "chatInput",
+          "afterEnter": {
+            "input": "/goal ",
+            "newMsgs": 0,
+            "setGoal": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "07-control-keystroke",
+      "at": "2026-10-02T02:32:19.291Z",
+      "load": [
+        1.35,
+        1.55,
+        2.16
+      ],
+      "setGoal": 1,
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "Goal for Read package.json reset to its first prompt."
+      }
+    },
+    {
+      "id": "16-typo",
+      "at": "2026-10-02T02:32:20.090Z",
+      "load": [
+        1.35,
+        1.55,
+        2.16
+      ],
+      "name": "vibepet",
+      "typed": "vibpet",
+      "lastMsg": {
+        "cls": "msg pet note",
+        "text": "No session matches “vibpet”."
+      },
+      "jumped": 0,
+      "rows": [
+        "vibepet · done just now"
+      ]
+    },
+    {
+      "id": "13-shift-tab",
+      "at": "2026-10-02T02:32:20.515Z",
+      "load": [
+        1.35,
+        1.55,
+        2.16
+      ],
+      "presses": 14,
+      "walk": [
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "do": null,
+          "text": "Vibe check",
+          "row": null
+        },
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "do": null,
+          "text": "What should I do next?",
+          "row": null
+        },
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "do": null,
+          "text": "Am I on track?",
+          "row": null
+        },
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "do": null,
+          "text": "Write a commit message",
+          "row": null
+        },
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "do": null,
+          "text": "What's my agent doing?",
+          "row": null
+        },
+        {
+          "tag": "DIV",
+          "id": "msgs",
+          "do": null,
+          "text": "Goal for Read package.js",
+          "row": null
+        },
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "do": "today",
+          "text": "Today",
+          "row": null
+        },
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "do": "rec",
+          "text": "● Record a short",
+          "row": null
+        },
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "do": "goal",
+          "text": "◎",
+          "row": "vibepet · done just now"
+        },
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "do": "done",
+          "text": "✓",
+          "row": "vibepet · done just now"
+        },
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "do": "replay",
+          "text": "▶",
+          "row": "vibepet · done just now"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "chatClose",
+          "do": null,
+          "text": "esc",
+          "row": null
+        },
+        {
+          "tag": "BUTTON",
+          "id": "homeMore",
+          "do": null,
+          "text": "⋯",
+          "row": null
+        },
+        {
+          "tag": "BODY",
+          "id": null,
+          "do": null,
+          "text": "Netvibepet/main · claude",
+          "row": null
+        }
+      ],
+      "rows": [
+        [
+          "vibepet · done just now",
+          [
+            "replay",
+            "done",
+            "goal"
+          ]
+        ]
+      ],
+      "rowsFocusable": [
+        -1
+      ]
+    }
+  ],
+  "truthBefore": {
+    "at": "2026-10-02T02:32:01.405Z",
+    "spend": {
+      "transcriptsUsd": 2.163593,
+      "estimateWithHiddenUsd": 3.2153,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sid": "13a1427d",
+        "reg": "waiting(permission prompt)",
+        "regAgeS": 139,
+        "last": "user_prompt"
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sid": "6101876b",
+        "reg": "idle",
+        "regAgeS": 117,
+        "last": "end_turn"
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sid": "5c051e84",
+        "reg": "idle",
+        "regAgeS": 1744,
+        "last": "end_turn"
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sid": "a9377f08",
+        "reg": "waiting(input needed)",
+        "regAgeS": 1099,
+        "last": "user_prompt"
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sid": "eb59a756",
+        "reg": "idle",
+        "regAgeS": 1872,
+        "last": "end_turn"
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sid": "db0c1ec0",
+        "reg": null,
+        "regAgeS": null,
+        "last": "user_prompt"
+      }
+    ]
+  },
+  "guiHosts": {
+    "kestrel": null,
+    "vibepet": null,
+    "atlas": null,
+    "beacon": null,
+    "delta": null
+  },
+  "truthAfter": {
+    "at": "2026-10-02T02:32:20.939Z",
+    "spend": {
+      "transcriptsUsd": 2.163593,
+      "estimateWithHiddenUsd": 3.2153,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sid": "13a1427d",
+        "reg": "waiting(permission prompt)",
+        "regAgeS": 158,
+        "last": "user_prompt"
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sid": "6101876b",
+        "reg": "idle",
+        "regAgeS": 136,
+        "last": "end_turn"
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sid": "5c051e84",
+        "reg": "idle",
+        "regAgeS": 1764,
+        "last": "end_turn"
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sid": "a9377f08",
+        "reg": "waiting(input needed)",
+        "regAgeS": 1118,
+        "last": "user_prompt"
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sid": "eb59a756",
+        "reg": "idle",
+        "regAgeS": 1892,
+        "last": "end_turn"
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sid": "db0c1ec0",
+        "reg": null,
+        "regAgeS": null,
+        "last": "user_prompt"
+      }
+    ]
+  },
+  "close": {
+    "how": "quit",
+    "ms": 263,
+    "procs": 7,
+    "orphans": []
+  },
+  "endedAt": "2026-10-02T02:32:21.264Z"
+}

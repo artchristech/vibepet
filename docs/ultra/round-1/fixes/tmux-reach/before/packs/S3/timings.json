@@ -1,0 +1,384 @@
+[
+ {
+  "flow": "F1",
+  "step": "single click on Net: mouseup → panel painted (bar visible)",
+  "ms": 254.4,
+  "n": 5,
+  "samples": [
+   254.5,
+   256.7,
+   252.9,
+   254.4,
+   252.6
+  ],
+  "load": "4.13 → 3.96",
+  "at": "01:48Z",
+  "note": "panel shown in the DOM at 221.4 ms median (the 220 ms double-click wait); caret in the bar at 222.5 ms"
+ },
+ {
+  "flow": "F1",
+  "step": "single click on Net: mousedown → panel painted",
+  "ms": 317,
+  "n": 5,
+  "samples": [
+   318.1,
+   320.3,
+   315.9,
+   317,
+   315.8
+  ],
+  "load": "4.13 → 3.96",
+  "at": "01:48Z"
+ },
+ {
+  "flow": "F1",
+  "step": "single click on Net: mouseup → open animation finished",
+  "ms": 484.6,
+  "n": 5,
+  "samples": [
+   457.9,
+   495.3,
+   484.6,
+   533,
+   478.7
+  ],
+  "load": "4.13 → 3.96",
+  "at": "01:48Z"
+ },
+ {
+  "flow": "F1",
+  "step": "single click on Net: mouseup → caret in the bar",
+  "ms": 222.5,
+  "n": 5,
+  "samples": [
+   222.5,
+   223.1,
+   222.3,
+   221.8,
+   223.7
+  ],
+  "load": "4.13 → 3.96",
+  "at": "01:48Z"
+ },
+ {
+  "flow": "F1",
+  "step": "double click on Net: 2nd mouseup → panel painted",
+  "ms": 36,
+  "n": 5,
+  "samples": [
+   36,
+   31.6,
+   39.4,
+   28.8,
+   43
+  ],
+  "load": "3.96 → 4.11",
+  "at": "01:49Z",
+  "note": "caret in the bar at 1.6 ms median; animation finished at 250.8 ms median"
+ },
+ {
+  "flow": "F1",
+  "step": "right click on Net → native menu shown",
+  "ms": 12.7,
+  "n": 5,
+  "samples": [
+   17.2,
+   10.8,
+   14.6,
+   9.7,
+   12.7
+  ],
+  "load": "4.11 → 4.18",
+  "at": "01:49Z"
+ },
+ {
+  "flow": "F1",
+  "step": "menu item \"Open Home\" → panel painted",
+  "ms": 10.8,
+  "n": 5,
+  "samples": [
+   8.1,
+   23.3,
+   10.8,
+   5,
+   12.2
+  ],
+  "load": "4.11 → 4.18",
+  "at": "01:49Z",
+  "note": "excludes the time a person takes to pick the item"
+ },
+ {
+  "flow": "F1",
+  "step": "type \"/\" in the bar → hint list painted",
+  "ms": 8.6,
+  "n": 5,
+  "samples": [
+   8.9,
+   30.2,
+   8.3,
+   8.6,
+   2.6
+  ],
+  "load": "4.23",
+  "at": "01:49Z"
+ },
+ {
+  "flow": "F1",
+  "step": "click ◎ on a row → bar prefilled \"/goal …\" with caret",
+  "ms": 1,
+  "n": 5,
+  "samples": [
+   1.9,
+   1,
+   1,
+   0.8,
+   0.9
+  ],
+  "load": "5.54",
+  "at": "02:00Z"
+ },
+ {
+  "flow": "F4",
+  "step": "Esc → panel hidden",
+  "ms": 0.3,
+  "n": 5,
+  "samples": [
+   0.3,
+   0.4,
+   0.3,
+   0.3,
+   0.5
+  ],
+  "load": "7.6",
+  "at": "01:59Z"
+ },
+ {
+  "flow": "F2",
+  "step": "/today: Enter → note in the panel (painted)",
+  "ms": 21.2,
+  "n": 5,
+  "samples": [
+   50.4,
+   95.9,
+   6.2,
+   19,
+   21.2
+  ],
+  "load": "3.48 → 3.57",
+  "at": "01:50Z",
+  "note": "note in the DOM at 2.2 ms median"
+ },
+ {
+  "flow": "F2",
+  "step": "/jump <visible session> (tmux): jump lookup in main → result (failed every time)",
+  "ms": 141,
+  "n": 22,
+  "samples": [
+   125,
+   143,
+   160,
+   146,
+   189,
+   139,
+   150,
+   104,
+   162,
+   161,
+   189,
+   114,
+   102,
+   110,
+   129,
+   114,
+   100,
+   139,
+   281,
+   135,
+   173,
+   191
+  ],
+  "load": "2.7 → 6.7",
+  "at": "01:51Z–02:02Z",
+  "note": "22 of 22 returned ok:false and wrote a resume command to the clipboard; no note in the panel"
+ },
+ {
+  "flow": "F2",
+  "step": "/jump <visible session>: Enter → failure line starts typing in the speech bubble (under the open panel)",
+  "ms": 145.1,
+  "n": 6,
+  "samples": [
+   126.3,
+   143.4,
+   160.3,
+   146.8,
+   190.3,
+   139.7
+  ],
+  "load": "3.09 → 3.99",
+  "at": "01:51Z",
+  "note": "the panel itself shows nothing; see shots 05, 06"
+ },
+ {
+  "flow": "F2",
+  "step": "/jump <name not in Home>: Enter → \"No session matches\" note painted",
+  "ms": 37.2,
+  "n": 5,
+  "samples": [
+   37.2,
+   24.8,
+   58.2,
+   97,
+   18.1
+  ],
+  "load": "3.50 → 3.42",
+  "at": "01:50Z"
+ },
+ {
+  "flow": "F2",
+  "step": "/replay <session>: Enter → Theater window created",
+  "ms": 104,
+  "n": 3,
+  "samples": [
+   112,
+   104,
+   89
+  ],
+  "load": "≈2.9",
+  "at": "01:52Z"
+ },
+ {
+  "flow": "F2",
+  "step": "/replay <session>: Enter → Theater ready (title + 47 beats)",
+  "ms": 174,
+  "n": 3,
+  "samples": [
+   208,
+   174,
+   154
+  ],
+  "load": "≈2.9",
+  "at": "01:52Z"
+ },
+ {
+  "flow": "F2",
+  "step": "/goal <text>: Enter → note painted",
+  "ms": 86.1,
+  "n": 2,
+  "samples": [
+   75.4,
+   96.8
+  ],
+  "load": "2.72 → 2.83",
+  "at": "01:52Z",
+  "note": "set-goal reached main at 4 ms"
+ },
+ {
+  "flow": "F2",
+  "step": "/stop <port>: Enter → confirm dialog requested",
+  "ms": 60,
+  "n": 3,
+  "samples": [
+   60,
+   60,
+   60
+  ],
+  "load": "≈3.4",
+  "at": "01:53Z–01:55Z"
+ },
+ {
+  "flow": "F2",
+  "step": "/stop <port>: key press (driver clock) → server process gone",
+  "ms": 46,
+  "n": 3,
+  "samples": [
+   47,
+   44,
+   46
+  ],
+  "load": "≈3.4",
+  "at": "01:53Z–01:55Z"
+ },
+ {
+  "flow": "F2",
+  "step": "/stop <port>: key press (driver clock) → server chip gone from the footer",
+  "ms": 2551,
+  "n": 3,
+  "samples": [
+   2440,
+   2764,
+   2551
+  ],
+  "load": "≈3.4",
+  "at": "01:53Z–01:55Z",
+  "note": "no note in the panel; the result line goes to the speech bubble"
+ },
+ {
+  "flow": "F2",
+  "step": "/setup: Enter → Setup card shown (bar hidden)",
+  "ms": 0.6,
+  "n": 3,
+  "samples": [
+   1.9,
+   0.6,
+   0.4
+  ],
+  "load": "4.5 → 5.4",
+  "at": "01:58Z"
+ },
+ {
+  "flow": "F2",
+  "step": "/settings: Enter → menu request reaches main",
+  "ms": 12.1,
+  "n": 3,
+  "samples": [
+   15.8,
+   10.7,
+   12.1
+  ],
+  "load": "3.68 → 3.59",
+  "at": "01:57Z"
+ },
+ {
+  "flow": "F2",
+  "step": "/settings: Enter → native menu shown",
+  "ms": 74,
+  "n": 3,
+  "samples": [
+   79,
+   74,
+   74
+  ],
+  "load": "3.68 → 3.59",
+  "at": "01:57Z"
+ },
+ {
+  "flow": "F2",
+  "step": "/record: Enter → record toggle reaches main (capture not run, see log)",
+  "ms": 0.3,
+  "n": 3,
+  "samples": [
+   0.2,
+   0.3,
+   0.4
+  ],
+  "load": "3.68 → 3.59",
+  "at": "01:57Z"
+ },
+ {
+  "flow": "F2",
+  "step": "unknown command (/approve, /reply, /answer, /deny, /help, /Today, /): Enter → note in the DOM",
+  "ms": 1.9,
+  "n": 7,
+  "samples": [
+   2.5,
+   1.2,
+   1.3,
+   2.3,
+   2.8,
+   1.4,
+   1.9
+  ],
+  "load": "9.7 → 10.4",
+  "at": "01:58Z"
+ }
+]

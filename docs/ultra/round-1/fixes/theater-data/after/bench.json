@@ -1,0 +1,52 @@
+{
+ "what": "node-level cost of the code this fix touches, base (8e5fe27, git archive) vs fix, interleaved in one process so load hits both alike; medians in ms",
+ "timeline_build": {
+  "method": "theater.timeline(file[, live]) on each fleet session's current transcript, 30 runs each, old/new alternating (order swapped every other run)",
+  "ms": {
+   "vibepet": {
+    "oldMed": 44.3,
+    "newMed": 35.2
+   },
+   "kestrel": {
+    "oldMed": 57,
+    "newMed": 41.3
+   },
+   "beacon": {
+    "oldMed": 37.2,
+    "newMed": 46.7
+   },
+   "ember": {
+    "oldMed": 61.8,
+    "newMed": 45.5
+   },
+   "delta": {
+    "oldMed": 108.9,
+    "newMed": 94.7
+   },
+   "atlas": {
+    "oldMed": 32.1,
+    "newMed": 31.5
+   }
+  },
+  "uptime_before": " 4:26  up 6 days, 15:12, 19 users, load averages: 21.55 25.66 33.18",
+  "uptime_after": " 4:27  up 6 days, 15:12, 19 users, load averages: 41.84 30.18 34.60"
+ },
+ "theater_menu_recent": {
+  "method": "theater.recent(dir) (the Theater\u2026 list), 10 runs each, old/new alternating; the real root was read for timing only (counts and ms printed, no titles, paths or text)",
+  "fleet_root": {
+   "oldMedianMs": 18.3,
+   "newMedianMs": 7.6,
+   "oldCount": 6,
+   "newCount": 6,
+   "runs": 10
+  },
+  "real_root_15_entries": {
+   "oldMedianMs": 201.8,
+   "newMedianMs": 38.4,
+   "oldCount": 15,
+   "newCount": 15,
+   "runs": 10
+  },
+  "uptime_after": " 4:27  up 6 days, 15:12, 19 users, load averages: 41.84 30.18 34.60"
+ }
+}

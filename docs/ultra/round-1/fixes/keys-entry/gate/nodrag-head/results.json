@@ -1,0 +1,264 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-keys-entry",
+  "git": "fb276cd keys-entry: say what VIBEPET_HOTKEY=<accelerator> binds",
+  "startedAt": "2026-10-02T13:11:46.223Z",
+  "n": 7,
+  "parts": [
+    "a"
+  ],
+  "a": {
+    "load0": "4.78 9.27 20.33",
+    "single": [
+      {
+        "detail": 1,
+        "toShown": 0.6,
+        "toFrame1": 12.3,
+        "toPainted": 29,
+        "toVisible": 61.4,
+        "toRows": 12.3,
+        "toFocus": 12.5,
+        "downToPainted": 81.7,
+        "load": "4.48 9.13 20.21"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.3,
+        "toFrame1": 12,
+        "toPainted": 27.8,
+        "toVisible": 62,
+        "toRows": 12,
+        "toFocus": 2.3,
+        "downToPainted": 79.7,
+        "load": "4.52 9.07 20.12"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.3,
+        "toFrame1": 13.6,
+        "toPainted": 29.4,
+        "toVisible": 62.7,
+        "toRows": 13.6,
+        "toFocus": 1.8,
+        "downToPainted": 81.2,
+        "load": "4.52 9.07 20.12"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.2,
+        "toFrame1": 12.8,
+        "toPainted": 28.6,
+        "toVisible": 62.8,
+        "toRows": 12.8,
+        "toFocus": 1.5,
+        "downToPainted": 80.8,
+        "load": "4.52 9.07 20.12"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.2,
+        "toFrame1": 14.1,
+        "toPainted": 30.6,
+        "toVisible": 47.4,
+        "toRows": 14.1,
+        "toFocus": 1.6,
+        "downToPainted": 82.1,
+        "load": "4.52 9.07 20.12"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.3,
+        "toFrame1": 11,
+        "toPainted": 28.3,
+        "toVisible": 62.1,
+        "toRows": 11,
+        "toFocus": 2.1,
+        "downToPainted": 81,
+        "load": "4.52 9.07 20.12"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.3,
+        "toFrame1": 11.8,
+        "toPainted": 28.4,
+        "toVisible": 61.8,
+        "toRows": 11.8,
+        "toFocus": 2,
+        "downToPainted": 81.7,
+        "load": "4.52 9.07 20.12"
+      }
+    ],
+    "double": [
+      {
+        "detail": 1,
+        "toShown": 0.4,
+        "toFrame1": 13,
+        "toPainted": 29.3,
+        "toVisible": 63.1,
+        "toRows": 13,
+        "toFocus": 1.8,
+        "downToPainted": 80.4,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 0.2,
+        "load": "4.56 9.00 20.03"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.2,
+        "toFrame1": 12.5,
+        "toPainted": 29.1,
+        "toVisible": 45.8,
+        "toRows": 12.5,
+        "toFocus": 1.6,
+        "downToPainted": 81.1,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 0.4,
+        "load": "4.56 9.00 20.03"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.3,
+        "toFrame1": 14,
+        "toPainted": 30.7,
+        "toVisible": 46.4,
+        "toRows": 14,
+        "toFocus": 2,
+        "downToPainted": 82.2,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 0.3,
+        "load": "4.56 9.00 20.03"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.3,
+        "toFrame1": 12.1,
+        "toPainted": 28.8,
+        "toVisible": 45,
+        "toRows": 12.1,
+        "toFocus": 1.7,
+        "downToPainted": 81.2,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 0.3,
+        "load": "4.35 8.88 19.93"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.2,
+        "toFrame1": 13.1,
+        "toPainted": 29.7,
+        "toVisible": 46.4,
+        "toRows": 13.1,
+        "toFocus": 1.5,
+        "downToPainted": 82.1,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 0.2,
+        "load": "4.35 8.88 19.93"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.3,
+        "toFrame1": 14.1,
+        "toPainted": 30.8,
+        "toVisible": 47.4,
+        "toRows": 14.1,
+        "toFocus": 1.7,
+        "downToPainted": 82.3,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 0.2,
+        "load": "4.35 8.88 19.93"
+      },
+      {
+        "detail": 1,
+        "toShown": 0.4,
+        "toFrame1": 12.7,
+        "toPainted": 29.3,
+        "toVisible": 62.7,
+        "toRows": 12.7,
+        "toFocus": 2.8,
+        "downToPainted": 81.8,
+        "shows": 1,
+        "hides": 0,
+        "openAfter": true,
+        "ups": [
+          1,
+          2
+        ],
+        "nextClickCloses": true,
+        "nextClickToHidden": 0.2,
+        "load": "4.35 8.88 19.93"
+      }
+    ],
+    "close": {
+      "how": "quit",
+      "ms": 203,
+      "procs": 7,
+      "orphans": []
+    },
+    "singleMedian": {
+      "toShown": 0.3,
+      "toFrame1": 12.3,
+      "toPainted": 28.6,
+      "toVisible": 62,
+      "toRows": 12.3,
+      "toFocus": 2,
+      "downToPainted": 81.2
+    },
+    "doubleMedian": {
+      "toShown": 0.3,
+      "toPainted": 29.3,
+      "toVisible": 46.4,
+      "nextClickToHidden": 0.2
+    },
+    "doubleOk": true,
+    "load1": "4.35 8.88 19.93",
+    "realCursorMoves": 59,
+    "winBounds": {
+      "x": 756,
+      "y": 25,
+      "width": 660,
+      "height": 816
+    }
+  },
+  "endedAt": "2026-10-02T13:12:07.777Z"
+}

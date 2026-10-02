@@ -1,0 +1,41 @@
+# test/theater-player.test.js, each assertion soft-reported, run on b7468a5 theater-player: Theater plays like a tool
+PASS live: opens at the latest chapter
+PASS no stage scene under the chapter card
+PASS the window's title tells replays apart
+PASS Jump and Approve offered
+PASS match
+PASS doesNotMatch
+PASS red on the rail
+PASS red on the scrub bar
+PASS strictEqual
+PASS strictEqual
+PASS strictEqual
+PASS paused replay idles at 0 fps
+PASS the bar's last pixel reaches the end
+PASS ▶ at the end plays from the top
+PASS play wakes the frame loop
+PASS deepStrictEqual
+PASS reopen shows the new beats
+PASS strictEqual
+PASS +2 new beats
+PASS strictEqual
+PASS touched: position kept
+PASS at the end: follows the new end
+PASS focus, nothing new: no redraw
+PASS strictEqual
+PASS focus keeps the playhead
+PASS strictEqual
+PASS ok
+PASS after the hold the scene comes back
+PASS strictEqual
+PASS a new chapter: the card replaces the stage
+PASS deepStrictEqual
+PASS the same name in another folder is another session
+PASS a window main does not know
+PASS strictEqual
+PASS each new window 28 px down-right of the newest, kept on screen
+PASS strictEqual
+PASS reopening asks for a re-read
+PASS /p/c.jsonl
+PASS back to the corner
+PASS strictEqual

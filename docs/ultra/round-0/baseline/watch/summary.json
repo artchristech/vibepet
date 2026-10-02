@@ -1,0 +1,488 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/int",
+  "root": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+  "startedAt": "2026-10-01T22:22:55.239Z",
+  "secs": 480,
+  "every": 2,
+  "samples": 240,
+  "homeOpens": 1,
+  "close": {
+    "how": "quit",
+    "ms": 450,
+    "procs": 7,
+    "orphans": []
+  },
+  "members": {
+    "vibepet": {
+      "segments": [
+        {
+          "from": 916,
+          "to": 18930,
+          "truth": "idle",
+          "ui": "hidden",
+          "label": null,
+          "fan": null
+        },
+        {
+          "from": 20931,
+          "to": 22934,
+          "truth": "idle",
+          "ui": "running",
+          "label": "vibepet · 0s",
+          "fan": null
+        },
+        {
+          "from": 24940,
+          "to": 423353,
+          "truth": "idle",
+          "ui": "ready",
+          "label": "vibepet · done 7m ago",
+          "fan": null
+        },
+        {
+          "from": 425354,
+          "to": 479397,
+          "truth": "idle",
+          "ui": "hidden",
+          "label": null,
+          "fan": null
+        }
+      ],
+      "changes": []
+    },
+    "atlas": {
+      "segments": [
+        {
+          "from": 916,
+          "to": 18930,
+          "truth": "idle",
+          "ui": "hidden",
+          "label": null,
+          "fan": null
+        },
+        {
+          "from": 20931,
+          "to": 20931,
+          "truth": "busy",
+          "ui": "running",
+          "label": "atlas · 0s",
+          "fan": null
+        },
+        {
+          "from": 22934,
+          "to": 479397,
+          "truth": "busy+tool",
+          "ui": "running",
+          "label": "atlas · 0s",
+          "fan": null
+        }
+      ],
+      "changes": [
+        {
+          "at": 20931,
+          "to": "busy",
+          "shownAs": "running",
+          "afterMs": 0
+        },
+        {
+          "at": 22934,
+          "to": "busy+tool",
+          "shownAs": "running",
+          "afterMs": 0
+        }
+      ]
+    },
+    "beacon": {
+      "segments": [
+        {
+          "from": 916,
+          "to": 8922,
+          "truth": "question",
+          "ui": "hidden",
+          "label": null,
+          "fan": null
+        },
+        {
+          "from": 10923,
+          "to": 14926,
+          "truth": "idle",
+          "ui": "hidden",
+          "label": null,
+          "fan": null
+        },
+        {
+          "from": 16928,
+          "to": 16928,
+          "truth": "busy",
+          "ui": "hidden",
+          "label": null,
+          "fan": null
+        },
+        {
+          "from": 18930,
+          "to": 109008,
+          "truth": "question",
+          "ui": "running",
+          "label": "beacon · 1m 30s",
+          "fan": null
+        },
+        {
+          "from": 111010,
+          "to": 147051,
+          "truth": "question",
+          "ui": "stuck",
+          "label": "beacon · stuck 1m",
+          "fan": null
+        },
+        {
+          "from": 149052,
+          "to": 235125,
+          "truth": "question",
+          "ui": "running",
+          "label": "beacon · 1m 28s",
+          "fan": null
+        },
+        {
+          "from": 237128,
+          "to": 479397,
+          "truth": "question",
+          "ui": "stuck",
+          "label": "beacon · stuck 4m",
+          "fan": null
+        }
+      ],
+      "changes": [
+        {
+          "at": 10923,
+          "to": "idle",
+          "shownAs": "hidden",
+          "afterMs": 0
+        },
+        {
+          "at": 16928,
+          "to": "busy",
+          "shownAs": null,
+          "afterMs": null
+        },
+        {
+          "at": 18930,
+          "to": "question",
+          "shownAs": null,
+          "afterMs": null
+        }
+      ]
+    },
+    "kestrel": {
+      "segments": [
+        {
+          "from": 916,
+          "to": 6921,
+          "truth": "approval",
+          "ui": "stuck",
+          "label": "kestrel · stuck 1m",
+          "fan": null
+        },
+        {
+          "from": 8922,
+          "to": 10923,
+          "truth": "idle",
+          "ui": "stuck",
+          "label": "kestrel · stuck 1m",
+          "fan": null
+        },
+        {
+          "from": 12925,
+          "to": 12925,
+          "truth": "idle",
+          "ui": "hidden",
+          "label": null,
+          "fan": null
+        },
+        {
+          "from": 14926,
+          "to": 107006,
+          "truth": "approval",
+          "ui": "running",
+          "label": "kestrel · 1m 30s",
+          "fan": null
+        },
+        {
+          "from": 109008,
+          "to": 479397,
+          "truth": "approval",
+          "ui": "stuck",
+          "label": "kestrel · stuck 6m",
+          "fan": null
+        }
+      ],
+      "changes": [
+        {
+          "at": 8922,
+          "to": "idle",
+          "shownAs": "hidden",
+          "afterMs": 4003
+        },
+        {
+          "at": 14926,
+          "to": "approval",
+          "shownAs": "stuck",
+          "afterMs": 94082
+        }
+      ]
+    },
+    "delta": {
+      "segments": [
+        {
+          "from": 916,
+          "to": 28941,
+          "truth": "idle",
+          "ui": "hidden",
+          "label": null,
+          "fan": null
+        },
+        {
+          "from": 30944,
+          "to": 30944,
+          "truth": "busy",
+          "ui": "hidden",
+          "label": null,
+          "fan": null
+        },
+        {
+          "from": 32946,
+          "to": 34948,
+          "truth": "busy",
+          "ui": "running",
+          "label": "delta · 0s",
+          "fan": null
+        },
+        {
+          "from": 36950,
+          "to": 187086,
+          "truth": "busy+tool",
+          "ui": "running",
+          "label": "delta · 2m 33s",
+          "fan": [
+            3,
+            3,
+            0
+          ]
+        },
+        {
+          "from": 189087,
+          "to": 189087,
+          "truth": "busy",
+          "ui": "running",
+          "label": "delta · 2m 36s",
+          "fan": [
+            1,
+            3,
+            0
+          ]
+        },
+        {
+          "from": 191087,
+          "to": 191087,
+          "truth": "idle",
+          "ui": "running",
+          "label": "delta · 2m 36s",
+          "fan": [
+            1,
+            3,
+            0
+          ]
+        },
+        {
+          "from": 193089,
+          "to": 255142,
+          "truth": "idle",
+          "ui": "ready",
+          "label": "delta · done 1m ago",
+          "fan": [
+            0,
+            3,
+            0
+          ]
+        },
+        {
+          "from": 257143,
+          "to": 257143,
+          "truth": "busy",
+          "ui": "ready",
+          "label": "delta · done 1m ago",
+          "fan": [
+            0,
+            3,
+            0
+          ]
+        },
+        {
+          "from": 259146,
+          "to": 259146,
+          "truth": "busy",
+          "ui": "running",
+          "label": "delta · 0s",
+          "fan": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "from": 261148,
+          "to": 409341,
+          "truth": "busy+tool",
+          "ui": "running",
+          "label": "delta · 2m 31s",
+          "fan": [
+            3,
+            3,
+            0
+          ]
+        },
+        {
+          "from": 411343,
+          "to": 413343,
+          "truth": "busy",
+          "ui": "running",
+          "label": "delta · 2m 34s",
+          "fan": [
+            3,
+            3,
+            0
+          ]
+        },
+        {
+          "from": 415345,
+          "to": 479397,
+          "truth": "idle",
+          "ui": "ready",
+          "label": "delta · done 1m ago",
+          "fan": [
+            0,
+            3,
+            0
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "at": 30944,
+          "to": "busy",
+          "shownAs": "running",
+          "afterMs": 2002
+        },
+        {
+          "at": 36950,
+          "to": "busy+tool",
+          "shownAs": "running",
+          "afterMs": 0
+        },
+        {
+          "at": 189087,
+          "to": "busy",
+          "shownAs": "running",
+          "afterMs": 0
+        },
+        {
+          "at": 191087,
+          "to": "idle",
+          "shownAs": "ready",
+          "afterMs": 2002
+        },
+        {
+          "at": 257143,
+          "to": "busy",
+          "shownAs": "running",
+          "afterMs": 2003
+        },
+        {
+          "at": 261148,
+          "to": "busy+tool",
+          "shownAs": "running",
+          "afterMs": 0
+        },
+        {
+          "at": 411343,
+          "to": "busy",
+          "shownAs": "running",
+          "afterMs": 0
+        },
+        {
+          "at": 415345,
+          "to": "idle",
+          "shownAs": "ready",
+          "afterMs": 0
+        }
+      ]
+    },
+    "extra:ember": {
+      "segments": [
+        {
+          "from": 26941,
+          "to": 28941,
+          "truth": "not a live fleet session",
+          "ui": "running",
+          "label": "ember · 0s"
+        },
+        {
+          "from": 30944,
+          "to": 34948,
+          "truth": "not a live fleet session",
+          "ui": "ready",
+          "label": "ember · done just now"
+        }
+      ]
+    },
+    "ember": {
+      "segments": [
+        {
+          "from": 36950,
+          "to": 309199,
+          "truth": "idle",
+          "ui": "ready",
+          "label": "ember · done 5m ago",
+          "fan": null
+        },
+        {
+          "from": 311200,
+          "to": 311200,
+          "truth": "busy",
+          "ui": "ready",
+          "label": "ember · done 5m ago",
+          "fan": null
+        },
+        {
+          "from": 313202,
+          "to": 315202,
+          "truth": "idle",
+          "ui": "running",
+          "label": "ember · 0s",
+          "fan": null
+        },
+        {
+          "from": 317201,
+          "to": 479397,
+          "truth": "idle",
+          "ui": "ready",
+          "label": "ember · done 3m ago",
+          "fan": null
+        }
+      ],
+      "changes": [
+        {
+          "at": 311200,
+          "to": "busy",
+          "shownAs": null,
+          "afterMs": null
+        },
+        {
+          "at": 313202,
+          "to": "idle",
+          "shownAs": "ready",
+          "afterMs": 3999
+        }
+      ]
+    }
+  }
+}

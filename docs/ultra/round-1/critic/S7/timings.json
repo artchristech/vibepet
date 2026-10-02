@@ -1,0 +1,16 @@
+[
+  { "step": "launch -> pet ready (critic instances A, B, C)", "ms": 498, "n": 3, "samples": [445, 498, 569], "load": "1.85 / 3.38 / 3.44 (1-min)" },
+  { "step": "registered jump-key callback -> ipc:jump result (tmux session: ok:false + clipboard write)", "ms": 78, "n": 5, "samples": [80, 74, 74, 92, 78], "load": "1.31-1.75" },
+  { "step": "ipc:jump handler duration (all ok:false)", "ms": 78, "n": 5, "samples": [79, 74, 74, 85, 78], "load": "1.31-1.75" },
+  { "step": "key summon from hidden -> failure bubble first computed-visible (roster pill hides it until then)", "ms": 1563, "n": 1, "samples": [1563], "load": "1.47" },
+  { "step": "pill open: failed jump -> bubble visible", "ms": null, "n": 1, "samples": ["never in 3.3 s of 250 ms samples (display:none), no row note"], "load": "1.31" },
+  { "step": "Home open: failed jump -> bubble on top", "ms": null, "n": 1, "samples": ["never: element at bubble centre = #chatInput inside #chat"], "load": "1.62" },
+  { "step": "kestrel permission prompt (tool_use withheld; registry waiting 03:12:22.347Z) -> pet phase", "ms": null, "n": 1, "samples": ["working at +1.1 s (not queued), dropped at +121.5 s (03:14:23.9Z) while registry still waiting at 03:15:12Z; never queued"], "load": "1.44-2.32" },
+  { "step": "beacon AskUserQuestion (registry waiting since 02:13:42.7Z) -> jump queue", "ms": null, "n": 1, "samples": ["never in 2155 polls 03:07:56-03:25:56Z; listed as running from 03:25:20.8Z after a transcript mtime touch (blocked 71.6 min)"], "load": "1.3-7.3" },
+  { "step": "vibepet end_turn (03:13:07.635Z) -> in jump queue", "ms": 963, "n": 1, "samples": [963], "load": "1.75" },
+  { "step": "Esc on kestrel dialog -> kestrel gone from queue", "ms": 1565, "n": 1, "samples": [1565], "load": "1.35" },
+  { "step": "trained cw circle stroke end -> hide/summon sent", "ms": 196, "n": 12, "samples": [191, 194, 193, 203, 192, 189, 208, 204, 197, 199, 202, 195], "load": "1.92-7.29" },
+  { "step": "180 px square stroke end -> toggle sent (Medium 3/3, Low 2/2)", "ms": 194, "n": 5, "samples": [195, 192, 206, 190, 196], "load": "2.10-2.72" },
+  { "step": "loop drag of Net (button held) path end -> toggle sent (3 of 4 valid drags toggled)", "ms": 201, "n": 3, "samples": [207, 192, 201], "load": "2.65-3.54" },
+  { "step": "re-summon stroke ending N ms after a gesture hide", "ms": null, "n": 4, "samples": ["1424: ignored", "1707: ignored", "2010: ignored", "2813: summoned (+210 ms)"], "load": "4.62-7.29" }
+]

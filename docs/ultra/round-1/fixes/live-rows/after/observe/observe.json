@@ -1,0 +1,231 @@
+{
+  "at": "2026-10-02T08:39:57.885Z",
+  "fix": "/Users/christopherharris/.vibepet-ultra/wt/r1-live-rows",
+  "base": "/Users/christopherharris/.vibepet-ultra/wt/r1-live-rows-base",
+  "members": [
+    {
+      "name": "ember",
+      "pid": 84901,
+      "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099"
+    }
+  ],
+  "uptime": [
+    "load 7.99 20.42 70.34",
+    "load 87.60 130.65 106.36"
+  ],
+  "flips": [
+    {
+      "member": "ember",
+      "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+      "status": "busy",
+      "waitingFor": null,
+      "statusUpdatedAt": 1790930652390,
+      "seenAt": 1790930653132,
+      "uptime": "load 60.83 57.04 74.46"
+    },
+    {
+      "member": "ember",
+      "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+      "status": "idle",
+      "waitingFor": null,
+      "statusUpdatedAt": 1790930653535,
+      "seenAt": 1790930653583,
+      "uptime": "load 60.83 57.04 74.46"
+    },
+    {
+      "member": "ember",
+      "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+      "status": "waiting",
+      "waitingFor": "dialog open",
+      "statusUpdatedAt": 1790930691879,
+      "seenAt": 1790930691941,
+      "uptime": "load 72.51 60.66 74.99"
+    },
+    {
+      "member": "ember",
+      "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+      "status": null,
+      "waitingFor": null,
+      "statusUpdatedAt": null,
+      "seenAt": 1790930692546,
+      "uptime": "load 72.51 60.66 74.99"
+    }
+  ],
+  "rows": {
+    "A": [
+      {
+        "t": 1790930400125,
+        "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "sig": "needs",
+        "acts": "reply",
+        "label": "beacon · asking 6h 26m"
+      },
+      {
+        "t": 1790930400125,
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "sig": "needs",
+        "acts": "approve",
+        "label": "kestrel · needs approval 5h 27m"
+      },
+      {
+        "t": 1790930400125,
+        "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "sig": "ready",
+        "acts": "",
+        "label": "delta · done 6h 39m ago"
+      },
+      {
+        "t": 1790930400125,
+        "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "sig": "ready",
+        "acts": "",
+        "label": "atlas · done 5h 36m ago"
+      },
+      {
+        "t": 1790930400125,
+        "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "sig": "ready",
+        "acts": "",
+        "label": "vibepet · done 5h 26m ago"
+      },
+      {
+        "t": 1790930400125,
+        "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "sig": "ready",
+        "acts": "",
+        "label": "ember · done 37s ago"
+      },
+      {
+        "t": 1790930653284,
+        "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "sig": "running",
+        "acts": "",
+        "label": "ember · running 1s"
+      },
+      {
+        "t": 1790930655190,
+        "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "sig": "ready",
+        "acts": "",
+        "label": "ember · done 2s ago"
+      },
+      {
+        "t": 1790930692025,
+        "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "sig": "needs",
+        "acts": "reply",
+        "label": "ember · asking 0s"
+      },
+      {
+        "t": 1790930692683,
+        "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "sig": "exited",
+        "acts": "",
+        "label": "ember · exited 0s ago"
+      }
+    ],
+    "B": [
+      {
+        "t": 1790930401030,
+        "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "sig": "needs",
+        "acts": "reply",
+        "label": "beacon · asking 6h 26m"
+      },
+      {
+        "t": 1790930401030,
+        "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "sig": "needs",
+        "acts": "approve",
+        "label": "kestrel · needs approval 5h 27m"
+      },
+      {
+        "t": 1790930401030,
+        "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "sig": "ready",
+        "acts": "",
+        "label": "delta · done 6h 39m ago"
+      },
+      {
+        "t": 1790930401030,
+        "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "sig": "ready",
+        "acts": "",
+        "label": "atlas · done 5h 37m ago"
+      },
+      {
+        "t": 1790930401030,
+        "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "sig": "ready",
+        "acts": "",
+        "label": "vibepet · done 5h 26m ago"
+      },
+      {
+        "t": 1790930401030,
+        "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "sig": "ready",
+        "acts": "",
+        "label": "ember · done 38s ago"
+      },
+      {
+        "t": 1790930692849,
+        "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "sig": "exited",
+        "acts": "",
+        "label": "ember · exited 0s ago"
+      }
+    ]
+  },
+  "delays": [
+    {
+      "member": "ember",
+      "status": "busy",
+      "statusUpdatedAt": 1790930652390,
+      "uptime": "load 60.83 57.04 74.46",
+      "A": {
+        "ms": 894,
+        "sig": "running",
+        "label": "ember · running 1s"
+      },
+      "B": null
+    },
+    {
+      "member": "ember",
+      "status": "idle",
+      "statusUpdatedAt": 1790930653535,
+      "uptime": "load 60.83 57.04 74.46",
+      "A": {
+        "ms": 1655,
+        "sig": "ready",
+        "label": "ember · done 2s ago"
+      },
+      "B": null
+    },
+    {
+      "member": "ember",
+      "status": "waiting",
+      "statusUpdatedAt": 1790930691879,
+      "uptime": "load 72.51 60.66 74.99",
+      "A": {
+        "ms": 146,
+        "sig": "needs",
+        "label": "ember · asking 0s"
+      },
+      "B": null
+    }
+  ],
+  "median": {
+    "A": 894,
+    "B": null
+  },
+  "close": [
+    {
+      "how": "quit",
+      "orphans": 0
+    },
+    {
+      "how": "quit",
+      "orphans": 0
+    }
+  ]
+}

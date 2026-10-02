@@ -1,0 +1,921 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-queue-state",
+  "at": "2026-10-02T05:42:55.678Z",
+  "uptime": [
+    "23:42  up 6 days, 10:28, 19 users, load averages: 14.49 61.94 53.28",
+    "23:43  up 6 days, 10:28, 19 users, load averages: 9.81 57.03 51.76"
+  ],
+  "runs": [
+    {
+      "n": 1,
+      "uptimeBefore": "23:42  up 6 days, 10:28, 19 users, load averages: 13.49 60.94 52.98",
+      "launchMs": 685,
+      "readyMs": 458,
+      "first": [
+        {
+          "member": "beacon",
+          "kind": "question",
+          "phase": "waiting"
+        },
+        {
+          "member": "kestrel",
+          "kind": "approval",
+          "phase": "stalled"
+        },
+        {
+          "member": "delta",
+          "kind": "done",
+          "phase": "ready"
+        },
+        {
+          "member": "atlas",
+          "kind": "done",
+          "phase": "ready"
+        },
+        {
+          "member": "vibepet",
+          "kind": "done",
+          "phase": "ready"
+        }
+      ],
+      "needsAfterLaunchCallMs": 698,
+      "needsAfterReadyMs": 13,
+      "pendingBeforeHover": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "rows": [
+        {
+          "member": "beacon",
+          "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+          "cls": "nr needs",
+          "tl": "rgb(255, 207, 63)",
+          "label": "beacon · asking 3h 29m",
+          "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Redis)",
+          "actions": [
+            "reply",
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "question",
+          "since": 1790907222729,
+          "options": [
+            {
+              "key": "1",
+              "label": "SQLite"
+            },
+            {
+              "key": "2",
+              "label": "Postgres"
+            },
+            {
+              "key": "3",
+              "label": "Redis"
+            }
+          ],
+          "alive": true,
+          "pid": 48539,
+          "term": {
+            "tmux": "vp-beacon:@3.%3"
+          },
+          "statusUpdatedAt": 1790907222729,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 12558
+        },
+        {
+          "member": "kestrel",
+          "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+          "cls": "nr needs",
+          "tl": "rgb(255, 207, 63)",
+          "label": "kestrel · needs approval 2h 30m",
+          "ask": "Bash: ./deploy.sh --dry-run",
+          "actions": [
+            "approve",
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "approval",
+          "since": 1790910742347,
+          "options": [
+            {
+              "key": "1",
+              "label": "Yes"
+            },
+            {
+              "key": "2",
+              "label": "Yes, and don’t ask again for: ./deploy.sh *"
+            },
+            {
+              "key": "3",
+              "label": "No"
+            }
+          ],
+          "alive": true,
+          "pid": 55946,
+          "term": {
+            "tmux": "vp-kestrel:@8.%8"
+          },
+          "statusUpdatedAt": 1790910742347,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 9039
+        },
+        {
+          "member": "delta",
+          "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+          "cls": "nr ready",
+          "tl": "rgb(255, 207, 63)",
+          "label": "delta · done 3h 42m ago",
+          "ask": null,
+          "actions": [
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "done",
+          "since": 1790906449089,
+          "options": null,
+          "alive": true,
+          "pid": 29074,
+          "term": {
+            "tmux": "vp-delta:@4.%4"
+          },
+          "statusUpdatedAt": 1790906449089,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 13332
+        },
+        {
+          "member": "atlas",
+          "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+          "cls": "nr ready",
+          "tl": "rgb(255, 207, 63)",
+          "label": "atlas · done 2h 39m ago",
+          "ask": null,
+          "actions": [
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "done",
+          "since": 1790910180805,
+          "options": null,
+          "alive": true,
+          "pid": 48392,
+          "term": {
+            "tmux": "vp-atlas:@2.%2"
+          },
+          "statusUpdatedAt": 1790910180805,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 9600
+        },
+        {
+          "member": "vibepet",
+          "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+          "cls": "nr ready",
+          "tl": "rgb(255, 207, 63)",
+          "label": "vibepet · done 2h 29m ago",
+          "ask": null,
+          "actions": [
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "done",
+          "since": 1790910787682,
+          "options": null,
+          "alive": true,
+          "pid": 48221,
+          "term": {
+            "tmux": "vp-vibepet:@1.%1"
+          },
+          "statusUpdatedAt": 1790910787682,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 8993
+        }
+      ],
+      "order": {
+        "snapshot": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "home": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "pending": [
+          "beacon",
+          "kestrel"
+        ]
+      },
+      "commands": [
+        {
+          "cmd": "/jump vibepet",
+          "ipc": "ipc:jump",
+          "arg": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+          "member": "vibepet",
+          "expect": "vibepet",
+          "ok": true
+        },
+        {
+          "cmd": "/jump beacon",
+          "ipc": "ipc:jump",
+          "arg": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+          "member": "beacon",
+          "expect": "beacon",
+          "ok": true
+        },
+        {
+          "cmd": "/replay kestrel",
+          "ipc": "ipc:theater",
+          "arg": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+          "member": "kestrel",
+          "expect": "kestrel",
+          "ok": true
+        }
+      ],
+      "theater": {
+        "beats": 61,
+        "title": "Run exactly `./deploy.sh --dry-run` with the Bash tool. Do n"
+      },
+      "hotkey": {
+        "queue": [
+          "beacon",
+          "kestrel"
+        ],
+        "presses": [
+          "beacon",
+          "kestrel"
+        ],
+        "gapMs": 106
+      },
+      "close": {
+        "how": "quit",
+        "ms": 256,
+        "procs": 10,
+        "orphans": []
+      },
+      "uptimeAfter": "23:43  up 6 days, 10:28, 19 users, load averages: 11.49 58.95 52.37"
+    },
+    {
+      "n": 2,
+      "uptimeBefore": "23:43  up 6 days, 10:28, 19 users, load averages: 11.49 58.95 52.37",
+      "launchMs": 580,
+      "readyMs": 503,
+      "first": [
+        {
+          "member": "beacon",
+          "kind": "question",
+          "phase": "waiting"
+        },
+        {
+          "member": "kestrel",
+          "kind": "approval",
+          "phase": "stalled"
+        },
+        {
+          "member": "delta",
+          "kind": "done",
+          "phase": "ready"
+        },
+        {
+          "member": "atlas",
+          "kind": "done",
+          "phase": "ready"
+        },
+        {
+          "member": "vibepet",
+          "kind": "done",
+          "phase": "ready"
+        }
+      ],
+      "needsAfterLaunchCallMs": 589,
+      "needsAfterReadyMs": 9,
+      "pendingBeforeHover": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "rows": [
+        {
+          "member": "beacon",
+          "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+          "cls": "nr needs",
+          "tl": "rgb(255, 207, 63)",
+          "label": "beacon · asking 3h 29m",
+          "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Redis)",
+          "actions": [
+            "reply",
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "question",
+          "since": 1790907222729,
+          "options": [
+            {
+              "key": "1",
+              "label": "SQLite"
+            },
+            {
+              "key": "2",
+              "label": "Postgres"
+            },
+            {
+              "key": "3",
+              "label": "Redis"
+            }
+          ],
+          "alive": true,
+          "pid": 48539,
+          "term": {
+            "tmux": "vp-beacon:@3.%3"
+          },
+          "statusUpdatedAt": 1790907222729,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 12571
+        },
+        {
+          "member": "kestrel",
+          "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+          "cls": "nr needs",
+          "tl": "rgb(255, 207, 63)",
+          "label": "kestrel · needs approval 2h 30m",
+          "ask": "Bash: ./deploy.sh --dry-run",
+          "actions": [
+            "approve",
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "approval",
+          "since": 1790910742347,
+          "options": [
+            {
+              "key": "1",
+              "label": "Yes"
+            },
+            {
+              "key": "2",
+              "label": "Yes, and don’t ask again for: ./deploy.sh *"
+            },
+            {
+              "key": "3",
+              "label": "No"
+            }
+          ],
+          "alive": true,
+          "pid": 55946,
+          "term": {
+            "tmux": "vp-kestrel:@8.%8"
+          },
+          "statusUpdatedAt": 1790910742347,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 9051
+        },
+        {
+          "member": "delta",
+          "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+          "cls": "nr ready",
+          "tl": "rgb(255, 207, 63)",
+          "label": "delta · done 3h 42m ago",
+          "ask": null,
+          "actions": [
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "done",
+          "since": 1790906449089,
+          "options": null,
+          "alive": true,
+          "pid": 29074,
+          "term": {
+            "tmux": "vp-delta:@4.%4"
+          },
+          "statusUpdatedAt": 1790906449089,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 13345
+        },
+        {
+          "member": "atlas",
+          "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+          "cls": "nr ready",
+          "tl": "rgb(255, 207, 63)",
+          "label": "atlas · done 2h 40m ago",
+          "ask": null,
+          "actions": [
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "done",
+          "since": 1790910180805,
+          "options": null,
+          "alive": true,
+          "pid": 48392,
+          "term": {
+            "tmux": "vp-atlas:@2.%2"
+          },
+          "statusUpdatedAt": 1790910180805,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 9613
+        },
+        {
+          "member": "vibepet",
+          "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+          "cls": "nr ready",
+          "tl": "rgb(255, 207, 63)",
+          "label": "vibepet · done 2h 30m ago",
+          "ask": null,
+          "actions": [
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "done",
+          "since": 1790910787682,
+          "options": null,
+          "alive": true,
+          "pid": 48221,
+          "term": {
+            "tmux": "vp-vibepet:@1.%1"
+          },
+          "statusUpdatedAt": 1790910787682,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 9006
+        }
+      ],
+      "order": {
+        "snapshot": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "home": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "pending": [
+          "beacon",
+          "kestrel"
+        ]
+      },
+      "close": {
+        "how": "quit",
+        "ms": 266,
+        "procs": 7,
+        "orphans": []
+      },
+      "uptimeAfter": "23:43  up 6 days, 10:28, 19 users, load averages: 10.57 57.97 52.06"
+    },
+    {
+      "n": 3,
+      "uptimeBefore": "23:43  up 6 days, 10:28, 19 users, load averages: 10.57 57.97 52.06",
+      "launchMs": 578,
+      "readyMs": 498,
+      "first": [
+        {
+          "member": "beacon",
+          "kind": "question",
+          "phase": "waiting"
+        },
+        {
+          "member": "kestrel",
+          "kind": "approval",
+          "phase": "stalled"
+        },
+        {
+          "member": "delta",
+          "kind": "done",
+          "phase": "ready"
+        },
+        {
+          "member": "atlas",
+          "kind": "done",
+          "phase": "ready"
+        },
+        {
+          "member": "vibepet",
+          "kind": "done",
+          "phase": "ready"
+        }
+      ],
+      "needsAfterLaunchCallMs": 588,
+      "needsAfterReadyMs": 10,
+      "pendingBeforeHover": [
+        "beacon",
+        "kestrel",
+        "delta",
+        "atlas",
+        "vibepet"
+      ],
+      "rows": [
+        {
+          "member": "beacon",
+          "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+          "cls": "nr needs",
+          "tl": "rgb(255, 207, 63)",
+          "label": "beacon · asking 3h 29m",
+          "ask": "Which database should beacon use to store check results? (SQLite / Postgres / Redis)",
+          "actions": [
+            "reply",
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "question",
+          "since": 1790907222729,
+          "options": [
+            {
+              "key": "1",
+              "label": "SQLite"
+            },
+            {
+              "key": "2",
+              "label": "Postgres"
+            },
+            {
+              "key": "3",
+              "label": "Redis"
+            }
+          ],
+          "alive": true,
+          "pid": 48539,
+          "term": {
+            "tmux": "vp-beacon:@3.%3"
+          },
+          "statusUpdatedAt": 1790907222729,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 12576
+        },
+        {
+          "member": "kestrel",
+          "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+          "cls": "nr needs",
+          "tl": "rgb(255, 207, 63)",
+          "label": "kestrel · needs approval 2h 30m",
+          "ask": "Bash: ./deploy.sh --dry-run",
+          "actions": [
+            "approve",
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "approval",
+          "since": 1790910742347,
+          "options": [
+            {
+              "key": "1",
+              "label": "Yes"
+            },
+            {
+              "key": "2",
+              "label": "Yes, and don’t ask again for: ./deploy.sh *"
+            },
+            {
+              "key": "3",
+              "label": "No"
+            }
+          ],
+          "alive": true,
+          "pid": 55946,
+          "term": {
+            "tmux": "vp-kestrel:@8.%8"
+          },
+          "statusUpdatedAt": 1790910742347,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 9057
+        },
+        {
+          "member": "delta",
+          "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+          "cls": "nr ready",
+          "tl": "rgb(255, 207, 63)",
+          "label": "delta · done 3h 42m ago",
+          "ask": null,
+          "actions": [
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "done",
+          "since": 1790906449089,
+          "options": null,
+          "alive": true,
+          "pid": 29074,
+          "term": {
+            "tmux": "vp-delta:@4.%4"
+          },
+          "statusUpdatedAt": 1790906449089,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 13350
+        },
+        {
+          "member": "atlas",
+          "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+          "cls": "nr ready",
+          "tl": "rgb(255, 207, 63)",
+          "label": "atlas · done 2h 40m ago",
+          "ask": null,
+          "actions": [
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "done",
+          "since": 1790910180805,
+          "options": null,
+          "alive": true,
+          "pid": 48392,
+          "term": {
+            "tmux": "vp-atlas:@2.%2"
+          },
+          "statusUpdatedAt": 1790910180805,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 9618
+        },
+        {
+          "member": "vibepet",
+          "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+          "cls": "nr ready",
+          "tl": "rgb(255, 207, 63)",
+          "label": "vibepet · done 2h 30m ago",
+          "ask": null,
+          "actions": [
+            "replay",
+            "done",
+            "goal"
+          ],
+          "kind": "done",
+          "since": 1790910787682,
+          "options": null,
+          "alive": true,
+          "pid": 48221,
+          "term": {
+            "tmux": "vp-vibepet:@1.%1"
+          },
+          "statusUpdatedAt": 1790910787682,
+          "sinceMinusRegistryMs": 0,
+          "trueAgeS": 9011
+        }
+      ],
+      "order": {
+        "snapshot": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "home": [
+          "beacon",
+          "kestrel",
+          "delta",
+          "atlas",
+          "vibepet"
+        ],
+        "pending": [
+          "beacon",
+          "kestrel"
+        ]
+      },
+      "close": {
+        "how": "quit",
+        "ms": 255,
+        "procs": 7,
+        "orphans": []
+      },
+      "uptimeAfter": "23:43  up 6 days, 10:28, 19 users, load averages: 9.81 57.03 51.76"
+    }
+  ],
+  "fleet": {
+    "at": "2026-10-02T05:42:55.982Z",
+    "allOk": false,
+    "spend": {
+      "transcriptsUsd": 2.223186,
+      "estimateWithHiddenUsd": 3.3093,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "permission prompt",
+          "statusUpdatedAt": 1790910742347
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T03:12:20.929Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910787682
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T03:13:07.635Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": false,
+        "paused": true,
+        "pid": 48392,
+        "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790910180805
+        },
+        "last": {
+          "kind": "interrupted",
+          "pending": [],
+          "lastTs": "2026-10-02T03:03:00.799Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "registry.status",
+          "child"
+        ]
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+        "registry": {
+          "status": "waiting",
+          "waitingFor": "input needed",
+          "statusUpdatedAt": 1790907222729
+        },
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T02:13:41.070Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": []
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+        "registry": {
+          "status": "idle",
+          "waitingFor": null,
+          "statusUpdatedAt": 1790906449089
+        },
+        "last": {
+          "kind": "end_turn",
+          "pending": [],
+          "lastTs": "2026-10-02T02:00:48.941Z"
+        },
+        "toolProcs": 0,
+        "subagents": 36,
+        "failing": [
+          "registry.status",
+          "child",
+          "subagents"
+        ]
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+        "registry": null,
+        "last": {
+          "kind": "user_prompt",
+          "pending": [],
+          "lastTs": "2026-10-02T03:01:04.741Z"
+        },
+        "toolProcs": 0,
+        "subagents": 0,
+        "failing": [
+          "claude",
+          "registry.status",
+          "loop",
+          "loopLock"
+        ]
+      }
+    ]
+  },
+  "relaunch": {
+    "beacon": {
+      "since": [
+        1790907222729,
+        1790907222729,
+        1790907222729
+      ],
+      "spreadMs": 0,
+      "labels": [
+        "beacon · asking 3h 29m",
+        "beacon · asking 3h 29m",
+        "beacon · asking 3h 29m"
+      ]
+    },
+    "kestrel": {
+      "since": [
+        1790910742347,
+        1790910742347,
+        1790910742347
+      ],
+      "spreadMs": 0,
+      "labels": [
+        "kestrel · needs approval 2h 30m",
+        "kestrel · needs approval 2h 30m",
+        "kestrel · needs approval 2h 30m"
+      ]
+    },
+    "delta": {
+      "since": [
+        1790906449089,
+        1790906449089,
+        1790906449089
+      ],
+      "spreadMs": 0,
+      "labels": [
+        "delta · done 3h 42m ago",
+        "delta · done 3h 42m ago",
+        "delta · done 3h 42m ago"
+      ]
+    },
+    "atlas": {
+      "since": [
+        1790910180805,
+        1790910180805,
+        1790910180805
+      ],
+      "spreadMs": 0,
+      "labels": [
+        "atlas · done 2h 39m ago",
+        "atlas · done 2h 40m ago",
+        "atlas · done 2h 40m ago"
+      ]
+    },
+    "vibepet": {
+      "since": [
+        1790910787682,
+        1790910787682,
+        1790910787682
+      ],
+      "spreadMs": 0,
+      "labels": [
+        "vibepet · done 2h 29m ago",
+        "vibepet · done 2h 30m ago",
+        "vibepet · done 2h 30m ago"
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+ "what": "Electron main CPU seconds over 60 s, Home closed, isolated fleet root",
+ "runs": [
+  {
+   "build": "fix",
+   "git": "959b918",
+   "cpuSecPerMin": 0.69,
+   "uptimeStart": "7:09  up 6 days, 17:55, 19 users, load averages: 6.05 11.24 22.46",
+   "uptimeEnd": "7:10  up 6 days, 17:56, 19 users, load averages: 6.86 10.38 21.37"
+  },
+  {
+   "build": "base",
+   "git": "8e5fe27",
+   "cpuSecPerMin": 0.58,
+   "uptimeStart": "7:11  up 6 days, 17:56, 19 users, load averages: 6.56 10.20 21.17",
+   "uptimeEnd": "7:12  up 6 days, 17:57, 19 users, load averages: 4.35 8.88 19.93"
+  },
+  {
+   "build": "fix",
+   "git": "959b918",
+   "cpuSecPerMin": 0.72,
+   "uptimeStart": "7:12  up 6 days, 17:57, 19 users, load averages: 4.14 8.69 19.73",
+   "uptimeEnd": "7:13  up 6 days, 17:58, 19 users, load averages: 4.28 7.89 18.68"
+  },
+  {
+   "build": "base",
+   "git": "8e5fe27",
+   "cpuSecPerMin": 0.65,
+   "uptimeStart": "7:13  up 6 days, 17:58, 19 users, load averages: 4.14 7.69 18.42",
+   "uptimeEnd": "7:14  up 6 days, 17:59, 19 users, load averages: 6.12 7.57 17.64"
+  }
+ ]
+}

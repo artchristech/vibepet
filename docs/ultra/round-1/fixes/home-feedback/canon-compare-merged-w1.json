@@ -1,0 +1,136 @@
+{
+  "a": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/canon-merged-w1",
+  "b": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/home-feedback/canon",
+  "gitA": "8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane @ ultra/round-1",
+  "gitB": "8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane @ ultra/r1/home-feedback",
+  "msA": 101338,
+  "msB": 70972,
+  "assertions": {
+    "a": "29/29",
+    "b": "29/29",
+    "differ": []
+  },
+  "rows": {
+    "a": {
+      "beacon": "needs",
+      "kestrel": "needs",
+      "delta": "ready",
+      "atlas": "ready",
+      "vibepet": "ready"
+    },
+    "b": {
+      "beacon": "needs",
+      "kestrel": "needs",
+      "delta": "ready",
+      "atlas": "ready",
+      "vibepet": "ready",
+      "ember": "ready"
+    },
+    "differ": [
+      "ember"
+    ]
+  },
+  "mismatches": {
+    "a": [],
+    "b": [],
+    "differ": [
+      "ember"
+    ]
+  },
+  "fleet": {
+    "a": "3/6",
+    "b": "4/6",
+    "changedDuring": [
+      [],
+      [
+        "ember"
+      ]
+    ]
+  },
+  "notes": {
+    "goalFirstClickDropped": [
+      false,
+      false
+    ],
+    "aboveFold": [
+      4,
+      4
+    ]
+  },
+  "shots": [
+    {
+      "file": "1-home/panel.png",
+      "changedPct": 15.98
+    },
+    {
+      "file": "1-home/pet.png",
+      "changedPct": 0.48
+    },
+    {
+      "file": "2-chat/reply.png",
+      "changedPct": 9.95
+    },
+    {
+      "file": "2-chat/sending.png",
+      "changedPct": 2.82
+    },
+    {
+      "file": "3-command/slash.png",
+      "changedPct": 3.09
+    },
+    {
+      "file": "3-command/today.png",
+      "changedPct": 6.07
+    },
+    {
+      "file": "4-rows/goal.png",
+      "size": [
+        "1220x158",
+        "1220x162"
+      ]
+    },
+    {
+      "file": "4-rows/jump.png",
+      "changedPct": 18.83
+    },
+    {
+      "file": "4-rows/list.png",
+      "changedPct": 10.45
+    },
+    {
+      "file": "4-rows/reply.png",
+      "size": [
+        "1220x294",
+        "1220x298"
+      ]
+    },
+    {
+      "file": "5-theater/open.png",
+      "changedPct": 5.53
+    },
+    {
+      "file": "5-theater/seek-mid.png",
+      "changedPct": 0
+    },
+    {
+      "file": "6-ports/footer.png",
+      "changedPct": 32.46
+    },
+    {
+      "file": "6-ports/stopped.png",
+      "changedPct": 15.75
+    },
+    {
+      "file": "7-keys/gesture-pad.png",
+      "changedPct": 5.57
+    },
+    {
+      "file": "7-keys/gesture-saved.png",
+      "changedPct": 0.05
+    },
+    {
+      "file": "7-keys/hotkey.png",
+      "changedPct": 18.24
+    }
+  ]
+}

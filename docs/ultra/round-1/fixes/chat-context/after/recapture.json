@@ -1,0 +1,369 @@
+{
+ "task": "chat-context (r1-S2-03, r1-S2-04, r1-S2-29)",
+ "branch": "ultra/r1/chat-context",
+ "fleetSpend": "$0 (chat on the user login, claude-haiku-4-5-20251001; no fleet turns; fleet spend stayed $3.3093)",
+ "a_canonStub": {
+  "out": "canon",
+  "result": "31/31",
+  "contextSessions": {
+   "file": "2-chat/context.txt",
+   "bytes": 2638,
+   "sends": 1,
+   "sessions": [
+    {
+     "member": "beacon",
+     "name": "beacon",
+     "line": "- beacon · \"Beacon database choice\" · folder ~/.vibepet-ultra/fleet/beacon · repo beacon/main · waiting for an answer for 6h 43m · asks: Which database should beacon use to store check results? (SQLite / Postgres / Redis) · edited this turn: nothing",
+     "has": {
+      "stateAge": true,
+      "ask": true,
+      "title": true,
+      "repo": true
+     }
+    },
+    {
+     "member": "kestrel",
+     "name": "kestrel",
+     "line": "- kestrel · \"Deploy.sh dry run\" · folder ~/.vibepet-ultra/fleet/kestrel · repo kestrel/main · needs approval for 5h 44m · asks: Bash: ./deploy.sh --dry-run · edited this turn: nothing",
+     "has": {
+      "stateAge": true,
+      "ask": true,
+      "title": true,
+      "repo": true
+     }
+    },
+    {
+     "member": "delta",
+     "name": "delta",
+     "line": "- delta · \"Reconcile three shards in parallel\" · folder ~/.vibepet-ultra/fleet/delta · repo delta/main · done for 6h 56m · last said: All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled · edited this turn: nothing · fan-out 3/3 subagents done",
+     "has": {
+      "stateAge": true,
+      "ask": true,
+      "title": true,
+      "repo": true
+     }
+    },
+    {
+     "member": "atlas",
+     "name": "atlas",
+     "line": "- atlas · \"Run build.sh\" · folder ~/.vibepet-ultra/fleet/atlas · repo atlas/main · done for 5h 54m · its turn was interrupted · edited this turn: nothing",
+     "has": {
+      "stateAge": true,
+      "ask": true,
+      "title": true,
+      "repo": true
+     }
+    },
+    {
+     "member": "vibepet",
+     "name": "vibepet",
+     "line": "- vibepet · \"Read package.json\" · folder ~/.vibepet-ultra/fleet/vibepet · repo vibepet/main · done for 5h 44m · last said: The app's main entry file is main.js. · edited this turn: nothing",
+     "has": {
+      "stateAge": true,
+      "ask": true,
+      "title": true,
+      "repo": true
+     }
+    },
+    {
+     "member": "ember",
+     "name": "ember",
+     "line": "- ember · folder ~/.vibepet-ultra/fleet/ember · repo ember/main · done for 2m 44s · last said: API Error: 400 vibepet-ultra fault injection: no API in this run · edited this turn: nothing",
+     "has": {
+      "stateAge": true,
+      "ask": true,
+      "title": true,
+      "repo": true
+     }
+    }
+   ],
+   "cameOrWent": [],
+   "overlaps": "Overlaps: none. No two sessions share a repo (6 sessions in 6 repos)."
+  },
+  "vsMergedW1": "canon-vs-merged-w1.json: all 29 assertions that pass in canon-merged-w1 still pass; +2 new (chat/contextSessions, chat/stubEchoesEverySession)",
+  "vsBaseNow": "canon-vs-base-now.json: same fleet, base build: only chat/contextSessions differs (false -> true)",
+  "startedAt": "2026-10-02T08:57:00.621Z"
+ },
+ "b_liveChat": {
+  "runs": {
+   "a": {
+    "out": "after/live-a",
+    "startedAt": "2026-10-02T08:49:22.132Z",
+    "summary": "32/32",
+    "first": {
+     "q": "what's running?",
+     "reply": "You have two agents waiting on you: beacon is asking which database to use for check results (SQLite / Postgres / Redis), and kestrel needs you to approve running ./deploy.sh --dry-run. The rest are done—delta just finished reconciling shards, and ember had an API error a few minutes ago.\n\nWant to answer beacon's database question first, or approve kestrel's deploy command?",
+     "context": "2-chat/context.txt",
+     "bytes": 2638
+    },
+    "asks": [
+     {
+      "q": "which session needs me first?",
+      "reply": "Beacon is first—it's asking which database to use to store check results: SQLite, Postgres, or Redis.",
+      "ms": 7500,
+      "load": {
+       "before": "333.42 159.10 109.47",
+       "after": "325.83 163.21 111.51"
+      },
+      "context": "2-chat/ask-1.context.txt",
+      "bytes": 2638,
+      "about": [],
+      "overlaps": "Overlaps: none. No two sessions share a repo (6 sessions in 6 repos).",
+      "verdict": "beacon first with its question and all 3 options; kestrel not repeated (its exact command was in the reply just before)"
+     },
+     {
+      "q": "what did atlas change?",
+      "reply": "Atlas hasn't changed anything. Its session started over 12 hours ago but made no commits—the last one was \"tile renderer and build script\" from before the session began.",
+      "ms": 5479,
+      "load": {
+       "before": "325.83 163.21 111.51",
+       "after": "320.88 164.88 112.41"
+      },
+      "context": "2-chat/ask-2.context.txt",
+      "bytes": 3544,
+      "about": [
+       {
+        "session": "atlas",
+        "why": "named in your message"
+       }
+      ],
+      "overlaps": "Overlaps: none. No two sessions share a repo (6 sessions in 6 repos).",
+      "verdict": "right: nothing changed, no commits since the session began, the last commit predates it"
+     },
+     {
+      "q": "are any two of my sessions about to edit the same file?",
+      "reply": "No. Each of your six sessions is in a different repo, so there's no overlap—they can't collide on the same file.",
+      "ms": 4364,
+      "load": {
+       "before": "320.88 164.88 112.41",
+       "after": "308.56 164.92 112.73"
+      },
+      "context": "2-chat/ask-3.context.txt",
+      "bytes": 2638,
+      "about": [],
+      "overlaps": "Overlaps: none. No two sessions share a repo (6 sessions in 6 repos).",
+      "verdict": "right: no overlap, every session in a different repo"
+     }
+    ]
+   },
+   "b": {
+    "out": "after/live-b",
+    "startedAt": "2026-10-02T08:50:14.732Z",
+    "summary": "32/32",
+    "first": {
+     "q": "what's running?",
+     "reply": "Two agents are waiting on you: beacon is asking which database to use (SQLite / Postgres / Redis), and kestrel needs approval for ./deploy.sh --dry-run. Three others are done: delta finished reconciling shards, atlas ran but got interrupted, and vibepet found your entry file is main.js.",
+     "context": "2-chat/context.txt",
+     "bytes": 2389
+    },
+    "asks": [
+     {
+      "q": "which session needs me first?",
+      "reply": "Beacon is first—it's asking which database to use for check results: SQLite, Postgres, or Redis. After that, kestrel needs approval for ./deploy.sh --dry-run.",
+      "ms": 6029,
+      "load": {
+       "before": "210.57 156.80 111.90",
+       "after": "196.67 154.82 111.46"
+      },
+      "context": "2-chat/ask-1.context.txt",
+      "bytes": 2389,
+      "about": [],
+      "overlaps": "Overlaps: none. No two sessions share a repo (5 sessions in 5 repos).",
+      "verdict": "beacon first with its question and options, then kestrel with `./deploy.sh --dry-run`"
+     },
+     {
+      "q": "what did atlas change?",
+      "reply": "Atlas hasn't changed anything—its repo is clean. The session got interrupted while running ./build.sh. The last commit there was \"atlas: tile renderer and build script\" from about 13 hours ago, before the session started.",
+      "ms": 5027,
+      "load": {
+       "before": "196.67 154.82 111.46",
+       "after": "183.01 152.68 110.96"
+      },
+      "context": "2-chat/ask-2.context.txt",
+      "bytes": 3295,
+      "about": [
+       {
+        "session": "atlas",
+        "why": "named in your message"
+       }
+      ],
+      "overlaps": "Overlaps: none. No two sessions share a repo (5 sessions in 5 repos).",
+      "verdict": "right: nothing changed, repo clean, interrupted while running ./build.sh, last commit before the session"
+     },
+     {
+      "q": "are any two of my sessions about to edit the same file?",
+      "reply": "No—each of your five sessions is in a different repo, so there's no overlap. Beacon, kestrel, delta, atlas, and vibepet are all isolated from each other.",
+      "ms": 11471,
+      "load": {
+       "before": "183.01 152.68 110.96",
+       "after": "157.12 148.47 110.19"
+      },
+      "context": "2-chat/ask-3.context.txt",
+      "bytes": 2389,
+      "about": [],
+      "overlaps": "Overlaps: none. No two sessions share a repo (5 sessions in 5 repos).",
+      "verdict": "right: no overlap, different repos"
+     }
+    ]
+   },
+   "c": {
+    "out": "after/live-c",
+    "startedAt": "2026-10-02T08:51:56.854Z",
+    "summary": "32/32",
+    "first": {
+     "q": "what's running?",
+     "reply": "You've got five agents active. Two need you right now: beacon is waiting to know which database to use (SQLite / Postgres / Redis), and kestrel is waiting to approve ./deploy.sh --dry-run. The other three—delta, atlas, and vibepet—are already done.\n\nWant to answer beacon's question, or approve kestrel's deploy command?",
+     "context": "2-chat/context.txt",
+     "bytes": 2389
+    },
+    "asks": [
+     {
+      "q": "which session needs me first?",
+      "reply": "Beacon needs you first—it's been waiting 6h 38m to know which database to use: SQLite, Postgres, or Redis.",
+      "ms": 3017,
+      "load": {
+       "before": "80.90 128.55 105.76",
+       "after": "75.14 126.56 105.20"
+      },
+      "context": "2-chat/ask-1.context.txt",
+      "bytes": 2389,
+      "about": [],
+      "overlaps": "Overlaps: none. No two sessions share a repo (5 sessions in 5 repos).",
+      "verdict": "beacon first (waiting 6h 38m) with its question and options; kestrel not repeated (exact command in the reply just before)"
+     },
+     {
+      "q": "what did atlas change?",
+      "reply": "Atlas hasn't changed anything—it's been running (until interrupted), but no commits have been made since its session started. The last change there was the tile renderer and build script from 13 hours ago.",
+      "ms": 6232,
+      "load": {
+       "before": "75.14 126.56 105.20",
+       "after": "70.33 124.71 104.67"
+      },
+      "context": "2-chat/ask-2.context.txt",
+      "bytes": 3295,
+      "about": [
+       {
+        "session": "atlas",
+        "why": "named in your message"
+       }
+      ],
+      "overlaps": "Overlaps: none. No two sessions share a repo (5 sessions in 5 repos).",
+      "verdict": "right: nothing changed, no commits since the session started"
+     },
+     {
+      "q": "are any two of my sessions about to edit the same file?",
+      "reply": "No—each of your five sessions is in its own repo, so there's no overlap.",
+      "ms": 4355,
+      "load": {
+       "before": "70.33 124.71 104.67",
+       "after": "65.34 122.77 104.10"
+      },
+      "context": "2-chat/ask-3.context.txt",
+      "bytes": 2389,
+      "about": [],
+      "overlaps": "Overlaps: none. No two sessions share a repo (5 sessions in 5 repos).",
+      "verdict": "right: no overlap, each in its own repo"
+     }
+    ]
+   }
+  },
+  "correct": {
+   "which session needs me first?": "beacon first with its question and all options 3/3 app runs (5/5 + 5/5 offline, exp-3); kestrel with its exact command 1/3 app runs, 3/5 offline - Haiku answers 'first' with the first only about half the time; the reply just before gave kestrel's exact command 3/3",
+   "what did atlas change?": "3/3",
+   "are any two of my sessions about to edit the same file?": "3/3"
+  },
+  "replyMsMedian": {
+   "which session needs me first?": 6029,
+   "what did atlas change?": 5479,
+   "are any two of my sessions about to edit the same file?": 4364
+  },
+  "loadNote": "load averages per ask in each run; 1-min load ranged 65-333 during these runs (other agents on the laptop)"
+ },
+ "before": {
+  "out": "before/live-base",
+  "build": "ultra/round-1 @ 8e5fe27 (frozen copy)",
+  "first": "You've got five agents running. Two are waiting on you: beacon has been stuck on a database choice question for 6 hours, and kestrel is ready for approval on a dry-run deploy. The other three—delta, atlas, and vibepet—are done; delta just finished reconciling all shards.\n\nWant to pick a database for beacon, or approve kestrel's deployment?",
+  "asks": [
+   {
+    "q": "which session needs me first?",
+    "reply": "Beacon has been waiting the longest—6+ hours on the database choice. Start there.",
+    "ms": 29611,
+    "load": {
+     "before": "26.01 53.06 175.47",
+     "after": "32.83 52.19 170.92"
+    },
+    "context": "2-chat/ask-1.context.txt"
+   },
+   {
+    "q": "what did atlas change?",
+    "reply": "I don't have details on atlas's changes—the context just shows it finished and was interrupted. You'd need to check its run logs or the repo diffs to see what it was working on.",
+    "ms": 11964,
+    "load": {
+     "before": "32.83 52.19 170.92",
+     "after": "36.11 51.97 168.77"
+    },
+    "context": "2-chat/ask-2.context.txt"
+   },
+   {
+    "q": "are any two of my sessions about to edit the same file?",
+    "reply": "No—the repo is clean with no uncommitted changes. None of the agents are actively editing yet, so there's no collision risk.",
+    "ms": 13017,
+    "load": {
+     "before": "36.11 51.97 168.77",
+     "after": "37.51 51.50 166.56"
+    },
+    "context": "2-chat/ask-3.context.txt"
+   }
+  ],
+  "verdicts": [
+   "names beacon but no ask beyond 'the database choice'; the context had no per-session lines",
+   "wrong: 'I don't have details on atlas's changes' - the context carried only delta's repo",
+   "unfounded: 'the repo is clean' (one watched repo) - no per-session edited files, no Overlaps line"
+  ]
+ },
+ "c_unit": "test/chat-context.test.js: \"Overlaps: two receipts touching one path in one repo name both sessions and the file\" (real transcript records through agents.js scan); fails before (no chat-context module), 6/6 after; npm test 57/57",
+ "quickAsk": {
+  "out": "after/quick-agent",
+  "what": "stub engine ($0): the 'agent' quick ask attaches beacon's and kestrel's own repo and transcript tail (both need you); '@kestrel' and 'atlas' attach theirs",
+  "about": [
+   {
+    "q": "mode:agent",
+    "about": [
+     {
+      "session": "beacon",
+      "why": "needs you"
+     },
+     {
+      "session": "kestrel",
+      "why": "needs you"
+     }
+    ],
+    "context": "2-chat/ask-1.context.txt"
+   },
+   {
+    "q": "what is @kestrel waiting on?",
+    "about": [
+     {
+      "session": "kestrel",
+      "why": "named in your message"
+     }
+    ],
+    "context": "2-chat/ask-2.context.txt"
+   },
+   {
+    "q": "what did atlas change?",
+    "about": [
+     {
+      "session": "atlas",
+      "why": "named in your message"
+     }
+    ],
+    "context": "2-chat/ask-3.context.txt"
+   }
+  ]
+ },
+ "iterations": "after/iterations/ (tuning runs + phrasing experiments, see iterations.json)",
+ "uptime": {
+  "canon": "2:57  up 6 days, 13:42, 19 users, load averages: 121.42 185.73 143.49 -> 2:57  up 6 days, 13:42, 19 users, load averages: 88.93 172.97 140.12"
+ }
+}

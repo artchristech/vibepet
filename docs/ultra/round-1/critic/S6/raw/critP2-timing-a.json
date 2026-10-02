@@ -1,0 +1,246 @@
+{
+ "flow": "P2",
+ "run": "a",
+ "startedAt": "2026-10-02T03:12:02.000Z",
+ "load": [
+  [
+   1.45,
+   1.51,
+   1.84
+  ],
+  [
+   3.26,
+   2.81,
+   2.33
+  ]
+ ],
+ "trials": [
+  {
+   "i": 0,
+   "port": 47410,
+   "kind": "node",
+   "repo": "delta",
+   "listenAt": 1790910738146,
+   "startMs": 11597,
+   "exitAt": 1790910753792,
+   "stopMs": 7965,
+   "load": [
+    1.87,
+    1.59,
+    1.85
+   ]
+  },
+  {
+   "i": 1,
+   "port": 47411,
+   "kind": "python",
+   "repo": "atlas",
+   "listenAt": 1790910773221,
+   "startMs": 12545,
+   "exitAt": 1790910786966,
+   "stopMs": 10803,
+   "load": [
+    1.75,
+    1.59,
+    1.84
+   ]
+  },
+  {
+   "i": 2,
+   "port": 47412,
+   "kind": "node",
+   "repo": "delta",
+   "listenAt": 1790910808804,
+   "startMs": 12992,
+   "exitAt": 1790910833384,
+   "stopMs": 12426,
+   "load": [
+    1.6,
+    1.57,
+    1.82
+   ]
+  },
+  {
+   "i": 3,
+   "port": 47413,
+   "kind": "python",
+   "repo": "atlas",
+   "listenAt": 1790910847709,
+   "startMs": 10122,
+   "exitAt": 1790910866412,
+   "stopMs": 3398,
+   "load": [
+    1.97,
+    1.65,
+    1.84
+   ]
+  },
+  {
+   "i": 4,
+   "port": 47414,
+   "kind": "node",
+   "repo": "delta",
+   "listenAt": 1790910881840,
+   "startMs": null,
+   "exitAt": 1790910924534,
+   "stopMs": 9,
+   "load": [
+    2.59,
+    1.86,
+    1.9
+   ]
+  },
+  {
+   "i": 5,
+   "port": 47415,
+   "kind": "python",
+   "repo": "atlas",
+   "listenAt": 1790910936518,
+   "startMs": null,
+   "exitAt": 1790910978463,
+   "stopMs": 10,
+   "load": [
+    3.4,
+    2.23,
+    2.04
+   ]
+  },
+  {
+   "i": 6,
+   "port": 47416,
+   "kind": "node",
+   "repo": "delta",
+   "listenAt": 1790910988527,
+   "startMs": null,
+   "exitAt": 1790911037772,
+   "stopMs": 8,
+   "load": [
+    3.54,
+    2.47,
+    2.14
+   ]
+  },
+  {
+   "i": 7,
+   "port": 47417,
+   "kind": "python",
+   "repo": "atlas",
+   "listenAt": 1790911038275,
+   "startMs": null,
+   "exitAt": 1790911087407,
+   "stopMs": 8,
+   "load": [
+    3.33,
+    2.57,
+    2.19
+   ]
+  },
+  {
+   "i": 8,
+   "port": 47418,
+   "kind": "node",
+   "repo": "delta",
+   "listenAt": 1790911087572,
+   "startMs": null,
+   "exitAt": 1790911133910,
+   "stopMs": 9,
+   "load": [
+    3.43,
+    2.74,
+    2.28
+   ]
+  },
+  {
+   "i": 9,
+   "port": 47419,
+   "kind": "python",
+   "repo": "atlas",
+   "listenAt": 1790911137673,
+   "startMs": null,
+   "exitAt": 1790911186802,
+   "stopMs": 11,
+   "load": [
+    3.26,
+    2.81,
+    2.33
+   ]
+  }
+ ],
+ "refresh": [
+  1790910722833,
+  1790910734778,
+  1790910746835,
+  1790910758826,
+  1790910770840,
+  1790910782851,
+  1790910794862,
+  1790910806862,
+  1790910818877,
+  1790910830869,
+  1790910842886,
+  1790910854886,
+  1790910866888,
+  1790910878935,
+  1790910890912,
+  1790910902916,
+  1790910914901,
+  1790910926883,
+  1790910938896,
+  1790910950892,
+  1790910962909,
+  1790910974912,
+  1790910986920,
+  1790910998919,
+  1790911010940,
+  1790911022942,
+  1790911034943,
+  1790911046968,
+  1790911058931,
+  1790911070946,
+  1790911082955,
+  1790911094955,
+  1790911106976,
+  1790911118945,
+  1790911130972,
+  1790911142979,
+  1790911154989,
+  1790911166987,
+  1790911178962
+ ],
+ "truthStart": [
+  "kestrel:approval(FAIL) reg=idle last=interrupted",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "summary": {
+  "n": 10,
+  "startMedian": 12071,
+  "startMin": 0,
+  "startMax": 12992,
+  "stopMedian": 10.5,
+  "stopMin": 8,
+  "stopMax": 12426,
+  "refreshMedian": 12003.5,
+  "refreshMin": 11945,
+  "refreshMax": 12057,
+  "refreshN": 38
+ },
+ "truthEnd": [
+  "kestrel:approval reg=waiting(permission prompt) last=user_prompt",
+  "vibepet:done reg=idle last=end_turn",
+  "atlas:working(FAIL) reg=idle last=interrupted",
+  "beacon:question reg=waiting(input needed) last=user_prompt",
+  "delta:fanout(FAIL) reg=idle last=end_turn",
+  "ember:loop(FAIL) reg=- last=user_prompt"
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 315,
+  "procs": 7,
+  "orphans": []
+ },
+ "endedAt": "2026-10-02T03:19:48.578Z"
+}

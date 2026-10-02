@@ -1,0 +1,237 @@
+{
+ "startedAt": "2026-10-02T10:43:35.668Z",
+ "uptimeStart": "4:43  up 6 days, 15:28, 19 users, load averages: 22.78 38.65 38.87",
+ "alerts": "done",
+ "snapCount": 11,
+ "folded": {
+  "chips": [
+   ":47656 vibepet · vibepet page 6",
+   ":47654 atlas · atlas page 4",
+   ":47652 kestrel · kestrel page 2",
+   ":47653 beacon · beacon page 3",
+   ":47647 vibepet · Prefork app",
+   ":47648 vibepet · Inspected app"
+  ],
+  "more": "+5 more"
+ },
+ "expanded": {
+  "chips": [
+   ":47656 vibepet · vibepet page 6",
+   ":47654 atlas · atlas page 4",
+   ":47652 kestrel · kestrel page 2",
+   ":47653 beacon · beacon page 3",
+   ":47647 vibepet · Prefork app",
+   ":47648 vibepet · Inspected app",
+   ":47649 vibepet · debugger [inactive: 127.0.0.1:47649 is node's debugger: open it from chrome://inspect · press to ask again]",
+   ":47650 kestrel · node [inactive: No answer yet from [::1]:47650 (still starting?) · press to ask again]",
+   ":47651 delta · delta page 1",
+   ":63052 delta · canon fixture",
+   ":47655 ember · ember page 5"
+  ],
+  "allReachable": true,
+  "more": "fewer"
+ },
+ "prefork": {
+  "chips": [
+   ":47647 vibepet · Prefork app"
+  ],
+  "pgid": 24902,
+  "groupBefore": 4,
+  "dialog": {
+   "kind": "dialog",
+   "at": 1790937836834,
+   "message": "Stop Python (vibepet) on :47647?",
+   "detail": "Ends pid 24902 and the 3 processes under it · :47647 goes down",
+   "answered": 0
+  },
+  "note": "Stopped Python (vibepet) on :47647",
+  "noteMs": 856,
+  "after": {
+   "portListeners": 0,
+   "groupLeft": [],
+   "respawnLines": 0,
+   "chipStill": false
+  }
+ },
+ "debugger": {
+  "chip": ":47649 vibepet · debugger",
+  "appChip": ":47648 vibepet · Inspected app",
+  "dialog": {
+   "kind": "dialog",
+   "at": 1790937842096,
+   "message": "Stop node (vibepet) on :47649?",
+   "detail": "Ends pid 24905 · :47648 and :47649 go down",
+   "answered": 0
+  },
+  "note": "Stopped node (vibepet) on :47648 and :47649",
+  "after": {
+   "chips": [],
+   "listeners": 0
+  }
+ },
+ "stale": [
+  {
+   "port": 47657,
+   "killAt": 1790937849741,
+   "clickAt": 1790937849901,
+   "landedStale": true,
+   "note": "That server had already stopped",
+   "dialog": false,
+   "chipGoneMsAfterKill": 715
+  },
+  {
+   "port": 47658,
+   "killAt": 1790937856922,
+   "clickAt": 1790937857091,
+   "landedStale": true,
+   "note": "That server had already stopped",
+   "dialog": false,
+   "chipGoneMsAfterKill": 255
+  },
+  {
+   "port": 47659,
+   "killAt": 1790937860706,
+   "clickAt": 1790937860780,
+   "landedStale": true,
+   "note": "That server had already stopped",
+   "dialog": false,
+   "chipGoneMsAfterKill": 393
+  }
+ ],
+ "menuStop": {
+  "alerts": "done",
+  "clicked": {
+   "ok": true,
+   "label": "Stop node (pid 28636)…"
+  },
+  "menuEntry": [
+   [
+    "Open http://localhost:47660",
+    true
+   ],
+   [
+    "node (beacon) — ~/.vibepet-ultra/fleet/beacon",
+    false
+   ],
+   [
+    "",
+    true
+   ],
+   [
+    "Stop node (pid 28636)…",
+    true
+   ]
+  ],
+  "dialog": {
+   "kind": "dialog",
+   "at": 1790937863772,
+   "message": "Stop node (beacon) on :47660?",
+   "detail": "Ends pid 28636 · :47660 goes down",
+   "answered": 0
+  },
+  "event": {
+   "kind": "localhost",
+   "text": "Stopped node (beacon) on :47660"
+  },
+  "exited": true
+ },
+ "externalKill": {
+  "alerts": "done",
+  "event": {
+   "kind": "localhost",
+   "text": "node (kestrel) on :47661 went down"
+  },
+  "msAfterKill": 963
+ },
+ "ports": {
+  "pre": 47647,
+  "app": 47648,
+  "dbg": 47649,
+  "tcp": 47650,
+  "t0": 47651,
+  "t1": 47652,
+  "t2": 47653,
+  "t3": 47654,
+  "t4": 47655,
+  "t5": 47656
+ },
+ "uptimeEnd": "4:44  up 6 days, 15:29, 19 users, load averages: 30.97 38.46 38.80",
+ "fixtures": [
+  {
+   "tag": "pre",
+   "pid": 24902,
+   "exited": true
+  },
+  {
+   "tag": "app",
+   "pid": 24905,
+   "exited": true
+  },
+  {
+   "tag": "tcp",
+   "pid": 24908,
+   "exited": true
+  },
+  {
+   "tag": "t0",
+   "pid": 24917,
+   "exited": true
+  },
+  {
+   "tag": "t1",
+   "pid": 24927,
+   "exited": true
+  },
+  {
+   "tag": "t2",
+   "pid": 24934,
+   "exited": true
+  },
+  {
+   "tag": "t3",
+   "pid": 24951,
+   "exited": true
+  },
+  {
+   "tag": "t4",
+   "pid": 25258,
+   "exited": true
+  },
+  {
+   "tag": "t5",
+   "pid": 25337,
+   "exited": true
+  },
+  {
+   "tag": "stale0",
+   "pid": 27296,
+   "exited": true
+  },
+  {
+   "tag": "stale1",
+   "pid": 28102,
+   "exited": true
+  },
+  {
+   "tag": "stale2",
+   "pid": 28352,
+   "exited": true
+  },
+  {
+   "tag": "menu",
+   "pid": 28636,
+   "exited": true
+  },
+  {
+   "tag": "crash",
+   "pid": 28885,
+   "exited": true
+  }
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 2752,
+  "procs": 8,
+  "orphans": []
+ }
+}

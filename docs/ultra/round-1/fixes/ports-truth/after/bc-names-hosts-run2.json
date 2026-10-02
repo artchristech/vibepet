@@ -1,0 +1,495 @@
+{
+ "startedAt": "2026-10-02T13:04:32.042Z",
+ "uptimeStart": "7:04  up 6 days, 17:49, 19 users, load averages: 16.46 9.56 26.38",
+ "servers": {},
+ "binds": {
+  "py": [
+   "*:47777"
+  ],
+  "viteA": [
+   "*:47778"
+  ],
+  "viteB": [
+   "*:47779"
+  ],
+  "v6": [
+   "[::1]:47780"
+  ],
+  "tls": [
+   "127.0.0.1:47781"
+  ],
+  "shared": [
+   "*:47782",
+   "127.0.0.1:47782"
+  ],
+  "slow": [
+   "*:47783"
+  ]
+ },
+ "slowFirst": {
+  "snapshot": {
+   "key": "47783/54366",
+   "port": 47783,
+   "pid": 54366,
+   "sid": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "name": "vibepet · node",
+   "http": null,
+   "url": "http://localhost:47783",
+   "why": "No answer yet from [::1]:47783 (still starting?)"
+  },
+  "chip": "folded",
+  "msAfterListen": null
+ },
+ "foldedFirst": {
+  "chips": [
+   ":47777 vibepet · Directory listing",
+   ":47778 vibepet · Vite + React + TS",
+   ":47779 delta · Vite + React + TS",
+   ":47780 vibepet · Vite on [::1]",
+   ":47781 vibepet · Secure dev app",
+   ":47782 kestrel · Kestrel dashboard"
+  ],
+  "more": "+2 more"
+ },
+ "chipsEarly": [
+  {
+   "port": 47777,
+   "key": "47777/54336",
+   "label": ":47777 vibepet · Directory listing",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://localhost:47777",
+   "cls": ""
+  },
+  {
+   "port": 47778,
+   "key": "47778/54339",
+   "label": ":47778 vibepet · Vite + React + TS",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://localhost:47778",
+   "cls": ""
+  },
+  {
+   "port": 47779,
+   "key": "47779/54342",
+   "label": ":47779 delta · Vite + React + TS",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://localhost:47779",
+   "cls": ""
+  },
+  {
+   "port": 47780,
+   "key": "47780/54345",
+   "label": ":47780 vibepet · Vite on [::1]",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://localhost:47780",
+   "cls": ""
+  },
+  {
+   "port": 47781,
+   "key": "47781/54348",
+   "label": ":47781 vibepet · Secure dev app",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open https://localhost:47781",
+   "cls": ""
+  },
+  {
+   "port": 47782,
+   "key": "47782/54351",
+   "label": ":47782 kestrel · Kestrel dashboard",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://[::1]:47782",
+   "cls": ""
+  },
+  {
+   "port": 47782,
+   "key": "47782/54363",
+   "label": ":47782 beacon · Beacon status",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://127.0.0.1:47782",
+   "cls": ""
+  },
+  {
+   "port": 47783,
+   "key": "47783/54366",
+   "label": ":47783 vibepet · node",
+   "inactive": true,
+   "disabled": false,
+   "title": "No answer yet from [::1]:47783 (still starting?) · press to ask again",
+   "cls": "off"
+  }
+ ],
+ "opens": [
+  {
+   "port": 47777,
+   "chip": ":47777 vibepet · Directory listing",
+   "url": "http://localhost:47777",
+   "servesTitle": "Directory listing for /"
+  },
+  {
+   "port": 47778,
+   "chip": ":47778 vibepet · Vite + React + TS",
+   "url": "http://localhost:47778",
+   "servesTitle": "Vite + React + TS"
+  },
+  {
+   "port": 47779,
+   "chip": ":47779 delta · Vite + React + TS",
+   "url": "http://localhost:47779",
+   "servesTitle": "Vite + React + TS"
+  },
+  {
+   "port": 47780,
+   "chip": ":47780 vibepet · Vite on [::1]",
+   "url": "http://localhost:47780",
+   "servesTitle": "Vite on [::1]"
+  },
+  {
+   "port": 47781,
+   "chip": ":47781 vibepet · Secure dev app",
+   "url": "https://localhost:47781",
+   "servesTitle": "Secure dev app"
+  },
+  {
+   "port": 47782,
+   "chip": ":47782 kestrel · Kestrel dashboard",
+   "url": "http://[::1]:47782",
+   "servesTitle": "Kestrel dashboard"
+  },
+  {
+   "port": 47782,
+   "chip": ":47782 beacon · Beacon status",
+   "url": "http://127.0.0.1:47782",
+   "servesTitle": "Beacon status"
+  },
+  {
+   "port": 47783,
+   "chip": ":47783 vibepet · Next.js app",
+   "url": "http://localhost:47783",
+   "servesTitle": "Next.js app"
+  }
+ ],
+ "slowTrace": [
+  {
+   "at": 1790946277031,
+   "msAfterReady": -16763,
+   "main": {
+    "http": null,
+    "why": "No answer yet from [::1]:47783 (still starting?)",
+    "name": "vibepet · node"
+   },
+   "chip": "inactive"
+  },
+  {
+   "at": 1790946279064,
+   "msAfterReady": -14730,
+   "main": {
+    "http": null,
+    "why": "No answer yet from [::1]:47783 (still starting?)",
+    "name": "vibepet · node"
+   },
+   "chip": "inactive"
+  },
+  {
+   "at": 1790946281113,
+   "msAfterReady": -12681,
+   "main": {
+    "http": null,
+    "why": "No answer yet from [::1]:47783 (still starting?)",
+    "name": "vibepet · node"
+   },
+   "chip": "inactive"
+  },
+  {
+   "at": 1790946283146,
+   "msAfterReady": -10648,
+   "main": {
+    "http": null,
+    "why": "No answer yet from [::1]:47783 (still starting?)",
+    "name": "vibepet · node"
+   },
+   "chip": "inactive"
+  },
+  {
+   "at": 1790946285195,
+   "msAfterReady": -8599,
+   "main": {
+    "http": null,
+    "why": "No answer yet from [::1]:47783 (still starting?)",
+    "name": "vibepet · node"
+   },
+   "chip": "inactive"
+  },
+  {
+   "at": 1790946287227,
+   "msAfterReady": -6567,
+   "main": {
+    "http": null,
+    "why": "No answer yet from [::1]:47783 (still starting?)",
+    "name": "vibepet · node"
+   },
+   "chip": "inactive"
+  },
+  {
+   "at": 1790946289272,
+   "msAfterReady": -4522,
+   "main": {
+    "http": null,
+    "why": "No answer yet from [::1]:47783 (still starting?)",
+    "name": "vibepet · node"
+   },
+   "chip": "inactive"
+  },
+  {
+   "at": 1790946291311,
+   "msAfterReady": -2483,
+   "main": {
+    "http": null,
+    "why": "No answer yet from [::1]:47783 (still starting?)",
+    "name": "vibepet · node"
+   },
+   "chip": "inactive"
+  },
+  {
+   "at": 1790946293332,
+   "msAfterReady": -462,
+   "main": {
+    "http": null,
+    "why": "No answer yet from [::1]:47783 (still starting?)",
+    "name": "vibepet · node"
+   },
+   "chip": "inactive"
+  }
+ ],
+ "slow": {
+  "listenAt": 1790946274026,
+  "readyAt": 1790946293794,
+  "activeAt": 1790946293834,
+  "msAfterReady": 40,
+  "load": [
+   23.87,
+   12.16,
+   26.85
+  ]
+ },
+ "chipsLate": [
+  {
+   "port": 47777,
+   "key": "47777/54336",
+   "label": ":47777 vibepet · Directory listing",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://localhost:47777",
+   "cls": ""
+  },
+  {
+   "port": 47778,
+   "key": "47778/54339",
+   "label": ":47778 vibepet · Vite + React + TS",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://localhost:47778",
+   "cls": ""
+  },
+  {
+   "port": 47779,
+   "key": "47779/54342",
+   "label": ":47779 delta · Vite + React + TS",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://localhost:47779",
+   "cls": ""
+  },
+  {
+   "port": 47780,
+   "key": "47780/54345",
+   "label": ":47780 vibepet · Vite on [::1]",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://localhost:47780",
+   "cls": ""
+  },
+  {
+   "port": 47781,
+   "key": "47781/54348",
+   "label": ":47781 vibepet · Secure dev app",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open https://localhost:47781",
+   "cls": ""
+  },
+  {
+   "port": 47782,
+   "key": "47782/54351",
+   "label": ":47782 kestrel · Kestrel dashboard",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://[::1]:47782",
+   "cls": ""
+  },
+  {
+   "port": 47782,
+   "key": "47782/54363",
+   "label": ":47782 beacon · Beacon status",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://127.0.0.1:47782",
+   "cls": ""
+  },
+  {
+   "port": 47783,
+   "key": "47783/54366",
+   "label": ":47783 vibepet · Next.js app",
+   "inactive": false,
+   "disabled": false,
+   "title": "Open http://localhost:47783",
+   "cls": ""
+  }
+ ],
+ "snapServers": [
+  {
+   "key": "47777/54336",
+   "port": 47777,
+   "pid": 54336,
+   "sid": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "name": "vibepet · Directory listing",
+   "http": true,
+   "url": "http://localhost:47777",
+   "why": null
+  },
+  {
+   "key": "47778/54339",
+   "port": 47778,
+   "pid": 54339,
+   "sid": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "name": "vibepet · Vite + React + TS",
+   "http": true,
+   "url": "http://localhost:47778",
+   "why": null
+  },
+  {
+   "key": "47779/54342",
+   "port": 47779,
+   "pid": 54342,
+   "sid": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+   "name": "delta · Vite + React + TS",
+   "http": true,
+   "url": "http://localhost:47779",
+   "why": null
+  },
+  {
+   "key": "47780/54345",
+   "port": 47780,
+   "pid": 54345,
+   "sid": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "name": "vibepet · Vite on [::1]",
+   "http": true,
+   "url": "http://localhost:47780",
+   "why": null
+  },
+  {
+   "key": "47781/54348",
+   "port": 47781,
+   "pid": 54348,
+   "sid": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "name": "vibepet · Secure dev app",
+   "http": true,
+   "url": "https://localhost:47781",
+   "why": null
+  },
+  {
+   "key": "47782/54351",
+   "port": 47782,
+   "pid": 54351,
+   "sid": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "name": "kestrel · Kestrel dashboard",
+   "http": true,
+   "url": "http://[::1]:47782",
+   "why": null
+  },
+  {
+   "key": "47782/54363",
+   "port": 47782,
+   "pid": 54363,
+   "sid": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+   "name": "beacon · Beacon status",
+   "http": true,
+   "url": "http://127.0.0.1:47782",
+   "why": null
+  },
+  {
+   "key": "47783/54366",
+   "port": 47783,
+   "pid": 54366,
+   "sid": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "name": "vibepet · Next.js app",
+   "http": true,
+   "url": "http://localhost:47783",
+   "why": null
+  }
+ ],
+ "ports": {
+  "py": 47777,
+  "viteA": 47778,
+  "viteB": 47779,
+  "v6": 47780,
+  "tls": 47781,
+  "shared": 47782,
+  "slow": 47783
+ },
+ "uptimeEnd": "7:04  up 6 days, 17:50, 19 users, load averages: 23.87 12.16 26.85",
+ "fixtures": [
+  {
+   "tag": "py",
+   "pid": 54336,
+   "exited": true
+  },
+  {
+   "tag": "viteA",
+   "pid": 54339,
+   "exited": true
+  },
+  {
+   "tag": "viteB",
+   "pid": 54342,
+   "exited": true
+  },
+  {
+   "tag": "v6",
+   "pid": 54345,
+   "exited": true
+  },
+  {
+   "tag": "tls",
+   "pid": 54348,
+   "exited": true
+  },
+  {
+   "tag": "sharedK",
+   "pid": 54351,
+   "exited": true
+  },
+  {
+   "tag": "sharedB",
+   "pid": 54363,
+   "exited": true
+  },
+  {
+   "tag": "slow",
+   "pid": 54366,
+   "exited": true
+  }
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 757,
+  "procs": 6,
+  "orphans": []
+ }
+}

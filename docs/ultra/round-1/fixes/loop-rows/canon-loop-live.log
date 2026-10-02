@@ -1,0 +1,3 @@
+ok 29/29 assertions in 35.9 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/loop-rows/canon
+rows: beacon:needs kestrel:needs delta:ready atlas:ready vibepet:ready ember:loop   fleet: 4/6 in state
+exit=0

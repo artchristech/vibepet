@@ -1,0 +1,1019 @@
+{
+ "phase": "A",
+ "startedAt": "2026-10-02T01:49:02.427Z",
+ "load0": [
+  4.25,
+  2.97,
+  2.53
+ ],
+ "shots": [
+  {
+   "name": "01-F1-home-before.png",
+   "at": 1790905747338,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+      "sig": "ready",
+      "title": "ember",
+      "small": "ember · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [],
+    "nowScroll": {
+     "top": 0,
+     "height": 99,
+     "full": 99
+    },
+    "bubble": {
+     "text": "",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": null
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "02-F1-shown-kestrel.png",
+   "at": 1790905758303,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+      "sig": "ready",
+      "title": "ember",
+      "small": "ember · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47101,
+      "pid": 55528,
+      "label": ":47101 node (kestrel)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 126,
+     "full": 126
+    },
+    "bubble": {
+     "text": "",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 2 servers"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "03-F4-gone-kestrel.png",
+   "at": 1790905770266,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+      "sig": "ready",
+      "title": "ember",
+      "small": "ember · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 126,
+     "full": 126
+    },
+    "bubble": {
+     "text": "",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 1 server"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "04-F1-shown-beacon.png",
+   "at": 1790905782281,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+      "sig": "ready",
+      "title": "ember",
+      "small": "ember · done 1m ago",
+      "ask": null,
+      "acts": [
+       "replay",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47102,
+      "pid": 58111,
+      "label": ":47102 Directory listing for /",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 126,
+     "full": 126
+    },
+    "bubble": {
+     "text": "",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 2 servers"
+    },
+    "msgs": []
+   }
+  }
+ ],
+ "timings": [
+  {
+   "flow": "home",
+   "step": "open (click on Net → panel shown)",
+   "ms": 402,
+   "load": [
+    4.07,
+    2.95,
+    2.53
+   ],
+   "at": "01:49:06.176Z",
+   "n": 1
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (kestrel, npm start → node src/server.js)",
+   "ms": 10334,
+   "load": [
+    3.99,
+    2.97,
+    2.54
+   ],
+   "at": "01:49:18.009Z",
+   "trial": 0,
+   "port": 47101
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (kestrel)",
+   "ms": 9279,
+   "load": [
+    3.73,
+    2.97,
+    2.55
+   ],
+   "at": "01:49:30.008Z",
+   "trial": 0,
+   "port": 47101
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (beacon, python http.server)",
+   "ms": 10310,
+   "load": [
+    3.92,
+    3.04,
+    2.57
+   ],
+   "at": "01:49:42.025Z",
+   "trial": 1,
+   "port": 47102
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (beacon)",
+   "ms": 10638,
+   "load": [
+    3.85,
+    3.07,
+    2.59
+   ],
+   "at": "01:49:54.084Z",
+   "trial": 1,
+   "port": 47102
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (kestrel, npm start → node src/server.js)",
+   "ms": 8794,
+   "load": [
+    3.48,
+    3.01,
+    2.58
+   ],
+   "at": "01:50:06.035Z",
+   "trial": 2,
+   "port": 47103
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (kestrel)",
+   "ms": 9198,
+   "load": [
+    3.57,
+    3.05,
+    2.6
+   ],
+   "at": "01:50:18.105Z",
+   "trial": 2,
+   "port": 47103
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (beacon, python http.server)",
+   "ms": 9133,
+   "load": [
+    3.37,
+    3.03,
+    2.6
+   ],
+   "at": "01:50:30.080Z",
+   "trial": 3,
+   "port": 47104
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (beacon)",
+   "ms": 10792,
+   "load": [
+    3.46,
+    3.06,
+    2.61
+   ],
+   "at": "01:50:42.021Z",
+   "trial": 3,
+   "port": 47104
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (kestrel, npm start → node src/server.js)",
+   "ms": 11012,
+   "load": [
+    3.2,
+    3.02,
+    2.61
+   ],
+   "at": "01:50:54.059Z",
+   "trial": 4,
+   "port": 47105
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (kestrel)",
+   "ms": 8128,
+   "load": [
+    3.09,
+    3,
+    2.6
+   ],
+   "at": "01:51:06.186Z",
+   "trial": 4,
+   "port": 47105
+  },
+  {
+   "flow": "F1",
+   "step": "server listening → shown in Home localhost (beacon, python http.server)",
+   "ms": 9216,
+   "load": [
+    3.24,
+    3.04,
+    2.62
+   ],
+   "at": "01:51:18.097Z",
+   "trial": 5,
+   "port": 47106
+  },
+  {
+   "flow": "F4",
+   "step": "server exited → gone from Home localhost (beacon)",
+   "ms": 8505,
+   "load": [
+    3.9,
+    3.18,
+    2.68
+   ],
+   "at": "01:51:30.198Z",
+   "trial": 5,
+   "port": 47106
+  }
+ ],
+ "notes": [
+  {
+   "at": 1790905746176,
+   "openHome": {
+    "mode": "now",
+    "at": {
+     "x": 330.5,
+     "y": 732.5
+    },
+    "ms": 402
+   }
+  }
+ ],
+ "readyMs": 498,
+ "truth0": {
+  "at": "2026-10-02T01:49:02.426Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": "r1-S6"
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": null
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": true,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "interrupted",
+    "lease": null
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": "r1-S6"
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": true,
+    "paused": false,
+    "pid": 51022,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   }
+  ]
+ },
+ "pmset0": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "trials": [
+  {
+   "i": 0,
+   "member": "kestrel",
+   "port": 47101,
+   "kind": "npm start → node src/server.js",
+   "listener": 55528,
+   "listenAt": 1790905747670,
+   "shownAt": 1790905758004,
+   "f1ms": 10334,
+   "label": {
+    "port": 47101,
+    "pid": 55528,
+    "label": ":47101 node (kestrel)",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790905760719,
+   "killMs": 16,
+   "goneAt": 1790905769998,
+   "f4ms": 9279
+  },
+  {
+   "i": 1,
+   "member": "beacon",
+   "port": 47102,
+   "kind": "python http.server",
+   "listener": 58111,
+   "listenAt": 1790905771679,
+   "shownAt": 1790905781989,
+   "f1ms": 10310,
+   "label": {
+    "port": 47102,
+    "pid": 58111,
+    "label": ":47102 Directory listing for /",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790905783355,
+   "killMs": 34,
+   "goneAt": 1790905793993,
+   "f4ms": 10638
+  },
+  {
+   "i": 2,
+   "member": "kestrel",
+   "port": 47103,
+   "kind": "npm start → node src/server.js",
+   "listener": 60786,
+   "listenAt": 1790905797214,
+   "shownAt": 1790905806008,
+   "f1ms": 8794,
+   "label": {
+    "port": 47103,
+    "pid": 60786,
+    "label": ":47103 node (kestrel)",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790905808812,
+   "killMs": 18,
+   "goneAt": 1790905818010,
+   "f4ms": 9198
+  },
+  {
+   "i": 3,
+   "member": "beacon",
+   "port": 47104,
+   "kind": "python http.server",
+   "listener": 63379,
+   "listenAt": 1790905820872,
+   "shownAt": 1790905830005,
+   "f1ms": 9133,
+   "label": {
+    "port": 47104,
+    "pid": 63379,
+    "label": ":47104 Directory listing for /",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790905831226,
+   "killMs": 17,
+   "goneAt": 1790905842018,
+   "f4ms": 10792
+  },
+  {
+   "i": 4,
+   "member": "kestrel",
+   "port": 47105,
+   "kind": "npm start → node src/server.js",
+   "listener": 65771,
+   "listenAt": 1790905843004,
+   "shownAt": 1790905854016,
+   "f1ms": 11012,
+   "label": {
+    "port": 47105,
+    "pid": 65771,
+    "label": ":47105 node (kestrel)",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790905857973,
+   "killMs": 17,
+   "goneAt": 1790905866101,
+   "f4ms": 8128
+  },
+  {
+   "i": 5,
+   "member": "beacon",
+   "port": 47106,
+   "kind": "python http.server",
+   "listener": 68585,
+   "listenAt": 1790905868871,
+   "shownAt": 1790905878087,
+   "f1ms": 9216,
+   "label": {
+    "port": 47106,
+    "pid": 68585,
+    "label": ":47106 Directory listing for /",
+    "disabled": false,
+    "title": "Open"
+   },
+   "deadAt": 1790905881591,
+   "killMs": 33,
+   "goneAt": 1790905890096,
+   "f4ms": 8505
+  }
+ ],
+ "summary": {
+  "f1": {
+   "median": 9763,
+   "min": 8794,
+   "max": 11012,
+   "n": 6,
+   "all": [
+    10334,
+    10310,
+    8794,
+    9133,
+    11012,
+    9216
+   ]
+  },
+  "f4": {
+   "median": 9239,
+   "min": 8128,
+   "max": 10792,
+   "n": 6,
+   "all": [
+    9279,
+    10638,
+    9198,
+    10792,
+    8128,
+    8505
+   ]
+  }
+ },
+ "pollGaps": {
+  "median": 12027,
+  "min": 11873,
+  "max": 12102,
+  "n": 12
+ },
+ "truth1": {
+  "at": "2026-10-02T01:51:33.333Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": "r1-S6"
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": null
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": true,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "interrupted",
+    "lease": null
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": "r1-S6"
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": true,
+    "paused": false,
+    "pid": 51022,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   }
+  ]
+ },
+ "pmset1": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "load1": [
+  3.99,
+  3.21,
+  2.69
+ ],
+ "endedAt": "2026-10-02T01:51:35.552Z",
+ "polls": [
+  {
+   "at": 1790905743257,
+   "seen": 1790905743322,
+   "servers": [],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905755130,
+   "seen": 1790905755223,
+   "servers": [
+    "55528:47101",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905767145,
+   "seen": 1790905767225,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905779123,
+   "seen": 1790905779216,
+   "servers": [
+    "58111:47102",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905791148,
+   "seen": 1790905791249,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905803199,
+   "seen": 1790905803266,
+   "servers": [
+    "60786:47103",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905815273,
+   "seen": 1790905815279,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905827189,
+   "seen": 1790905827215,
+   "servers": [
+    "63379:47104",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905839218,
+   "seen": 1790905839225,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905851140,
+   "seen": 1790905851143,
+   "servers": [
+    "65771:47105",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905863242,
+   "seen": 1790905863313,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905875298,
+   "seen": 1790905875318,
+   "servers": [
+    "68585:47106",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790905887356,
+   "seen": 1790905887453,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  }
+ ],
+ "allCalls": [],
+ "footerLog": [
+  {
+   "at": 1790905743227,
+   "srv": []
+  },
+  {
+   "at": 1790905758004,
+   "srv": [
+    {
+     "port": 47101,
+     "pid": 55528,
+     "label": ":47101 node (kestrel)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790905769998,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790905781989,
+   "srv": [
+    {
+     "port": 47102,
+     "pid": 58111,
+     "label": ":47102 Directory listing for /",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790905793993,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790905806008,
+   "srv": [
+    {
+     "port": 47103,
+     "pid": 60786,
+     "label": ":47103 node (kestrel)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790905818010,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790905830005,
+   "srv": [
+    {
+     "port": 47104,
+     "pid": 63379,
+     "label": ":47104 Directory listing for /",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790905842018,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790905854016,
+   "srv": [
+    {
+     "port": 47105,
+     "pid": 65771,
+     "label": ":47105 node (kestrel)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790905866101,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790905878087,
+   "srv": [
+    {
+     "port": 47106,
+     "pid": 68585,
+     "label": ":47106 Directory listing for /",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790905890096,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  }
+ ],
+ "rendererEvents": [],
+ "close": {
+  "how": "quit",
+  "ms": 376,
+  "procs": 7,
+  "orphans": []
+ }
+}

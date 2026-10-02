@@ -1,0 +1,706 @@
+{
+ "phase": "detached",
+ "startedAt": "2026-10-02T05:44:39.737Z",
+ "uptimeStart": "23:44  up 6 days, 10:29, 19 users, load averages: 16.91 47.47 48.54",
+ "fleet": {
+  "delta": {
+   "pid": 29074,
+   "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+   "tmux": "vp-delta:@4.%4",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790906449089
+  },
+  "vibepet": {
+   "pid": 48221,
+   "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "tmux": "vp-vibepet:@1.%1",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790910787682
+  },
+  "atlas": {
+   "pid": 48392,
+   "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+   "tmux": "vp-atlas:@2.%2",
+   "status": "idle",
+   "waitingFor": null,
+   "statusUpdatedAt": 1790910180805
+  },
+  "beacon": {
+   "pid": 48539,
+   "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+   "tmux": "vp-beacon:@3.%3",
+   "status": "waiting",
+   "waitingFor": "input needed",
+   "statusUpdatedAt": 1790907222729
+  },
+  "kestrel": {
+   "pid": 55946,
+   "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "tmux": "vp-kestrel:@8.%8",
+   "status": "waiting",
+   "waitingFor": "permission prompt",
+   "statusUpdatedAt": 1790910742347
+  }
+ },
+ "clientsAtStart": [],
+ "terminalWindows": 0,
+ "trials": [
+  {
+   "how": "/jump",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-kestrel",
+    "attach": "tmux attach -t vp-kestrel"
+   },
+   "handlerMs": 193,
+   "clickToResultMs": 227,
+   "load": [
+    19.31,
+    46.99,
+    48.36
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "/jump",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-beacon",
+    "attach": "tmux attach -t vp-beacon"
+   },
+   "handlerMs": 226,
+   "clickToResultMs": 245,
+   "load": [
+    19.31,
+    46.99,
+    48.36
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "/jump",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-vibepet",
+    "attach": "tmux attach -t vp-vibepet"
+   },
+   "handlerMs": 590,
+   "clickToResultMs": 631,
+   "load": [
+    21.93,
+    47.08,
+    48.38
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "/jump",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-atlas",
+    "attach": "tmux attach -t vp-atlas"
+   },
+   "handlerMs": 838,
+   "clickToResultMs": 935,
+   "load": [
+    21.93,
+    47.08,
+    48.38
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "/jump",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-delta",
+    "attach": "tmux attach -t vp-delta"
+   },
+   "handlerMs": 687,
+   "clickToResultMs": 715,
+   "load": [
+    21.93,
+    47.08,
+    48.38
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-kestrel",
+    "attach": "tmux attach -t vp-kestrel"
+   },
+   "handlerMs": 502,
+   "clickToResultMs": 605,
+   "load": [
+    29.22,
+    48.17,
+    48.76
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-beacon",
+    "attach": "tmux attach -t vp-beacon"
+   },
+   "handlerMs": 580,
+   "clickToResultMs": 644,
+   "load": [
+    29.22,
+    48.17,
+    48.76
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-vibepet",
+    "attach": "tmux attach -t vp-vibepet"
+   },
+   "handlerMs": 670,
+   "clickToResultMs": 718,
+   "load": [
+    30.96,
+    48.22,
+    48.77
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-atlas",
+    "attach": "tmux attach -t vp-atlas"
+   },
+   "handlerMs": 1393,
+   "clickToResultMs": 1464,
+   "load": [
+    30.96,
+    48.22,
+    48.77
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-delta",
+    "attach": "tmux attach -t vp-delta"
+   },
+   "handlerMs": 1457,
+   "clickToResultMs": 1675,
+   "load": [
+    38.81,
+    49.56,
+    49.24
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-kestrel",
+    "attach": "tmux attach -t vp-kestrel"
+   },
+   "handlerMs": 1528,
+   "clickToResultMs": 1567,
+   "load": [
+    46.92,
+    51.06,
+    49.77
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-beacon",
+    "attach": "tmux attach -t vp-beacon"
+   },
+   "handlerMs": 916,
+   "clickToResultMs": 967,
+   "load": [
+    46.92,
+    51.06,
+    49.77
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-vibepet",
+    "attach": "tmux attach -t vp-vibepet"
+   },
+   "handlerMs": 404,
+   "clickToResultMs": 456,
+   "load": [
+    51.89,
+    52.02,
+    50.12
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-atlas",
+    "attach": "tmux attach -t vp-atlas"
+   },
+   "handlerMs": 928,
+   "clickToResultMs": 970,
+   "load": [
+    51.89,
+    52.02,
+    50.12
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-delta",
+    "attach": "tmux attach -t vp-delta"
+   },
+   "handlerMs": 456,
+   "clickToResultMs": 548,
+   "load": [
+    51.89,
+    52.02,
+    50.12
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "kestrel",
+   "jumped": "kestrel",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-kestrel",
+    "attach": "tmux attach -t vp-kestrel"
+   },
+   "handlerMs": 333,
+   "clickToResultMs": 426,
+   "load": [
+    51.89,
+    52.02,
+    50.12
+   ],
+   "target": "vp-kestrel @8 %8",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "beacon",
+   "jumped": "beacon",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-beacon",
+    "attach": "tmux attach -t vp-beacon"
+   },
+   "handlerMs": 534,
+   "clickToResultMs": 560,
+   "load": [
+    52.38,
+    52.12,
+    50.16
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "vibepet",
+   "jumped": "vibepet",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-vibepet",
+    "attach": "tmux attach -t vp-vibepet"
+   },
+   "handlerMs": 507,
+   "clickToResultMs": 549,
+   "load": [
+    52.38,
+    52.12,
+    50.16
+   ],
+   "target": "vp-vibepet @1 %1",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "atlas",
+   "jumped": "atlas",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-atlas",
+    "attach": "tmux attach -t vp-atlas"
+   },
+   "handlerMs": 454,
+   "clickToResultMs": 526,
+   "load": [
+    52.38,
+    52.12,
+    50.16
+   ],
+   "target": "vp-atlas @2 %2",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "row",
+   "asked": "delta",
+   "jumped": "delta",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-delta",
+    "attach": "tmux attach -t vp-delta"
+   },
+   "handlerMs": 533,
+   "clickToResultMs": 571,
+   "load": [
+    52.59,
+    52.17,
+    50.19
+   ],
+   "target": "vp-delta @4 %4",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  },
+  {
+   "how": "hotkey",
+   "asked": null,
+   "jumped": "beacon",
+   "result": {
+    "ok": false,
+    "why": "no terminal is attached to tmux session vp-beacon",
+    "attach": "tmux attach -t vp-beacon"
+   },
+   "handlerMs": 682,
+   "clickToResultMs": 689,
+   "load": [
+    52.59,
+    52.17,
+    50.19
+   ],
+   "target": "vp-beacon @3 %3",
+   "clients": [],
+   "front": "com.backblaze.bzbmenu",
+   "clipboardWrites": 0,
+   "paneMatches": null
+  }
+ ],
+ "notes": [],
+ "git": "f6fcf2f tmux-reach: quote the tmux attach hint for a session name with spaces",
+ "worktreeDiff": "agents.js | 7 +++++--\n 1 file changed, 5 insertions(+), 2 deletions(-)",
+ "launch": {
+  "pid": 93924,
+  "readyMs": 1191
+ },
+ "aeTerminal": "-600",
+ "rows": [
+  {
+   "id": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+   "cls": "nr needs",
+   "title": "Beacon database choice",
+   "label": "beacon · waiting 1m",
+   "actions": [
+    "reply",
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "beacon"
+  },
+  {
+   "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+   "cls": "nr stuck",
+   "title": "Deploy.sh dry run",
+   "label": "kestrel · stuck 1m",
+   "actions": [
+    "approve",
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "kestrel"
+  },
+  {
+   "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+   "cls": "nr ready",
+   "title": "Run build.sh",
+   "label": "atlas · done just now",
+   "actions": [
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "atlas"
+  },
+  {
+   "id": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+   "cls": "nr ready",
+   "title": "Read package.json",
+   "label": "vibepet · done just now",
+   "actions": [
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "vibepet"
+  },
+  {
+   "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+   "cls": "nr ready",
+   "title": "Reconcile three shards in parallel",
+   "label": "delta · done just now",
+   "actions": [
+    "replay",
+    "done",
+    "goal"
+   ],
+   "member": "delta"
+  }
+ ],
+ "clipboard": 0,
+ "openExternal": [],
+ "close": {
+  "how": "quit",
+  "ms": 589,
+  "procs": 7,
+  "orphans": []
+ },
+ "uptimeEnd": "23:45  up 6 days, 10:30, 19 users, load averages: 52.59 52.17 50.19",
+ "summary": {
+  "hotkey": {
+   "n": 1,
+   "ok": 0,
+   "levels": [
+    "no terminal is attached to tmux session vp-beacon"
+   ],
+   "medianClickToResultMs": 689,
+   "maxClickToResultMs": 689,
+   "paneMatches": 0,
+   "terminalFront": 0,
+   "clipboardWrites": 0,
+   "perMember": {
+    "kestrel": {
+     "n": 0,
+     "medianMs": null
+    },
+    "beacon": {
+     "n": 1,
+     "medianMs": 689
+    },
+    "vibepet": {
+     "n": 0,
+     "medianMs": null
+    },
+    "atlas": {
+     "n": 0,
+     "medianMs": null
+    },
+    "delta": {
+     "n": 0,
+     "medianMs": null
+    }
+   }
+  },
+  "/jump": {
+   "n": 5,
+   "ok": 0,
+   "levels": [
+    "no terminal is attached to tmux session vp-kestrel",
+    "no terminal is attached to tmux session vp-beacon",
+    "no terminal is attached to tmux session vp-vibepet",
+    "no terminal is attached to tmux session vp-atlas",
+    "no terminal is attached to tmux session vp-delta"
+   ],
+   "medianClickToResultMs": 631,
+   "maxClickToResultMs": 935,
+   "paneMatches": 0,
+   "terminalFront": 0,
+   "clipboardWrites": 0,
+   "perMember": {
+    "kestrel": {
+     "n": 1,
+     "medianMs": 227
+    },
+    "beacon": {
+     "n": 1,
+     "medianMs": 245
+    },
+    "vibepet": {
+     "n": 1,
+     "medianMs": 631
+    },
+    "atlas": {
+     "n": 1,
+     "medianMs": 935
+    },
+    "delta": {
+     "n": 1,
+     "medianMs": 715
+    }
+   }
+  },
+  "row": {
+   "n": 15,
+   "ok": 0,
+   "levels": [
+    "no terminal is attached to tmux session vp-kestrel",
+    "no terminal is attached to tmux session vp-beacon",
+    "no terminal is attached to tmux session vp-vibepet",
+    "no terminal is attached to tmux session vp-atlas",
+    "no terminal is attached to tmux session vp-delta"
+   ],
+   "medianClickToResultMs": 605,
+   "maxClickToResultMs": 1675,
+   "paneMatches": 0,
+   "terminalFront": 0,
+   "clipboardWrites": 0,
+   "perMember": {
+    "kestrel": {
+     "n": 3,
+     "medianMs": 605
+    },
+    "beacon": {
+     "n": 3,
+     "medianMs": 644
+    },
+    "vibepet": {
+     "n": 3,
+     "medianMs": 549
+    },
+    "atlas": {
+     "n": 3,
+     "medianMs": 970
+    },
+    "delta": {
+     "n": 3,
+     "medianMs": 571
+    }
+   }
+  }
+ }
+}

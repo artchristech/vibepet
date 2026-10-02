@@ -1,0 +1,125 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/wt/r1-home-keyed",
+  "git": "5e8f472 home: needs-you rows stack only at the top of the list",
+  "startedAt": "2026-10-02T07:36:56.513Z",
+  "loadStart": "725.56 787.54 800.01",
+  "home": {
+    "mode": "now",
+    "ms": 493,
+    "rows": [
+      "vibepet:ready",
+      "beacon:running"
+    ],
+    "load": "682.12 776.20 795.84"
+  },
+  "liveFoldEmpty": {
+    "rows": 2,
+    "inView": 2,
+    "needs": 0,
+    "needsInView": 0,
+    "footerInView": true,
+    "msgs": 0,
+    "panel": 460,
+    "listViewport": 58,
+    "listScroll": 58,
+    "msgsBox": 0,
+    "needsStack": 0
+  },
+  "presses": [
+    {
+      "id": "6101876b",
+      "ticksDuringPress": 1,
+      "took": true,
+      "load": "682.12 776.20 795.84"
+    },
+    {
+      "id": "a9377f08",
+      "ticksDuringPress": 1,
+      "took": true,
+      "load": "665.30 771.15 793.94"
+    }
+  ],
+  "focus": {
+    "el": "<button data-do=\"replay\" title=\"Replay this sessio",
+    "kept": [
+      true,
+      true,
+      true
+    ]
+  },
+  "keys": {
+    "approvalRow": -1,
+    "afterEsc": "chatInput",
+    "tabFromComposer": "BODY",
+    "shiftTabBack": "BODY",
+    "blurs": 0,
+    "homeOpen": null
+  },
+  "needs4": {
+    "order": [
+      "extra0:waiting",
+      "extra1:waiting",
+      "extra2:waiting",
+      "extra3:waiting",
+      "vibepet:ready",
+      "extra5:ready",
+      "extra7:ready",
+      "extra9:ready",
+      "extra11:ready",
+      "beacon:working",
+      "extra4:working",
+      "extra6:working",
+      "extra8:working",
+      "extra10:working",
+      "extra12:working"
+    ],
+    "load": "628.24 757.66 788.73",
+    "emptyChat": {
+      "fold": {
+        "rows": 2,
+        "inView": 0,
+        "needs": 0,
+        "needsInView": 0,
+        "footerInView": false,
+        "msgs": 0,
+        "panel": 0,
+        "listViewport": 0,
+        "listScroll": 0,
+        "msgsBox": 0,
+        "needsStack": 0
+      },
+      "reach": {
+        "max": 0,
+        "rows": 2,
+        "neverVisible": [
+          "Read package.json",
+          "Beacon database choice"
+        ],
+        "partlyOnly": [],
+        "detail": [
+          {
+            "title": "Read package.json",
+            "sig": "other",
+            "h": 0,
+            "maxVisiblePx": 0
+          },
+          {
+            "title": "Beacon database choice",
+            "sig": "other",
+            "h": 0,
+            "maxVisiblePx": 0
+          }
+        ]
+      }
+    }
+  },
+  "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#now [data-do=today]')\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"chip\" data-do=\"today\">Today</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    51 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at /private/tmp/claude-501/-Users-christopherharris-projects/2aec191f-bd46-4d22-b2da-e8c859fd18a3/scratchpad/gate-home-keyed.js:145:47",
+  "close": {
+    "how": "quit",
+    "ms": 2562,
+    "procs": 7,
+    "orphans": []
+  },
+  "loadEnd": "675.28 756.67 787.28",
+  "endedAt": "2026-10-02T07:37:57.717Z"
+}

@@ -1,0 +1,1046 @@
+{
+ "generated_at": "2026-10-01T20:56:41.920Z",
+ "implementation": "mineA (Node v22.23.1, zero deps)",
+ "headline": {
+  "concurrency_median_p90_max_all": [
+   1,
+   4,
+   10
+  ],
+  "concurrency_median_p90_max_30d": [
+   1,
+   4,
+   10
+  ],
+  "tta_combined_censored_median_p90_s_all": [
+   122.33,
+   1647.29
+  ],
+  "tta_combined_censored_median_p90_s_30d": [
+   181.35,
+   2034.97
+  ],
+  "cutoff": "2026-10-01T20:00:00.000Z",
+  "blocks_per_live_session_hour": 1.12
+ },
+ "concurrency": {
+  "all_time": {
+   "live_minutes": 14011,
+   "live_hours": 233.52,
+   "sessions_per_live_minute": {
+    "median": 1,
+    "p75": 2,
+    "p90": 4,
+    "max": 10,
+    "mean": 1.74
+   },
+   "share_minutes_ge2": 36.16,
+   "share_minutes_ge5_pct": 4.83,
+   "share_minutes_ge10_pct": 0.01,
+   "days_with_live": 71,
+   "per_day_peak": {
+    "median": 3,
+    "p90": 7,
+    "max": 10
+   },
+   "session_minutes": 24358
+  },
+  "last_30d": {
+   "live_minutes": 7462,
+   "live_hours": 124.37,
+   "sessions_per_live_minute": {
+    "median": 1,
+    "p75": 3,
+    "p90": 4,
+    "max": 10,
+    "mean": 2.05
+   },
+   "share_minutes_ge2": 47.68,
+   "share_minutes_ge5_pct": 7.97,
+   "share_minutes_ge10_pct": 0.03,
+   "days_with_live": 29,
+   "per_day_peak": {
+    "median": 4,
+    "p90": 8,
+    "max": 10
+   },
+   "session_minutes": 15323
+  }
+ },
+ "tta": {
+  "all_time": {
+   "question": {
+    "raw": {
+     "n": 314,
+     "median": 176.68,
+     "p75": 922.18,
+     "p90": 13718.77,
+     "p99": 170089.45,
+     "max": 404311.3,
+     "mean": 9354.92
+    },
+    "censored": {
+     "n": 276,
+     "median": 116.42,
+     "p75": 410.54,
+     "p90": 1504.09,
+     "p99": 5785.57,
+     "max": 6650.46,
+     "mean": 539.61
+    },
+    "away_dropped": 38
+   },
+   "ask": {
+    "raw": {
+     "n": 78,
+     "median": 311.61,
+     "p75": 2086.22,
+     "p90": 19072.18,
+     "p99": 129304.99,
+     "max": 151913.87,
+     "mean": 9194.08
+    },
+    "censored": {
+     "n": 64,
+     "median": 217.98,
+     "p75": 783.16,
+     "p90": 1809.46,
+     "p99": 6264.18,
+     "max": 6737.4,
+     "mean": 788.44
+    },
+    "away_dropped": 14
+   },
+   "approval": {
+    "raw": {
+     "n": 45,
+     "median": 146.44,
+     "p75": 794.34,
+     "p90": 10105.15,
+     "p99": 34472.77,
+     "max": 35159.11,
+     "mean": 3331.64
+    },
+    "censored": {
+     "n": 40,
+     "median": 110.55,
+     "p75": 440.74,
+     "p90": 1277.57,
+     "p99": 6362.9,
+     "max": 7039.31,
+     "mean": 595.28
+    },
+    "away_dropped": 5
+   },
+   "approval_spec": {
+    "raw": {
+     "n": 248,
+     "median": 3.7,
+     "p75": 15.72,
+     "p90": 106.98,
+     "p99": 23216.28,
+     "max": 35159.11,
+     "mean": 610.74
+    },
+    "censored": {
+     "n": 243,
+     "median": 3.65,
+     "p75": 13.86,
+     "p90": 75.24,
+     "p99": 1772.87,
+     "max": 7039.31,
+     "mean": 104.33
+    },
+    "away_dropped": 5
+   },
+   "combined_abc": {
+    "raw": {
+     "n": 437,
+     "median": 189.04,
+     "p75": 1128.73,
+     "p90": 15480.98,
+     "p99": 145597.94,
+     "max": 404311.3,
+     "mean": 8705.96
+    },
+    "censored": {
+     "n": 380,
+     "median": 122.33,
+     "p75": 511.18,
+     "p90": 1647.29,
+     "p99": 6167.41,
+     "max": 7039.31,
+     "mean": 587.38
+    },
+    "away_dropped": 57
+   },
+   "combined_abc_spec": {
+    "raw": {
+     "n": 640,
+     "median": 54.79,
+     "p75": 411.86,
+     "p90": 5715.2,
+     "p99": 116640.83,
+     "max": 404311.3,
+     "mean": 5946.95
+    },
+    "censored": {
+     "n": 583,
+     "median": 37.16,
+     "p75": 228.43,
+     "p90": 922.98,
+     "p99": 5872.13,
+     "max": 7039.31,
+     "mean": 385.5
+    },
+    "away_dropped": 57
+   },
+   "done_idle_not_tta": {
+    "raw": {
+     "n": 2041,
+     "median": 160.24,
+     "p75": 1141.38,
+     "p90": 24668.75,
+     "p99": 293871.66,
+     "max": 2361280.68,
+     "mean": 14749.89
+    },
+    "censored": {
+     "n": 1735,
+     "median": 101.22,
+     "p75": 392.6,
+     "p90": 1333.34,
+     "p99": 5928.58,
+     "max": 7118.19,
+     "mean": 505
+    },
+    "away_dropped": 306
+   }
+  },
+  "last_30d": {
+   "question": {
+    "raw": {
+     "n": 184,
+     "median": 198.06,
+     "p75": 1100.86,
+     "p90": 4437.59,
+     "p99": 74259.73,
+     "max": 375365.26,
+     "mean": 5143.28
+    },
+    "censored": {
+     "n": 169,
+     "median": 176.63,
+     "p75": 652.78,
+     "p90": 2044.61,
+     "p99": 4973.78,
+     "max": 6040.63,
+     "mean": 622.93
+    },
+    "away_dropped": 15
+   },
+   "ask": {
+    "raw": {
+     "n": 47,
+     "median": 495.09,
+     "p75": 4006.43,
+     "p90": 12549.36,
+     "p99": 58406.84,
+     "max": 75109.69,
+     "mean": 5375.2
+    },
+    "censored": {
+     "n": 38,
+     "median": 225.51,
+     "p75": 780.75,
+     "p90": 1702.11,
+     "p99": 6459.47,
+     "max": 6737.4,
+     "mean": 859.97
+    },
+    "away_dropped": 9
+   },
+   "approval": {
+    "raw": {
+     "n": 27,
+     "median": 209.13,
+     "p75": 684.84,
+     "p90": 5998.67,
+     "p99": 34753.54,
+     "max": 35159.11,
+     "mean": 3246.18
+    },
+    "censored": {
+     "n": 25,
+     "median": 183.33,
+     "p75": 472.99,
+     "p90": 1189.03,
+     "p99": 6623.06,
+     "max": 7039.31,
+     "mean": 755.54
+    },
+    "away_dropped": 2
+   },
+   "approval_spec": {
+    "raw": {
+     "n": 144,
+     "median": 4.63,
+     "p75": 25.26,
+     "p90": 167.52,
+     "p99": 22178.48,
+     "max": 35159.11,
+     "mean": 616.98
+    },
+    "censored": {
+     "n": 142,
+     "median": 4.51,
+     "p75": 22.53,
+     "p90": 117.69,
+     "p99": 3676.15,
+     "max": 7039.31,
+     "mean": 141.45
+    },
+    "away_dropped": 2
+   },
+   "combined_abc": {
+    "raw": {
+     "n": 258,
+     "median": 220.86,
+     "p75": 1124.45,
+     "p90": 7149.37,
+     "p99": 73684.61,
+     "max": 375365.26,
+     "mean": 4987
+    },
+    "censored": {
+     "n": 232,
+     "median": 181.35,
+     "p75": 726.55,
+     "p90": 2034.97,
+     "p99": 6023.78,
+     "max": 7039.31,
+     "mean": 676.05
+    },
+    "away_dropped": 26
+   },
+   "combined_abc_spec": {
+    "raw": {
+     "n": 375,
+     "median": 64.14,
+     "p75": 484.04,
+     "p90": 3598.55,
+     "p99": 60382.54,
+     "max": 375365.26,
+     "mean": 3434.25
+    },
+    "censored": {
+     "n": 349,
+     "median": 42.59,
+     "p75": 285.41,
+     "p90": 1206.68,
+     "p99": 5919.45,
+     "max": 7039.31,
+     "mean": 452.84
+    },
+    "away_dropped": 26
+   },
+   "done_idle_not_tta": {
+    "raw": {
+     "n": 1317,
+     "median": 158.08,
+     "p75": 979.76,
+     "p90": 15342.04,
+     "p99": 125714.77,
+     "max": 604087.75,
+     "mean": 7867.79
+    },
+    "censored": {
+     "n": 1150,
+     "median": 102.97,
+     "p75": 425.89,
+     "p90": 1339.04,
+     "p99": 5616.22,
+     "max": 7058.59,
+     "mean": 510.31
+    },
+    "away_dropped": 167
+   }
+  },
+  "unanswered_at_end": {
+   "question": 30,
+   "ask": 1,
+   "approval": 0,
+   "done_idle": 279
+  },
+  "superseded_before_prompt": {
+   "question": 17,
+   "done_idle": 999
+  },
+  "literal_no_supersession": {
+   "question": {
+    "raw": {
+     "n": 332,
+     "median": 181.51,
+     "p75": 1181.06,
+     "p90": 17767.22,
+     "p99": 162699.14,
+     "max": 404311.3,
+     "mean": 9246.86
+    },
+    "censored": {
+     "n": 290,
+     "median": 120.46,
+     "p75": 448.1,
+     "p90": 1761.45,
+     "p99": 6107.04,
+     "max": 6963.56,
+     "mean": 592.35
+    }
+   },
+   "done_idle": {
+    "raw": {
+     "n": 2924,
+     "median": 416.14,
+     "p75": 4098.26,
+     "p90": 38233.86,
+     "p99": 237137,
+     "max": 2361280.68,
+     "mean": 14755.78
+    },
+    "censored": {
+     "n": 2295,
+     "median": 174.67,
+     "p75": 879.61,
+     "p90": 2869.9,
+     "p99": 6475.4,
+     "max": 7185.31,
+     "mean": 821.48
+    }
+   }
+  },
+  "approval_detail": {
+   "editlike_gap_gt2s": 223,
+   "editlike_by_mode": {
+    "plan": 20,
+    "auto": 203
+   },
+   "edit_gap_excluded_nonprompting_mode": 203,
+   "user_rejection_any_tool": 25,
+   "excluded_bypassPermissions": 22,
+   "excluded_nonhuman_denial": {
+    "automode-blocked": 32,
+    "permission-rule": 9,
+    "automode-unavailable": 14,
+    "interrupted": 3
+   },
+   "excluded_unknown_denial": 0,
+   "tool_results_total": 23400,
+   "tool_results_by_mode": {
+    "auto": 22551,
+    "plan": 686,
+    "acceptEdits": 64,
+    "?": 72,
+    "bypassPermissions": 22,
+    "default": 5
+   },
+   "bash_results": 13427,
+   "bash_with_decisive_signal": 77,
+   "bash_fast_gt30s_nonauto": 12,
+   "denial_kind_gaps": {
+    "Bash|automode-blocked": {
+     "n": 30,
+     "median": 19.06,
+     "p75": 30.63,
+     "p90": 43.33,
+     "p99": 109.6,
+     "max": 121.48,
+     "mean": 26.1
+    },
+    "Bash|permission-rule": {
+     "n": 1,
+     "median": 84235.41,
+     "p75": 84235.41,
+     "p90": 84235.41,
+     "p99": 84235.41,
+     "max": 84235.41,
+     "mean": 84235.41
+    },
+    "Bash|user-rejected": {
+     "n": 23,
+     "median": 25.67,
+     "p75": 169.89,
+     "p90": 4361.79,
+     "p99": 28972.75,
+     "max": 35159.11,
+     "mean": 2138.67
+    },
+    "other|automode-unavailable": {
+     "n": 5,
+     "median": 957.05,
+     "p75": 991.78,
+     "p90": 994.38,
+     "p99": 995.95,
+     "max": 996.12,
+     "mean": 791.09
+    },
+    "other|interrupted": {
+     "n": 3,
+     "median": 3115.75,
+     "p75": 4266.16,
+     "p90": 4956.4,
+     "p99": 5370.55,
+     "max": 5416.57,
+     "mean": 3293.99
+    },
+    "editlike|permission-rule": {
+     "n": 2,
+     "median": 9543.76,
+     "p75": 13625.18,
+     "p90": 16074.04,
+     "p99": 17543.35,
+     "max": 17706.61,
+     "mean": 9543.76
+    },
+    "Ask|permission-rule": {
+     "n": 2,
+     "median": 102222.82,
+     "p75": 112387.26,
+     "p90": 118485.92,
+     "p99": 122145.11,
+     "max": 122551.69,
+     "mean": 102222.82
+    },
+    "Bash|automode-unavailable": {
+     "n": 9,
+     "median": 929.5,
+     "p75": 1016.83,
+     "p90": 1022.04,
+     "p99": 1037.77,
+     "max": 1039.51,
+     "mean": 675.52
+    },
+    "other|user-rejected": {
+     "n": 2,
+     "median": 1032.91,
+     "p75": 1152.2,
+     "p90": 1223.77,
+     "p99": 1266.71,
+     "max": 1271.48,
+     "mean": 1032.91
+    },
+    "other|permission-rule": {
+     "n": 6,
+     "median": 2.54,
+     "p75": 5.02,
+     "p90": 555.38,
+     "p99": 1050.71,
+     "max": 1105.75,
+     "mean": 185.98
+    },
+    "Ask|user-rejected": {
+     "n": 1,
+     "median": 151913.87,
+     "p75": 151913.87,
+     "p90": 151913.87,
+     "p99": 151913.87,
+     "max": 151913.87,
+     "mean": 151913.87
+    },
+    "other|automode-blocked": {
+     "n": 1,
+     "median": 7.03,
+     "p75": 7.03,
+     "p90": 7.03,
+     "p99": 7.03,
+     "max": 7.03,
+     "mean": 7.03
+    },
+    "editlike|automode-blocked": {
+     "n": 1,
+     "median": 10.52,
+     "p75": 10.52,
+     "p90": 10.52,
+     "p99": 10.52,
+     "max": 10.52,
+     "mean": 10.52
+    }
+   }
+  },
+  "negative_turn_waits_dropped": 5
+ },
+ "attention_load": {
+  "blocks_per_live_hour": {
+   "aggregate": 1.12,
+   "aggregate_censored": 0.98,
+   "per_session_ge_half_live_hour": {
+    "n": 173,
+    "median": 0.93,
+    "p75": 1.87,
+    "p90": 2.97,
+    "max": 5.42
+   },
+   "total_blocks": 437,
+   "total_live_session_hours": 388.52,
+   "live_session_minutes_touched": 24358,
+   "last_30d": {
+    "blocks": 258,
+    "live_session_hours": 244.9,
+    "per_live_hour": 1.05,
+    "per_session_ge_half_live_hour": {
+     "n": 113,
+     "median": 0.77,
+     "p75": 1.8,
+     "p90": 2.9
+    }
+   }
+  },
+  "blocked_sessions_per_minute": {
+   "note": "blocked minutes outside live minutes arise because a session waiting > 30 min with no records is not live by the live-span definition",
+   "all_time": {
+    "live_minutes": 14011,
+    "median": 0,
+    "p75": 0,
+    "p90": 1,
+    "p99": 2,
+    "max": 6,
+    "share_ge1_pct": 17.66,
+    "share_ge2_pct": 3.87,
+    "share_ge3_pct": 0.84,
+    "given_ge1": {
+     "n": 2475,
+     "median": 1,
+     "p90": 2
+    }
+   },
+   "last_30d": {
+    "live_minutes": 7462,
+    "median": 0,
+    "p75": 0,
+    "p90": 1,
+    "p99": 3,
+    "max": 6,
+    "share_ge1_pct": 23.64,
+    "share_ge2_pct": 5.92,
+    "share_ge3_pct": 1.45,
+    "given_ge1": {
+     "n": 1764,
+     "median": 1,
+     "p90": 2
+    }
+   },
+   "blocked_minutes_outside_live_minutes": 702
+  },
+  "identical_tool_call_blocks": {
+   "exact_command_or_dir_ext_pattern": {
+    "approval_blocks_considered": 243,
+    "overlapping_cross_session_pairs": 0,
+    "blocks_involved": 0,
+    "distinct_keys_with_overlap": 0
+   },
+   "coarse_prefix2_or_tool_ext": {
+    "approval_blocks_considered": 243,
+    "overlapping_cross_session_pairs": 0,
+    "blocks_involved": 0,
+    "distinct_keys_with_overlap": 0
+   },
+   "note": "approval_spec (c, spec rule, superset of approval) blocks only, censored <= 2 h; key1 = tool + whitespace-normalized full Bash command, or tool + repo-common-dir + repo-relative dir + extension for file tools; key2 = tool + first two Bash tokens, or tool + extension. Hashes only."
+  },
+  "loops_wakeups_cron": {
+   "sessions_with_loop_prompt": 18,
+   "loop_prompts": 27,
+   "sessions_with_ScheduleWakeup": 20,
+   "ScheduleWakeup_calls": 157,
+   "sessions_with_CronCreate": 0,
+   "CronCreate_calls": 0,
+   "sessions_with_any": 23,
+   "sessions_with_effective_ScheduleWakeup_non_noop_non_stop": 13,
+   "wakeup_delaySeconds": {
+    "n": 107,
+    "median": 1200,
+    "p75": 1500,
+    "p90": 1500,
+    "p99": 2400,
+    "max": 2400,
+    "mean": 1239.25,
+    "min": 60
+   },
+   "observed_seconds_between_consecutive_ScheduleWakeup_calls": {
+    "n": 137,
+    "median": 142.4,
+    "p75": 345.67,
+    "p90": 4972.9,
+    "p99": 65635.67,
+    "max": 83927.13,
+    "mean": 3519.5
+   },
+   "cron_interval_seconds_parsed": {
+    "n": 0
+   }
+  },
+  "tokens_and_cost": {
+   "sessions": 356,
+   "sessions_with_usage": 348,
+   "assistant_messages_with_usage": 25139,
+   "totals": {
+    "input": 22687453,
+    "cache_write_5m": 0,
+    "cache_write_1h": 176684971,
+    "cache_write_unsplit": 0,
+    "cache_read": 5391443314,
+    "output": 20723497,
+    "usd": 5329.19,
+    "usd_last_30d_by_message_time": 2076.45
+   },
+   "per_session_usd": {
+    "median": 2.99,
+    "p75": 12.48,
+    "p90": 42.38,
+    "p99": 148.32,
+    "max": 417.35
+   },
+   "per_session_tokens_median": {
+    "input": 114,
+    "cache_write": 129388.5,
+    "cache_read": 2924275.5,
+    "output": 20366
+   },
+   "per_session_tokens_p90": {
+    "input": 2501.8000000000034,
+    "cache_write": 1614822.8000000003,
+    "cache_read": 46669214.60000001,
+    "output": 175212.30000000005
+   },
+   "usd_by_model": {
+    "claude-fable-5": 1436.79,
+    "claude-haiku-4-5-20251001": 0.14,
+    "claude-sonnet-5": 58.72,
+    "claude-opus-4-6": 7.12,
+    "claude-opus-5": 2334.61,
+    "claude-opus-4-8": 23.97,
+    "claude-fable-5-1": 875.51,
+    "claude-opus-5-5": 592.34
+   },
+   "crosscheck_cost_state": {
+    "sessions_with_cost_state": 169,
+    "sum_last_cost_state_usd": 3475.78,
+    "sum_mine_usd_same_sessions": 1174.81,
+    "note": "cost-state totalCostUSD is Claude Code's own running cost (last record per file); it can reset on resume and includes subagents, so only an order-of-magnitude check."
+   }
+  },
+  "away_gaps": {
+   "all_time": {
+    "gaps": 333,
+    "active_gaps": 305,
+    "total_hours": 1727.1,
+    "gap_minutes": {
+     "n": 333,
+     "median": 135.06,
+     "p75": 400.72,
+     "p90": 760.1,
+     "p99": 2622.23,
+     "max": 2888.64,
+     "mean": 311.19
+    },
+    "blocks_started_in_gaps": 84,
+    "finishes_started_in_gaps": 311,
+    "gaps_with_ge1_pileup": 262,
+    "gaps_with_ge3_pileup": 31,
+    "pileup_per_gap": {
+     "median": 1,
+     "p75": 1,
+     "p90": 2,
+     "max": 10
+    },
+    "share_active_gaps_with_ge1_block": 19.34,
+    "share_active_gaps_with_ge1_finish": 71.15
+   },
+   "last_30d": {
+    "gaps": 142,
+    "active_gaps": 134,
+    "total_hours": 640.89,
+    "gap_minutes": {
+     "n": 142,
+     "median": 112.76,
+     "p75": 371.99,
+     "p90": 697.75,
+     "p99": 1741.23,
+     "max": 2529.91,
+     "mean": 270.8
+    },
+    "blocks_started_in_gaps": 41,
+    "finishes_started_in_gaps": 156,
+    "gaps_with_ge1_pileup": 115,
+    "gaps_with_ge3_pileup": 22,
+    "pileup_per_gap": {
+     "median": 1,
+     "p75": 2,
+     "p90": 3,
+     "max": 5
+    },
+    "share_active_gaps_with_ge1_block": 22.39,
+    "share_active_gaps_with_ge1_finish": 72.39
+   },
+   "human_prompts_total": 2999,
+   "definition": "gap >= 20 min between consecutive human prompts (all sessions merged); pile-up = answered a+b+c blocks + answered done-idle waits whose start lies strictly inside the gap; active = a live minute strictly inside the gap"
+  },
+  "shared_cwd_or_repo": {
+   "live_minutes": 14011,
+   "minutes_ge2_live": 5067,
+   "minutes_with_shared_cwd": 1778,
+   "pct_of_live_minutes_shared_cwd": 12.69,
+   "pct_of_ge2_minutes_shared_cwd": 35.09,
+   "pct_of_ge2_minutes_shared_worktree": 20.54,
+   "minutes_with_shared_worktree": 1041,
+   "minutes_with_shared_repo_any_worktree": 1075,
+   "pct_of_live_minutes_shared_repo": 7.67,
+   "pct_of_ge2_minutes_shared_repo": 21.22,
+   "distinct_session_pairs_shared_cwd": 342,
+   "distinct_session_pairs_shared_worktree": 149,
+   "distinct_session_pairs_shared_repo": 153,
+   "last_30d": {
+    "minutes_ge2_live": 3558,
+    "minutes_with_shared_cwd": 1311,
+    "minutes_with_shared_worktree": 621,
+    "minutes_with_shared_repo": 621,
+    "pct_of_ge2_minutes_shared_cwd": 36.85,
+    "pct_of_ge2_minutes_shared_worktree": 17.45,
+    "pct_of_ge2_minutes_shared_repo": 17.45
+   },
+   "definition": "per live minute with >= 2 sessions: cwd = latest cwd record before the minute ends; worktree/repo = git toplevel / common dir resolved on the filesystem (sessions whose cwd is not in a git repo do not share a repo)."
+  },
+  "same_file_edits_within_30min": {
+   "edit_tools_only": {
+    "edit_events": 3168,
+    "files_edited": 934,
+    "collision_events": 38,
+    "files_with_collision": 9,
+    "session_pairs": 8
+   },
+   "incl_bash_changed_files": {
+    "edit_events": 5540,
+    "files_edited": 2191,
+    "collision_events": 54,
+    "files_with_collision": 17,
+    "session_pairs": 18
+   },
+   "edit_tools_only_last_30d": {
+    "edit_events": 574,
+    "files_edited": 366,
+    "collision_events": 0,
+    "files_with_collision": 0,
+    "session_pairs": 0
+   },
+   "definition": "collision event = a successful edit to file F by session B with an edit to F by a different session A in the preceding 30 min (paths hashed)."
+  },
+  "commit_while_other_session_has_newer_edits": {
+   "git_commits_detected": 542,
+   "last_30d_commits": 327,
+   "commits_no_repo_resolved": 29,
+   "prev_commit_from_git_log": 497,
+   "prev_commit_from_transcripts": 1,
+   "no_previous_commit": 15,
+   "flagged_same_worktree": 13,
+   "flagged_same_worktree_pct": 2.4,
+   "flagged_same_repo_any_worktree": 13,
+   "flagged_same_repo_pct": 2.4,
+   "flagged_same_worktree_last_30d": 5,
+   "definition": "commit = successful Bash tool_use whose command matches git [-C dir] commit; flagged when a different session, live (by live-span minutes) at the commit time, made a successful Edit/Write/MultiEdit/NotebookEdit in the same worktree (or same repo incl. other worktrees) after the repo's previous commit (git log --all %ct, fallback: previous transcript commit) and before this commit."
+  }
+ },
+ "methods": {
+  "root": "~/.claude/projects (top-level <dir>/<sessionId>.jsonl only)",
+  "files_parsed": 356,
+  "bytes_parsed": 1482127781,
+  "sessions": 356,
+  "skipped": {
+   "dirs_private_tmp_or_scratchpad": 12,
+   "dirs_fleet": 9,
+   "files_in_skipped_dirs": 188,
+   "subagent_files_ignored": 1744
+  },
+  "records_parsed": 160977,
+  "parse_errors": 0,
+  "runtime_s": 24.84,
+  "session_identity": "one session = one top-level file (filename sessionId). Records whose uuid was already seen in an earlier-born file (birth time, then path) are dropped (resume/fork copies). Records with timestamp > cutoff and files born after cutoff are ignored.",
+  "cutoff": "2026-10-01T20:00:00.000Z",
+  "timezone": "America/Denver",
+  "last_30d_window": "2026-09-01T20:00:00.000Z .. 2026-10-01T20:00:00.000Z (30 x 24 h ending at the cutoff); events assigned by their start timestamp, minutes by minute start; per-day peaks use local (America/Denver) calendar days",
+  "percentiles": "linear interpolation (Hyndman-Fan type 7, numpy default). Durations in seconds unless named otherwise.",
+  "definitions": {
+   "human_prompt": "type=user, !isMeta, !isSidechain, !isCompactSummary, no scheduledTaskId, no tool_result block, text (string content or text blocks joined by \\n) trimmed non-empty, not starting with '[Request interrupted', not starting with '<' unless starting with '<command-'. Compaction summaries and scheduled fires are machine-written and excluded (see sanity counts).",
+   "live": "all records with a parseable top-level timestamp (any type), sorted per session; consecutive pair < 30 min apart => session live over [t_i, t_i+1]; a minute is live if any such span touches it (minute = floor(ms/60000)). Isolated records (no neighbour within 30 min) are not live.",
+   "question": "file order. Assistant message (records grouped by message.id) with stop_reason end_turn whose last text block, trimmed, ends with '?'; wait starts at the timestamp of the message's last record and ends at the session's next human prompt. Supersession: any assistant record of a DIFFERENT message.id before that prompt drops the wait (the session moved on by itself; counted in superseded_before_prompt). A prompt timestamped before the end_turn (file-order anomaly) drops the wait (negative_turn_waits_dropped). literal_no_supersession reports pairing every end_turn to the next prompt.",
+   "ask": "tool_use AskUserQuestion -> its tool_result (tool_use record timestamp to tool_result record timestamp).",
+   "approval": "HEADLINE (a human prompt was shown): tool_use -> first tool_result in file order. Excluded: permissionMode (last seen before the tool_use) bypassPermissions; toolDenialKind automode-blocked / automode-unavailable / permission-rule / interrupted (no human answered: classifier, classifier timeout, settings rule, Esc) and unknown denial kinds. Counted: (1) toolDenialKind user-rejected, or is_error with the rejection marker text (the user answered No; any tool, any gap); (2) ExitPlanMode gap > 2 s (plan approval); (3) Edit/Write/MultiEdit/NotebookEdit gap > 2 s while permissionMode is default or unknown (auto/acceptEdits/plan show no edit prompt). Approved Bash prompts have no marker and are not counted.",
+   "approval_spec": "spec rule as written: same exclusions; user rejections + Edit/Write/MultiEdit/NotebookEdit/ExitPlanMode gap > 2 s in ANY permission mode. Under auto mode those gaps are classifier/hook latency (median ~3 s, max 83 s, no human decision), so this variant is reported but not used as the headline.",
+   "approval_heuristic_rationale": "Bash toolUseResult has no duration field (keys: stdout, stderr, interrupted, isImage, noOutputExpected), so for approved prompts the gap cannot be split into permission wait vs execution. 97% of tool calls ran under permissionMode 'auto', where the classifier allows or blocks without asking a human; only explicit user-rejection markers are decisive for Bash. Coverage: see approval_detail.bash_with_decisive_signal vs bash_results. Spec rule (1) is kept as written although under auto mode Edit/Write gaps > 2 s are mostly classifier latency, not humans (see approval_detail.editlike_by_mode).",
+   "done_idle": "end_turn message without a question -> next human prompt (same supersession rule). Not TTA.",
+   "censoring": "censored = waits <= 2 h; waits > 2 h counted as away_dropped. Waits with no answer before the file ends are in unanswered_at_end.",
+   "blocks": "a+b+c answered waits. blocked_sessions_per_minute uses censored waits, unioned per session, a session counts in every minute its wait interval touches; distribution is over live minutes.",
+   "away_gap": "gap >= 20 min between consecutive human prompts across all sessions (merged); pile-up = answered a+b+c blocks + answered done-idle waits whose start lies strictly inside the gap.",
+   "tokens": "usage deduped by message.id (Claude Code writes one record per content block with the same usage; max per field kept). Price = model list price (see prices). cache_creation split into 5m/1h when present; unsplit remainder priced as 5m. Non-Anthropic models (glm, deepseek) unpriced. Top-level sessions only: subagent spend excluded.",
+   "repo": "git worktree toplevel = nearest ancestor of cwd with .git; repo identity = commondir of that .git (so worktrees of one repo share it). Resolved from the live filesystem; cwds outside any git repo have no repo.",
+   "live_hours": "exact live time = sum over a session of consecutive-record gaps < 30 min (merged spans), clipped to the window; per-session rates for sessions with >= 0.5 live h."
+  },
+  "prices_usd_per_mtok_in_out_cw5m_cw1h_read": {
+   "claude-fable-5-1": [
+    10,
+    50,
+    12.5,
+    20,
+    0.25
+   ],
+   "claude-fable-5": [
+    10,
+    50,
+    12.5,
+    20,
+    1
+   ],
+   "claude-opus-5-5": [
+    4,
+    20,
+    5,
+    8,
+    0.2
+   ],
+   "claude-opus-5": [
+    5,
+    25,
+    6.25,
+    10,
+    0.5
+   ],
+   "claude-opus-4-8": [
+    5,
+    25,
+    6.25,
+    10,
+    0.5
+   ],
+   "claude-opus-4-7": [
+    5,
+    25,
+    6.25,
+    10,
+    0.5
+   ],
+   "claude-opus-4-6": [
+    5,
+    25,
+    6.25,
+    10,
+    0.5
+   ],
+   "claude-sonnet-5-5": [
+    2,
+    10,
+    2.5,
+    4,
+    0.2
+   ],
+   "claude-sonnet-5": [
+    2,
+    10,
+    2.5,
+    4,
+    0.2
+   ],
+   "claude-sonnet-4-6": [
+    3,
+    15,
+    3.75,
+    6,
+    0.30000000000000004
+   ],
+   "claude-haiku-4-5": [
+    1,
+    5,
+    1.25,
+    2,
+    0.1
+   ]
+  },
+  "sanity": {
+   "records": 160977,
+   "parse_errors": 0,
+   "blank_lines": 0,
+   "dup_uuid_records_dropped": 6363,
+   "sessionId_ne_filename": 6,
+   "no_timestamp_records": 40605,
+   "bad_timestamp": 0,
+   "nonmonotonic_records": 3347,
+   "nonmonotonic_by_type": {
+    "system": 1114,
+    "attachment": 742,
+    "user": 359,
+    "assistant": 1132
+   },
+   "future_ts": 0,
+   "pre2025_ts": 0,
+   "compact_boundaries": 7,
+   "compact_summary_prompts_excluded": 7,
+   "scheduled_prompts_excluded": 6,
+   "records_after_cutoff": 395,
+   "sidechain_records": 0,
+   "assistant_records": 46095,
+   "assistant_messages": 25139,
+   "usage_records_deduped_by_message_id": 20956,
+   "human_prompts": 2999,
+   "human_prompts_with_origin_sender": 0,
+   "sessions_with_no_timestamps": 0,
+   "tool_use_without_result": 6,
+   "tool_result_without_use": 1,
+   "unpriced_models": {
+    "glm-5.3-flash": 223,
+    "other": 38,
+    "deepseek-v4.1-flash": 10
+   },
+   "models": {
+    "claude-fable-5": 3059,
+    "<synthetic>": 184,
+    "claude-haiku-4-5-20251001": 5,
+    "claude-sonnet-5": 901,
+    "claude-opus-4-6": 72,
+    "claude-opus-5": 11152,
+    "claude-opus-4-8": 128,
+    "claude-fable-5-1": 3469,
+    "glm-5.3-flash": 223,
+    "other": 38,
+    "deepseek-v4.1-flash": 10,
+    "claude-opus-5-5": 5898
+   },
+   "record_types": {
+    "queue-operation": 7891,
+    "user": 30829,
+    "attachment": 27408,
+    "last-prompt": 9075,
+    "ai-title": 6805,
+    "assistant": 49225,
+    "custom-title": 3914,
+    "mode": 6489,
+    "system": 4255,
+    "pr-link": 152,
+    "frame-link": 199,
+    "atis-latch": 5963,
+    "file-history-snapshot": 1856,
+    "permission-mode": 3203,
+    "file-history-delta": 413,
+    "agent-name": 1365,
+    "artifact-comment-monitor": 49,
+    "bridge-session": 1574,
+    "artifact-autoreact-ledger": 124,
+    "cost-state": 188
+   },
+   "permission_modes_seen": {
+    "auto": 7009,
+    "plan": 103,
+    "acceptEdits": 8,
+    "bypassPermissions": 13,
+    "default": 4
+   },
+   "negative_turn_waits_dropped": 5
+  },
+  "outliers_note": "nonmonotonic_records = record timestamp more than 1 s earlier than the max seen so far in that file (sorted before use). dup_uuid_records_dropped = resumed/forked copies. compact_boundaries = context compactions (session continues in same file)."
+ }
+}

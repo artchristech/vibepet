@@ -1,0 +1,815 @@
+{
+ "definition": "rank.py - counterfactual TTA arithmetic for the five many-session features (numbers only).\n\nInput: mineA.js --dump event file (hashed sids, ms timestamps, enum classes) + presence.side_data (entrypoint enum,\naway_summary timestamps). Never reads or prints transcript text.\n\nAttention-switch model. A human prompt the user sends to ANOTHER session while block B waits is a moment the user is\ndemonstrably at the keyboard and choosing what to do next. If B is visible as 'needs you' at that moment, the user\nattends B next with probability c, and B is answered h seconds later (switch + read + type). Savings(B) =\nactual end - expected counterfactual end. Visibility differs by policy:\n  today  - vibepet main @649beb2: question visible from its end_turn until 5 min of file silence ('parked'; an\n           away_summary record restarts the 5 min); AskUserQuestion / approvals read 'working' for 90 s, then\n           'stalled' until the file has been silent 45 min (scan skips it).\n  queue  - every block visible from its start until answered (true age), AskUserQuestion / ExitPlanMode classified\n           by tool name at once, permission prompts via the CLI registry (status=waiting, waitingFor='permission\n           prompt') at once; desktop non-plan approvals keep the 90 s rule.",
+ "cutoff": "2026-10-01T20:00:00Z",
+ "main": {
+  "days_all": 76.79,
+  "days_30": 30,
+  "all": {
+   "blocks_raw": 437,
+   "blocks_censored": 380,
+   "blocks_per_day_raw": 5.69,
+   "blocks_per_day_censored": 4.95,
+   "by_class_raw": {
+    "question": 314,
+    "ask": 78,
+    "approval": 45
+   },
+   "by_entrypoint_raw": {
+    "claude-desktop": 217,
+    "cli": 220
+   },
+   "censored_wait_h_per_day": 0.807,
+   "gt2h_per_day": 0.74,
+   "today_hidden": {
+    "questions_raw": 314,
+    "questions_outliving_parked_rule": 116,
+    "ask_or_approval_raw": 123,
+    "ask_or_approval_answered_within_90s_never_shown": 40,
+    "ask_or_approval_outliving_45min": 25,
+    "censored_wait_s_hidden_today_per_day": 1702.6,
+    "censored_wait_s_visible_today_per_day": 1204.0,
+    "censored_wait_s_total_per_day": 2906.6
+   },
+   "switch_model": {
+    "c0.25_h15": {
+     "today_s_per_day": 763.2,
+     "queue_s_per_day": 1095.8,
+     "queue_minus_today_s_per_day": 332.7,
+     "queue_minus_today_s_per_block": 67.2
+    },
+    "c0.25_h30": {
+     "today_s_per_day": 754.0,
+     "queue_s_per_day": 1082.7,
+     "queue_minus_today_s_per_day": 328.7,
+     "queue_minus_today_s_per_block": 66.4
+    },
+    "c0.25_h60": {
+     "today_s_per_day": 736.8,
+     "queue_s_per_day": 1058.0,
+     "queue_minus_today_s_per_day": 321.2,
+     "queue_minus_today_s_per_block": 64.9
+    },
+    "c0.50_h15": {
+     "today_s_per_day": 1064.3,
+     "queue_s_per_day": 1360.5,
+     "queue_minus_today_s_per_day": 296.2,
+     "queue_minus_today_s_per_block": 59.9
+    },
+    "c0.50_h30": {
+     "today_s_per_day": 1050.5,
+     "queue_s_per_day": 1343.0,
+     "queue_minus_today_s_per_day": 292.5,
+     "queue_minus_today_s_per_block": 59.1
+    },
+    "c0.50_h60": {
+     "today_s_per_day": 1024.6,
+     "queue_s_per_day": 1310.1,
+     "queue_minus_today_s_per_day": 285.5,
+     "queue_minus_today_s_per_block": 57.7
+    },
+    "c1.00_h15": {
+     "today_s_per_day": 1400.0,
+     "queue_s_per_day": 1580.1,
+     "queue_minus_today_s_per_day": 180.1,
+     "queue_minus_today_s_per_block": 36.4
+    },
+    "c1.00_h30": {
+     "today_s_per_day": 1381.0,
+     "queue_s_per_day": 1557.8,
+     "queue_minus_today_s_per_day": 176.8,
+     "queue_minus_today_s_per_block": 35.7
+    },
+    "c1.00_h60": {
+     "today_s_per_day": 1344.9,
+     "queue_s_per_day": 1516.1,
+     "queue_minus_today_s_per_day": 171.2,
+     "queue_minus_today_s_per_block": 34.6
+    }
+   },
+   "queue_gain_by_class_s_per_day_c05_h30": {
+    "question": 266.7,
+    "ask": 22.1,
+    "approval": 3.7
+   },
+   "blocks_with_a_switch_pct": 31.8,
+   "switches_per_block_with_any": 3.0,
+   "tta_by_concurrency_at_start": {
+    "1": {
+     "n": 115,
+     "median": 81.1,
+     "p90": 1308.0,
+     "mean": 467.7,
+     "sum_h": 14.94
+    },
+    "2": {
+     "n": 71,
+     "median": 171.2,
+     "p90": 1097.3,
+     "mean": 551.7,
+     "sum_h": 10.88
+    },
+    "3-4": {
+     "n": 131,
+     "median": 229.6,
+     "p90": 2091.9,
+     "mean": 793.2,
+     "sum_h": 28.86
+    },
+    "5+": {
+     "n": 63,
+     "median": 119.8,
+     "p90": 1135.8,
+     "mean": 418.1,
+     "sum_h": 7.32
+    }
+   },
+   "tta_with_vs_without_switch": {
+    "with_switch": {
+     "n": 121,
+     "median": 654.8,
+     "p90": 3690.0,
+     "mean": 1299.7,
+     "sum_h": 43.69
+    },
+    "no_switch": {
+     "n": 259,
+     "median": 63.5,
+     "p90": 543.8,
+     "mean": 254.6,
+     "sum_h": 18.32
+    }
+   },
+   "final_stretch_after_last_switch_s": {
+    "n": 121,
+    "median": 60.0,
+    "p90": 492.4,
+    "mean": 221.9,
+    "sum_h": 7.46
+   },
+   "answer_after_first_switch_s": {
+    "n": 121,
+    "median": 341.4,
+    "p90": 2576.1,
+    "mean": 1017.6,
+    "sum_h": 34.2
+   },
+   "ordering": {
+    "prompts_while_2plus_blocks_pending": 132,
+    "per_day": 1.72,
+    "younger_answered_while_older_waits": 66,
+    "per_day_inv": 0.86,
+    "older_then_waited_more_s": {
+     "n": 66,
+     "median": 420.2,
+     "p90": 2398.6,
+     "mean": 918.3,
+     "sum_h": 16.83
+    }
+   },
+   "batch_approval": {
+    "n": 45,
+    "overlapping_cross_session_pairs": 3
+   },
+   "batch_approval_spec": {
+    "n": 248,
+    "overlapping_cross_session_pairs": 42
+   },
+   "blocks_in_loop_sessions": 22,
+   "away_digest": {
+    "gaps": 333,
+    "gaps_per_day": 4.34,
+    "censored_blocks_pending_at_return": 31,
+    "per_day": 0.4,
+    "answered_by_the_return_prompt_itself": 14,
+    "post_return_delay_s": {
+     "n": 31,
+     "median": 15.1,
+     "p90": 639.7,
+     "mean": 200.8,
+     "sum_h": 1.73
+    },
+    "gt2h_blocks_pending_at_a_return": 49,
+    "gt2h_post_first_return_delay_s_capped_2h": {
+     "n": 49,
+     "median": 7200.0,
+     "p90": 7200.0,
+     "mean": 4229.3,
+     "sum_h": 57.57
+    },
+    "digest_saving_s_per_day_c05_h30": 36.7,
+    "digest_saving_s_per_day_c1_h30": 73.5,
+    "done_idle_pending_at_return": 162,
+    "done_idle_per_day": 2.11,
+    "done_idle_post_return_delay_s": {
+     "n": 162,
+     "median": 0.0,
+     "p90": 872.5,
+     "mean": 347.4,
+     "sum_h": 15.63
+    }
+   }
+  },
+  "last30": {
+   "blocks_raw": 258,
+   "blocks_censored": 232,
+   "blocks_per_day_raw": 8.6,
+   "blocks_per_day_censored": 7.73,
+   "by_class_raw": {
+    "question": 184,
+    "ask": 47,
+    "approval": 27
+   },
+   "by_entrypoint_raw": {
+    "claude-desktop": 62,
+    "cli": 196
+   },
+   "censored_wait_h_per_day": 1.452,
+   "gt2h_per_day": 0.87,
+   "today_hidden": {
+    "questions_raw": 184,
+    "questions_outliving_parked_rule": 68,
+    "ask_or_approval_raw": 74,
+    "ask_or_approval_answered_within_90s_never_shown": 20,
+    "ask_or_approval_outliving_45min": 16,
+    "censored_wait_s_hidden_today_per_day": 3197.7,
+    "censored_wait_s_visible_today_per_day": 2030.4,
+    "censored_wait_s_total_per_day": 5228.1
+   },
+   "switch_model": {
+    "c0.25_h15": {
+     "today_s_per_day": 1734.6,
+     "queue_s_per_day": 2407.9,
+     "queue_minus_today_s_per_day": 673.3,
+     "queue_minus_today_s_per_block": 87.1
+    },
+    "c0.25_h30": {
+     "today_s_per_day": 1716.4,
+     "queue_s_per_day": 2381.5,
+     "queue_minus_today_s_per_day": 665.1,
+     "queue_minus_today_s_per_block": 86.0
+    },
+    "c0.25_h60": {
+     "today_s_per_day": 1681.8,
+     "queue_s_per_day": 2331.0,
+     "queue_minus_today_s_per_day": 649.3,
+     "queue_minus_today_s_per_block": 84.0
+    },
+    "c0.50_h15": {
+     "today_s_per_day": 2363.8,
+     "queue_s_per_day": 2998.3,
+     "queue_minus_today_s_per_day": 634.5,
+     "queue_minus_today_s_per_block": 82.0
+    },
+    "c0.50_h30": {
+     "today_s_per_day": 2336.9,
+     "queue_s_per_day": 2964.2,
+     "queue_minus_today_s_per_day": 627.2,
+     "queue_minus_today_s_per_block": 81.1
+    },
+    "c0.50_h60": {
+     "today_s_per_day": 2286.1,
+     "queue_s_per_day": 2899.4,
+     "queue_minus_today_s_per_day": 613.2,
+     "queue_minus_today_s_per_block": 79.3
+    },
+    "c1.00_h15": {
+     "today_s_per_day": 3035.5,
+     "queue_s_per_day": 3479.7,
+     "queue_minus_today_s_per_day": 444.3,
+     "queue_minus_today_s_per_block": 57.4
+    },
+    "c1.00_h30": {
+     "today_s_per_day": 2999.3,
+     "queue_s_per_day": 3438.0,
+     "queue_minus_today_s_per_day": 438.8,
+     "queue_minus_today_s_per_block": 56.7
+    },
+    "c1.00_h60": {
+     "today_s_per_day": 2930.4,
+     "queue_s_per_day": 3359.1,
+     "queue_minus_today_s_per_day": 428.8,
+     "queue_minus_today_s_per_block": 55.4
+    }
+   },
+   "queue_gain_by_class_s_per_day_c05_h30": {
+    "question": 567.8,
+    "ask": 50.0,
+    "approval": 9.5
+   },
+   "blocks_with_a_switch_pct": 37.1,
+   "switches_per_block_with_any": 3.0,
+   "tta_by_concurrency_at_start": {
+    "1": {
+     "n": 48,
+     "median": 85.2,
+     "p90": 1383.6,
+     "mean": 471.7,
+     "sum_h": 6.29
+    },
+    "2": {
+     "n": 45,
+     "median": 204.0,
+     "p90": 1078.1,
+     "mean": 495.7,
+     "sum_h": 6.2
+    },
+    "3-4": {
+     "n": 86,
+     "median": 256.5,
+     "p90": 3340.3,
+     "mean": 1015.9,
+     "sum_h": 24.27
+    },
+    "5+": {
+     "n": 53,
+     "median": 176.6,
+     "p90": 1306.7,
+     "mean": 462.8,
+     "sum_h": 6.81
+    }
+   },
+   "tta_with_vs_without_switch": {
+    "with_switch": {
+     "n": 86,
+     "median": 828.5,
+     "p90": 3719.1,
+     "mean": 1403.0,
+     "sum_h": 33.52
+    },
+    "no_switch": {
+     "n": 146,
+     "median": 66.9,
+     "p90": 409.3,
+     "mean": 247.8,
+     "sum_h": 10.05
+    }
+   },
+   "final_stretch_after_last_switch_s": {
+    "n": 86,
+    "median": 67.3,
+    "p90": 580.9,
+    "mean": 250.8,
+    "sum_h": 5.99
+   },
+   "answer_after_first_switch_s": {
+    "n": 86,
+    "median": 601.8,
+    "p90": 3710.7,
+    "mean": 1228.7,
+    "sum_h": 29.35
+   },
+   "ordering": {
+    "prompts_while_2plus_blocks_pending": 120,
+    "per_day": 4.0,
+    "younger_answered_while_older_waits": 54,
+    "per_day_inv": 1.8,
+    "older_then_waited_more_s": {
+     "n": 54,
+     "median": 397.1,
+     "p90": 2490.5,
+     "mean": 900.6,
+     "sum_h": 13.51
+    }
+   },
+   "batch_approval": {
+    "n": 27,
+    "overlapping_cross_session_pairs": 1
+   },
+   "batch_approval_spec": {
+    "n": 144,
+    "overlapping_cross_session_pairs": 40
+   },
+   "blocks_in_loop_sessions": 5,
+   "away_digest": {
+    "gaps": 143,
+    "gaps_per_day": 4.77,
+    "censored_blocks_pending_at_return": 20,
+    "per_day": 0.67,
+    "answered_by_the_return_prompt_itself": 8,
+    "post_return_delay_s": {
+     "n": 20,
+     "median": 62.4,
+     "p90": 643.2,
+     "mean": 234.9,
+     "sum_h": 1.31
+    },
+    "gt2h_blocks_pending_at_a_return": 21,
+    "gt2h_post_first_return_delay_s_capped_2h": {
+     "n": 21,
+     "median": 7200.0,
+     "p90": 7200.0,
+     "mean": 4822.3,
+     "sum_h": 28.13
+    },
+    "digest_saving_s_per_day_c05_h30": 71.2,
+    "digest_saving_s_per_day_c1_h30": 142.4,
+    "done_idle_pending_at_return": 94,
+    "done_idle_per_day": 3.13,
+    "done_idle_post_return_delay_s": {
+     "n": 94,
+     "median": 19.8,
+     "p90": 1790.9,
+     "mean": 556.9,
+     "sum_h": 14.54
+    }
+   }
+  }
+ },
+ "decomposition_and_mc": {
+  "all": {
+   "persist_only": 269.8,
+   "instant_only": 22.7,
+   "queue": 292.5,
+   "mc_tta_c0.1_h30": {
+    "history": {
+     "median": 122.3,
+     "p75": 511.2,
+     "p90": 1647.3,
+     "mean": 587.4
+    },
+    "today": {
+     "median": 119.8,
+     "p75": 358.2,
+     "p90": 1336.3,
+     "mean": 499.4
+    },
+    "queue": {
+     "median": 119.5,
+     "p75": 349.3,
+     "p90": 1111.6,
+     "mean": 445.0
+    }
+   },
+   "mc_tta_c0.5_h30": {
+    "history": {
+     "median": 122.3,
+     "p75": 511.2,
+     "p90": 1647.3,
+     "mean": 587.4
+    },
+    "today": {
+     "median": 94.6,
+     "p75": 251.9,
+     "p90": 860.2,
+     "mean": 375.2
+    },
+    "queue": {
+     "median": 88.0,
+     "p75": 243.8,
+     "p90": 695.6,
+     "mean": 316.4
+    }
+   }
+  },
+  "last30": {
+   "persist_only": 574.4,
+   "instant_only": 52.9,
+   "queue": 627.2,
+   "mc_tta_c0.1_h30": {
+    "history": {
+     "median": 181.4,
+     "p75": 726.6,
+     "p90": 2040.9,
+     "mean": 676.0
+    },
+    "today": {
+     "median": 150.8,
+     "p75": 473.0,
+     "p90": 1503.4,
+     "mean": 546.4
+    },
+    "queue": {
+     "median": 141.1,
+     "p75": 419.4,
+     "p90": 1194.6,
+     "mean": 476.2
+    }
+   },
+   "mc_tta_c0.5_h30": {
+    "history": {
+     "median": 181.4,
+     "p75": 726.6,
+     "p90": 2040.9,
+     "mean": 676.0
+    },
+    "today": {
+     "median": 108.5,
+     "p75": 261.1,
+     "p90": 908.7,
+     "mean": 373.7
+    },
+    "queue": {
+     "median": 97.9,
+     "p75": 251.9,
+     "p90": 649.7,
+     "mean": 291.2
+    }
+   }
+  }
+ },
+ "extra": {
+  "all": {
+   "done_idle_digest_saving_s_per_day_c05_h30_NOT_TTA": 350.2,
+   "queue_gain_s_per_day_by_entrypoint": {
+    "claude-desktop": 110.1,
+    "cli": 182.4
+   },
+   "censored_blocks_by_entrypoint": {
+    "claude-desktop": 184,
+    "cli": 196
+   },
+   "multi_session_tax_s_per_block": 171.6,
+   "blocks_at_conc2plus_per_day": 3.45,
+   "multi_session_tax_s_per_day": 592.2,
+   "mean_tta_conc1_s": 467.7,
+   "mean_tta_conc2plus_s": 639.3,
+   "done_rows_persist_gain_s_per_day_c05_h30_NOT_TTA": 1115.2,
+   "done_idle_censored_per_day": 22.6
+  },
+  "last30": {
+   "done_idle_digest_saving_s_per_day_c05_h30_NOT_TTA": 833.6,
+   "queue_gain_s_per_day_by_entrypoint": {
+    "claude-desktop": 161.0,
+    "cli": 466.2
+   },
+   "censored_blocks_by_entrypoint": {
+    "claude-desktop": 53,
+    "cli": 179
+   },
+   "multi_session_tax_s_per_block": 257.7,
+   "blocks_at_conc2plus_per_day": 6.13,
+   "multi_session_tax_s_per_day": 1580.6,
+   "mean_tta_conc1_s": 471.7,
+   "mean_tta_conc2plus_s": 729.4,
+   "done_rows_persist_gain_s_per_day_c05_h30_NOT_TTA": 2450.3,
+   "done_idle_censored_per_day": 38.3
+  }
+ },
+ "loops": {
+  "files_with_ScheduleWakeup": 226,
+  "calls": 157,
+  "effective_calls": 107,
+  "effective_calls_last_30d": 74,
+  "first_call_utc": "2026-07-27T02:39:38.876000+00:00",
+  "sessions_effective": 13,
+  "sessions_effective_last_30d": 3,
+  "toolUseResult_keys": {
+   "scheduledFor": 157,
+   "clampedDelaySeconds": 157,
+   "wasClamped": 157,
+   "stopped": 19,
+   "cancelledWakeups": 19
+  },
+  "next_record_kind_after_turn_end": {
+   "human": 32,
+   "assistant": 3,
+   "user:lt|ps=system|origin{kind}": 24,
+   "user:scheduledTaskId|lt": 5,
+   "user:meta|txt|ps=system|origin{body,from,handback,kind,senderTaskId}": 42
+  },
+  "system_subtypes_skipped_between": {
+   "stop_hook_summary": 22,
+   "turn_duration": 74,
+   "scheduled_task_fire": 5
+  },
+  "outcome_all": {
+   "stalled": 11,
+   "human": 21,
+   "end": 1,
+   "early": 68,
+   "late": 2,
+   "fire": 4
+  },
+  "outcome_last_30d": {
+   "human": 3,
+   "early": 66,
+   "late": 1,
+   "fire": 4
+  },
+  "turn_end_found": 78,
+  "false_done_all": 78,
+  "false_done_last_30d": 47,
+  "fire_deviation_s": {
+   "n": 74,
+   "median": -1071.3,
+   "p75": -942.4,
+   "p90": -732.9,
+   "max": 22104.3,
+   "sum": -47490.7
+  },
+  "stall_unnoticed_s": {
+   "n": 11,
+   "median": 30193.3,
+   "p75": 56461.5,
+   "p90": 84188.6,
+   "max": 84285.4,
+   "sum": 390376.3
+  },
+  "stall_unnoticed_s_last_30d": null,
+  "human_stepped_in_before_fire_s_after_turn_end": {
+   "n": 17,
+   "median": 597.7,
+   "p75": 717.5,
+   "p90": 1217.9,
+   "max": 1536.7,
+   "sum": 9755.8
+  },
+  "clamped_delay_s": {
+   "n": 107,
+   "median": 1200.0,
+   "p75": 1500.0,
+   "p90": 1500.0,
+   "max": 2400,
+   "sum": 132600
+  },
+  "sleep_s_per_iteration_turn_end_to_fire": {
+   "n": 5,
+   "median": 83.3,
+   "p75": 99.3,
+   "p90": 102.9,
+   "max": 105.4,
+   "sum": 356.3
+  }
+ },
+ "loops_context": {
+  "all": {
+   "stalled": [
+    {
+     "unnoticed_h": 0.3,
+     "prompts_elsewhere": 0,
+     "min_to_first_prompt_elsewhere": null
+    },
+    {
+     "unnoticed_h": 0.7,
+     "prompts_elsewhere": 0,
+     "min_to_first_prompt_elsewhere": null
+    },
+    {
+     "unnoticed_h": 3.3,
+     "prompts_elsewhere": 0,
+     "min_to_first_prompt_elsewhere": null
+    },
+    {
+     "unnoticed_h": 4.5,
+     "prompts_elsewhere": 0,
+     "min_to_first_prompt_elsewhere": null
+    },
+    {
+     "unnoticed_h": 4.7,
+     "prompts_elsewhere": 0,
+     "min_to_first_prompt_elsewhere": null
+    },
+    {
+     "unnoticed_h": 8.4,
+     "prompts_elsewhere": 0,
+     "min_to_first_prompt_elsewhere": null
+    },
+    {
+     "unnoticed_h": 8.4,
+     "prompts_elsewhere": 0,
+     "min_to_first_prompt_elsewhere": null
+    },
+    {
+     "unnoticed_h": 8.4,
+     "prompts_elsewhere": 0,
+     "min_to_first_prompt_elsewhere": null
+    },
+    {
+     "unnoticed_h": 22.9,
+     "prompts_elsewhere": 14,
+     "min_to_first_prompt_elsewhere": 384.4
+    },
+    {
+     "unnoticed_h": 23.4,
+     "prompts_elsewhere": 9,
+     "min_to_first_prompt_elsewhere": 137.1
+    },
+    {
+     "unnoticed_h": 23.4,
+     "prompts_elsewhere": 9,
+     "min_to_first_prompt_elsewhere": 135.5
+    }
+   ],
+   "false_done_events": 78,
+   "false_done_per_day": 1.02,
+   "false_done_sessions": 12,
+   "false_done_shown_s": {
+    "n": 77,
+    "median": 238.2,
+    "p90": 1150.5,
+    "mean": 3877.4,
+    "sum_h": 82.93
+   },
+   "false_done_shown_gt5min": 29
+  },
+  "last30": {
+   "stalled": [],
+   "false_done_events": 47,
+   "false_done_per_day": 1.57,
+   "false_done_sessions": 2,
+   "false_done_shown_s": {
+    "n": 47,
+    "median": 167.6,
+    "p90": 383.8,
+    "mean": 206.6,
+    "sum_h": 2.7
+   },
+   "false_done_shown_gt5min": 7
+  }
+ },
+ "compliance_and_pet_era": {
+  "last30": {
+   "days": 30.0,
+   "blocks_raw_per_day": 8.6,
+   "blocks_censored_per_day": 7.73,
+   "observed_tta_s": {
+    "n": 232,
+    "median": 181.4,
+    "p90": 2035.0,
+    "mean": 676.0,
+    "sum_h": 43.57
+   },
+   "observed_tta_p75": 726.6,
+   "hidden_by_today_rules_pct_of_censored_wait": 61.2,
+   "wait_share_from_blocks_over_5min_pct": 90.7,
+   "queue_minus_today_c0.05_h30": {
+    "s_per_block": 45.1,
+    "s_per_day": 348.9
+   },
+   "queue_minus_today_c0.10_h30": {
+    "s_per_block": 66.3,
+    "s_per_day": 512.9
+   },
+   "queue_minus_today_c0.25_h30": {
+    "s_per_block": 86.0,
+    "s_per_day": 665.1
+   },
+   "queue_minus_today_c0.50_h30": {
+    "s_per_block": 81.1,
+    "s_per_day": 627.2
+   }
+  },
+  "pre_pet_sep1_25": {
+   "days": 23.99,
+   "blocks_raw_per_day": 5.46,
+   "blocks_censored_per_day": 4.83,
+   "observed_tta_s": {
+    "n": 116,
+    "median": 178.0,
+    "p90": 1708.7,
+    "mean": 692.7,
+    "sum_h": 22.32
+   },
+   "observed_tta_p75": 532.7,
+   "hidden_by_today_rules_pct_of_censored_wait": 60.4,
+   "wait_share_from_blocks_over_5min_pct": 90.1,
+   "queue_minus_today_c0.05_h30": {
+    "s_per_block": 33.6,
+    "s_per_day": 162.6
+   },
+   "queue_minus_today_c0.10_h30": {
+    "s_per_block": 54.5,
+    "s_per_day": 263.4
+   },
+   "queue_minus_today_c0.25_h30": {
+    "s_per_block": 82.2,
+    "s_per_day": 397.3
+   },
+   "queue_minus_today_c0.50_h30": {
+    "s_per_block": 87.8,
+    "s_per_day": 424.6
+   }
+  },
+  "pet_era_6d": {
+   "days": 6.01,
+   "blocks_raw_per_day": 21.14,
+   "blocks_censored_per_day": 19.31,
+   "observed_tta_s": {
+    "n": 116,
+    "median": 191.0,
+    "p90": 2087.8,
+    "mean": 659.4,
+    "sum_h": 21.25
+   },
+   "observed_tta_p75": 815.2,
+   "hidden_by_today_rules_pct_of_censored_wait": 62.0,
+   "wait_share_from_blocks_over_5min_pct": 91.4,
+   "queue_minus_today_c0.05_h30": {
+    "s_per_block": 56.6,
+    "s_per_day": 1092.9
+   },
+   "queue_minus_today_c0.10_h30": {
+    "s_per_block": 78.2,
+    "s_per_day": 1509.2
+   },
+   "queue_minus_today_c0.25_h30": {
+    "s_per_block": 89.8,
+    "s_per_day": 1734.6
+   },
+   "queue_minus_today_c0.50_h30": {
+    "s_per_block": 74.4,
+    "s_per_day": 1436.4
+   }
+  }
+ }
+}

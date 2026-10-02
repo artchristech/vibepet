@@ -1,0 +1,221 @@
+{
+ "all": {
+  "self_resumed_turn_ends": 1098,
+  "per_day": 14.38,
+  "shown_as_done_ge3s": 922,
+  "shown_as_done_ge3s_per_day": 12.08,
+  "shown_ge90s_per_day": 5.59,
+  "false_done_machine_resume_per_day": 10.51,
+  "false_done_excl_handbacks_per_day": 5.8,
+  "false_done_sessions": 124,
+  "false_done_top3_sessions_share_pct": 20.0,
+  "false_done_shown_s": {
+   "n": 802,
+   "median": 78.5,
+   "p75": 404.8,
+   "p90": 1498.1,
+   "max": 422411.9
+  },
+  "false_done_excl_handbacks_shown_s": {
+   "n": 443,
+   "median": 90.0,
+   "p75": 779.1,
+   "p90": 3574.1,
+   "max": 422411.9
+  },
+  "false_done_excl_handbacks_ge30s_per_day": 3.59,
+  "false_done_ge30s_per_day": 6.67,
+  "false_done_share_of_all_done_signals_pct": null,
+  "gap_s": {
+   "n": 1098,
+   "median": 45.4,
+   "p75": 262.6,
+   "p90": 1120.5,
+   "max": 584429.7
+  },
+  "by_trigger": {
+   "origin:task-notification": {
+    "n": 451,
+    "median": 15.7,
+    "p75": 277.9,
+    "p90": 1228.3,
+    "max": 44815.9
+   },
+   "agent_handback": {
+    "n": 407,
+    "median": 47.3,
+    "p75": 197.3,
+    "p90": 499.0,
+    "max": 3418.4
+   },
+   "origin:human": {
+    "n": 120,
+    "median": 65.3,
+    "p75": 152.4,
+    "p90": 745.2,
+    "max": 584429.7
+   },
+   "meta": {
+    "n": 61,
+    "median": 15.1,
+    "p75": 952.6,
+    "p90": 23289.9,
+    "max": 422411.9
+   },
+   "origin:auto-continuation": {
+    "n": 18,
+    "median": 6032.0,
+    "p75": 13680.3,
+    "p90": 14172.4,
+    "max": 27566.5
+   },
+   "user_other": {
+    "n": 16,
+    "median": 319.2,
+    "p75": 1201.3,
+    "p90": 6722.4,
+    "max": 35938.7
+   },
+   "none": {
+    "n": 14,
+    "median": 942.7,
+    "p75": 1032.5,
+    "p90": 1053.5,
+    "max": 1081.6
+   },
+   "tool_result": {
+    "n": 6,
+    "median": 3.6,
+    "p75": 4.5,
+    "p90": 12.7,
+    "max": 20.7
+   },
+   "scheduled_fire": {
+    "n": 4,
+    "median": 275.5,
+    "p75": 552.9,
+    "p90": 976.3,
+    "max": 1258.6
+   },
+   "system:local_command": {
+    "n": 1,
+    "median": 143.1,
+    "p75": 143.1,
+    "p90": 143.1,
+    "max": 143.1
+   }
+  }
+ },
+ "last30": {
+  "self_resumed_turn_ends": 971,
+  "per_day": 32.37,
+  "shown_as_done_ge3s": 795,
+  "shown_as_done_ge3s_per_day": 26.5,
+  "shown_ge90s_per_day": 11.5,
+  "false_done_machine_resume_per_day": 23.4,
+  "false_done_excl_handbacks_per_day": 11.43,
+  "false_done_sessions": 91,
+  "false_done_top3_sessions_share_pct": 22.8,
+  "false_done_shown_s": {
+   "n": 702,
+   "median": 61.5,
+   "p75": 316.0,
+   "p90": 1075.9,
+   "max": 44815.9
+  },
+  "false_done_excl_handbacks_shown_s": {
+   "n": 343,
+   "median": 51.8,
+   "p75": 493.8,
+   "p90": 2561.1,
+   "max": 44815.9
+  },
+  "false_done_excl_handbacks_ge30s_per_day": 6.4,
+  "false_done_ge30s_per_day": 14.23,
+  "false_done_share_of_all_done_signals_pct": 34.2,
+  "gap_s": {
+   "n": 971,
+   "median": 35.1,
+   "p75": 194.8,
+   "p90": 851.6,
+   "max": 44815.9
+  },
+  "by_trigger": {
+   "agent_handback": {
+    "n": 407,
+    "median": 47.3,
+    "p75": 197.3,
+    "p90": 499.0,
+    "max": 3418.4
+   },
+   "origin:task-notification": {
+    "n": 378,
+    "median": 7.2,
+    "p75": 157.1,
+    "p90": 1042.0,
+    "max": 44815.9
+   },
+   "origin:human": {
+    "n": 93,
+    "median": 62.0,
+    "p75": 105.2,
+    "p90": 315.2,
+    "max": 21258.8
+   },
+   "meta": {
+    "n": 44,
+    "median": 14.0,
+    "p75": 16.6,
+    "p90": 88.8,
+    "max": 3921.4
+   },
+   "origin:auto-continuation": {
+    "n": 18,
+    "median": 6032.0,
+    "p75": 13680.3,
+    "p90": 14172.4,
+    "max": 27566.5
+   },
+   "user_other": {
+    "n": 12,
+    "median": 348.2,
+    "p75": 1201.3,
+    "p90": 3470.8,
+    "max": 9763.4
+   },
+   "none": {
+    "n": 9,
+    "median": 926.2,
+    "p75": 1019.3,
+    "p90": 1049.1,
+    "max": 1081.6
+   },
+   "tool_result": {
+    "n": 5,
+    "median": 3.3,
+    "p75": 4.7,
+    "p90": 14.3,
+    "max": 20.7
+   },
+   "scheduled_fire": {
+    "n": 4,
+    "median": 275.5,
+    "p75": 552.9,
+    "p90": 976.3,
+    "max": 1258.6
+   },
+   "system:local_command": {
+    "n": 1,
+    "median": 143.1,
+    "p75": 143.1,
+    "p90": 143.1,
+    "max": 143.1
+   }
+  },
+  "false_done_excl_handbacks_share_pct": 20.3
+ },
+ "answered_done_idle_turn_ends": {
+  "old": 769,
+  "w30": 1350
+ }
+}

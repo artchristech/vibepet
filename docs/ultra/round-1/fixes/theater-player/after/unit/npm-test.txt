@@ -1,0 +1,57 @@
+# npm test on b7468a5 theater-player: Theater plays like a tool ·  5:48  up 6 days, 16:33, 19 users, load averages: 343.63 212.58 115.58
+ok 1 - test/agents.test.js
+ok 2 - test/camera.test.js
+ok 3 - test/content.test.js
+ok 4 - test/fanout.test.js
+ok 5 - spend stop: default, round file, env; the lowest wins and junk is ignored
+ok 6 - lease: taken, held against others, renewed by the holder, released
+ok 7 - lease: a lease past its ttl is stale, and the next taker breaks it
+ok 8 - lease: names that could escape the lease dir are refused; move-aside leftovers are not leases
+ok 9 - lease CLI: of 8 processes racing for one member exactly one wins (exit 0), the rest get exit 3
+ok 10 - status shows holders; rearm/pause warn, or refuse when --as names someone else
+ok 7 - test/gesture.test.js
+ok 8 - test/goal.test.js
+ok 13 - guard: the real ~/.claude and anything outside ~/.vibepet-ultra are refused before a byte is read
+ok 14 - guard: an isolated root inside the base passes, with fleet links and registry links
+ok 15 - guard: every way back to real data is refused
+ok 16 - shot(): a transparent capture is composited onto the neutral background, straight alpha
+ok 17 - close() bookkeeping: a process tree is ours, a dead pid is not, other people's command lines never come back
+ok 18 - unset: the shipped paths, no userData override, the saved jump key
+ok 19 - VIBEPET_CLAUDE_DIR moves projects/ and sessions/ together; ~ and relative paths resolve
+ok 20 - VIBEPET_USER_DATA and VIBEPET_HOTKEY
+ok 21 - agents.js: a pid is matched to its session through <root>/sessions/<pid>.json
+ok 22 - theater: replays a session under the watched root, refuses one outside it
+ok 23 - ports: an isolated root lists only its own sessions' background tasks (none from this machine's real ones)
+ok 24 - ports: an isolated root lists the servers its own sessions run, not the rest of the machine's
+ok 25 - no module builds a path into ~/.claude except through overrides.js
+ok 26 - the packaged app ships overrides.js
+ok 11 - test/place.test.js
+ok 12 - test/ports.test.js
+ok 13 - test/receipt.test.js
+ok 30 - parseDialog: the approval names its command; the question its text and choices (keys kept, free text dropped)
+ok 31 - read(): live entries only — a dead pid, a dangling link and a reused pid are out; a half-written file keeps its last parse
+ok 32 - sameStart: procStart in UTC (as Claude Code writes it) or local time; anything else is another process
+ok 33 - scan + registry: a withheld approval and a withheld question need you at once, with the pane's ask and the registry's clock
+ok 34 - scan + registry: done stays listed while its claude lives; busy is running however quiet, never stalled; interrupted is done
+ok 35 - scan + registry: an entry that disappears is exited within one tick, listed last for 10 min, never running
+ok 36 - scan: /exit in the tail is an exit at its record time, with or without a registry; /clear in the same claude is not
+ok 37 - scan without a registry entry: a written AskUserQuestion needs you at once (not after 90 s); other tools keep the 90 s rule
+ok 38 - the one queue order: needs you (approval, question, plan, input together, oldest block first) → done → running → exited
+ok 39 - the packaged app ships registry.js
+ok 15 - test/theater-player.test.js
+ok 16 - test/theater.test.js
+ok 42 - parseTarget: the registry tmux field → session, window, pane
+ok 43 - parsePane: where the pane is now, and whether keys would reach claude alone
+ok 44 - owns: the pane pid must be claude itself or one of its ancestors
+ok 45 - pickClient: a client already on the session, else the most recently used one
+ok 46 - guard: an approval prompt takes approve / always / deny, nothing else
+ok 47 - guard: an AskUserQuestion list takes its own option digits only; a text reply is refused
+ok 48 - guard: an idle input box takes text; approve, option and interrupt are refused
+ok 49 - guard: a grey prompt suggestion is not a draft; typed text is
+ok 50 - guard: a busy session takes interrupt, and text (Claude Code queues it)
+ok 51 - literal: a reply ending in ";" survives tmux argument parsing
+ok 52 - locateSession: exact registry hit carries the entry; exited sessions get null; an unregistered claude is found by cwd
+# tests 52
+# pass 52
+# fail 0
+# duration_ms 18666.34425

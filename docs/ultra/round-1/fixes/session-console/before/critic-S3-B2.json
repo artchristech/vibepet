@@ -1,0 +1,637 @@
+{
+  "section": "B2",
+  "startedAt": "2026-10-02T02:41:00.650Z",
+  "steps": [
+    {
+      "id": "rows",
+      "at": "2026-10-02T02:41:03.173Z",
+      "load": [
+        2.88,
+        2.35,
+        2.24
+      ],
+      "waitedMs": 2,
+      "rows": [
+        [
+          "Read package.json",
+          "vibepet · done just now",
+          "ready"
+        ],
+        [
+          "Run build.sh",
+          "atlas · 1s",
+          "running"
+        ]
+      ]
+    },
+    {
+      "id": "05-jump",
+      "at": "2026-10-02T02:41:04.209Z",
+      "load": [
+        2.88,
+        2.35,
+        2.24
+      ],
+      "query": "a",
+      "matches": [
+        "vibepet",
+        "atlas"
+      ],
+      "jumpedTo": "vibepet",
+      "result": false,
+      "newPanelMsgs": []
+    },
+    {
+      "id": "05-replay",
+      "at": "2026-10-02T02:41:05.872Z",
+      "load": [
+        2.88,
+        2.35,
+        2.24
+      ],
+      "query": "a",
+      "matches": [
+        "vibepet",
+        "atlas"
+      ],
+      "opened": "vibepet",
+      "theaterWindows": [
+        "Theater — vibepet"
+      ]
+    },
+    {
+      "id": "05-jump",
+      "at": "2026-10-02T02:41:06.686Z",
+      "load": [
+        2.88,
+        2.35,
+        2.24
+      ],
+      "query": "b",
+      "matches": [
+        "vibepet",
+        "atlas"
+      ],
+      "jumpedTo": "vibepet",
+      "result": false,
+      "newPanelMsgs": []
+    },
+    {
+      "id": "05-replay",
+      "at": "2026-10-02T02:41:08.071Z",
+      "load": [
+        3.05,
+        2.4,
+        2.26
+      ],
+      "query": "b",
+      "matches": [
+        "vibepet",
+        "atlas"
+      ],
+      "opened": "vibepet",
+      "theaterWindows": [
+        "Theater — vibepet"
+      ]
+    },
+    {
+      "id": "05-M4-atlas-since",
+      "at": "2026-10-02T02:42:37.647Z",
+      "load": [
+        3.43,
+        2.69,
+        2.38
+      ],
+      "samples": [
+        {
+          "t": "2026-10-02T02:42:17.338Z",
+          "phase": "working",
+          "sinceAgoS": 76,
+          "label": "atlas · 1m 15s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:18.351Z",
+          "phase": "working",
+          "sinceAgoS": 77,
+          "label": "atlas · 1m 15s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:19.364Z",
+          "phase": "working",
+          "sinceAgoS": 78,
+          "label": "atlas · 1m 15s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:20.377Z",
+          "phase": "working",
+          "sinceAgoS": 79,
+          "label": "atlas · 1m 18s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:21.390Z",
+          "phase": "working",
+          "sinceAgoS": 80,
+          "label": "atlas · 1m 18s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:22.405Z",
+          "phase": "working",
+          "sinceAgoS": 81,
+          "label": "atlas · 1m 18s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:23.418Z",
+          "phase": "working",
+          "sinceAgoS": 82,
+          "label": "atlas · 1m 21s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:24.431Z",
+          "phase": "working",
+          "sinceAgoS": 83,
+          "label": "atlas · 1m 21s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:25.446Z",
+          "phase": "working",
+          "sinceAgoS": 84,
+          "label": "atlas · 1m 21s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:26.464Z",
+          "phase": "working",
+          "sinceAgoS": 85,
+          "label": "atlas · 1m 24s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:27.481Z",
+          "phase": "working",
+          "sinceAgoS": 86,
+          "label": "atlas · 1m 24s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:28.497Z",
+          "phase": "working",
+          "sinceAgoS": 87,
+          "label": "atlas · 1m 24s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:29.516Z",
+          "phase": "working",
+          "sinceAgoS": 88,
+          "label": "atlas · 1m 27s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:30.540Z",
+          "phase": "working",
+          "sinceAgoS": 89,
+          "label": "atlas · 1m 27s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:31.553Z",
+          "phase": "working",
+          "sinceAgoS": 90,
+          "label": "atlas · 1m 27s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:32.569Z",
+          "phase": "working",
+          "sinceAgoS": 91,
+          "label": "atlas · 1m 30s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:33.584Z",
+          "phase": "working",
+          "sinceAgoS": 92,
+          "label": "atlas · 1m 30s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:34.602Z",
+          "phase": "working",
+          "sinceAgoS": 93,
+          "label": "atlas · 1m 30s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:35.624Z",
+          "phase": "working",
+          "sinceAgoS": 94,
+          "label": "atlas · 1m 33s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        },
+        {
+          "t": "2026-10-02T02:42:36.644Z",
+          "phase": "working",
+          "sinceAgoS": 95,
+          "label": "atlas · 1m 33s",
+          "order": [
+            "vibepet",
+            "kestrel",
+            "atlas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-byUrgency",
+      "at": "2026-10-02T02:42:37.924Z",
+      "load": [
+        3.43,
+        2.69,
+        2.38
+      ],
+      "order": [
+        [
+          "vibepet",
+          "ready",
+          96
+        ],
+        [
+          "kestrel",
+          "working",
+          66
+        ],
+        [
+          "atlas",
+          "working",
+          96
+        ]
+      ]
+    },
+    {
+      "id": "13-walk-two-rows",
+      "at": "2026-10-02T02:42:37.986Z",
+      "load": [
+        3.43,
+        2.69,
+        2.38
+      ],
+      "firstRowActionAt": 8,
+      "walk": [
+        {
+          "id": null,
+          "do": null,
+          "text": "Vibe check",
+          "row": null
+        },
+        {
+          "id": null,
+          "do": null,
+          "text": "What should I do next?",
+          "row": null
+        },
+        {
+          "id": null,
+          "do": null,
+          "text": "Am I on track?",
+          "row": null
+        },
+        {
+          "id": null,
+          "do": null,
+          "text": "Write a commit message",
+          "row": null
+        },
+        {
+          "id": null,
+          "do": null,
+          "text": "What's my agent doing?",
+          "row": null
+        },
+        {
+          "id": null,
+          "do": "today",
+          "text": "Today",
+          "row": null
+        },
+        {
+          "id": null,
+          "do": "rec",
+          "text": "● Record a short",
+          "row": null
+        },
+        {
+          "id": null,
+          "do": "goal",
+          "text": "◎",
+          "row": "atlas"
+        },
+        {
+          "id": null,
+          "do": "done",
+          "text": "✓",
+          "row": "atlas"
+        },
+        {
+          "id": null,
+          "do": "replay",
+          "text": "▶",
+          "row": "atlas"
+        },
+        {
+          "id": null,
+          "do": "goal",
+          "text": "◎",
+          "row": "kestrel"
+        },
+        {
+          "id": null,
+          "do": "done",
+          "text": "✓",
+          "row": "kestrel"
+        },
+        {
+          "id": null,
+          "do": "replay",
+          "text": "▶",
+          "row": "kestrel"
+        },
+        {
+          "id": null,
+          "do": "goal",
+          "text": "◎",
+          "row": "vibepet"
+        },
+        {
+          "id": null,
+          "do": "done",
+          "text": "✓",
+          "row": "vibepet"
+        },
+        {
+          "id": null,
+          "do": "replay",
+          "text": "▶",
+          "row": "vibepet"
+        },
+        {
+          "id": "chatClose",
+          "do": null,
+          "text": "esc",
+          "row": null
+        }
+      ]
+    }
+  ],
+  "truthBefore": {
+    "at": "2026-10-02T02:41:01.035Z",
+    "spend": {
+      "transcriptsUsd": 2.172409,
+      "estimateWithHiddenUsd": 3.2285,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sid": "13a1427d",
+        "reg": "waiting(permission prompt)",
+        "regAgeS": 678,
+        "last": "user_prompt"
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sid": "6101876b",
+        "reg": "idle",
+        "regAgeS": 5,
+        "last": "end_turn"
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": true,
+        "paused": false,
+        "pid": 48392,
+        "sid": "5c051e84",
+        "reg": "busy",
+        "regAgeS": 23,
+        "last": "pending_tool_use"
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sid": "a9377f08",
+        "reg": "waiting(input needed)",
+        "regAgeS": 1638,
+        "last": "user_prompt"
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sid": "eb59a756",
+        "reg": "idle",
+        "regAgeS": 2412,
+        "last": "end_turn"
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sid": "db0c1ec0",
+        "reg": null,
+        "regAgeS": null,
+        "last": "user_prompt"
+      }
+    ]
+  },
+  "guiHosts": {
+    "kestrel": null,
+    "vibepet": null,
+    "atlas": null,
+    "beacon": null,
+    "delta": null
+  },
+  "truthAfter": {
+    "at": "2026-10-02T02:42:38.394Z",
+    "spend": {
+      "transcriptsUsd": 2.172409,
+      "estimateWithHiddenUsd": 3.2285,
+      "stop": 3.32,
+      "cap": 5
+    },
+    "members": [
+      {
+        "name": "kestrel",
+        "state": "approval",
+        "inState": true,
+        "paused": false,
+        "pid": 55946,
+        "sid": "13a1427d",
+        "reg": "waiting(permission prompt)",
+        "regAgeS": 776,
+        "last": "user_prompt"
+      },
+      {
+        "name": "vibepet",
+        "state": "done",
+        "inState": true,
+        "paused": false,
+        "pid": 48221,
+        "sid": "6101876b",
+        "reg": "idle",
+        "regAgeS": 102,
+        "last": "end_turn"
+      },
+      {
+        "name": "atlas",
+        "state": "working",
+        "inState": true,
+        "paused": false,
+        "pid": 48392,
+        "sid": "5c051e84",
+        "reg": "busy",
+        "regAgeS": 120,
+        "last": "pending_tool_use"
+      },
+      {
+        "name": "beacon",
+        "state": "question",
+        "inState": true,
+        "paused": false,
+        "pid": 48539,
+        "sid": "a9377f08",
+        "reg": "waiting(input needed)",
+        "regAgeS": 1736,
+        "last": "user_prompt"
+      },
+      {
+        "name": "delta",
+        "state": "fanout",
+        "inState": false,
+        "paused": true,
+        "pid": 29074,
+        "sid": "eb59a756",
+        "reg": "idle",
+        "regAgeS": 2509,
+        "last": "end_turn"
+      },
+      {
+        "name": "ember",
+        "state": "loop",
+        "inState": false,
+        "paused": true,
+        "pid": null,
+        "sid": "db0c1ec0",
+        "reg": null,
+        "regAgeS": null,
+        "last": "user_prompt"
+      }
+    ]
+  },
+  "close": {
+    "how": "quit",
+    "ms": 270,
+    "procs": 7,
+    "orphans": []
+  },
+  "endedAt": "2026-10-02T02:42:38.742Z"
+}

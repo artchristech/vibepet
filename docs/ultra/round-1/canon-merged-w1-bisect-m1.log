@@ -1,0 +1,4 @@
+FAIL 28/29 assertions in 123.1 s → /Users/christopherharris/projects/vibepet/docs/ultra/round-1/canon-merged-w1-bisect-m1
+rows: beacon:needs kestrel:needs delta:ready atlas:ready vibepet:ready   fleet: 3/6 in state
+  FAIL run/cleanClose: {"how":"timeout","ms":26733,"procs":7,"orphans":[{"pid":20086,"name":"Electron"}]}
+exit=1 elapsed 123s

@@ -1,0 +1,798 @@
+{
+ "label": "tt2",
+ "at": "2026-10-02T02:00:52.020Z",
+ "fleetAt": "2026-10-02T02:00:51.978Z",
+ "rowsReadAt": "2026-10-02T02:00:51.835Z",
+ "rowsChangedDuringRead": false,
+ "rowsOrder": [
+  "needs:kestrel · waiting 1m",
+  "ready:delta · done just now",
+  "running:atlas · 0s",
+  "running:ember · 1m 13s"
+ ],
+ "aboveFold": 3,
+ "totalRows": 4,
+ "empty": null,
+ "extra": [],
+ "members": [
+  {
+   "member": "kestrel",
+   "state": "approval",
+   "inState": false,
+   "paused": false,
+   "registry": {
+    "status": "idle",
+    "waitingFor": null,
+    "since": "2026-10-02T02:00:09.659Z"
+   },
+   "tail": {
+    "kind": "end_turn",
+    "lastTs": "2026-10-02T02:00:09.598Z",
+    "pending": [],
+    "lastText": "Should the deploy script have unit tests?"
+   },
+   "toolProcs": 0,
+   "subagentsActive": 0,
+   "subagents": 0,
+   "row": {
+    "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+    "sig": "needs",
+    "title": "Deploy.sh dry run",
+    "label": "kestrel · waiting 1m",
+    "ask": "Should the deploy script have unit tests?",
+    "goal": "◎ Run exactly ./deploy.sh --dry-run with the Bash tool.",
+    "acts": [
+     "reply",
+     "replay",
+     "done",
+     "goal"
+    ],
+    "above": true
+   },
+   "snapshotPhase": "waiting",
+   "snapshotFan": null,
+   "trueAgeS": 42,
+   "ageBasis": "registry idle since 2026-10-02T02:00:09.659Z",
+   "shownAgeS": 60,
+   "expected": "needs you: approval, with the command and Approve",
+   "problems": [
+    "member not in its state (fleet: )",
+    "no approve action (has reply,replay,done,goal)"
+   ],
+   "verdict": "WRONG"
+  },
+  {
+   "member": "vibepet",
+   "state": "done",
+   "inState": true,
+   "paused": false,
+   "registry": {
+    "status": "idle",
+    "waitingFor": null,
+    "since": "2026-10-02T01:55:03.405Z"
+   },
+   "tail": {
+    "kind": "end_turn",
+    "lastTs": "2026-10-02T01:55:03.362Z",
+    "pending": [],
+    "lastText": "The HTTP server failed to start with exit code 143."
+   },
+   "toolProcs": 0,
+   "subagentsActive": 0,
+   "subagents": 0,
+   "row": null,
+   "snapshotPhase": null,
+   "snapshotFan": null,
+   "trueAgeS": 349,
+   "ageBasis": "end_turn at 2026-10-02T01:55:03.362Z",
+   "shownAgeS": null,
+   "expected": "done, your move (finished turn), age since the turn ended",
+   "problems": [
+    "no row"
+   ],
+   "verdict": "WRONG"
+  },
+  {
+   "member": "atlas",
+   "state": "working",
+   "inState": true,
+   "paused": false,
+   "registry": {
+    "status": "busy",
+    "waitingFor": null,
+    "since": "2026-10-02T01:53:53.784Z"
+   },
+   "tail": {
+    "kind": "pending_tool_use",
+    "lastTs": "2026-10-02T01:53:55.132Z",
+    "pending": [
+     "Bash {\"command\":\"./build.sh\",\"description\":\"Run build script\",\"timeout\":600000}"
+    ],
+    "lastText": ""
+   },
+   "toolProcs": 3,
+   "subagentsActive": 0,
+   "subagents": 0,
+   "row": {
+    "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+    "sig": "running",
+    "title": "Run build.sh",
+    "label": "atlas · 0s",
+    "ask": null,
+    "goal": "◎ Run exactly ./build.sh with the Bash tool in the foreground (do not run it in t…",
+    "acts": [
+     "replay",
+     "done",
+     "goal"
+    ],
+    "above": true
+   },
+   "snapshotPhase": "working",
+   "snapshotFan": null,
+   "trueAgeS": 418,
+   "ageBasis": "registry busy since 2026-10-02T01:53:53.784Z",
+   "shownAgeS": 0,
+   "expected": "running: the long tool, age since it started",
+   "problems": [
+    "age shown 0s vs true 418s"
+   ],
+   "verdict": "WRONG"
+  },
+  {
+   "member": "beacon",
+   "state": "question",
+   "inState": true,
+   "paused": false,
+   "registry": {
+    "status": "waiting",
+    "waitingFor": "input needed",
+    "since": "2026-10-02T01:54:41.359Z"
+   },
+   "tail": {
+    "kind": "user_prompt",
+    "lastTs": "2026-10-02T01:54:39.786Z",
+    "pending": [],
+    "lastText": ""
+   },
+   "toolProcs": 0,
+   "subagentsActive": 0,
+   "subagents": 0,
+   "row": null,
+   "snapshotPhase": null,
+   "snapshotFan": null,
+   "trueAgeS": 371,
+   "ageBasis": "registry waiting since 2026-10-02T01:54:41.359Z",
+   "shownAgeS": null,
+   "expected": "needs you: question, with the question text and Reply (pick an option)",
+   "problems": [
+    "no row"
+   ],
+   "verdict": "WRONG"
+  },
+  {
+   "member": "delta",
+   "state": "fanout",
+   "inState": false,
+   "paused": false,
+   "registry": {
+    "status": "idle",
+    "waitingFor": null,
+    "since": "2026-10-02T02:00:49.089Z"
+   },
+   "tail": {
+    "kind": "end_turn",
+    "lastTs": "2026-10-02T02:00:48.941Z",
+    "pending": [],
+    "lastText": "All shards reconciled:\n- `[shard-1] reconciled`\n- `[shard-2] reconciled`\n- `[shard-3] reconciled`"
+   },
+   "toolProcs": 0,
+   "subagentsActive": 0,
+   "subagents": 36,
+   "row": {
+    "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+    "sig": "ready",
+    "title": "Reconcile three shards in parallel",
+    "label": "delta · done just now",
+    "ask": null,
+    "goal": "◎ Reconcile the three shards in parallel.",
+    "acts": [
+     "replay",
+     "done",
+     "goal"
+    ],
+    "above": true
+   },
+   "snapshotPhase": "ready",
+   "snapshotFan": {
+    "total": 3,
+    "open": 0,
+    "done": 3,
+    "stuck": 0
+   },
+   "trueAgeS": 3,
+   "ageBasis": "registry idle since 2026-10-02T02:00:49.089Z",
+   "shownAgeS": 0,
+   "expected": "running with 3 subagents open (fan-out gauge)",
+   "problems": [
+    "member not in its state (fleet: )",
+    "signal ready, want running",
+    "no fan-out gauge in the row (Home rows have none)"
+   ],
+   "verdict": "WRONG"
+  },
+  {
+   "member": "ember",
+   "state": "loop",
+   "inState": false,
+   "paused": true,
+   "registry": null,
+   "tail": {
+    "kind": "user_prompt",
+    "lastTs": "2026-10-02T01:59:35.255Z",
+    "pending": [],
+    "lastText": "Done. Tick 27 executed at 2026-10-01T19:57:53-0600."
+   },
+   "toolProcs": 0,
+   "subagentsActive": 0,
+   "subagents": 0,
+   "row": {
+    "id": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+    "sig": "running",
+    "title": "ember",
+    "label": "ember · 1m 13s",
+    "ask": null,
+    "goal": null,
+    "acts": [
+     "replay",
+     "goal"
+    ],
+    "above": false
+   },
+   "snapshotPhase": "working",
+   "snapshotFan": null,
+   "trueAgeS": null,
+   "ageBasis": null,
+   "shownAgeS": 73,
+   "expected": "looping/scheduled between fires (not done, not waiting on you)",
+   "problems": [
+    "member not in its state (paused)"
+   ],
+   "verdict": "WRONG"
+  }
+ ],
+ "load": [
+  5.541015625,
+  5.0986328125,
+  3.8095703125
+ ],
+ "spend": {
+  "transcriptsUsd": 2.113267,
+  "estimateWithHiddenUsd": 3.1398,
+  "stop": 3.32,
+  "cap": 5
+ },
+ "truth": {
+  "at": "2026-10-02T02:00:51.978Z",
+  "allOk": false,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": false,
+    "paused": false,
+    "target": "vp-kestrel:0.0",
+    "tty": "/dev/ttys007",
+    "pid": 55946,
+    "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-kestrel/13a1427d-6cb0-4561-b5a3-22453a34bf93.jsonl",
+    "registry": {
+     "status": "idle",
+     "statusUpdatedAt": 1790906409659,
+     "messagingSocketPath": "/tmp/cc-socks/55946.sock",
+     "tmux": "vp-kestrel:@8.%8",
+     "name": "kestrel-4d"
+    },
+    "last": {
+     "kind": "end_turn",
+     "pending": [],
+     "stopReason": "end_turn",
+     "lastTs": "2026-10-02T02:00:09.598Z"
+    },
+    "subagents": [],
+    "toolProcs": 0,
+    "spendUsd": 0.2161,
+    "lease": {
+     "member": "kestrel",
+     "owner": "r1-S4",
+     "token": "81bc9599c73c7038",
+     "at": "2026-10-02T01:59:57.452Z",
+     "ttlSec": 1500,
+     "expiresAt": "2026-10-02T02:24:57.452Z",
+     "leftSec": 1446,
+     "stale": false
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T02:00:09.598Z",
+     "stopReason": "end_turn",
+     "pending": [],
+     "lastAsstText": "Should the deploy script have unit tests?",
+     "lastUses": [
+      {
+       "name": "Bash",
+       "ts": "2026-10-02T00:32:53.245Z",
+       "input": "{\"command\":\"./deploy.sh --dry-run\",\"description\":\"Run dry-run deploy script\"}"
+      },
+      {
+       "name": "Bash",
+       "ts": "2026-10-02T01:54:40.764Z",
+       "input": "{\"command\":\"./deploy.sh --dry-run\",\"description\":\"Run dry-run deploy script\"}"
+      }
+     ]
+    }
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "target": "vp-vibepet:0.0",
+    "tty": "/dev/ttys013",
+    "pid": 48221,
+    "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-vibepet/6101876b-19c6-42a1-824f-6f1c7d4fd83e.jsonl",
+    "registry": {
+     "status": "idle",
+     "statusUpdatedAt": 1790906103405,
+     "messagingSocketPath": "/tmp/cc-socks/48221.sock",
+     "tmux": "vp-vibepet:@1.%1",
+     "name": "vibepet-d2"
+    },
+    "last": {
+     "kind": "end_turn",
+     "pending": [],
+     "stopReason": "end_turn",
+     "lastTs": "2026-10-02T01:55:03.362Z"
+    },
+    "subagents": [],
+    "toolProcs": 0,
+    "spendUsd": 0.1337,
+    "lease": {
+     "member": "vibepet",
+     "owner": "r1-S6",
+     "token": "034f1fb89cf3e4ab",
+     "at": "2026-10-02T01:57:45.068Z",
+     "ttlSec": 600,
+     "expiresAt": "2026-10-02T02:07:45.068Z",
+     "leftSec": 414,
+     "stale": false
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T01:55:03.362Z",
+     "stopReason": "end_turn",
+     "pending": [],
+     "lastAsstText": "The HTTP server failed to start with exit code 143.",
+     "lastUses": [
+      {
+       "name": "Read",
+       "ts": "2026-10-01T20:24:59.499Z",
+       "input": "{\"file_path\":\"/Users/christopherharris/.vibepet-ultra/fleet/vibepet/package.json\"}"
+      },
+      {
+       "name": "Bash",
+       "ts": "2026-10-02T01:53:46.883Z",
+       "input": "{\"command\":\"python3 -m http.server 47120 --bind 127.0.0.1\",\"description\":\"Start HTTP server on port 47120\",\"run_in_background\":true}"
+      }
+     ]
+    }
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": true,
+    "paused": false,
+    "target": "vp-atlas:0.0",
+    "tty": "/dev/ttys015",
+    "pid": 48392,
+    "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-atlas/5c051e84-b74f-41b6-845f-bde937a9ef90.jsonl",
+    "registry": {
+     "status": "busy",
+     "statusUpdatedAt": 1790906033784,
+     "messagingSocketPath": "/tmp/cc-socks/48392.sock",
+     "tmux": "vp-atlas:@2.%2",
+     "name": "atlas-c4"
+    },
+    "last": {
+     "kind": "pending_tool_use",
+     "pending": [
+      "Bash"
+     ],
+     "stopReason": "tool_use",
+     "lastTs": "2026-10-02T01:53:55.132Z"
+    },
+    "subagents": [],
+    "toolProcs": 3,
+    "spendUsd": 0.0894,
+    "lease": {
+     "member": "atlas",
+     "owner": "S1-driver",
+     "token": "8c96b1131ba9fff9",
+     "at": "2026-10-02T01:52:15.387Z",
+     "ttlSec": 1800,
+     "expiresAt": "2026-10-02T02:22:15.387Z",
+     "leftSec": 1284,
+     "stale": false
+    },
+    "tail": {
+     "kind": "pending_tool_use",
+     "lastTs": "2026-10-02T01:53:55.132Z",
+     "stopReason": "tool_use",
+     "pending": [
+      {
+       "name": "Bash",
+       "ts": "2026-10-02T01:53:55.132Z",
+       "input": "{\"command\":\"./build.sh\",\"description\":\"Run build script\",\"timeout\":600000}"
+      }
+     ],
+     "lastAsstText": "",
+     "lastUses": [
+      {
+       "name": "Bash",
+       "ts": "2026-10-01T22:40:50.557Z",
+       "input": "{\"command\":\"./build.sh\",\"description\":\"Run build script\",\"timeout\":600000}"
+      },
+      {
+       "name": "Bash",
+       "ts": "2026-10-02T01:53:55.132Z",
+       "input": "{\"command\":\"./build.sh\",\"description\":\"Run build script\",\"timeout\":600000}"
+      }
+     ]
+    }
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "target": "vp-beacon:0.0",
+    "tty": "/dev/ttys017",
+    "pid": 48539,
+    "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-beacon/a9377f08-ad27-4bd5-bb77-dbd576eab89e.jsonl",
+    "registry": {
+     "status": "waiting",
+     "waitingFor": "input needed",
+     "statusUpdatedAt": 1790906081359,
+     "messagingSocketPath": "/tmp/cc-socks/48539.sock",
+     "tmux": "vp-beacon:@3.%3",
+     "name": "beacon-18"
+    },
+    "last": {
+     "kind": "user_prompt",
+     "pending": [],
+     "stopReason": "tool_use",
+     "lastTs": "2026-10-02T01:54:39.786Z"
+    },
+    "subagents": [],
+    "toolProcs": 0,
+    "spendUsd": 0.1354,
+    "lease": {
+     "member": "beacon",
+     "owner": "r1-S4",
+     "token": "f3dac36096119c4a",
+     "at": "2026-10-02T01:52:56.128Z",
+     "ttlSec": 1200,
+     "expiresAt": "2026-10-02T02:12:56.128Z",
+     "leftSec": 725,
+     "stale": false
+    },
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T01:54:39.786Z",
+     "stopReason": "tool_use",
+     "pending": [],
+     "lastAsstText": "",
+     "lastUses": [
+      {
+       "name": "AskUserQuestion",
+       "ts": "2026-10-01T23:25:27.408Z",
+       "input": "{\"questions\":[{\"question\":\"Which database should beacon use to store check results?\",\"header\":\"Database choice\",\"multiSelect\":false,\"options\":[{\"label\":\"SQLite\""
+      },
+      {
+       "name": "AskUserQuestion",
+       "ts": "2026-10-02T00:32:56.435Z",
+       "input": "{\"questions\":[{\"question\":\"Which database should beacon use to store check results?\",\"header\":\"Database choice\",\"multiSelect\":false,\"options\":[{\"label\":\"SQLite\""
+      }
+     ]
+    }
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": false,
+    "target": "vp-delta:0.0",
+    "tty": "/dev/ttys021",
+    "pid": 29074,
+    "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-delta/eb59a756-0b6f-4a82-8d55-1f0bc2c40358.jsonl",
+    "registry": {
+     "status": "idle",
+     "statusUpdatedAt": 1790906449089,
+     "messagingSocketPath": "/tmp/cc-socks/29074.sock",
+     "tmux": "vp-delta:@4.%4",
+     "name": "delta-7a"
+    },
+    "last": {
+     "kind": "end_turn",
+     "pending": [],
+     "stopReason": "end_turn",
+     "lastTs": "2026-10-02T02:00:48.941Z"
+    },
+    "subagents": [
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790894616215.8547
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893561892.025
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894214112.248
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790888567686.3704
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790899908091.0469
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894722501.3132
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790887439799.705
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790887440401.745
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790891823454.4905
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893787023.85
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894722498.2302
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790906446770.7168
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893564199.2212
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790894103678.407
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790887439793.2415
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790891824212.5696
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790906446546.374
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790900581467.6956
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790894616746.552
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790888567644.45
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893562869.5686
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790906446563.602
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790891823928.2356
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790900263914.462
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893786787.7073
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790894105218.9543
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790893787363.1067
+     },
+     {
+      "kind": "interrupted",
+      "pending": [],
+      "mtime": 1790888398123.3796
+     },
+     {
+      "kind": "end_turn",
+      "pending": [],
+      "mtime": 1790894103619.4402
+     },
+     {
+      "kind": "interrupted",
+      "pending": [],
+      "mtime": 1790888398120.8875
+     },
+     {
+      "kind": "interrupted",
+      "pending": [],
+      "mtime": 1790888398122.6323
+     },
+     {
+      "kind": "assistant_streaming",
+      "pending": [],
+      "mtime": 1790894615691.8984
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894214111.6057
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790888567625.1365
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894722500.5576
+     },
+     {
+      "kind": "tool_result",
+      "pending": [],
+      "mtime": 1790894214111.1565
+     }
+    ],
+    "toolProcs": 0,
+    "spendUsd": 0.9207,
+    "lease": {
+     "member": "delta",
+     "owner": "S1-driver",
+     "token": "54181fef19c9d4ea",
+     "at": "2026-10-02T01:52:15.420Z",
+     "ttlSec": 1800,
+     "expiresAt": "2026-10-02T02:22:15.420Z",
+     "leftSec": 1284,
+     "stale": false
+    },
+    "tail": {
+     "kind": "end_turn",
+     "lastTs": "2026-10-02T02:00:48.941Z",
+     "stopReason": "end_turn",
+     "pending": [],
+     "lastAsstText": "All shards reconciled:\n- `[shard-1] reconciled`\n- `[shard-2] reconciled`\n- `[shard-3] reconciled`",
+     "lastUses": [
+      {
+       "name": "Agent",
+       "ts": "2026-10-02T01:58:12.712Z",
+       "input": "{\"description\":\"Run shard 2 reconciliation\",\"subagent_type\":\"general-purpose\",\"prompt\":\"Run `./slow.sh shard-2` with the Bash tool in the foreground (timeout 60"
+      },
+      {
+       "name": "Agent",
+       "ts": "2026-10-02T01:58:13.439Z",
+       "input": "{\"description\":\"Run shard 3 reconciliation\",\"subagent_type\":\"general-purpose\",\"prompt\":\"Run `./slow.sh shard-3` with the Bash tool in the foreground (timeout 60"
+      }
+     ]
+    }
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "target": "vp-ember:0.0",
+    "tty": "/dev/ttys023",
+    "pid": null,
+    "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+    "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-ember/db0c1ec0-b899-4ca1-a238-7d979e61e099.jsonl",
+    "registry": null,
+    "last": {
+     "kind": "user_prompt",
+     "pending": [],
+     "stopReason": "end_turn",
+     "lastTs": "2026-10-02T01:59:35.255Z"
+    },
+    "subagents": [],
+    "toolProcs": 0,
+    "loop": null,
+    "spendUsd": 0.3909,
+    "lease": null,
+    "tail": {
+     "kind": "user_prompt",
+     "lastTs": "2026-10-02T01:59:35.255Z",
+     "stopReason": "end_turn",
+     "pending": [],
+     "lastAsstText": "Done. Tick 27 executed at 2026-10-01T19:57:53-0600.",
+     "lastUses": [
+      {
+       "name": "Bash",
+       "ts": "2026-10-02T01:53:07.898Z",
+       "input": "{\"command\":\"./tick.sh\",\"description\":\"Run tick script\"}"
+      },
+      {
+       "name": "Bash",
+       "ts": "2026-10-02T01:57:53.525Z",
+       "input": "{\"command\":\"./tick.sh\",\"description\":\"Run tick script\"}"
+      }
+     ]
+    }
+   }
+  ],
+  "spend": {
+   "transcriptsUsd": 2.113267,
+   "estimateWithHiddenUsd": 3.1398,
+   "stop": 3.32,
+   "cap": 5
+  }
+ }
+}

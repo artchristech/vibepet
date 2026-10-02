@@ -1,0 +1,528 @@
+{
+ "runs": [
+  {
+   "how": "top",
+   "done": true,
+   "undone": {
+    "ok": true,
+    "xp": 15
+   },
+   "movedOnDone": false,
+   "movedWhenNoteEnds": false,
+   "before": {
+    "scrollTop": 0,
+    "maxScroll": 255,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      393,
+      335
+     ],
+     [
+      531,
+      393,
+      335
+     ],
+     [
+      581,
+      393,
+      335
+     ]
+    ]
+   },
+   "after": {
+    "scrollTop": 0,
+    "maxScroll": 277,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 93.5,
+    "slots": [
+     [
+      469,
+      393,
+      335
+     ],
+     [
+      531,
+      393,
+      335
+     ],
+     [
+      581,
+      393,
+      335
+     ]
+    ]
+   },
+   "later": {
+    "scrollTop": 0,
+    "maxScroll": 255,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      393,
+      335
+     ],
+     [
+      531,
+      393,
+      335
+     ],
+     [
+      581,
+      393,
+      335
+     ]
+    ]
+   }
+  },
+  {
+   "how": "rowAtTop",
+   "done": true,
+   "undone": {
+    "ok": true,
+    "xp": 15
+   },
+   "movedOnDone": false,
+   "movedWhenNoteEnds": false,
+   "before": {
+    "scrollTop": 176,
+    "maxScroll": 176,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      217,
+      159
+     ],
+     [
+      531,
+      217,
+      159
+     ],
+     [
+      581,
+      217,
+      159
+     ]
+    ]
+   },
+   "after": {
+    "scrollTop": 176,
+    "maxScroll": 199,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 93.5,
+    "slots": [
+     [
+      469,
+      217,
+      159
+     ],
+     [
+      531,
+      217,
+      159
+     ],
+     [
+      581,
+      217,
+      159
+     ]
+    ]
+   },
+   "later": {
+    "scrollTop": 176,
+    "maxScroll": 176,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      217,
+      159
+     ],
+     [
+      531,
+      217,
+      159
+     ],
+     [
+      581,
+      217,
+      159
+     ]
+    ]
+   }
+  },
+  {
+   "how": "max",
+   "done": true,
+   "undone": {
+    "ok": true,
+    "xp": 15
+   },
+   "movedOnDone": false,
+   "movedWhenNoteEnds": false,
+   "before": {
+    "scrollTop": 176,
+    "maxScroll": 176,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      217,
+      159
+     ],
+     [
+      531,
+      217,
+      159
+     ],
+     [
+      581,
+      217,
+      159
+     ]
+    ]
+   },
+   "after": {
+    "scrollTop": 176,
+    "maxScroll": 199,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 93.5,
+    "slots": [
+     [
+      469,
+      217,
+      159
+     ],
+     [
+      531,
+      217,
+      159
+     ],
+     [
+      581,
+      217,
+      159
+     ]
+    ]
+   },
+   "later": {
+    "scrollTop": 176,
+    "maxScroll": 176,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      217,
+      159
+     ],
+     [
+      531,
+      217,
+      159
+     ],
+     [
+      581,
+      217,
+      159
+     ]
+    ]
+   }
+  },
+  {
+   "how": "rowAtBottom",
+   "done": true,
+   "undone": {
+    "ok": true,
+    "xp": 15
+   },
+   "movedOnDone": false,
+   "movedWhenNoteEnds": false,
+   "before": {
+    "scrollTop": 0,
+    "maxScroll": 176,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      393,
+      335
+     ],
+     [
+      531,
+      393,
+      335
+     ],
+     [
+      581,
+      393,
+      335
+     ]
+    ]
+   },
+   "after": {
+    "scrollTop": 0,
+    "maxScroll": 199,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 93.5,
+    "slots": [
+     [
+      469,
+      393,
+      335
+     ],
+     [
+      531,
+      393,
+      335
+     ],
+     [
+      581,
+      393,
+      335
+     ]
+    ]
+   },
+   "later": {
+    "scrollTop": 0,
+    "maxScroll": 176,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      393,
+      335
+     ],
+     [
+      531,
+      393,
+      335
+     ],
+     [
+      581,
+      393,
+      335
+     ]
+    ]
+   }
+  },
+  {
+   "how": "max",
+   "done": true,
+   "undone": {
+    "ok": true,
+    "xp": 15
+   },
+   "movedOnDone": false,
+   "movedWhenNoteEnds": false,
+   "before": {
+    "scrollTop": 176,
+    "maxScroll": 176,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      217,
+      159
+     ],
+     [
+      531,
+      217,
+      159
+     ],
+     [
+      581,
+      217,
+      159
+     ]
+    ]
+   },
+   "after": {
+    "scrollTop": 176,
+    "maxScroll": 199,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 93.5,
+    "slots": [
+     [
+      469,
+      217,
+      159
+     ],
+     [
+      531,
+      217,
+      159
+     ],
+     [
+      581,
+      217,
+      159
+     ]
+    ]
+   },
+   "later": {
+    "scrollTop": 176,
+    "maxScroll": 176,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      217,
+      159
+     ],
+     [
+      531,
+      217,
+      159
+     ],
+     [
+      581,
+      217,
+      159
+     ]
+    ]
+   }
+  },
+  {
+   "how": "rowAtBottom",
+   "done": true,
+   "undone": {
+    "ok": true,
+    "xp": 15
+   },
+   "movedOnDone": true,
+   "movedWhenNoteEnds": true,
+   "before": {
+    "scrollTop": 0,
+    "maxScroll": 176,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      393,
+      335
+     ],
+     [
+      531,
+      393,
+      335
+     ],
+     [
+      581,
+      393,
+      335
+     ]
+    ]
+   },
+   "after": {
+    "scrollTop": 0,
+    "maxScroll": 277,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": true,
+    "rowH": 93.5,
+    "slots": [
+     [
+      469,
+      385.6,
+      335
+     ],
+     [
+      531,
+      385.6,
+      335
+     ],
+     [
+      581,
+      385.6,
+      335
+     ]
+    ]
+   },
+   "later": {
+    "scrollTop": 0,
+    "maxScroll": 255,
+    "nowH": 367,
+    "fresh": true,
+    "bubble": false,
+    "rowH": 71.3,
+    "slots": [
+     [
+      469,
+      393,
+      335
+     ],
+     [
+      531,
+      393,
+      335
+     ],
+     [
+      581,
+      393,
+      335
+     ]
+    ]
+   }
+  }
+ ],
+ "open": {
+  "mode": "now",
+  "at": {
+   "x": 330.5,
+   "y": 732.5
+  },
+  "ms": 420
+ },
+ "close": {
+  "how": "quit",
+  "ms": 308,
+  "procs": 7,
+  "orphans": []
+ }
+}

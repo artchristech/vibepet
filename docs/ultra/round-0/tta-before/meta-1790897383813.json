@@ -1,0 +1,83 @@
+{
+  "app": "/Users/christopherharris/.vibepet-ultra/int",
+  "git": "c2b5c0a canon --compare: compare the kind of each truth mismatch, not its clock; report dropped first clicks and the fold @ ultra/round-0",
+  "root": "/Users/christopherharris/.vibepet-ultra/root/.claude",
+  "startedAt": "2026-10-01T23:29:43.791Z",
+  "pollMs": 250,
+  "setup": {
+    "A": {
+      "pid": 30012,
+      "readyMs": 1554,
+      "instrument": {
+        "spied": [
+          "jump",
+          "send-to"
+        ]
+      },
+      "audio": {
+        "realContext": false
+      },
+      "prefs": {
+        "muted": false,
+        "alerts": "done",
+        "feel": "calm",
+        "animations": false
+      }
+    },
+    "B": {
+      "pid": 30013,
+      "readyMs": 1256,
+      "instrument": {
+        "spied": [
+          "jump",
+          "send-to"
+        ]
+      },
+      "audio": {
+        "realContext": false
+      },
+      "prefs": {
+        "muted": false,
+        "alerts": "done",
+        "feel": "calm",
+        "animations": false
+      }
+    }
+  },
+  "perms": {
+    "ax": true,
+    "screen": true
+  },
+  "prefs": {
+    "muted": false,
+    "alerts": "done",
+    "feel": "calm",
+    "animations": false
+  },
+  "plan": [
+    {
+      "kind": "question",
+      "n": 1
+    },
+    {
+      "kind": "done",
+      "n": 1
+    },
+    {
+      "kind": "question",
+      "n": 2
+    },
+    {
+      "kind": "done",
+      "n": 2
+    },
+    {
+      "kind": "question",
+      "n": 3
+    },
+    {
+      "kind": "done",
+      "n": 3
+    }
+  ]
+}

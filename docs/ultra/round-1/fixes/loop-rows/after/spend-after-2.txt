@@ -1,0 +1,1 @@
+fleet spend: transcripts $2.2232 at Haiku 4.5 prices; estimate incl. hidden calls $3.3093 (cost-state of 14 exited sessions $2.1147 vs their transcripts $1.4268 = +48%; applied +50% to the rest); stop $3.32 (/Users/christopherharris/.vibepet-ultra/fleet/spend-stop), cap $5; 259 responses; models {"claude-haiku-4-5-20251001":259}

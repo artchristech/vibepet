@@ -1,0 +1,151 @@
+{
+  "section": "A4",
+  "startedAt": "2026-10-02T02:36:12.286Z",
+  "n": 5,
+  "single": [
+    {
+      "upToPainted": 253.1,
+      "downToPainted": 315.8,
+      "upToShown": 221.1,
+      "upToFocus": 231.8,
+      "detail": 1,
+      "load": [
+        1.52,
+        1.63,
+        2.05
+      ]
+    },
+    {
+      "upToPainted": 257.7,
+      "downToPainted": 319.6,
+      "upToShown": 221.1,
+      "upToFocus": 222.1,
+      "detail": 1,
+      "load": [
+        1.52,
+        1.63,
+        2.05
+      ]
+    },
+    {
+      "upToPainted": 244.9,
+      "downToPainted": 307,
+      "upToShown": 221.9,
+      "upToFocus": 223.6,
+      "detail": 1,
+      "load": [
+        1.52,
+        1.63,
+        2.05
+      ]
+    },
+    {
+      "upToPainted": 255.3,
+      "downToPainted": 317.5,
+      "upToShown": 220.9,
+      "upToFocus": 222,
+      "detail": 1,
+      "load": [
+        1.52,
+        1.63,
+        2.05
+      ]
+    },
+    {
+      "upToPainted": 246.4,
+      "downToPainted": 309.5,
+      "upToShown": 221,
+      "upToFocus": 221.9,
+      "detail": 1,
+      "load": [
+        1.52,
+        1.63,
+        2.05
+      ]
+    }
+  ],
+  "double": [
+    {
+      "upToPainted": 22.3,
+      "downToPainted": 65.8,
+      "upToShown": 0.2,
+      "upToFocus": 2.2,
+      "detail": 2,
+      "load": [
+        1.55,
+        1.64,
+        2.05
+      ]
+    },
+    {
+      "upToPainted": 30.3,
+      "downToPainted": 73.2,
+      "upToShown": 0.1,
+      "upToFocus": 1.5,
+      "detail": 2,
+      "load": [
+        1.55,
+        1.64,
+        2.05
+      ]
+    },
+    {
+      "upToPainted": 24.4,
+      "downToPainted": 67.3,
+      "upToShown": 0.2,
+      "upToFocus": 2.4,
+      "detail": 2,
+      "load": [
+        1.55,
+        1.64,
+        2.05
+      ]
+    },
+    {
+      "upToPainted": 27.3,
+      "downToPainted": 69.8,
+      "upToShown": 0.1,
+      "upToFocus": 1.2,
+      "detail": 2,
+      "load": [
+        1.55,
+        1.64,
+        2.05
+      ]
+    },
+    {
+      "upToPainted": 22.2,
+      "downToPainted": 64.5,
+      "upToShown": 0.2,
+      "upToFocus": 1.1,
+      "detail": 2,
+      "load": [
+        1.55,
+        1.64,
+        2.05
+      ]
+    }
+  ],
+  "singleMedian": {
+    "upToPainted": 253.1,
+    "downToPainted": 315.8,
+    "upToFocus": 222.1
+  },
+  "doubleMedian": {
+    "upToPainted": 24.4,
+    "downToPainted": 67.3,
+    "upToFocus": 1.5
+  },
+  "close": {
+    "how": "quit",
+    "ms": 262,
+    "procs": 7,
+    "orphans": []
+  },
+  "endedAt": "2026-10-02T02:36:24.427Z",
+  "loadEnd": [
+    1.67,
+    1.66,
+    2.05
+  ]
+}

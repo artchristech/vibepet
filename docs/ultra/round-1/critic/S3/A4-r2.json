@@ -1,0 +1,151 @@
+{
+  "section": "A4",
+  "startedAt": "2026-10-02T02:38:07.000Z",
+  "n": 5,
+  "single": [
+    {
+      "upToPainted": 249.3,
+      "downToPainted": 312.3,
+      "upToShown": 221.8,
+      "upToFocus": 234.6,
+      "detail": 1,
+      "load": [
+        2.67,
+        1.92,
+        2.1
+      ]
+    },
+    {
+      "upToPainted": 247.7,
+      "downToPainted": 310,
+      "upToShown": 221.3,
+      "upToFocus": 222.3,
+      "detail": 1,
+      "load": [
+        2.67,
+        1.92,
+        2.1
+      ]
+    },
+    {
+      "upToPainted": 261.5,
+      "downToPainted": 326,
+      "upToShown": 220.6,
+      "upToFocus": 222,
+      "detail": 1,
+      "load": [
+        2.67,
+        1.92,
+        2.1
+      ]
+    },
+    {
+      "upToPainted": 251.9,
+      "downToPainted": 314.3,
+      "upToShown": 220.5,
+      "upToFocus": 221.9,
+      "detail": 1,
+      "load": [
+        2.67,
+        1.92,
+        2.1
+      ]
+    },
+    {
+      "upToPainted": 239.6,
+      "downToPainted": 302.6,
+      "upToShown": 222.1,
+      "upToFocus": 223.4,
+      "detail": 1,
+      "load": [
+        2.67,
+        1.92,
+        2.1
+      ]
+    }
+  ],
+  "double": [
+    {
+      "upToPainted": 21.5,
+      "downToPainted": 64,
+      "upToShown": 0.1,
+      "upToFocus": 1.2,
+      "detail": 2,
+      "load": [
+        3.02,
+        2.01,
+        2.13
+      ]
+    },
+    {
+      "upToPainted": 23.3,
+      "downToPainted": 65.6,
+      "upToShown": 0.1,
+      "upToFocus": 1,
+      "detail": 2,
+      "load": [
+        3.02,
+        2.01,
+        2.13
+      ]
+    },
+    {
+      "upToPainted": 26.3,
+      "downToPainted": 68.5,
+      "upToShown": 0.1,
+      "upToFocus": 1.1,
+      "detail": 2,
+      "load": [
+        3.02,
+        2.01,
+        2.13
+      ]
+    },
+    {
+      "upToPainted": 22.9,
+      "downToPainted": 67.9,
+      "upToShown": 0.1,
+      "upToFocus": 2.5,
+      "detail": 2,
+      "load": [
+        3.02,
+        2.01,
+        2.13
+      ]
+    },
+    {
+      "upToPainted": 23.4,
+      "downToPainted": 65.7,
+      "upToShown": 0,
+      "upToFocus": 1,
+      "detail": 2,
+      "load": [
+        3.02,
+        2.01,
+        2.13
+      ]
+    }
+  ],
+  "singleMedian": {
+    "upToPainted": 249.3,
+    "downToPainted": 312.3,
+    "upToFocus": 222.3
+  },
+  "doubleMedian": {
+    "upToPainted": 23.3,
+    "downToPainted": 65.7,
+    "upToFocus": 1.1
+  },
+  "close": {
+    "how": "quit",
+    "ms": 261,
+    "procs": 7,
+    "orphans": []
+  },
+  "endedAt": "2026-10-02T02:38:19.032Z",
+  "loadEnd": [
+    3.1,
+    2.04,
+    2.14
+  ]
+}

@@ -1,0 +1,17 @@
+uptime-start:  1:33  up 6 days, 12:19, 19 users, load averages: 804.08 845.42 819.62
+07:34:17.684 home {"mode":"now","ms":602,"rows":["beacon:needs","kestrel:needs","delta:ready","atlas:ready","vibepet:ready"],"load":"797.58 841.16 818.69"}
+07:34:17.700 liveFoldEmpty {"rows":5,"inView":5,"needs":2,"needsInView":2,"footerInView":true,"msgs":0,"panel":539,"listViewport":286,"listScroll":286,"msgsBox":0,"needsStack":194}
+07:34:32.558 presses [{"id":"a9377f08","ticksDuringPress":1,"took":true,"load":"739.68 826.90 813.87"},{"id":"13a1427d","ticksDuringPress":2,"took":true,"load":"731.62 823.78 812.84"},{"id":"eb59a756","ticksDuringPress":1,"took":true,"load":"731.62 823.78 812.84"}]
+07:34:39.865 focus {"el":"<button data-do=\"reply\">Reply</button>","kept":[true,true,true]}
+07:34:51.225 reply {"openedFocusInBox":true,"ticks":2,"chatBar":"what is atlas doing","replyBox":"","load":"726.26 816.67 810.55"}
+07:34:53.608 keys {"approvalRow":1,"sendTo":[[{"id":"13a1427d-6cb0-4561-b5a3-22453a34bf93","text":null}]],"afterEsc":"chatInput","tabFromComposer":"homeMore","shiftTabBack":"chatInput","blurs":0,"homeOpen":"now"}
+07:35:02.543 needs4 empty {"rows":15,"inView":5,"needs":4,"needsInView":4,"footerInView":true,"msgs":0,"panel":596,"listViewport":452,"listScroll":741,"msgsBox":0,"needsStack":405} never: 0 partly: 0
+07:35:16.340 needs4 oneNote {"rows":15,"inView":3,"needs":4,"needsInView":3,"footerInView":true,"msgs":1,"panel":596,"listViewport":340,"listScroll":741,"msgsBox":112,"needsStack":405} never: ["Reconcile three shards in parallel","Run build.sh","Read package.json","Extra session 4 (gate)","Extra session 6 (gate)","Extra session 8 (gate)","Extra session 10 (gate)","Extra session 3 (gate)","Extra session 5 (gate)","Extra session 7 (gate)","Extra session 9 (gate)"] partly: []
+07:35:24.433 needs4 slash {"rows":15,"inView":1,"needs":4,"needsInView":1,"footerInView":true,"msgs":1,"panel":596,"listViewport":145,"listScroll":741,"msgsBox":112,"needsStack":405} never: 12
+07:35:28.038 needs5 empty {"rows":15,"inView":4,"needs":5,"needsInView":4,"footerInView":true,"msgs":0,"panel":596,"listViewport":452,"listScroll":818,"msgsBox":0,"needsStack":510} never: 10 partly: 0
+07:35:33.156 needs5 oneNote {"rows":15,"inView":3,"needs":5,"needsInView":3,"footerInView":true,"msgs":1,"panel":596,"listViewport":340,"listScroll":818,"msgsBox":112,"needsStack":510} never: ["Reconcile three shards in parallel","Run build.sh","Read package.json","Extra session 4 (gate)","Extra session 6 (gate)","Extra session 8 (gate)","Extra session 10 (gate)","Extra session 5 (gate)","Extra session 7 (gate)","Extra session 9 (gate)"] partly: ["Extra session 2 (gate) (40/105px)"]
+07:35:38.191 needs5 slash {"rows":15,"inView":1,"needs":5,"needsInView":1,"footerInView":true,"msgs":1,"panel":596,"listViewport":145,"listScroll":818,"msgsBox":112,"needsStack":510} never: 12
+07:35:46.203 live {"rows":5,"inView":5,"needs":2,"needsInView":2,"footerInView":true,"msgs":1,"panel":582,"listViewport":286,"listScroll":286,"msgsBox":152,"needsStack":194} {"rows":5,"inView":1,"needs":2,"needsInView":1,"footerInView":true,"msgs":1,"panel":596,"listViewport":145,"listScroll":286,"msgsBox":112,"needsStack":194} slash never: ["Reconcile three shards in parallel","Run build.sh","Read package.json"] partly: []
+07:35:48.306 done {"how":"quit","ms":1382,"procs":7,"orphans":[]}
+exit=0
+uptime-end:  1:36  up 6 days, 12:21, 19 users, load averages: 713.61 797.63 804.13

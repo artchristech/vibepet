@@ -1,0 +1,1276 @@
+{
+ "phase": "C",
+ "startedAt": "2026-10-02T02:03:26.692Z",
+ "load0": [
+  5.99,
+  5.6,
+  4.24
+ ],
+ "shots": [
+  {
+   "name": "11-F2-three-servers.png",
+   "at": 1790906623148,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "sig": "needs",
+      "title": "Deploy.sh dry run",
+      "small": "kestrel · waiting 1m",
+      "ask": "Should the deploy script have unit tests?",
+      "acts": [
+       "reply",
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "sig": "ready",
+      "title": "Run build.sh",
+      "small": "atlas · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "sig": "ready",
+      "title": "Reconcile three shards in parallel",
+      "small": "delta · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47141,
+      "pid": 83400,
+      "label": ":47141 vibepet — a desktop pet for people who code with agents",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": true
+     },
+     {
+      "port": 47142,
+      "pid": 83402,
+      "label": ":47142 node (vibepet)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47143,
+      "pid": 83469,
+      "label": ":47143 node (kestrel)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 333,
+     "full": 334
+    },
+    "bubble": {
+     "text": "kestrel is waiting on you",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 4 servers"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "12-F2-after-stop-wrapped.png",
+   "at": 1790906628959,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "sig": "ready",
+      "title": "Run build.sh",
+      "small": "atlas · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "sig": "ready",
+      "title": "Reconcile three shards in parallel",
+      "small": "delta · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "sig": "running",
+      "title": "Deploy.sh dry run",
+      "small": "kestrel · 0s",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47141,
+      "pid": 83400,
+      "label": ":47141 vibepet — a desktop pet for people who code with agents",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": true
+     },
+     {
+      "port": 47143,
+      "pid": 83469,
+      "label": ":47143 node (kestrel)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 291,
+     "full": 291
+    },
+    "bubble": {
+     "text": "stopped pid 83402",
+     "hidden": false,
+     "occludedByPanel": true
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 3 servers"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "13-F2-stop-on-dead-server.png",
+   "at": 1790906632290,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "sig": "ready",
+      "title": "Run build.sh",
+      "small": "atlas · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "sig": "ready",
+      "title": "Reconcile three shards in parallel",
+      "small": "delta · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "sig": "running",
+      "title": "Deploy.sh dry run",
+      "small": "kestrel · 3s",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47141,
+      "pid": 83400,
+      "label": ":47141 vibepet — a desktop pet for people who code with agents",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": true
+     },
+     {
+      "port": 47143,
+      "pid": 83469,
+      "label": ":47143 node (kestrel)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 291,
+     "full": 291
+    },
+    "bubble": {
+     "text": "couldn't stop pid 83400: ESRCH",
+     "hidden": false,
+     "occludedByPanel": true
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 3 servers"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "14-F2-stop-command-notes.png",
+   "at": 1790906636731,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "sig": "ready",
+      "title": "Run build.sh",
+      "small": "atlas · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "sig": "ready",
+      "title": "Reconcile three shards in parallel",
+      "small": "delta · done just now",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "sig": "running",
+      "title": "Deploy.sh dry run",
+      "small": "kestrel · 7s",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 47143,
+      "pid": 83469,
+      "label": ":47143 node (kestrel)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 291,
+     "full": 291
+    },
+    "bubble": {
+     "text": "couldn't stop pid 83400: ESRCH",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 2 servers"
+    },
+    "msgs": [
+     "Nothing listening on 47999.",
+     "Nothing listening on ."
+    ]
+   }
+  },
+  {
+   "name": "15-F2-after-stop-command.png",
+   "at": 1790906642215,
+   "view": {
+    "home": true,
+    "empty": null,
+    "rows": [
+     {
+      "id": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "sig": "ready",
+      "title": "Run build.sh",
+      "small": "atlas · done 1m ago",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "sig": "ready",
+      "title": "Reconcile three shards in parallel",
+      "small": "delta · done 1m ago",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     },
+     {
+      "id": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "sig": "running",
+      "title": "Deploy.sh dry run",
+      "small": "kestrel · 12s",
+      "ask": null,
+      "acts": [
+       "replay",
+       "done",
+       "goal"
+      ]
+     }
+    ],
+    "srv": [
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 291,
+     "full": 291
+    },
+    "bubble": {
+     "text": "stopped pid 83469",
+     "hidden": false,
+     "occludedByPanel": true
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 1 server"
+    },
+    "msgs": [
+     "Nothing listening on 47999.",
+     "Nothing listening on ."
+    ]
+   }
+  }
+ ],
+ "timings": [
+  {
+   "flow": "F2",
+   "step": "click Open → shell.openExternal called",
+   "ms": 26,
+   "load": [
+    5.62,
+    5.54,
+    4.24
+   ],
+   "at": "02:03:43.587Z",
+   "n": 1
+  },
+  {
+   "flow": "F2",
+   "step": "click ✕ (Stop) → listener dead",
+   "ms": 43,
+   "load": [
+    5.54,
+    5.52,
+    4.25
+   ],
+   "at": "02:03:50.469Z",
+   "n": 1
+  },
+  {
+   "flow": "F2",
+   "step": "click ✕ (Stop) → chip gone",
+   "ms": 3160,
+   "load": [
+    5.54,
+    5.52,
+    4.25
+   ],
+   "at": "02:03:50.469Z",
+   "n": 1
+  },
+  {
+   "flow": "F2",
+   "step": "/stop <port> + Enter (Stop) → listener dead",
+   "ms": 281,
+   "load": [
+    5.6,
+    5.53,
+    4.27
+   ],
+   "at": "02:04:01.871Z",
+   "n": 1
+  }
+ ],
+ "notes": [
+  {
+   "at": 1790906610941,
+   "openHome": {
+    "mode": "now",
+    "at": {
+     "x": 330.5,
+     "y": 732.5
+    },
+    "ms": 412
+   }
+  },
+  {
+   "at": "02:03:42.257Z",
+   "step": "all three listed",
+   "srv": [
+    {
+     "port": 47141,
+     "pid": 83400,
+     "label": ":47141 vibepet — a desktop pet for people who code with agents",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47142,
+     "pid": 83402,
+     "label": ":47142 node (vibepet)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47143,
+     "pid": 83469,
+     "label": ":47143 node (kestrel)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906623587,
+   "step": "open site preview",
+   "url": "http://localhost:47141",
+   "ms": 26,
+   "got": {
+    "status": 200,
+    "remote": "127.0.0.1",
+    "title": "vibepet — a desktop pet for people who code with agents"
+   }
+  },
+  {
+   "at": 1790906625111,
+   "step": "✕ then Cancel",
+   "dialog": {
+    "kind": "dialog",
+    "at": 1790906623606,
+    "message": "Stop node (vibepet) on :47142?",
+    "detail": "pid 83402",
+    "buttons": [
+     "Stop",
+     "Cancel"
+    ],
+    "defaultId": 1,
+    "answer": 1
+   },
+   "alive": [
+    [
+     47141,
+     true
+    ],
+    [
+     47142,
+     true
+    ],
+    [
+     47143,
+     true
+    ]
+   ],
+   "events": []
+  },
+  {
+   "at": 1790906630468,
+   "step": "✕ then Stop (wrapped node)",
+   "dialog": {
+    "kind": "dialog",
+    "at": 1790906625138,
+    "message": "Stop node (vibepet) on :47142?",
+    "detail": "pid 83402",
+    "buttons": [
+     "Stop",
+     "Cancel"
+    ],
+    "defaultId": 1,
+    "answer": 0
+   },
+   "deadMs": 43,
+   "goneMs": 3160,
+   "wrapperAlive": false,
+   "wrapperOut": "wrapper-saw-exit 143",
+   "others": [
+    [
+     47141,
+     true
+    ],
+    [
+     47143,
+     true
+    ]
+   ],
+   "events": [
+    {
+     "kind": "localhost",
+     "text": "stopped pid 83402"
+    }
+   ],
+   "bubble": {
+    "text": "stopped pid 83402",
+    "hidden": false,
+    "occludedByPanel": true
+   }
+  },
+  {
+   "at": 1790906634369,
+   "step": "stop on a server that already exited",
+   "stillListed": true,
+   "dialog": {
+    "kind": "dialog",
+    "at": 1790906630806,
+    "message": "Stop http.server (vibepet) on :47141?",
+    "detail": "pid 83400",
+    "buttons": [
+     "Stop",
+     "Cancel"
+    ],
+    "defaultId": 1,
+    "answer": 0
+   },
+   "events": [
+    {
+     "kind": "localhost",
+     "text": "couldn't stop pid 83400: ESRCH"
+    }
+   ],
+   "bubble": {
+    "text": "couldn't stop pid 83400: ESRCH",
+    "hidden": false,
+    "occludedByPanel": true
+   },
+   "listedForMs": 3813
+  },
+  {
+   "at": 1790906641871,
+   "step": "/stop 47143",
+   "dialog": {
+    "kind": "dialog",
+    "at": 1790906636993,
+    "message": "Stop node (kestrel) on :47143?",
+    "detail": "pid 83469",
+    "buttons": [
+     "Stop",
+     "Cancel"
+    ],
+    "defaultId": 1,
+    "answer": 0
+   },
+   "deadMs": 281,
+   "goneMs": 3539,
+   "npmAlive": false,
+   "events": [
+    {
+     "kind": "localhost",
+     "text": "stopped pid 83469"
+    }
+   ],
+   "msgs": [
+    "Nothing listening on 47999.",
+    "Nothing listening on ."
+   ],
+   "none": {
+    "msgs": [
+     "Nothing listening on 47999."
+    ],
+    "dialogs": 0
+   },
+   "empty": {
+    "msgs": [
+     "Nothing listening on 47999.",
+     "Nothing listening on ."
+    ],
+    "dialogs": 0
+   }
+  }
+ ],
+ "readyMs": 582,
+ "truth0": {
+  "at": "2026-10-02T02:03:26.691Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": false,
+    "paused": false,
+    "pid": 55946,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "r1-S6"
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": false,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": false,
+    "pid": 29074,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   }
+  ]
+ },
+ "pmset0": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "servers": [
+  {
+   "name": "vibepet site preview",
+   "port": 47141,
+   "listener": 83400,
+   "wrapper": 83400
+  },
+  {
+   "name": "node behind sh -c",
+   "port": 47142,
+   "listener": 83402,
+   "wrapper": 83401
+  },
+  {
+   "name": "kestrel npm start",
+   "port": 47143,
+   "listener": 83469,
+   "wrapper": 83407
+  }
+ ],
+ "open": {
+  "url": "http://localhost:47141",
+  "ms": 26,
+  "got": {
+   "status": 200,
+   "remote": "127.0.0.1",
+   "title": "vibepet — a desktop pet for people who code with agents"
+  }
+ },
+ "cancel": {
+  "dialog": {
+   "kind": "dialog",
+   "at": 1790906623606,
+   "message": "Stop node (vibepet) on :47142?",
+   "detail": "pid 83402",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 1
+  },
+  "alive": [
+   [
+    47141,
+    true
+   ],
+   [
+    47142,
+    true
+   ],
+   [
+    47143,
+    true
+   ]
+  ],
+  "events": []
+ },
+ "stop2": {
+  "dialog": {
+   "kind": "dialog",
+   "at": 1790906625138,
+   "message": "Stop node (vibepet) on :47142?",
+   "detail": "pid 83402",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 0
+  },
+  "deadMs": 43,
+  "goneMs": 3160,
+  "wrapperAlive": false,
+  "wrapperOut": "wrapper-saw-exit 143",
+  "others": [
+   [
+    47141,
+    true
+   ],
+   [
+    47143,
+    true
+   ]
+  ],
+  "events": [
+   {
+    "kind": "localhost",
+    "text": "stopped pid 83402"
+   }
+  ],
+  "bubble": {
+   "text": "stopped pid 83402",
+   "hidden": false,
+   "occludedByPanel": true
+  }
+ },
+ "stale": {
+  "stillListed": true,
+  "dialog": {
+   "kind": "dialog",
+   "at": 1790906630806,
+   "message": "Stop http.server (vibepet) on :47141?",
+   "detail": "pid 83400",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 0
+  },
+  "events": [
+   {
+    "kind": "localhost",
+    "text": "couldn't stop pid 83400: ESRCH"
+   }
+  ],
+  "bubble": {
+   "text": "couldn't stop pid 83400: ESRCH",
+   "hidden": false,
+   "occludedByPanel": true
+  },
+  "listedForMs": 3813
+ },
+ "cmdNone": {
+  "msgs": [
+   "Nothing listening on 47999."
+  ],
+  "dialogs": 0
+ },
+ "cmdEmpty": {
+  "msgs": [
+   "Nothing listening on 47999.",
+   "Nothing listening on ."
+  ],
+  "dialogs": 0
+ },
+ "cmdStop": {
+  "dialog": {
+   "kind": "dialog",
+   "at": 1790906636993,
+   "message": "Stop node (kestrel) on :47143?",
+   "detail": "pid 83469",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 0
+  },
+  "deadMs": 281,
+  "goneMs": 3539,
+  "npmAlive": false,
+  "events": [
+   {
+    "kind": "localhost",
+    "text": "stopped pid 83469"
+   }
+  ],
+  "msgs": [
+   "Nothing listening on 47999.",
+   "Nothing listening on ."
+  ]
+ },
+ "leftovers": [
+  [
+   47141,
+   []
+  ],
+  [
+   47142,
+   []
+  ],
+  [
+   47143,
+   []
+  ]
+ ],
+ "truth1": {
+  "at": "2026-10-02T02:04:03.443Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "r1-S6"
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": false,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": "r1-S4"
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": false,
+    "pid": 29074,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   }
+  ]
+ },
+ "pmset1": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "load1": [
+  6.11,
+  5.64,
+  4.31
+ ],
+ "endedAt": "2026-10-02T02:04:05.865Z",
+ "polls": [
+  {
+   "at": 1790906607706,
+   "seen": 1790906607747,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906619411,
+   "seen": 1790906619453,
+   "servers": [
+    "83400:47141",
+    "83402:47142",
+    "83469:47143",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906626125,
+   "seen": 1790906626156,
+   "servers": [
+    "83400:47141",
+    "83469:47143",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906631762,
+   "seen": 1790906631786,
+   "servers": [
+    "83469:47143",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906637975,
+   "seen": 1790906638004,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  }
+ ],
+ "allCalls": [
+  {
+   "kind": "openExternal",
+   "at": 1790906623174,
+   "url": "http://localhost:47141"
+  },
+  {
+   "kind": "dialog",
+   "at": 1790906623606,
+   "message": "Stop node (vibepet) on :47142?",
+   "detail": "pid 83402",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 1
+  },
+  {
+   "kind": "dialog",
+   "at": 1790906625138,
+   "message": "Stop node (vibepet) on :47142?",
+   "detail": "pid 83402",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 0
+  },
+  {
+   "kind": "event",
+   "at": 1790906625145,
+   "data": {
+    "kind": "localhost",
+    "text": "stopped pid 83402"
+   }
+  },
+  {
+   "kind": "dialog",
+   "at": 1790906630806,
+   "message": "Stop http.server (vibepet) on :47141?",
+   "detail": "pid 83400",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 0
+  },
+  {
+   "kind": "event",
+   "at": 1790906630813,
+   "data": {
+    "kind": "localhost",
+    "text": "couldn't stop pid 83400: ESRCH"
+   }
+  },
+  {
+   "kind": "dialog",
+   "at": 1790906636993,
+   "message": "Stop node (kestrel) on :47143?",
+   "detail": "pid 83469",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 0
+  },
+  {
+   "kind": "event",
+   "at": 1790906637000,
+   "data": {
+    "kind": "localhost",
+    "text": "stopped pid 83469"
+   }
+  }
+ ],
+ "footerLog": [
+  {
+   "at": 1790906607650,
+   "srv": []
+  },
+  {
+   "at": 1790906610405,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906622257,
+   "srv": [
+    {
+     "port": 47141,
+     "pid": 83400,
+     "label": ":47141 vibepet — a desktop pet for people who code with agents",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47142,
+     "pid": 83402,
+     "label": ":47142 node (vibepet)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47143,
+     "pid": 83469,
+     "label": ":47143 node (kestrel)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906628272,
+   "srv": [
+    {
+     "port": 47141,
+     "pid": 83400,
+     "label": ":47141 vibepet — a desktop pet for people who code with agents",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47143,
+     "pid": 83469,
+     "label": ":47143 node (kestrel)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906634282,
+   "srv": [
+    {
+     "port": 47143,
+     "pid": 83469,
+     "label": ":47143 node (kestrel)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906640270,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  }
+ ],
+ "rendererEvents": [
+  {
+   "at": 1790906625146,
+   "kind": "localhost",
+   "text": "stopped pid 83402"
+  },
+  {
+   "at": 1790906630813,
+   "kind": "localhost",
+   "text": "couldn't stop pid 83400: ESRCH"
+  },
+  {
+   "at": 1790906637000,
+   "kind": "localhost",
+   "text": "stopped pid 83469"
+  }
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 361,
+  "procs": 7,
+  "orphans": []
+ }
+}

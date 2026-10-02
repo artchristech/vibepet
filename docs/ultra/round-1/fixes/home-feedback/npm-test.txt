@@ -1,0 +1,17 @@
+484e9b4 home-feedback: rows read at a glance: one label, state + age first, the fan-out gauge, a legible ask line
+ 2:54  up 6 days, 13:39, 19 users, load averages: 407.66 221.17 144.34
+# tests 58
+# pass 58
+# fail 0
+real 3.05
+ 2:54  up 6 days, 13:39, 19 users, load averages: 377.98 218.12 143.71
+# tests 58
+# pass 58
+# fail 0
+real 2.73
+ 2:54  up 6 days, 13:39, 19 users, load averages: 377.98 218.12 143.71
+# tests 58
+# pass 58
+# fail 0
+real 2.85
+ 2:54  up 6 days, 13:39, 19 users, load averages: 349.63 214.89 143.01

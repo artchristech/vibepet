@@ -1,0 +1,310 @@
+[
+ {
+  "flow": "F1",
+  "step": "Enter -> first visible model token (typed \"what's my agent doing?\", Claude Code login, default model)",
+  "ms": 2284,
+  "n": 3,
+  "samples": [
+   2494,
+   2208,
+   2284
+  ],
+  "unit": "median",
+  "load": "2.95-3.46 (1-min)"
+ },
+ {
+  "flow": "F1",
+  "step": "Enter -> reply complete (same event: the reply lands whole, 0 incremental updates)",
+  "ms": 2284,
+  "n": 3,
+  "samples": [
+   2494,
+   2208,
+   2284
+  ],
+  "unit": "median",
+  "load": "2.95-3.46"
+ },
+ {
+  "flow": "F1",
+  "step": "Enter -> first visible token, every successful real-engine send in this pack (F1, F2, F5, exploration; chip included)",
+  "ms": 3198,
+  "n": 14,
+  "samples": [
+   2208,
+   2277,
+   2284,
+   2494,
+   2649,
+   2981,
+   3191,
+   3204,
+   3248,
+   3279,
+   3584,
+   3651,
+   4282,
+   6955
+  ],
+  "p90": 4282,
+  "p95": 6955,
+  "unit": "median",
+  "load": "2.09-6.67 across runs"
+ },
+ {
+  "flow": "F1",
+  "step": "Quick-ask chip \"What's my agent doing?\" click -> reply",
+  "ms": 4282,
+  "n": 1,
+  "samples": [
+   4282
+  ],
+  "load": "6.11-6.51"
+ },
+ {
+  "flow": "F1",
+  "step": "Enter -> user bubble + typing indicator in DOM",
+  "ms": 1,
+  "n": 17,
+  "samples": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   2,
+   4
+  ],
+  "p95": 4,
+  "load": "2.09-6.67"
+ },
+ {
+  "flow": "F1",
+  "step": "Enter -> user bubble + typing indicator painted (2 animation frames)",
+  "ms": 19,
+  "n": 17,
+  "samples": [
+   3,
+   4,
+   4,
+   4,
+   10,
+   14,
+   16,
+   18,
+   19,
+   20,
+   23,
+   23,
+   24,
+   29,
+   30,
+   37,
+   44
+  ],
+  "p95": 44,
+  "load": "2.09-6.67"
+ },
+ {
+  "flow": "F1",
+  "step": "Enter -> claude process spawned (IPC + context build: git log/diff --stat)",
+  "ms": 38,
+  "n": 14,
+  "samples": [
+   23,
+   23,
+   24,
+   25,
+   26,
+   31,
+   37,
+   38,
+   48,
+   65,
+   71,
+   73,
+   106,
+   217
+  ],
+  "p95": 217,
+  "load": "2.09-6.67"
+ },
+ {
+  "flow": "F1",
+  "step": "claude process overhead per send (spawn->exit minus the CLI's own duration_ms)",
+  "ms": 1059,
+  "n": 11,
+  "samples": [
+   906,
+   934,
+   945,
+   979,
+   1014,
+   1059,
+   1080,
+   1215,
+   1321,
+   1342,
+   1465
+  ],
+  "load": "2.09-6.67"
+ },
+ {
+  "flow": "F1",
+  "step": "model API time per send (CLI duration_api_ms)",
+  "ms": 2079,
+  "n": 11,
+  "samples": [
+   1209,
+   1253,
+   1996,
+   2000,
+   2039,
+   2079,
+   2209,
+   2217,
+   2510,
+   2696,
+   5980
+  ],
+  "load": "2.09-6.67"
+ },
+ {
+  "flow": "F6",
+  "step": "single click on Net -> Home + composer visible (renderer: pointerup -> panel shown; includes the 220 ms double-click wait)",
+  "ms": 222,
+  "n": 5,
+  "samples": [
+   222,
+   222,
+   221,
+   223,
+   223
+  ],
+  "load": "2.60-3.85"
+ },
+ {
+  "flow": "F6",
+  "step": "single click on Net -> Home detected by the driver (CDP move+down+up+poll)",
+  "ms": 399,
+  "n": 7,
+  "samples": [
+   371,
+   395,
+   399,
+   403,
+   404,
+   400,
+   420
+  ],
+  "load": "3.0-4.3"
+ },
+ {
+  "flow": "F6",
+  "step": "double-click on Net -> panel visible (after the 2nd click)",
+  "ms": 0,
+  "n": 3,
+  "samples": [
+   1,
+   0,
+   0
+  ],
+  "load": "2.60"
+ },
+ {
+  "flow": "F6",
+  "step": "Esc -> panel hidden",
+  "ms": 0,
+  "n": 3,
+  "samples": [
+   0,
+   0,
+   0
+  ],
+  "load": "4.18-4.25"
+ },
+ {
+  "flow": "F3",
+  "step": "offline (ANTHROPIC_BASE_URL=127.0.0.1:9): Enter -> error bubble",
+  "ms": 90036,
+  "n": 1,
+  "samples": [
+   90036
+  ],
+  "load": "3.71-8.21"
+ },
+ {
+  "flow": "F3",
+  "step": "429 + retry-after 23 (local server): Enter -> error bubble",
+  "ms": 90068,
+  "n": 1,
+  "samples": [
+   90068
+  ],
+  "load": "4.89-6.58"
+ },
+ {
+  "flow": "F3",
+  "step": "invalid API key: Enter -> error bubble",
+  "ms": 159,
+  "n": 2,
+  "samples": [
+   168,
+   150
+  ],
+  "load": "5.67-6.67"
+ },
+ {
+  "flow": "F3",
+  "step": "no engine: click Net -> key form visible",
+  "ms": 922,
+  "n": 1,
+  "samples": [
+   922
+  ],
+  "load": "3.37"
+ },
+ {
+  "flow": "F3",
+  "step": "unavailable model: failed first spawn added to every send",
+  "ms": 1605,
+  "n": 2,
+  "samples": [
+   1545,
+   1665
+  ],
+  "load": "4.83-5.27"
+ },
+ {
+  "flow": "F3",
+  "step": "unavailable model: Enter -> first token (failed spawn + retry on the CLI default)",
+  "ms": 4864,
+  "n": 2,
+  "samples": [
+   5090,
+   4637
+  ],
+  "load": "4.83-5.27"
+ },
+ {
+  "flow": "F5",
+  "step": "\"@kestrel approve\" / \"tell the vibepet session to run its tests\": Enter -> reply (nothing sent to either session)",
+  "ms": 2463,
+  "n": 2,
+  "samples": [
+   2277,
+   2649
+  ],
+  "load": "2.95-4.20"
+ }
+]

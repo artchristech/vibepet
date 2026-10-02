@@ -1,0 +1,29 @@
+Local time: 10/2/2026, 2:37:17 AM.
+
+Agents: beacon=waiting for an answer for 6h 23m - Which database should beacon use to store check results? (SQLite / Postgres / Redis); kestrel=needs approval for 5h 24m - Bash: ./deploy.sh --dry-run; delta=done for 6h 36m - All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled; atlas=done for 5h 34m - interrupted; vibepet=done for 5h 24m - The app's main entry file is main.js.; ember=done for 2m 34s - API Error: 400 vibepet-ultra fault injection: no API in this run.
+
+Sessions, in the order they need you (needs you first, then done, running, exited; longest-waiting first). Ages are on Claude Code's own clock; "edited this turn" = files the session changed since its last prompt:
+- beacon · "Beacon database choice" · folder ~/.vibepet-ultra/fleet/beacon · repo beacon/main · waiting for an answer for 6h 23m · asks: Which database should beacon use to store check results? (SQLite / Postgres / Redis) · edited this turn: nothing
+- kestrel · "Deploy.sh dry run" · folder ~/.vibepet-ultra/fleet/kestrel · repo kestrel/main · needs approval for 5h 24m · asks: Bash: ./deploy.sh --dry-run · edited this turn: nothing
+- delta · "Reconcile three shards in parallel" · folder ~/.vibepet-ultra/fleet/delta · repo delta/main · done for 6h 36m · last said: All shards reconciled: - [shard-1] reconciled - [shard-2] reconciled - [shard-3] reconciled · edited this turn: nothing · fan-out 3/3 subagents done
+- atlas · "Run build.sh" · folder ~/.vibepet-ultra/fleet/atlas · repo atlas/main · done for 5h 34m · its turn was interrupted · edited this turn: nothing
+- vibepet · "Read package.json" · folder ~/.vibepet-ultra/fleet/vibepet · repo vibepet/main · done for 5h 24m · last said: The app's main entry file is main.js. · edited this turn: nothing
+- ember · folder ~/.vibepet-ultra/fleet/ember · repo ember/main · done for 2m 34s · last said: API Error: 400 vibepet-ultra fault injection: no API in this run · edited this turn: nothing
+Needs you now: beacon first: answer "Which database should beacon use to store check results? (SQLite / Postgres / Redis)"; then kestrel: approve "Bash: ./deploy.sh --dry-run". Quote these asks exactly.
+
+Overlaps: none. No two sessions share a repo (6 sessions in 6 repos).
+
+Watched repo: vibepet (branch main; sessions in it: vibepet): 0 uncommitted lines across 0 files, 0 untracked files. Last commit 592 min ago: "canon --compare: compare the kind of each truth mismatch, not its clock; report dropped first clicks and the fold".
+
+Recent commits:
+c2b5c0a canon --compare: compare the kind of each truth mismatch, not its clock; report dropped first clicks and the fold
+6b26f35 canon: flag row ages that disagree with the registry; Approve/Reply go to the member whose state asks for them
+ad863b8 harness: canon.js captures all 7 surfaces against the live fleet; watch.js logs Home vs. the registry over time
+0c5fd29 Merge ultra/r0-fleet: fixture fleet of real Claude Code sessions in tmux
+85ed1af Merge ultra/r0-harness: isolated test harness, overrides, fast unit gate
+014b8ac test/fleet: fixture fleet of real Claude Code sessions in tmux
+6c93f06 harness(readme): the guard walks 5 levels under projects/ and sessions/
+773195c harness(readme): test mode starts as an accessory app
+
+Diff stat:
+(clean)

@@ -1,0 +1,435 @@
+{
+  "round": 1,
+  "stage": "triage",
+  "base": "ultra/round-1 @ 37ba577 (ULTRA/int)",
+  "generatedAt": "2026-10-02T05:05:00Z",
+  "notes": {
+    "confirmed": "129 confirmed bugs -> 14 bug tasks + 1 lowest (S4). Wave 1 = queue-state, tmux-reach, home-keyed (disjoint functions; run in parallel). Wave 2 starts from the merged wave-1 branch.",
+    "fleetBudget": "At triage (22:01 local, load 3.17 3.32 2.80) `fleet.js spend` estimate = $3.3093 against the $3.32 stop: about $0.011 of headroom. Every acceptance has a $0 path; the SPEND-GATED parts total about $0.45 (queue-state 0.05, tmux-reach 0.045, row-actions 0.12, live-rows 0.09, loop-rows 0.04, session-console 0.065, theater-player 0.025, theater-data 0.01 optional). Run them only if the stop is raised, ideally once per wave on the merged branch rather than per task; never let a member take a turn past the stop.",
+    "contracts": [
+      "queue-state -> everyone: snapshot.agents in ONE queue order with kind, true since, ask, options[{key,label}], alive, pid, term; phase values kept (approval=stalled, question/input=waiting, done=ready, running=working) + exited; the context line keeps the \"Agents:\" prefix (canon stub).",
+      "tmux-reach -> row-actions, live-rows, session-console, theater-player: send-to {id, action: approve|always|deny|option|text|interrupt, key?, text?} -> {ok, why?, level?}; jump -> {ok, level: pane|tab|app, why?, cmd? (exited only)}.",
+      "home-keyed -> row-actions, home-feedback, ports-truth, live-rows: keyed rows with rowHead/rowActs/rowNote/rowForm/renderFoot/renderServers, rowNote(id, text, ms, kind), hold-order while pointed at, focusable rows, Cmd+1..9 row focus.",
+      "live-rows <-> row-actions/session-console: callers show r.note on ok and r.why on failure; live-rows fills both from verified state.",
+      "chat-bar -> session-console: window.vpChat = {newChat, showHistory}; Esc ladder in capture phase: open menu (session-console) > streaming stop (chat-bar) > focused row back to composer (home-keyed) > close panel (existing handler)."
+    ],
+    "mergeAnchors": "Insert, do not rewrite, around code another task owns. preload.js: row-actions after goalDone, chat-bar after chatVia, live-rows after sendTo, session-console after theater. main.js IPC: row-actions diff after the goal-done handler, session-console after the jump handler, theater-player via theater/act.js required after require('./theater'), live-rows requires live.js next to tick(). style.css: insert next to the rules you own (home-feedback: #bubble/.na/#roster; row-actions: after .nrep; ports-truth: after .srv; session-console: after #slash; keys-entry: #setup; chat-bar: chat rules), never append at EOF.",
+    "evidence": "Each task writes its recapture to EVID/round-1/fixes/<task-id>/ with uptime beside every timing and medians for repeated timings."
+  },
+  "tasks": [
+    {
+      "id": "queue-state",
+      "title": "Attention queue state: needs-you, liveness and true ages from Claude Code's session registry; one queue order",
+      "kind": "bug",
+      "surface": "S1",
+      "bugIds": [
+        "r1-S1-01",
+        "r1-S1-02",
+        "r1-S1-05",
+        "r1-S1-08",
+        "r1-S1-09",
+        "r1-S1-12",
+        "r1-S2-01",
+        "r1-S2-02",
+        "r1-S2-05",
+        "r1-S3-01",
+        "r1-S4-01",
+        "r1-S5-01",
+        "r1-S5-03",
+        "r1-S7-01",
+        "r1-S7-05",
+        "r1-S7-06"
+      ],
+      "brief": "ROOT CAUSE (one, shared by all 16; lines at base 37ba577): state is inferred from the transcript tail + file mtime only. agents.js:158 a pending tool_use = working for 90 s, then 'stalled' (red 'stuck', ranked below questions: renderer/app.js:118-125); agents.js:167-168 a trailing user record = working for 120 s, then 'parked' - this is both the withheld-dialog case (Claude Code keeps the pending tool_use of an open approval/AskUserQuestion out of the transcript) and the /exit case (the command and its stdout are user records); agents.js:160 end_turn + 5 min idle = 'parked'; agents.js:283 drops parked sessions from snapshot.agents, so Home, the roster, the jump key, /jump, /replay, the row's play button and the chat context all lose blocked and finished-but-alive sessions; agents.js:270 skips files silent 45 min; agents.js:279 since = first sighting (resets on restart, on mtime touches and on every phase flip); main.js:257-258 unstick rewrites a.phase/s.phase in place, so the next scan sees a flip and atlas reads '0s' for its whole build; renderer/app.js:893 sorts Home newest-first while pending() (app.js:123-125) sorts oldest-first; main.js:496 hands chat 'name=phase for Ns' built from the same wrong state. The registry (<sessionsDir>/<pid>.json via overrides.sessionsDir(): status idle|busy|waiting, waitingFor 'permission prompt'|'input needed', statusUpdatedAt, sessionId, pid, tmux, cwd) is read only to find a pid (agents.js:314). FIX: (1) new registry.js: each tick read every <sessionsDir>/*.json (follow symlinks, skip dangling ones), keep entries whose pid is alive (kill(pid,0) and the same procStart), map sessionId to entry. (2) agents.js classify()/scan() join each transcript with its entry: waiting + 'permission prompt' = approval; waiting + 'input needed' = question (AskUserQuestion); busy = working (never 'stalled', so unstick is skipped); idle = done, or input when the turn ended with '?', or interrupted - all kept while the process lives (no 5-min park, no 45-min skip); an entry that disappears or a dead pid for a session seen alive = 'exited' within one tick, shown about 10 min, ranked last, never 'running'. Sessions with no entry (desktop, older CLIs) keep the transcript rules, except a pending AskUserQuestion/ExitPlanMode tool_use is a question/plan at once. Keep the phase values the renderer already maps (approval = 'stalled', question/input = 'waiting', done = 'ready', running = 'working'), add 'exited', and put the precise kind in a new field. (3) since = the phase's own start on Claude Code's clock: statusUpdatedAt for waiting/busy (the pending tool_use timestamp for a running tool), the end_turn record time for done, the exit time for exited - never Date.now() at first sight; unstick (main.js:247-266) caches its verdict per toolAt and never mutates s.phase. (4) ask: approval = 'Bash: ./deploy.sh --dry-run' from the pending tool_use; AskUserQuestion = the question text + its options (input.questions) instead of the bare tool name (agents.js:40-43); when the tool_use is withheld, read the dialog once per block from the registry's tmux pane (read-only `tmux capture-pane -p -t <pane>`, cached per statusUpdatedAt; resolve the tmux binary like findClaude, main.js:529-540, because a GUI app's PATH lacks /opt/homebrew/bin) and parse the command or the question + options; otherwise 'needs approval - see terminal'. (5) snapshot.agents gains kind (approval|question|plan|input|done|running|exited), a true since, ask, options [{key,label}], alive, pid, term ({tmux:target}|{tty}|null), and is sorted in ONE order: needs-you (approval, question, plan, input ranked together, oldest block first) -> done (oldest first) -> running -> exited; pending(), byUrgency and the roster all use it; SIG.stalled -> 'needs' (amber, not red 'stuck'); phaseTime (app.js:589-592) gives kind-aware labels with seconds under a minute ('needs approval 42s', 'asking 14m', 'done 3m ago', 'exited 20s ago'). (6) transition()/nag() (main.js:137-147, 232-241) key episodes on the true since; an approval emits agentNeeds at once (no 90 s stallQueue). main.js:496 keeps the 'Agents:' prefix (canon's stub engine reads it) but prints 'name=<label> for <true age> - <ask>'. Update canon.js labelMs/EXPECT if label formats change. BOUNDARIES (parallel wave-1 tasks): don't edit renderHome or the #now handlers (home-keyed), main.js jump/send-to or agents.js locateSession/hostApp (tmux-reach); new code goes in registry.js; tests for the registry join, a withheld dialog, an exit, ages and the order.",
+      "acceptance": "Evidence to EVID/round-1/fixes/queue-state/; uptime next to every timing. $0 (no member takes a turn), on the fleet as held (kestrel waiting/permission prompt, beacon waiting/input needed with its tool_use withheld, vibepet/atlas/delta idle): (a) `node test/ultra/canon.js --app ULTRA/wt/queue-state --out <evid>/canon --strict` exits 0: kestrel and beacon rows are amber 'needs' within 3 s of launch, kestrel shows 'Bash: ./deploy.sh --dry-run' + Approve, beacon shows its question + options (pane-derived), every row label's age = now - registry statusUpdatedAt +-3 s; the replay button is present on kestrel, beacon and vibepet. (b) `node test/ultra/watch.js --app ULTRA/wt/queue-state --out <evid>/watch --secs 420`: 0 drops of kestrel/beacon/vibepet/atlas/delta while their registry entries exist (>5 min after their last write); on every sample snapshot order = Home row order = renderer pending() order: beacon, kestrel (oldest block first), then the done rows oldest first. (c) `/jump vibepet`, `/jump beacon` and `/replay kestrel` resolve to those sessions (ipc args = their ids); main's hotkey handler (send('hotkey')) walks beacon then kestrel. (d) Quit and relaunch twice with the same userData: every age unchanged +-3 s. (e) canon 2-chat: the stub's reply (it echoes the context's Agents line) lists kestrel as needing approval and beacon as waiting for an answer with true ages, vibepet/atlas/delta as done. SPEND-GATED (about $0.05; only if `node test/fleet/fleet.js spend` estimate + 0.05 <= the stop; lease, re-arm, release): `fleet.js rearm kestrel` -> its row reads 'needs approval' <=3 s after the registry flip and never 'running' (watch.js); `fleet.js rearm atlas` -> the 'running' clock rises monotonically through the build (no '0s' resets); `fleet.js rearm ember` then `fleet.js pause ember` -> its row reads 'exited' <=3 s after its registry entry disappears, never 'running'. npm test green.",
+      "priority": 1,
+      "wave": 1,
+      "files": [
+        "registry.js (new)",
+        "agents.js",
+        "main.js",
+        "renderer/app.js",
+        "test/registry.test.js",
+        "test/ultra/canon.js"
+      ]
+    },
+    {
+      "id": "tmux-reach",
+      "title": "Jump, approve and reply reach tmux sessions through the registry's pane; never copy `claude --resume` for a live session",
+      "kind": "bug",
+      "surface": "S4",
+      "bugIds": [
+        "r1-S1-06",
+        "r1-S3-02",
+        "r1-S4-03",
+        "r1-S4-04",
+        "r1-S7-02"
+      ],
+      "brief": "ROOT CAUSE: hostApp (agents.js:326-332) walks claude's ancestors to an .app bundle; under tmux the chain is claude -> bash -> tmux server (ppid 1) -> launchd, so every tmux session has no host. The jump handler (main.js:696-716) then writes 'cd ... && claude --resume <id>' to the clipboard (main.js:713-714) even for a live session (pasting it forks a second claude onto that session); send-to (main.js:436-447) answers \"couldn't find its tab\" and delivers nothing; the row click, /jump and the jump key all share this path. The registry already names the pane: tmux 'vp-kestrel:@8.%8' (session:@window.%pane). FIX (new tmux.js, required next to the send-to handler; locateSession (agents.js:306-323) also returns the registry entry it already reads at :314): (1) target = the registry's tmux; resolve the tmux binary like findClaude (main.js:529-540; a GUI app's PATH lacks /opt/homebrew/bin); before any action verify the pane belongs to the session: `tmux display -p -t %P '#{pane_pid}'` is an ancestor of the registry pid. (2) jump: `tmux list-clients -F '#{client_tty} #{client_pid} #{client_session}'`; prefer a client already on that session, else switch one (`switch-client -c <tty> -t <session>`); `select-window -t @W`; `select-pane -t %P`; then raise the terminal hosting that client (hostApp(client_pid) + focusTty(bid, client_tty): the existing Terminal/iTerm/Accessibility paths) -> {ok:true, level:'pane'}. No client attached -> {ok:false, why:'no terminal is attached to tmux session <name>', attach:'tmux attach -t <name>'} and no clipboard write. (3) send-to accepts {id, action:'approve'|'always'|'deny'|'option'|'text'|'interrupt', key?, text?} (text===null -> approve and a string -> text, for today's callers). tmux path = send-keys -t %P: approve = Enter with '1. Yes' highlighted, always = 2, deny = Escape, option = its digit, text = `send-keys -l` then Enter after about 400 ms (Claude Code takes a fast Enter after typed text as part of a paste), interrupt = Escape on a busy session. Guard: `capture-pane -p -t %P` first and refuse unless the screen shows what the action expects ('Do you want to proceed?' for approve/always/deny, 'Enter to select' for option, the input box with no dialog for text, 'esc to interrupt' for interrupt) -> {ok:false, why:\"kestrel isn't showing an approval prompt\"}. No Accessibility and no focus change on the tmux path. The GUI path is unchanged, except a text reply is refused when the registry's waitingFor is 'input needed' (typing into an AskUserQuestion list picks blindly). (4) Live = registry entry present and pid alive: never write a resume command for it; only an exited session gets {ok:false, cmd} with the command copied and the copy said so. This send-to vocabulary is the contract row-actions, live-rows, session-console and theater-player build on. BOUNDARIES: don't touch scan/classify/tick (queue-state), renderHome (home-keyed) or agents.js module.exports; unit tests for target parsing and for the guard on dialog screens transcribed in round-0/fleet-states.md.",
+      "acceptance": "Evidence to EVID/round-1/fixes/tmux-reach/; uptime + click->result ms next to every timing, medians of >=3. $0: (a) Open ONE Terminal.app window with a tmux client attached to a vp-* session (e.g. `tmux attach -t vp-vibepet`). `node test/ultra/canon.js --app ULTRA/wt/tmux-reach --out <evid>/canon --all-rows`: every row jump (kestrel, beacon, vibepet, atlas, delta) returns {ok:true, level:'pane'} <=1 s; after each, `tmux display -p -c <client tty> '#{session_name} #{window_id} #{pane_id}'` equals that member's registry tmux target and Terminal is frontmost; intercepted clipboard writes = 0. The same through `/jump <member>` and main's hotkey handler. Keep real terminal raises to these trials and close the window afterwards. (b) With no client attached: jump -> {ok:false, why:'no terminal is attached...'} and 0 clipboard writes; an exited session (ember while exited, if it has a row) -> the resume command is copied and reported. (c) Guard: send-to approve on vibepet (idle, no dialog) and a text reply on beacon (AskUserQuestion list) are refused with the precise why; capture-pane before/after identical; 0 new transcript records. SPEND-GATED (about $0.045; lease kestrel + vibepet, re-arm, release; only if `fleet.js spend` estimate + 0.045 <= the stop): `canon.js --act`: Approve on kestrel -> registry leaves waiting <=1 s and a tool_result lands, then `fleet.js rearm kestrel`; Reply 'Reply with exactly: ok' to vibepet -> a new user record + registry busy <=1 s; Deny on kestrel -> registry idle + a '[Request interrupted' record, then `fleet.js rearm kestrel`. npm test green; canon 26/26.",
+      "priority": 2,
+      "wave": 1,
+      "files": [
+        "tmux.js (new)",
+        "main.js",
+        "agents.js",
+        "preload.js",
+        "test/tmux.test.js"
+      ]
+    },
+    {
+      "id": "home-keyed",
+      "title": "Home rows update in place by session: clicks, focus, selection, reply text and positions survive the refresh; keyboard-reachable rows; every session and the footer fit",
+      "kind": "bug",
+      "surface": "S4",
+      "bugIds": [
+        "r1-S1-03",
+        "r1-S1-14",
+        "r1-S1-15",
+        "r1-S3-13",
+        "r1-S4-06",
+        "r1-S4-07",
+        "r1-S4-08",
+        "r1-S4-14"
+      ],
+      "brief": "ROOT CAUSE: renderer/app.js:436 calls renderHome on every 3 s tick and renderHome (app.js:895-923) rebuilds #now with innerHTML (:920): a press that spans a tick is lost, focus on a row button falls to <body>, a text selection is cleared; the guard (:900) only spares a focused INPUT; the open reply box is re-created and focused on every render (:921-922), so words typed in the chat bar land in a session's reply box. The row click handler (:927) jumps on any click, including the end of a selection drag. Rows are non-focusable divs (:910): 17 Shift+Tabs through the quick asks and '● Record a short' to reach a row button; window blur closes Home (:803) and focus never wraps, so Tab off the end closes the panel. Rows re-sort under a still pointer (since resets + newest-first sort; queue-state fixes the clock and the order). #now max-height 46%/62% (style.css:102-103) cuts the 4th row and pushes Record/Today/localhost below the fold while the chat area sits empty; rows are capped at 8 (app.js:901). FIX: keyed reconciliation of .nr rows by session id - create, update, move or remove only what changed and patch only changed sub-parts, never replacing a focused, pressed or selected node. Split rendering into rowHead(a), rowActs(a), rowNote(a) (renders noteFor(a.id), app.js:614-615, today uncalled), rowForm(a), renderFoot() and renderServers() so wave-2 tasks edit separate functions, and export rowNote(id, text, ms, kind), which sets the note and patches only that row. Focus the reply input only when the user opens Reply. Ignore a row click when window.getSelection() is non-empty or the pointer moved >4 px. Hold order: while the pointer is over the list or focus is inside it, existing rows keep their slots (a new row never moves the hovered one); apply the queue order on leave. Rows get tabindex=0 and aria-labels; Cmd+1..Cmd+9 focus the Nth row from anywhere in the panel; Up/Down move between rows; Enter = the row's first action button, else jump; Esc on a row returns focus to the composer (capture phase, before Esc closes the panel); Tab/Shift+Tab wrap inside #chat. (Up in an empty composer belongs to chat-bar: recall the last message.) Layout: render every row (no cap), compact one-line running/done rows, the footer (record/today/servers) outside the scrolling list so it is always visible, #now grows into the panel's free height; needs-you rows never scroll out of view. BOUNDARIES: keep today's row content, classes and data-do values (canon/tta select .nr, .nm small, .na, .nb button[data-do]) and the phase-to-button mapping (row-actions/home-feedback change those in wave 2); don't edit byUrgency/pending/phaseTime (queue-state) or renderSetup (keys-entry).",
+      "acceptance": "Evidence to EVID/round-1/fixes/home-keyed/; trusted CDP input through launch.js; Home open; uptime recorded; $0 (no member takes a turn). (a) Over >=6 ticks: a 3.3 s press on a row button spanning a tick takes effect 5/5 (the replay button opens Theater, or the goal button prefills); focus on a row button is the same element after each tick; a selection in an ask/goal line survives >=3 ticks; a drag across row text selects it and fires 0 ipc:jump. (b) With kestrel's Reply box open, typing 'what is atlas doing' into the chat bar at 300 ms/char across >=2 ticks lands entirely in the chat bar (0 characters in the reply box). (c) Pointer resting on the list for 3 min with the fleet live: 0 row position changes (bounding boxes sampled every 250 ms); the order is reapplied within one tick after the pointer leaves. (d) Keyboard: Cmd+1 focuses the top row and Enter fires its first action (ipc recorded) - 2 keys; Down/Up move between rows; Esc from a row returns to the composer; Tab from the last control wraps to the first and Shift+Tab from the first wraps to the last; Home stays open throughout (0 blur closes). (e) canon home.aboveFold: every fleet row and the Record/Today/localhost footer are visible with an empty chat and after one note; a 15-agent snapshot sent through the test hook (win().webContents.send('tick', ...)) renders 15 rows with the footer visible (screenshot). (f) `node test/ultra/canon.js --app ULTRA/wt/home-keyed --out <evid>/canon` 26/26; npm test green.",
+      "priority": 3,
+      "wave": 1,
+      "files": [
+        "renderer/app.js",
+        "renderer/style.css",
+        "renderer/index.html"
+      ]
+    },
+    {
+      "id": "row-actions",
+      "title": "Row actions that resolve every block from the pet: Approve/Always/Deny, answer options, Reply to finished sessions, Stop, Diff, batch and keys; labelled fixed-slot buttons; a reversible goal tick",
+      "kind": "bug",
+      "surface": "S4",
+      "bugIds": [
+        "r1-S4-02",
+        "r1-S4-15",
+        "r1-S4-18",
+        "r1-S4-16",
+        "r1-S4-17",
+        "r1-S4-20",
+        "r1-S4-19",
+        "r1-S4-21",
+        "r1-S4-12",
+        "r1-S1-20",
+        "r1-S4-09",
+        "r1-S4-22",
+        "r1-S3-07",
+        "r1-S4-10"
+      ],
+      "brief": "ROOT CAUSE: a row's actions are renderer/app.js:903-909 - Approve only for phase 'stalled' (Enter on whatever is highlighted: on an AskUserQuestion it picks an option blindly, main.js:443), Reply only for 'waiting' (a turn ending in '?', agents.js:162), and glyph-only play/tick/target buttons explained by tooltips; the goal tick sits next to Approve/Reply, vanishes after use so the replay button slides into its slot (auto grid column, style.css:105/115) and has no undo; goal_done is counted again after a reset and auto goals write no goal_set (main.js:152-164, 169-176, 183-197, 219-228), hence 'Goals set: 2 · hit: 5' and farmable xp; the goal button prefills an empty '/goal ' for an auto goal and leaves Send disabled, so Enter does nothing (app.js:933, 868, 872). No Deny, Always, option answers, Stop/interrupt, next instruction for a finished session, diff (rcLine, app.js:595-604, has no caller), batch or keyboard actions exist. FIX (builds on wave 1: queue-state's kind/ask/options, tmux-reach's send-to actions, home-keyed's rowActs/rowNote/focusable rows): approval rows show the exact command with [Approve] [Always: <rule>] [Deny]; question rows show the question, one button per option (keys 1..N) and 'Other...' free text (send-to option/text); input and done rows get a Reply / 'Tell <name>...' box; running and looping rows get [Stop] (interrupt) with an in-place confirm. Text labels for Replay / Goal / Diff in fixed slots that never shift; no goal control beside Approve/Reply on blocked rows; 'Mark done' with a 5 s Undo, a goal counted once (idempotent per session + goal text, Undo deletes the ledger row, a reset never re-awards xp, auto goals count as set). Goal editing happens inline on the row, prefilled with the current goal (auto or typed), Enter saves - no composer prefill (this fixes r1-S4-22 and r1-S3-07). Diff: rows with a receipt show the files touched + check verdict (rcLine) and Diff opens that session's repo diff (read-only window or a panel card with the stat and open-in-editor). Batch: 'Approve all (N)' when >=2 approvals wait on the identical command; 'Clear done' acknowledges every finished row into a collapsed idle group. Keys on a focused row: A approve, W always, D deny, 1-9 option, R reply, S stop, P replay, J jump (Cmd+1..9 row focus comes from home-keyed). Results go to that row through rowNote - r.note (else '<Action> sent') on ok, r.why on failure (contract with live-rows) - never say(). Update canon.js (4-rows flow, EXPECT.question act) and tta.js (askuser resolves with the option button) to the new controls. BOUNDARIES: rowActs, the #now click handler, row keydown, main.js goal handlers and a new diff IPC placed after the 'goal-done' handler (preload entry after goalDone); CSS inserted after the .nrep rules; don't edit send-to (live-rows), rowHead (home-feedback) or the command bar (session-console).",
+      "acceptance": "Evidence to EVID/round-1/fixes/row-actions/; uptime + medians. $0: (a) `node test/ultra/canon.js --app ULTRA/wt/row-actions --out <evid>/canon`: kestrel's row shows 'Bash: ./deploy.sh --dry-run' with Approve, Always (./deploy.sh *) and Deny; beacon's row shows its question with SQLite / Postgres / Redis / Other; vibepet, atlas and delta (done) show Reply; no glyph-only control remains; the Replay/Goal bounding boxes are identical before and after Mark done. (b) Mark done, then Undo within 5 s, restores the goal and removes its ledger row; reset + Mark done again leaves Today's hit count and xp unchanged; inline edit of an auto goal is prefilled with it and Enter saves (1 set-goal IPC). (c) Diff on vibepet's row opens the diff of ~/.vibepet-ultra/fleet/vibepet; with send-to intercepted, A/W/D/2/R/S on focused rows call send-to with the right action and the right session id. SPEND-GATED (about $0.12; lease each member, re-arm, release; only if `fleet.js spend` estimate + 0.12 <= the stop): beacon option 'Postgres' from its row -> registry leaves waiting <=1 s and the tool_result names Postgres, rearm beacon; Deny kestrel -> idle + '[Request interrupted', rearm; Approve kestrel -> busy + tool_result, rearm; Always kestrel -> its .claude/settings.local.json gains the allow rule (rearm strips it); Reply 'Reply with exactly: ok' to vibepet's done row -> a new user record; `fleet.js rearm atlas` then Stop -> registry idle <=1 s; `node test/ultra/tta.js --app ULTRA/wt/row-actions --out <evid>/tta --plan askuser:1` resolves through the option button. npm test green; canon 26/26.",
+      "priority": 4,
+      "wave": 2,
+      "files": [
+        "renderer/app.js",
+        "renderer/style.css",
+        "main.js",
+        "preload.js",
+        "test/goal.test.js",
+        "test/ultra/canon.js",
+        "test/ultra/tta.js"
+      ]
+    },
+    {
+      "id": "live-rows",
+      "title": "Live, verified row actions: a block is actionable <1 s after it starts and every action is confirmed from Claude Code's own state <1 s",
+      "kind": "lowest",
+      "surface": "S4",
+      "bugIds": [],
+      "brief": "WHY THIS (S4 raters: 'takes block-to-actionable to under 1 s', 'show action results inline'; no confirmed bug covers either): state is polled every 3 s (main.js:20, setInterval at :877) and send-to returns as soon as keys are typed (main.js:436-447), so a fresh block waits up to a tick (p95 about 3 s) to become actionable, an action's effect appears only on the next tick, and keys that land on a changed screen read as success. Every other S4 change makes actions possible; this one makes them fast and trustworthy, which the Speed and Correctness anchors measure. CHANGE (one loop - Claude Code state -> row -> action -> Claude Code state - made live): (1) new live.js + main.js: fs.watch the registry dir (overrides.sessionsDir()) and each live session's transcript and subagents dir (re-armed as sessions come and go); debounce 150 ms -> tick(), coalescing a tick requested while one runs into one follow-up; keep the 3 s interval as the fallback; no scan() changes. (2) send-to (as rewritten by tmux-reach): after delivering, watch that session's registry entry + transcript tail for <=2 s for the transition the action implies - approve/always/option: leaves 'waiting'; deny: 'idle' + a rejected/interrupted tool_result; text: a new user record with that text + 'busy'; interrupt: 'idle' - then tick() at once and return {ok:true, note:'Approved · kestrel running'} or {ok:false, why:\"Didn't land - kestrel still shows its approval prompt\"}; for approve/option keep following (<=15 s) and push 'action-result' {id, text} with the tool outcome ('./deploy.sh --dry-run ran · exit 0 · 3 lines' / 'failed · exit 1'). (3) Renderer: a new api.on('action-result') listener -> rowNote; a row just acted on holds its slot with its outcome note for 5 s before moving to its new group (home-keyed's hold). Contract: row-actions and session-console show r.note on ok and r.why on failure. BOUNDARIES: live.js, tick scheduling in main.js (require live.js there, not at the top), send-to, a preload channel after sendTo, one renderer listener; don't edit scan/classify (loop-rows) or rowActs (row-actions).",
+      "acceptance": "Evidence to EVID/round-1/fixes/live-rows/; uptime next to every timing; medians. SPEND-GATED (about $0.09; lease kestrel, re-arm, release; only if `fleet.js spend` estimate + 0.09 <= the stop): `node test/ultra/tta.js --app ULTRA/wt/live-rows --out <evid>/tta --plan approval:3 --quiet kestrel,beacon` (compare with the wave-1 integration's recorded detection times; no second paid run): Home's row reads needs-you at a median <=1.0 s after the trigger; each trial resolved from the pet shows the verified 'Approved' note <=1.0 s after the click and the tool outcome note <=5 s after; inside the same lease, an Approve sent right after a Deny (dialog gone, before the rearm) shows 'Didn't land...' on the row <=2 s. $0: every send-to in the run is logged with its verified verdict (0 unverified successes); with the watcher on, idle app CPU <= base + 1 point (3 x 60 s, uptime recorded) and <=5 ticks/s during the trials. npm test green; canon 26/26.",
+      "priority": 5,
+      "wave": 2,
+      "files": [
+        "live.js (new)",
+        "main.js",
+        "preload.js",
+        "renderer/app.js",
+        "test/live.test.js"
+      ]
+    },
+    {
+      "id": "chat-bar",
+      "title": "Chat bar: a warm streaming engine with Stop, queued sends, exact error states, stable-prefix prompts, persistent history and a real composer",
+      "kind": "bug",
+      "surface": "S2",
+      "bugIds": [
+        "r1-S2-06",
+        "r1-S2-07",
+        "r1-S2-08",
+        "r1-S2-09",
+        "r1-S2-10",
+        "r1-S2-12",
+        "r1-S2-13",
+        "r1-S2-14",
+        "r1-S2-15",
+        "r1-S2-16",
+        "r1-S2-17",
+        "r1-S2-18",
+        "r1-S2-19",
+        "r1-S2-20",
+        "r1-S2-21",
+        "r1-S2-24",
+        "r1-S2-27"
+      ],
+      "brief": "ROOT CAUSES (the chat feature from round-0/benchmark.md B1-B4, B7): every message cold-spawns `claude -p --output-format json` (main.js:550, 569-571): about 1 s of process overhead and nothing streams (one JSON result; preload.js:15 invoke; app.js:841-845 is a fake 'reading the repo / thinking' ticker); an unavailable model re-spawns on every send and is never remembered (main.js:571-573); each send is a new process with the live context first and the conversation after (main.js:567-568), so prompt cache is written and never read and the model weighs stale turns over the fresh context; stderr is discarded and the only failure signal is a 90 s timeout (main.js:550-552, 574), so offline and 429 both read 'thinking... claude timed out'; errors are raw strings, the turn is popped and the composer cleared (app.js:857, 868); a send while one is pending is dropped (app.js:835); Esc closes the panel and the reply pops up truncated in a bubble (app.js:801, 862); with no engine the key form hides the composer and command bar (style.css:203, app.js:787-788) and the header claims 'api key' (app.js:792); a question typed into the auto-focused key field is saved as a key unvalidated (main.js:609-618, app.js:874-882); history lives only in renderer memory (app.js:779) - no /new, list, search or clear, and the quick asks show only while the chat is fresh (style.css:177); markdown drops lists/links and the fence language (app.js:807, style.css:167); an arriving reply yanks the scroll (app.js:821); the composer is a one-line <input> (index.html:31); #chatNote is hidden, so nobody can see what Net was told (index.html:33, app.js:789). FIX: a warm persistent `claude -p --input-format stream-json --output-format stream-json --verbose --include-partial-messages --no-session-persistence` process (spawned when the panel opens or the app idles, respawned after a crash, killed on quit) and the API path with stream:true + cache_control; deltas over an IPC channel rendered incrementally (>=5 DOM updates/s) with markdown safe mid-stream; system prompt + history as the stable prefix, the live context last and labelled current (older turns' context must not outweigh it); remember the working model after one fallback and say so in a note; Stop (Esc or a button) kills/aborts <=200 ms, keeps the partial marked '(stopped)' and leaves the panel open; a send while streaming is queued and shown 'queued'; detect offline / 429 / auth / overloaded / timeout from stream-json system and api_retry events, stderr and HTTP status, each with the exact copy + one action from the B4 table (429: live countdown + Retry now; offline: queued, sent on recovery); failed text stays retryable; no engine -> the composer and model-free commands stay usable, with 'I need a way to think...' + [Paste key] [How to install]; a key is validated (format + a test call) before 'Key saved' and the composer, not the key field, takes focus; history persisted in userData (messages, labels, code blocks, scroll), Cmd+N / New chat, a searchable history list with Clear and stated retention, quick asks reachable after the first message; lists, links and fence labels render; autoscroll only within 40 px of the bottom, else a '↓ new' pill; the composer becomes a growing textarea (Shift+Enter newline, Up in an empty composer recalls the last message, Cmd+N, Cmd+K opens the / menu, Cmd+Shift+C copies the last code block; Cmd+1..9 is home-keyed's); a 'What Net sees' disclosure under each reply shows the exact context and a token estimate. Expose window.vpChat = {newChat, showHistory} (session-console maps /new to it). Update canon.js's stub engine to the stream-json protocol; it must keep reading the context's 'Agents:' line. Suggested order: engine + stream + Stop + queue; errors + no-engine + key; prompt/cache/model; history; rendering + composer. BOUNDARIES: main.js chat section except agentTranscript/buildContext (chat-context), the renderer chat section (openChat..renderMd/addMsg/send/keyForm), index.html composer; Esc/keydown handlers in the capture phase consuming only their own cases (menu Esc belongs to session-console); preload entries after chatVia.",
+      "acceptance": "Evidence to EVID/round-1/fixes/chat-bar/; live chat on the user's own Claude login with model claude-haiku-4-5 (no fleet spend; <=40 sends) and fault injection at the network boundary only; uptime + p50/p95 with n >= 10 for every timing. (a) Enter -> first visible model token p50 <= 2.0 s and p95 <= 3.5 s on the login path (target <=1.5 s p50); >=5 DOM mutations/s while streaming (MutationObserver on #msgs); the user bubble + indicator <=50 ms p95. (b) Model set to 'claude-unavailable-model-x': the first send costs one extra round trip and posts a note naming the fallback; the second send has no failed spawn. (c) cache_read_input_tokens >= 50% of input from turn 3 on (CLI/API usage logged per send). (d) Esc while streaming stops it <=200 ms (process killed or reused), keeps the partial '(stopped)', panel open; a second message sent during a reply is queued and then answered. (e) ANTHROPIC_BASE_URL=http://127.0.0.1:9 -> the offline copy <=3 s and the message queued and sent after recovery; a local 429 server with retry-after 23 -> 'Rate limited by Anthropic. Retrying in 23 s.' with a live countdown and Retry now; a rejected key -> 'That API key was rejected...' + [Paste key]; the text stays retryable in every case. (f) No engine (VIBEPET_CLAUDE_BIN=/nonexistent, no key): composer visible, /today and /jump work, the copy + actions show, the header claims no key, a question typed where a key is asked is refused as not a key. (g) Relaunch with the same userData: messages, labels, code blocks and scroll come back; Cmd+N starts a new chat and the old one is in the searchable list; Clear empties it. (h) A reply with a list, a link and a ```bash block renders <ul>/<a> and the 'bash' label; scrolled up 200 px, an arriving reply leaves scrollTop unchanged and shows '↓ new'; Shift+Enter inserts a newline, Up recalls the last message, Cmd+Shift+C copies the last block (clipboard recorded). (i) 'What Net sees' shows the exact context of the last turn. (j) npm test green; canon 2-chat passes with the updated stream-json stub.",
+      "priority": 6,
+      "wave": 2,
+      "files": [
+        "main.js",
+        "chat-engine.js (new)",
+        "preload.js",
+        "renderer/app.js",
+        "renderer/index.html",
+        "renderer/style.css",
+        "test/chat.test.js",
+        "test/ultra/canon.js"
+      ]
+    },
+    {
+      "id": "home-feedback",
+      "title": "Home reads at a glance and every message lands where you look: bubbles above the panel, failures in the row, an honest jump queue",
+      "kind": "bug",
+      "surface": "S1",
+      "bugIds": [
+        "r1-S1-10",
+        "r1-S1-11",
+        "r1-S1-18",
+        "r1-S3-03",
+        "r1-S4-05",
+        "r1-S4-11",
+        "r1-S5-22",
+        "r1-S7-03",
+        "r1-S7-04",
+        "r1-S7-13",
+        "r1-S7-15"
+      ],
+      "brief": "ROOT CAUSES: #bubble has z-index 2 (renderer/style.css:26) under #chat's z-index 3, whose margin-bottom -46px covers the bubble slot (style.css:78), so with Home open every bubble - jump failure, 'goal hit +15xp', level-up, /stop and localhost lines, nags - draws behind the composer; #roster:not(.hidden) ~ #bubble {display:none} (style.css:239) hides it while the pill is open; noteFor() (app.js:614-615) has no caller, so jumpTo's in-row note (app.js:750) never renders; jumpTo calls markSeen() before and regardless of the jump (app.js:746 -> :104; pending at :123-125), so one failure drops every done row from the jump walk; its bubble names the folder (a.name, app.js:751) while rows lead with the title; the jump key with nothing pending does nothing at all (app.js:445-453). Rows: renderHome never reads a.fanout (foPips/foTitle, app.js:605-612, are unused); an untitled session repeats its name and the state/age is the row's smallest, dimmest text (app.js:911, style.css:111); the ask line (.na #ffd98a) has no light-theme override: 1.23:1 on the cream needs row (style.css:114); the roster's replay button is opacity 0 until hover, an 8 px glyph in a 13x15 px box (style.css:248-249). FIX: with Home open, bubbles render above the panel (a toast pinned to its top edge, z-index over #chat), and row-scoped results become rowNote notes in that row (home-keyed helper); the roster pill renders notes in its rows instead of hiding them; markSeen only the jumped session and only on success; an empty jump queue answers 'Nobody's waiting on you' (quiet, once per press); one label everywhere: '<title> · <folder>'. rowHead: the fan-out gauge (foPips + 'n/m subagents' + oldest running age) on rows with a fan-out; state + age lead as the strongest secondary text and an untitled session shows its name once; the ask line >=4.5:1 in light and dark; the roster's replay control always visible with a >=24 px target. BOUNDARIES: say()/show() (app.js:370-393), the hotkey handler, renderRoster, jumpTo, rowHead; CSS inserted next to the #bubble, .na and #roster rules without editing lines other tasks own; leave the 'event' switch, rowActs, send-to and the command bar to their tasks.",
+      "acceptance": "Evidence to EVID/round-1/fixes/home-feedback/; $0; uptime recorded. (a) Home open, no tmux client attached: a row jump fails and its reason shows in that row <=0.5 s; for that failure, for 'goal hit' (Mark done on a goal) and for `/stop <port>` on a fixture server the tester started in a fleet repo, elementFromPoint at the bubble's centre is the bubble/toast, not #chat (screenshots); with the roster pill open the failure note shows in the pill row. (b) After a failed jump to kestrel the renderer's pending() still lists the done rows; with pending() empty, main's hotkey handler produces 'Nobody's waiting on you'. (c) delta's row shows its fan-out gauge from its last fan-out (3/3 done); vibepet's untitled row shows its name once with 'done Nm ago' leading; the ask line on kestrel's row measures >=4.5:1 on light- and dark-theme screenshots; the roster's replay control is visible without hover in a >=24 px box. (d) kestrel reads 'Deploy.sh dry run · kestrel' in the bubble, the pill and the row. (e) canon 26/26; npm test green.",
+      "priority": 7,
+      "wave": 2,
+      "files": [
+        "renderer/app.js",
+        "renderer/style.css"
+      ]
+    },
+    {
+      "id": "loop-rows",
+      "title": "Loop-aware rows: a /loop or ScheduleWakeup session reads 'looping · fired 40s ago · next ≈4m', never 'done, your move'; every fire is seen",
+      "kind": "bug",
+      "surface": "S1",
+      "bugIds": [
+        "r1-S1-04",
+        "r1-S1-07"
+      ],
+      "brief": "ROOT CAUSE: agents.js:162 turns every end_turn into 'ready' (the yellow your-move dot and an agentDone bubble) with no knowledge of a live CronCreate job or a pending ScheduleWakeup; each fire refreshes the file, so a loop never parks and reads 'done, your move' forever. A fire shorter than the 3 s tick is never observed: since/transition change only on an observed phase change (agents.js:279, main.js:137-147) and the isMeta scheduled prompt is skipped (agents.js:154), so the age never resets and no signal fires (2 of 3 fires invisible). FIX (feature: loop-aware rows, round-0/feature-ranking.md #3): detect a loop - a CronCreate tool_use whose result id has no later CronDelete (cron + humanSchedule) in a session whose process is alive (registry; <cwd>/.claude/scheduled_tasks.lock names the pid), or a pending ScheduleWakeup (scheduledFor in its tool result); a new kind/phase 'loop' that is calm (blue/grey, not your move), raises no agentDone bubble and stays out of the jump queue; label 'looping · every 5m · fired 40s ago · next ≈4m 20s' (last fire from system:scheduled_task_fire / scheduled-turn records; next = last fire + period - Claude Code fires at about 0.95 x period, never on the cron boundary - and 'overdue' past 2 x period); count scheduled turns as turns and detect a turn that happened between ticks from a newer registry statusUpdatedAt or a newer turn_duration record, so every fire resets 'fired ...' and a human turn ending in a loop session still says done. Update canon.js EXPECT.loop to the new signal. BOUNDARIES: agents.js classify/scan, main.js transition/nag, renderer SIG/RANK/phaseTime; don't edit send-to or tick scheduling (live-rows).",
+      "acceptance": "Evidence to EVID/round-1/fixes/loop-rows/; uptime recorded. SPEND-GATED (about $0.04; lease ember; `fleet.js rearm ember` resumes it and catches up a missed fire; observe >=2 fires; then `fleet.js pause ember`; release; only if `fleet.js spend` estimate + 0.04 <= the stop): `node test/ultra/watch.js --app ULTRA/wt/loop-rows --out <evid>/watch --secs 660`: between fires ember's row reads 'looping...' with no yellow dot, is absent from pending() and raises no agentDone bubble or sound; each fire (registry busy -> idle, 2-13 s) resets 'fired ...' within one tick of its end, 2/2 fires seen, including any shorter than 3 s; 'next ≈' lands within +-30 s of the actual next fire; after `pause ember` the row reads exited, never done. $0: a unit fixture with ember's real record structure (types and fields only, no text) classifies loop vs done, and vibepet's ordinary end_turn still reads done. npm test green.",
+      "priority": 8,
+      "wave": 2,
+      "files": [
+        "agents.js",
+        "main.js",
+        "renderer/app.js",
+        "test/agents.test.js",
+        "test/ultra/canon.js"
+      ]
+    },
+    {
+      "id": "chat-context",
+      "title": "Chat knows every session: state, exact ask, title, repo and edited files per session; a named session gets its own repo and transcript; truthful overlap answers",
+      "kind": "bug",
+      "surface": "S2",
+      "bugIds": [
+        "r1-S2-03",
+        "r1-S2-04",
+        "r1-S2-29"
+      ],
+      "brief": "ROOT CAUSE: buildContext (main.js:491-515) sends only 'Agents: name=phase for Ns' (:496) plus the one focused repo (:498-508), and the agent/next quick asks attach only agents[0]'s transcript (:513), so chat can't say what any session needs, answers 'what did atlas change?' from another repo, and says 'No agents are active' when asked whether two sessions are editing one file - although the snapshot already holds each session's ask, title, cwd and receipt files. FIX: keep the one-line 'Agents:' summary first (canon's stub reads it), then one block per live session (all of them, <=15, within a byte budget): '<title> · <folder> · <repo>/<branch> · <state> <true age> · <exact ask: command, or question + options> · edited: <receipt files> · fan-out n/m'; an 'Overlaps:' line computed from per-session edited files (same repo + same path -> both sessions and the file are named; else 'none') - the truthful answer until the Collision Radar card ships; when the message names a session (title, folder or @name) or a quick ask concerns the sessions that need you, attach that session's own repo stat/log and transcript tail (agentTranscript per session, capped) instead of only the focused repo and agents[0]. Keep guidance inside the context block. BOUNDARIES: agentTranscript and buildContext only; SYSTEM, the engine and the prompt order belong to chat-bar.",
+      "acceptance": "Evidence to EVID/round-1/fixes/chat-context/; $0 fleet (chat on the user's login, Haiku); uptime recorded. (a) canon 2-chat: the stub's echo shows every fleet member; the logged context (written to EVID by the test) has one block per member with state, true age, ask ('Bash: ./deploy.sh --dry-run'; beacon's question + options), title and repo. (b) `canon.js --live-chat` plus 3 typed questions: 'which session needs me first?' names beacon/kestrel with their exact asks; 'what did atlas change?' is answered from atlas's repo (clean, nothing changed) and the context sent carries atlas's repo block; 'are any two of my sessions about to edit the same file?' answers from the Overlaps line (no overlap: different repos) - 3/3 correct. (c) A unit test with two receipts touching one path in one repo yields an Overlaps line naming both sessions and the file. npm test green.",
+      "priority": 9,
+      "wave": 2,
+      "files": [
+        "main.js",
+        "test/chat-context.test.js"
+      ]
+    },
+    {
+      "id": "session-console",
+      "title": "Command bar as a session console: /approve /deny /answer /reply /interrupt and @session from the bar; every session resolvable; keyboard menus with completion",
+      "kind": "bug",
+      "surface": "S3",
+      "bugIds": [
+        "r1-S3-04",
+        "r1-S2-22",
+        "r1-S2-23",
+        "r1-S3-05",
+        "r1-S3-06",
+        "r1-S5-04",
+        "r1-S3-08",
+        "r1-S2-28",
+        "r1-S3-18",
+        "r1-S5-19",
+        "r1-S3-17",
+        "r1-S3-19"
+      ],
+      "brief": "ROOT CAUSE: the command table (renderer/app.js:943-946) and command() (app.js:954-964) have no verb that answers a session, and free text only goes to the model (app.js:849, 869-870), so '@kestrel approve' and 'tell the vibepet session to run its tests' never reach a session; findSession (app.js:953) takes the first substring match over the live list only (Array.find; ties follow a since that restarts every tick), so ambiguous names act on an unpredictable session and exited or older sessions can't be replayed by name although Theater... lists them (theater.recent, main.js:738); /goal takes its whole argument as the goal text for the picked or top row (app.js:957); the hint list is click-only buttons, hidden once a space is typed, with no Up/Down/Tab/Enter handling or argument completion (app.js:947-952, 872); '@' opens nothing; Esc always closes the whole panel (app.js:801) and leaves '/' behind; the input is cleared before command() runs (app.js:868), so a typo must be retyped; edge copy: '/stop' -> 'Nothing listening on .', '/' -> 'Unknown command /.', commands are case-sensitive (app.js:955-964). FIX: verbs /approve, /always, /deny, /answer <n|text>, /reply <text>, /interrupt <session>, plus '@name <text>' (reply) and '@name approve|deny|<n>', each resolved to one session and sent through tmux-reach's send-to (same guard), with the result posted as a panel note (r.note / r.why, contract with live-rows); a natural 'tell <session> to ...' asks 'Send to vibepet: “run its tests”? Enter' before sending. One resolver for every command: live sessions + recent ones (a new IPC returning theater.recent() ids/titles), exact folder > title > substring, case-insensitive; several matches -> list them as choices, never act on a guess; /goal @session <text>, an unmatched name refused. Keyboard menus: Up/Down select, Tab/Enter complete, a unique prefix completes or runs, after '/jump ' '/replay ' '/approve ' etc. a session picker (ports for /stop), '@' opens the same picker, Esc closes the menu first (capture phase; the next Esc closes the panel), '/' alone opens the list. Keep the text, selected, after a failed command; '/stop needs a port, e.g. /stop 3000'; register /new -> window.vpChat.newChat() (chat-bar) with a fallback note. Update canon.js 3-command (the list grows past 8). BOUNDARIES: the command-bar section, the submit router and input handler, a new capture-phase keydown on the composer; the recent-sessions IPC goes right after the 'jump' handler in main.js, its preload entry after theater:; don't edit send() or addMsg (chat-bar) or the row handlers.",
+      "acceptance": "Evidence to EVID/round-1/fixes/session-console/; uptime recorded. $0: (a) '/jump kest' + Tab completes to '/jump kestrel' and Enter jumps (ipc:jump ok); '/' Down Down Enter runs the third command; '/rep' + Tab -> '/replay ' and a session picker; '@' opens the session picker; Esc closes only the menu and a second Esc closes Home; '/jump a' with 3 matches lists them and does not jump; '/replay ember' (exited) opens ember's replay; '/goal kestrel: approve the deploy' sets kestrel's goal (the set-goal IPC carries kestrel's id); after '/jump zebra' the bar still holds 'zebra' selected; '/stop' gives the needs-a-port copy; '/Today' works. (b) Guard: '/approve vibepet' (no dialog) is refused with the why and no keystroke. SPEND-GATED (about $0.065; leases, re-arm, release; only if `fleet.js spend` estimate + 0.065 <= the stop): '/approve kestrel' -> registry leaves waiting <=1 s and a panel note 'Approved...', rearm kestrel; '@vibepet Reply with exactly: ok' -> a new user record in vibepet's transcript and a note; '/answer beacon 2' -> the tool_result names Postgres, rearm beacon. npm test green; canon 26/26 (3-command updated).",
+      "priority": 10,
+      "wave": 2,
+      "files": [
+        "renderer/app.js",
+        "renderer/style.css",
+        "main.js",
+        "preload.js",
+        "test/ultra/canon.js"
+      ]
+    },
+    {
+      "id": "keys-entry",
+      "title": "Keyboard-first entry: Home opens in <=150 ms by click or a global key with the caret in the bar; truthful jump-key status; a setup card you can drive from the keyboard",
+      "kind": "bug",
+      "surface": "S3",
+      "bugIds": [
+        "r1-S1-13",
+        "r1-S3-11",
+        "r1-S2-26",
+        "r1-S3-12",
+        "r1-S7-07",
+        "r1-S7-08",
+        "r1-S3-10"
+      ],
+      "brief": "ROOT CAUSES: a single click on Net waits a fixed 220 ms for a possible double click before opening Home (renderer/app.js:729) although a double click also just opens Home (app.js:728): 221 ms shown / about 250 ms painted, over the 150 ms anchor; the only global shortcuts are the jump key and Ctrl+Opt+Cmd+R (main.js:808-815), so no key opens Home or the chat; on macOS globalShortcut.register returns true while another process holds the accelerator, so keyTaken (main.js:812-813) never reports a clash (two vibepets both fire on one press); the Setup card's Keys row is the literal 'Ctrl+Opt+Cmd+J' (app.js:981) whatever the key is; /setup hides the bar (style.css:152), setupForced survives close/reopen (app.js:962, 988), the card is rebuilt by innerHTML every tick, dropping focus (app.js:436 -> 899, 971-982), and typed keys press setup buttons (the pet changed to Sprout). FIX: open Home on the first click at once and make the second click of a double a no-op (a later single click closes); an 'Open Home' global key (an unclaimed default, configurable next to the jump key, Off allowed) that opens Home with the caret in the composer <=150 ms - focus the composer synchronously right after calling openChat(), without editing openChat's body (chat-bar's); detect clashes between vibepet instances with a per-accelerator lock file (pid + liveness) and show 'Jump key (taken by another vibepet)' with the alternative; the Setup Keys row shows the active keys or Off/taken; the setup card renders once and is patched (focus kept), the bar stays visible, Esc or close leaves setup, typing never changes a setting. BOUNDARIES: the mouseup handler, renderSetup + its click handler, bindKey and the Jump key menu item; don't edit buildMenu elsewhere (theater-data edits the Theater... item) or openChat.",
+      "acceptance": "Evidence to EVID/round-1/fixes/keys-entry/; $0; uptime + medians (n >= 5). (a) A single CDP click on Net -> panel painted <=150 ms (rAF timestamp); a double click opens Home once and doesn't close it; the next single click closes it. (b) The open-Home key's handler, invoked through main as canon invokes the jump key (never an OS-level key press), opens Home with document.activeElement = the composer <=150 ms. (c) Two test instances with different userData register the same jump key - an accelerator no real app holds, never Ctrl+Opt+Cmd+J, which the user's own vibepet holds: the second shows 'taken' in its menu and Setup row; Off and Opt+Cmd+J are reflected in the Setup Keys row. (d) /setup: Tab reaches every control without leaving the card; focus survives 3 ticks; '/today' + Enter typed in the bar runs /today and doesn't change the pet; Esc leaves setup and the next open shows the Now list. npm test green; canon 26/26.",
+      "priority": 11,
+      "wave": 2,
+      "files": [
+        "renderer/app.js",
+        "renderer/style.css",
+        "main.js",
+        "preload.js"
+      ]
+    },
+    {
+      "id": "gesture",
+      "title": "Summon gesture: never fires on a drag or a square, works in both directions, accepts a quick re-summon, and says it toggles",
+      "kind": "bug",
+      "surface": "S7",
+      "bugIds": [
+        "r1-S7-09",
+        "r1-S7-10",
+        "r1-S7-11",
+        "r1-S7-12",
+        "r1-S7-14"
+      ],
+      "brief": "ROOT CAUSES: the stroke callback toggles Net with no check of the drag state kept at main.js:672-688 (main.js:822-825; the watcher only samples cursor positions, gesture.js:156-163), so dragging Net in a loop hides him; normalize scales x and y independently into a square box (gesture.js:32-40) and the +-45 degree rotation search (gesture.js:42-50) let a square score 0.892 against circle templates, above THRESH med 0.85 and low 0.88 (gesture.js:4); variants()/score() compare points in drawn order with no reversed variant (gesture.js:87-97), so a counter-clockwise circle scores 0.107 against a clockwise-trained one, and the pad copy (renderer/index.html:46) never says direction matters; a stroke within 2.5 s of a toggle is silently ignored (main.js:824; toggledAt at :853); the 'Saved.' copy says the shape only brings Net back (renderer/app.js:495). FIX: ignore strokes while a Net drag is active (drag-start/drag-end state in main); add closedness/corner features or aspect-preserving normalization so squares and triangles fall below the threshold at Medium and Low while circles and ellipses still match, and retune THRESH with fixtures in test/gesture.test.js (including the critic's square and ccw strokes); match the reversed template too (direction-free for closed shapes) or tell the user on the pad; shorten the lockout to the hide animation (about 300 ms) and always accept the reverse toggle; copy: 'Saved. Draw it to hide Net; draw it again to bring him back.' BOUNDARIES: gesture.js, the gesture section of main.js, the gesture-rec copy and the pad copy.",
+      "acceptance": "Evidence to EVID/round-1/fixes/gesture/; $0; real CDP drags on Net in a test instance plus offline scoring with gesture.js on recorded strokes; uptime recorded. With a trained clockwise circle: a closed-loop drag of Net (button held) hides him 0/4; a 180 px square scores below the Medium and Low thresholds offline and doesn't toggle live 0/3; a counter-clockwise circle matches 3/3 (or the pad copy states the direction rule and it is shown on screen); a re-summon circle ending 0.5-2 s after a hide summons Net 3/3; the Saved copy says the shape toggles. No regression: the earlier true positives (circle, zig-zag, Z) still fire at Medium. npm test green.",
+      "priority": 12,
+      "wave": 2,
+      "files": [
+        "gesture.js",
+        "main.js",
+        "renderer/app.js",
+        "renderer/index.html",
+        "test/gesture.test.js"
+      ]
+    },
+    {
+      "id": "ports-truth",
+      "title": "Ports you can trust: chips name their session, find [::1] and HTTPS servers, retry slow ones, appear and vanish <=3 s, group a server, and Stop tells the truth",
+      "kind": "bug",
+      "surface": "S6",
+      "bugIds": [
+        "r1-S6-01",
+        "r1-S6-02",
+        "r1-S6-03",
+        "r1-S6-04",
+        "r1-S6-07",
+        "r1-S6-08",
+        "r1-S6-09",
+        "r1-S6-10",
+        "r1-S6-11",
+        "r1-S6-16",
+        "r1-S6-17",
+        "r1-S3-15"
+      ],
+      "brief": "ROOT CAUSES: chips carry only {port, pid, name, http} with name = page <title> || label (main.js:372), and no listener is joined to a session (ports.js:162-170); the probe always goes to http://127.0.0.1 (ports.js:81), ignoring the listener host kept at ports.js:30 and TLS, and Open is always http://localhost:<port> (main.js:397, 428); one 800 ms probe per pid:port, cached until the listener goes (ports.js:153, 168, 172), so a still-compiling server keeps Open disabled for good; poll(minMs = 10e3) (ports.js:181-182) read on the 3 s tick (main.js:381-382) -> new servers 9-12 s late, dead ones linger about 11 s; Home shows local.servers.slice(0, 8) in port order with no '+N more' (main.js:372, ports.js:33, app.js:919-920); one chip per pid:port while Stop kills one pid (ports.js:20-33, 205; app.js:937; main.js:430-431), so a prefork master respawns the killed worker and a debugger port duplicates a chip; local-stop trusts the cached list (main.js:429-432) -> \"couldn't stop pid N: ESRCH\"; localhost events are in QUIET.done (main.js:92-94), so a crash vanishes silently and Stop from the Localhost menu (main.js:392) reports nothing; running background tasks match only '(ID: <id>)' (ports.js:98) -> raw ids; Stop copy is 'stopped pid N' (ports.js:205); a disabled Open looks enabled and is titled 'Open' (style.css:117-118, app.js:919); a /stop'd chip leaves only on a later tick (main.js:432 polls after 800 ms and pushes no snapshot). FIX: join servers to sessions (listener cwd under a session cwd -> that session's title/folder; chip ':47302 vibepet · Directory listing'; the session's row can list its servers); probe the bound host ([::1] or 127.0.0.1) and https when TLS answers, Open the exact scheme and host; re-probe failures with backoff (2 s, 5 s, 15 s ...) and on Open; refresh the listener list every <=2 s cheaply (lsof only; probes async) and push a snapshot when it changes; one chip per server (port + process group); Stop ends the group, its master or its launchd job, and the dialog names every port that goes down; re-check that the pid still owns the port before the dialog and before acting; report every Stop result (menu and chip) whatever the alert level, and a server that dies on its own as one quiet line at 'done'; name running background tasks from the 'Command running in background with ID:' record's tool_use description; Stop copy 'Stopped http.server (vibepet) on :47120' / 'That server had already stopped'; a disabled Open looks inactive and says why; every server reachable from Home ('+N more' opens the full list), most recent or most relevant first. BOUNDARIES: ports.js, main.js QUIET/emit, the servers lines of snapshot(), the localhost section; renderServers (home-keyed's sub-function) and CSS inserted after the .srv rules.",
+      "acceptance": "Evidence to EVID/round-1/fixes/ports-truth/; $0 - only fixture servers the tester starts with cwd in fleet repos, all killed afterwards; uptime + medians (n >= 10). (a) listen -> chip <=3 s and exit -> chip gone <=3 s over random start/stop times (median and max reported). (b) `python3 -m http.server` in the vibepet repo -> ':<port> vibepet · Directory listing'; two servers titled 'Vite + React + TS' in two repos are told apart by their chips. (c) A [::1]-only node server and an HTTPS server show their titles and Open enabled, opening the right URL (openExternal recorded); a server that answers 20 s after listening gets its title and Open within 5 s of answering. (d) 10 servers: all reachable from Home ('+N more'); a prefork server (master + 3 workers) is one chip and Stop ends it (port free, no respawn); Stop on a stale chip -> 'That server had already stopped' and the chip goes; Stop from the Localhost menu and an external kill each produce a line at the default alert level. (e) `/stop <port>` -> chip gone and a panel note <=1 s after the process exits. (f) A running background task is named by its description (unit test on the fleet record structure; no fleet turn). npm test green; canon 26/26.",
+      "priority": 13,
+      "wave": 2,
+      "files": [
+        "ports.js",
+        "main.js",
+        "renderer/app.js",
+        "renderer/style.css",
+        "test/ports.test.js"
+      ]
+    },
+    {
+      "id": "theater-data",
+      "title": "Theater tells the session's own story: only its commits, its live state at the end, questions as questions, loop fires, readable menu labels, real ages, spawn-ordered branches",
+      "kind": "bug",
+      "surface": "S5",
+      "bugIds": [
+        "r1-S5-05",
+        "r1-S5-06",
+        "r1-S5-09",
+        "r1-S5-11",
+        "r1-S5-12",
+        "r1-S5-13",
+        "r1-S5-17"
+      ],
+      "brief": "ROOT CAUSES: gitLog runs `git log --all` filtered only by the time window (theater/index.js:19) and model.js:134 turns every commit in [t0-60 s, t1+5 min] into a lane-0 'Milestone' beat, so commits pulled in from elsewhere become the session's (vibepet: 19, it made none), and a leading commit makes chapter 0 'Session start' (model.js:144, player.js:173); timeline() reads only the transcript and git (index.js:23; main.js:789-790 pass just the file), so a live session's replay ends on its prompt or on a running command with no verdict (player.js:68); AskUserQuestion falls through to kind 'read' with a title from description/command/url (model.js:65 -> 'LOOK · AskUserQuestion'), ignoring input.questions; walk() reads only user/assistant records (model.js:78), so system:scheduled_task_fire is skipped and isMeta loop prompts fail humanAt, leaving resumed ticks under a '/exit' chapter (model.js:144); Theater... labels are the raw first prompt cut at 50 chars (index.js:48-51), so /command sessions show '<command-message>...'; ages and order come from file mtime (index.js:39, 41; main.js:738), which Claude Code touches without writing; subagent lanes are numbered in readdir order (index.js:12; model.js:126, 129). FIX: commits only when the session made them (a Bash `git commit` in the session or its subagents whose output names the hash, or a commit authored inside a turn whose files intersect the session's edits) - otherwise none; chapter 0 titled by the first prompt; main passes the session's live state (kind/ask/since/options from the snapshot) to timeline() and the model appends a final 'now' beat ('Waiting for your approval: Bash ./deploy.sh --dry-run · since 6:32 PM' / 'Running ./build.sh · 2m' / 'Asking: Which database...? SQLite / Postgres / Redis'); 'question' beats carrying the question, its options and the answer or 'dismissed'; scheduled fires as 'loop fire' beats, and a resumed session opens a 'Resumed' chapter instead of continuing '/exit'; Theater... titles apply the <command-name>/<command-args> rewrite (as model.js:82-83) and prefer ai-title; ages and order from the last record's timestamp; branches numbered by spawn time. BOUNDARIES: model.js, theater/index.js timeline()/recent()/subagentsOf, main.js's theater-timeline handler and the Theater... menu label; in player.js only add KIND/ICON entries and new scene() cases after 'commit' (theater-player owns the rest).",
+      "acceptance": "Evidence to EVID/round-1/fixes/theater-data/; $0 (fleet transcripts read through the app only); uptime recorded. (a) vibepet's replay: 0 commits and its header and chapter 1 read its first prompt; a unit fixture of a session that did commit keeps exactly its own commits. (b) kestrel's replay ends on 'Waiting for your approval: Bash ./deploy.sh --dry-run' with the registry's since; beacon's ends on its question + options. (c) beacon's AskUserQuestion beats render as Question with 'Which database...' and its options; ember's replay marks each scheduled fire (21 in db0c1ec0) and has 'Resumed' chapters - no '/exit' chapter containing ticks. (d) Theater... lists ember's entries as '/loop 5m run ./tick.sh · ember · <age>', distinguishable from each other; ages within +-1 min of each session's last record. (e) delta's first fan-out is labelled branch 1, 2, 3. npm test green.",
+      "priority": 14,
+      "wave": 2,
+      "files": [
+        "theater/model.js",
+        "theater/index.js",
+        "main.js",
+        "theater/player.js",
+        "test/theater.test.js"
+      ]
+    },
+    {
+      "id": "theater-player",
+      "title": "Theater plays like a tool: fits the window, opens at now, refreshes on reopen, cascades windows, idles at 0 fps, marks rejections, and acts on the session",
+      "kind": "bug",
+      "surface": "S5",
+      "bugIds": [
+        "r1-S5-07",
+        "r1-S5-08",
+        "r1-S5-10",
+        "r1-S5-14",
+        "r1-S5-15",
+        "r1-S5-16",
+        "r1-S5-18",
+        "r1-S5-20",
+        "r1-S5-21",
+        "r1-S5-23"
+      ],
+      "brief": "ROOT CAUSES: the body grid has no column template, so #top's nowrap title (theater/player.css:10, 18) widens the page past the window (stats, chapter label, the detail panel's close button and the clock off-screen); every replay seeks to 0 (player.js:188) and keydown handles only Space, arrows, brackets, Esc and 1-3 (player.js:159-168) - no End/Home/now; reopening focuses the existing window without reloading (index.js:61) and the timeline is fetched once (player.js:184); windows open at the same frame with repo-only titles (index.js:62, player.js:174); frame() repaints and re-queues rAF even when paused (player.js:145-146, 127-135): 6.5% CPU per paused replay; the chapter card types over the prompt already on stage (player.js:98, 101, 188; player.css:86); rejected commands render '✗ EXIT' (player.js:68 ignores b.denied, set at model.js:94) and only failed checks get rail/scrub marks (player.js:43, 180); the last scrub pixel maps below dur, so play at the visible end runs 164 ms and stops (player.js:155, 148, 17); every beat and lane is rendered as innerHTML before the first frame (player.js:42-47): 165-192 ms first frame for delta; the player exposes no action at all (player.html:26-32, theater/preload.js:3). FIX: grid-template-columns: minmax(0,1fr) and min-width: 0 so everything fits at 820x520; open a live session at its latest chapter (the turn that needs you) and add End/'Now' and Home keys + a Now button; reload the timeline on reopen/focus (keeping the position if the user scrubbed) + a refresh control; cascade new windows (+28 px) titled 'Theater - <title> · <folder>'; stop rAF when paused or finished and nothing animates (resume on input); the card replaces the stage scene while it types; 'Rejected by you' for denied commands, with red rail and scrub marks for rejected and failed commands; snap the last scrub pixel to dur and restart on play at the displayed end; first frame <=150 ms by rendering the visible rail window first and the rest when idle; Jump / Approve / Reply buttons for a live session that needs you (theater preload -> new theater/act.js IPC -> the same jump/send-to handlers by session id). BOUNDARIES: player.js/css/html, theater/preload.js, theater/index.js open() and fileFor, theater/act.js required right after `require('./theater')` in main.js; don't change model.js or the scene cases theater-data adds.",
+      "acceptance": "Evidence to EVID/round-1/fixes/theater-player/; $0 unless noted; uptime + medians (n >= 5). (a) kestrel's and ember's replays at 1280x800 and 820x520: stats, chapter label, the detail panel's close button, the clock and the whole scrub bar lie inside the window (bounding boxes). (b) kestrel's replay opens at its latest chapter; End jumps to now; play after dragging to the end restarts from 0. (c) Reopening after the transcript grew (after another task's rearm, or an ember fire) shows the new beats; 3 replays cascade with distinct titles. (d) A paused replay's renderer CPU <=0.5% (n=3) with 0 DOM mutations/s while paused. (e) No card/stage text overlap on open or at a chapter (screenshots at +0.1 s and +0.3 s). (f) kestrel's rejected commands read 'Rejected by you' with red rail and scrub marks. (g) delta's replay first frame <=150 ms median. (h) kestrel's live replay shows Jump/Approve; Jump reaches its pane through tmux-reach (one Terminal tmux client attached). SPEND-GATED (about $0.025; lease kestrel, rearm, release; only within the stop): Approve from the replay -> registry leaves waiting <=1 s. npm test green.",
+      "priority": 15,
+      "wave": 2,
+      "files": [
+        "theater/player.js",
+        "theater/player.css",
+        "theater/player.html",
+        "theater/preload.js",
+        "theater/index.js",
+        "theater/act.js (new)",
+        "main.js",
+        "test/theater.test.js"
+      ]
+    }
+  ],
+  "coverage": "r1-S1-01 -> queue-state\nr1-S1-02 -> queue-state\nr1-S1-03 -> home-keyed\nr1-S1-04 -> loop-rows\nr1-S1-05 -> queue-state\nr1-S1-06 -> tmux-reach\nr1-S1-07 -> loop-rows\nr1-S1-08 -> queue-state\nr1-S1-09 -> queue-state\nr1-S1-10 -> home-feedback\nr1-S1-11 -> home-feedback\nr1-S1-12 -> queue-state\nr1-S1-13 -> keys-entry\nr1-S1-14 -> home-keyed\nr1-S1-15 -> home-keyed\nr1-S1-18 -> home-feedback\nr1-S1-20 -> row-actions\nr1-S2-01 -> queue-state\nr1-S2-02 -> queue-state\nr1-S2-03 -> chat-context\nr1-S2-04 -> chat-context\nr1-S2-05 -> queue-state\nr1-S2-06 -> chat-bar\nr1-S2-07 -> chat-bar\nr1-S2-08 -> chat-bar\nr1-S2-09 -> chat-bar\nr1-S2-10 -> chat-bar\nr1-S2-12 -> chat-bar\nr1-S2-13 -> chat-bar\nr1-S2-14 -> chat-bar\nr1-S2-15 -> chat-bar\nr1-S2-16 -> chat-bar\nr1-S2-17 -> chat-bar\nr1-S2-18 -> chat-bar\nr1-S2-19 -> chat-bar\nr1-S2-20 -> chat-bar\nr1-S2-21 -> chat-bar\nr1-S2-22 -> session-console\nr1-S2-23 -> session-console\nr1-S2-24 -> chat-bar\nr1-S2-26 -> keys-entry\nr1-S2-27 -> chat-bar\nr1-S2-28 -> session-console\nr1-S2-29 -> chat-context\nr1-S3-01 -> queue-state\nr1-S3-02 -> tmux-reach\nr1-S3-03 -> home-feedback\nr1-S3-04 -> session-console\nr1-S3-05 -> session-console\nr1-S3-06 -> session-console\nr1-S3-07 -> row-actions\nr1-S3-08 -> session-console\nr1-S3-10 -> keys-entry\nr1-S3-11 -> keys-entry\nr1-S3-12 -> keys-entry\nr1-S3-13 -> home-keyed\nr1-S3-15 -> ports-truth\nr1-S3-17 -> session-console\nr1-S3-18 -> session-console\nr1-S3-19 -> session-console\nr1-S4-01 -> queue-state\nr1-S4-02 -> row-actions\nr1-S4-03 -> tmux-reach\nr1-S4-04 -> tmux-reach\nr1-S4-05 -> home-feedback\nr1-S4-06 -> home-keyed\nr1-S4-07 -> home-keyed\nr1-S4-08 -> home-keyed\nr1-S4-09 -> row-actions\nr1-S4-10 -> row-actions\nr1-S4-11 -> home-feedback\nr1-S4-12 -> row-actions\nr1-S4-14 -> home-keyed\nr1-S4-15 -> row-actions\nr1-S4-16 -> row-actions\nr1-S4-17 -> row-actions\nr1-S4-18 -> row-actions\nr1-S4-19 -> row-actions\nr1-S4-20 -> row-actions\nr1-S4-21 -> row-actions\nr1-S4-22 -> row-actions\nr1-S5-01 -> queue-state\nr1-S5-03 -> queue-state\nr1-S5-04 -> session-console\nr1-S5-05 -> theater-data\nr1-S5-06 -> theater-data\nr1-S5-07 -> theater-player\nr1-S5-08 -> theater-player\nr1-S5-09 -> theater-data\nr1-S5-10 -> theater-player\nr1-S5-11 -> theater-data\nr1-S5-12 -> theater-data\nr1-S5-13 -> theater-data\nr1-S5-14 -> theater-player\nr1-S5-15 -> theater-player\nr1-S5-16 -> theater-player\nr1-S5-17 -> theater-data\nr1-S5-18 -> theater-player\nr1-S5-19 -> session-console\nr1-S5-20 -> theater-player\nr1-S5-21 -> theater-player\nr1-S5-22 -> home-feedback\nr1-S5-23 -> theater-player\nr1-S6-01 -> ports-truth\nr1-S6-02 -> ports-truth\nr1-S6-03 -> ports-truth\nr1-S6-04 -> ports-truth\nr1-S6-07 -> ports-truth\nr1-S6-08 -> ports-truth\nr1-S6-09 -> ports-truth\nr1-S6-10 -> ports-truth\nr1-S6-11 -> ports-truth\nr1-S6-16 -> ports-truth\nr1-S6-17 -> ports-truth\nr1-S7-01 -> queue-state\nr1-S7-02 -> tmux-reach\nr1-S7-03 -> home-feedback\nr1-S7-04 -> home-feedback\nr1-S7-05 -> queue-state\nr1-S7-06 -> queue-state\nr1-S7-07 -> keys-entry\nr1-S7-08 -> keys-entry\nr1-S7-09 -> gesture\nr1-S7-10 -> gesture\nr1-S7-11 -> gesture\nr1-S7-12 -> gesture\nr1-S7-13 -> home-feedback\nr1-S7-14 -> gesture\nr1-S7-15 -> home-feedback"
+}

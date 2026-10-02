@@ -1,0 +1,230 @@
+{
+  "section": "A5",
+  "startedAt": "2026-10-02T02:37:14.610Z",
+  "runs": [
+    {
+      "port": 60924,
+      "typed": "60924",
+      "load": [
+        1.61,
+        1.62,
+        2.01
+      ],
+      "dialog": {
+        "message": "Stop node (vibepet) on :60924?",
+        "buttons": [
+          "Stop",
+          "Cancel"
+        ],
+        "defaultId": 1,
+        "cancelId": 1,
+        "msAfterEnter": 0
+      },
+      "processGoneMs": 11,
+      "chipGoneMs": 2457,
+      "at1s": {
+        "newPanelMsgs": 0,
+        "bubble": {
+          "hidden": false,
+          "display": "block",
+          "text": "stopped pid 94148",
+          "z": "2",
+          "rect": [
+            262,
+            601,
+            137,
+            25
+          ],
+          "coveredBy": "chat-panel"
+        }
+      },
+      "atChipGone": {
+        "newPanelMsgs": 0,
+        "bubble": {
+          "hidden": false,
+          "display": "block",
+          "text": "stopped pid 94148",
+          "z": "2",
+          "rect": [
+            262,
+            601,
+            137,
+            25
+          ],
+          "coveredBy": "chat-panel"
+        }
+      }
+    },
+    {
+      "port": 60925,
+      "typed": ":60925",
+      "load": [
+        1.64,
+        1.63,
+        2.01
+      ],
+      "dialog": {
+        "message": "Stop node (vibepet) on :60925?",
+        "buttons": [
+          "Stop",
+          "Cancel"
+        ],
+        "defaultId": 1,
+        "cancelId": 1,
+        "msAfterEnter": 0
+      },
+      "processGoneMs": 9,
+      "chipGoneMs": 1352,
+      "at1s": {
+        "newPanelMsgs": 0,
+        "bubble": {
+          "hidden": false,
+          "display": "block",
+          "text": "stopped pid 94148",
+          "z": "2",
+          "rect": [
+            262,
+            601,
+            137,
+            25
+          ],
+          "coveredBy": "chat-panel"
+        }
+      },
+      "atChipGone": {
+        "newPanelMsgs": 0,
+        "bubble": {
+          "hidden": false,
+          "display": "block",
+          "text": "",
+          "z": "2",
+          "rect": [
+            318,
+            620,
+            24,
+            10
+          ],
+          "coveredBy": "chat-panel"
+        }
+      }
+    },
+    {
+      "port": 60926,
+      "typed": "60926",
+      "load": [
+        1.64,
+        1.63,
+        2.01
+      ],
+      "dialog": {
+        "message": "Stop node (vibepet) on :60926?",
+        "buttons": [
+          "Stop",
+          "Cancel"
+        ],
+        "defaultId": 1,
+        "cancelId": 1,
+        "msAfterEnter": 0
+      },
+      "processGoneMs": 9,
+      "chipGoneMs": 1372,
+      "at1s": {
+        "newPanelMsgs": 0,
+        "bubble": {
+          "hidden": false,
+          "display": "block",
+          "text": "node (vibepet) on :60924 went down",
+          "z": "2",
+          "rect": [
+            205,
+            601,
+            249,
+            25
+          ],
+          "coveredBy": "chat-panel"
+        }
+      },
+      "atChipGone": {
+        "newPanelMsgs": 0,
+        "bubble": {
+          "hidden": false,
+          "display": "block",
+          "text": "node (vibepet) on :60924 went down",
+          "z": "2",
+          "rect": [
+            205,
+            601,
+            249,
+            25
+          ],
+          "coveredBy": "chat-panel"
+        }
+      }
+    }
+  ],
+  "servers": [
+    {
+      "pid": 94148,
+      "port": 60924
+    },
+    {
+      "pid": 94150,
+      "port": 60925
+    },
+    {
+      "pid": 94151,
+      "port": 60926
+    },
+    {
+      "pid": 94152,
+      "port": 60927
+    }
+  ],
+  "chipsShownAfterMs": 1769,
+  "cancelRun": {
+    "port": 60927,
+    "dialog": {
+      "kind": "dialog",
+      "at": 1790908648793,
+      "message": "Stop node (vibepet) on :60927?",
+      "buttons": [
+        "Stop",
+        "Cancel"
+      ],
+      "defaultId": 1,
+      "cancelId": 1,
+      "answered": 1
+    },
+    "alive": true,
+    "newPanelMsgs": 0,
+    "bubble": {
+      "hidden": false,
+      "display": "block",
+      "text": "stopped pid 94150",
+      "z": "2",
+      "rect": [
+        262,
+        601,
+        137,
+        25
+      ],
+      "coveredBy": "chat-panel"
+    }
+  },
+  "median": {
+    "processGoneMs": 9,
+    "chipGoneMs": 1372
+  },
+  "close": {
+    "how": "quit",
+    "ms": 339,
+    "procs": 7,
+    "orphans": []
+  },
+  "endedAt": "2026-10-02T02:37:32.978Z",
+  "loadEnd": [
+    2.1,
+    1.72,
+    2.04
+  ]
+}

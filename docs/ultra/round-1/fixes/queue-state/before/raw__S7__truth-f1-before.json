@@ -1,0 +1,571 @@
+{
+  "at": "2026-10-02T02:23:41.573Z",
+  "allOk": false,
+  "members": [
+    {
+      "name": "kestrel",
+      "state": "approval",
+      "ok": true,
+      "paused": false,
+      "target": "vp-kestrel:0.0",
+      "tty": "/dev/ttys007",
+      "pid": 55946,
+      "sessionId": "13a1427d-6cb0-4561-b5a3-22453a34bf93",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-kestrel/13a1427d-6cb0-4561-b5a3-22453a34bf93.jsonl",
+      "registry": {
+        "status": "waiting",
+        "waitingFor": "permission prompt",
+        "statusUpdatedAt": 1790906629383,
+        "messagingSocketPath": "/tmp/cc-socks/55946.sock",
+        "tmux": "vp-kestrel:@8.%8",
+        "name": "kestrel-4d"
+      },
+      "last": {
+        "kind": "user_prompt",
+        "pending": [],
+        "stopReason": "end_turn",
+        "lastTs": "2026-10-02T02:03:48.056Z"
+      },
+      "subagents": [],
+      "procs": [],
+      "toolProcs": 0,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-kestrel"
+        },
+        {
+          "name": "claude",
+          "ok": true,
+          "detail": "pid 55946"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": true,
+          "detail": "waiting"
+        },
+        {
+          "name": "registry.waitingFor",
+          "ok": true,
+          "detail": "permission prompt"
+        },
+        {
+          "name": "pane",
+          "ok": true,
+          "detail": "Do you want to proceed\\?"
+        },
+        {
+          "name": "paneAlso",
+          "ok": true,
+          "detail": "deploy\\.sh"
+        },
+        {
+          "name": "noChild",
+          "ok": true,
+          "detail": "no tool process"
+        }
+      ],
+      "spendUsd": 0.2161,
+      "lease": null
+    },
+    {
+      "name": "vibepet",
+      "state": "done",
+      "ok": true,
+      "paused": false,
+      "target": "vp-vibepet:0.0",
+      "tty": "/dev/ttys013",
+      "pid": 48221,
+      "sessionId": "6101876b-19c6-42a1-824f-6f1c7d4fd83e",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-vibepet/6101876b-19c6-42a1-824f-6f1c7d4fd83e.jsonl",
+      "registry": {
+        "status": "idle",
+        "statusUpdatedAt": 1790907139303,
+        "messagingSocketPath": "/tmp/cc-socks/48221.sock",
+        "tmux": "vp-vibepet:@1.%1",
+        "name": "vibepet-d2"
+      },
+      "last": {
+        "kind": "end_turn",
+        "pending": [],
+        "stopReason": "end_turn",
+        "lastTs": "2026-10-02T02:12:19.268Z"
+      },
+      "subagents": [],
+      "procs": [],
+      "toolProcs": 0,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-vibepet"
+        },
+        {
+          "name": "claude",
+          "ok": true,
+          "detail": "pid 48221"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": true,
+          "detail": "idle"
+        },
+        {
+          "name": "noChild",
+          "ok": true,
+          "detail": "no tool process"
+        },
+        {
+          "name": "last",
+          "ok": true,
+          "detail": "end_turn"
+        },
+        {
+          "name": "notQuestion",
+          "ok": true,
+          "detail": "statement"
+        }
+      ],
+      "spendUsd": 0.1379,
+      "lease": null
+    },
+    {
+      "name": "atlas",
+      "state": "working",
+      "ok": false,
+      "paused": true,
+      "target": "vp-atlas:0.0",
+      "tty": "/dev/ttys015",
+      "pid": 48392,
+      "sessionId": "5c051e84-b74f-41b6-845f-bde937a9ef90",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-atlas/5c051e84-b74f-41b6-845f-bde937a9ef90.jsonl",
+      "registry": {
+        "status": "idle",
+        "statusUpdatedAt": 1790906577054,
+        "messagingSocketPath": "/tmp/cc-socks/48392.sock",
+        "tmux": "vp-atlas:@2.%2",
+        "name": "atlas-c4"
+      },
+      "last": {
+        "kind": "end_turn",
+        "pending": [],
+        "stopReason": "end_turn",
+        "lastTs": "2026-10-02T02:02:56.993Z"
+      },
+      "subagents": [],
+      "procs": [],
+      "toolProcs": 0,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-atlas"
+        },
+        {
+          "name": "claude",
+          "ok": true,
+          "detail": "pid 48392"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": false,
+          "detail": "idle"
+        },
+        {
+          "name": "paneNot",
+          "ok": true,
+          "detail": "Do you want to proceed"
+        },
+        {
+          "name": "child",
+          "ok": false,
+          "detail": "0 × /build\\.sh/"
+        }
+      ],
+      "spendUsd": 0.0951,
+      "lease": null
+    },
+    {
+      "name": "beacon",
+      "state": "question",
+      "ok": true,
+      "paused": false,
+      "target": "vp-beacon:0.0",
+      "tty": "/dev/ttys017",
+      "pid": 48539,
+      "sessionId": "a9377f08-ad27-4bd5-bb77-dbd576eab89e",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-beacon/a9377f08-ad27-4bd5-bb77-dbd576eab89e.jsonl",
+      "registry": {
+        "status": "waiting",
+        "waitingFor": "input needed",
+        "statusUpdatedAt": 1790907222729,
+        "messagingSocketPath": "/tmp/cc-socks/48539.sock",
+        "tmux": "vp-beacon:@3.%3",
+        "name": "beacon-18"
+      },
+      "last": {
+        "kind": "user_prompt",
+        "pending": [],
+        "stopReason": "tool_use",
+        "lastTs": "2026-10-02T02:13:41.070Z"
+      },
+      "subagents": [],
+      "procs": [],
+      "toolProcs": 0,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-beacon"
+        },
+        {
+          "name": "claude",
+          "ok": true,
+          "detail": "pid 48539"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": true,
+          "detail": "waiting"
+        },
+        {
+          "name": "registry.waitingFor",
+          "ok": true,
+          "detail": "input needed"
+        },
+        {
+          "name": "pane",
+          "ok": true,
+          "detail": "Enter to select"
+        }
+      ],
+      "spendUsd": 0.167,
+      "lease": null
+    },
+    {
+      "name": "delta",
+      "state": "fanout",
+      "ok": false,
+      "paused": true,
+      "target": "vp-delta:0.0",
+      "tty": "/dev/ttys021",
+      "pid": 29074,
+      "sessionId": "eb59a756-0b6f-4a82-8d55-1f0bc2c40358",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-delta/eb59a756-0b6f-4a82-8d55-1f0bc2c40358.jsonl",
+      "registry": {
+        "status": "idle",
+        "statusUpdatedAt": 1790906449089,
+        "messagingSocketPath": "/tmp/cc-socks/29074.sock",
+        "tmux": "vp-delta:@4.%4",
+        "name": "delta-7a"
+      },
+      "last": {
+        "kind": "end_turn",
+        "pending": [],
+        "stopReason": "end_turn",
+        "lastTs": "2026-10-02T02:00:48.941Z"
+      },
+      "subagents": [
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790894616215.8547
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790893561892.025
+        },
+        {
+          "kind": "tool_result",
+          "pending": [],
+          "mtime": 1790894214112.248
+        },
+        {
+          "kind": "tool_result",
+          "pending": [],
+          "mtime": 1790888567686.3704
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790899908091.0469
+        },
+        {
+          "kind": "tool_result",
+          "pending": [],
+          "mtime": 1790894722501.3132
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790887439799.705
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790887440401.745
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790891823454.4905
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790893787023.85
+        },
+        {
+          "kind": "tool_result",
+          "pending": [],
+          "mtime": 1790894722498.2302
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790906446770.7168
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790893564199.2212
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790894103678.407
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790887439793.2415
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790891824212.5696
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790906446546.374
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790900581467.6956
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790894616746.552
+        },
+        {
+          "kind": "tool_result",
+          "pending": [],
+          "mtime": 1790888567644.45
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790893562869.5686
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790906446563.602
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790891823928.2356
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790900263914.462
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790893786787.7073
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790894105218.9543
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790893787363.1067
+        },
+        {
+          "kind": "interrupted",
+          "pending": [],
+          "mtime": 1790888398123.3796
+        },
+        {
+          "kind": "end_turn",
+          "pending": [],
+          "mtime": 1790894103619.4402
+        },
+        {
+          "kind": "interrupted",
+          "pending": [],
+          "mtime": 1790888398120.8875
+        },
+        {
+          "kind": "interrupted",
+          "pending": [],
+          "mtime": 1790888398122.6323
+        },
+        {
+          "kind": "assistant_streaming",
+          "pending": [],
+          "mtime": 1790894615691.8984
+        },
+        {
+          "kind": "tool_result",
+          "pending": [],
+          "mtime": 1790894214111.6057
+        },
+        {
+          "kind": "tool_result",
+          "pending": [],
+          "mtime": 1790888567625.1365
+        },
+        {
+          "kind": "tool_result",
+          "pending": [],
+          "mtime": 1790894722500.5576
+        },
+        {
+          "kind": "tool_result",
+          "pending": [],
+          "mtime": 1790894214111.1565
+        }
+      ],
+      "procs": [],
+      "toolProcs": 0,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-delta"
+        },
+        {
+          "name": "claude",
+          "ok": true,
+          "detail": "pid 29074"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": false,
+          "detail": "idle"
+        },
+        {
+          "name": "child",
+          "ok": false,
+          "detail": "0 × /slow\\.sh/"
+        },
+        {
+          "name": "subagents",
+          "ok": false,
+          "detail": "0 active of 36"
+        }
+      ],
+      "spendUsd": 0.9207,
+      "lease": null
+    },
+    {
+      "name": "ember",
+      "state": "loop",
+      "ok": false,
+      "paused": true,
+      "target": "vp-ember:0.0",
+      "tty": "/dev/ttys023",
+      "pid": null,
+      "sessionId": "db0c1ec0-b899-4ca1-a238-7d979e61e099",
+      "transcript": "/Users/christopherharris/.claude/projects/-Users-christopherharris--vibepet-ultra-fleet-ember/db0c1ec0-b899-4ca1-a238-7d979e61e099.jsonl",
+      "registry": null,
+      "last": {
+        "kind": "user_prompt",
+        "pending": [],
+        "stopReason": "end_turn",
+        "lastTs": "2026-10-02T01:59:35.255Z"
+      },
+      "subagents": [],
+      "procs": [],
+      "toolProcs": 0,
+      "loop": null,
+      "checks": [
+        {
+          "name": "tmux",
+          "ok": true,
+          "detail": "vp-ember"
+        },
+        {
+          "name": "claude",
+          "ok": false,
+          "detail": "claude not running"
+        },
+        {
+          "name": "model",
+          "ok": true,
+          "detail": "claude-haiku-4-5-20251001"
+        },
+        {
+          "name": "registry.status",
+          "ok": false,
+          "detail": "∅"
+        },
+        {
+          "name": "loop",
+          "ok": false,
+          "detail": "no live cron job in this process"
+        },
+        {
+          "name": "loopLock",
+          "ok": false,
+          "detail": "no .claude/scheduled_tasks.lock"
+        }
+      ],
+      "spendUsd": 0.3909,
+      "lease": null
+    }
+  ],
+  "spend": {
+    "transcriptsUsd": 2.154728,
+    "estimateWithHiddenUsd": 3.202,
+    "stop": 3.32,
+    "cap": 5
+  }
+}

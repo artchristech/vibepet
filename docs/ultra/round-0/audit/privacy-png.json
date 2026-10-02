@@ -1,0 +1,270 @@
+{
+ "at": "2026-10-02T01:09:26.219Z",
+ "pngs": 353,
+ "ocrTokens": 25940,
+ "notInFleetVocabulary": 172,
+ "share": 0.0066,
+ "pngsAllTokensKnown": 247,
+ "unknownDistinct4plus": 57,
+ "unknownOcrNoise": 44,
+ "unknownEnglish": 6,
+ "unknownInRealCorpusNonDictionary": 7,
+ "pngsToLookAt": [
+  {
+   "png": "round-0/baseline/attempt-2/3-command/today.png",
+   "tokens": 2
+  },
+  {
+   "png": "round-0/tta-before/shots/question-1/005.2s-A-led-needs.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/tta-before/shots/question-2/00004s-A-led-needs.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-1/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-1/6-ports/stopped.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-1/3-command/today.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-1/4-rows/approve.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-1/4-rows/jump-beacon.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-1/4-rows/list.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-1/4-rows/jump-kestrel.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-1/4-rows/jump-atlas.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-1/4-rows/jump-vibepet.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-1/4-rows/jump-delta.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-1/4-rows/jump-ember.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-2/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-2/6-ports/stopped.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-2/4-rows/approve.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-2/4-rows/jump-beacon.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-2/4-rows/jump-kestrel.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-2/4-rows/jump-atlas.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-2/4-rows/jump-vibepet.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-2/4-rows/jump-delta.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/attempt-2/4-rows/jump-ember.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-1/run-2/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-1/run-2/6-ports/stopped.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-1/run-2/3-command/today.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-1/run-2/4-rows/jump.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-1/run-2/4-rows/list.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-1/run-1/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-1/run-1/6-ports/stopped.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-1/run-1/3-command/today.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-1/run-1/4-rows/jump.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-1/run-1/4-rows/list.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/from-fresh-worktree/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/from-fresh-worktree/6-ports/stopped.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/from-fresh-worktree/3-command/today.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/from-fresh-worktree/4-rows/jump.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/run-2/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/run-2/6-ports/stopped.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/run-2/3-command/today.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/run-2/4-rows/jump.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-2/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-2/6-ports/stopped.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-2/3-command/today.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-2/4-rows/jump.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-2-final-pre-age/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-2-final-pre-age/6-ports/stopped.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-2-final-pre-age/3-command/today.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-2-final-pre-age/4-rows/jump.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-1-final-pre-age/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-1-final-pre-age/6-ports/stopped.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-1-final-pre-age/3-command/today.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-1-final-pre-age/4-rows/jump.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-1/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-1/6-ports/stopped.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-1/3-command/today.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-1/4-rows/jump.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/run-1/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/run-1/6-ports/stopped.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/run-1/3-command/today.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/run-1/4-rows/jump.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/baseline/7-keys/hotkey.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-2/3-command/slash.png",
+   "tokens": 1
+  },
+  {
+   "png": "round-0/canon/attempt-2/run-1/3-command/slash.png",
+   "tokens": 1
+  }
+ ]
+}

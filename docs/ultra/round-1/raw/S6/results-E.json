@@ -1,0 +1,1981 @@
+{
+ "phase": "E",
+ "startedAt": "2026-10-02T02:07:46.684Z",
+ "load0": [
+  4.27,
+  5.09,
+  4.38
+ ],
+ "shots": [
+  {
+   "name": "19-F5-noise-in-footer.png",
+   "at": 1790906907700,
+   "view": {
+    "home": true,
+    "empty": "No live sessions. Start Claude Code anywhere and I’ll pick it up.",
+    "rows": [],
+    "srv": [
+     {
+      "port": 47161,
+      "pid": 16514,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47161,
+      "pid": 16515,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47161,
+      "pid": 16516,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47161,
+      "pid": 16517,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47162,
+      "pid": 16518,
+      "label": ":47162 inspected app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47163,
+      "pid": 16518,
+      "label": ":47163 node (vibepet)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47164,
+      "pid": 16519,
+      "label": ":47164 node (vibepet)",
+      "disabled": true,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 58308,
+      "pid": 56038,
+      "label": ":58308 ember preview",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 162,
+     "full": 162
+    },
+    "bubble": {
+     "text": "",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 8 servers"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "20-F5-cap-eight-chips.png",
+   "at": 1790906931671,
+   "view": {
+    "home": true,
+    "empty": "No live sessions. Start Claude Code anywhere and I’ll pick it up.",
+    "rows": [],
+    "srv": [
+     {
+      "port": 47161,
+      "pid": 16514,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47161,
+      "pid": 16515,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47161,
+      "pid": 16516,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47161,
+      "pid": 16517,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47162,
+      "pid": 16518,
+      "label": ":47162 inspected app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47163,
+      "pid": 16518,
+      "label": ":47163 node (vibepet)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47164,
+      "pid": 16519,
+      "label": ":47164 node (vibepet)",
+      "disabled": true,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47165,
+      "pid": 20310,
+      "label": ":47165 newer app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 162,
+     "full": 162
+    },
+    "bubble": {
+     "text": "",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 10 servers"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "21-F5-prefork-after-stop.png",
+   "at": 1790906964526,
+   "view": {
+    "home": true,
+    "empty": "No live sessions. Start Claude Code anywhere and I’ll pick it up.",
+    "rows": [],
+    "srv": [
+     {
+      "port": 47162,
+      "pid": 16518,
+      "label": ":47162 inspected app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47163,
+      "pid": 16518,
+      "label": ":47163 node (vibepet)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47164,
+      "pid": 16519,
+      "label": ":47164 node (vibepet)",
+      "disabled": true,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47165,
+      "pid": 20310,
+      "label": ":47165 newer app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47166,
+      "pid": 20311,
+      "label": ":47166 newest app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 137,
+     "full": 137
+    },
+    "bubble": {
+     "text": "stopped pid 16514",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 5 servers · 1 dev proc"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "22-F5-hover-roster-count.png",
+   "at": 1790906982715,
+   "view": {
+    "home": false,
+    "empty": "No live sessions. Start Claude Code anywhere and I’ll pick it up.",
+    "rows": [],
+    "srv": [
+     {
+      "port": 47162,
+      "pid": 16518,
+      "label": ":47162 inspected app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47163,
+      "pid": 16518,
+      "label": ":47163 node (vibepet)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47164,
+      "pid": 16519,
+      "label": ":47164 node (vibepet)",
+      "disabled": true,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47165,
+      "pid": 20310,
+      "label": ":47165 newer app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47166,
+      "pid": 20311,
+      "label": ":47166 newest app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 0,
+     "full": 0
+    },
+    "bubble": {
+     "text": "stopped pid 16518",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": false,
+     "local": "⌂ 1 server"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "23-F5-setup-alerts-everything.png",
+   "at": 1790906986238,
+   "view": {
+    "home": true,
+    "empty": "No live sessions. Start Claude Code anywhere and I’ll pick it up.",
+    "rows": [],
+    "srv": [
+     {
+      "port": 47168,
+      "pid": 26574,
+      "label": ":47168 hover check",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 0,
+     "full": 0
+    },
+    "bubble": {
+     "text": "stopped pid 16518",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": true,
+     "local": "⌂ 1 server"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "24-F5-announce-up-home-closed.png",
+   "at": 1790906994505,
+   "view": {
+    "home": false,
+    "empty": "No live sessions. Start Claude Code anywhere and I’ll pick it up.",
+    "rows": [],
+    "srv": [
+     {
+      "port": 47168,
+      "pid": 26574,
+      "label": ":47168 hover check",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "nowScroll": {
+     "top": 0,
+     "height": 0,
+     "full": 0
+    },
+    "bubble": {
+     "text": "node (vibepet) on :47169 is up · node (vibepet) on :47168 went dow",
+     "hidden": true,
+     "occludedByPanel": false
+    },
+    "roster": {
+     "hidden": false,
+     "local": "⌂ 1 server"
+    },
+    "msgs": []
+   }
+  },
+  {
+   "name": "25-F5-announce-down-home-open.png",
+   "at": 1790907006604,
+   "view": {
+    "home": true,
+    "empty": "No live sessions. Start Claude Code anywhere and I’ll pick it up.",
+    "rows": [],
+    "srv": [],
+    "nowScroll": {
+     "top": 0,
+     "height": 84,
+     "full": 84
+    },
+    "bubble": {
+     "text": "node (vibepet) on :47169 went down",
+     "hidden": false,
+     "occludedByPanel": true
+    },
+    "roster": {
+     "hidden": true,
+     "local": null
+    },
+    "msgs": []
+   }
+  }
+ ],
+ "timings": [
+  {
+   "flow": "F5",
+   "step": "server up → \"is up\" announcement (alerts: Everything, Home closed)",
+   "ms": 5120,
+   "load": [
+    2.6,
+    4.22,
+    4.13
+   ],
+   "at": "02:09:54.505Z",
+   "n": 1
+  },
+  {
+   "flow": "F5",
+   "step": "server exit → \"went down\" announcement (alerts: Everything, Home open)",
+   "ms": 3459,
+   "load": [
+    3.59,
+    4.36,
+    4.18
+   ],
+   "at": "02:10:06.604Z",
+   "n": 1
+  }
+ ],
+ "notes": [
+  {
+   "at": 1790906870955,
+   "openHome": {
+    "mode": "now",
+    "at": {
+     "x": 330.5,
+     "y": 732.5
+    },
+    "ms": 411
+   }
+  },
+  {
+   "at": 1790906871909,
+   "step": "started",
+   "prefork": {
+    "master": 16514,
+    "workers": [
+     16515,
+     16516,
+     16517
+    ],
+    "lsof": [
+     {
+      "pid": 16514,
+      "addr": "127.0.0.1:47161"
+     },
+     {
+      "pid": 16515,
+      "addr": "127.0.0.1:47161"
+     },
+     {
+      "pid": 16516,
+      "addr": "127.0.0.1:47161"
+     },
+     {
+      "pid": 16517,
+      "addr": "127.0.0.1:47161"
+     }
+    ]
+   },
+   "inspector": {
+    "pid": 16518,
+    "lsof": [
+     [
+      {
+       "pid": 16518,
+       "addr": "*:47162"
+      }
+     ],
+     [
+      {
+       "pid": 16518,
+       "addr": "127.0.0.1:47163"
+      }
+     ]
+    ]
+   },
+   "raw": {
+    "pid": 16519
+   },
+   "outside": [
+    16448,
+    16475
+   ]
+  },
+  {
+   "at": 1790906907700,
+   "step": "footer with noise",
+   "e1": {
+    "outsideListed": []
+   },
+   "e2": {
+    "chips": [
+     {
+      "port": 47161,
+      "pid": 16514,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47161,
+      "pid": 16515,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47161,
+      "pid": 16516,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47161,
+      "pid": 16517,
+      "label": ":47161 prefork app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "stop": {
+     "victim": 16514,
+     "role": "master",
+     "dialog": {
+      "kind": "dialog",
+      "at": 1790906947037,
+      "message": "Stop Python (vibepet) on :47161?",
+      "detail": "pid 16514",
+      "buttons": [
+       "Stop",
+       "Cancel"
+      ],
+      "defaultId": 1,
+      "answer": 0
+     },
+     "events": [
+      {
+       "kind": "localhost",
+       "text": "stopped pid 16514"
+      }
+     ],
+     "stillServing": false,
+     "chipsAfter": [],
+     "respawns": []
+    }
+   },
+   "e3": {
+    "chips": [
+     {
+      "port": 47162,
+      "pid": 16518,
+      "label": ":47162 inspected app",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     },
+     {
+      "port": 47163,
+      "pid": 16518,
+      "label": ":47163 node (vibepet)",
+      "disabled": false,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "stop": {
+     "dialog": {
+      "kind": "dialog",
+      "at": 1790906964552,
+      "message": "Stop node (vibepet) on :47162?",
+      "detail": "pid 16518",
+      "buttons": [
+       "Stop",
+       "Cancel"
+      ],
+      "defaultId": 1,
+      "answer": 0
+     },
+     "appPortAlsoGone": true,
+     "events": [
+      {
+       "kind": "localhost",
+       "text": "stopped pid 16518"
+      }
+     ]
+    }
+   },
+   "e4": {
+    "chips": [
+     {
+      "port": 47164,
+      "pid": 16519,
+      "label": ":47164 node (vibepet)",
+      "disabled": true,
+      "visibleInScrollBox": true,
+      "clipped": false
+     }
+    ],
+    "chip": {
+     "port": 47164,
+     "pid": 16519,
+     "label": ":47164 node (vibepet)",
+     "disabled": true,
+     "visibleInScrollBox": true,
+     "clipped": false
+    }
+   },
+   "all": [
+    ":47161 prefork app",
+    ":47161 prefork app",
+    ":47161 prefork app",
+    ":47161 prefork app",
+    ":47162 inspected app",
+    ":47163 node (vibepet)",
+    ":47164 node (vibepet)",
+    ":58308 ember preview"
+   ]
+  },
+  {
+   "at": 1790906931682,
+   "step": "cap",
+   "chips": [
+    ":47161 prefork app",
+    ":47161 prefork app",
+    ":47161 prefork app",
+    ":47161 prefork app",
+    ":47162 inspected app",
+    ":47163 node (vibepet)",
+    ":47164 node (vibepet)",
+    ":47165 newer app"
+   ],
+   "chipCount": 8,
+   "snapshotServers": 8,
+   "localCount": 10,
+   "newestListed": false,
+   "newerListed": true,
+   "overflowHint": false
+  },
+  {
+   "at": 1790906947010,
+   "step": "native Localhost menu",
+   "items": [
+    ":47161  prefork app  · 1m",
+    ":47161  prefork app  · 1m",
+    ":47161  prefork app  · 1m",
+    ":47161  prefork app  · 1m",
+    ":47162  inspected app  · 1m",
+    ":47163  node (vibepet)  · 1m",
+    ":47164  node (vibepet)  · 1m",
+    ":47165  newer app  · 1m",
+    ":47166  newest app  · 1m",
+    ":58308  ember preview  · 20m",
+    "—",
+    "Dev processes",
+    "node · vibepet · 1m",
+    "—",
+    "Background tasks",
+    "✓ Run shard 1 reconciliation · delta · 8m",
+    "✓ Run shard 3 reconciliation · delta · 8m",
+    "✓ Run shard 2 reconciliation · delta · 8m",
+    "✗ Start HTTP server on port 47120 · vibepet · 14m",
+    "✓ Run probe command · delta · 2h",
+    "✓ Run probe command · delta · 2h"
+   ]
+  },
+  {
+   "at": 1790906964530,
+   "step": "prefork stop",
+   "victim": 16514,
+   "role": "master",
+   "dialog": {
+    "kind": "dialog",
+    "at": 1790906947037,
+    "message": "Stop Python (vibepet) on :47161?",
+    "detail": "pid 16514",
+    "buttons": [
+     "Stop",
+     "Cancel"
+    ],
+    "defaultId": 1,
+    "answer": 0
+   },
+   "events": [
+    {
+     "kind": "localhost",
+     "text": "stopped pid 16514"
+    }
+   ],
+   "stillServing": false,
+   "chipsAfter": [],
+   "respawns": []
+  },
+  {
+   "at": 1790906965378,
+   "step": "inspector stop",
+   "dialog": {
+    "kind": "dialog",
+    "at": 1790906964552,
+    "message": "Stop node (vibepet) on :47162?",
+    "detail": "pid 16518",
+    "buttons": [
+     "Stop",
+     "Cancel"
+    ],
+    "defaultId": 1,
+    "answer": 0
+   },
+   "appPortAlsoGone": true,
+   "events": [
+    {
+     "kind": "localhost",
+     "text": "stopped pid 16518"
+    }
+   ]
+  },
+  {
+   "at": 1790906982715,
+   "step": "hover roster",
+   "roster": {
+    "hidden": false,
+    "local": "⌂ 1 server"
+   }
+  },
+  {
+   "at": 1790906984504,
+   "openHome": {
+    "mode": "now",
+    "at": {
+     "x": 330.5,
+     "y": 732.5
+    },
+    "ms": 417
+   }
+  },
+  {
+   "at": 1790907001416,
+   "openHome": {
+    "mode": "now",
+    "at": {
+     "x": 330.5,
+     "y": 732.5
+    },
+    "ms": 405
+   }
+  },
+  {
+   "at": 1790907006604,
+   "step": "announcements",
+   "alerts": "all",
+   "up": {
+    "text": "node (vibepet) on :47169 is up · node (vibepet) on :47168 went down",
+    "ms": 5120,
+    "bubble": {
+     "text": "node (vibepet) on :47169 is up · node (vibepet) on :47168 went dow",
+     "hidden": true,
+     "occludedByPanel": false
+    }
+   },
+   "down": {
+    "text": "node (vibepet) on :47169 went down",
+    "ms": 3459,
+    "bubble": {
+     "text": "node (vibepet) on :47169 went down",
+     "hidden": false,
+     "occludedByPanel": true
+    }
+   }
+  }
+ ],
+ "readyMs": 674,
+ "truth0": {
+  "at": "2026-10-02T02:07:46.683Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": null
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "r1-S6"
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": false,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": null
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": false,
+    "pid": 29074,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   }
+  ]
+ },
+ "pmset0": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "idlePid": 16447,
+ "started": {
+  "prefork": {
+   "master": 16514,
+   "workers": [
+    16515,
+    16516,
+    16517
+   ],
+   "lsof": [
+    {
+     "pid": 16514,
+     "addr": "127.0.0.1:47161"
+    },
+    {
+     "pid": 16515,
+     "addr": "127.0.0.1:47161"
+    },
+    {
+     "pid": 16516,
+     "addr": "127.0.0.1:47161"
+    },
+    {
+     "pid": 16517,
+     "addr": "127.0.0.1:47161"
+    }
+   ]
+  },
+  "inspector": {
+   "pid": 16518,
+   "lsof": [
+    [
+     {
+      "pid": 16518,
+      "addr": "*:47162"
+     }
+    ],
+    [
+     {
+      "pid": 16518,
+      "addr": "127.0.0.1:47163"
+     }
+    ]
+   ]
+  },
+  "raw": {
+   "pid": 16519
+  },
+  "outside": [
+   16448,
+   16475
+  ]
+ },
+ "e1": {
+  "outsideListed": []
+ },
+ "e2": {
+  "chips": [
+   {
+    "port": 47161,
+    "pid": 16514,
+    "label": ":47161 prefork app",
+    "disabled": false,
+    "visibleInScrollBox": true,
+    "clipped": false
+   },
+   {
+    "port": 47161,
+    "pid": 16515,
+    "label": ":47161 prefork app",
+    "disabled": false,
+    "visibleInScrollBox": true,
+    "clipped": false
+   },
+   {
+    "port": 47161,
+    "pid": 16516,
+    "label": ":47161 prefork app",
+    "disabled": false,
+    "visibleInScrollBox": true,
+    "clipped": false
+   },
+   {
+    "port": 47161,
+    "pid": 16517,
+    "label": ":47161 prefork app",
+    "disabled": false,
+    "visibleInScrollBox": true,
+    "clipped": false
+   }
+  ],
+  "stop": {
+   "victim": 16514,
+   "role": "master",
+   "dialog": {
+    "kind": "dialog",
+    "at": 1790906947037,
+    "message": "Stop Python (vibepet) on :47161?",
+    "detail": "pid 16514",
+    "buttons": [
+     "Stop",
+     "Cancel"
+    ],
+    "defaultId": 1,
+    "answer": 0
+   },
+   "events": [
+    {
+     "kind": "localhost",
+     "text": "stopped pid 16514"
+    }
+   ],
+   "stillServing": false,
+   "chipsAfter": [],
+   "respawns": []
+  }
+ },
+ "e3": {
+  "chips": [
+   {
+    "port": 47162,
+    "pid": 16518,
+    "label": ":47162 inspected app",
+    "disabled": false,
+    "visibleInScrollBox": true,
+    "clipped": false
+   },
+   {
+    "port": 47163,
+    "pid": 16518,
+    "label": ":47163 node (vibepet)",
+    "disabled": false,
+    "visibleInScrollBox": true,
+    "clipped": false
+   }
+  ],
+  "stop": {
+   "dialog": {
+    "kind": "dialog",
+    "at": 1790906964552,
+    "message": "Stop node (vibepet) on :47162?",
+    "detail": "pid 16518",
+    "buttons": [
+     "Stop",
+     "Cancel"
+    ],
+    "defaultId": 1,
+    "answer": 0
+   },
+   "appPortAlsoGone": true,
+   "events": [
+    {
+     "kind": "localhost",
+     "text": "stopped pid 16518"
+    }
+   ]
+  }
+ },
+ "e4": {
+  "chips": [
+   {
+    "port": 47164,
+    "pid": 16519,
+    "label": ":47164 node (vibepet)",
+    "disabled": true,
+    "visibleInScrollBox": true,
+    "clipped": false
+   }
+  ],
+  "chip": {
+   "port": 47164,
+   "pid": 16519,
+   "label": ":47164 node (vibepet)",
+   "disabled": true,
+   "visibleInScrollBox": true,
+   "clipped": false
+  }
+ },
+ "e5": {
+  "chips": [
+   ":47161 prefork app",
+   ":47161 prefork app",
+   ":47161 prefork app",
+   ":47161 prefork app",
+   ":47162 inspected app",
+   ":47163 node (vibepet)",
+   ":47164 node (vibepet)",
+   ":47165 newer app"
+  ],
+  "chipCount": 8,
+  "snapshotServers": 8,
+  "localCount": 10,
+  "newestListed": false,
+  "newerListed": true,
+  "overflowHint": false
+ },
+ "menu": {
+  "label": "Localhost (10)",
+  "items": [
+   {
+    "label": ":47161  prefork app  · 1m",
+    "enabled": true,
+    "sub": [
+     {
+      "label": "Open http://localhost:47161",
+      "enabled": true
+     },
+     {
+      "label": "Python (vibepet) — ~/.vibepet-ultra/fleet/vibepet",
+      "enabled": false
+     },
+     {
+      "label": "—",
+      "enabled": true
+     },
+     {
+      "label": "Stop Python (pid 16514)…",
+      "enabled": true
+     }
+    ]
+   },
+   {
+    "label": ":47161  prefork app  · 1m",
+    "enabled": true,
+    "sub": [
+     {
+      "label": "Open http://localhost:47161",
+      "enabled": true
+     },
+     {
+      "label": "Python (vibepet) — ~/.vibepet-ultra/fleet/vibepet",
+      "enabled": false
+     },
+     {
+      "label": "—",
+      "enabled": true
+     },
+     {
+      "label": "Stop Python (pid 16515)…",
+      "enabled": true
+     }
+    ]
+   },
+   {
+    "label": ":47161  prefork app  · 1m",
+    "enabled": true,
+    "sub": [
+     {
+      "label": "Open http://localhost:47161",
+      "enabled": true
+     },
+     {
+      "label": "Python (vibepet) — ~/.vibepet-ultra/fleet/vibepet",
+      "enabled": false
+     },
+     {
+      "label": "—",
+      "enabled": true
+     },
+     {
+      "label": "Stop Python (pid 16516)…",
+      "enabled": true
+     }
+    ]
+   },
+   {
+    "label": ":47161  prefork app  · 1m",
+    "enabled": true,
+    "sub": [
+     {
+      "label": "Open http://localhost:47161",
+      "enabled": true
+     },
+     {
+      "label": "Python (vibepet) — ~/.vibepet-ultra/fleet/vibepet",
+      "enabled": false
+     },
+     {
+      "label": "—",
+      "enabled": true
+     },
+     {
+      "label": "Stop Python (pid 16517)…",
+      "enabled": true
+     }
+    ]
+   },
+   {
+    "label": ":47162  inspected app  · 1m",
+    "enabled": true,
+    "sub": [
+     {
+      "label": "Open http://localhost:47162",
+      "enabled": true
+     },
+     {
+      "label": "node (vibepet) — ~/.vibepet-ultra/fleet/vibepet",
+      "enabled": false
+     },
+     {
+      "label": "—",
+      "enabled": true
+     },
+     {
+      "label": "Stop node (pid 16518)…",
+      "enabled": true
+     }
+    ]
+   },
+   {
+    "label": ":47163  node (vibepet)  · 1m",
+    "enabled": true,
+    "sub": [
+     {
+      "label": "Open http://localhost:47163",
+      "enabled": true
+     },
+     {
+      "label": "node (vibepet) — ~/.vibepet-ultra/fleet/vibepet",
+      "enabled": false
+     },
+     {
+      "label": "—",
+      "enabled": true
+     },
+     {
+      "label": "Stop node (pid 16518)…",
+      "enabled": true
+     }
+    ]
+   },
+   {
+    "label": ":47164  node (vibepet)  · 1m",
+    "enabled": true,
+    "sub": [
+     {
+      "label": "Open http://localhost:47164",
+      "enabled": false
+     },
+     {
+      "label": "node (vibepet) — ~/.vibepet-ultra/fleet/vibepet",
+      "enabled": false
+     },
+     {
+      "label": "—",
+      "enabled": true
+     },
+     {
+      "label": "Stop node (pid 16519)…",
+      "enabled": true
+     }
+    ]
+   },
+   {
+    "label": ":47165  newer app  · 1m",
+    "enabled": true,
+    "sub": [
+     {
+      "label": "Open http://localhost:47165",
+      "enabled": true
+     },
+     {
+      "label": "node (vibepet) — ~/.vibepet-ultra/fleet/vibepet",
+      "enabled": false
+     },
+     {
+      "label": "—",
+      "enabled": true
+     },
+     {
+      "label": "Stop node (pid 20310)…",
+      "enabled": true
+     }
+    ]
+   },
+   {
+    "label": ":47166  newest app  · 1m",
+    "enabled": true,
+    "sub": [
+     {
+      "label": "Open http://localhost:47166",
+      "enabled": true
+     },
+     {
+      "label": "node (kestrel) — ~/.vibepet-ultra/fleet/kestrel",
+      "enabled": false
+     },
+     {
+      "label": "—",
+      "enabled": true
+     },
+     {
+      "label": "Stop node (pid 20311)…",
+      "enabled": true
+     }
+    ]
+   },
+   {
+    "label": ":58308  ember preview  · 20m",
+    "enabled": true,
+    "sub": [
+     {
+      "label": "Open http://localhost:58308",
+      "enabled": true
+     },
+     {
+      "label": "node (ember) — ~/.vibepet-ultra/fleet/ember",
+      "enabled": false
+     },
+     {
+      "label": "—",
+      "enabled": true
+     },
+     {
+      "label": "Stop node (pid 56038)…",
+      "enabled": true
+     }
+    ]
+   },
+   {
+    "label": "—",
+    "enabled": true
+   },
+   {
+    "label": "Dev processes",
+    "enabled": false
+   },
+   {
+    "label": "node · vibepet · 1m",
+    "enabled": true,
+    "sub": [
+     {
+      "label": "/Users/christopherharris/.hermes/node/bin/node -e setInterval(()=>{},1000);setTi",
+      "enabled": false
+     },
+     {
+      "label": "Stop pid 16447…",
+      "enabled": true
+     }
+    ]
+   },
+   {
+    "label": "—",
+    "enabled": true
+   },
+   {
+    "label": "Background tasks",
+    "enabled": false
+   },
+   {
+    "label": "✓ Run shard 1 reconciliation · delta · 8m",
+    "enabled": true
+   },
+   {
+    "label": "✓ Run shard 3 reconciliation · delta · 8m",
+    "enabled": true
+   },
+   {
+    "label": "✓ Run shard 2 reconciliation · delta · 8m",
+    "enabled": true
+   },
+   {
+    "label": "✗ Start HTTP server on port 47120 · vibepet · 14m",
+    "enabled": true
+   },
+   {
+    "label": "✓ Run probe command · delta · 2h",
+    "enabled": true
+   },
+   {
+    "label": "✓ Run probe command · delta · 2h",
+    "enabled": true
+   }
+  ]
+ },
+ "e7": {
+  "roster": {
+   "hidden": false,
+   "local": "⌂ 1 server"
+  }
+ },
+ "e8": {
+  "alerts": "all",
+  "up": {
+   "text": "node (vibepet) on :47169 is up · node (vibepet) on :47168 went down",
+   "ms": 5120,
+   "bubble": {
+    "text": "node (vibepet) on :47169 is up · node (vibepet) on :47168 went dow",
+    "hidden": true,
+    "occludedByPanel": false
+   }
+  },
+  "down": {
+   "text": "node (vibepet) on :47169 went down",
+   "ms": 3459,
+   "bubble": {
+    "text": "node (vibepet) on :47169 went down",
+    "hidden": false,
+    "occludedByPanel": true
+   }
+  }
+ },
+ "leftovers": [],
+ "truth1": {
+  "at": "2026-10-02T02:10:09.519Z",
+  "exit": 1,
+  "members": [
+   {
+    "name": "kestrel",
+    "state": "approval",
+    "ok": true,
+    "paused": false,
+    "pid": 55946,
+    "reg": "waiting(permission prompt)",
+    "last": "user_prompt",
+    "lease": null
+   },
+   {
+    "name": "vibepet",
+    "state": "done",
+    "ok": true,
+    "paused": false,
+    "pid": 48221,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": null
+   },
+   {
+    "name": "atlas",
+    "state": "working",
+    "ok": false,
+    "paused": false,
+    "pid": 48392,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "beacon",
+    "state": "question",
+    "ok": true,
+    "paused": false,
+    "pid": 48539,
+    "reg": "waiting(input needed)",
+    "last": "user_prompt",
+    "lease": null
+   },
+   {
+    "name": "delta",
+    "state": "fanout",
+    "ok": false,
+    "paused": false,
+    "pid": 29074,
+    "reg": "idle",
+    "last": "end_turn",
+    "lease": "S1-driver"
+   },
+   {
+    "name": "ember",
+    "state": "loop",
+    "ok": false,
+    "paused": true,
+    "pid": null,
+    "reg": null,
+    "last": "user_prompt",
+    "lease": null
+   }
+  ]
+ },
+ "pmset1": [
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Sleep notifications: [tipsd is slow(3179 ms)] [wifip2pd is slow(3673 ms)] [airportd is slow(4162 ms)] [mediaremoted is slow(4223 ms)] [assistantd is slow(4907 ms)] [assistantd is slow(4907 ms)] [awdd is slow(6836 ms)] [mediaremoted is slow(7054 ms)] [systemstats is slow(7928 ms)] [findmylocateagen is slow(8305 ms)] [donotdisturbd is slow(8516 ms)] [wifivelocityd is slow(8518 ms)] [ScreenTimeAgent is slow(8696 ms)] [netbiosd is slow(8891 ms)] [dataaccessd is slow(8910 ms)] [appleaccountd is slow(8926 ms)] [UsageTrackingAge is slow(9009 ms)] [IMAutomaticHisto is slow(9073 ms)] [routined is slow(9184 ms)] [remindd is slow(9487 ms)] [diagnostics_agen is slow(9541 ms)] [passd is slow(9718 ms)] [PerfPowerService is slow(10422 ms)] [calaccessd is slow(11307 ms)] [calaccessd is slow(11427 ms)] [assistantd is slow(11589 ms)] [assistantd is slow(13890 ms)] [mediaremoted is slow(15196 ms)] [calaccessd is slow(15216 ms)] [calaccessd is slow(15617 ms)] [remindd is slow(19194 ms)] [calaccessd is slow(19497 ms)] [remindd is slow(22134 ms)] [findmylocated is slow(22253 ms)] [calaccessd is slow(23590 ms)] [geod is slow(26504 ms)] [dataaccessd timed out(30000 ms)] ",
+  "2026-10-01 15:49:16 -0600 Kernel Client Acks  \tDelays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(119 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(130 ms)] [powerd is slow(23963 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(109 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(121 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(198 ms)] [powerd is slow(10494 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(108 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(127 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(137 ms)]"
+ ],
+ "load1": [
+  3.46,
+  4.32,
+  4.17
+ ],
+ "endedAt": "2026-10-02T02:10:11.497Z",
+ "polls": [
+  {
+   "at": 1790906867730,
+   "seen": 1790906867788,
+   "servers": [
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906880202,
+   "seen": 1790906880301,
+   "servers": [
+    "16514:47161",
+    "16515:47161",
+    "16516:47161",
+    "16517:47161",
+    "16518:47162",
+    "16518:47163",
+    "16519:47164",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906891364,
+   "seen": 1790906891384,
+   "servers": [
+    "16514:47161",
+    "16515:47161",
+    "16516:47161",
+    "16517:47161",
+    "16518:47162",
+    "16518:47163",
+    "16519:47164",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906903387,
+   "seen": 1790906903486,
+   "servers": [
+    "16514:47161",
+    "16515:47161",
+    "16516:47161",
+    "16517:47161",
+    "16518:47162",
+    "16518:47163",
+    "16519:47164",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906915407,
+   "seen": 1790906915410,
+   "servers": [
+    "16514:47161",
+    "16515:47161",
+    "16516:47161",
+    "16517:47161",
+    "16518:47162",
+    "16518:47163",
+    "16519:47164",
+    "20310:47165",
+    "20311:47166",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906927402,
+   "seen": 1790906927408,
+   "servers": [
+    "16514:47161",
+    "16515:47161",
+    "16516:47161",
+    "16517:47161",
+    "16518:47162",
+    "16518:47163",
+    "16519:47164",
+    "20310:47165",
+    "20311:47166",
+    "56038:58308"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906939419,
+   "seen": 1790906939519,
+   "servers": [
+    "16514:47161",
+    "16515:47161",
+    "16516:47161",
+    "16517:47161",
+    "16518:47162",
+    "16518:47163",
+    "16519:47164",
+    "20310:47165",
+    "20311:47166",
+    "56038:58308"
+   ],
+   "procs": 1,
+   "tasks": 20
+  },
+  {
+   "at": 1790906947958,
+   "seen": 1790906948056,
+   "servers": [
+    "16518:47162",
+    "16518:47163",
+    "16519:47164",
+    "20310:47165",
+    "20311:47166",
+    "56038:58308"
+   ],
+   "procs": 1,
+   "tasks": 20
+  },
+  {
+   "at": 1790906960466,
+   "seen": 1790906960553,
+   "servers": [
+    "16518:47162",
+    "16518:47163",
+    "16519:47164",
+    "20310:47165",
+    "20311:47166"
+   ],
+   "procs": 1,
+   "tasks": 20
+  },
+  {
+   "at": 1790906965500,
+   "seen": 1790906965540,
+   "servers": [],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906978486,
+   "seen": 1790906978576,
+   "servers": [
+    "26574:47168"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790906990523,
+   "seen": 1790906990526,
+   "servers": [
+    "28814:47169"
+   ],
+   "procs": 0,
+   "tasks": 20
+  },
+  {
+   "at": 1790907002461,
+   "seen": 1790907002526,
+   "servers": [],
+   "procs": 0,
+   "tasks": 20
+  }
+ ],
+ "allCalls": [
+  {
+   "kind": "menuPopup",
+   "at": 1790906946603,
+   "items": [
+    "Watching atlas",
+    "Localhost (10)",
+    "Open Home",
+    "Setup…",
+    "Theater…",
+    "Start content session",
+    "Finish last session",
+    "Open shorts folder",
+    "Today…",
+    "Pet",
+    "Toss a snack",
+    "Settings",
+    "Hide Net",
+    "Quit Net"
+   ]
+  },
+  {
+   "kind": "dialog",
+   "at": 1790906947037,
+   "message": "Stop Python (vibepet) on :47161?",
+   "detail": "pid 16514",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 0
+  },
+  {
+   "kind": "event",
+   "at": 1790906947045,
+   "data": {
+    "kind": "localhost",
+    "text": "stopped pid 16514"
+   }
+  },
+  {
+   "kind": "dialog",
+   "at": 1790906964552,
+   "message": "Stop node (vibepet) on :47162?",
+   "detail": "pid 16518",
+   "buttons": [
+    "Stop",
+    "Cancel"
+   ],
+   "defaultId": 1,
+   "answer": 0
+  },
+  {
+   "kind": "event",
+   "at": 1790906964559,
+   "data": {
+    "kind": "localhost",
+    "text": "stopped pid 16518"
+   }
+  },
+  {
+   "kind": "event",
+   "at": 1790906993297,
+   "data": {
+    "kind": "localhost",
+    "text": "node (vibepet) on :47169 is up · node (vibepet) on :47168 went down"
+   }
+  },
+  {
+   "kind": "event",
+   "at": 1790907005294,
+   "data": {
+    "kind": "localhost",
+    "text": "node (vibepet) on :47169 went down"
+   }
+  }
+ ],
+ "footerLog": [
+  {
+   "at": 1790906867694,
+   "srv": []
+  },
+  {
+   "at": 1790906870418,
+   "srv": [
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906882248,
+   "srv": [
+    {
+     "port": 47161,
+     "pid": 16514,
+     "label": ":47161 prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47161,
+     "pid": 16515,
+     "label": ":47161 prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47161,
+     "pid": 16516,
+     "label": ":47161 prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47161,
+     "pid": 16517,
+     "label": ":47161 prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47162,
+     "pid": 16518,
+     "label": ":47162 inspected app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47163,
+     "pid": 16518,
+     "label": ":47163 node (vibepet)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47164,
+     "pid": 16519,
+     "label": ":47164 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906918262,
+   "srv": [
+    {
+     "port": 47161,
+     "pid": 16514,
+     "label": ":47161 prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47161,
+     "pid": 16515,
+     "label": ":47161 prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47161,
+     "pid": 16516,
+     "label": ":47161 prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47161,
+     "pid": 16517,
+     "label": ":47161 prefork app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47162,
+     "pid": 16518,
+     "label": ":47162 inspected app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47163,
+     "pid": 16518,
+     "label": ":47163 node (vibepet)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47164,
+     "pid": 16519,
+     "label": ":47164 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    },
+    {
+     "port": 47165,
+     "pid": 20310,
+     "label": ":47165 newer app",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906948278,
+   "srv": [
+    {
+     "port": 47162,
+     "pid": 16518,
+     "label": ":47162 inspected app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47163,
+     "pid": 16518,
+     "label": ":47163 node (vibepet)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47164,
+     "pid": 16519,
+     "label": ":47164 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    },
+    {
+     "port": 47165,
+     "pid": 20310,
+     "label": ":47165 newer app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47166,
+     "pid": 20311,
+     "label": ":47166 newest app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 58308,
+     "pid": 56038,
+     "label": ":58308 ember preview",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906963299,
+   "srv": [
+    {
+     "port": 47162,
+     "pid": 16518,
+     "label": ":47162 inspected app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47163,
+     "pid": 16518,
+     "label": ":47163 node (vibepet)",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47164,
+     "pid": 16519,
+     "label": ":47164 node (vibepet)",
+     "disabled": true,
+     "title": "Open"
+    },
+    {
+     "port": 47165,
+     "pid": 20310,
+     "label": ":47165 newer app",
+     "disabled": false,
+     "title": "Open"
+    },
+    {
+     "port": 47166,
+     "pid": 20311,
+     "label": ":47166 newest app",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790906983951,
+   "srv": [
+    {
+     "port": 47168,
+     "pid": 26574,
+     "label": ":47168 hover check",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790907000870,
+   "srv": [
+    {
+     "port": 47169,
+     "pid": 28814,
+     "label": ":47169 announce check",
+     "disabled": false,
+     "title": "Open"
+    }
+   ]
+  },
+  {
+   "at": 1790907005303,
+   "srv": []
+  }
+ ],
+ "rendererEvents": [
+  {
+   "at": 1790906947046,
+   "kind": "localhost",
+   "text": "stopped pid 16514"
+  },
+  {
+   "at": 1790906964559,
+   "kind": "localhost",
+   "text": "stopped pid 16518"
+  },
+  {
+   "at": 1790906993298,
+   "kind": "localhost",
+   "text": "node (vibepet) on :47169 is up · node (vibepet) on :47168 went down"
+  },
+  {
+   "at": 1790907005294,
+   "kind": "localhost",
+   "text": "node (vibepet) on :47169 went down"
+  }
+ ],
+ "close": {
+  "how": "quit",
+  "ms": 273,
+  "procs": 7,
+  "orphans": []
+ }
+}

@@ -1,0 +1,13 @@
+{"k":"shipped","i":0,"kestrel":false,"cmd":false,"opts":true,"r":"Beacon—it's been waiting 6h 35m for you to pick a database (SQLite / Postgres / Redis) for storing check results."}
+{"k":"shipped","i":1,"kestrel":true,"cmd":true,"opts":true,"r":"**Beacon** needs you first—it's been waiting 6h 35m for you to pick a database (SQLite / Postgres / Redis).\n\n**Kestrel** is next, waiting 5h 37m to approve `./deploy.sh --dry-run`."}
+{"k":"shipped","i":2,"kestrel":true,"cmd":true,"opts":true,"r":"Beacon needs you first—it's been waiting 6h 35m for an answer about which database to use (SQLite / Postgres / Redis).\n\nAfter that, kestrel needs you to approve `./deploy.sh --dry-run`."}
+{"k":"shipped","i":3,"kestrel":false,"cmd":false,"opts":true,"r":"Beacon—it's been waiting 6h 35m. It needs to know which database to use for check results: SQLite, Postgres, or Redis?"}
+{"k":"shipped","i":4,"kestrel":true,"cmd":true,"opts":true,"r":"**beacon** needs you first—it's asking: Which database should beacon use to store check results? (SQLite / Postgres / Redis). Next is **kestrel**, which needs approval for `./deploy.sh --dry-run`."}
+{"k":"again","i":0,"kestrel":false,"cmd":false,"opts":true,"r":"Beacon—it's been waiting 6.5 hours on which database to use (SQLite / Postgres / Redis)."}
+{"k":"again","i":1,"kestrel":true,"cmd":true,"opts":true,"r":"**beacon** first—it's been waiting 6h 35m for you to pick a database (SQLite / Postgres / Redis) for storing check results. Next is **kestrel**, which needs approval to run `./deploy.sh --dry-run`."}
+{"k":"again","i":2,"kestrel":true,"cmd":true,"opts":true,"r":"**Beacon** needs you first—it's been waiting 6h 35m for your answer: which database should it use (SQLite / Postgres / Redis)?\n\nAfter that, **kestrel** is next, waiting 5h 37m to approve `./deploy.sh --dry-run`."}
+{"k":"again","i":3,"kestrel":true,"cmd":true,"opts":true,"r":"**Beacon** needs you first—it's asking which database to use for check results (SQLite / Postgres / Redis). After that, **kestrel** needs approval for `./deploy.sh --dry-run`."}
+{"k":"again","i":4,"kestrel":false,"cmd":false,"opts":true,"r":"Beacon, waiting for 6h 35m. It's asking: which database should it use to store check results—SQLite, Postgres, or Redis?"}
+shipped kestrel 3/5 cmd 3/5 beaconOpts 5/5
+again kestrel 3/5 cmd 3/5 beaconOpts 5/5
+load 30.29 132.88 127.85

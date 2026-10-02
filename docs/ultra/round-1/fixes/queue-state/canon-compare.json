@@ -1,0 +1,189 @@
+{
+  "a": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/canon-base",
+  "b": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/queue-state/canon",
+  "gitA": "37ba577 fleet: the spend stop can be lowered to the round's budget (ULTRA/fleet/spend-stop) @ ultra/round-1",
+  "gitB": "ab8ce69 registry: never signal pid 0, -1 or 1 while checking liveness @ ultra/r1/queue-state",
+  "msA": 21139,
+  "msB": 24783,
+  "assertions": {
+    "a": "20/22",
+    "b": "29/29",
+    "differ": [
+      {
+        "id": "rows/anyRow",
+        "a": false,
+        "b": null
+      },
+      {
+        "id": "theater/replayButton",
+        "a": false,
+        "b": null
+      },
+      {
+        "id": "home/rowsInSnapshotOrder",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/goalPrefill",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/goalSet",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/goalDone",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/replyForm",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/jumpRuns:delta",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "theater/opens",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "theater/hasBeats",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "keys/hotkeyWalks",
+        "a": null,
+        "b": true
+      }
+    ]
+  },
+  "rows": {
+    "a": {},
+    "b": {
+      "beacon": "needs",
+      "kestrel": "needs",
+      "delta": "ready",
+      "atlas": "ready",
+      "vibepet": "ready"
+    },
+    "differ": [
+      "beacon",
+      "kestrel",
+      "delta",
+      "atlas",
+      "vibepet"
+    ]
+  },
+  "mismatches": {
+    "a": [
+      "kestrel: missing: a permission dialog is open: it needs you, Approve, but Home has no row for it",
+      "vibepet: missing: the turn ended with a statement: done, your move, but Home has no row for it",
+      "beacon: missing: an AskUserQuestion dialog is open: it needs you, Reply, but Home has no row for it"
+    ],
+    "b": [],
+    "differ": [
+      "kestrel",
+      "vibepet",
+      "atlas",
+      "beacon",
+      "delta"
+    ]
+  },
+  "fleet": {
+    "a": "3/6",
+    "b": "3/6",
+    "changedDuring": [
+      [],
+      []
+    ]
+  },
+  "notes": {
+    "goalFirstClickDropped": [
+      false,
+      false
+    ],
+    "aboveFold": [
+      0,
+      4
+    ]
+  },
+  "shots": [
+    {
+      "file": "1-home/panel.png",
+      "changedPct": 27.34
+    },
+    {
+      "file": "1-home/pet.png",
+      "changedPct": 0.86
+    },
+    {
+      "file": "2-chat/reply.png",
+      "changedPct": 38.93
+    },
+    {
+      "file": "2-chat/sending.png",
+      "changedPct": 24.64
+    },
+    {
+      "file": "3-command/slash.png",
+      "changedPct": 18
+    },
+    {
+      "file": "3-command/today.png",
+      "changedPct": 26.37
+    },
+    {
+      "file": "4-rows/goal.png",
+      "only": "b"
+    },
+    {
+      "file": "4-rows/jump.png",
+      "only": "b"
+    },
+    {
+      "file": "4-rows/list.png",
+      "only": "b"
+    },
+    {
+      "file": "4-rows/reply.png",
+      "only": "b"
+    },
+    {
+      "file": "5-theater/open.png",
+      "only": "b"
+    },
+    {
+      "file": "5-theater/seek-mid.png",
+      "only": "b"
+    },
+    {
+      "file": "6-ports/footer.png",
+      "changedPct": 10.02
+    },
+    {
+      "file": "6-ports/stopped.png",
+      "changedPct": 25.21
+    },
+    {
+      "file": "7-keys/gesture-pad.png",
+      "changedPct": 20.25
+    },
+    {
+      "file": "7-keys/gesture-saved.png",
+      "changedPct": 8.16
+    },
+    {
+      "file": "7-keys/hotkey.png",
+      "changedPct": 24.27
+    }
+  ]
+}

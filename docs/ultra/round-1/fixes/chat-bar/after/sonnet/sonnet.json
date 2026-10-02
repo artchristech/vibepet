@@ -1,0 +1,218 @@
+{
+  "loadStart": "load 9.87 12.33 46.98",
+  "turns": [
+    {
+      "q": "Which of my sessions needs me first?",
+      "load": "load 11.16 12.56 46.85",
+      "bubbleMs": 8.400000035762787,
+      "firstMs": 1414.5,
+      "streamMs": 1832.6000000238419,
+      "muts": 10,
+      "mutPerSec": 5.5,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Kestrel — it's been waiting 6 hours for approval to run ./deploy.sh --dry-run. An approval gate is quick to clear and unblocks a deploy, so that's worth doing first.After that, beacon's been stuck even longer (7h) on the SQLite/Postgres/Redis question for check results — just needs a decision from you.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 1.3k in, 117 out"
+      }
+    },
+    {
+      "q": "What is kestrel waiting for?",
+      "load": "load 11.63 12.63 46.68",
+      "bubbleMs": 1.5999999642372131,
+      "firstMs": 1227.800000011921,
+      "streamMs": 1073.0999999642372,
+      "muts": 2,
+      "mutPerSec": 1.9,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Kestrel wants approval to run ./deploy.sh --dry-run — it's been sitting for 6 hours waiting on that.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 1.8k in (1.3k cached), 46 out"
+      }
+    },
+    {
+      "q": "What did delta finish?",
+      "load": "load 11.63 12.63 46.68",
+      "bubbleMs": 1.399999976158142,
+      "firstMs": 1319,
+      "streamMs": 737.6999999880791,
+      "muts": 3,
+      "mutPerSec": 4.1,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Delta finished reconciling all shards — shard-1, shard-2, and shard-3 are all reconciled.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 2.2k in (1.8k cached), 38 out"
+      }
+    },
+    {
+      "q": "Is anything running right now?",
+      "load": "load 12.30 12.76 46.52",
+      "bubbleMs": 1.4000000357627869,
+      "firstMs": 1267.5,
+      "streamMs": 998.1999999880791,
+      "muts": 2,
+      "mutPerSec": 2,
+      "reply": {
+        "cls": "msg pet",
+        "text": "No — nothing's actively running. Beacon and kestrel are both blocked waiting on you, and delta, atlas, and vibepet are all done.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 2.6k in (2.2k cached), 49 out"
+      }
+    },
+    {
+      "q": "One concrete next step?",
+      "load": "load 11.80 12.64 46.29",
+      "bubbleMs": 1.399999976158142,
+      "firstMs": 1293,
+      "streamMs": 1231.5,
+      "muts": 6,
+      "mutPerSec": 4.9,
+      "reply": {
+        "cls": "msg pet",
+        "text": "Approve kestrel's ./deploy.sh --dry-run — it's the quickest thing to clear and it's been waiting the longest of the two blockers at 6 hours.",
+        "say": null,
+        "acts": [],
+        "sees": "What Net sees · ≈192 tokens · sent 3.1k in (2.6k cached), 59 out"
+      }
+    }
+  ],
+  "chatTurns": [
+    {
+      "at": 1790932488946,
+      "engine": "claude",
+      "model": "claude-sonnet-5",
+      "ms": {
+        "first": 1335,
+        "total": 3203
+      },
+      "usage": {
+        "input": 1263,
+        "read": 0,
+        "write": 1261,
+        "out": 117
+      },
+      "turns": 1
+    },
+    {
+      "at": 1790932492118,
+      "engine": "claude",
+      "model": "claude-sonnet-5",
+      "ms": {
+        "first": 1165,
+        "total": 2275
+      },
+      "usage": {
+        "input": 1775,
+        "read": 1261,
+        "write": 512,
+        "out": 46
+      },
+      "turns": 2
+    },
+    {
+      "at": 1790932495043,
+      "engine": "claude",
+      "model": "claude-sonnet-5",
+      "ms": {
+        "first": 1244,
+        "total": 2038
+      },
+      "usage": {
+        "input": 2212,
+        "read": 1773,
+        "write": 437,
+        "out": 38
+      },
+      "turns": 3
+    },
+    {
+      "at": 1790932498176,
+      "engine": "claude",
+      "model": "claude-sonnet-5",
+      "ms": {
+        "first": 1218,
+        "total": 2253
+      },
+      "usage": {
+        "input": 2642,
+        "read": 2210,
+        "write": 430,
+        "out": 49
+      },
+      "turns": 4
+    },
+    {
+      "at": 1790932501585,
+      "engine": "claude",
+      "model": "claude-sonnet-5",
+      "ms": {
+        "first": 1243,
+        "total": 2514
+      },
+      "usage": {
+        "input": 3082,
+        "read": 2640,
+        "write": 440,
+        "out": 59
+      },
+      "turns": 5
+    }
+  ],
+  "errors": [],
+  "close": {
+    "how": "quit",
+    "ms": 330,
+    "procs": 8,
+    "orphans": []
+  },
+  "loadEnd": "load 11.57 12.58 46.07",
+  "sends": 30,
+  "cache": [
+    {
+      "turn": 1,
+      "input": 1263,
+      "read": 0,
+      "write": 1261,
+      "readPct": 0,
+      "model": "claude-sonnet-5"
+    },
+    {
+      "turn": 2,
+      "input": 1775,
+      "read": 1261,
+      "write": 512,
+      "readPct": 71,
+      "model": "claude-sonnet-5"
+    },
+    {
+      "turn": 3,
+      "input": 2212,
+      "read": 1773,
+      "write": 437,
+      "readPct": 80,
+      "model": "claude-sonnet-5"
+    },
+    {
+      "turn": 4,
+      "input": 2642,
+      "read": 2210,
+      "write": 430,
+      "readPct": 84,
+      "model": "claude-sonnet-5"
+    },
+    {
+      "turn": 5,
+      "input": 3082,
+      "read": 2640,
+      "write": 440,
+      "readPct": 86,
+      "model": "claude-sonnet-5"
+    }
+  ]
+}

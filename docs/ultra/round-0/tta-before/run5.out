@@ -1,0 +1,13 @@
+[00:06:26.362] plan subagent#1 · spend est $2.2598 · this probe so far $0.2123 of $0.6
+[00:06:28.931] instances A pid 34496 (Home closed), B pid 34497 (Home open) · app c2b5c0a canon --compare: compare the kind of each truth mismatch, not its clock; report dropped first clicks and the fold @ ultra/round-0 · perms {"ax":true,"screen":true}
+[00:06:29.037] == subagent #1 (delta) · status null
+[00:06:31.910]   delta: fleet.js up --no-prompt → exit 0
+    [delta] fanout
+      delta: claude pid 34572 session eb59a756-0b6f-4a82-8d55-1f0bc2c40358 (resumed) in 1803ms
+    root: 6 projects, 5 live sessions
+[00:06:41.756]   block: reg waiting/permission prompt at +4.7 s · record +4.7 s (subagent Bash)
+[00:11:46.632]   attempt: {"clicks":2,"keys":0,"action":null,"result":"no Approve on its row (actions: replay done goal)","resolved":false,"jump":false}
+[00:11:46.751]   delta: Esc (end of trial)
+[00:11:49.864]   result {"t0":"2026-10-02T00:06:39.818Z","t0From":"transcript","detectAmbientS":null,"detectAmbientRegS":null,"bubbleS":null,"ledS":null,"faceS":null,"rowS":null,"rowRegS":null,"offerS":null,"offerAction":null,"bannerS":null,"soundS":null,"goneS":null,"phaseS":null,"queueHeadS":null,"wrong":null,"otherBubble":null,"actionWorks":false,"clicks":2,"keys":0} · spent ~$0.1835
+[00:11:50.342]   delta: fleet.js pause → exit 0
+[00:11:51.403] closed quit/0 orphans, quit/0 orphans · B reopened 0× · poll errors 0 · spend est $2.4433 · this probe $0.3958 of $0.6

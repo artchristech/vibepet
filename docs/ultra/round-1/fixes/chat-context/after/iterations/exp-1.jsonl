@@ -1,0 +1,10 @@
+{"k":"todo","i":0,"ms":3458,"kestrel":false,"cmd":false,"store":false,"r":"Beacon—it's been waiting 6 hours 23 minutes for you to pick a database (SQLite, Postgres, or Redis)."}
+{"k":"todo","i":1,"ms":3868,"kestrel":true,"cmd":false,"store":false,"r":"Beacon—it's been waiting 6+ hours on the database choice. After you answer that, kestrel needs approval for the deploy."}
+{"k":"todo","i":2,"ms":3518,"kestrel":false,"cmd":false,"store":false,"r":"Beacon first—it's been waiting 6+ hours for a database choice (SQLite, Postgres, or Redis)."}
+{"k":"queue","i":0,"ms":3858,"kestrel":false,"cmd":false,"store":true,"r":"Beacon—it's been waiting 6+ hours for you to pick a database (SQLite, Postgres, or Redis) for storing check results."}
+{"k":"queue","i":1,"ms":4273,"kestrel":false,"cmd":false,"store":true,"r":"Beacon. It's been waiting 6+ hours for you to pick a database (SQLite / Postgres / Redis) for storing check results."}
+{"k":"queue","i":2,"ms":3869,"kestrel":true,"cmd":false,"store":false,"r":"Beacon—it's been waiting 6+ hours on the database choice. After you answer that, kestrel's next with the deploy approval."}
+{"k":"next","i":0,"ms":5756,"kestrel":false,"cmd":false,"store":true,"r":"Beacon is first—it's been waiting 6h 23m for you to pick a database (SQLite, Postgres, or Redis) for storing check results."}
+{"k":"next","i":1,"ms":4366,"kestrel":true,"cmd":false,"store":false,"r":"Beacon first—it's been waiting 6h 23m on the database choice (SQLite / Postgres / Redis).\n\nThen kestrel is next, waiting 5h 24m to approve the deploy dry-run."}
+{"k":"next","i":2,"ms":5550,"kestrel":true,"cmd":false,"store":false,"r":"Beacon needs you first—it's waiting for a database choice (SQLite, Postgres, or Redis). Kestrel is next, waiting to approve the deploy dry-run."}
+load 13.32 24.66 76.32

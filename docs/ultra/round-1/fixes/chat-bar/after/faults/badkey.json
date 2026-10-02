@@ -1,0 +1,156 @@
+{
+  "load": {
+    "start": "load 5.63 7.56 31.08",
+    "end": "load 8.70 8.07 30.18"
+  },
+  "stat": {
+    "n": 10,
+    "p50": 29,
+    "p95": 99,
+    "min": 26,
+    "max": 99
+  },
+  "paste": {
+    "keyForm": true,
+    "focus": "keyInput"
+  },
+  "errors": [],
+  "close": {
+    "how": "quit",
+    "ms": 283,
+    "procs": 7,
+    "orphans": []
+  },
+  "data": [
+    {
+      "ms": 90,
+      "load": "load 8.70 8.07 30.18",
+      "say": "That API key was rejected. Check it at console.anthropic.com or paste a new one.",
+      "acts": [
+        "Paste key"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "hello (1)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 44,
+      "load": "load 8.70 8.07 30.18",
+      "say": "That API key was rejected. Check it at console.anthropic.com or paste a new one.",
+      "acts": [
+        "Paste key"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "hello (2)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 33,
+      "load": "load 8.70 8.07 30.18",
+      "say": "That API key was rejected. Check it at console.anthropic.com or paste a new one.",
+      "acts": [
+        "Paste key"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "hello (3)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 28,
+      "load": "load 8.70 8.07 30.18",
+      "say": "That API key was rejected. Check it at console.anthropic.com or paste a new one.",
+      "acts": [
+        "Paste key"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "hello (4)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 71,
+      "load": "load 8.70 8.07 30.18",
+      "say": "That API key was rejected. Check it at console.anthropic.com or paste a new one.",
+      "acts": [
+        "Paste key"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "hello (5)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 99,
+      "load": "load 8.70 8.07 30.18",
+      "say": "That API key was rejected. Check it at console.anthropic.com or paste a new one.",
+      "acts": [
+        "Paste key"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "hello (6)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 27,
+      "load": "load 8.70 8.07 30.18",
+      "say": "That API key was rejected. Check it at console.anthropic.com or paste a new one.",
+      "acts": [
+        "Paste key"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "hello (7)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 29,
+      "load": "load 8.70 8.07 30.18",
+      "say": "That API key was rejected. Check it at console.anthropic.com or paste a new one.",
+      "acts": [
+        "Paste key"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "hello (8)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 28,
+      "load": "load 8.70 8.07 30.18",
+      "say": "That API key was rejected. Check it at console.anthropic.com or paste a new one.",
+      "acts": [
+        "Paste key"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "hello (9)",
+        "retry": true
+      }
+    },
+    {
+      "ms": 26,
+      "load": "load 8.70 8.07 30.18",
+      "say": "That API key was rejected. Check it at console.anthropic.com or paste a new one.",
+      "acts": [
+        "Paste key"
+      ],
+      "user": {
+        "cls": "msg user failed",
+        "text": "hello (10)",
+        "retry": true
+      }
+    }
+  ]
+}

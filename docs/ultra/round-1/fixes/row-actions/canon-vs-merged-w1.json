@@ -1,0 +1,219 @@
+{
+  "a": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/canon-merged-w1",
+  "b": "/Users/christopherharris/projects/vibepet/docs/ultra/round-1/fixes/row-actions/canon",
+  "gitA": "8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane @ ultra/round-1",
+  "gitB": "8e5fe27 Merge ultra/r1/tmux-reach: jump, approve and reply reach tmux sessions through the registry's pane @ ultra/r1/row-actions",
+  "msA": 101338,
+  "msB": 56313,
+  "assertions": {
+    "a": "29/29",
+    "b": "43/43",
+    "differ": [
+      {
+        "id": "rows/approvalActs:kestrel",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/questionOptions:beacon",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/replyOnDone",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/noGlyphOnly",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/goalRow",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/slotsFixed",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/goalUndo",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/goalOnce",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/diffOpens",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/key:A",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/key:W",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/key:D",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/key:2",
+        "a": null,
+        "b": true
+      },
+      {
+        "id": "rows/key:R",
+        "a": null,
+        "b": true
+      }
+    ]
+  },
+  "rows": {
+    "a": {
+      "beacon": "needs",
+      "kestrel": "needs",
+      "delta": "ready",
+      "atlas": "ready",
+      "vibepet": "ready"
+    },
+    "b": {
+      "beacon": "needs",
+      "kestrel": "needs",
+      "delta": "ready",
+      "atlas": "ready",
+      "vibepet": "ready",
+      "ember": "ready"
+    },
+    "differ": [
+      "ember"
+    ]
+  },
+  "mismatches": {
+    "a": [],
+    "b": [],
+    "differ": []
+  },
+  "fleet": {
+    "a": "3/6",
+    "b": "3/6",
+    "changedDuring": [
+      [],
+      []
+    ]
+  },
+  "notes": {
+    "goalFirstClickDropped": [
+      false,
+      false
+    ],
+    "aboveFold": [
+      4,
+      3
+    ]
+  },
+  "shots": [
+    {
+      "file": "1-home/panel.png",
+      "changedPct": 6.21
+    },
+    {
+      "file": "1-home/pet.png",
+      "changedPct": 0.48
+    },
+    {
+      "file": "2-chat/reply.png",
+      "changedPct": 18.24
+    },
+    {
+      "file": "2-chat/sending.png",
+      "changedPct": 13.08
+    },
+    {
+      "file": "3-command/slash.png",
+      "changedPct": 5.24
+    },
+    {
+      "file": "3-command/today.png",
+      "changedPct": 6.28
+    },
+    {
+      "file": "4-rows/diff.png",
+      "only": "b"
+    },
+    {
+      "file": "4-rows/done.png",
+      "only": "b"
+    },
+    {
+      "file": "4-rows/goal.png",
+      "size": [
+        "1220x158",
+        "1220x202"
+      ]
+    },
+    {
+      "file": "4-rows/jump.png",
+      "changedPct": 18.84
+    },
+    {
+      "file": "4-rows/keys.png",
+      "only": "b"
+    },
+    {
+      "file": "4-rows/list.png",
+      "changedPct": 15.03
+    },
+    {
+      "file": "4-rows/reply.png",
+      "size": [
+        "1220x294",
+        "1220x272"
+      ]
+    },
+    {
+      "file": "4-rows/undo.png",
+      "only": "b"
+    },
+    {
+      "file": "5-theater/open.png",
+      "changedPct": 14
+    },
+    {
+      "file": "5-theater/seek-mid.png",
+      "changedPct": 0
+    },
+    {
+      "file": "6-ports/footer.png",
+      "changedPct": 27.13
+    },
+    {
+      "file": "6-ports/stopped.png",
+      "changedPct": 10.35
+    },
+    {
+      "file": "7-keys/gesture-pad.png",
+      "changedPct": 0.9
+    },
+    {
+      "file": "7-keys/gesture-saved.png",
+      "changedPct": 4.7
+    },
+    {
+      "file": "7-keys/hotkey.png",
+      "changedPct": 11.8
+    }
+  ]
+}

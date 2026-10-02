@@ -1,0 +1,16 @@
+uptime-start:  1:41  up 6 days, 12:27, 19 users, load averages: 779.45 793.52 797.04
+07:41:57.586 home {"mode":"now","ms":534,"rows":["kestrel:running"],"load":"768.36 790.99 796.12"}
+07:41:57.594 liveFoldEmpty {"rows":1,"inView":1,"needs":0,"needsInView":0,"footerInView":true,"msgs":0,"panel":460,"listViewport":28,"listScroll":28,"msgsBox":0,"needsStack":0}
+07:42:01.857 presses [{"id":"13a1427d","ticksDuringPress":1,"took":true,"load":"764.25 789.76 795.66"}]
+07:42:09.137 focus {"el":"<button data-do=\"replay\" title=\"Replay this sessio","kept":[true,true,true]}
+07:42:09.326 keys {"approvalRow":-1,"afterEsc":"chatInput","tabFromComposer":"homeMore","shiftTabBack":"chatInput","blurs":0,"homeOpen":"now"}
+07:42:14.397 needs4 empty {"rows":15,"inView":7,"needs":4,"needsInView":4,"footerInView":true,"msgs":0,"panel":596,"listViewport":452,"listScroll":691,"msgsBox":0,"needsStack":355} never: 0 partly: 0
+07:42:20.290 needs4 oneNote {"rows":15,"inView":3,"needs":4,"needsInView":3,"footerInView":true,"msgs":1,"panel":596,"listViewport":340,"listScroll":691,"msgsBox":112,"needsStack":355} never: ["Extra session 6 (gate)","Extra session 8 (gate)","Extra session 10 (gate)","Extra session 12 (gate)","Extra session 14 (gate)","Deploy.sh dry run","Extra session 5 (gate)","Extra session 7 (gate)","Extra session 9 (gate)","Extra session 11 (gate)","Extra session 13 (gate)"] partly: []
+07:42:26.332 needs4 slash {"rows":15,"inView":1,"needs":4,"needsInView":1,"footerInView":true,"msgs":1,"panel":596,"listViewport":145,"listScroll":691,"msgsBox":112,"needsStack":355} never: 12
+07:42:31.580 needs5 empty {"rows":15,"inView":5,"needs":5,"needsInView":5,"footerInView":true,"msgs":0,"panel":596,"listViewport":452,"listScroll":752,"msgsBox":0,"needsStack":444} never: 0 partly: 10
+07:42:37.193 needs5 oneNote {"rows":15,"inView":3,"needs":5,"needsInView":3,"footerInView":true,"msgs":1,"panel":596,"listViewport":340,"listScroll":752,"msgsBox":112,"needsStack":444} never: ["Extra session 6 (gate)","Extra session 8 (gate)","Extra session 10 (gate)","Extra session 12 (gate)","Extra session 14 (gate)","Deploy.sh dry run","Extra session 7 (gate)","Extra session 9 (gate)","Extra session 11 (gate)","Extra session 13 (gate)"] partly: ["Extra session 4 (gate) (72/89px)"]
+07:42:41.802 needs5 slash {"rows":15,"inView":1,"needs":5,"needsInView":1,"footerInView":true,"msgs":1,"panel":596,"listViewport":145,"listScroll":752,"msgsBox":112,"needsStack":444} never: 12
+07:42:51.531 live {"rows":1,"inView":1,"needs":0,"needsInView":0,"footerInView":true,"msgs":1,"panel":460,"listViewport":28,"listScroll":28,"msgsBox":180,"needsStack":0} {"rows":1,"inView":1,"needs":0,"needsInView":0,"footerInView":true,"msgs":1,"panel":588,"listViewport":28,"listScroll":28,"msgsBox":112,"needsStack":0} slash never: [] partly: []
+07:42:54.084 done {"how":"quit","ms":1896,"procs":7,"orphans":[]}
+exit=0
+uptime-end:  1:43  up 6 days, 12:28, 19 users, load averages: 841.38 806.69 801.48

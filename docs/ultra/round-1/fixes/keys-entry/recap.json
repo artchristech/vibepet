@@ -1,0 +1,468 @@
+{
+ "branch": "ultra/r1/keys-entry",
+ "commits": [
+  "395d636 one click on Net opens Home at once",
+  "b96a86d an Open Home key, and a key another vibepet holds reads as taken",
+  "16a5d81 the setup card is driven from the keyboard",
+  "fb276cd say what VIBEPET_HOTKEY=<accelerator> binds"
+ ],
+ "a_click": {
+  "before_base": {
+   "single_median_ms": {
+    "toShown": 222.1,
+    "toFrame1": 228.4,
+    "toPainted": 245.1,
+    "toVisible": 278.4,
+    "toRows": 228.8,
+    "toFocus": 224.5,
+    "downToPainted": 298.4
+   },
+   "double_median_ms_from_first_up": {
+    "toShown": 133.4,
+    "toPainted": 159.9,
+    "toVisible": 192.2,
+    "nextClickToHidden": 222.2
+   },
+   "load": [
+    "18.42 17.87 26.52",
+    "17.74 17.68 26.24"
+   ],
+   "n": 7
+  },
+  "after_run1": {
+   "single_median_ms": {
+    "toShown": 0.4,
+    "toFrame1": 10.3,
+    "toPainted": 26.3,
+    "toVisible": 59.8,
+    "toRows": 10.9,
+    "toFocus": 2.4,
+    "downToPainted": 79.9
+   },
+   "double_median_ms_from_first_up": {
+    "toShown": 0.5,
+    "toPainted": 18.7,
+    "toVisible": 55.6,
+    "nextClickToHidden": 0.5
+   },
+   "doubleOpensOnceStaysOpen_nextClickCloses": true,
+   "load": [
+    "12.09 16.38 25.10",
+    "51.28 24.69 27.76"
+   ],
+   "n": 7
+  },
+  "after_run2": {
+   "single_median_ms": {
+    "toShown": 0.5,
+    "toFrame1": 10.7,
+    "toPainted": 27,
+    "toVisible": 60.4,
+    "toRows": 10.7,
+    "toFocus": 4,
+    "downToPainted": 100.6
+   },
+   "double_median_ms_from_first_up": {
+    "toShown": 0.5,
+    "toPainted": 18.2,
+    "toVisible": 56.5,
+    "nextClickToHidden": 0.6
+   },
+   "doubleOpensOnceStaysOpen_nextClickCloses": true,
+   "load": [
+    "234.10 108.96 61.62",
+    "358.13 156.56 81.23"
+   ],
+   "n": 7
+  },
+  "after_pooled_n14_median_ms": {
+   "toShown": 0.5,
+   "toFrame1": 10.5,
+   "toPainted": 26.6,
+   "toVisible": 60.1,
+   "toFocus": 3.0
+  },
+  "defs": "ms from the mouseup event (renderer clock): toShown = #chat un-hidden; toFrame1 = first rAF after; toPainted = second rAF (the critic's painted frame); toVisible = first frame at opacity >= 0.5 (rise animation)"
+ },
+ "b_home_key": {
+  "before_base": "no Open Home key in this build: __vibepet.press is missing (main binds only the jump key and ⌃⌥⌘R)",
+  "after_run1": {
+   "median_ms": {
+    "toShown": 2.5,
+    "toFrame1": -4.2,
+    "toPainted": 13.4,
+    "toVisible": 46.1,
+    "toRows": -4.2,
+    "toFocus": 2.3
+   },
+   "caretInBar_all": true,
+   "secondPressCloses_all": true,
+   "load": [
+    "132.30 45.84 35.29",
+    "127.29 47.64 36.06"
+   ],
+   "n": 7
+  },
+  "after_run2": {
+   "median_ms": {
+    "toShown": 2.3,
+    "toFrame1": -3.9,
+    "toPainted": 11.2,
+    "toVisible": 52.6,
+    "toRows": -3.9,
+    "toFocus": 2.2
+   },
+   "caretInBar_all": true,
+   "secondPressCloses_all": true,
+   "load": [
+    "415.63 189.41 95.72",
+    "403.53 194.27 98.54"
+   ],
+   "n": 7
+  },
+  "after_pooled_n14_median_ms": {
+   "toShown": 2.4,
+   "toPainted": 11.9,
+   "toVisible": 49.8,
+   "toFocus": 2.2
+  },
+  "defs": "ms from main calling __vibepet.press('home') (wall clock, both processes); toFocus = the composer's focus event; document.activeElement checked = #chatInput"
+ },
+ "c_two_instances": {
+  "accelerators": {
+   "jump": "Control+Alt+Command+F19",
+   "home": "Control+Alt+Command+F18"
+  },
+  "locksAfter": [],
+  "A_keys": {
+   "home": {
+    "label": "⌃⌥⌘F18",
+    "on": true,
+    "taken": false
+   },
+   "jump": {
+    "label": "⌃⌥⌘F19",
+    "on": true,
+    "taken": false
+   },
+   "rec": {
+    "label": "Off",
+    "on": false,
+    "taken": false
+   }
+  },
+  "B_keys": {
+   "home": {
+    "label": "⌃⌥⌘F18",
+    "on": false,
+    "taken": true,
+    "alt": "⌃⌥⌘H"
+   },
+   "jump": {
+    "label": "⌃⌥⌘F19",
+    "on": false,
+    "taken": true,
+    "alt": "⌃⌥⌘J"
+   },
+   "rec": {
+    "label": "Off",
+    "on": false,
+    "taken": false,
+    "alt": null
+   }
+  },
+  "B_registered_at_os": [
+   [
+    "Control+Alt+Command+F19",
+    false
+   ],
+   [
+    "Control+Alt+Command+F18",
+    false
+   ],
+   [
+    "Control+Alt+Command+R",
+    false
+   ],
+   [
+    "Control+Alt+Command+J",
+    false
+   ]
+  ],
+  "B_menu": [
+   "Jump key (taken by another vibepet · try ⌃⌥⌘J)",
+   "Open Home key (taken by another vibepet · try ⌃⌥⌘H)",
+   "Set API key…"
+  ],
+  "B_setupKeys_taken": "⌃⌥⌘F18 open Home: taken by another vibepet, try ⌃⌥⌘H (⋯ → Settings → Open Home key)\n⌃⌥⌘F19 jump to who needs you: taken by another vibepet, try ⌃⌥⌘J (⋯ → Settings → Jump key)\nrecord a short: off",
+  "B_setupKeys_altCmdJ": "⌃⌥⌘F18 open Home: taken by another vibepet, try ⌃⌥⌘H (⋯ → Settings → Open Home key)\n⌥⌘J jump to who needs you\nrecord a short: off",
+  "B_setupKeys_off": "⌃⌥⌘F18 open Home: taken by another vibepet, try ⌃⌥⌘H (⋯ → Settings → Open Home key)\njump to who needs you: off\nrecord a short: off",
+  "B_register_stub": {
+   "replaced": true,
+   "recorded": [
+    "Control+Alt+Command+F17"
+   ],
+   "osRegistered": false
+  },
+  "B_takeover_after_A_quit": {
+   "homeOn": true,
+   "ms": 4352
+  },
+  "load": [
+   "127.29 47.64 36.06",
+   "121.43 51.21 37.59"
+  ]
+ },
+ "d_setup_keyboard": {
+  "before_base": {
+   "afterSetup": {
+    "setupShown": true,
+    "barShown": false,
+    "active": {
+     "tag": "BODY",
+     "id": null,
+     "k": null,
+     "v": null,
+     "perm": null,
+     "done": false,
+     "text": "Netdelta/main · claude code⋯esc\n    Quic",
+     "inSetup": false,
+     "bar": false
+    }
+   },
+   "tab": {
+    "controls": 19,
+    "walk": [
+     "OUTSIDE:BUTTON#homeMore",
+     "OUTSIDE:BUTTON#chatClose",
+     "pet:net",
+     "pet:slime",
+     "pet:cat",
+     "pet:sprout",
+     "pet:shroom",
+     "pet:star",
+     "pet:koi",
+     "size:s",
+     "size:m",
+     "size:l",
+     "feel:calm",
+     "feel:lively",
+     "feel:still",
+     "alerts:blocked",
+     "alerts:done",
+     "alerts:all",
+     "perm:ax",
+     "perm:screen"
+    ],
+    "allReached": false,
+    "outside": [
+     "OUTSIDE:BUTTON#homeMore",
+     "OUTSIDE:BUTTON#chatClose"
+    ],
+    "barAt": -1,
+    "shiftTabFromBar": "walk did not end on the bar"
+   },
+   "ticks": {
+    "waited": 3,
+    "kept": false,
+    "active": {
+     "tag": "BODY",
+     "id": null,
+     "k": null,
+     "v": null,
+     "perm": null,
+     "done": false,
+     "text": "Netdelta/main · claude code⋯esc\n    Quic",
+     "inSetup": false,
+     "bar": false
+    },
+    "nextTab": null
+   },
+   "esc": {
+    "closed": true,
+    "reopen": {
+     "setupShown": true,
+     "nowShown": false,
+     "active": null
+    }
+   },
+   "done": {
+    "onDone": true,
+    "setupShown": false,
+    "nowShown": true,
+    "active": null,
+    "setupDone": true
+   }
+  },
+  "after": {
+   "afterSetup": {
+    "setupShown": true,
+    "barShown": true,
+    "active": {
+     "tag": "INPUT",
+     "id": "chatInput",
+     "k": null,
+     "v": null,
+     "perm": null,
+     "done": false,
+     "text": "",
+     "inSetup": false,
+     "bar": true
+    }
+   },
+   "tab": {
+    "controls": 19,
+    "walk": [
+     "pet:net",
+     "pet:slime",
+     "pet:cat",
+     "pet:sprout",
+     "pet:shroom",
+     "pet:star",
+     "pet:koi",
+     "size:s",
+     "size:m",
+     "size:l",
+     "feel:calm",
+     "feel:lively",
+     "feel:still",
+     "alerts:blocked",
+     "alerts:done",
+     "alerts:all",
+     "perm:ax",
+     "perm:screen",
+     "done",
+     "BAR"
+    ],
+    "allReached": true,
+    "outside": [],
+    "barAt": 19,
+    "shiftTabFromBar": "done"
+   },
+   "ticks": {
+    "waited": 3,
+    "kept": true,
+    "active": {
+     "tag": "BUTTON",
+     "id": null,
+     "k": "size",
+     "v": "m",
+     "perm": null,
+     "done": false,
+     "text": "Medium",
+     "inSetup": true,
+     "bar": false
+    },
+    "nextTab": "l"
+   },
+   "choice": {
+    "pressed": {
+     "tag": "BUTTON",
+     "id": null,
+     "k": "alerts",
+     "v": "done",
+     "perm": null,
+     "done": false,
+     "text": "+ Finished",
+     "inSetup": true,
+     "bar": false
+    },
+    "on": true,
+    "alerts": "done",
+    "back": {
+     "active": {
+      "tag": "BUTTON",
+      "id": null,
+      "k": "alerts",
+      "v": "all",
+      "perm": null,
+      "done": false,
+      "text": "Everything",
+      "inSetup": true,
+      "bar": false
+     },
+     "alerts": "all",
+     "alerts0": "all"
+    }
+   },
+   "typedOnSprout": {
+    "focusWas": "sprout",
+    "pet0": "net",
+    "pet": "net",
+    "notesAdded": 1,
+    "lastNote": "Goals set: 0 · hit: 0 · time drifting: 0m\n\n◎ Before anything",
+    "active": {
+     "tag": "INPUT",
+     "id": "chatInput",
+     "k": null,
+     "v": null,
+     "perm": null,
+     "done": false,
+     "text": "",
+     "inSetup": false,
+     "bar": true
+    },
+    "setupShown": true
+   },
+   "typedInBar": {
+    "pet": "net",
+    "notesAdded": 1,
+    "active": {
+     "tag": "INPUT",
+     "id": "chatInput",
+     "k": null,
+     "v": null,
+     "perm": null,
+     "done": false,
+     "text": "",
+     "inSetup": false,
+     "bar": true
+    },
+    "setupShown": true
+   },
+   "esc": {
+    "closed": true,
+    "reopen": {
+     "setupShown": false,
+     "nowShown": true,
+     "active": "chatInput"
+    }
+   },
+   "done": {
+    "onDone": true,
+    "setupShown": false,
+    "nowShown": true,
+    "active": "chatInput",
+    "setupDone": true
+   }
+  },
+  "load": [
+   "142.13 56.67 39.59",
+   "215.11 80.86 48.82"
+  ]
+ },
+ "canon": {
+  "run1": [
+   "29/29",
+   67829,
+   [
+    " 3:44  up 6 days, 14:30, 19 users, load averages: 34.74 111.91 122.72",
+    " 3:45  up 6 days, 14:31, 19 users, load averages: 32.66 96.96 116.35"
+   ]
+  ],
+  "run2": [
+   "29/29",
+   308519,
+   [
+    " 3:52  up 6 days, 14:38, 19 users, load averages: 21.68 43.44 81.79",
+    " 3:57  up 6 days, 14:43, 19 users, load averages: 54.26 55.11 75.83"
+   ]
+  ],
+  "base_now": [
+   "29/29",
+   122274
+  ],
+  "vs_merged_w1": "same 29/29 assertions, same rows, 0 truth mismatches",
+  "pixel_note": "1-home/panel 13.85% = a 15 px (7.5 css px) panel shift: the launch bubble had expired before the shot (post-launch harness overhead 11-30 s under load in these runs); residual after the shift 1.0% (ages). Other large diffs are the same hover/bubble timing; canon-r2 vs base-now: today 1.2%, gesture-pad 0.35%"
+ }
+}

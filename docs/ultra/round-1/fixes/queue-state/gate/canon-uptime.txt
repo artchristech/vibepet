@@ -1,0 +1,4 @@
+run 1 before: 23:41  up 6 days, 10:26, 19 users, load averages: 38.02 77.10 57.45
+run 1 exit=0 wall=24.9s after: 23:42  up 6 days, 10:27, 19 users, load averages: 27.45 71.47 55.99
+run 2 before: 23:42  up 6 days, 10:27, 19 users, load averages: 27.45 71.47 55.99
+run 2 exit=0 wall=25.0s after: 23:42  up 6 days, 10:27, 19 users, load averages: 19.91 66.17 54.53
