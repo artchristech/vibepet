@@ -41,26 +41,31 @@ const arg = (k, d) => { const i = argv.indexOf(k); return i >= 0 && argv[i + 1] 
 const flag = k => argv.includes(k);
 
 // the shortcut's pick of what to show for a member in each true state (members.json `state`)
+// An approval shows amber 'needs' with the command it asks for; a question its text and choices (renderer/app.js SIG: the
+// red 'stuck' an approval used to get was the bug, r1-S7-06). Ask patterns are what the row's ask line must look like.
 const EXPECT = {
-  approval: { sig: ['stuck', 'needs'], act: 'approve', why: 'a permission dialog is open: it needs you, Approve' },
-  question: { sig: ['needs'], act: 'reply', why: 'an AskUserQuestion dialog is open: it needs you, Reply' },
+  approval: { sig: ['needs'], act: 'approve', ask: /^[\w ]+: \S/, why: 'a permission dialog is open: it needs you, Approve' },
+  question: { sig: ['needs'], act: 'reply', ask: /\? \(.+ \/ .+\)$/, why: 'an AskUserQuestion dialog is open: it needs you, Reply' },
   done: { sig: ['ready'], why: 'the turn ended with a statement: done, your move' },
   working: { sig: ['running'], why: 'a long foreground tool is running' },
   fanout: { sig: ['running'], why: 'three subagents are running' },
   loop: { sig: ['running', 'ready'], why: 'idle between /loop fires: alive and scheduled, not waiting on you' },
 };
 const PREFER = ['delta', 'kestrel', 'atlas', 'ember', 'vibepet', 'beacon'];   // a stable pick when one row is enough
-// a Home row label's duration back to ms (renderer/app.js phaseTime: dur(), ago(), 'stuck Nm', 'waiting Nm'), or null
-function labelMs(label) {
-  const t = String(label || '').split(' · ').pop();
+// a Home row label's duration back to ms (renderer/app.js phaseTime: 'needs approval 42s', 'asking 14m', 'asking 2h 37m',
+// 'done 3m ago', 'exited 20s ago', 'running 4m 50s'; older builds: 'stuck Nm', 'waiting Nm', 'just now'), or null
+function labelMs(label) { return labelSpan(label)?.ms ?? null; }
+// … and the label's unit: whole minutes are floored ('14m' = 14:00–14:59), so the true age is in [ms, ms + unit)
+function labelSpan(label) {
+  const t = String(label || '').split(' · ').pop().replace(/ ago$/, '');
   let m;
-  if (/just now$/.test(t)) return 0;
-  if ((m = t.match(/(\d+)h (\d+)m$/))) return (+m[1] * 60 + +m[2]) * 60e3;
-  if ((m = t.match(/(\d+)m (\d+)s$/))) return +m[1] * 60e3 + +m[2] * 1e3;
-  if ((m = t.match(/^(\d+)s$/))) return +m[1] * 1e3;
-  if ((m = t.match(/(\d+)m( ago)?$/))) return +m[1] * 60e3;
-  if ((m = t.match(/(\d+)h ago$/))) return +m[1] * 3600e3;
-  if ((m = t.match(/(\d+)d ago$/))) return +m[1] * 864e5;
+  if (/just now$/.test(t)) return { ms: 0, unit: 60e3 };
+  if ((m = t.match(/(\d+)h (\d+)m$/))) return { ms: (+m[1] * 60 + +m[2]) * 60e3, unit: 60e3 };
+  if ((m = t.match(/(\d+)m (\d+)s$/))) return { ms: +m[1] * 60e3 + +m[2] * 1e3, unit: 1e3 };
+  if ((m = t.match(/(?:^|\s)(\d+)s$/))) return { ms: +m[1] * 1e3, unit: 1e3 };
+  if ((m = t.match(/(\d+)m$/))) return { ms: +m[1] * 60e3, unit: 60e3 };
+  if ((m = t.match(/(\d+)h$/))) return { ms: +m[1] * 3600e3, unit: 3600e3 };
+  if ((m = t.match(/(\d+)d$/))) return { ms: +m[1] * 864e5, unit: 864e5 };
   return null;
 }
 const fmt = ms => ms < 90e3 ? `${Math.round(ms / 1000)}s` : ms < 5400e3 ? `${Math.round(ms / 60e3)}m` : `${(ms / 3600e3).toFixed(1)}h`;
@@ -117,13 +122,14 @@ function guiHost(pid) {
 function writeStub(dir) {
   const f = path.join(dir, 'stub-claude.js'), log = path.join(dir, 'stub-claude.jsonl');
   fs.writeFileSync(f, `#!${process.execPath}
-// canon's chat engine (VIBEPET_CLAUDE_BIN): answers from the live context's "Agents:" line only. Logs flags + sizes, never text.
+// canon's chat engine (VIBEPET_CLAUDE_BIN): answers from the live context's "Agents:" line only, echoing it in its order
+// ('name=state for age - ask', '; ' between sessions; an older build: 'name=phase for Ns', ', '). Logs flags + sizes, never text.
 const fs = require('fs'); let input = '';
 process.stdin.on('data', d => input += d).on('end', () => {
   const a = process.argv.slice(2), m = a.indexOf('--model'), line = (input.match(/^Agents: (.*)$/m) || [, ''])[1];
-  const agents = line === 'none active.' ? [] : line.split(', ').map(x => x.replace(/ for \\d+s\\.?$/, '')).filter(Boolean).sort();
+  const agents = line === 'none active.' ? [] : line.replace(/(\\w)\\.$/, '$1').split(/^(?:[^=,;]+=\\w+ for \\d+s(?:, |\\.?$))+$/.test(line) ? ', ' : '; ').filter(Boolean);
   fs.appendFileSync(${JSON.stringify(log)}, JSON.stringify({ at: Date.now(), model: m >= 0 ? a[m + 1] : null, print: a.includes('-p'), noPersist: a.includes('--no-session-persistence'), bytes: input.length, agents: agents.length }) + '\\n');
-  const text = agents.length ? 'Canon stub engine. Live agents in my context: ' + agents.join(', ') + '.' : 'Canon stub engine. No live agents in my context.';
+  const text = agents.length ? 'Canon stub engine. Live agents in my context: ' + agents.join('; ').replace(/[^.?!]$/, '$&.') : 'Canon stub engine. No live agents in my context.';
   process.stdout.write(JSON.stringify({ type: 'result', subtype: 'success', is_error: false, result: text, total_cost_usd: 0 }));
 });
 `, { mode: 0o755 });
@@ -208,12 +214,15 @@ async function run(opts) {
   try { if (stub) fs.rmSync(stub.log, { force: true }); } catch {}
 
   let v;
+  const tLaunch = Date.now();
   try {
     v = await launch({ appDir, root, userData: opts.userdata ? path.resolve(opts.userdata) : undefined, state: SEED,
       env: { ANTHROPIC_API_KEY: '', ...(stub ? { VIBEPET_CLAUDE_BIN: stub.file } : {}) } });
   } catch (e) { if (srv) try { process.kill(srv.pid, 'SIGTERM'); } catch {} throw e; }
-  R.launch = { pid: v.pid, readyMs: v.readyMs, paths: { claude: v.paths.claude, userData: path.relative(ULTRA, v.paths.userData) },
-    perms: await v.evalMain(() => globalThis.__vibepet.snapshot().perms).catch(() => null) };
+  // the first snapshot the renderer got (launch() returns once it has one): who needed you from the very first tick
+  const snap0 = await v.evalMain(() => globalThis.__vibepet.snapshot()).catch(() => null);
+  R.launch = { pid: v.pid, readyMs: v.readyMs, paths: { claude: v.paths.claude, userData: path.relative(ULTRA, v.paths.userData) }, perms: snap0?.perms || null,
+    first: { msAfterLaunchCall: Date.now() - tLaunch, agents: (snap0?.agents || []).map(a => ({ member: bySid.get(a.id)?.name || null, name: a.name, kind: a.kind || null, phase: a.phase, ask: a.ask || null })) } };
   const W = v.win;
   const inst = await v.evalMain(instrument);
   R.instrument = inst;
@@ -222,7 +231,7 @@ async function run(opts) {
   const waitCall = async (t, kind, ms = 8000) => { const end = Date.now() + ms; for (;;) { const c = await callsSince(t, kind); if (c.length) return c; if (Date.now() > end) return []; await sleep(100); } };
   const ensureHome = async () => { if (!(await v.homeMode())) await v.openHome(); };
   const rowsDom = () => W.evaluate(() => [...document.querySelectorAll('#now .nr[data-id]')].map(r => ({
-    id: r.dataset.id, sig: ['needs', 'stuck', 'ready', 'running'].find(c => r.classList.contains(c)) || null,
+    id: r.dataset.id, sig: ['needs', 'stuck', 'ready', 'running', 'exited'].find(c => r.classList.contains(c)) || null,
     title: r.querySelector('.nm b')?.textContent || '', label: r.querySelector('.nm small')?.textContent || '',
     goal: r.querySelector('.ng')?.textContent || null, goalDone: !!r.querySelector('.ng.done'), ask: r.querySelector('.na')?.textContent || null,
     actions: [...r.querySelectorAll('.nb button[data-do]')].map(b => b.dataset.do) })));
@@ -255,8 +264,11 @@ async function run(opts) {
       R.surfaces.home.aboveFold = await W.evaluate(() => { const box = document.getElementById('now').getBoundingClientRect();
         return [...document.querySelectorAll('#now .nr[data-id]')].filter(r => { const b = r.getBoundingClientRect(); return b.top >= box.top - 1 && b.bottom <= box.bottom + 1; }).length; });
       const sa = new Map((snap.agents || []).map(a => [a.id, a]));
-      R.rows = rows.map(r => ({ ...r, member: memberOf(r), name: sa.get(r.id)?.name || null, phase: sa.get(r.id)?.phase || null,
+      R.rows = rows.map(r => ({ ...r, member: memberOf(r), name: sa.get(r.id)?.name || null, phase: sa.get(r.id)?.phase || null, kind: sa.get(r.id)?.kind || null, since: sa.get(r.id)?.since ?? null,
         fanout: sa.get(r.id)?.fanout ? { total: sa.get(r.id).fanout.total, open: sa.get(r.id).fanout.open, stuck: sa.get(r.id).fanout.stuck } : null }));
+      // one order: Home's rows are the snapshot's, which is the order main sorts by (and pending() keeps)
+      R.surfaces.home.order = { home: rows.map(r => memberOf(r) || r.id.slice(0, 8)), snapshot: (snap.agents || []).map(a => bySid.get(a.id)?.name || a.id.slice(0, 8)) };
+      assert('home', 'rowsInSnapshotOrder', rows.every((r, i) => r.id === (snap.agents || [])[i]?.id), R.surfaces.home.order);
       R.surfaces.home.rows = rows.length;
       R.surfaces.home.snapshotAgents = (snap.agents || []).length;
       assert('home', 'rowsRender', rows.length > 0 || (snap.agents || []).length === 0, `${rows.length} rows, ${(snap.agents || []).length} agents in the snapshot`);
@@ -265,22 +277,29 @@ async function run(opts) {
     });
 
     // ---------------- truth vs. what Home shows ----------------
+    // a member out of its fixture state (paused: atlas/delta idle at the prompt) is still a live claude: scored on its registry
+    const BY_REG = { idle: { sig: ['ready', 'needs'], why: 'idle at its prompt (registry): done, or asking' }, busy: { sig: ['running'], why: 'busy (registry): running' },
+      waiting: { sig: ['needs'], why: 'a dialog is open (registry waiting): it needs you' } };
+    const first = new Map((R.launch.first?.agents || []).filter(a => a.member).map(a => [a.member, a]));
     for (const m of members) {
-      const row = R.rows.find(r => r.id === m.sessionId) || null, e = EXPECT[m.state] || {}, c = { member: m.name, state: m.state, inState: m.inState,
+      const row = R.rows.find(r => r.id === m.sessionId) || null, e = (m.inState ? EXPECT[m.state] : m.registry && BY_REG[m.registry.status]) || {}, c = { member: m.name, state: m.state, inState: m.inState,
         truth: m.registry ? `${m.registry.status}${m.registry.waitingFor ? ` (${m.registry.waitingFor})` : ''}` : 'no claude', shown: !!row,
-        sig: row?.sig || null, label: row?.label || null, phase: row?.phase || null, actions: row?.actions || [], expected: e.sig || null, problems: [] };
-      if (!m.inState) c.problems.push(`not in its fixture state (${m.paused ? 'paused' : 'failing: ' + m.failing.join(',')}): not scored`);
+        sig: row?.sig || null, label: row?.label || null, ask: row?.ask || null, phase: row?.phase || null, kind: row?.kind || null, actions: row?.actions || [], expected: e.sig || null, problems: [] };
+      if (!m.inState && !m.registry) c.problems.push(`not in its fixture state (${m.paused ? 'paused' : 'failing: ' + m.failing.join(',')}): not scored`);
       else if (!row) c.problems.push(`missing: ${e.why}, but Home has no row for it`);
       else {
         if (e.sig && !e.sig.includes(row.sig)) c.problems.push(`shows '${row.sig}' (${row.label}); truth: ${e.why}`);
         if (e.act && !row.actions.includes(e.act)) c.problems.push(`no ${e.act} action`);
-        // the label's clock vs. the registry's: how long the session has really been in this status
-        const trueMs = m.registry?.statusUpdatedAt && R.surfaces.home?.readAt ? R.surfaces.home.readAt - m.registry.statusUpdatedAt : null, shownMs = labelMs(row.label);
-        c.age = { trueMs, shownMs };
-        if (trueMs != null && shownMs != null && trueMs >= 120e3 && Math.abs(shownMs - trueMs) > Math.max(90e3, 0.25 * trueMs))
-          c.problems.push(`age: label says ${fmt(shownMs)} (${row.label}), the registry says ${m.registry.status} for ${fmt(trueMs)}`);
+        if (e.ask && !e.ask.test(row.ask || '')) c.problems.push(`ask: '${row.ask}' (wanted ${e.ask})`);
+        if (e.act && first.get(m.name) && !['approval', 'question', 'plan', 'input'].includes(first.get(m.name).kind)) c.problems.push(`at launch: '${first.get(m.name).kind || first.get(m.name).phase}' in the first snapshot`);
+        // ages: the row counts from its since, which must be the registry's statusUpdatedAt (±3 s); the label must read that since
+        const readAt = R.surfaces.home?.readAt, trueMs = m.registry?.statusUpdatedAt && readAt ? readAt - m.registry.statusUpdatedAt : null;
+        const sinceMs = row.since && readAt ? readAt - row.since : null, sp = labelSpan(row.label);
+        c.age = { trueMs, sinceMs, shownMs: sp ? sp.ms : null, unit: sp ? sp.unit : null };
+        if (trueMs != null && sinceMs != null && Math.abs(sinceMs - trueMs) > 3000) c.problems.push(`age: counts from ${fmt(sinceMs)} ago (${row.label}), the registry says ${m.registry.status} for ${fmt(trueMs)}`);
+        else if (sp && sinceMs != null && (sinceMs < sp.ms - 1500 || sinceMs > sp.ms + sp.unit + 4000)) c.problems.push(`label: '${row.label}' doesn't read ${fmt(sinceMs)}`);   // rendered ≤ 1 tick before the read
       }
-      c.ok = m.inState ? c.problems.length === 0 : null;
+      c.ok = m.inState || m.registry ? c.problems.length === 0 : null;
       R.compare.push(c);
     }
     for (const r of R.rows) if (!r.member) R.compare.push({ member: null, extra: true, row: { id: r.id.slice(0, 8), name: r.name, sig: r.sig, label: r.label },
@@ -300,7 +319,7 @@ async function run(opts) {
       await W.locator('#chatInput').press('Enter');
       await W.waitForFunction(n => document.querySelectorAll('#msgs .msg.user').length > 0 && document.querySelectorAll('#msgs .msg').length > n, n0, { timeout: 5000 }).catch(() => {});
       await v.shot(path.join(d, 'sending.png'));
-      const ok = await W.waitForFunction(() => { const m = [...document.querySelectorAll('#msgs .msg.pet')].filter(x => !x.classList.contains('typing')); return m.length ? { err: m[m.length - 1].classList.contains('err'), text: m[m.length - 1].textContent.slice(0, 160) } : null; },
+      const ok = await W.waitForFunction(() => { const m = [...document.querySelectorAll('#msgs .msg.pet')].filter(x => !x.classList.contains('typing')); return m.length ? { err: m[m.length - 1].classList.contains('err'), text: m[m.length - 1].textContent.slice(0, 1200) } : null; },
         null, { timeout: opts.liveChat ? 90e3 : 20e3 }).then(h => h.jsonValue()).catch(() => null);
       await sleep(400); await v.shot(path.join(d, 'reply.png'));
       R.surfaces.chat.reply = ok;
@@ -472,9 +491,20 @@ async function run(opts) {
       const t = Date.now();
       await v.evalMain(() => { const w = globalThis.__vibepet.win(); if (!w.isVisible()) w.showInactive(), w.webContents.send('summon'); w.webContents.send('hotkey'); });
       const c = (await waitCall(t, 'ipc:jump', 6000))[0];
+      // a second press within 4 s of the first walks on to the next in line (renderer/app.js 'hotkey'); later, it starts over
+      let c2 = null, gap = null;
+      if (queue.length > 1) {
+        const t2 = Date.now(); gap = t2 - t;
+        await v.evalMain(() => globalThis.__vibepet.win().webContents.send('hotkey'));
+        c2 = (await waitCall(t2, 'ipc:jump', 6000))[0];
+      }
       await sleep(600); await v.shot(path.join(d, 'hotkey.png'));
       k.hotkey = { jumped: c ? c.args[0] : null, expected: queue[0]?.id || null, result: c ? c.result : null };
       assert('keys', 'hotkeyJumps', queue.length ? c && c.args[0] === queue[0].id : !c, queue.length ? `${k.queue[0].member} first in line` : 'nothing in line: no jump');
+      if (queue.length > 1) {
+        k.hotkey2 = { jumped: c2 ? c2.args[0] : null, member: c2 ? bySidName(c2.args[0]) : null, expected: queue[1].id, gapMs: gap };
+        assert('keys', 'hotkeyWalks', gap >= 4000 || (c2 && c2.args[0] === queue[1].id), gap >= 4000 ? `second press ${gap} ms after the first: a new walk` : `then ${k.queue[1].member}`);
+      }
       // ⋯ → Settings → Gesture → Record gesture… (a native menu: captured, then its item clicked)
       await ensureHome();
       const t2 = Date.now();

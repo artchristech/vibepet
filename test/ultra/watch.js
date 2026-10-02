@@ -4,9 +4,11 @@
 // every --every seconds records, on one clock:
 //   truth  per live fleet session: Claude Code's registry (root/sessions/<pid>.json → status, waitingFor), the fleet
 //          member it belongs to, and how many tool processes (build.sh / slow.sh / deploy.sh …) run under its pid
-//   ui     per Home row: its signal (needs / stuck / ready / running) and label, plus the snapshot's phase and fan-out
+//   ui     per Home row: its signal (needs / stuck / ready / running / exited) and label, plus the snapshot's phase, kind,
+//          since and fan-out; and the three orders (snapshot, Home rows, the jump key's pending())
 // and writes timeline.jsonl + summary.json (per member: the segments of (truth, ui), and how long each truth change took
-// to show). Rows of sessions that are not live fleet sessions are kept as `extra`.
+// to show; drops = samples with no row while the registry entry exists; order mismatches). Rows of sessions that are
+// not live fleet sessions are kept as `extra`.
 //
 //   node test/ultra/watch.js [--app <worktree>] --out <dir> [--secs 300] [--every 2] [--userdata <dir>] [--root DIR]
 //
@@ -65,13 +67,15 @@ async function main() {
     while (Date.now() - T0 < secs * 1000) {
       const t = Date.now();
       if (!(await v.homeMode())) { await v.openHome().catch(() => {}); opens++; }
-      const [rows, snap] = await Promise.all([
-        v.win.evaluate(() => [...document.querySelectorAll('#now .nr[data-id]')].map(r => ({ id: r.dataset.id, sig: ['needs', 'stuck', 'ready', 'running'].find(c => r.classList.contains(c)) || null, label: r.querySelector('.nm small')?.textContent || '', ask: (r.querySelector('.na')?.textContent || '').slice(0, 60) || null }))),
-        v.evalMain(() => (globalThis.__vibepet.snapshot().agents || []).map(a => ({ id: a.id, name: a.name, phase: a.phase, since: a.since, fan: a.fanout ? [a.fanout.open, a.fanout.total, a.fanout.stuck] : null }))),
+      const [rows, snap, queue] = await Promise.all([
+        v.win.evaluate(() => [...document.querySelectorAll('#now .nr[data-id]')].map(r => ({ id: r.dataset.id, sig: ['needs', 'stuck', 'ready', 'running', 'exited'].find(c => r.classList.contains(c)) || null, label: r.querySelector('.nm small')?.textContent || '', ask: (r.querySelector('.na')?.textContent || '').slice(0, 60) || null }))),
+        v.evalMain(() => (globalThis.__vibepet.snapshot().agents || []).map(a => ({ id: a.id, name: a.name, phase: a.phase, kind: a.kind || null, since: a.since, fan: a.fanout ? [a.fanout.open, a.fanout.total, a.fanout.stuck] : null }))),
+        v.win.evaluate(() => typeof pending === 'function' ? { pending: pending().map(a => a.id), held: pending(true).map(a => a.id) } : null),   // the jump key's queue
       ]);
       const tr = truth(root), sa = new Map(snap.map(a => [a.id, a]));
-      const line = { t: t - T0, at: new Date(t).toISOString(), truth: tr, ui: rows.map(r => ({ ...r, name: sa.get(r.id)?.name || null, phase: sa.get(r.id)?.phase || null, fan: sa.get(r.id)?.fan || null })),
-        hiddenPhases: snap.filter(a => !rows.some(r => r.id === a.id)).map(a => ({ id: a.id, name: a.name, phase: a.phase })) };
+      const line = { t: t - T0, at: new Date(t).toISOString(), truth: tr, ui: rows.map(r => ({ ...r, name: sa.get(r.id)?.name || null, phase: sa.get(r.id)?.phase || null, kind: sa.get(r.id)?.kind || null, since: sa.get(r.id)?.since ?? null, fan: sa.get(r.id)?.fan || null })),
+        hiddenPhases: snap.filter(a => !rows.some(r => r.id === a.id)).map(a => ({ id: a.id, name: a.name, phase: a.phase })),
+        order: { snapshot: snap.map(a => a.id), home: rows.map(r => r.id), pending: queue?.pending || null, held: queue?.held || null } };
       lines.push(line); fs.appendFileSync(f, JSON.stringify(line) + '\n');
       await sleep(Math.max(0, every * 1000 - (Date.now() - t)));
     }
@@ -91,7 +95,8 @@ async function main() {
       if (!last || last.ui !== uiClass(u)) m.segments.push({ from: L.t, to: L.t, truth: 'not a live fleet session', ui: uiClass(u), label: u.label }); else last.to = L.t; }
   }
   // detection latency: a truth change at t1 → the first sample at or after it whose Home row says the matching thing
-  const WANT = { approval: ['stuck', 'needs'], question: ['needs'], 'busy+tool': ['running'], busy: ['running'], idle: ['ready', 'hidden'] };
+  // (an approval read as red 'stuck', and a done session dropped from Home, were bugs: r1-S7-06, r1-S1-02)
+  const WANT = { approval: ['needs'], question: ['needs'], 'busy+tool': ['running'], busy: ['running'], idle: ['ready', 'needs'], gone: ['exited', 'hidden'] };
   for (const [k, m] of Object.entries(members)) {
     if (!m.changes) continue;
     let prev = null;
@@ -104,12 +109,23 @@ async function main() {
       prev = s.truth;
     }
   }
-  const summary = { app: appDir, root, startedAt: new Date(T0).toISOString(), secs, every, samples: lines.length, homeOpens: opens, close: closed, members };
+  // one order: Home's rows = the snapshot's (Home caps at 8), and the jump key's queue (pending()) keeps the snapshot's order.
+  // drops: samples where a live fleet session (its registry entry exists) has no Home row
+  const sub = (xs, ys) => { let j = 0; for (const x of xs || []) { while (j < ys.length && ys[j] !== x) j++; if (j++ >= ys.length) return false; } return true; };
+  const bad = lines.filter(L => L.order.home.join() !== L.order.snapshot.slice(0, 8).join() || !sub(L.order.pending, L.order.snapshot) || !sub(L.order.held, L.order.snapshot));
+  const drops = {};
+  for (const L of lines) for (const t of L.truth) { const k = t.member || t.sessionId.slice(0, 8); drops[k] = (drops[k] || 0) + (L.ui.some(r => r.id === t.sessionId) ? 0 : 1); }
+  const name = id => { for (const L of lines) for (const t of L.truth) if (t.sessionId === id) return t.member; return id.slice(0, 8); };
+  const order = { samples: lines.length, mismatches: bad.length, firstMismatch: bad[0] ? { t: bad[0].t, ...Object.fromEntries(Object.entries(bad[0].order).map(([k, v]) => [k, (v || []).map(name)])) } : null,
+    last: lines.length ? Object.fromEntries(Object.entries(lines[lines.length - 1].order).map(([k, v]) => [k, (v || []).map(name)])) : null };
+  const summary = { app: appDir, root, startedAt: new Date(T0).toISOString(), secs, every, samples: lines.length, homeOpens: opens, close: closed, drops, order, members };
   fs.writeFileSync(path.join(out, 'summary.json'), JSON.stringify(summary, null, 2));
   for (const [k, m] of Object.entries(members)) {
     console.log(k);
     for (const s of m.segments) console.log(`  ${(s.from / 1000).toFixed(0).padStart(4)}–${(s.to / 1000).toFixed(0).padEnd(4)}s  truth ${s.truth.padEnd(10)} ui ${s.ui.padEnd(8)} ${s.label || ''}${s.fan ? ` fan ${s.fan.join('/')}` : ''}`);
   }
+  console.log(`drops (samples with no row while the registry entry exists): ${JSON.stringify(drops)}`);
+  console.log(`order: ${order.mismatches} of ${order.samples} samples off (Home = snapshot, pending() ⊆ snapshot in order); last ${JSON.stringify(order.last)}`);
   console.log(`${lines.length} samples → ${out}  (close ${closed.how}, orphans ${closed.orphans.length})`);
 }
 if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });
