@@ -374,19 +374,21 @@ async function psAll() {
 
 const locCache = new Map();   // session id -> { pid, tty }
 const isClaude = p => !!p && path.basename(p.comm) === 'claude';
+const regOf = pid => { try { return JSON.parse(fs.readFileSync(path.join(SESS_DIR, pid + '.json'), 'utf8')); } catch { return null; } };
+// → { pid, tty, reg } or null. reg = the pid's registry entry (its tmux pane, status, waitingFor), read fresh each time;
+// null reg = a claude found only by its cwd (no registry file: an older CLI)
 async function locateSession(s, procs) {
   procs ||= await psAll();
-  const hit = locCache.get(s.id);
-  if (hit && isClaude(procs.get(hit.pid))) return hit;
+  const hit = locCache.get(s.id), hr = hit && isClaude(procs.get(hit.pid)) ? regOf(hit.pid) : undefined;
+  if (hr !== undefined && (!hr || hr.sessionId === s.id)) return { ...hit, reg: hr };   // a /clear or /resume moves the pid on
   locCache.delete(s.id);
-  const cands = [...procs.values()].filter(isClaude);
-  const keep = p => { const v = { pid: p.pid, tty: p.tty }; locCache.set(s.id, v); return v; };
-  for (const p of cands) {          // exact: Claude Code records which session each pid is running
-    try { if (JSON.parse(fs.readFileSync(path.join(SESS_DIR, p.pid + '.json'), 'utf8')).sessionId === s.id) return keep(p); } catch {}
-  }
+  const cands = [...procs.values()].filter(isClaude), regs = new Map(cands.map(p => [p.pid, regOf(p.pid)]));
+  const keep = (p, reg = null) => { const v = { pid: p.pid, tty: p.tty }; locCache.set(s.id, v); return { ...v, reg }; };
+  for (const p of cands) if (regs.get(p.pid)?.sessionId === s.id) return keep(p, regs.get(p.pid));   // exact: Claude Code records which session each pid is running
   if (!s.cwd) return null;
-  const cwds = await Promise.all(cands.map(p => run('/usr/sbin/lsof', ['-a', '-p', String(p.pid), '-d', 'cwd', '-Fn'])));
-  const same = cands.filter((p, i) => (cwds[i] || '').split('\n').find(l => l.startsWith('n'))?.slice(1) === s.cwd);
+  const free = cands.filter(p => !regs.get(p.pid));   // a pid whose registry names another session isn't this one: never guess it
+  const cwds = await Promise.all(free.map(p => run('/usr/sbin/lsof', ['-a', '-p', String(p.pid), '-d', 'cwd', '-Fn'])));
+  const same = free.filter((p, i) => (cwds[i] || '').split('\n').find(l => l.startsWith('n'))?.slice(1) === s.cwd);
   if (!same.length) return null;
   let born = Infinity; try { born = fs.statSync(s.file).birthtimeMs; } catch {}
   const gap = p => p.start <= born ? born - p.start : 1e13 + p.start - born;   // started closest to, and not after, the session

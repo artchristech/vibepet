@@ -444,16 +444,29 @@ ipcMain.on('local-stop', async (_, pid) => {
   const r = await dialog.showMessageBox({ type: 'warning', buttons: ['Stop', 'Cancel'], defaultId: 1, cancelId: 1, message: `Stop ${ports.label(s)} on :${s.port}?`, detail: `pid ${pid}` });
   if (r.response === 0) { send('event', { kind: 'localhost', text: await ports.stop(pid) }); setTimeout(() => ports.poll(0), 800); }
 });
-// approve / reply from the panel: bring that exact tab forward, then type into it. Refuses unless the tab was
-// found for sure, so keystrokes can never land in the wrong window.
-ipcMain.handle('send-to', async (_, { id, text }) => {
+// act on a session from the panel: { id, action: approve|always|deny|option|text|interrupt, key?, text? } (today's callers:
+// text null = approve, a string = text). In tmux: send-keys into its own pane, only once the pane shows what the action
+// answers (tmux.js) — no Accessibility, no focus change. Elsewhere: bring that exact tab forward, then type into it
+// (approve and text only); refuses unless the tab was found for sure, so keystrokes can never land in the wrong window.
+const tmux = require('./tmux');
+const ACTIONS = new Set(['approve', 'always', 'deny', 'option', 'text', 'interrupt']);
+ipcMain.handle('send-to', async (_, { id, action, key, text } = {}) => {
   const s = sessions.get(id); if (!s) return { ok: false, why: 'gone' };
-  if (!perms().ax) { shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility'); return { ok: false, why: 'Allow Accessibility first' }; }
+  action ||= text == null ? 'approve' : 'text';
+  if (!ACTIONS.has(action)) return { ok: false, why: `unknown action ${action}` };
+  if (action === 'text' && !String(text ?? '').trim()) return { ok: false, why: 'nothing to send' };
   try {
-    const procs = await psAll(), loc = await locateSession(s, procs), host = loc && hostApp(loc.pid, procs), bid = host && await bundleId(host);
+    const procs = await psAll();
+    if (!procs.size) return { ok: false, why: "couldn't list processes" };   // ps timed out (a loaded Mac): don't guess where it runs
+    const loc = await locateSession(s, procs);
+    if (loc?.reg?.tmux) return await tmux.send({ target: loc.reg.tmux, pid: loc.pid, procs, name: s.name, action, key, text });
+    if (action !== 'approve' && action !== 'text') return { ok: false, why: `${s.name} isn't in tmux: only Approve and Reply reach its tab` };
+    if (loc?.reg?.waitingFor === 'input needed') return { ok: false, why: `${s.name} is showing a question: ${action === 'text' ? 'typing' : 'Enter'} would pick an option blindly` };
+    if (!perms().ax) { shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility'); return { ok: false, why: 'Allow Accessibility first' }; }
+    const host = loc && hostApp(loc.pid, procs), bid = host && await bundleId(host);
     if (!bid || await focusTty(bid, loc.tty, s.title ? `✳ ${s.title}` : null) !== true) return { ok: false, why: "couldn't find its tab" };
     const esc = t => t.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-    const script = text ? `tell application "System Events"\nkeystroke "${esc(String(text).slice(0, 2000))}"\nkey code 36\nend tell` : 'tell application "System Events" to key code 36';   // approve = Enter on the highlighted "Yes"
+    const script = action === 'text' ? `tell application "System Events"\nkeystroke "${esc(String(text).slice(0, 2000))}"\nkey code 36\nend tell` : 'tell application "System Events" to key code 36';   // approve = Enter on the highlighted "Yes"
     await run('/usr/bin/osascript', ['-e', script], 5000);
     return { ok: true };
   } catch (e) { return { ok: false, why: e.message }; }
@@ -706,30 +719,44 @@ ipcMain.on('drag-end', () => {
 const takeFocus = () => { if (TEST) return; app.focus({ steal: true }); win.focus(); };   // never under test (see TEST)
 ipcMain.on('focus', takeFocus);
 ipcMain.on('copy', (_, text) => clipboard.writeText(text));
-// click → the terminal tab that session runs in (iTerm2/Terminal), else its app, else copy a resume command.
-// The only place ps/lsof/osascript ever run; nothing is typed into any terminal.
+// click → that session's terminal: its tmux pane through an attached client (tmux.js), else the tab it runs in
+// (iTerm2/Terminal), else its app. Only a session that has exited gets a resume command copied: pasting one for a
+// live session would start a second claude on it. Nothing is typed into any terminal.
 const shq = s => /^[\w@%+=:,./-]+$/.test(s) ? s : `'${s.replace(/'/g, `'\\''`)}'`;
 let axAsked = false;
+// bring a terminal forward → 'tab' (the exact one: iTerm2/Terminal by script, others through Accessibility) | 'app' | null
+async function raise(host, tty, title) {
+  const bid = await bundleId(host);
+  const f = await focusTty(bid, tty, title);
+  if (f === true) return 'tab';
+  if (f === 'noax' && !axAsked) {   // once per run: explain, open the pane; the app still comes forward below
+    axAsked = true;
+    emit('content', `To jump to the exact ${path.basename(host, '.app')} tab, allow vibepet in Accessibility (opening it now), then click again.`, { alert: true });
+    require('electron').shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility');
+  }
+  return await run('/usr/bin/open', bid ? ['-b', bid] : ['-a', host]) !== null ? 'app' : null;
+}
 ipcMain.handle('jump', async (_, id) => {
   const s = sessions.get(id);
   if (!s) return { ok: false };
+  let loc;
   try {
-    const procs = await psAll(), loc = await locateSession(s, procs), host = loc && hostApp(loc.pid, procs);
-    if (host) {
-      const bid = await bundleId(host);
-      const f = await focusTty(bid, loc.tty, s.title ? `✳ ${s.title}` : null);
-      if (f === true) return { ok: true, level: 'tab' };
-      if (f === 'noax' && !axAsked) {   // once per run: explain, open the pane; the app still comes forward below
-        axAsked = true;
-        emit('content', `To jump to the exact ${path.basename(host, '.app')} tab, allow vibepet in Accessibility (opening it now), then click again.`, { alert: true });
-        require('electron').shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility');
-      }
-      if (await run('/usr/bin/open', bid ? ['-b', bid] : ['-a', host]) !== null) return { ok: true, level: 'app' };
+    const procs = await psAll();
+    if (!procs.size) return { ok: false, why: "couldn't list processes" };
+    loc = await locateSession(s, procs);
+    if (loc?.reg?.tmux) {   // live in tmux: its pane in an attached client, or exactly why not
+      const t = await tmux.jump({ target: loc.reg.tmux, pid: loc.pid, procs, name: s.name });
+      if (!t.ok) return t;
+      const host = hostApp(t.client.pid, procs);
+      return { ok: true, level: 'pane', raised: host ? await raise(host, t.client.tty, t.session) : null };
     }
+    const host = loc && hostApp(loc.pid, procs), level = host && await raise(host, loc.tty, s.title ? `✳ ${s.title}` : null);
+    if (level) return { ok: true, level };
   } catch (e) { console.error('jump:', e.message); }
+  if (loc) return { ok: false, why: `couldn't find ${s.name}'s terminal` };   // alive: never a resume command
   const cmd = `${s.cwd ? `cd ${shq(s.cwd)} && ` : ''}claude --resume ${shq(id)}`;
   clipboard.writeText(cmd);
-  return { ok: false, cmd };
+  return { ok: false, cmd, why: `${s.name} has exited: resume command copied` };
 });
 ipcMain.on('rename', (_, name) => { name = (name || '').trim().slice(0, 16); if (name) { state.name = name; save(); tick(); } });
 ipcMain.on('exit-done', () => app.quit());

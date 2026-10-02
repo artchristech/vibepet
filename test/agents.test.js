@@ -32,8 +32,14 @@ console.log('classify ok', { waiting: w.ask.slice(-40), stalled: s.ask, ready: r
   if (!live) { console.log('locate: no live claude CLI with a tty on this machine — skipped'); return; }
   const cwd = (await require('../agents').run('/usr/sbin/lsof', ['-a', '-p', String(live.pid), '-d', 'cwd', '-Fn'])).split('\n').find(l => l.startsWith('n')).slice(1);
   const f = path.join(dir, 'probe.jsonl'); fs.writeFileSync(f, '');
-  const hit = await locateSession({ id: 'probe-' + Date.now(), cwd, file: f }, procs);
+  let reg = null; try { reg = JSON.parse(fs.readFileSync(path.join(require('../overrides').sessionsDir(), live.pid + '.json'), 'utf8')); } catch {}
+  const hit = await locateSession(reg ? { id: reg.sessionId, cwd, file: f } : { id: 'probe-' + Date.now(), cwd, file: f }, procs);
   assert(hit && procs.has(hit.pid) && /^\/dev\/ttys\d+$/.test(hit.tty), JSON.stringify(hit));
+  if (reg) {   // registered: found by its registry, entry attached; and never guessed for another session of its folder
+    assert.deepStrictEqual([hit.pid, hit.reg?.sessionId], [live.pid, reg.sessionId]);
+    const probe = await locateSession({ id: 'probe-' + Date.now(), cwd, file: f }, procs);
+    assert(!probe || (probe.pid !== live.pid && probe.reg === null), JSON.stringify(probe));
+  }
   assert.strictEqual(await locateSession({ id: 'none-' + Date.now(), cwd: dir, file: f }, procs), null);
-  console.log('locate ok', { cwd, pid: hit.pid, tty: hit.tty, none: null });
+  console.log('locate ok', { cwd, pid: hit.pid, tty: hit.tty, registered: !!reg, none: null });
 })().catch(e => { console.error(e); process.exit(1); }).finally(() => fs.rmSync(dir, { recursive: true, force: true }));

@@ -23,7 +23,7 @@ contextBridge.exposeInMainWorld('pet', {
   today: () => ipcRenderer.invoke('today'),
   localOpen: port => ipcRenderer.send('local-open', port),
   localStop: pid => ipcRenderer.send('local-stop', pid),
-  sendTo: (id, text) => ipcRenderer.invoke('send-to', { id, text }),
+  sendTo: (id, x) => ipcRenderer.invoke('send-to', x !== null && typeof x === 'object' ? { ...x, id } : { id, text: x }),   // x: { action, key?, text? }, or text (null = approve)
   jump: id => ipcRenderer.invoke('jump', id),
   theater: id => ipcRenderer.send('theater', id),
   gestureCancel: () => ipcRenderer.send('gesture-cancel'),

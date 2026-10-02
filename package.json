@@ -27,6 +27,7 @@
       "place.js",
       "agents.js",
       "registry.js",
+      "tmux.js",
       "goal.js",
       "overrides.js",
       "content/**",
