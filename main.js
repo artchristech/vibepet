@@ -448,7 +448,7 @@ ipcMain.handle('send-to', async (_, { id, action, key, text } = {}) => {
     const loc = await locateSession(s, procs);
     if (loc?.reg?.tmux) return await tmux.send({ target: loc.reg.tmux, pid: loc.pid, procs, name: s.name, action, key, text });
     if (action !== 'approve' && action !== 'text') return { ok: false, why: `${s.name} isn't in tmux: only Approve and Reply reach its tab` };
-    if (action === 'text' && loc?.reg?.waitingFor === 'input needed') return { ok: false, why: `${s.name} is showing a question: typing would pick an option blindly` };
+    if (loc?.reg?.waitingFor === 'input needed') return { ok: false, why: `${s.name} is showing a question: ${action === 'text' ? 'typing' : 'Enter'} would pick an option blindly` };
     if (!perms().ax) { shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility'); return { ok: false, why: 'Allow Accessibility first' }; }
     const host = loc && hostApp(loc.pid, procs), bid = host && await bundleId(host);
     if (!bid || await focusTty(bid, loc.tty, s.title ? `✳ ${s.title}` : null) !== true) return { ok: false, why: "couldn't find its tab" };
