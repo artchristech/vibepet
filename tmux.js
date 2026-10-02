@@ -34,7 +34,7 @@ function owns(procs, panePid, pid) {
   for (let p = pid, n = 0; p > 1 && n < 32; p = procs.get(p)?.ppid, n++) if (p === panePid) return true;
   return false;
 }
-// '#{pane_pid} #{pane_in_mode} #{pane_synchronized} #{window_id} #{pane_id} #{session_name}' → its parts, or null
+// display -p PANE → its parts, or null (copy mode and synchronize-panes decide whether keys would reach claude alone)
 const PANE = '#{pane_pid} #{pane_in_mode} #{pane_synchronized} #{window_id} #{pane_id} #{session_name}';
 function parsePane(out) {
   const m = String(out || '').trim().match(/^(\d+) ([01]) ([01]) (@\d+) (%\d+) (.+)$/);
@@ -62,7 +62,8 @@ async function jump({ target, pid, procs, name }) {
   const at = await locate(target, pid, procs, name);
   if (at.why) return { ok: false, why: at.why };
   const c = pickClient(await tmux(['list-clients', '-F', '#{client_tty} #{client_pid} #{client_activity} #{client_session}']), at.session);
-  if (!c) return { ok: false, why: `no terminal is attached to tmux session ${at.session}`, attach: `tmux attach -t ${at.session}` };
+  const q = /^[\w@%+=:,./-]+$/.test(at.session) ? at.session : `'${at.session.replace(/'/g, `'\\''`)}'`;
+  if (!c) return { ok: false, why: `no terminal is attached to tmux session ${at.session}`, attach: `tmux attach -t ${q}` };
   // one tmux call: switch (by pane id, so a session name can't prefix-match another), select, then read back what the client shows
   const out = await tmux([...(c.session === at.session ? [] : ['switch-client', '-c', c.tty, '-t', at.pane, ';']),
     'select-window', '-t', at.window, ';', 'select-pane', '-t', at.pane, ';', 'display', '-p', '-c', c.tty, '#{session_name} #{window_id} #{pane_id}']);
