@@ -914,6 +914,15 @@ $('renameForm').onsubmit = e => {
 // rows come in main's one queue order (needs you, oldest block first → done, oldest first → running → exited), as pending() does
 const byUrgency = () => [...(snap?.agents || [])];
 let replyOpen = null;   // session id whose inline reply box is open
+// a row's head: the one label (the folder dimmer after the title), then state + age leading the strongest second line with the
+// fan-out gauge beside it (pips + 'n/m subagents done' + the oldest still running), the goal, and the exact ask when it's your move
+function rowHead(a) {
+  const sig = SIG[a.phase], g = a.goal, t = a.title && a.title !== a.name, fo = a.fanout;
+  const gauge = fo && `<span class="nfo" title="${esc(foTitle(fo))}">${foPips(fo, fo.stuck ? TL.stuck : 'var(--c-accent)')}${fo.done}/${fo.total} subagents done${fo.open && fo.oldestOpenAt ? ` · oldest running ${span(Date.now() - fo.oldestOpenAt)}` : ''}</span>`;
+  return `<div class="nm"><b>${esc(t ? a.title : a.name)}${t ? `<i> · ${esc(a.name)}</i>` : ''}</b><div class="nst"><small>${esc(phaseTime(a, sig))}</small>${gauge || ''}</div>
+      ${g ? `<span class="ng ${g.done ? 'done' : g.verdict || ''}">${g.done ? '✓' : '◎'} ${esc(g.text)}</span>` : ''}
+      ${a.ask && (sig === 'needs' || sig === 'stuck') ? `<span class="na">${esc(a.ask)}</span>` : ''}</div>`;
+}
 function renderHome() {
   if (!snap) return;
   const setup = !snap.setupDone || setupForced;
@@ -930,9 +939,7 @@ function renderHome() {
       `<button data-do="goal" title="Set goal">◎</button>`,
     ].join('');
     return `<div class="nr ${sig}" data-id="${esc(a.id)}"><i class="tl" style="background:${TL[sig]}"></i>
-      <div class="nm"><b>${esc(a.title || a.name)}</b><small>${esc(a.name)} · ${esc(phaseTime(a, sig))}</small>
-      ${g ? `<span class="ng ${g.done ? 'done' : g.verdict || ''}">${g.done ? '✓' : '◎'} ${esc(g.text)}</span>` : ''}
-      ${a.ask && (sig === 'needs' || sig === 'stuck') ? `<span class="na">${esc(a.ask)}</span>` : ''}</div>
+      ${rowHead(a)}
       <div class="nb">${acts}</div>${rowNote(a)}
       ${replyOpen === a.id ? `<form class="nrep"><input placeholder="Reply to ${esc(a.title || a.name)}…" maxlength="2000"><button>Send</button></form>` : ''}</div>`;
   }).join('') || '<div class="nempty">No live sessions. Start Claude Code anywhere and I’ll pick it up.</div>';

@@ -1,7 +1,7 @@
 // node --test test/home-feedback.test.js — the renderer's feedback on Home: a jump that fails says why in its row (Home and the
 // pill) and leaves the queue alone, one that lands marks only its own row seen, an empty queue answers the key, one label
-// everywhere, and the CSS that keeps bubbles above the panel. The real renderer/app.js runs in a vm context on a small fake
-// DOM (no deps); markup is read back as strings.
+// everywhere, row heads (state first, fan-out gauge), and the CSS that keeps bubbles above the panel and the ask line legible.
+// The real renderer/app.js runs in a vm context on a small fake DOM (no deps); markup is read back as strings.
 const test = require('node:test');
 const assert = require('assert');
 const fs = require('fs');
@@ -159,4 +159,41 @@ test("the jump key with nobody waiting answers once per press, quietly; with som
   R.tick(FLEET());
   R.emit('hotkey');
   assert.deepStrictEqual(R.calls.jump, ['k'], 'first in line');
+});
+
+test('row heads: one label, state + age first, an untitled session named once, the fan-out gauge', () => {
+  const R = renderer();
+  const fl = FLEET();
+  fl.push({ id: 'f', name: 'swarm', title: 'Fan out', phase: 'working', kind: 'running', since: now - 5 * M,
+    fanout: { total: 3, done: 1, open: 2, stuck: 0, oldestOpenAt: now - 2 * M - 5000, items: [{ desc: 'a', open: true }, { desc: 'b', open: true }, { desc: 'c', open: false }] } });
+  R.tick(fl);
+  const html = R.home();
+  const k = homeRow(html, 'k'), v = homeRow(html, 'v'), d = homeRow(html, 'd'), f = homeRow(html, 'f');
+  assert.strictEqual(text(first(k, /<b>(.*?)<\/b>/)), 'Deploy.sh dry run · kestrel');
+  assert.strictEqual(first(k, /<small>([^<]*)<\/small>/), 'needs approval 38m', 'state + age lead the second line (canon reads the first small)');
+  assert.strictEqual(text(first(v, /<b>(.*?)<\/b>/)), 'vibepet');
+  assert.strictEqual(first(v, /<small>([^<]*)<\/small>/), 'done 3m ago');
+  assert.strictEqual((text(v).match(/vibepet/g) || []).length, 1, 'an untitled session shows its name once');
+  assert.match(text(d), /done 9m ago 3\/3 subagents done/);
+  assert.strictEqual((d.match(/<u class="f"><\/u>/g) || []).length, 3, 'three filled pips: every subagent done');
+  assert.match(text(f), /running 5m \d+s 1\/3 subagents done · oldest running 2m/);
+  assert.strictEqual((f.match(/<u><\/u>/g) || []).length, 2, 'two hollow pips: still running');
+  assert.ok(!/class="nfo"/.test(k), 'no gauge without a fan-out');
+  // the pill: the same label
+  assert.match(pillRow(R.els.get('roster').innerHTML, 'k'), /<b>Deploy\.sh dry run · kestrel<\/b>/);
+});
+
+test('the ask line holds >= 4.5:1 on the needs row in light and dark, over any desktop behind the panel', () => {
+  for (const theme of ['dark', 'light']) {
+    const panel = rgba(value('#chat', '--c-bg', theme)), tint = rgba(value('.nr.needs', 'background', theme)), ask = rgba(value('.na', 'color', theme));
+    for (const desk of [[0, 0, 0, 1], [138, 143, 152, 1], [255, 255, 255, 1]]) {   // black, the screenshots' grey, white
+      const row = over(tint, over(panel, desk)), c = contrast(ask, row);
+      assert.ok(c >= 4.5, `${theme} ask ${value('.na', 'color', theme)} on the needs row over rgb(${desk.slice(0, 3)}): ${c.toFixed(2)}:1`);
+    }
+  }
+});
+
+test("the pill's replay control shows without hovering its row, in a 24 px target", () => {
+  assert.notStrictEqual(value('#roster .replay', 'opacity'), '0', 'replay shown without hover');
+  assert.ok(parseFloat(value('#roster .replay', 'min-width')) >= 24 && parseFloat(value('#roster .replay', 'min-height')) >= 24, 'a 24 px target');
 });
