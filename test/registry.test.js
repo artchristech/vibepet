@@ -73,6 +73,7 @@ test('read(): live entries only — a dead pid, a dangling link and a reused pid
   put(424242, { pid: 424242, sessionId: 'dead', status: 'busy', statusUpdatedAt: ago(1000) });   // above macOS's pid ceiling: never alive
   put(424243, { pid: me, sessionId: 'reused', procStart: 'Mon Jan  1 00:00:00 2024', status: 'waiting', statusUpdatedAt: ago(1000) });   // our pid, another start
   fs.symlinkSync(path.join(dir, 'gone', '777.json'), path.join(dir, '777.json'));   // its claude exited, the link dangles
+  put(5, { pid: -1, sessionId: 'group' }); put(6, { pid: 1, sessionId: 'launchd' });   // kill(-1, 0) would ask every process; 1 isn't a claude
   let m = await R.read(dir);
   assert.deepStrictEqual([...m.keys()], ['live']);
   assert.strictEqual(m.get('live').pid, me);

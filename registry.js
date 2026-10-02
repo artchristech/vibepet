@@ -44,7 +44,7 @@ async function read(dir = DIR) {
     if (!e) { last.delete(n); continue; }
     last.set(n, e);
     const pid = Number.isInteger(e.pid) ? e.pid : +n.slice(0, -5);
-    if (typeof e.sessionId === 'string' && alive(pid)) ents.push({ ...e, pid });
+    if (typeof e.sessionId === 'string' && pid > 1 && alive(pid)) ents.push({ ...e, pid });   // never kill(0 | -1): a group, not a process
   }
   for (const n of last.keys()) if (!names.includes(n)) last.delete(n);
   await look(ents.map(e => e.pid));
