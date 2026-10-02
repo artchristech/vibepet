@@ -153,11 +153,12 @@ async function send({ target, pid, procs, name, action, key, text }) {
   if (why) return { ok: false, why };
   const keys = p => tmux(['send-keys', '-t', at.pane, ...p]).then(o => o != null);
   if (action !== 'text') return await keys(action === 'option' ? [String(key)] : KEYS[action]) ? { ok: true } : { ok: false, why: `tmux couldn't type into ${name}'s pane` };
-  // Claude Code reads a fast Enter after typed text as part of a paste: type, wait, and press Enter only if the box still holds it
+  // Claude Code reads a fast Enter after typed text as part of a paste: type, wait, and press Enter only if the ❯ box now
+  // holds typed text and nothing else came up (no box, or an empty one, means the keys went somewhere else: no Enter)
   if (!await keys(['-l', '--', literal(line(text))])) return { ok: false, why: `tmux couldn't type into ${name}'s pane` };
   await sleep(400);
   const now = screenState(await shot());
-  if (!now.box || now.perm || now.ask) return { ok: false, why: `${name}'s screen changed while typing: the reply is in its pane but wasn't sent` };
+  if (!now.box?.draft || now.perm || now.ask) return { ok: false, why: `${name}'s screen changed while typing: the reply is in its pane but wasn't sent` };
   return await keys(['Enter']) ? { ok: true } : { ok: false, why: `tmux couldn't press Enter in ${name}'s pane` };
 }
 
