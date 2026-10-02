@@ -9,12 +9,15 @@
 //        [--act]          really press Approve / send a Reply (default: only open them). On a build that can reach tmux
 //                         this answers a fleet session: it leaves its state and the next turn costs money; rearm after.
 //        [--live-chat]    chat through the user's real `claude` login on Haiku (default: a local stub engine, $0)
+//        [--ask TEXT]     after the first reply, type TEXT too and keep its reply, screenshot and context (repeatable;
+//                         'mode:agent' sends that quick ask instead)
 //        [--strict]       exit 1 when a Home row disagrees with the fleet's truth (default: only reachability fails)
 //   node test/ultra/canon.js --compare <outA> <outB> [--json FILE]   two runs side by side (exit 1 if they differ)
 //
 // Surfaces (renderer/app.js, main.js; see docs/ultra/round-0/surface-map.md):
 //   1 home      a real click on Net's pixels opens the Net Home panel; rows vs. `fleet.js status --json`
-//   2 chat      type a message, Enter → the reply (stub engine by default: deterministic, no tokens, nothing leaves)
+//   2 chat      type a message, Enter → the reply (stub engine by default: deterministic, no tokens, nothing leaves); the
+//               context each send carried is kept (2-chat/contexts/) and must hold a line per session
 //   3 command   '/' lists the commands; /today posts the day book
 //   4 rows      the row actions: ◎ goal → /goal → ✓ done, Reply form, Approve, a row click (= jump to its terminal)
 //   5 theater   ▶ on a row opens Theater for that session; it has beats; seek
@@ -136,6 +139,40 @@ process.stdin.on('data', d => input += d).on('end', () => {
   return { file: f, log };
 }
 
+// ---------- what the engine was sent: a pass-through in front of it (the stub, or the real `claude` with --live-chat) ----------
+// It keeps each call's stdin in <out>/2-chat/contexts/, then gives the engine the same argv, stdin and stdout. The instance
+// watches the isolated root, so that context holds fleet sessions and fleet repos only.
+function writeTee(dir, target) {
+  const f = path.join(dir, 'tee-claude.js'), ctx = path.join(dir, '2-chat', 'contexts');
+  fs.mkdirSync(ctx, { recursive: true });
+  fs.writeFileSync(f, `#!${process.execPath}
+const fs = require('fs'), path = require('path'), { spawn } = require('child_process');
+const file = path.join(${JSON.stringify(ctx)}, Date.now() + '-' + process.pid + '.stdin.txt');
+const c = spawn(${JSON.stringify(target)}, process.argv.slice(2), { stdio: ['pipe', 'inherit', 'inherit'] });
+process.stdin.on('data', d => { fs.appendFileSync(file, d); c.stdin.write(d); }).on('end', () => c.stdin.end());
+c.stdin.on('error', () => {}); c.on('error', () => process.exit(127)); c.on('exit', code => process.exit(code ?? 1));
+for (const s of ['SIGTERM', 'SIGINT', 'SIGHUP']) process.on(s, () => c.kill(s));
+`, { mode: 0o755 });
+  return { file: f, dir: ctx };
+}
+// the `claude` main.js's findClaude would pick: the user's own login
+function realClaude() {
+  const h = os.homedir();
+  for (const p of [path.join(h, '.local/bin/claude'), '/opt/homebrew/bin/claude', '/usr/local/bin/claude', path.join(h, '.claude/local/claude')]) { try { fs.accessSync(p, fs.constants.X_OK); return p; } catch {} }
+  try { const p = execFileSync('/bin/zsh', ['-lc', 'command -v claude'], { encoding: 'utf8', timeout: 5000 }).trim().split('\n').pop(); return p.startsWith('/') ? p : null; } catch { return null; }
+}
+// the <live_context> blocks sent so far, oldest first: from raw stdin, or from the strings inside a stream-json engine's lines
+function contextsSent(dir) {
+  const out = [], grab = t => { for (const m of t.matchAll(/<live_context>\n?([\s\S]*?)\n?<\/live_context>/g)) out.push(m[1]); };
+  let files = []; try { files = fs.readdirSync(dir).filter(f => f.endsWith('.stdin.txt')).sort((a, b) => parseInt(a) - parseInt(b)); } catch {}
+  for (const f of files) {
+    const t = fs.readFileSync(path.join(dir, f), 'utf8');
+    if (!t.trimStart().startsWith('{')) { grab(t); continue; }
+    for (const l of t.split('\n')) { try { JSON.stringify(JSON.parse(l), (k, v) => (typeof v === 'string' && v.includes('<live_context>') && grab(v), v)); } catch {} }
+  }
+  return out;
+}
+
 // ---------- main-process instrumentation: stubs for everything that would leave the instance, spies on the IPC we assert on ----------
 function instrument({ dialog, shell, clipboard, Menu, ipcMain }) {
   if (globalThis.__canon) return { already: true };
@@ -193,7 +230,7 @@ async function run(opts) {
   // nothing of the calling Claude Code session leaks into the app or a `claude` it spawns
   for (const k of Object.keys(process.env)) if (/^CLAUDE(CODE$|_CODE_|_PID$|_EFFORT$)/.test(k)) delete process.env[k];
   const { launch } = require('./launch');
-  const T0 = Date.now(), R = { app: appDir, out, root, startedAt: new Date().toISOString(), flags: { allRows: !!opts.allRows, act: !!opts.act, liveChat: !!opts.liveChat },
+  const T0 = Date.now(), R = { app: appDir, out, root, startedAt: new Date().toISOString(), flags: { allRows: !!opts.allRows, act: !!opts.act, liveChat: !!opts.liveChat, asks: (opts.asks || []).length },
     git: null, fleet: null, surfaces: {}, assertions: [], rows: [], compare: [], intercepted: [], timings: {}, failures: [] };
   try { R.git = execFileSync('git', ['-C', appDir, 'log', '-1', '--format=%h %s'], { encoding: 'utf8' }).trim() + ' @ ' + execFileSync('git', ['-C', appDir, 'rev-parse', '--abbrev-ref', 'HEAD'], { encoding: 'utf8' }).trim(); } catch {}
   const assert = (surface, id, ok, detail) => { R.assertions.push({ surface, id, ok: !!ok, detail }); if (!ok) R.failures.push(`${surface}/${id}: ${typeof detail === 'string' ? detail : JSON.stringify(detail)}`); return !!ok; };
@@ -212,12 +249,14 @@ async function run(opts) {
   if (srvRepo) srv = await startServer(fleetRepo(srvRepo)).catch(e => { assert('ports', 'fixtureServer', false, e.message); return null; });
   const stub = opts.liveChat ? null : writeStub(out);
   try { if (stub) fs.rmSync(stub.log, { force: true }); } catch {}
+  try { fs.rmSync(path.join(out, '2-chat', 'contexts'), { recursive: true, force: true }); } catch {}
+  const engine = stub ? stub.file : realClaude(), tee = engine ? writeTee(out, engine) : null;
 
   let v;
   const tLaunch = Date.now();
   try {
     v = await launch({ appDir, root, userData: opts.userdata ? path.resolve(opts.userdata) : undefined, state: SEED,
-      env: { ANTHROPIC_API_KEY: '', ...(stub ? { VIBEPET_CLAUDE_BIN: stub.file } : {}) } });
+      env: { ANTHROPIC_API_KEY: '', ...(tee ? { VIBEPET_CLAUDE_BIN: tee.file } : {}) } });
   } catch (e) { if (srv) try { process.kill(srv.pid, 'SIGTERM'); } catch {} throw e; }
   // the first snapshot the renderer got (launch() returns once it has one): who needed you from the very first tick
   const snap0 = await v.evalMain(() => globalThis.__vibepet.snapshot()).catch(() => null);
@@ -314,7 +353,7 @@ async function run(opts) {
       R.surfaces.chat = { ...st };
       assert('chat', 'inputVisible', st.input, st);
       assert('chat', 'chipsVisible', st.chips.length >= 1, st.chips);
-      const n0 = await W.locator('#msgs .msg').count();
+      const n0 = await W.locator('#msgs .msg').count(), snapS = await v.evalMain(() => globalThis.__vibepet.snapshot());   // what the context is built from (±1 tick)
       await W.locator('#chatInput').fill("what's running?");
       await W.locator('#chatInput').press('Enter');
       await W.waitForFunction(n => document.querySelectorAll('#msgs .msg.user').length > 0 && document.querySelectorAll('#msgs .msg').length > n, n0, { timeout: 5000 }).catch(() => {});
@@ -328,7 +367,36 @@ async function run(opts) {
       if (stub) { let log = []; try { log = fs.readFileSync(stub.log, 'utf8').trim().split('\n').filter(Boolean).map(l => JSON.parse(l)); } catch {}
         R.surfaces.chat.engine = { kind: 'stub', calls: log };
         assert('chat', 'engineCalled', log.length === 1 && log[0].print && log[0].noPersist, log); }
-      else R.surfaces.chat.engine = { kind: 'live claude login', model: SEED.model };
+      else R.surfaces.chat.engine = { kind: 'live claude login', model: SEED.model, bin: engine };
+      // what the send carried: a line per session with its state and age, ask, title and repo, then an Overlaps line. Scored:
+      // the sessions live both before the send and after the reply, each against either snapshot (a tick may fall between)
+      const sent = tee ? contextsSent(tee.dir) : [], ctx = sent[sent.length - 1] || null, snapC = await v.evalMain(() => globalThis.__vibepet.snapshot());
+      if (ctx) fs.writeFileSync(path.join(d, 'context.txt'), ctx);
+      const lines = (ctx || '').split('\n').filter(l => l.startsWith('- ')), after = new Map((snapC.agents || []).map(a => [a.id, a]));
+      const per = (snapS.agents || []).filter(a => after.has(a.id)).map(a => { const both = [a, after.get(a.id)], l = lines.find(x => x.startsWith(`- ${a.name} `) && both.some(b => !b.title || x.includes(`"${b.title}"`))) || null;
+        return { member: bySid.get(a.id)?.name || null, name: a.name, line: l, has: l && { stateAge: / for \d+(?:s|m \d+s|h \d+m)(?: · |$)/.test(l), ask: both.some(b => !b.ask || l.includes(b.ask)), title: both.some(b => !b.title || l.includes(`"${b.title}"`)),
+          repo: / · repo [^ ]+\/[^ ]+ · /.test(l) || l.includes(' · not in a git repo · ') } }; });
+      const moved = [...(snapS.agents || []).filter(a => !after.has(a.id)), ...(snapC.agents || []).filter(a => !(snapS.agents || []).some(b => b.id === a.id))].map(a => bySid.get(a.id)?.name || a.name);
+      R.surfaces.chat.context = { file: ctx ? '2-chat/context.txt' : null, bytes: ctx ? ctx.length : 0, sends: sent.length, sessions: per, cameOrWent: moved, overlaps: (ctx || '').split('\n').find(l => l.startsWith('Overlaps:')) || null };
+      assert('chat', 'contextSessions', !!ctx && per.every(p => p.line && Object.values(p.has).every(Boolean)) && !!R.surfaces.chat.context.overlaps,
+        ctx ? per.filter(p => !p.line || !Object.values(p.has).every(Boolean)).map(p => `${p.member || p.name}: ${p.line ? JSON.stringify(p.has) : 'no line'}`).join('; ') || `a line for each of ${per.length} sessions + Overlaps` : 'no context captured');
+      if (stub) assert('chat', 'stubEchoesEverySession', ok && per.every(p => ok.text.includes(`${p.name}=`)), ok && ok.text);
+      // --ask: more questions, one at a time: the reply, a screenshot, the context it was sent with, the load
+      R.surfaces.chat.asks = [];
+      for (const [i, q] of (opts.asks || []).entries()) {
+        const n = await W.locator('#msgs .msg.pet:not(.typing)').count(), before = (tee ? contextsSent(tee.dir) : []).length, load = os.loadavg().map(x => x.toFixed(2)).join(' '), t = Date.now();
+        if (/^mode:\w+$/.test(q)) await W.evaluate(m => send(null, m), q.slice(5));   // a quick ask, as its chip sends it (chips show on a fresh chat only)
+        else { await W.locator('#chatInput').fill(q); await W.locator('#chatInput').press('Enter'); }
+        const r = await W.waitForFunction(n => { const m = [...document.querySelectorAll('#msgs .msg.pet')].filter(x => !x.classList.contains('typing')); return m.length > n ? { err: m[m.length - 1].classList.contains('err'), text: m[m.length - 1].textContent.slice(0, 2000) } : null; },
+          n, { timeout: opts.liveChat ? 120e3 : 20e3 }).then(h => h.jsonValue()).catch(() => null);
+        const ms = Date.now() - t;
+        await sleep(400); await v.shot(path.join(d, `ask-${i + 1}.png`));
+        const all = tee ? contextsSent(tee.dir) : [], c = all.length > before ? all[all.length - 1] : null;
+        if (c) fs.writeFileSync(path.join(d, `ask-${i + 1}.context.txt`), c);
+        R.surfaces.chat.asks.push({ q, reply: r, ms, load: { before: load, after: os.loadavg().map(x => x.toFixed(2)).join(' ') }, context: c ? `2-chat/ask-${i + 1}.context.txt` : null,
+          about: c ? [...c.matchAll(/^About (.+?) \((.+?)\):$/gm)].map(m => ({ session: m[1], why: m[2] })) : [], overlaps: c ? c.split('\n').find(l => l.startsWith('Overlaps:')) || null : null });
+        assert('chat', `ask${i + 1}`, r && !r.err, { q, reply: r });
+      }
     });
 
     // ---------------- 3. command bar ----------------
@@ -594,8 +662,9 @@ if (require.main === module && flag('--compare')) {
   for (const s of c.shots) console.log(`  ${s.file}: ${s.only ? 'only in ' + s.only : s.size ? 'size ' + s.size.join(' vs ') : s.changedPct + '% of pixels changed'}`);
   process.exit(same ? 0 : 1);
 } else if (require.main === module) {
-  const opts = { app: arg('--app'), out: arg('--out'), userdata: arg('--userdata'), root: arg('--root'), allRows: flag('--all-rows'), act: flag('--act'), liveChat: flag('--live-chat') };
-  if (!opts.out) { console.error('usage: node test/ultra/canon.js --app <worktree> --out <dir> [--userdata <dir>] [--root DIR] [--all-rows] [--act] [--live-chat] [--strict]'); process.exit(2); }
+  const opts = { app: arg('--app'), out: arg('--out'), userdata: arg('--userdata'), root: arg('--root'), allRows: flag('--all-rows'), act: flag('--act'), liveChat: flag('--live-chat'),
+    asks: argv.flatMap((a, i) => a === '--ask' && argv[i + 1] != null ? [argv[i + 1]] : []) };
+  if (!opts.out) { console.error('usage: node test/ultra/canon.js --app <worktree> --out <dir> [--userdata <dir>] [--root DIR] [--all-rows] [--act] [--live-chat] [--ask TEXT]... [--strict]'); process.exit(2); }
   run(opts).then(R => {
     const s = R.summary;
     console.log(`${s.ok ? 'ok' : 'FAIL'} ${s.assertions} assertions in ${(R.ms / 1000).toFixed(1)} s → ${R.out}`);

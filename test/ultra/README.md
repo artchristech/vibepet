@@ -32,7 +32,7 @@ truth (`test/fleet/fleet.js status --json`, read-only), then opens the 7 surface
 | surface | what it does | shots |
 |---|---|---|
 | 1-home | real click on Net → Home; rows vs. the fleet (`compare[]`: per member truth, row signal, label, actions, problems) | pet, panel |
-| 2-chat | types a message, Enter → reply. Engine = a stub `claude` (`VIBEPET_CLAUDE_BIN`, answers from the context's `Agents:` line, $0); `--live-chat` uses the user's login on Haiku | sending, reply |
+| 2-chat | types a message, Enter → reply. Engine = a stub `claude` (`VIBEPET_CLAUDE_BIN`, answers from the context's `Agents:` line, $0); `--live-chat` uses the user's login on Haiku. A pass-through in front of either engine keeps each send's stdin (`2-chat/contexts/`, the first send's context in `context.txt`): it must hold a line per session (state + true age, ask, title, repo) and an `Overlaps:` line | sending, reply |
 | 3-command | `/` lists 8 commands; `/today` posts its note | slash, today |
 | 4-rows | ◎ → `/goal canon goal` → ✓ (clicked again once if the first ✓ is dropped, see `firstClickDropped`); Reply opens its form; a row click jumps (`ipc:jump` result) | list, goal, reply, jump |
 | 5-theater | ▶ on a row → Theater window with beats; the middle beat | open, seek-mid |
@@ -43,7 +43,9 @@ Before any click, main is instrumented: dialogs answer themselves, `shell.openEx
 only record, native menus are captured (then their items clicked), and `jump`/`send-to` are wrapped to record each
 call's result (`intercepted[]`). Flags: `--all-rows` (a shot + a jump of every row: the baseline view), `--act` (really
 press Approve / send the Reply; refused when the session's terminal is a GUI app; on a build that reaches tmux this
-answers a fleet session, which leaves its state: rearm after), `--root`, `--strict` (truth mismatches fail the run).
+answers a fleet session, which leaves its state: rearm after), `--root`, `--strict` (truth mismatches fail the run),
+`--ask TEXT` (repeatable: after the first reply, type TEXT too; `mode:agent` sends that quick ask instead. Each gets
+`2-chat/ask-N.png`, `ask-N.context.txt`, and its reply, time and load in canon.json).
 
 ## Over time: `watch.js` (what Home shows vs. the registry, every 2 s)
 
