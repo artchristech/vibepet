@@ -74,6 +74,86 @@ function loadMembers(file = process.env.VP_MEMBERS || path.join(__dirname, 'memb
 function loadState() { try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch { return { members: {} }; } }
 function saveState(s) { fs.mkdirSync(FLEET, { recursive: true }); fs.writeFileSync(STATE_FILE + '.tmp', JSON.stringify(s, null, 2)); fs.renameSync(STATE_FILE + '.tmp', STATE_FILE); }
 
+// ---------------------------------------------------------------- leases (advisory: one holder per member)
+// Whoever is about to change a member's state takes its lease first, re-arms what it consumed, then releases.
+// Taking = an atomic mkdir of LEASES/<member> (of N racing takers exactly one wins); owner.json inside names the
+// holder. A lease older than its ttl is stale and the next taker breaks it: rename it aside (atomic, so one breaker
+// wins), check that what moved is the lease it judged stale, then mkdir again. The holder taking it again renews it.
+const LEASES = path.join(FLEET, '.leases');
+const LEASE_TTL_SEC = 1800;
+const LEASE_NAME = /^[A-Za-z0-9_-]{1,64}$/;   // no dots: '<member>.stale-*' / '.release-*' are the move-aside names
+function leaseDirOf(member, dir) {
+  if (!LEASE_NAME.test(String(member))) throw new Error(`bad member name for a lease: ${member}`);
+  return path.join(dir, member);
+}
+function readLeaseAt(p, now) {
+  let st; try { st = fs.statSync(p); } catch { return null; }
+  let info = null; try { info = JSON.parse(fs.readFileSync(path.join(p, 'owner.json'), 'utf8')); } catch {}
+  // no owner.json yet (a taker between its mkdir and its write) or unreadable: held, owner unknown, aged by the dir
+  const at = info && Date.parse(info.at) ? Date.parse(info.at) : st.mtimeMs;
+  const ttlSec = info && info.ttlSec > 0 ? info.ttlSec : LEASE_TTL_SEC;
+  const exp = at + ttlSec * 1000;
+  return { member: path.basename(p), owner: info ? info.owner : null, token: info ? info.token : null, at: iso(at), ttlSec, expiresAt: iso(exp), leftSec: Math.round((exp - now) / 1000), stale: now >= exp };
+}
+function readLease(member, { dir = LEASES, now = Date.now() } = {}) { return readLeaseAt(leaseDirOf(member, dir), now); }
+function listLeases({ dir = LEASES, now = Date.now() } = {}) {
+  let names = []; try { names = fs.readdirSync(dir).filter(n => LEASE_NAME.test(n)); } catch {}
+  return names.map(n => readLeaseAt(path.join(dir, n), now)).filter(Boolean);
+}
+function writeLeaseOwner(p, info) {
+  const tmp = path.join(p, `.owner-${process.pid}-${require('crypto').randomBytes(3).toString('hex')}.json`);
+  fs.writeFileSync(tmp, JSON.stringify(info, null, 2) + '\n');
+  fs.renameSync(tmp, path.join(p, 'owner.json'));
+}
+// Move the lease dir aside and delete it, but only if it is still the lease `expect` describes (same token); a
+// lease that changed in between is put back. Returns 'gone' (removed or already gone) or 'changed'.
+function removeLeaseIf(p, expect) {
+  const aside = `${p}.${expect.why}-${process.pid}-${require('crypto').randomBytes(4).toString('hex')}`;
+  try { fs.renameSync(p, aside); } catch (e) { if (e.code === 'ENOENT') return 'gone'; throw e; }
+  const moved = readLeaseAt(aside, Date.now());
+  if (moved && moved.token !== expect.token) { try { fs.renameSync(aside, p); } catch {} return 'changed'; }
+  fs.rmSync(aside, { recursive: true, force: true });
+  return 'gone';
+}
+function acquireLease(member, owner, { ttlSec = LEASE_TTL_SEC, dir = LEASES, now = Date.now() } = {}) {
+  owner = String(owner || '').trim();
+  if (!owner || owner.length > 100 || /[\n\r]/.test(owner)) throw new Error('lease: owner must be a short one-line name');
+  ttlSec = Number(ttlSec);
+  if (!(ttlSec > 0)) throw new Error(`lease: bad ttl ${ttlSec}`);
+  const p = leaseDirOf(member, dir);
+  fs.mkdirSync(dir, { recursive: true });
+  const info = () => ({ member, owner, token: require('crypto').randomBytes(8).toString('hex'), at: iso(now), ttlSec, expiresAt: iso(now + ttlSec * 1000), cmdPid: process.pid });
+  let broke = null;
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try { fs.mkdirSync(p); } catch (e) {
+      if (e.code !== 'EEXIST') throw e;
+      let cur = readLeaseAt(p, now);
+      // a fresh dir without owner.json: the winner is between its mkdir and its write; give it a moment to say who
+      for (let i = 0; cur && cur.owner == null && !cur.stale && i < 10; i++) { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25); cur = readLeaseAt(p, now); }
+      if (!cur) continue;                                        // released between our mkdir and our read: retry
+      if (cur.owner === owner) { writeLeaseOwner(p, info()); return { ok: true, action: 'renewed', lease: readLeaseAt(p, now), broke }; }
+      if (!cur.stale) return { ok: false, action: 'held', lease: cur };
+      if (removeLeaseIf(p, { token: cur.token, why: 'stale' }) === 'changed') return { ok: false, action: 'held', lease: readLeaseAt(p, now) || cur };
+      broke = cur;
+      continue;
+    }
+    writeLeaseOwner(p, info());
+    return { ok: true, action: broke ? 'broke-stale' : 'taken', lease: readLeaseAt(p, now), broke };
+  }
+  return { ok: false, action: 'contended', lease: readLeaseAt(p, now) };
+}
+// release <member> frees it whoever holds it; with `owner`, only that owner's lease is freed (unless `force`).
+function releaseLease(member, { owner = null, force = false, dir = LEASES, now = Date.now() } = {}) {
+  const p = leaseDirOf(member, dir);
+  const cur = readLeaseAt(p, now);
+  if (!cur) return { ok: true, action: 'free', lease: null };
+  if (owner && cur.owner !== owner && !force) return { ok: false, action: 'not-yours', lease: cur };
+  return removeLeaseIf(p, { token: cur.token, why: 'release' }) === 'changed'
+    ? { ok: false, action: 'changed', lease: readLeaseAt(p, now) }
+    : { ok: true, action: 'released', lease: cur };
+}
+const leaseLabel = (l) => (l ? `${l.owner || '(unknown)'} ${l.stale ? 'STALE' : `${l.leftSec}s left`}` : '');
+
 // ---------------------------------------------------------------- tmux
 function tmux(args, { allowFail = false } = {}) {
   const r = spawnSync(TMUX, args, { env: cleanEnv(), encoding: 'utf8' });
@@ -325,6 +405,7 @@ module.exports = {
   SPEND_CAP, SPEND_REFUSE_AT, HIDDEN_OVERHEAD_FLOOR, PRICES, estimateUsd, sessionSpend,
   cleanEnv, dname, isFleetDname, sleep, now, iso,
   loadMembers, loadState, saveState,
+  LEASES, LEASE_TTL_SEC, readLease, listLeases, acquireLease, releaseLease, leaseLabel,
   tmux, hasSession, fleetSessions, capture, paneInfo, sendKeys, sendLiteral, sendLine, assertOurs,
   psTable, descendants, argsOf, claudePidOf, childProcs, readRegistry,
   readJsonl, walkJsonl, fleetDnames, transcriptPath, subagentFiles, contentOf, tailState,

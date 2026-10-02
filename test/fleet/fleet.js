@@ -12,9 +12,15 @@
 //   node test/fleet/fleet.js send <name> <text...>          type a prompt into a member (spend-guarded)
 //   node test/fleet/fleet.js attach [name]                  open ONE Terminal.app window with a tmux client
 //   node test/fleet/fleet.js costs [names...]               per-turn cost timeline (prompt / scheduled / task_notification)
+//   node test/fleet/fleet.js lease <name> <owner> [--ttl 1800]   take a member before changing its state (exit 3: held)
+//   node test/fleet/fleet.js release <name> [owner] [--force]    give it back (with owner: only if that owner holds it)
 //
 // Members are data: test/fleet/members.json. Everything that can make a session take a turn
 // refuses once fleet spend reaches $4.50 (cap $5).
+//
+// Leases are advisory (atomic mkdir under ULTRA/fleet/.leases, stale after their ttl): status shows holders, and
+// rearm / send / pause / up warn when someone else holds a member. Say who you are with --as <owner> or
+// VP_LEASE_OWNER=<owner> and they refuse instead.
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -29,6 +35,18 @@ const CFG = L.loadMembers();
 const MEMBERS = CFG.members;
 const byName = (n) => { const m = MEMBERS.find(x => x.name === n); if (!m) throw new Error(`unknown member: ${n}`); return m; };
 const pick = (names) => (names.length ? names.map(byName) : MEMBERS);
+
+// Before a command changes members' state: a live lease held by someone else is a warning, or a refusal when the
+// caller said who it is (--as / VP_LEASE_OWNER) and it is not the holder.
+function leaseGate(ms, verb, me) {
+  for (const m of ms) {
+    const l = L.readLease(m.name);
+    if (!l || l.stale || (me && l.owner === me)) continue;
+    const msg = `${m.name} is leased by ${l.owner || '(unknown)'} until ${l.expiresAt} (${l.leftSec}s left)`;
+    if (me) throw new Error(`refusing ${verb}: ${msg}; you are ${me}`);
+    console.error(`fleet: WARNING ${verb}: ${msg}. Take the lease first: fleet.js lease ${m.name} <owner>`);
+  }
+}
 
 // ---------------------------------------------------------------- repos
 const GIT_ENV = L.cleanEnv({ GIT_AUTHOR_NAME: 'vibepet fleet', GIT_AUTHOR_EMAIL: 'fleet@vibepet.invalid', GIT_COMMITTER_NAME: 'vibepet fleet', GIT_COMMITTER_EMAIL: 'fleet@vibepet.invalid' });
@@ -339,6 +357,7 @@ async function cmdStatus(names, json) {
       procs: o.procs.map(p => p.comm + ' ' + p.args.slice(0, 60)), toolProcs: o.toolProcs.length,
       loop: m.verify && m.verify.loop ? loopJob(o, m) : undefined,
       checks: ev.checks, spendUsd: Math.round(memberSpend(m, ms) * 1e4) / 1e4,
+      lease: L.readLease(m.name),
     });
   }
   const sp = L.fleetSpend();
@@ -346,7 +365,7 @@ async function cmdStatus(names, json) {
   if (json) { log(JSON.stringify(res, null, 2)); return res; }
   for (const x of out) {
     const reg = x.registry ? `${x.registry.status}${x.registry.waitingFor ? '(' + x.registry.waitingFor + ')' : ''} ${ago(x.registry.statusUpdatedAt)}` : '-';
-    log(`${x.ok ? 'OK  ' : x.paused ? 'PAUS' : 'FAIL'} ${x.name.padEnd(8)} ${x.state.padEnd(9)} ${String(x.target || '-').padEnd(13)} pid ${String(x.pid || '-').padEnd(6)} sess ${(x.sessionId || '-').slice(0, 8)}  reg ${reg.padEnd(34)} last ${x.last.kind}${x.last.pending.length ? '[' + x.last.pending.join(',') + ']' : ''}  $${x.spendUsd.toFixed(4)}${x.paused ? '  (paused)' : ''}`);
+    log(`${x.ok ? 'OK  ' : x.paused ? 'PAUS' : 'FAIL'} ${x.name.padEnd(8)} ${x.state.padEnd(9)} ${String(x.target || '-').padEnd(13)} pid ${String(x.pid || '-').padEnd(6)} sess ${(x.sessionId || '-').slice(0, 8)}  reg ${reg.padEnd(34)} last ${x.last.kind}${x.last.pending.length ? '[' + x.last.pending.join(',') + ']' : ''}  $${x.spendUsd.toFixed(4)}${x.paused ? '  (paused)' : ''}${x.lease ? `  [lease: ${L.leaseLabel(x.lease)}]` : ''}`);
     if (!x.ok) log(`       failing: ${x.checks.filter(c => !c.ok).map(c => `${c.name}=${c.detail}`).join('; ')}`);
   }
   log(`fleet spend: $${res.spend.transcriptsUsd.toFixed(4)} in transcripts, ~$${res.spend.estimateWithHiddenUsd.toFixed(4)} incl. hidden calls (cap $${L.SPEND_CAP})  ${res.allOk ? 'ALL GREEN' : 'NOT ALL GREEN'}`);
@@ -448,13 +467,43 @@ function cmdAttach(name) {
 
 (async () => {
   const [cmd, ...rest] = process.argv.slice(2);
-  const flags = new Set(rest.filter(a => a.startsWith('--')));
-  const pos = rest.filter(a => !a.startsWith('--'));
+  // options that take a value (--ttl 1800 or --ttl=1800); their values are not positional
+  const VALUED = new Set(['--ttl', '--as', '--note']);
+  const opts = {}, pos = [], flags = new Set();
+  for (let i = 0; i < rest.length; i++) {
+    const a = rest[i], eq = a.indexOf('=');
+    if (a.startsWith('--') && eq > 0 && VALUED.has(a.slice(0, eq))) opts[a.slice(0, eq)] = a.slice(eq + 1);
+    else if (VALUED.has(a)) opts[a] = rest[++i];
+    else if (a.startsWith('--')) flags.add(a);
+    else pos.push(a);
+  }
+  const me = opts['--as'] || process.env.VP_LEASE_OWNER || null;
   switch (cmd) {
-    case 'up': process.exitCode = (await cmdUp(pos, { prompt: !flags.has('--no-prompt') })) ? 0 : 1; break;
+    case 'up': leaseGate(pick(pos), 'up', me); process.exitCode = (await cmdUp(pos, { prompt: !flags.has('--no-prompt') })) ? 0 : 1; break;
     case 'status': { const r = await cmdStatus(pos, flags.has('--json')); process.exitCode = r.allOk ? 0 : 1; break; }
-    case 'rearm': { if (!pos.length) throw new Error('rearm <name...>'); const st = L.loadState(); let ok = true; for (const m of pos.map(byName)) { log(`[${m.name}] rearm`); ok = (await arm(m, st)) && ok; } buildRoot(); process.exitCode = ok ? 0 : 1; break; }
-    case 'pause': await cmdPause(pos); break;
+    case 'rearm': { if (!pos.length) throw new Error('rearm <name...>'); leaseGate(pos.map(byName), 'rearm', me); const st = L.loadState(); let ok = true; for (const m of pos.map(byName)) { log(`[${m.name}] rearm`); ok = (await arm(m, st)) && ok; } buildRoot(); process.exitCode = ok ? 0 : 1; break; }
+    case 'pause': leaseGate(pos.length ? pos.map(byName) : MEMBERS.filter(m => m.costly), 'pause', me); await cmdPause(pos); break;
+    case 'lease': {
+      const [name, owner] = pos;
+      if (!name || !owner) throw new Error('lease <name> <owner> [--ttl SECONDS]');
+      byName(name);
+      const r = L.acquireLease(name, owner, { ttlSec: opts['--ttl'] != null ? Number(opts['--ttl']) : L.LEASE_TTL_SEC });
+      if (r.ok) log(`  ${name}: lease ${r.action} by ${owner} for ${r.lease.ttlSec}s (until ${r.lease.expiresAt})${r.broke ? `; broke the stale lease of ${r.broke.owner || '(unknown)'} from ${r.broke.at}` : ''}`);
+      else log(`  ${name}: ${r.action === 'held' ? 'held' : r.action} by ${r.lease ? r.lease.owner || '(unknown)' : '?'} since ${r.lease ? r.lease.at : '?'} (${r.lease ? r.lease.leftSec : '?'}s left); not taken`);
+      process.exitCode = r.ok ? 0 : 3;
+      break;
+    }
+    case 'release': {
+      const [name, owner] = pos;
+      if (!name) throw new Error('release <name> [owner] [--force]');
+      byName(name);
+      const r = L.releaseLease(name, { owner: owner || null, force: flags.has('--force') });
+      if (r.action === 'released') log(`  ${name}: released (was ${r.lease.owner || '(unknown)'} since ${r.lease.at})`);
+      else if (r.action === 'free') log(`  ${name}: not leased`);
+      else log(`  ${name}: not released: held by ${r.lease ? r.lease.owner || '(unknown)' : '?'}${r.action === 'changed' ? ' (changed while releasing)' : ''}; --force to take it anyway`);
+      process.exitCode = r.ok ? 0 : 3;
+      break;
+    }
     case 'down': cmdDown(pos); break;
     case 'spend': {
       const i = rest.indexOf('--note'); const sp = spendReport(i >= 0 ? rest[i + 1] : undefined);
@@ -465,10 +514,15 @@ function cmdAttach(name) {
       break;
     }
     case 'root': { const r = buildRoot(); log(JSON.stringify(r, null, 2)); break; }
-    case 'send': await cmdSend(pos[0], rest.slice(1).join(' ')); break;
+    case 'send': {   // the text is everything after the name, verbatim (flags like --dry-run included); only --as is taken out
+      const words = rest.filter((a, i) => !(a === '--as' || a.startsWith('--as=') || (i > 0 && rest[i - 1] === '--as')));
+      leaseGate([byName(words[0])], 'send', me);
+      await cmdSend(words[0], words.slice(1).join(' '));
+      break;
+    }
     case 'attach': cmdAttach(pos[0]); break;
     case 'costs': { const st = L.loadState(); for (const m of pick(pos)) { const c = turnCosts(m, st.members[m.name] || {}); log(`[${m.name}]`); for (const t of c.turns) log(`  ${t.start} ${t.session} ${t.origin.padEnd(17)} resp ${String(t.responses).padStart(2)}  $${t.usd.toFixed(5)}`); for (const x of c.subs) log(`  subagent ${x.file} ${x.first}..${x.last} resp ${x.responses} $${x.usd.toFixed(5)}`); } break; }
     default:
-      log('usage: fleet.js up|status|rearm|pause|down|spend|root|send|attach  (see header)'); process.exitCode = 2;
+      log('usage: fleet.js up|status|rearm|pause|down|spend|root|send|attach|costs|lease|release  (see header)'); process.exitCode = 2;
   }
 })().catch(e => { console.error('fleet:', e.message); process.exitCode = 1; });
