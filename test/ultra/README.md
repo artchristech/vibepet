@@ -55,6 +55,26 @@ Keeps Home open and samples, on one clock, each live fleet session's registry st
 and its Home row (signal, label, snapshot phase, fan-out). Writes `timeline.jsonl` and `summary.json` (per member: the
 segments of truth vs. UI, and how long each truth change took to show). Read-only: drive the fleet from another shell.
 
+## Time to attention: `tta.js` (a session starts needing you: how long until the pet says so, and can you act on it)
+
+```sh
+node test/ultra/tta.js --app <worktree> --out <dir> --plan approval:3,askuser:3 --quiet kestrel,beacon
+node test/ultra/tta.js --app <worktree> --out <dir> --plan question:3,done:3 --interleave
+node test/ultra/tta.js --app <worktree> --out <dir> --plan loop:3          # then subagent:3 (costly: ~$0.05 a trial warm)
+node test/ultra/tta.js --report <dir> --json <file> --full                # censored medians per kind + raw trials
+```
+
+It drives the fleet into a fresh block per trial (kestrel approval, beacon AskUserQuestion, a vibepet question or
+statement, an ember /loop fire that stalls on an approval, a delta subagent whose Bash call needs approval), while two
+instances of the app watch the isolated root: A with Home closed (bubble, LED, face: the ambient signal) and B with Home
+open (the rows). Both are polled read-only every 250 ms. The block's start is the transcript timestamp of the tool_use or
+end_turn, or the registry's `statusUpdatedAt` when Claude Code withholds the record. Each trial then resolves from the pet
+for real in A: click Net, press the row's Approve / Reply (never when the session's terminal is a GUI app), and the fleet
+session is the judge (tool_result written, registry left `waiting`, a new prompt landed). Writes `trials.jsonl`
+(appended; trial numbers continue), `shots/<kind>-<n>/` (each signal as it appears, named by seconds since the trigger),
+`run.log` and `meta-*.json`. Every prompt is spend-guarded (`--budget`, this probe's estimate incl. hidden calls).
+Sounds are recorded instead of played; banners are recorded by test mode, never posted.
+
 ## Env vars (all unset = vibepet as shipped)
 
 | var | effect |
