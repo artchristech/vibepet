@@ -34,15 +34,21 @@ function owns(procs, panePid, pid) {
   for (let p = pid, n = 0; p > 1 && n < 32; p = procs.get(p)?.ppid, n++) if (p === panePid) return true;
   return false;
 }
+// '#{pane_pid} #{pane_in_mode} #{pane_synchronized} #{window_id} #{pane_id} #{session_name}' → its parts, or null
+const PANE = '#{pane_pid} #{pane_in_mode} #{pane_synchronized} #{window_id} #{pane_id} #{session_name}';
+function parsePane(out) {
+  const m = String(out || '').trim().match(/^(\d+) ([01]) ([01]) (@\d+) (%\d+) (.+)$/);
+  return m ? { panePid: +m[1], inMode: m[2] === '1', synced: m[3] === '1', window: m[4], pane: m[5], session: m[6] } : null;
+}
 // where the pane is now (a pane can be moved to another window or session) — only if it still runs this claude
 async function locate(target, pid, procs, name) {
   const t = parseTarget(target);
   if (!t) return { why: `can't read ${name}'s tmux pane (${target})` };
   if (!await bin()) return { why: `${name} runs in tmux, but vibepet can't find the tmux command` };
-  const m = (await tmux(['display', '-p', '-t', t.pane, '#{pane_pid} #{window_id} #{pane_id} #{session_name}']) || '').trim().match(/^(\d+) (@\d+) (%\d+) (.+)$/);
-  if (!m) return { why: `${name}'s tmux pane ${t.pane} is gone` };
-  if (!owns(procs, +m[1], pid)) return { why: `tmux pane ${t.pane} doesn't run ${name} anymore` };
-  return { window: m[2], pane: m[3], session: m[4] };
+  const p = parsePane(await tmux(['display', '-p', '-t', t.pane, PANE]));
+  if (!p) return { why: `${name}'s tmux pane ${t.pane} is gone` };
+  if (!owns(procs, p.panePid, pid)) return { why: `tmux pane ${t.pane} doesn't run ${name} anymore` };
+  return p;
 }
 
 // attached clients ('#{client_tty} #{client_pid} #{client_activity} #{client_session}'): one already on the session, else the last used
@@ -146,6 +152,9 @@ async function send({ target, pid, procs, name, action, key, text }) {
   if (action === 'text' && !line(text)) return { ok: false, why: 'nothing to send' };
   const at = await locate(target, pid, procs, name);
   if (at.why) return { ok: false, why: at.why };
+  // keys would go to tmux's copy mode, or to every pane of the window (synchronize-panes), not to claude alone
+  if (at.inMode) return { ok: false, why: `${name}'s tmux pane is in copy mode (scrolled back): leave it first` };
+  if (at.synced) return { ok: false, why: `${name}'s tmux window has synchronize-panes on: keys would reach every pane` };
   const shot = () => tmux(['capture-pane', '-p', '-e', '-t', at.pane]);
   const raw = await shot();
   if (raw == null) return { ok: false, why: `couldn't read ${name}'s screen` };
@@ -162,4 +171,4 @@ async function send({ target, pid, procs, name, action, key, text }) {
   return await keys(['Enter']) ? { ok: true } : { ok: false, why: `tmux couldn't press Enter in ${name}'s pane` };
 }
 
-module.exports = { bin, parseTarget, owns, pickClient, screenState, guard, typed, literal, jump, send };
+module.exports = { bin, parseTarget, parsePane, owns, pickClient, screenState, guard, typed, literal, jump, send };

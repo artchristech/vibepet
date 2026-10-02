@@ -12,7 +12,7 @@ const { spawn } = require('child_process');
 const ROOT = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'vibepet-tmux-')));
 process.env.VIBEPET_CLAUDE_DIR = ROOT;
 fs.mkdirSync(path.join(ROOT, 'sessions'));
-const { parseTarget, owns, pickClient, screenState, guard, typed, literal } = require('../tmux');
+const { parseTarget, parsePane, owns, pickClient, screenState, guard, typed, literal } = require('../tmux');
 const { psAll, locateSession } = require('../agents');
 test.after(() => fs.rmSync(ROOT, { recursive: true, force: true }));
 
@@ -106,6 +106,12 @@ test('parseTarget: the registry tmux field → session, window, pane', () => {
   assert.deepStrictEqual(parseTarget('my work:@12.%40'), { session: 'my work', window: '@12', pane: '%40' });
   assert.deepStrictEqual(parseTarget('%3'), { session: null, window: null, pane: '%3' });
   for (const bad of [undefined, '', 'vp-kestrel', 'vp-kestrel:0.0', 'vp-kestrel:@8', '%8; kill-server', 'a:b:@1.%2']) assert.strictEqual(parseTarget(bad), null, String(bad));
+});
+
+test('parsePane: where the pane is now, and whether keys would reach claude alone', () => {
+  assert.deepStrictEqual(parsePane('48195 0 0 @1 %1 vp-vibepet\n'), { panePid: 48195, inMode: false, synced: false, window: '@1', pane: '%1', session: 'vp-vibepet' });
+  assert.deepStrictEqual([parsePane('7 1 0 @2 %5 my work').inMode, parsePane('7 0 1 @2 %5 my work').synced, parsePane('7 0 1 @2 %5 my work').session], [true, true, 'my work']);
+  for (const bad of [null, '', "can't find pane: %9", '7 0 @2 %5 s']) assert.strictEqual(parsePane(bad), null, String(bad));
 });
 
 test('owns: the pane pid must be claude itself or one of its ancestors', () => {
