@@ -24,7 +24,8 @@ const EVID = process.env.VIBEPET_ULTRA_EVID || path.join(HOME, 'projects', 'vibe
 const FLEET_TAG = '-vibepet-ultra-fleet-';
 const TMUX_PREFIX = 'vp-';
 const SPEND_CAP = 5;
-const SPEND_REFUSE_AT = 4.5;
+const SPEND_REFUSE_AT = 4.5;   // default stop; a round can set a lower one (spendStop below)
+const SPEND_STOP_FILE = path.join(FLEET, 'spend-stop');
 // Claude Code makes API calls that never reach the transcript (prompt suggestions, ai-title,
 // background-agent summaries ...). Measured against its own cost-state records: +8.8% for a
 // one-turn session, +44% (ember: 7 turns incl. /loop fires), +55% (delta: 2 fan-outs, 6
@@ -382,7 +383,7 @@ function fleetSpend() {
   const estimate = cov.costStateUsd + (cov.afterUsd + unc.usd) * (1 + overhead);
   const r4 = (x) => Math.round(x * 1e4) / 1e4;
   return {
-    at: iso(), total: tokenSums(all), byDir, models, cap: SPEND_CAP, refuseAt: SPEND_REFUSE_AT,
+    at: iso(), total: tokenSums(all), byDir, models, cap: SPEND_CAP, refuseAt: spendStop().usd,
     hidden: { sessionsWithCostState: cov.sessions, costStateUsd: r4(cov.costStateUsd), transcriptUsdCovered: r4(cov.transcriptUsd), observedOverhead: observed == null ? null : r4(observed), appliedOverhead: r4(overhead), uncoveredSessions: unc.sessions },
     estimate: r4(estimate),
   };
@@ -394,15 +395,23 @@ function appendSpendLog(sp, note) {
   fs.appendFileSync(f, JSON.stringify({ at: sp.at, usd: sp.total.usd, estimateUsd: sp.estimate, hidden: sp.hidden, responses: sp.total.responses, tokens: { in: sp.total.input, out: sp.total.output, cw5m: sp.total.cacheWrite5m, cw1h: sp.total.cacheWrite1h, cr: sp.total.cacheRead }, byRepo: byDir, models: sp.models, note: note || undefined }) + '\n');
 }
 const estimateUsd = (sp) => sp.estimate;
+// The stop in force: the lowest of the $4.50 default, the round's budget in ULTRA/fleet/spend-stop (one number, set
+// by whoever runs the round) and VP_SPEND_STOP. Neither can raise it; unparsable values are ignored.
+function spendStop() {
+  let file = ''; try { file = fs.readFileSync(SPEND_STOP_FILE, 'utf8').trim(); } catch {}
+  const c = [{ usd: SPEND_REFUSE_AT, from: 'default' }, { usd: Number(file), from: SPEND_STOP_FILE }, { usd: Number(process.env.VP_SPEND_STOP), from: 'VP_SPEND_STOP' }]
+    .filter(x => x.usd > 0);
+  return c.reduce((a, b) => (b.usd < a.usd ? b : a));
+}
 function assertBudget(what) {
-  const sp = fleetSpend();
-  if (sp.estimate >= SPEND_REFUSE_AT) throw new Error(`refusing ${what}: estimated fleet spend $${sp.estimate.toFixed(4)} (transcripts $${sp.total.usd.toFixed(4)}, hidden-call overhead ${Math.round(sp.hidden.appliedOverhead * 100)}%) >= $${SPEND_REFUSE_AT} (cap $${SPEND_CAP})`);
+  const sp = fleetSpend(), stop = spendStop();
+  if (sp.estimate >= stop.usd) throw new Error(`refusing ${what}: estimated fleet spend $${sp.estimate.toFixed(4)} (transcripts $${sp.total.usd.toFixed(4)}, hidden-call overhead ${Math.round(sp.hidden.appliedOverhead * 100)}%) >= stop $${stop.usd} (${stop.from}; cap $${SPEND_CAP})`);
   return sp;
 }
 
 module.exports = {
   HOME, ULTRA, FLEET, ROOT, STATE_FILE, CLAUDE_HOME, PROJECTS, SESSIONS, EVID, FLEET_TAG, TMUX_PREFIX, TMUX, CLAUDE_BIN, PANE_PATH,
-  SPEND_CAP, SPEND_REFUSE_AT, HIDDEN_OVERHEAD_FLOOR, PRICES, estimateUsd, sessionSpend,
+  SPEND_CAP, SPEND_REFUSE_AT, SPEND_STOP_FILE, spendStop, HIDDEN_OVERHEAD_FLOOR, PRICES, estimateUsd, sessionSpend,
   cleanEnv, dname, isFleetDname, sleep, now, iso,
   loadMembers, loadState, saveState,
   LEASES, LEASE_TTL_SEC, readLease, listLeases, acquireLease, releaseLease, leaseLabel,

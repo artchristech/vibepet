@@ -16,7 +16,8 @@
 //   node test/fleet/fleet.js release <name> [owner] [--force]    give it back (with owner: only if that owner holds it)
 //
 // Members are data: test/fleet/members.json. Everything that can make a session take a turn
-// refuses once fleet spend reaches $4.50 (cap $5).
+// refuses once the fleet spend estimate reaches the stop: $4.50 (cap $5), or lower when the round's budget is
+// written to ULTRA/fleet/spend-stop (or VP_SPEND_STOP is set); the lowest wins.
 //
 // Leases are advisory (atomic mkdir under ULTRA/fleet/.leases, stale after their ttl): status shows holders, and
 // rearm / send / pause / up warn when someone else holds a member. Say who you are with --as <owner> or
@@ -361,14 +362,14 @@ async function cmdStatus(names, json) {
     });
   }
   const sp = L.fleetSpend();
-  const res = { at: L.iso(), allOk: out.every(x => x.ok), members: out, spend: { transcriptsUsd: sp.total.usd, estimateWithHiddenUsd: L.estimateUsd(sp), cap: L.SPEND_CAP } };
+  const res = { at: L.iso(), allOk: out.every(x => x.ok), members: out, spend: { transcriptsUsd: sp.total.usd, estimateWithHiddenUsd: L.estimateUsd(sp), stop: sp.refuseAt, cap: L.SPEND_CAP } };
   if (json) { log(JSON.stringify(res, null, 2)); return res; }
   for (const x of out) {
     const reg = x.registry ? `${x.registry.status}${x.registry.waitingFor ? '(' + x.registry.waitingFor + ')' : ''} ${ago(x.registry.statusUpdatedAt)}` : '-';
     log(`${x.ok ? 'OK  ' : x.paused ? 'PAUS' : 'FAIL'} ${x.name.padEnd(8)} ${x.state.padEnd(9)} ${String(x.target || '-').padEnd(13)} pid ${String(x.pid || '-').padEnd(6)} sess ${(x.sessionId || '-').slice(0, 8)}  reg ${reg.padEnd(34)} last ${x.last.kind}${x.last.pending.length ? '[' + x.last.pending.join(',') + ']' : ''}  $${x.spendUsd.toFixed(4)}${x.paused ? '  (paused)' : ''}${x.lease ? `  [lease: ${L.leaseLabel(x.lease)}]` : ''}`);
     if (!x.ok) log(`       failing: ${x.checks.filter(c => !c.ok).map(c => `${c.name}=${c.detail}`).join('; ')}`);
   }
-  log(`fleet spend: $${res.spend.transcriptsUsd.toFixed(4)} in transcripts, ~$${res.spend.estimateWithHiddenUsd.toFixed(4)} incl. hidden calls (cap $${L.SPEND_CAP})  ${res.allOk ? 'ALL GREEN' : 'NOT ALL GREEN'}`);
+  log(`fleet spend: $${res.spend.transcriptsUsd.toFixed(4)} in transcripts, ~$${res.spend.estimateWithHiddenUsd.toFixed(4)} incl. hidden calls (stop $${res.spend.stop}, cap $${L.SPEND_CAP})  ${res.allOk ? 'ALL GREEN' : 'NOT ALL GREEN'}`);
   return res;
 }
 // Per-turn cost timeline of a member's sessions: what each prompt / scheduled fire / task
@@ -507,7 +508,7 @@ function cmdAttach(name) {
     case 'down': cmdDown(pos); break;
     case 'spend': {
       const i = rest.indexOf('--note'); const sp = spendReport(i >= 0 ? rest[i + 1] : undefined);
-      log(`fleet spend: transcripts $${sp.total.usd.toFixed(4)} at Haiku 4.5 prices; estimate incl. hidden calls $${sp.estimate.toFixed(4)} (cost-state of ${sp.hidden.sessionsWithCostState} exited sessions $${sp.hidden.costStateUsd} vs their transcripts $${sp.hidden.transcriptUsdCovered} = +${Math.round((sp.hidden.observedOverhead || 0) * 100)}%; applied +${Math.round(sp.hidden.appliedOverhead * 100)}% to the rest) of $${L.SPEND_CAP} cap; ${sp.total.responses} responses; models ${JSON.stringify(sp.models)}`);
+      log(`fleet spend: transcripts $${sp.total.usd.toFixed(4)} at Haiku 4.5 prices; estimate incl. hidden calls $${sp.estimate.toFixed(4)} (cost-state of ${sp.hidden.sessionsWithCostState} exited sessions $${sp.hidden.costStateUsd} vs their transcripts $${sp.hidden.transcriptUsdCovered} = +${Math.round((sp.hidden.observedOverhead || 0) * 100)}%; applied +${Math.round(sp.hidden.appliedOverhead * 100)}% to the rest); stop $${sp.refuseAt} (${L.spendStop().from}), cap $${L.SPEND_CAP}; ${sp.total.responses} responses; models ${JSON.stringify(sp.models)}`);
       for (const [d, v] of Object.entries(sp.byDir)) log(`  ${d.replace(/^.*-vibepet-ultra-fleet-/, '').padEnd(10)} $${v.usd.toFixed(4)}  resp ${v.responses}  in ${v.input} out ${v.output} cw1h ${v.cacheWrite1h} cw5m ${v.cacheWrite5m} cr ${v.cacheRead}  files ${v.files}${v.costStateUsd ? `  cost-state $${v.costStateUsd.toFixed(4)}` : ''}`);
       if (Object.keys(sp.claudeJsonLastCost).length) log(`  ~/.claude.json lastCost (last exited session per repo, incl. hidden calls): ${JSON.stringify(sp.claudeJsonLastCost)}`);
       log(`  logged to ${path.join(L.EVID, 'fleet-spend.jsonl')}`);
