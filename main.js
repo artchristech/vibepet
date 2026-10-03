@@ -4,22 +4,41 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { execFile, spawn } = require('child_process');
-const { readTail, textOf, firstPrompt, scan, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
+const { readTail, textOf, firstPrompt, scan, byQueue, NEEDS, psAll, locateSession, hostApp, bundleId, focusTty, run } = require('./agents');
+const registry = require('./registry');
 const gesture = require('./gesture');
 const { judge, commitMatches } = require('./goal');
 const content = require('./content');
 const ports = require('./ports');
 const theater = require('./theater');
+const overrides = require('./overrides');
+const chatCtx = require('./chat-context');
+const { SAYS, agentLine } = chatCtx;
 
 const W = 660, H = 960;
 const { place, areaFor, minY } = require('./place');
 let petTop = 276;   // Net's top inside the window (panels-above layout); the renderer reports the real value
 let virt = null, below = false, room = 9999;   // wanted window pos (panels above; may sit above the screen top) + current flip
-const CLAUDE_DIR = path.join(os.homedir(), '.claude', 'projects');
+const CLAUDE_DIR = overrides.projectsDir();   // ~/.claude/projects unless VIBEPET_CLAUDE_DIR moves the root
 const TICK_MS = 3000;
+// VIBEPET_TEST (test/ultra/launch.js): an instance under test never takes the OS focus and never posts to Notification
+// Center: someone is working at this Mac while instances come and go. The harness drives it over CDP, which needs neither.
+const TEST = !!process.env.VIBEPET_TEST;
 
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 app.disableHardwareAcceleration();   // a 224×208 pixel canvas + one CSS capsule: the GPU process costs memory, buys nothing
+if (TEST) {
+  // an accessory app from its first moment: macOS activates a regular app it has just launched, which took the focus
+  // from whoever's window was in front (seen: the user's terminal → Electron on every launch, before any window showed)
+  if (process.platform === 'darwin') app.setActivationPolicy('accessory');
+  app.commandLine.appendSwitch('use-mock-keychain');   // Chromium's Safe Storage key: a mock, no login Keychain read or write
+  // its launcher died (a crashed or SIGKILLed harness): quit rather than linger on screen as an orphan
+  const ppid0 = process.ppid;
+  if (ppid0 > 1) setInterval(() => { if (process.ppid !== ppid0) app.quit(); }, 2000).unref();
+}
+// VIBEPET_USER_DATA: its own state, ledger and single-instance lock — so it must land before the lock is taken
+const USER_DATA = overrides.userData();
+if (USER_DATA) { fs.mkdirSync(USER_DATA, { recursive: true }); app.setPath('userData', USER_DATA); }
 const primary = app.requestSingleInstanceLock();
 if (!primary) app.quit();   // the running pet gets 'second-instance' instead
 
@@ -81,8 +100,9 @@ function emit(kind, text, { notify = false, ...extra } = {}) {
 }
 // a banner is a door: click → that agent's terminal (the renderer's queue decides). Electron drops the click
 // handler once a Notification is GC'd, so each one is held until it closes or is clicked.
-const banners = new Set();
+const banners = new Set(), notes = [];   // notes: what a test instance would have posted (VIBEPET_TEST), newest last
 function banner(body, id, silent = false) {
+  if (TEST) { notes.push({ body, id, silent, at: Date.now() }); if (notes.length > 200) notes.shift(); return null; }
   const n = new Notification({ title: state.name, body, silent }), drop = () => banners.delete(n);
   banners.add(n);
   if (banners.size > 16) banners.delete(banners.values().next().value);   // macOS never fires 'close' for one left in Notification Center
@@ -112,20 +132,24 @@ function flushDone() {
 const away = () => !win || win.isDestroyed() || !win.isVisible() || powerMonitor.getSystemIdleTime() > 60;
 
 // ---------- claude code sessions ----------
-const sessions = new Map(); // id -> { phase, since, … }
+const sessions = new Map(); // id -> { phase, kind, since, … }
 
-// phases are settled against each session's subagents (agents.js fanout/settle), so a fan-out never reads as stuck or done
-const scanAgents = () => scan(CLAUDE_DIR, sessions, transition);
+// a session in Claude Code's registry (registry.js) takes its state from there: needs-you, alive or exited, true ages.
+// Phases of the rest are settled against each session's subagents (agents.js fanout/settle), so a fan-out never reads as stuck or done
+let reg = new Map();   // sessionId -> live registry entry, read each tick (the last good read if one fails)
+const scanAgents = () => scan(CLAUDE_DIR, sessions, transition, reg);
 
+// a new episode = a new kind or a new since: an approval is announced at once when the registry says so; one inferred
+// from 90 s of transcript silence waits for unstick() to rule out a tool that's simply still running
 function transition(s, prev) {
-  const { name, id, phase } = s, was = prev.phase === 'working' || prev.phase === 'stalled';
-  if (phase === 'ready' && was) {
+  const { name, id, kind } = s;
+  if (kind === 'done' && prev.kind !== 'done' && prev.kind !== 'exited' && s.ask !== 'interrupted') {   // you stopped it yourself: nothing to say
     emit('agentDone', `${name} is done`, { agent: name, id });
     if (away() && state.alerts !== 'blocked') queueDone({ name, id });
-  } else if (phase === 'waiting' && was) {
-    emit('agentNeeds', `${name} has a question`, { agent: name, id, notify: away() });
-  } else if (phase === 'stalled' && prev.phase === 'working') {
-    stallQueue.add(id);   // announced after unstick() rules out a tool that's simply still running
+  } else if (NEEDS.has(kind) && (!NEEDS.has(prev.kind) || s.since !== prev.since)) {
+    if (kind === 'question' || kind === 'input') emit('agentNeeds', `${name} has a question`, { agent: name, id, notify: away() });
+    else if (s.alive) emit('agentNeeds', `${name} needs approval`, { agent: name, id, notify: away() });
+    else stallQueue.add(id);
   }
 }
 
@@ -210,40 +234,45 @@ function goalDone(a, how) {
 }
 ipcMain.on('goal-done', (_, id) => { const a = agents.find(x => x.id === id); if (a) { goalDone(a, 'marked'); save(); tick(); } });
 
-// blocked on you past NAG_MS: one nudge per episode (a new phase resets `since`, so a fresh block nags again)
-const NAG_MS = 3 * 60e3, nagged = new Map();   // id -> since it nagged for
+// blocked on you past NAG_MS: one nudge per episode, keyed on its true since (a fresh block nags again). A block already
+// past NAG_MS when this pet started was said at launch: no banner per old block.
+const NAG_MS = 3 * 60e3, nagged = new Map(), nagT0 = Date.now();   // id -> since it nagged for
 function nag(list) {
   const now = Date.now();
   for (const a of list) {
-    if ((a.phase !== 'stalled' && a.phase !== 'waiting') || now - a.since < NAG_MS || nagged.get(a.id) === a.since) continue;
+    if (!NEEDS.has(a.kind) || now - a.since < NAG_MS || nagged.get(a.id) === a.since) continue;
     nagged.set(a.id, a.since);
+    if (a.since + NAG_MS < nagT0) continue;
     const m = Math.round((now - a.since) / 60000);
     emit('agentNag', `${a.title || a.name} ${a.phase === 'waiting' ? 'has waited on your answer' : 'has been blocked on approval'} ${m}m`, { agent: a.name, id: a.id, notify: true });
   }
   for (const id of nagged.keys()) if (!sessions.has(id)) nagged.delete(id);
 }
 
-// ---------- stalled vs. busy ----------
+// ---------- stalled vs. busy (a session with no registry entry) ----------
 // A tool call with 90s of silence is either waiting on your approval or just long (a build, a render, a sleep).
-// A running tool is a child process of that claude, started after the call: then it's working, not stuck.
-const stallQueue = new Set();
+// A running tool is a child process of that claude, started after the call: then it's working, not stuck. The verdict is
+// kept per tool call (s.busyAt, which scan() reads back) and never written into s.phase: that flip reset the row's clock.
+// A registry session needs none of this: its status says busy or waiting.
+const stallQueue = new Set(), freeAt = new Map();   // id@toolAt -> when a 'not running' verdict may be checked again
 async function unstick(list) {
-  const st = list.filter(a => a.phase === 'stalled' && a.toolAt);
+  const now = Date.now(), st = list.filter(a => a.phase === 'stalled' && a.kind === 'approval' && a.toolAt && a.alive === null && now >= (freeAt.get(a.id + '@' + a.toolAt) || 0));
   if (st.length) {
     let procs; try { procs = await psAll(); } catch {}
     const kids = new Map();
     for (const p of procs?.values() || []) (kids.get(p.ppid) || kids.set(p.ppid, []).get(p.ppid)).push(p);
     const busy = (pid, since) => (kids.get(pid) || []).some(k => k.start >= since - 2000 || busy(k.pid, since));
+    if (freeAt.size > 500) freeAt.clear();
     for (const a of st) {
       const loc = procs && await locateSession(a, procs).catch(() => null);
-      if (!loc || !busy(loc.pid, a.toolAt)) continue;
-      a.phase = 'working'; a.ask = undefined;
-      const s = sessions.get(a.id); if (s) s.phase = 'working';
+      if (!loc || !busy(loc.pid, a.toolAt)) { freeAt.set(a.id + '@' + a.toolAt, now + 15e3); continue; }
+      const s = sessions.get(a.id); if (s) s.busyAt = a.toolAt;
+      Object.assign(a, { phase: 'working', kind: 'running', ask: undefined });   // this tick's copy; scan() keeps it from the next
     }
   }
   for (const id of stallQueue) {
     const a = list.find(x => x.id === id);
-    if (a?.phase === 'stalled') emit('agentStalled', `${a.name} needs approval`, { agent: a.name, id, notify: away() });
+    if (a?.phase === 'stalled') emit('agentNeeds', `${a.name} needs approval`, { agent: a.name, id, notify: away() });
   }
   stallQueue.clear();
 }
@@ -267,8 +296,8 @@ async function rootOf(dir) {
 async function scanGit(agents) {
   const roots = new Set();
   for (const a of agents) { const r = await rootOf(a.cwd); if (r) roots.add(r); }
-  // auto-focus is sticky: only move off the current repo once no live agent is working in it
-  const live = agents.filter(a => a.phase !== 'parked'), cur = gitInfo?.root;
+  // auto-focus is sticky: only move off the current repo once no live agent is working in it; else the latest active one
+  const live = agents.filter(a => a.kind !== 'exited').sort((a, b) => b.mtime - a.mtime), cur = gitInfo?.root;
   const stick = cur && (!live.length || live.some(a => a.cwd === cur || a.cwd?.startsWith(cur + path.sep)));
   const focusDir = state.repo || (stick ? cur : live[0]?.cwd || agents[0]?.cwd) || cur;
   const focus = await rootOf(focusDir);
@@ -328,8 +357,10 @@ async function tick() {
   busy = true;
   try {
     decay();
+    reg = (await registry.read()) || reg;
     agents = scanAgents();
     await unstick(agents);
+    agents.sort(byQueue);
     for (const a of agents) { a.goal = goalFor(a); watchDrift(a); }
     pruneGoals();
     for (const id of drift.keys()) if (!sessions.has(id)) drift.delete(id);
@@ -347,8 +378,9 @@ function snapshot() {
   return {
     name: state.name, level, xp: state.xp, xpLo: xpForLevel(level), xpHi: xpForLevel(level + 1),
     fuel: state.fuel, mood: state.mood, commits: state.commits,
-    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, goal: a.goal && { text: a.goal.text, auto: a.goal.auto, done: !!a.goal.done, verdict: a.verdict }, phase: a.phase, since: a.since, ask: a.ask, fanout: a.fanout,
-      receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
+    // in the one queue order (agents.js byQueue): Home, the roster and the jump key show it as is
+    agents: agents.map(a => ({ id: a.id, name: a.name, title: a.title, goal: a.goal && { text: a.goal.text, auto: a.goal.auto, done: !!a.goal.done, verdict: a.verdict }, phase: a.phase, kind: a.kind, since: a.since,
+      ask: a.ask, options: a.options, alive: a.alive, pid: a.pid ?? null, term: a.term, fanout: a.fanout, receipt: a.receipt && { ...a.receipt, files: [...a.receipt.files] } })),
     git: gitInfo, muted: state.muted, animations: state.animations, game: state.game, pet: state.pet, hasKey: hasKey(), hour: new Date().getHours(),
     watching: state.repo ? 'manual' : 'auto', rec: content.status(), scale: petScale(),
     size: state.size || 'm', alerts: state.alerts || 'done', feel: state.feel, setupDone: !!state.setupDone, pets: PETS, perms: perms(),
@@ -414,16 +446,29 @@ ipcMain.on('local-stop', async (_, pid) => {
   const r = await dialog.showMessageBox({ type: 'warning', buttons: ['Stop', 'Cancel'], defaultId: 1, cancelId: 1, message: `Stop ${ports.label(s)} on :${s.port}?`, detail: `pid ${pid}` });
   if (r.response === 0) { send('event', { kind: 'localhost', text: await ports.stop(pid) }); setTimeout(() => ports.poll(0), 800); }
 });
-// approve / reply from the panel: bring that exact tab forward, then type into it. Refuses unless the tab was
-// found for sure, so keystrokes can never land in the wrong window.
-ipcMain.handle('send-to', async (_, { id, text }) => {
+// act on a session from the panel: { id, action: approve|always|deny|option|text|interrupt, key?, text? } (today's callers:
+// text null = approve, a string = text). In tmux: send-keys into its own pane, only once the pane shows what the action
+// answers (tmux.js) — no Accessibility, no focus change. Elsewhere: bring that exact tab forward, then type into it
+// (approve and text only); refuses unless the tab was found for sure, so keystrokes can never land in the wrong window.
+const tmux = require('./tmux');
+const ACTIONS = new Set(['approve', 'always', 'deny', 'option', 'text', 'interrupt']);
+ipcMain.handle('send-to', async (_, { id, action, key, text } = {}) => {
   const s = sessions.get(id); if (!s) return { ok: false, why: 'gone' };
-  if (!perms().ax) { shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility'); return { ok: false, why: 'Allow Accessibility first' }; }
+  action ||= text == null ? 'approve' : 'text';
+  if (!ACTIONS.has(action)) return { ok: false, why: `unknown action ${action}` };
+  if (action === 'text' && !String(text ?? '').trim()) return { ok: false, why: 'nothing to send' };
   try {
-    const procs = await psAll(), loc = await locateSession(s, procs), host = loc && hostApp(loc.pid, procs), bid = host && await bundleId(host);
+    const procs = await psAll();
+    if (!procs.size) return { ok: false, why: "couldn't list processes" };   // ps timed out (a loaded Mac): don't guess where it runs
+    const loc = await locateSession(s, procs);
+    if (loc?.reg?.tmux) return await tmux.send({ target: loc.reg.tmux, pid: loc.pid, procs, name: s.name, action, key, text });
+    if (action !== 'approve' && action !== 'text') return { ok: false, why: `${s.name} isn't in tmux: only Approve and Reply reach its tab` };
+    if (loc?.reg?.waitingFor === 'input needed') return { ok: false, why: `${s.name} is showing a question: ${action === 'text' ? 'typing' : 'Enter'} would pick an option blindly` };
+    if (!perms().ax) { shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility'); return { ok: false, why: 'Allow Accessibility first' }; }
+    const host = loc && hostApp(loc.pid, procs), bid = host && await bundleId(host);
     if (!bid || await focusTty(bid, loc.tty, s.title ? `✳ ${s.title}` : null) !== true) return { ok: false, why: "couldn't find its tab" };
     const esc = t => t.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-    const script = text ? `tell application "System Events"\nkeystroke "${esc(String(text).slice(0, 2000))}"\nkey code 36\nend tell` : 'tell application "System Events" to key code 36';   // approve = Enter on the highlighted "Yes"
+    const script = action === 'text' ? `tell application "System Events"\nkeystroke "${esc(String(text).slice(0, 2000))}"\nkey code 36\nend tell` : 'tell application "System Events" to key code 36';   // approve = Enter on the highlighted "Yes"
     await run('/usr/bin/osascript', ['-e', script], 5000);
     return { ok: true };
   } catch (e) { return { ok: false, why: e.message }; }
@@ -468,18 +513,28 @@ function agentTranscript(s, n = 4) {
       if (t && !t.startsWith('<')) out.push('HUMAN: ' + t.slice(0, 400));
     }
   }
-  return `[${s.name} · ${s.phase}]\n` + out.reverse().join('\n');
+  return `[${s.name} · ${SAYS[s.kind] || s.phase}]\n` + out.reverse().join('\n');
 }
-
-async function buildContext(mode) {
-  const g = gitInfo;
+// what each session is, needs and touched, and the sessions a message is about (chat-context.js formats; this reads git)
+const repoOf = root => Promise.all([['diff', 'HEAD', '--stat'], ['ls-files', '--others', '--exclude-standard'], ['log', '--format=%h%x09%ct%x09%s (%cr)', '-6']]
+  .map(a => git(root, ['--no-optional-locks', ...a]))).then(([stat, untracked, log]) => ({ stat, untracked, log }));
+const bornAt = f => { try { return fs.statSync(f).birthtimeMs || null; } catch { return null; } };   // when a session began
+async function buildContext(mode, messages = []) {
+  const g = gitInfo, now = Date.now();
+  const all = await Promise.all(agents.map(async a => { const e = reg.get(a.id);   // regName: '@kestrel-4d'; alias: one the user gave it (/rename)
+    return { ...a, root: await rootOf(a.cwd), regName: e?.name, alias: !!e?.nameSource && e.nameSource !== 'derived' }; }));
+  const br = new Map(await Promise.all([...new Set(all.map(a => a.root).filter(Boolean))].map(async r => [r, await git(r, ['branch', '--show-current']) || 'detached HEAD'])));
+  for (const a of all) a.branch = br.get(a.root);
   const parts = [
     state.game && `Pet stats: level ${levelFor(state.xp)}, fuel ${Math.round(state.fuel)}/100, mood ${Math.round(state.mood)}/100, total commits witnessed ${state.commits}.`,
     `Local time: ${new Date().toLocaleString()}.`,
-    `Agents: ${agents.length ? agents.map(a => `${a.name}=${a.phase} for ${Math.round((Date.now() - a.since) / 1000)}s`).join(', ') : 'none active'}.`,
+    `Agents: ${all.length ? all.map(a => agentLine(a, now)).join('; ').replace(/[^.?!]$/, '$&.') : 'none active.'}`,   // first: canon's stub reads this line
+    all.length && chatCtx.sessions(all, now),
+    all.length && chatCtx.overlaps(all),
   ];
   if (g?.root) {
-    parts.push(`Repo: ${g.name} (branch ${g.branch || '?'}): ${g.lines} uncommitted lines across ${g.files} files, ${g.untracked} untracked files. Last commit ${g.lastCommitAt ? Math.round((Date.now() - g.lastCommitAt) / 60000) + ' min ago' : 'never'}: "${g.lastSubject}".`);
+    const here = [...new Set(all.filter(a => a.root === g.root).map(a => a.name))];
+    parts.push(`Watched repo: ${g.name} (branch ${g.branch || '?'}${here.length ? `; sessions in it: ${here.join(', ')}` : ''}): ${g.lines} uncommitted lines across ${g.files} files, ${g.untracked} untracked files. Last commit ${g.lastCommitAt ? Math.round((Date.now() - g.lastCommitAt) / 60000) + ' min ago' : 'never'}: "${g.lastSubject}".`);
     const [stat, log] = await Promise.all([git(g.root, ['diff', 'HEAD', '--stat']), git(g.root, ['log', '--oneline', '-8'])]);
     parts.push('Recent commits:\n' + (log || '(none)'));
     parts.push('Diff stat:\n' + (stat || '(clean)').split('\n').slice(-30).join('\n'));
@@ -488,12 +543,15 @@ async function buildContext(mode) {
       parts.push('Diff (truncated):\n' + (diff || '').slice(0, 16000));
       if (untracked) parts.push('Untracked files:\n' + untracked.split('\n').slice(0, 30).join('\n'));
     }
-  } else parts.push('Repo: none detected.');
+  } else parts.push('Watched repo: none detected.');
   if (mode === 'goal') {
     const live = agents.filter(a => a.goal).slice(0, 4);
     parts.push(live.length ? live.map(a => `GOAL (${a.goal.auto ? 'guessed from first prompt' : 'set by user'}): ${a.goal.text}\nLexical check: ${a.verdict}\n${agentTranscript(a, 8)}`).join('\n\n---\n\n') : 'No session has a goal yet.');
   }
-  if (mode === 'agent' || mode === 'next') parts.push('Latest agent transcript:\n' + agentTranscript(agents[0]));
+  // a session the message names (or, for the agent/next quick asks, the ones that need you) brings its own repo and transcript
+  const ab = chatCtx.about([...messages].reverse().find(m => m.role === 'user')?.content, mode, all);
+  parts.push(...await Promise.all(ab.list.map(async a => `About ${a.name} (${ab.why}):\n${a.root ? chatCtx.repoText(a, await repoOf(a.root), bornAt(a.file), now) : `${a.name} isn't in a git repo.`}\n${agentTranscript(a, 6)}`)));
+  if (!ab.list.length && (mode === 'agent' || mode === 'next')) parts.push('Latest agent transcript:\n' + agentTranscript(all[0]));
   return parts.filter(Boolean).join('\n\n');
 }
 
@@ -547,7 +605,7 @@ async function chatViaClaude(bin, messages, mode) {
   try {
     // the repo context (diff included) rides stdin, never argv: argv is readable by `ps` and logged by endpoint agents
     const sys = SYSTEM(state.name) + '\n\nThe user\'s message starts with a <live_context> block the app attached: their live repo and agent state.';
-    const input = '<live_context>\n' + await buildContext(mode) + '\n</live_context>\n\n' +
+    const input = '<live_context>\n' + await buildContext(mode, messages) + '\n</live_context>\n\n' +
       messages.map(m => `${m.role === 'user' ? 'User' : state.name}: ${m.content}`).join('\n\n');
     const base = ['-p', '--no-session-persistence', '--tools', '', '--setting-sources', '', '--strict-mcp-config', '--output-format', 'json'];
     const parse = s => { try { return JSON.parse(s); } catch { return null; } };
@@ -572,7 +630,7 @@ ipcMain.handle('chat', async (_, { messages, mode }) => {
     return via === 'key-locked' && !r.error ? { ...r, note: 'Couldn\'t unlock the saved key, so I used your Claude Code login.' } : r;
   }
   try {
-    const ctx = await buildContext(mode);
+    const ctx = await buildContext(mode, messages);
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
@@ -630,8 +688,10 @@ function createWindow() {
     width: W, height: H, x: pos.x, y: pos.y, frame: false, transparent: true, resizable: false,
     hasShadow: false, alwaysOnTop: state.onTop, skipTaskbar: true, fullscreenable: false, backgroundColor: '#00000000',
     acceptFirstMouse: true,   // Net is never the key window: without this macOS eats the first click to activate him
+    show: !TEST,   // show() activates the app; a test instance appears without taking the focus (showInactive below)
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false },
   });
+  if (TEST) win.showInactive();
   win.setAlwaysOnTop(state.onTop, 'floating');
   win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   win.setIgnoreMouseEvents(true, { forward: true });
@@ -667,32 +727,47 @@ ipcMain.on('drag-end', () => {
   clearInterval(drag.timer); drag = null;
   state.pos = { ...virt }; save();
 });
-ipcMain.on('focus', () => { app.focus({ steal: true }); win.focus(); });
+const takeFocus = () => { if (TEST) return; app.focus({ steal: true }); win.focus(); };   // never under test (see TEST)
+ipcMain.on('focus', takeFocus);
 ipcMain.on('copy', (_, text) => clipboard.writeText(text));
-// click → the terminal tab that session runs in (iTerm2/Terminal), else its app, else copy a resume command.
-// The only place ps/lsof/osascript ever run; nothing is typed into any terminal.
+// click → that session's terminal: its tmux pane through an attached client (tmux.js), else the tab it runs in
+// (iTerm2/Terminal), else its app. Only a session that has exited gets a resume command copied: pasting one for a
+// live session would start a second claude on it. Nothing is typed into any terminal.
 const shq = s => /^[\w@%+=:,./-]+$/.test(s) ? s : `'${s.replace(/'/g, `'\\''`)}'`;
 let axAsked = false;
+// bring a terminal forward → 'tab' (the exact one: iTerm2/Terminal by script, others through Accessibility) | 'app' | null
+async function raise(host, tty, title) {
+  const bid = await bundleId(host);
+  const f = await focusTty(bid, tty, title);
+  if (f === true) return 'tab';
+  if (f === 'noax' && !axAsked) {   // once per run: explain, open the pane; the app still comes forward below
+    axAsked = true;
+    emit('content', `To jump to the exact ${path.basename(host, '.app')} tab, allow vibepet in Accessibility (opening it now), then click again.`, { alert: true });
+    require('electron').shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility');
+  }
+  return await run('/usr/bin/open', bid ? ['-b', bid] : ['-a', host]) !== null ? 'app' : null;
+}
 ipcMain.handle('jump', async (_, id) => {
   const s = sessions.get(id);
   if (!s) return { ok: false };
+  let loc;
   try {
-    const procs = await psAll(), loc = await locateSession(s, procs), host = loc && hostApp(loc.pid, procs);
-    if (host) {
-      const bid = await bundleId(host);
-      const f = await focusTty(bid, loc.tty, s.title ? `✳ ${s.title}` : null);
-      if (f === true) return { ok: true, level: 'tab' };
-      if (f === 'noax' && !axAsked) {   // once per run: explain, open the pane; the app still comes forward below
-        axAsked = true;
-        emit('content', `To jump to the exact ${path.basename(host, '.app')} tab, allow vibepet in Accessibility (opening it now), then click again.`, { alert: true });
-        require('electron').shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility');
-      }
-      if (await run('/usr/bin/open', bid ? ['-b', bid] : ['-a', host]) !== null) return { ok: true, level: 'app' };
+    const procs = await psAll();
+    if (!procs.size) return { ok: false, why: "couldn't list processes" };
+    loc = await locateSession(s, procs);
+    if (loc?.reg?.tmux) {   // live in tmux: its pane in an attached client, or exactly why not
+      const t = await tmux.jump({ target: loc.reg.tmux, pid: loc.pid, procs, name: s.name });
+      if (!t.ok) return t;
+      const host = hostApp(t.client.pid, procs);
+      return { ok: true, level: 'pane', raised: host ? await raise(host, t.client.tty, t.session) : null };
     }
+    const host = loc && hostApp(loc.pid, procs), level = host && await raise(host, loc.tty, s.title ? `✳ ${s.title}` : null);
+    if (level) return { ok: true, level };
   } catch (e) { console.error('jump:', e.message); }
+  if (loc) return { ok: false, why: `couldn't find ${s.name}'s terminal` };   // alive: never a resume command
   const cmd = `${s.cwd ? `cd ${shq(s.cwd)} && ` : ''}claude --resume ${shq(id)}`;
   clipboard.writeText(cmd);
-  return { ok: false, cmd };
+  return { ok: false, cmd, why: `${s.name} has exited: resume command copied` };
 });
 ipcMain.on('rename', (_, name) => { name = (name || '').trim().slice(0, 16); if (name) { state.name = name; save(); tick(); } });
 ipcMain.on('exit-done', () => app.quit());
@@ -765,7 +840,7 @@ function buildMenu() {
 }
 ipcMain.on('rec-toggle', () => content.toggle());
 // Theater: replay a session; the player window asks for its own timeline (main owns which file it is)
-function openTheater(file) { app.focus({ steal: true }); theater.open(BrowserWindow, file); }
+function openTheater(file) { if (!TEST) app.focus({ steal: true }); theater.open(BrowserWindow, file, { inactive: TEST }); }
 ipcMain.on('theater', (_, id) => { const s = sessions.get(id); if (s?.file) openTheater(s.file); });
 ipcMain.handle('theater-timeline', e => theater.timeline(theater.fileFor(e.sender)));
 ipcMain.on('menu', () => buildMenu().popup({ window: win }));
@@ -782,11 +857,14 @@ function createTray() {
 
 // ---------- the jump door: a global key walks the renderer's queue (it owns pending()) ----------
 const KEYS = [['⌃⌥⌘J', 'Control+Alt+Command+J'], ['⌥⌘J', 'Alt+Command+J'], ['Off', null]];   // not ⌥Space (Raycast/ChatGPT) or ⌃⌥Space (input source)
+const HOTKEY = overrides.hotkey();   // VIBEPET_HOTKEY: undefined = the saved key, null = 'off', else that accelerator
+const jumpKey = () => HOTKEY === undefined ? state.hotkey : HOTKEY;
 let keyTaken = false;
 function bindKey() {
   globalShortcut.unregisterAll();
+  if (HOTKEY === null) { keyTaken = false; return; }   // 'off': instances run side by side in tests, none may grab a global key
   let ok = true;
-  if (state.hotkey) try { ok = globalShortcut.register(state.hotkey, () => { if (!win.isVisible()) win.showInactive(), send('summon'); send('hotkey'); }); } catch { ok = false; }
+  if (jumpKey()) try { ok = globalShortcut.register(jumpKey(), () => { if (!win.isVisible()) win.showInactive(), send('summon'); send('hotkey'); }); } catch { ok = false; }
   keyTaken = !ok;   // someone else has it: stay quiet, the menu says so
   try { globalShortcut.register('Control+Alt+Command+R', () => content.toggle()); } catch {}   // not ⌘⇧R: that's hard-reload in every browser
 }
@@ -829,7 +907,7 @@ function summonAt(p) {
 }
 function toggleNet(p) { toggledAt = Date.now(); win.isVisible() ? hideNet() : summonAt(p); }
 function hideNet() { send('hide'); setTimeout(() => { if (!win.isDestroyed()) win.hide(); }, 260); }
-function recordGesture() { rec = { samples: [] }; if (!win.isVisible()) send('summon'); win.show(); app.focus({ steal: true }); win.focus(); syncWatch(); recSend({ start: true }); }
+function recordGesture() { rec = { samples: [] }; if (!win.isVisible()) send('summon'); if (TEST) win.showInactive(); else { win.show(); takeFocus(); } syncWatch(); recSend({ start: true }); }
 ipcMain.on('gesture-cancel', () => { rec = null; syncWatch(); });
 
 // "Lost him? Open vibepet again." — a second launch re-homes the running pet and opens its pill once
@@ -852,6 +930,9 @@ app.whenReady().then(() => {
   syncWatch();
   setTimeout(findClaude, 3000);   // so the Chat engine menu knows whether the login exists
   setInterval(tick, TICK_MS);
-  if (process.env.VIBEPET_TEST) globalThis.__vibepet = { banners, banner, bindKey, keyTaken: () => keyTaken };
+  // test hook, VIBEPET_TEST only: test/ultra/launch.js reaches the running app through it (see test/ultra/README.md)
+  if (TEST) globalThis.__vibepet = { banners, banner, notes, bindKey, keyTaken: () => keyTaken, jumpKey,
+    win: () => win, state: () => state, snapshot, tick, require,
+    paths: { claude: overrides.claudeDir(), projects: CLAUDE_DIR, sessions: overrides.sessionsDir(), userData: app.getPath('userData') } };
 });
 app.on('window-all-closed', () => app.quit());

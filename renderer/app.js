@@ -101,12 +101,15 @@ const seenReady = new Set(), rkey = a => a.name + '@' + a.since;
 const unseen = a => !(a.phase === 'ready' && seenReady.has(rkey(a)));
 function agentsIn(phase) { return (snap?.agents || []).filter(a => a.phase === phase && unseen(a)); }
 const heldReady = new Set();   // ready rows seen by this hover stay in the roster until the pill closes
-function markSeen() { const r = agentsIn('ready'); for (const a of r) { seenReady.add(rkey(a)); heldReady.add(rkey(a)); } if (r.length) { renderHud(); wake(); } }
+// markSeen() = every finished row (a hover or a poke saw them all); markSeen(a) = that one session (a jump that landed on it)
+function markSeen(only) { const r = agentsIn('ready').filter(a => !only || a.id === only.id); for (const a of r) { seenReady.add(rkey(a)); heldReady.add(rkey(a)); } if (r.length) { renderHud(); wake(); } }
+// needs you: an approval or a plan (phase 'stalled'), a question or a turn that ended asking ('waiting'). One amber face.
+const needsYou = a => a.phase === 'waiting' || a.phase === 'stalled';
 function baseState(now) {
   if (!snap) return 'idle';
-  if (agentsIn('waiting').some(a => Date.now() - a.since < 8000)) return 'alert';
-  if (agentsIn('waiting').length) return 'waiting';
-  if (agentsIn('stalled').length) return 'stalled';
+  const need = (snap.agents || []).filter(needsYou);
+  if (need.some(a => Date.now() - a.since < 8000)) return 'alert';
+  if (need.length) return 'waiting';
   if (agentsIn('ready').length) return 'ready';
   if (agentsIn('working').length) return 'working';
   if (snap.game && snap.fuel < 20) return 'hungry';
@@ -114,15 +117,15 @@ function baseState(now) {
   if ((late || now - lastInteract > 15 * 60e3) && !hovering && !chatOpen) return 'sleeping';
   return 'idle';
 }
-// one resolver for LED + face: needs input > stuck > ready > running > none; [0] wins, the rest become pips
-const SIG = { waiting: 'needs', stalled: 'stuck', ready: 'ready', working: 'running' }, RANK = ['needs', 'stuck', 'ready', 'running'];
-function agentSignals() { return (snap?.agents || []).filter(a => SIG[a.phase] && unseen(a)).map(a => SIG[a.phase]).sort((a, b) => RANK.indexOf(a) - RANK.indexOf(b)); }
-const TL = { running: '#3fe08f', needs: '#ffcf3f', ready: '#ffcf3f', stuck: '#ff5c6c' };
+// one resolver for LED + face: needs you (approval, plan, question) > ready > running > none; [0] wins, the rest become pips.
+// An exited session is listed last in Home and lights nothing. ('stuck' is left for a subagent stuck on its own tool.)
+const SIG = { waiting: 'needs', stalled: 'needs', ready: 'ready', working: 'running', exited: 'exited' }, RANK = ['needs', 'ready', 'running', 'exited'];
+function agentSignals() { return (snap?.agents || []).filter(a => SIG[a.phase] && SIG[a.phase] !== 'exited' && unseen(a)).map(a => SIG[a.phase]).sort((a, b) => RANK.indexOf(a) - RANK.indexOf(b)); }
+const TL = { running: '#3fe08f', needs: '#ffcf3f', ready: '#ffcf3f', stuck: '#ff5c6c', exited: '#8a93b8' };
 const LED = { needs: '#ffcf3f', stuck: '#ff5c6c', ready: '#9ff5d6', running: '#3fe08f', none: '#8a93b8' };
-// agents that want you, most urgent first (needs > stuck > ready), oldest first within a rank
+// agents that want you, in main's one queue order (needs you, oldest block first → done, oldest first): never re-sorted here
 function pending(held) {
-  return (snap?.agents || []).filter(a => SIG[a.phase] && SIG[a.phase] !== 'running' && (unseen(a) || (held && heldReady.has(rkey(a)))))
-    .sort((a, b) => RANK.indexOf(SIG[a.phase]) - RANK.indexOf(SIG[b.phase]) || a.since - b.since);
+  return (snap?.agents || []).filter(a => SIG[a.phase] === 'needs' || (SIG[a.phase] === 'ready' && (unseen(a) || (held && heldReady.has(rkey(a))))));
 }
 // exit: a hole opens under the pet and it drops in (ms offsets from the start)
 let exiting = null;
@@ -437,12 +440,12 @@ api.on('tick', s => {
   if (s.scale && s.scale !== +document.documentElement.style.getPropertyValue('--pet-scale')) { document.documentElement.style.setProperty('--pet-scale', s.scale); api.petTop?.(cv.offsetTop); }   // Small / Medium / Large
   renderHud();
   if (first) {                                  // speak at launch only when someone is actually waiting on you
-    const w = agentsIn('waiting');
+    const w = (s.agents || []).filter(needsYou);
     if (w.length) say(`${w.map(a => a.name).join(', ')} ${w.length > 1 ? 'are' : 'is'} waiting on you`, { alert: true });
   }
 });
-// the jump door. hotkey: a press < 4 s after the last walks on, else it snapshots the queue (markSeen reshuffles pending()).
-// nothing waiting = nothing happens: no bubble, no sound
+// the jump door. hotkey: a press < 4 s after the last walks on, else it snapshots the queue (a jump that lands marks its row
+// seen, which reshuffles pending()). Nothing waiting still answers, one quiet line a press: a press never reads as a dead key
 let cyc = { ids: [], i: 0, at: 0 };
 api.on('hotkey', () => {
   const now = Date.now();
@@ -452,6 +455,7 @@ api.on('hotkey', () => {
     const j = (cyc.i + k) % cyc.ids.length, a = live.find(x => x.id === cyc.ids[j]);
     if (a && api.jump) { cyc.i = j; jumpTo(a); return; }
   }
+  say("Nobody's waiting on you", { prio: true, quiet: true, ms: 3000 });
 });
 api.on('jumpTo', ({ id } = {}) => {   // a clicked banner: its agent, else whoever is first in line
   const a = (snap?.agents || []).find(x => x.id === id) || pending()[0];
@@ -528,6 +532,8 @@ api.on('event', e => {
 // ================= hud =================
 const ago = ms => { const m = Math.round(ms / 60000); return m < 1 ? 'just now' : m < 60 ? `${m}m ago` : m < 1440 ? `${Math.round(m / 60)}h ago` : `${Math.round(m / 1440)}d ago`; };
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+// one label everywhere (the Home row, the pill, the bubble): '<title> · <folder>'; an untitled session is its folder, once
+const label = a => a.title && a.title !== a.name ? `${a.title} · ${a.name}` : a.name;
 function renderHud() {
   if (!snap) return;
   $('hud').classList.toggle('nogame', !snap.game);
@@ -541,7 +547,7 @@ function renderHud() {
     $('hudRepo').innerHTML = `⎇ <b>${esc(g.name)}</b>${g.branch ? '/' + esc(g.branch) : ''} · ±${g.lines} in ${g.files}f${g.untracked ? ` +${g.untracked}new` : ''} · ${g.lastCommitAt ? ago(Date.now() - g.lastCommitAt) : 'no commits'}`;
   } else $('hudRepo').textContent = g?.dir ? `${g.dir.split('/').pop()} isn't a git repo` : 'no repo — start an agent or right-click → watch';
   $('hudAgents').innerHTML = (snap.agents || []).slice(0, 6).map(a =>
-    `<span class="chip ${a.phase}" title="${a.phase} since ${ago(Date.now() - a.since)}">${esc(a.name)}${a.phase === 'waiting' ? ' · your move' : a.phase === 'stalled' ? ' · stuck?' : a.phase === 'ready' ? ' · done' : ''}</span>`).join('');
+    `<span class="chip ${a.phase}" title="${esc(phaseTime(a, SIG[a.phase]))}">${esc(a.name)}${a.phase === 'waiting' ? ' · your move' : a.phase === 'stalled' ? ' · approve?' : a.phase === 'ready' ? ' · done' : a.phase === 'exited' ? ' · exited' : ''}</span>`).join('');
   renderRoster();
 }
 // the question in the pill: what each waiting/stuck/finished agent wants, shown only while the pill is open.
@@ -570,25 +576,28 @@ function editGoal(id) {
 }
 function renderRoster() {
   if (editing) return;
-  // every live session, most urgent first; unseen needs/stuck/ready from pending(), then everything still running
+  // every live session in the queue order: needs you + unseen done from pending(), then everything still running
   const rows = pending(true), has = new Set(rows.map(a => a.id));
   rows.push(...(snap?.agents || []).filter(a => a.phase === 'working' && !has.has(a.id)));
-  // traffic light: green = working, yellow = your move (needs input / finished, unread), red = stuck/error
+  // traffic light: green = working, yellow = your move (an approval, a question, finished and unread), red = a subagent stuck
   $('roster').innerHTML = rows.slice(0, 6).map(a => { const sig = SIG[a.phase];
     const kids = (a.fanout?.items || []).filter(k => k.open).slice(0, 3).map(k =>
       `<span class="kid"><i class="tl" style="color:${k.stuck ? TL.stuck : TL.running};background:currentColor"></i><b>${esc(k.type || k.desc)}</b></span>`).join('');
-    return `<button data-id="${esc(a.id)}" title="${esc(sig)}"><i class="tl" style="color:${TL[sig]};background:currentColor"></i><b>${esc(a.title || a.name)}</b><em class="replay" data-theater title="replay in Theater">▶</em>${goalLine(a)}${kids}</button>`; }).join('');
+    return `<button data-id="${esc(a.id)}" title="${esc(sig)}"><i class="tl" style="color:${TL[sig]};background:currentColor"></i><b>${esc(label(a))}</b><em class="replay" data-theater title="replay in Theater">▶</em>${goalLine(a)}${kids}${rowNote(a)}</button>`; }).join('');
   // localhost footer: what's listening + running in the background (right-click → Localhost for the list)
   const L = snap?.local;
   if (L && (L.servers || L.tasks || L.procs)) $('roster').insertAdjacentHTML('beforeend', `<small class="local" title="${esc((L.names || []).join('\n'))}">⌂ ${L.servers} server${L.servers === 1 ? '' : 's'}${L.tasks ? ` · ${L.tasks} bg task${L.tasks === 1 ? '' : 's'}` : ''}${L.procs ? ` · ${L.procs} dev proc${L.procs === 1 ? '' : 's'}` : ''}</small>`);
   rosterShow();
 }
-// "waiting 4m" says whose move it is and for how long; "just now" said neither
+// "needs approval 42s" says whose move it is and for how long, on Claude Code's clock (main's since): seconds under a
+// minute, then whole minutes ('asking 14m', 'done 3m ago', 'exited 20s ago'); a running clock keeps its seconds
 const dur = ms => { const s = Math.max(0, Math.round(ms / 1000)); return s < 60 ? `${s}s` : s < 3600 ? `${Math.floor(s / 60)}m ${s % 60}s` : `${Math.floor(s / 3600)}h ${Math.floor(s % 3600 / 60)}m`; };
+const span = ms => { const s = Math.max(0, Math.round(ms / 1000)), m = Math.floor(s / 60); return s < 60 ? `${s}s` : m < 60 ? `${m}m` : m < 1440 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${Math.floor(m / 1440)}d`; };
 const kfmt = n => n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${(n / 1e3).toFixed(1)}k` : String(n);
+const SAYS = { approval: 'needs approval', plan: 'plan to approve', question: 'asking', input: 'asking', done: 'done', exited: 'exited' };
 function phaseTime(a, sig) {
-  const t = Date.now() - a.since, m = Math.max(1, Math.round(t / 60000));
-  return sig === 'needs' ? `waiting ${m}m` : sig === 'stuck' ? `stuck ${m}m` : sig === 'ready' ? `done ${ago(t)}` : dur(t);
+  const t = Date.now() - a.since, k = a.kind || { needs: 'question', ready: 'done', running: 'running', exited: 'exited' }[sig];
+  return k === 'done' || k === 'exited' ? `${SAYS[k]} ${span(t)} ago` : SAYS[k] ? `${SAYS[k]} ${span(t)}` : `running ${dur(t)}`;
 }
 // the receipt: what the turn touched, and whether a check ran green after it. Pull-only: never feeds the LED, bubble or sound
 const short = f => f.split('/').slice(-2).join('/');
@@ -610,9 +619,21 @@ function foTitle(fo) {
   const descs = fo.items.map(k => k.desc).filter(Boolean).join(', ');
   return [`${fo.done} of ${fo.total} subagents done`, fo.open && fo.oldestOpenAt && `oldest running ${Math.max(1, Math.round((Date.now() - fo.oldestOpenAt) / 60000))}m`, descs].filter(Boolean).join(' · ');
 }
-// a failed jump's note shows in the row itself: the roster hides the bubble while the pill is open
+// a row's own result (a failed jump: main's why) shows in that row, in Home and in the pill (which hides the bubble while open).
+// rowNote(id, text, ms, kind) says text there for ms and redraws; rowNote(a) = the row's note markup ('err' | 'ok' colours it)
 const notes = new Map();
 function noteFor(id) { const n = notes.get(id); return n && n.until > Date.now() ? n.text : null; }
+function rowNote(a, text, ms = 4000, kind = '') {
+  const redraw = () => { if (chatOpen) renderHome(); renderRoster(); };
+  if (typeof a === 'string') {
+    notes.set(a, { text, kind, until: Date.now() + ms }); redraw(); setTimeout(redraw, ms + 50);
+    for (const L of [$('now'), $('roster')])   // a row low in a short or scrolled list: its note comes into view
+      [...L.querySelectorAll('[data-id]')].find(r => r.dataset.id === a)?.querySelector('.nnote')?.scrollIntoView({ block: 'nearest' });
+    return;
+  }
+  const t = noteFor(a.id);
+  return t ? `<small class="nnote ${esc(notes.get(a.id).kind || '')}">${esc(t)}</small>` : '';
+}
 function rosterShow() {
   const r = $('roster'), on = !!editing || ($('hud').classList.contains('live') && r.children.length > 0 && !menuOpen);
   if (on === r.classList.contains('hidden')) r.classList.toggle('hidden', !on);
@@ -740,15 +761,15 @@ function poke() {
   if (Math.random() < 0.4) say(pick(['hehe', '*happy wiggle*', 'boop', 'again!', ...(snap?.game ? [`⚡${Math.round(snap.fuel)} ♥${Math.round(snap.mood)}`] : [])]), { ms: 1600 });
 }
 
-// go to the agent's terminal; if it can't be found, the resume command is on the clipboard: one quiet line, no sound
+// go to the agent's terminal. Only a jump that lands marks a row seen, and only that one. One that can't says main's why (and how
+// to attach a tmux client) in that row, Home's and the pill's, and in one quiet line, no sound; the queue stays as it was
 let jumpT;
 async function jumpTo(a) {
-  markSeen();
   let r; try { r = await api.jump(a.id); } catch { r = null; }
-  if (r?.ok) return;
-  const text = r?.cmd ? "couldn't find its terminal — resume command copied" : "couldn't find its terminal";
-  notes.set(a.id, { text, until: Date.now() + 4000 }); renderRoster(); setTimeout(renderRoster, 4100);
-  say(`${a.name}: ${text}`, { prio: true, quiet: true, ms: 4000 });
+  if (r?.ok) return markSeen(a);
+  const why = r?.why || (r?.cmd ? "couldn't find its terminal — resume command copied" : "couldn't find its terminal");
+  rowNote(a.id, r?.attach ? `${why} — ${r.attach}` : why, 6000, 'err');
+  say(`${label(a)}: ${why}`, { prio: true, quiet: true, ms: 4000 });
 }
 
 // ================= click menu (replaces the old pill) =================
@@ -890,8 +911,18 @@ $('renameForm').onsubmit = e => {
 
 // ================= Home: one panel for everything (Now + chat + command bar) =================
 // Now = every live session with its actions, recording, localhost. Chat sits under it; the input doubles as a command bar.
-const byUrgency = () => [...(snap?.agents || [])].sort((a, b) => RANK.indexOf(SIG[a.phase]) - RANK.indexOf(SIG[b.phase]) || b.since - a.since);
+// rows come in main's one queue order (needs you, oldest block first → done, oldest first → running → exited), as pending() does
+const byUrgency = () => [...(snap?.agents || [])];
 let replyOpen = null;   // session id whose inline reply box is open
+// a row's head: the one label (the folder dimmer after the title), then state + age leading the strongest second line with the
+// fan-out gauge beside it (pips + 'n/m subagents done' + the oldest still running), the goal, and the exact ask when it's your move
+function rowHead(a) {
+  const sig = SIG[a.phase], g = a.goal, t = a.title && a.title !== a.name, fo = a.fanout;
+  const gauge = fo && `<span class="nfo" title="${esc(foTitle(fo))}">${foPips(fo, fo.stuck ? TL.stuck : 'var(--c-accent)')}${fo.done}/${fo.total} subagents done${fo.open && fo.oldestOpenAt ? ` · oldest running ${span(Date.now() - fo.oldestOpenAt)}` : ''}</span>`;
+  return `<div class="nm"><b>${esc(t ? a.title : a.name)}${t ? `<i> · ${esc(a.name)}</i>` : ''}</b><div class="nst"><small>${esc(phaseTime(a, sig))}</small>${gauge || ''}</div>
+      ${g ? `<span class="ng ${g.done ? 'done' : g.verdict || ''}">${g.done ? '✓' : '◎'} ${esc(g.text)}</span>` : ''}
+      ${a.ask && (sig === 'needs' || sig === 'stuck') ? `<span class="na">${esc(a.ask)}</span>` : ''}</div>`;
+}
 function renderHome() {
   if (!snap) return;
   const setup = !snap.setupDone || setupForced;
@@ -908,10 +939,8 @@ function renderHome() {
       `<button data-do="goal" title="Set goal">◎</button>`,
     ].join('');
     return `<div class="nr ${sig}" data-id="${esc(a.id)}"><i class="tl" style="background:${TL[sig]}"></i>
-      <div class="nm"><b>${esc(a.title || a.name)}</b><small>${esc(a.name)} · ${esc(phaseTime(a, sig))}</small>
-      ${g ? `<span class="ng ${g.done ? 'done' : g.verdict || ''}">${g.done ? '✓' : '◎'} ${esc(g.text)}</span>` : ''}
-      ${a.ask && (sig === 'needs' || sig === 'stuck') ? `<span class="na">${esc(a.ask)}</span>` : ''}</div>
-      <div class="nb">${acts}</div>
+      ${rowHead(a)}
+      <div class="nb">${acts}</div>${rowNote(a)}
       ${replyOpen === a.id ? `<form class="nrep"><input placeholder="Reply to ${esc(a.title || a.name)}…" maxlength="2000"><button>Send</button></form>` : ''}</div>`;
   }).join('') || '<div class="nempty">No live sessions. Start Claude Code anywhere and I’ll pick it up.</div>';
   const rs = snap.rec || {};

@@ -2,11 +2,10 @@
 // Nothing here runs a process except locate/focus, which main.js calls only from the 'jump' handler (a click).
 const path = require('path');
 const fs = require('fs');
-const os = require('os');
 const { execFile } = require('child_process');
 
 const { intentful, evidence } = require('./goal');
-const SESS_DIR = path.join(os.homedir(), '.claude', 'sessions');   // Claude Code's own <pid>.json registry
+const SESS_DIR = require('./overrides').sessionsDir();   // Claude Code's own <pid>.json registry (~/.claude/sessions)
 
 function readTail(file, bytes = 131072, maxBytes = 16 * 1048576) {
   const fd = fs.openSync(file, 'r');
@@ -38,9 +37,16 @@ function cap(t, n = 120) {
 }
 const lastLine = t => plain(t.trim().split('\n').filter(l => l.trim()).pop() || '');
 const firstSentence = t => { const p = plain(t.trim().split(/\n\s*\n/)[0] || ''); return (p.match(/^.*?[.!?](?=\s|$)/) || [p])[0]; };
+// a pending tool call as the pill says it: 'Bash: npm test'; a question is its text and choices, a plan its first sentence
 function toolAsk(c) {
-  const i = c.input || {};
+  const i = c.input || {}, q = Array.isArray(i.questions) && i.questions[0];
+  if (c.name === 'AskUserQuestion' && q) { const o = toolOpts(c) || []; return plain(String(q.question || q.header || '')) + (o.length ? ` (${o.map(x => x.label).join(' / ')})` : ''); }
+  if (c.name === 'ExitPlanMode') return `Plan: ${firstSentence(String(i.plan || ''))}`.replace(/: $/, '');
   return `${c.name}: ${plain(String(i.command || i.file_path || i.pattern || i.url || i.description || ''))}`.replace(/: $/, '');
+}
+function toolOpts(c) {
+  const q = Array.isArray(c.input?.questions) && c.input.questions[0];
+  return q && Array.isArray(q.options) && q.options.length ? q.options.map((o, k) => ({ key: String(k + 1), label: plain(String(o?.label ?? o)) })) : undefined;
 }
 
 // a real human prompt: typed text (or a /command), not a tool result, hook echo or background-task notice
@@ -148,25 +154,38 @@ function classify(file, mtimeMs, side = false) {
   const rc = receipt(lines, side ? 0 : turnAt, side, fallback);   // same lines, no extra read
   const act = side ? activity(lines) : null;
   const ev = side ? undefined : evidence(lines);
-  const out = (phase, ask, extra) => ({ phase, cwd, title, turnAt, receipt: rc, ev, ...(ask ? { ask: cap(ask) } : {}), ...(act || {}), ...extra });
+  // phase: the transcript's own rule (a session with no registry entry); kind + at: what the tail is, since when (its record's
+  // timestamp, Claude Code's clock). scan() joins Claude Code's registry, which outranks both for a live session.
+  const out = (phase, kind, at, ask, extra) => ({ phase, kind, at, cwd, title, turnAt, fallback, receipt: rc, ev, ...(ask ? { ask: cap(ask) } : {}), ...(act || {}), ...extra });
+  let local = false;   // walking back over a local command's output (/cost, /model …): its command decides, not the output
   for (let i = lines.length - 1; i >= 0; i--) {
     let d; try { d = JSON.parse(lines[i]); } catch { continue; }
     if (!cwd && d.cwd) cwd = d.cwd;
     if ((d.isSidechain && !side) || d.isMeta || (d.type !== 'assistant' && d.type !== 'user')) continue;
     cwd = d.cwd || cwd;
+    const at = Date.parse(d.timestamp) || 0;
     if (d.type === 'assistant') {
       const m = d.message || {}, tools = (m.content || []).filter(c => c.type === 'tool_use');
-      if (tools.length) return idle > 90000 ? out('stalled', toolAsk(tools[tools.length - 1]), { agentWait: tools.some(c => c.name === 'Agent' || c.name === 'Task'), toolAt: Date.parse(d.timestamp) || 0 }) : out('working');
-      if (['end_turn', 'stop_sequence', 'max_tokens'].includes(m.stop_reason)) {
-        if (idle > 5 * 60e3) return out('parked');
-        const t = textOf(m.content).trim();
-        return t.endsWith('?') ? out('waiting', lastLine(t)) : out('ready', firstSentence(t));   // a question needs you; anything else is just done
+      if (tools.length) {
+        const t = tools[tools.length - 1], x = { tool: t, toolAt: at, agentWait: tools.some(c => c.name === 'Agent' || c.name === 'Task') };
+        // a question or a plan is a dialog the moment it's asked; any other tool is a dialog or just long (unstick tells)
+        if (t.name === 'AskUserQuestion') return out('waiting', 'question', at, toolAsk(t), { ...x, options: toolOpts(t) });
+        if (t.name === 'ExitPlanMode') return out('stalled', 'plan', at, toolAsk(t), x);
+        return idle > 90000 ? out('stalled', 'approval', at, toolAsk(t), x) : out('working', 'running', at, undefined, x);
       }
-      return out('working');
+      if (['end_turn', 'stop_sequence', 'max_tokens'].includes(m.stop_reason)) {
+        const t = textOf(m.content).trim(), q = t.endsWith('?');   // a question needs you; anything else is just done
+        return out(idle > 5 * 60e3 ? 'parked' : q ? 'waiting' : 'ready', q ? 'input' : 'done', at, q ? lastLine(t) : firstSentence(t), { end: true });
+      }
+      return out('working', 'running', at);
     }
     const txt = textOf(d.message?.content);
-    if (txt.startsWith('[Request interrupted')) return out('parked');
-    return out(idle > 120000 && !side ? 'parked' : 'working');   // a subagent thinking past 2 min after a tool result is still running (fanout ages it out at 10)
+    if (!side && /^<command-name>\/(?:exit|quit)</.test(txt)) return out('exited', 'exited', at);   // /exit: that claude is gone
+    if (!side && txt.startsWith('<local-command-stdout>')) { local = true; continue; }
+    if (local && txt.startsWith('<command-name>')) { local = false; continue; }
+    local = false;
+    if (txt.startsWith('[Request interrupted')) return out('parked', 'done', at, 'interrupted');
+    return out(idle > 120000 && !side ? 'parked' : 'working', 'running', at);   // a subagent thinking past 2 min after a tool result is still running (fanout ages it out at 10)
   }
   return null;
 }
@@ -255,37 +274,88 @@ function settle(c, fo) {
   return c.phase;
 }
 
-// every live session under root (~/.claude/projects); onChange(s, prev) on a phase change
-function scan(root, sessions, onChange) {
+// ---------- one state per session: kind, since, ask ----------
+// kind: approval | question | plan | input (all four = needs you) | done | running | exited. phase keeps the values the
+// renderer maps: approval/plan 'stalled', question/input 'waiting', done 'ready', running 'working', plus 'exited'.
+const PHASE = { approval: 'stalled', plan: 'stalled', question: 'waiting', input: 'waiting', done: 'ready', running: 'working', exited: 'exited' };
+const NEEDS = new Set(['approval', 'question', 'plan', 'input']), EXIT_MS = 10 * 60e3;   // an exited session stays listed 10 min, last
+// the one queue order (snapshot, Home, roster, jump key): needs you → done → running → exited, oldest first in each
+const RANK = { approval: 0, question: 0, plan: 0, input: 0, done: 1, running: 2, exited: 3 };
+const byQueue = (a, b) => (RANK[a.kind] ?? 2) - (RANK[b.kind] ?? 2) || a.since - b.since || (a.id < b.id ? -1 : 1);
+
+// a live session: Claude Code's registry decides. It flips ~75 ms after a tool_use, also while the record itself is
+// withheld (an open dialog, 1 in 5). The transcript adds what the dialog asks and the last answer; the pane (registry.js
+// e.dialog) what a withheld dialog asks. since = the status's own start, on Claude Code's clock.
+function withEntry(c, e, fo) {
+  const t = c.tool && !c.agentWait && c.toolAt >= (e.statusUpdatedAt || 0) - 10e3 ? c.tool : null, d = e.dialog, since = e.statusUpdatedAt || c.at;
+  if (e.status === 'waiting') {
+    const w = String(e.waitingFor || ''), kind = t?.name === 'ExitPlanMode' || d?.kind === 'plan' ? 'plan' : /permission/.test(w) ? 'approval'
+      : /input/.test(w) ? 'question' : d?.kind || (t ? (t.name === 'AskUserQuestion' ? 'question' : 'approval') : 'input');
+    const ask = (t && toolAsk(t)) || d?.ask || (kind === 'approval' && fo?.stuck && fo.stuckAsk) || (kind === 'approval' || kind === 'plan' ? 'needs approval - see terminal' : 'needs an answer - see terminal');
+    return { kind, since, ask, options: d?.options || (t && toolOpts(t)) };
+  }
+  // busy: a running tool's clock starts at its call, or at the approval that let it run
+  if (e.status === 'busy') return { kind: 'running', since: Math.max(since, c.tool ? c.toolAt : 0), ask: c.tool && !c.agentWait ? toolAsk(c.tool) : undefined };
+  if (e.status === 'idle') return { kind: c.kind === 'input' ? 'input' : 'done', since, ask: c.kind === 'input' || c.kind === 'done' ? c.ask : undefined };
+  return null;   // a status this build doesn't know: the transcript's rule, but never parked (its claude is alive)
+}
+// no registry entry (the desktop app, an older CLI): the transcript's own rules, settled against the subagents. A tool
+// unstick (main.js) saw running stays 'running' through prev.busyAt, so its clock never restarts.
+function fromTranscript(c, fo, prev) {
+  let phase = settle(c, fo), kind = phase === c.phase ? c.kind : phase === 'working' ? 'running' : 'approval', busyAt;
+  if (phase === 'stalled' && kind === 'approval' && c.toolAt && prev?.busyAt === c.toolAt) { phase = 'working'; kind = 'running'; busyAt = c.toolAt; }
+  const since = kind !== 'running' ? c.at : c.tool ? c.toolAt : c.fallback ? c.at : c.turnAt;
+  const ask = kind === 'running' ? undefined : phase === 'stalled' && fo?.stuck && (c.phase !== 'stalled' || c.agentWait) ? fo.stuckAsk : c.ask;
+  return { phase, kind, since, ask, options: c.options, busyAt };
+}
+
+// every live session under root (~/.claude/projects), joined with reg (registry.js: sessionId -> live entry).
+// onChange(s, prev) when a session's phase or since changes (a new episode). Returns copies in queue order.
+function scan(root, sessions, onChange, reg = new Map()) {
   let dirs; try { dirs = fs.readdirSync(root); } catch { return []; }
-  const now = Date.now(), seen = new Set(), out = [];
+  const now = Date.now(), seen = new Set(), out = [], pids = new Set([...reg.values()].map(e => e.pid));
   for (const dname of dirs) {
     if (dname.includes('private-tmp') || dname.includes('scratchpad')) continue; // throwaway worker sessions
     const dir = path.join(root, dname);
     let files; try { files = fs.readdirSync(dir); } catch { continue; }
     for (const f of files) {
       if (!f.endsWith('.jsonl')) continue;
-      const fp = path.join(dir, f);
+      const fp = path.join(dir, f), id = f.slice(0, -6), e = reg.get(id), prev = sessions.get(id);
       let st; try { st = fs.statSync(fp); } catch { continue; }
+      // gone: no entry now for a session seen alive (or seen exit) this run, and nothing written since it went
+      const gone = !e && !!prev && (prev.alive === true || !!prev.exitAt) && !(prev.exitAt && st.mtimeMs > prev.exitAt + 5000);
+      if (gone && prev.exitAt && now - prev.exitAt >= EXIT_MS) { seen.add(id); continue; }   // shown its 10 min: stays out
       const age = now - st.mtimeMs;
-      if (age > 45 * 60e3 && (age > 12 * 3600e3 || !(now - (fanout(fp)?.newestAt || 0) <= 45 * 60e3))) continue;   // silent parent, but children may still run
+      // a live claude stays listed however long it's quiet; a silent file with none is skipped, unless its children still run
+      if (!e && !gone && age > 45 * 60e3 && (age > 12 * 3600e3 || !(now - (fanout(fp)?.newestAt || 0) <= 45 * 60e3))) continue;
       let c; try { c = classify(fp, st.mtimeMs); } catch { continue; }
       if (!c) continue;
-      const fo = fanout(fp, c.turnAt, c.receipt), phase = settle(c, fo), receipt = fo ? fo.receipt : c.receipt;
+      const fo = fanout(fp, c.turnAt, c.receipt), receipt = fo ? fo.receipt : c.receipt;
       if (fo) delete fo.receipt;
-      const id = f.slice(0, -6);
       seen.add(id);
-      const prev = sessions.get(id);
-      const name = c.cwd ? path.basename(c.cwd) : dname.split('-').pop();
-      const s = { id, file: fp, name, cwd: c.cwd, phase, since: prev && prev.phase === phase ? prev.since : now, mtime: Math.max(st.mtimeMs, fo?.newestAt || 0),
-        ask: phase === 'stalled' && fo?.stuck && (c.phase !== 'stalled' || c.agentWait) ? fo.stuckAsk : c.ask, title: c.title || prev?.title, fanout: fo?.total ? fo : undefined, receipt, ev: c.ev, toolAt: c.toolAt };
-      if (prev && prev.phase !== phase) onChange?.(s, prev);
+      let v = e && withEntry(c, e, fo), alive = e ? true : null;
+      if (v) v.phase = PHASE[v.kind];
+      else if (gone) {   // exited within one tick of its entry going. Not listed: the same claude in another session now (/clear,
+        // /resume: nobody exited), or a headless one (a registry kind other than interactive: `claude -p` runs end by design)
+        const exitAt = prev.exitAt || (c.kind === 'exited' ? c.at : now);
+        v = { phase: 'exited', kind: 'exited', since: exitAt, exitAt, hide: prev.hide || prev.headless || (prev.alive === true && pids.has(prev.pid)) }; alive = false;
+      } else {
+        v = fromTranscript(c, fo, prev);
+        if (e) { if (v.kind === 'exited') v.kind = 'done'; if (v.phase === 'parked' || v.phase === 'exited') v.phase = PHASE[v.kind]; }   // an unknown registry status: alive, never parked
+        else if (v.kind === 'exited') { alive = false; v.exitAt = v.since; }
+      }
+      const name = c.cwd ? path.basename(c.cwd) : e?.cwd ? path.basename(e.cwd) : dname.split('-').pop();
+      const s = { id, file: fp, name, cwd: c.cwd || e?.cwd, phase: v.phase, kind: v.kind, since: v.since || st.mtimeMs, mtime: Math.max(st.mtimeMs, fo?.newestAt || 0),
+        ask: v.ask ? cap(v.ask) : undefined, options: v.options, title: c.title || prev?.title, fanout: fo?.total ? fo : undefined, receipt, ev: c.ev, toolAt: c.toolAt,
+        alive, pid: e?.pid ?? prev?.pid, term: e ? (e.tmux ? { tmux: e.tmux } : e.tty ? { tty: e.tty } : null) : null, exitAt: v.exitAt, hide: v.hide, busyAt: v.busyAt,
+        headless: e ? !!e.kind && e.kind !== 'interactive' : prev?.headless };
+      if (prev && (prev.phase !== s.phase || prev.since !== s.since)) onChange?.(s, prev);
       sessions.set(id, s);
-      if (phase !== 'parked') out.push(s);
+      if (s.phase !== 'parked' && !(s.phase === 'exited' && (s.hide || now - s.since >= EXIT_MS))) out.push({ ...s });
     }
   }
   for (const id of [...sessions.keys()]) if (!seen.has(id)) sessions.delete(id);
-  return out.sort((a, b) => b.mtime - a.mtime);
+  return out.sort(byQueue);
 }
 
 // ---------- where does a session live? (on click only) ----------
@@ -304,19 +374,21 @@ async function psAll() {
 
 const locCache = new Map();   // session id -> { pid, tty }
 const isClaude = p => !!p && path.basename(p.comm) === 'claude';
+const regOf = pid => { try { return JSON.parse(fs.readFileSync(path.join(SESS_DIR, pid + '.json'), 'utf8')); } catch { return null; } };
+// → { pid, tty, reg } or null. reg = the pid's registry entry (its tmux pane, status, waitingFor), read fresh each time;
+// null reg = a claude found only by its cwd (no registry file: an older CLI)
 async function locateSession(s, procs) {
   procs ||= await psAll();
-  const hit = locCache.get(s.id);
-  if (hit && isClaude(procs.get(hit.pid))) return hit;
+  const hit = locCache.get(s.id), hr = hit && isClaude(procs.get(hit.pid)) ? regOf(hit.pid) : undefined;
+  if (hr !== undefined && (!hr || hr.sessionId === s.id)) return { ...hit, reg: hr };   // a /clear or /resume moves the pid on
   locCache.delete(s.id);
-  const cands = [...procs.values()].filter(isClaude);
-  const keep = p => { const v = { pid: p.pid, tty: p.tty }; locCache.set(s.id, v); return v; };
-  for (const p of cands) {          // exact: Claude Code records which session each pid is running
-    try { if (JSON.parse(fs.readFileSync(path.join(SESS_DIR, p.pid + '.json'), 'utf8')).sessionId === s.id) return keep(p); } catch {}
-  }
+  const cands = [...procs.values()].filter(isClaude), regs = new Map(cands.map(p => [p.pid, regOf(p.pid)]));
+  const keep = (p, reg = null) => { const v = { pid: p.pid, tty: p.tty }; locCache.set(s.id, v); return { ...v, reg }; };
+  for (const p of cands) if (regs.get(p.pid)?.sessionId === s.id) return keep(p, regs.get(p.pid));   // exact: Claude Code records which session each pid is running
   if (!s.cwd) return null;
-  const cwds = await Promise.all(cands.map(p => run('/usr/sbin/lsof', ['-a', '-p', String(p.pid), '-d', 'cwd', '-Fn'])));
-  const same = cands.filter((p, i) => (cwds[i] || '').split('\n').find(l => l.startsWith('n'))?.slice(1) === s.cwd);
+  const free = cands.filter(p => !regs.get(p.pid));   // a pid whose registry names another session isn't this one: never guess it
+  const cwds = await Promise.all(free.map(p => run('/usr/sbin/lsof', ['-a', '-p', String(p.pid), '-d', 'cwd', '-Fn'])));
+  const same = free.filter((p, i) => (cwds[i] || '').split('\n').find(l => l.startsWith('n'))?.slice(1) === s.cwd);
   if (!same.length) return null;
   let born = Infinity; try { born = fs.statSync(s.file).birthtimeMs; } catch {}
   const gap = p => p.start <= born ? born - p.start : 1e13 + p.start - born;   // started closest to, and not after, the session
@@ -423,4 +495,4 @@ async function focusTty(bid, tty, restore) {
   return bid ? focusTagged(bid, tty, restore) : false;
 }
 
-module.exports = { CHECK_RE, firstPrompt, humanAt, receipt, readTail, textOf, classify, fanout, settle, scan, psAll, locateSession, hostApp, bundleId, focusTty, run };
+module.exports = { CHECK_RE, firstPrompt, humanAt, receipt, readTail, textOf, classify, fanout, settle, scan, byQueue, NEEDS, EXIT_MS, psAll, locateSession, hostApp, bundleId, focusTty, run };

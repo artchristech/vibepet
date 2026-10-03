@@ -39,6 +39,12 @@ button { font: inherit; cursor: pointer; }
 /* stuck: same red as the LED and the ? glyph; amber stays your-move only */
 #bubble.alert.stuck { box-shadow: inset 0 0 0 1px rgba(255,92,108,.5), 0 2px 10px rgba(0,0,0,.45); }
 #bubble.alert.stuck::before { background: var(--red); }
+/* Home open: the bubble is a toast pinned inside the panel's top edge, over it (it drew behind the composer, r1-S1-10/S4-05),
+   and out of the flow, so its coming and going no longer moves the panel. A hairline keeps it apart from the dark panel */
+#chat:not(.hidden) { anchor-name: --home; }
+#stage > #chat:not(.hidden) ~ #bubble { position: absolute; position-anchor: --home; top: calc(anchor(top) + 8px); justify-self: anchor-center; margin: 0; z-index: 4; }
+#stage > #chat:not(.hidden) ~ #bubble:not(.alert) { box-shadow: inset 0 0 0 1px rgba(255,255,255,.16), 0 4px 16px rgba(0,0,0,.45); }
+#stage > #chat:not(.hidden) ~ #bubble::after { display: none; }
 @keyframes pop { from { transform: translateY(4px); opacity: 0 } to { transform: none; opacity: 1 } }
 
 /* hud — minimal pill */
@@ -106,12 +112,28 @@ button { font: inherit; cursor: pointer; }
 .nr:hover { background: rgba(255,255,255,.045); }
 .nr .tl { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; }
 .nr.needs, .nr.stuck { background: rgba(255,207,63,.05); }
+.nr.exited .nm { opacity: .6; }   /* its claude is gone: listed last for 10 min, ▶ and the resume command still work */
 .nm { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .nm b { font-weight: 650; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .nm small { color: var(--c-faint); font-size: 11px; }
 .ng, .na { font-size: 11.5px; color: var(--c-dim); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .ng.on { color: var(--c-accent2); } .ng.drift { color: #ffc46b; } .ng.done { color: var(--c-accent); }
-.na { color: #ffd98a; font-family: var(--mono, ui-monospace, Menlo, monospace); font-size: 11px; }
+.na { color: #ffd98a; font-family: var(--mono, ui-monospace, Menlo, monospace); font-size: 11px; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }   /* a question keeps its choices in view */
+/* the head: the folder trails the title (one label); state + age lead the second line, the row's strongest after the title */
+.nm b i { font-style: normal; font-weight: 500; color: var(--c-dim); }
+.nst { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.nst > small { flex: none; color: var(--c-fg); font-size: 12px; font-weight: 600; }
+/* fan-out gauge beside it: filled pip = subagent done, hollow = still running (the pill's grammar) */
+.nfo { min-width: 0; display: inline-flex; align-items: center; gap: 6px; color: var(--c-dim); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nfo em { flex: none; display: inline-flex; align-items: center; gap: 2px; font-style: normal; }
+.nfo u { width: 6px; height: 6px; border-radius: 50%; box-shadow: inset 0 0 0 1px currentColor; }
+.nfo u.f { background: currentColor; }
+.nfo em small { margin-left: 2px; color: var(--c-dim); font-size: 10px; }
+/* a row's own result (rowNote): why a jump failed, in the row it was pressed on */
+.nnote { grid-column: 2 / 4; margin-top: 4px; font-size: 11px; color: var(--c-dim); }
+.nnote.err { color: #ff8a95; } .nnote.ok { color: var(--c-accent); }
+/* light: the ask on the cream needs row was #ffd98a at 1.2:1 (r1-S4-11); these hold >= 4.5:1 on it */
+@media (prefers-color-scheme: light) { .na { color: #7a4b00; } .nnote.err { color: #b4232f; } }
 .nb { display: flex; gap: 4px; opacity: .55; transition: opacity .12s; }
 .nr:hover .nb, .nr.needs .nb, .nr.stuck .nb { opacity: 1; }
 .nb button, .nfoot .chip, .srv button { background: var(--c-field); border: 1px solid var(--c-line); color: var(--c-fg); border-radius: 7px; padding: 3px 8px; font: 11.5px var(--ui); cursor: pointer; }
@@ -236,7 +258,9 @@ input:focus { border-color: rgba(255,255,255,.22); }
   display: flex; flex-direction: column; gap: 2px;
   background: rgba(18,18,20,.92); border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.45);
 }
-#roster:not(.hidden) ~ #bubble { display: none; }
+#roster:not(.hidden) ~ #bubble { display: none; }   /* a row's own result shows in its row instead (rowNote) */
+#roster .nnote { grid-column: 2 / 4; white-space: normal; font-size: 10.5px; color: var(--dim); }
+#roster .nnote.err { color: #ff8a95; } #roster .nnote.ok { color: #3fe08f; }
 #roster button {
   display: grid; grid-template-columns: 6px minmax(0, 1fr) auto; column-gap: 7px; align-items: center; min-height: 28px; min-width: 0;
   padding: 4px 9px; background: none; border: none; border-radius: 10px; color: var(--text); font: 11px/1.35 var(--font); text-align: left; cursor: pointer;
@@ -245,8 +269,8 @@ input:focus { border-color: rgba(255,255,255,.22); }
 #roster i { width: 6px; height: 6px; border-radius: 50%; }
 #roster b, #roster span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; min-width: 0; }
 #roster b { font-weight: 700; }
-#roster .replay { font-style: normal; font-size: 8px; color: var(--dim); padding: 2px 4px; border-radius: 4px; opacity: 0; }
-#roster button:hover .replay { opacity: 1; } #roster .replay:hover { color: #fff; background: rgba(255,255,255,.12); }
+#roster .replay { display: grid; place-items: center; min-width: 24px; min-height: 24px; font-style: normal; font-size: 10px; color: var(--dim); border-radius: 6px; }   /* always shown: a 24 px target */
+#roster button:hover .replay { color: #cfd6ea; } #roster .replay:hover { color: #fff; background: rgba(255,255,255,.12); }
 #roster .local { color: var(--dim); font-size: 10px; padding: 2px 6px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #roster time { color: var(--dim); font-variant-numeric: tabular-nums; }
 #roster span { grid-column: 2 / 4; color: #b7bdd0; }

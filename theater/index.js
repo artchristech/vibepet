@@ -1,8 +1,9 @@
 // theater/index.js — main-process side: read a session (+ subagents + git), list recent sessions, open the player window.
-const fs = require('fs'), path = require('path'), os = require('os');
+const fs = require('fs'), path = require('path');
 const { execFile } = require('child_process');
 const { build, parseGit } = require('./model');
 const { humanAt, textOf } = require('../agents');
+const { projectsDir } = require('../overrides');
 
 const readLines = f => { try { return fs.readFileSync(f, 'utf8').split('\n').filter(Boolean); } catch { return []; } };
 
@@ -20,7 +21,7 @@ const gitLog = (cwd, t0, t1) => new Promise(res => {
 });
 
 async function timeline(file) {
-  if (!file || !file.endsWith('.jsonl') || !path.resolve(file).startsWith(path.join(os.homedir(), '.claude', 'projects'))) throw new Error('not a session file');
+  if (!file || !file.endsWith('.jsonl') || !path.resolve(file).startsWith(projectsDir() + path.sep)) throw new Error('not a session file');
   const lines = readLines(file), subagents = subagentsOf(file);
   const first = build(lines, { subagents });
   const commits = await gitLog(first.meta.cwd, first.meta.t0, first.meta.t1);
@@ -54,11 +55,13 @@ function recent(dir, hours = 12, max = 15) {
 // TODO(theater): "Export cinematic" — render the timeline as a HyperFrames composition via content/compose.js ensureCLI/renderHF (9:16 + 16:9).
 // one player window per session file; reopening focuses it
 const wins = new Map();
-function open(BrowserWindow, file) {
+// inactive: appear without taking the OS focus (an instance under test, VIBEPET_TEST)
+function open(BrowserWindow, file, { inactive = false } = {}) {
   const w0 = wins.get(file);
-  if (w0 && !w0.isDestroyed()) { w0.show(); w0.focus(); return w0; }
+  if (w0 && !w0.isDestroyed()) { if (inactive) w0.showInactive(); else { w0.show(); w0.focus(); } return w0; }
   const w = new BrowserWindow({ width: 1280, height: 800, minWidth: 820, minHeight: 520, title: 'Theater', backgroundColor: '#07080c', titleBarStyle: 'hiddenInset',
-    webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false, sandbox: true } });
+    show: !inactive, webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false, sandbox: true } });
+  if (inactive) w.showInactive();
   w.loadFile(path.join(__dirname, 'player.html'));
   w.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   w.webContents.on('will-navigate', e => e.preventDefault());
